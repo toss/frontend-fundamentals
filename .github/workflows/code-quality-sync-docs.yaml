@@ -1,0 +1,27 @@
+name: code-quality-sync-docs
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: [Linux]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+      - name: Setup yarn
+        run: corepack enable
+      - name: Install Dependencies
+        run: yarn
+      - name: Sync Dockit
+        run: yarn dockit sync
+        env:
+          ALGOLIA_INDEX_NAME: ${{ secrets.ALGOLIA_INDEX_NAME }}
+          ALGOLIA_WRITE_API_KEY: ${{ secrets.ALGOLIA_WRITE_API_KEY }}
+          ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+          INKEEP_INGESTION_API_KEY: ${{ secrets.INKEEP_INGESTION_API_KEY }}

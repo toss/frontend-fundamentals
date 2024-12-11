@@ -1,0 +1,31 @@
+name: code-quality-deploy-docs
+
+on:
+  push:
+    branches:
+      - main
+      - dev/*
+
+jobs:
+  deploy:
+    runs-on: [Linux]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+      - name: Setup yarn
+        run: corepack enable
+      - name: Install Dependencies
+        run: yarn
+      - name: Deploy Docs
+        run: |
+          mkdir -p $HOME/.toss
+          echo $TOSSCLI_CONFIG > $HOME/.toss/config.yml
+          export AWS_SDK_JS_SUPPRESS_MAINTENANCE_MODE_MESSAGE=true
+          
+          yarn dlx -q "@tosscore-internal/cli@^0.14" ci
+        working-directory: ./docs
+        env:
+          TOSSCLI_CONFIG: ${{ secrets.TOSSCLI_CONFIG }}
