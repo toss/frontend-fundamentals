@@ -1,0 +1,14 @@
+{
+  "name": "frontend-fundamentals",
+  "packageManager": "yarn@4.6.0",
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "dependencies": {
+    "markdown-it-footnote": "^4.0.0",
+    "typescript": "^5.6.3",
+    "vitepress": "^1.4.1"
+  }
+}
