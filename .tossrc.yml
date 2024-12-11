@@ -1,0 +1,18 @@
+version: '0.14'
+service:
+  image:
+    source: ./.vitepress/dist
+ci:
+  - branch: dev/*
+    tasks:
+      - service build
+      - service pack -o image.tar.br
+      - service publish image.tar.br s3:internal.alpha/docs-code-quality -m s3:internal.alpha/docs-code-quality/alpha
+      - service deploy image.tar.br s3:core.alpha/docs-code-quality/alpha
+  - branch: main
+    tasks:
+      - service build
+      - service pack -o image.tar.br
+      - service publish image.tar.br s3:internal.alpha/docs-code-quality -m s3:internal.alpha/docs-code-quality/alpha
+      - service publish image.tar.br s3:internal.common/docs-code-quality -m s3:internal.common/docs-code-quality/live
+      - service deploy image.tar.br s3:core.alpha/docs-code-quality/alpha

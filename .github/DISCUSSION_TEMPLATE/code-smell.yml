@@ -1,0 +1,47 @@
+labels: ['Discussion']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## ✏️ 고민
+        배경, 개선 과정, 목표와 같은 내용을 포함해 작성해주시면, 더 유용한 답변을 받을 수 있어요.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: 고민
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 💻 코드
+        맥락을 이해할 수 있도록, 해당 코드와 연관된 부분도 함께 작성해주세요.
+
+  - type: textarea
+    id: code
+    attributes:
+      label: 코드
+      value: |
+        ```tsx
+        ```
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 🖼️ 참고 이미지(또는 자료)
+        문제를 더 명확히 전달할 수 있는 스크린샷, 다이어그램, 또는 링크를 추가해주세요.
+
+  - type: textarea
+    id: resources
+    attributes:
+      label: 참고 자료
+      value: |
+        - 스크린샷:
+        - 다이어그램:
+        - 링크 (ex. 피그마, 노션 등):
+    validations:
+      required: false
