@@ -63,7 +63,7 @@ export default defineConfig({
     socialLinks: [
       {
         icon: 'github',
-        link: 'https://github.toss.bz/toss/frontend-example-docs',
+        link: 'https://github.toss.bz/toss/frontend-code-quality-committee',
       },
     ],
   }
