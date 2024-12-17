@@ -1,7 +1,7 @@
 {
   "name": "docs-code-quality",
   "private": true,
-  "packageManager": "yarn@4.5.0",
+  "packageManager": "yarn@4.5.3",
   "scripts": {
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
