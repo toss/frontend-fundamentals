@@ -6,7 +6,7 @@
 
 다음 `<FriendInvitation />` 컴포넌트는 클릭하면 사용자에게 동의를 받고 사용자에게 초대를 보내는 페이지 컴포넌트예요.
 
-```tsx 6-27
+```tsx 6-27,33
 function FriendInvitation() {
   const { data } = useQuery(/* 생략.. */);
 
@@ -103,7 +103,9 @@ function InviteButton({ name }) {
           await sendPush();
         }
       }}
-    />
+    >
+      초대하기
+    </Button>
   );
 }
 ```
