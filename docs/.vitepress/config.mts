@@ -53,6 +53,10 @@ export default defineConfig({
                 link: '/examples/condition-name',
               },
               {
+                text: '삼항 연산자 풀어서 쓰기',
+                link: '/examples/ternary-operator',
+              },
+              {
                 text: '시점 이동 줄이기',
                 link: '/examples/user-policy',
               },
