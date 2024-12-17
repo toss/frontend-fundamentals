@@ -1,4 +1,4 @@
-# 사용자 권한에 따라서 다르게 동작하는 `<SubmitButton />`
+# `<SubmitButton />`에서 한 번에 다루는 맥락 줄이기
 
 <Badge type="info" text="가독성" />
 

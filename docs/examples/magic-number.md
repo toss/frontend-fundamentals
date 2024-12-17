@@ -1,4 +1,4 @@
-# 무슨 뜻인지 알기 어려운 매직 넘버
+# 매직 넘버에 이름 붙이기
 
 <Badge type="info" text="가독성" />
 <Badge type="info" text="응집도" />

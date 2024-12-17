@@ -1,4 +1,4 @@
-# 모든 쿼리 파라미터를 한 번에 관리하기: `usePageState()`
+# 모든 쿼리 파라미터를 한 번에 관리하는 `usePageState()` 쪼개기
 
 <Badge type="info" text="가독성" />
 <Badge type="info" text="결합도" />

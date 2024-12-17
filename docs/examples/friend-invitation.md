@@ -1,4 +1,4 @@
-# 추상화가 되어 있지 않은 `<FriendInvitation />`
+# `<FriendInvitation />` 적절하게 추상화하기
 
 <Badge type="info" text="가독성" />
 

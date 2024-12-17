@@ -29,11 +29,11 @@ export default defineConfig({
             text: '가독성',
             items: [
               {
-                text: '모든 쿼리 파라미터를 한 번에 관리',
+                text: '쿼리 파라미터는 하나씩 관리',
                 link: '/examples/use-page-state',
               },
               {
-                text: '다른 동작을 한 번에 관리',
+                text: '한 번에 다루는 맥락 줄이기',
                 link: '/examples/submit-button',
               },
               {
@@ -41,8 +41,12 @@ export default defineConfig({
                 link: '/examples/friend-invitation',
               },
               {
-                text: '매직 넘버',
+                text: '매직 넘버에 이름 붙이기',
                 link: '/examples/magic-number',
+              },
+              {
+                text: '복잡한 조건에 이름 붙이기',
+                link: '/examples/condition-name',
               },
             ],
             collapsed: true,
