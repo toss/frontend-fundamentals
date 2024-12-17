@@ -48,6 +48,10 @@ export default defineConfig({
                 text: '복잡한 조건에 이름 붙이기',
                 link: '/examples/condition-name',
               },
+              {
+                text: '시점 이동 줄이기',
+                link: '/examples/user-policy',
+              },
             ],
             collapsed: true,
           },
