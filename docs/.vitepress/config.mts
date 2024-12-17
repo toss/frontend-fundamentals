@@ -56,11 +56,29 @@ export default defineConfig({
             collapsed: true,
           },
           {
+            text: '응집도',
+            items: [
+              {
+                text: '연관된 파일 같은 디렉토리에 두기',
+                link: '/examples/code-directory',
+              },
+              {
+                text: '폼의 응집도 생각하기',
+                link: '/examples/form-fields',
+              }
+            ],
+            collapsed: true,
+          },
+          {
             text: '결합도',
             items: [
               {
-                text: '모든 쿼리 파라미터를 한 번에 관리',
+                text: '쿼리 파라미터는 하나씩 관리',
                 link: '/examples/use-page-state',
+              },
+              {
+                text: '중복 코드 허용하기',
+                link: '/examples/use-bottom-sheet',
               }
             ],
             collapsed: true,
