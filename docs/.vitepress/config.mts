@@ -63,12 +63,27 @@ export default defineConfig({
             ],
             collapsed: true,
           },
+
+          {
+            text: '예측 가능성',
+            items: [
+              {
+                text: '이름 겹치지 않게 관리하기',
+                link: '/examples/http',
+              },
+            ],
+            collapsed: true,
+          },
           {
             text: '응집도',
             items: [
               {
                 text: '연관된 파일 같은 디렉토리에 두기',
                 link: '/examples/code-directory',
+              },
+              {
+                text: '매직 넘버에 이름 붙이기',
+                link: '/examples/magic-number',
               },
               {
                 text: '폼의 응집도 생각하기',
@@ -91,16 +106,6 @@ export default defineConfig({
             ],
             collapsed: true,
           },
-          {
-            text: '예측 가능성',
-            items: [
-              {
-                text: '이름 겹치지 않게 관리하기',
-                link: '/examples/http',
-              },
-            ],
-            collapsed: true,
-          }
         ]
       }
     ],
