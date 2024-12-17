@@ -86,6 +86,16 @@ export default defineConfig({
               }
             ],
             collapsed: true,
+          },
+          {
+            text: '예측 가능성',
+            items: [
+              {
+                text: '이름 겹치지 않게 관리하기',
+                link: '/examples/http',
+              },
+            ],
+            collapsed: true,
           }
         ]
       }
