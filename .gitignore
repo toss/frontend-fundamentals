@@ -1,0 +1,40 @@
+node_modules
+.DS_Store
+.next
+out
+*.log
+dist
+.idea/
+*.map
+.env
+esm
+.rpt2_cache
+umd
+.toss-es5-cache.json
+code-owners.json
+.linaria-cache
+.pnp.*
+.yarn/*
+# !.yarn/cache
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+!.yarn/patches
+**/*/nft-analysis.json
+*.tsbuildinfo
+.eslintcache
+.i18n
+
+# asset-manifest.json 는 빌드 결과물이라 제외
+asset-manifest.json
+assets-preload.html
+_assetManifest.json
+__assetManifest.json
+
+# local 개발용
+.next-local
+.toss
+
+#rn
+.swc
