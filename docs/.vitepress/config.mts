@@ -37,8 +37,12 @@ export default defineConfig({
                 link: '/examples/submit-button',
               },
               {
-                text: '적절한 수준의 추상화',
+                text: '적절한 수준의 추상화 1',
                 link: '/examples/friend-invitation',
+              },
+              {
+                text: '적절한 수준의 추상화 2',
+                link: '/examples/login-start-page',
               },
               {
                 text: '매직 넘버에 이름 붙이기',
