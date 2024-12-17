@@ -60,7 +60,7 @@ export function usePageState() {
 
 먼저, 이 Hook는 "이 페이지에서 필요한 모든 쿼리 파라미터를 가지고 있어" 라고 하는 넓은 책임을 가져요. 그래서 페이지 안의 컴포넌트나 Hook이 너도나도 이 Hook에 의존하기 시작해서, 코드 수정의 영향범위가 급격히 커질 수 있어요.
 
-점점 이 Hook을 수정하는 부담이 생기고, 건드리지 못하는 Hook이 될 가능성이 있어요.
+점점 이 Hook을 수정하는 부담이 생기고, 수정하기 어려운 Hook이 될 가능성이 있어요.
 
 ### 성능
 
@@ -70,7 +70,7 @@ export function usePageState() {
 
 ## ✏️ 개선해보기
 
-다음 코드와 같이 각각의 쿼리 파라미터
+다음 코드와 같이 각각의 쿼리 파라미터별로 별도의 Hook을 작성할 수 있어요.
 
 ```typescript
 import { useQueryParam } from 'use-query-params';
@@ -85,3 +85,6 @@ export function useCardIdQueryParam() {
   return [cardId ?? undefined, setCardId] as const;
 }
 ```
+
+Hook이 담당하는 책임을 분리했기 때문에, 기존 `usePageState()` Hook보다 명확한 이름을 가져요. 
+또한 Hook을 수정했을 때 영향이 갈 범위를 좁혀서, 예상하지 못한 변경이 생기는 것을 막을 수 있어요.
