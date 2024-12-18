@@ -3,13 +3,12 @@ import { defineConfig } from 'vitepress';
 
 export default defineConfig({
   extends: defaultConfig,
-  title: "Code Quality",
-  description: "프론트엔드 예시 문서",
+  title: "Frontend Fundamentals",
+  description: "프론트엔드 코드의 기준",
   base: '/code-quality',
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
-      { text: '모든 문서', link: 'https://docs.alpha-i.toss.bz' },
     ],
 
     sidebar: [
