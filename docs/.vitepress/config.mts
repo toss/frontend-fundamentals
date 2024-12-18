@@ -29,7 +29,7 @@ export default defineConfig({
             text: '1. 가독성',
             items: [
               {
-                text: '맥락 분리하기',
+                text: '맥락 줄이기',
                 items: [
                   {
                     text: '1. SubmitButton',
