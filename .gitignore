@@ -42,3 +42,5 @@ __assetManifest.json
 .tosscore
 .vitepress/cache
 .vitepress/dist
+
+config.mts.*.js
