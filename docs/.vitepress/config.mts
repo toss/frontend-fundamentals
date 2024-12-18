@@ -5,7 +5,6 @@ export default defineConfig({
   extends: defaultConfig,
   title: "Frontend Fundamentals",
   description: "프론트엔드 코드의 기준",
-  base: '/code-quality',
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
