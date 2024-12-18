@@ -1,6 +1,8 @@
 # `useOpenMaintenanceBottomSheet`에서 함께 수정되는 코드만 공통화하기
 
+<div style="margin-top: 16px">
 <Badge type="info" text="결합도" />
+</div>
 
 개발자로서 여러 페이지나 컴포넌트에 걸친 중복 코드를 하나의 Hook이나 컴포넌트로 공통화하는 경우가 많아요.
 중복 코드를 하나의 컴포넌트나 Hook으로 공통화하면, 좋은 코드의 특징 중 하나인 응집도를 챙겨서, 함께 수정되어야 할 코드들을 한꺼번에 수정할 수 있어요.

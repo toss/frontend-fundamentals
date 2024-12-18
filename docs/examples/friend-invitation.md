@@ -1,6 +1,8 @@
 # `<FriendInvitation />` 적절하게 추상화하기
 
+<div style="margin-top: 16px">
 <Badge type="info" text="가독성" />
+</div>
 
 ## 📝 코드 예시
 

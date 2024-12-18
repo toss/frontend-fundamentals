@@ -1,6 +1,8 @@
 # `<SubmitButton />`에서 한 번에 다루는 맥락 줄이기
 
+<div style="margin-top: 16px">
 <Badge type="info" text="가독성" />
+</div>
 
 ## 📝 코드 예시
 

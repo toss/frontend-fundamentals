@@ -1,7 +1,9 @@
 # 매직 넘버에 이름 붙이기
 
+<div style="margin-top: 16px">
 <Badge type="info" text="가독성" />
 <Badge type="info" text="응집도" />
+</div>
 
 **매직 넘버**(Magic Number)란 정확한 뜻을 밝히지 않고 소스 코드 안에 직접 숫자 값을 넣는 것을 말해요. 
 

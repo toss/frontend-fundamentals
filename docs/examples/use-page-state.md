@@ -1,7 +1,9 @@
 # 모든 쿼리 파라미터를 한 번에 관리하는 `usePageState()` 쪼개기
 
+<div style="margin-top: 16px">
 <Badge type="info" text="가독성" />
 <Badge type="info" text="결합도" />
+</div>
 
 ## 📝 코드 예시
 
