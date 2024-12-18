@@ -26,7 +26,7 @@ export default defineConfig({
         text: '좋은 코드를 만드는 전략',
         items: [
           {
-            text: '맥락 줄이기',
+            text: '1. 가독성',
             items: [
               {
                 text: '맥락 분리하기',
@@ -83,7 +83,7 @@ export default defineConfig({
           },
 
           {
-            text: '예측 가능성',
+            text: '2. 예측 가능성',
             items: [
               {
                 text: '이름 겹치지 않게 관리하기',
@@ -93,7 +93,7 @@ export default defineConfig({
             collapsed: true,
           },
           {
-            text: '응집도',
+            text: '3. 응집도',
             items: [
               {
                 text: '연관된 파일 같은 디렉토리에 두기',
@@ -111,7 +111,7 @@ export default defineConfig({
             collapsed: true,
           },
           {
-            text: '결합도',
+            text: '4. 결합도',
             items: [
               {
                 text: '쿼리 파라미터는 하나씩 관리',
