@@ -19,7 +19,7 @@
     - [`<LoginStartPage />`의 사례](./examples/login-start-page.md)
 - 이름 붙이기
     - [복잡한 조건에 이름 붙이기](./examples/condition-name.md)
-    - [매직 넘버에 이름 붙이기](./examples/magic-number.md)
+    - [매직 넘버에 이름 붙이기](./examples/magic-number-readability.md)
 - [시점 이동 줄이기](./examples/user-policy.md)
 
 ## 2. 예측 가능성
@@ -47,7 +47,7 @@
 
 ### 응집도를 높이는 전략
 
-- [매직 넘버에 이름 붙이기](./examples/magic-number.md)
+- [매직 넘버에 이름 붙이기](./examples/magic-number-cohesion.md)
 - [함께 수정되는 소스 파일을 같은 디렉토리에 두기](./examples/code-directory.md)
 - [폼에서 응집도 다루기](./examples/form-fields.md)
 
