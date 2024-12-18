@@ -25,6 +25,33 @@ export default defineConfig({
       text: '마지막 업데이트',
     },
 
+    search: {
+      provider: 'local',
+      options: {
+        translations: {
+          button: {
+            buttonText: '검색',
+            buttonAriaLabel: '검색',
+          },
+          modal: {
+            backButtonTitle: '뒤로가기',
+            displayDetails: '더보기',
+            footer: {
+              closeKeyAriaLabel: '닫기',
+              closeText: '닫기',
+              navigateDownKeyAriaLabel: '아래로',
+              navigateText: '이동',
+              navigateUpKeyAriaLabel: '위로',
+              selectKeyAriaLabel: '선택',
+              selectText: '선택',
+            },
+            noResultsText: '검색 결과를 찾지 못했어요.',
+            resetButtonTitle: '모두 지우기',
+          },
+        },
+      },
+    },
+
     sidebar: [
       {
         text: '좋은 코드의 기준',
