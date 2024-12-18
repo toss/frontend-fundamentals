@@ -29,7 +29,7 @@ export default defineConfig({
             text: '가독성',
             items: [
               {
-                text: '쿼리 파라미터는 하나씩 관리',
+                text: '쿼리 파라미터는 하나씩 관리하기',
                 link: '/examples/use-page-state',
               },
               {
