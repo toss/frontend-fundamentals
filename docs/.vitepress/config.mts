@@ -58,7 +58,7 @@ export default defineConfig({
                   },
                   {
                     text: '2. 매직 넘버',
-                    link: '/examples/magic-number',
+                    link: '/examples/magic-number-readability',
                   },
                 ],
                 collapsed: true
@@ -99,8 +99,8 @@ export default defineConfig({
                 link: '/examples/code-directory',
               },
               {
-                text: '매직 넘버에 이름 붙이기',
-                link: '/examples/magic-number',
+                text: '매직 넘버 없애기',
+                link: '/examples/magic-number-cohesion',
               },
               {
                 text: '폼의 응집도 생각하기',
