@@ -5,7 +5,7 @@
 
 ## 📝 코드 예시
 
-다음 `usePageState()` Hook은 페이지 전체의 쿼리 파라미터를 한 번에 관리하고 있어요.
+다음 `usePageState()` Hook은 페이지 전체의 URL 쿼리 파라미터를 한 번에 관리해요.
 
 ```typescript
 import moment, { Moment } from 'moment';
