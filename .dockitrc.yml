@@ -1,8 +1,0 @@
-project:
-  root: .
-sites:
-  - name: Code Quality
-    documents:
-      root: ./docs
-    deploy:
-      origin: https://docs.alpha-i.toss.bz/code-quality/

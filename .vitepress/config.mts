@@ -1,14 +1,29 @@
-import defaultConfig from '@fe-document/vitepress/config';
+import { createRequire } from 'node:module';
+import path from 'node:path';
 import { defineConfig } from 'vitepress';
+import footnote from 'markdown-it-footnote';
+
+const require = createRequire(import.meta.url);
 
 export default defineConfig({
-  extends: defaultConfig,
   title: "Frontend Fundamentals",
   description: "프론트엔드 코드의 기준",
+  lastUpdated: true,
   themeConfig: {
     nav: [
-      { text: 'Home', link: '/' },
+      { text: '홈', link: '/' },
     ],
+
+    outline: {
+      label: '페이지 내용',
+    },
+    docFooter: {
+      prev: '이전 페이지',
+      next: '다음 페이지',
+    },
+    lastUpdated: {
+      text: '마지막 업데이트',
+    },
 
     sidebar: [
       {
@@ -128,8 +143,35 @@ export default defineConfig({
     socialLinks: [
       {
         icon: 'github',
-        link: 'https://github.toss.bz/toss/frontend-code-quality-committee',
+        link: 'https://github.com/toss/frontend-fundamentals',
       },
     ],
-  }
+  },
+  vite: {
+    resolve: {
+      alias: [
+        {
+          find: /^vue$/,
+          replacement: path.dirname(
+            require.resolve('vue/package.json', {
+              paths: [require.resolve('vitepress')],
+            })
+          ),
+        },
+        {
+          find: /^vue\/server-renderer$/g,
+          replacement: path.dirname(
+            require.resolve('vue/server-renderer', {
+              paths: [require.resolve('vitepress')],
+            })
+          ),
+        },
+      ],
+    },
+  },
+  markdown: {
+    config: (md) => {
+      md.use(footnote);
+    },
+  },
 })
