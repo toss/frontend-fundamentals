@@ -6,8 +6,11 @@ hero:
   name: "Frontend Fundamentals"
   text: "프론트엔드 코드의 기본"
   actions:
-    - text: 알아보기
+    - text: 좋은 코드의 기준 알아보기
       link: /introduction
+    - theme: alt
+      text: 소통하기
+      link: https://github.com/toss/frontend-fundamentals/discussions
 
 features:
   - icon: 🤓
