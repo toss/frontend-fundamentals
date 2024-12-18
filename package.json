@@ -7,7 +7,6 @@
     "docs:preview": "vitepress preview"
   },
   "dependencies": {
-    "@fe-document/vitepress": "^1.15.10",
     "markdown-it-footnote": "^4.0.0",
     "typescript": "^5.6.3",
     "vitepress": "^1.4.1"
