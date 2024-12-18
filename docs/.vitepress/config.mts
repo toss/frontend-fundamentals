@@ -17,49 +17,67 @@ export default defineConfig({
         text: '좋은 코드의 기준',
         items: [
           { 
-            text: 'Frontend Fundamentals',
+            text: '변경하기 쉬운 코드',
             link: '/introduction',
           },
         ]
       },
       {
-        text: '예시',
+        text: '좋은 코드를 만드는 전략',
         items: [
           {
-            text: '가독성',
+            text: '맥락 줄이기',
             items: [
               {
-                text: '쿼리 파라미터는 하나씩 관리하기',
-                link: '/examples/use-page-state',
+                text: '맥락 분리하기',
+                items: [
+                  {
+                    text: '1. SubmitButton',
+                    link: '/examples/submit-button',
+                  },
+                  {
+                    text: '2. FriendInvitation',
+                    link: '/examples/friend-invitation',
+                  },
+                  {
+                    text: '3. LoginStartPage',
+                    link: '/examples/login-start-page',
+                  },
+                  {
+                    text: '4. 쿼리 파라미터 관리하기',
+                    link: '/examples/use-page-state',
+                  },
+                ],
+                collapsed: true
               },
               {
-                text: '한 번에 다루는 맥락 줄이기',
-                link: '/examples/submit-button',
+                text: '이름 붙이기',
+                items: [
+                  {
+                    text: '1. 복잡한 조건',
+                    link: '/examples/condition-name',
+                  },
+                  {
+                    text: '2. 매직 넘버',
+                    link: '/examples/magic-number',
+                  },
+                ],
+                collapsed: true
               },
               {
-                text: '적절한 수준의 추상화 1',
-                link: '/examples/friend-invitation',
-              },
-              {
-                text: '적절한 수준의 추상화 2',
-                link: '/examples/login-start-page',
-              },
-              {
-                text: '매직 넘버에 이름 붙이기',
-                link: '/examples/magic-number',
-              },
-              {
-                text: '복잡한 조건에 이름 붙이기',
-                link: '/examples/condition-name',
-              },
-              {
-                text: '삼항 연산자 풀어서 쓰기',
-                link: '/examples/ternary-operator',
-              },
-              {
-                text: '시점 이동 줄이기',
-                link: '/examples/user-policy',
-              },
+                text: '위에서 아래로 읽히게 하기',
+                items: [
+                  {
+                    text: '삼항 연산자 풀어서 쓰기',
+                    link: '/examples/ternary-operator',
+                  },
+                  {
+                    text: '시점 이동 줄이기',
+                    link: '/examples/user-policy',
+                  },
+                ],
+                collapsed: true
+              }
             ],
             collapsed: true,
           },
