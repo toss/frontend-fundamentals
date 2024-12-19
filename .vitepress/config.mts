@@ -162,12 +162,34 @@ export default defineConfig({
             text: '4. 결합도',
             items: [
               {
-                text: '쿼리 파라미터는 하나씩 관리',
-                link: '/code/examples/use-page-state',
+                text: '책임을 하나씩 관리',
+                items: [
+                  {
+                    text: '1. usePageState',
+                    link: '/code/examples/use-page-state',
+                  }
+                ],
+                collapsed: true,
               },
               {
                 text: '중복 코드 허용하기',
-                link: '/code/examples/use-bottom-sheet',
+                items: [
+                  {
+                    text: '1. useBottomSheet',
+                    link: '/code/examples/use-bottom-sheet',
+                  }
+                ],
+                collapsed: true,
+              },
+              {
+                text: 'Props Drilling 지우기',
+                items: [
+                  {
+                    text: '1. ItemEditModal',
+                    link: '/code/examples/item-edit-modal',
+                  }
+                ],
+                collapsed: true,
               }
             ],
             collapsed: true,
