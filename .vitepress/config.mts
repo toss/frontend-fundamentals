@@ -116,12 +116,12 @@ export default defineConfig({
                 text: '위에서 아래로 읽히게 하기',
                 items: [
                   {
-                    text: '삼항 연산자 풀어서 쓰기',
-                    link: '/code/examples/ternary-operator',
+                    text: '1. 시점 이동',
+                    link: '/code/examples/user-policy',
                   },
                   {
-                    text: '시점 이동 줄이기',
-                    link: '/code/examples/user-policy',
+                    text: '2. 삼항 연산자',
+                    link: '/code/examples/ternary-operator',
                   },
                 ],
                 collapsed: true
