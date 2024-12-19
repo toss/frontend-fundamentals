@@ -57,8 +57,16 @@ export default defineConfig({
         text: '좋은 코드의 기준',
         items: [
           { 
+            text: '시작하기',
+            link: '/code/start',
+          },
+          { 
             text: '변경하기 쉬운 코드',
-            link: '/introduction',
+            link: '/code',
+          },
+          { 
+            text: '기여하기',
+            link: '/code/contributing',
           },
         ]
       },
@@ -73,19 +81,19 @@ export default defineConfig({
                 items: [
                   {
                     text: '1. SubmitButton',
-                    link: '/examples/submit-button',
+                    link: '/code/examples/submit-button',
                   },
                   {
                     text: '2. FriendInvitation',
-                    link: '/examples/friend-invitation',
+                    link: '/code/examples/friend-invitation',
                   },
                   {
                     text: '3. LoginStartPage',
-                    link: '/examples/login-start-page',
+                    link: '/code/examples/login-start-page',
                   },
                   {
                     text: '4. 쿼리 파라미터 관리하기',
-                    link: '/examples/use-page-state',
+                    link: '/code/examples/use-page-state',
                   },
                 ],
                 collapsed: true
@@ -95,11 +103,11 @@ export default defineConfig({
                 items: [
                   {
                     text: '1. 복잡한 조건',
-                    link: '/examples/condition-name',
+                    link: '/code/examples/condition-name',
                   },
                   {
                     text: '2. 매직 넘버',
-                    link: '/examples/magic-number-readability',
+                    link: '/code/examples/magic-number-readability',
                   },
                 ],
                 collapsed: true
@@ -109,11 +117,11 @@ export default defineConfig({
                 items: [
                   {
                     text: '삼항 연산자 풀어서 쓰기',
-                    link: '/examples/ternary-operator',
+                    link: '/code/examples/ternary-operator',
                   },
                   {
                     text: '시점 이동 줄이기',
-                    link: '/examples/user-policy',
+                    link: '/code/examples/user-policy',
                   },
                 ],
                 collapsed: true
@@ -127,7 +135,7 @@ export default defineConfig({
             items: [
               {
                 text: '이름 겹치지 않게 관리하기',
-                link: '/examples/http',
+                link: '/code/examples/http',
               },
             ],
             collapsed: true,
@@ -137,15 +145,15 @@ export default defineConfig({
             items: [
               {
                 text: '연관된 파일 같은 디렉토리에 두기',
-                link: '/examples/code-directory',
+                link: '/code/examples/code-directory',
               },
               {
                 text: '매직 넘버 없애기',
-                link: '/examples/magic-number-cohesion',
+                link: '/code/examples/magic-number-cohesion',
               },
               {
                 text: '폼의 응집도 생각하기',
-                link: '/examples/form-fields',
+                link: '/code/examples/form-fields',
               }
             ],
             collapsed: true,
@@ -155,11 +163,11 @@ export default defineConfig({
             items: [
               {
                 text: '쿼리 파라미터는 하나씩 관리',
-                link: '/examples/use-page-state',
+                link: '/code/examples/use-page-state',
               },
               {
                 text: '중복 코드 허용하기',
-                link: '/examples/use-bottom-sheet',
+                link: '/code/examples/use-bottom-sheet',
               }
             ],
             collapsed: true,
