@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { useData } from 'vitepress'
 
-const { title } = useData()
+const { frontmatter, title } = useData()
 </script>
 
 <template>
-  <div :key="title" class="giscus">
+  <div v-if="frontmatter.comments !== false" :key="title" class="giscus">
     <component
       :is="'script'"
       data-repo="toss/frontend-fundamentals"
