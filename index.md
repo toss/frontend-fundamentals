@@ -7,7 +7,7 @@ hero:
   text: "프론트엔드 코드의 기본"
   actions:
     - text: 좋은 코드의 기준 알아보기
-      link: /introduction
+      link: /code
     - theme: alt
       text: 소통하기
       link: https://github.com/toss/frontend-fundamentals/discussions
