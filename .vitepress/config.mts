@@ -92,7 +92,7 @@ export default defineConfig({
                     link: '/code/examples/login-start-page',
                   },
                   {
-                    text: '4. 쿼리 파라미터 관리하기',
+                    text: '4. usePageState',
                     link: '/code/examples/use-page-state',
                   },
                 ],
