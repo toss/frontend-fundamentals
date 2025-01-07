@@ -1,3 +1,7 @@
+---
+comments: false
+---
+
 # 시작하기
 
 `Frontend Fundamentals`는 좋은 프론트엔드 코드의 기준을 제공해요.

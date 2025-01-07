@@ -1,3 +1,6 @@
+---
+comments: false
+---
 # 기여하기
 
 `Frontend Fundamentals`는 커뮤니티와 함께 좋은 코드의 기준을 만들어 가고 있어요. 
