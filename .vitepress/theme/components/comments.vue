@@ -6,7 +6,6 @@ const { frontmatter, title } = useData()
 
 <template>
   <div v-if="frontmatter.comments !== false" :key="title" class="giscus" style="margin-top: 24px;">
-    <div>하하</div>
     <component
       :is="'script'"
       data-repo="toss/frontend-fundamentals"
