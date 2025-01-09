@@ -89,7 +89,7 @@ export default defineConfig({
                   },
                   {
                     text: 'C. 로직 종류에 따라 합쳐진 함수 쪼개기',
-                    link: '/code/examples/use-page-state',
+                    link: '/code/examples/use-page-state-readability',
                   },
                 ],
                 collapsed: true
@@ -130,8 +130,12 @@ export default defineConfig({
             text: '2. 예측 가능성',
             items: [
               {
-                text: '이름 겹치지 않게 관리하기',
+                text: 'A. 이름 겹치지 않게 관리하기',
                 link: '/code/examples/http',
+              },
+              {
+                text: 'B. 같은 종류의 함수는 반환 타입 통일하기',
+                link: '/code/examples/use-user',
               },
             ],
             collapsed: true,
@@ -162,7 +166,7 @@ export default defineConfig({
                 items: [
                   {
                     text: '1. usePageState',
-                    link: '/code/examples/use-page-state',
+                    link: '/code/examples/use-page-state-coupling',
                   }
                 ],
                 collapsed: true,

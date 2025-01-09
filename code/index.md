@@ -18,7 +18,6 @@ comments: false
 
 - 한 번에 다루는 맥락 분리하기
     - [`<SubmitButton />`의 사례](./examples/submit-button.md)
-    - [`<FriendInvitation />`의 사례](./examples/friend-invitation.md)
     - [`<LoginStartPage />`의 사례](./examples/login-start-page.md)
 - 이름 붙이기
     - [복잡한 조건에 이름 붙이기](./examples/condition-name.md)
@@ -28,7 +27,7 @@ comments: false
 ## 2. 예측 가능성
 
 **예측 가능성**(Predictability)이란, 함께 협업하는 동료들이 함수나 컴포넌트의 동작을 얼마나 예측할 수 있는지를 말해요.
-예측 가능성이 높은 코드는 함수나 컴포넌트의 이름과 파라미터, 반환 값만 보고도 어떤 동작을 하는지 알 수 있어요.
+예측 가능성이 높은 코드는 일관적인 규칙을 따르고, 함수나 컴포넌트의 이름과 파라미터, 반환 값만 보고도 어떤 동작을 하는지 알 수 있어요.
 
 ### 예측 가능성을 높이는 전략
 
@@ -61,7 +60,7 @@ comments: false
 
 ### 결합도를 낮추는 전략
 
-- [거대한 Hook 쪼개기](./examples/use-page-state.md)
+- [거대한 Hook 쪼개기](./examples/use-page-state-coupling.md)
 - [중복 코드 허용하기](./examples/use-bottom-sheet.md)
 
 
