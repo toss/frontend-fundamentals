@@ -137,6 +137,10 @@ export default defineConfig({
                 text: 'B. 같은 종류의 함수는 반환 타입 통일하기',
                 link: '/code/examples/use-user',
               },
+              {
+                text: 'C. 숨은 로직 지우기',
+                link: '/code/examples/hidden-logic',
+              },
             ],
             collapsed: true,
           },
