@@ -1,4 +1,4 @@
-# Form 관리하기
+# 폼의 응집도 생각하기
 
 <div style="margin-top: 16px">
 <Badge type="info" text="응집도" />
