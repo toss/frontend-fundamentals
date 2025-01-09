@@ -19,4 +19,6 @@ comments: false
 좋은 코드의 기준에 대해 의견이 있거나, 새로운 의견을 더하고 싶다면 더 좋은 코드가 어떤 코드인지 투표하고, 의견을 남겨 보세요.
 커뮤니티와 소통하며 더욱 풍부하고 깊이 있는 기준을 만들어 나가요.
 
+이 코드가 좋을까? 저 코드가 좋을까? 에 대해서 나만의 기준을 확립하는 계기가 될 수 있어요.
+
 - [A vs B에 올라온 코드 보기](https://github.com/toss/frontend-fundamentals/discussions/categories/a-vs-b)
