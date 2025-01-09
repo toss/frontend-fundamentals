@@ -98,11 +98,11 @@ export default defineConfig({
                 text: '이름 붙이기',
                 items: [
                   {
-                    text: 'A. 복잡한 조건',
+                    text: 'A. 복잡한 조건에 이름 붙이기',
                     link: '/code/examples/condition-name',
                   },
                   {
-                    text: 'B. 매직 넘버',
+                    text: 'B. 매직 넘버에 이름 붙이기',
                     link: '/code/examples/magic-number-readability',
                   },
                 ],
@@ -112,11 +112,11 @@ export default defineConfig({
                 text: '위에서 아래로 읽히게 하기',
                 items: [
                   {
-                    text: 'A. 시점 이동',
+                    text: 'A. 시점 이동 줄이기',
                     link: '/code/examples/user-policy',
                   },
                   {
-                    text: 'B. 삼항 연산자',
+                    text: 'B. 삼항 연산자 단순하게 하기',
                     link: '/code/examples/ternary-operator',
                   },
                 ],
