@@ -25,6 +25,7 @@ comments: false
 - [raon0211](https://github.com/raon0211)
 - [bigsaigon333](https://github.com/bigsaigon333)
 - [jho2301](https://github.com/jho2301)
+- [KimChunsick](https://github.com/KimChunsick)
 
 ## 문서 기여자
 
