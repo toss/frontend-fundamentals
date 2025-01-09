@@ -123,7 +123,6 @@ export default defineConfig({
                 collapsed: true
               }
             ],
-            collapsed: true,
           },
 
           {
@@ -142,7 +141,6 @@ export default defineConfig({
                 link: '/code/examples/hidden-logic',
               },
             ],
-            collapsed: true,
           },
           {
             text: '3. 응집도',
@@ -160,7 +158,6 @@ export default defineConfig({
                 link: '/code/examples/form-fields',
               }
             ],
-            collapsed: true,
           },
           {
             text: '4. 결합도',
@@ -178,7 +175,6 @@ export default defineConfig({
                 link: '/code/examples/item-edit-modal',
               }
             ],
-            collapsed: true,
           },
         ]
       }
