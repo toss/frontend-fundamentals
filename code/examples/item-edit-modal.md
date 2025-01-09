@@ -1,17 +1,19 @@
-# `<ItemEditModal />`에서 Props Drilling 때문에 생긴 결합도 제거하기
+# Props Drilling 지우기
 
 <div style="margin-top: 16px">
 <Badge type="info" text="결합도" />
 </div>
+
+Props Drilling은 부모 컴포넌트와 자식 컴포넌트 사이에 결합도가 생겼다는 것을 나타내는 명확한 표시예요. 만약에 Drilling되는 프롭이 변경되면, 프롭을 참조하는 모든 컴포넌트가 변경되어야 하죠.
 
 ## 📝 코드 예시
 
 다음 코드는 사용자가 `item`을 선택할 때 사용하는 `<ItemSelectorModal />` 컴포넌트예요. 
 사용자가 키워드를 입력해서 아이템 목록을 검색하고, 찾고 있었던 아이템을 선택하면 `onConfirm`이 호출돼요.
 
-사용자가 선택할 수 있는 아이템은 `items`, 추천 아이템의 목록은 `recommendedItems` 프롭으로 전달돼요.
+사용자가 입력한 키워드는 `keyword`, 선택할 수 있는 아이템은 `items`, 추천 아이템의 목록은 `recommendedItems` 프롭으로 전달돼요.
 
-```tsx
+```tsx 2,9-10,12-13,29-32
 function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
   const [keyword, setKeyword] = useState('');
   
@@ -39,7 +41,12 @@ function ItemEditBody({ keyword, onKeywordChange, items, recommendedItems, onCon
         <Input value={keyword} onChange={e => onKeywordChange(e.target.value)} />
         <Button onClick={onClose}>닫기</Button>
       </div>
-      <ItemEditList keyword={keyword} items={items} recommendedItems={recommendedItems} onConfirm={onConfirm} />
+      <ItemEditList 
+        keyword={keyword} 
+        items={items} 
+        recommendedItems={recommendedItems} 
+        onConfirm={onConfirm}
+      />
     </>
   )
 }

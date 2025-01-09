@@ -1,4 +1,4 @@
-# 서비스 유틸리티 함수는 라이브러리와 이름이 겹치지 않게 하기
+# 이름 겹치지 않게 관리하기
 
 <div style="margin-top: 16px">
 <Badge type="info" text="예측 가능성" />

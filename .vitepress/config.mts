@@ -144,15 +144,15 @@ export default defineConfig({
             text: '3. 응집도',
             items: [
               {
-                text: '같이 수정되는 파일을 같은 디렉토리에 두기',
+                text: 'A. 같이 수정되는 파일을 같은 디렉토리에 두기',
                 link: '/code/examples/code-directory',
               },
               {
-                text: '매직 넘버 없애기',
+                text: 'B. 매직 넘버 없애기',
                 link: '/code/examples/magic-number-cohesion',
               },
               {
-                text: '폼의 응집도 생각하기',
+                text: 'C. 폼의 응집도 생각하기',
                 link: '/code/examples/form-fields',
               }
             ],
@@ -162,34 +162,16 @@ export default defineConfig({
             text: '4. 결합도',
             items: [
               {
-                text: '책임을 하나씩 관리',
-                items: [
-                  {
-                    text: '1. usePageState',
-                    link: '/code/examples/use-page-state-coupling',
-                  }
-                ],
-                collapsed: true,
+                text: 'A. 책임을 하나씩 관리하기',
+                link: '/code/examples/use-page-state-coupling',
               },
               {
-                text: '중복 코드 허용하기',
-                items: [
-                  {
-                    text: '1. useBottomSheet',
-                    link: '/code/examples/use-bottom-sheet',
-                  }
-                ],
-                collapsed: true,
+                text: 'B. 중복 코드 허용하기',
+                link: '/code/examples/use-bottom-sheet',
               },
               {
-                text: 'Props Drilling 지우기',
-                items: [
-                  {
-                    text: '1. ItemEditModal',
-                    link: '/code/examples/item-edit-modal',
-                  }
-                ],
-                collapsed: true,
+                text: 'C. Props Drilling 지우기',
+                link: '/code/examples/item-edit-modal',
               }
             ],
             collapsed: true,

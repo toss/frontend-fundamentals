@@ -1,4 +1,4 @@
-# 함께 수정되는 소스 파일을 같은 디렉토리에 두기
+# 같이 수정되는 파일을 같은 디렉토리에 두기
 
 <div style="margin-top: 16px">
 <Badge type="info" text="응집도" />

@@ -34,6 +34,12 @@ async function onLikeClick() {
 
 하나의 코드를 여러 명의 개발자가 함께 수정하다 보면 의도를 정확히 알 수 없어서 코드가 원하지 않는 방향으로 수정될 수도 있어요.
 
+::: info
+
+이 Hook은 [응집도](./use-page-state-cohesion.md) 관점으로도 볼 수 있어요.
+
+:::
+
 ## ✏️ 개선해보기
 
 숫자 `300`의 맥락을 정확하게 표시하기 위해서 상수 `ANIMATION_DELAY_MS`로 선언할 수 있어요.

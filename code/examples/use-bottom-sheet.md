@@ -1,4 +1,4 @@
-# `useOpenMaintenanceBottomSheet`에서 함께 수정되는 코드만 공통화하기
+# 중복 코드 허용하기
 
 <div style="margin-top: 16px">
 <Badge type="info" text="결합도" />
