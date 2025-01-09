@@ -1,4 +1,4 @@
-# 숨은 로직 지우기
+# 숨은 로직 드러내기
 
 <div style="margin-top: 16px">
 <Badge type="info" text="예측 가능성" />

@@ -16,13 +16,16 @@ comments: false
 
 ### 가독성을 높이는 전략
 
-- 한 번에 다루는 맥락 분리하기
-    - [`<SubmitButton />`의 사례](./examples/submit-button.md)
-    - [`<LoginStartPage />`의 사례](./examples/login-start-page.md)
-- 이름 붙이기
+- **한 번에 다루는 맥락 줄이기**
+    - [같이 실행되지 않는 코드 분리하기](./examples/submit-button.md)
+    - [구현 상세 추상화하기](./examples/login-start-page.md)
+    - [로직 종류에 따라서 합쳐진 함수 쪼개기](./examples/use-page-state-readability.md)
+- **이름 붙이기**
     - [복잡한 조건에 이름 붙이기](./examples/condition-name.md)
     - [매직 넘버에 이름 붙이기](./examples/magic-number-readability.md)
-- [시점 이동 줄이기](./examples/user-policy.md)
+- **위에서 아래로 읽히게 하기**
+    - [시점 이동 줄이기](./examples/user-policy.md)
+    - [삼항 연산자 단순하게 하기](./examples/ternary-operator.md)
 
 ## 2. 예측 가능성
 
@@ -32,6 +35,8 @@ comments: false
 ### 예측 가능성을 높이는 전략
 
 - [이름 겹치지 않게 관리하기](./examples/http.md)
+- [같은 종류의 함수는 반환 타입 통일하기](./examples/use-user.md)
+- [숨은 로직 드러내기](./examples/hidden-logic.md)
 
 ## 3. 응집도
 
@@ -49,9 +54,9 @@ comments: false
 
 ### 응집도를 높이는 전략
 
-- [매직 넘버에 이름 붙이기](./examples/magic-number-cohesion.md)
 - [함께 수정되는 소스 파일을 같은 디렉토리에 두기](./examples/code-directory.md)
-- [폼에서 응집도 다루기](./examples/form-fields.md)
+- [매직 넘버에 없애기](./examples/magic-number-cohesion.md)
+- [폼의 응집도 생각하기](./examples/form-fields.md)
 
 ## 4. 결합도
 
@@ -60,8 +65,9 @@ comments: false
 
 ### 결합도를 낮추는 전략
 
-- [거대한 Hook 쪼개기](./examples/use-page-state-coupling.md)
+- [책임을 하나씩 관리하기](./examples/use-page-state-coupling.md)
 - [중복 코드 허용하기](./examples/use-bottom-sheet.md)
+- [Props Drilling 지우기](./examples/item-edit-modal.md)
 
 
 ## 코드 품질 여러 각도로 보기

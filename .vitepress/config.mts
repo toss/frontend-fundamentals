@@ -138,7 +138,7 @@ export default defineConfig({
                 link: '/code/examples/use-user',
               },
               {
-                text: 'C. 숨은 로직 지우기',
+                text: 'C. 숨은 로직 드러내기',
                 link: '/code/examples/hidden-logic',
               },
             ],
