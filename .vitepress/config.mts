@@ -80,19 +80,15 @@ export default defineConfig({
                 text: '맥락 줄이기',
                 items: [
                   {
-                    text: '1. SubmitButton',
+                    text: 'A. 같이 실행되지 않는 코드 분리하기',
                     link: '/code/examples/submit-button',
                   },
                   {
-                    text: '2. FriendInvitation',
-                    link: '/code/examples/friend-invitation',
-                  },
-                  {
-                    text: '3. LoginStartPage',
+                    text: 'B. 구현 상세 추상화하기',
                     link: '/code/examples/login-start-page',
                   },
                   {
-                    text: '4. usePageState',
+                    text: 'C. 로직 종류에 따라 합쳐진 함수 쪼개기',
                     link: '/code/examples/use-page-state',
                   },
                 ],
@@ -102,11 +98,11 @@ export default defineConfig({
                 text: '이름 붙이기',
                 items: [
                   {
-                    text: '1. 복잡한 조건',
+                    text: 'A. 복잡한 조건',
                     link: '/code/examples/condition-name',
                   },
                   {
-                    text: '2. 매직 넘버',
+                    text: 'B. 매직 넘버',
                     link: '/code/examples/magic-number-readability',
                   },
                 ],
@@ -116,11 +112,11 @@ export default defineConfig({
                 text: '위에서 아래로 읽히게 하기',
                 items: [
                   {
-                    text: '1. 시점 이동',
+                    text: 'A. 시점 이동',
                     link: '/code/examples/user-policy',
                   },
                   {
-                    text: '2. 삼항 연산자',
+                    text: 'B. 삼항 연산자',
                     link: '/code/examples/ternary-operator',
                   },
                 ],
