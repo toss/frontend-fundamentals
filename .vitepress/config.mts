@@ -10,6 +10,7 @@ export default defineConfig({
   description: "프론트엔드 코드의 기준",
   lastUpdated: true,
   themeConfig: {
+    logo: '/images/designs/ff-symbol.svg',
     nav: [
       { text: '홈', link: '/' },
     ],
