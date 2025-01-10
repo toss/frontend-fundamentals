@@ -1,6 +1,7 @@
 ---
 comments: false
 ---
+
 # 변경하기 쉬운 코드
 
 좋은 프론트엔드 코드는 **변경하기 쉬운** 코드예요.
@@ -9,23 +10,23 @@ comments: false
 
 ## 1. 가독성
 
-**가독성**(Readability)은 코드가 읽기 쉬운 정도를 말해요. 
-코드가 변경하기 쉬우려면 먼저 코드가 어떤 동작을 하는지 이해할 수 있어야 해요. 
+**가독성**(Readability)은 코드가 읽기 쉬운 정도를 말해요.
+코드가 변경하기 쉬우려면 먼저 코드가 어떤 동작을 하는지 이해할 수 있어야 해요.
 
 읽기 좋은 코드는 읽는 사람이 한 번에 머릿속에서 고려하는 맥락이 적고, 위에서 아래로 자연스럽게 이어져요.
 
 ### 가독성을 높이는 전략
 
-- **한 번에 다루는 맥락 줄이기**
-    - [같이 실행되지 않는 코드 분리하기](./examples/submit-button.md)
-    - [구현 상세 추상화하기](./examples/login-start-page.md)
-    - [로직 종류에 따라서 합쳐진 함수 쪼개기](./examples/use-page-state-readability.md)
+- **맥락 줄이기**
+  - [같이 실행되지 않는 코드 분리하기](./examples/submit-button.md)
+  - [구현 상세 추상화하기](./examples/login-start-page.md)
+  - [로직 종류에 따라서 합쳐진 함수 쪼개기](./examples/use-page-state-readability.md)
 - **이름 붙이기**
-    - [복잡한 조건에 이름 붙이기](./examples/condition-name.md)
-    - [매직 넘버에 이름 붙이기](./examples/magic-number-readability.md)
+  - [복잡한 조건에 이름 붙이기](./examples/condition-name.md)
+  - [매직 넘버에 이름 붙이기](./examples/magic-number-readability.md)
 - **위에서 아래로 읽히게 하기**
-    - [시점 이동 줄이기](./examples/user-policy.md)
-    - [삼항 연산자 단순하게 하기](./examples/ternary-operator.md)
+  - [시점 이동 줄이기](./examples/user-policy.md)
+  - [삼항 연산자 단순하게 하기](./examples/ternary-operator.md)
 
 ## 2. 예측 가능성
 
@@ -40,7 +41,7 @@ comments: false
 
 ## 3. 응집도
 
-**응집도**(Cohesion)란, 수정되어야 할 코드가 항상 같이 수정되는지를 말해요. 
+**응집도**(Cohesion)란, 수정되어야 할 코드가 항상 같이 수정되는지를 말해요.
 응집도가 높은 코드는 코드의 한 부분을 수정해도 의도치 않게 다른 부분에서 오류가 발생하지 않아요.
 함께 수정되어야 할 부분이 반드시 함께 수정되도록 구조적으로 뒷받침되기 때문이죠.
 
@@ -54,14 +55,14 @@ comments: false
 
 ### 응집도를 높이는 전략
 
-- [함께 수정되는 소스 파일을 같은 디렉토리에 두기](./examples/code-directory.md)
+- [함께 수정되는 파일을 같은 디렉토리에 두기](./examples/code-directory.md)
 - [매직 넘버 없애기](./examples/magic-number-cohesion.md)
 - [폼의 응집도 생각하기](./examples/form-fields.md)
 
 ## 4. 결합도
 
-**결합도**(Coupling)란, 코드를 수정했을 때의 영향범위를 말해요. 
-코드를 수정했을 때 영향범위가 적어서, 변경에 따른 범위를 예측할 수 있는 코드가 수정하기 쉬운 코드예요. 
+**결합도**(Coupling)란, 코드를 수정했을 때의 영향범위를 말해요.
+코드를 수정했을 때 영향범위가 적어서, 변경에 따른 범위를 예측할 수 있는 코드가 수정하기 쉬운 코드예요.
 
 ### 결합도를 낮추는 전략
 
@@ -69,10 +70,9 @@ comments: false
 - [중복 코드 허용하기](./examples/use-bottom-sheet.md)
 - [Props Drilling 지우기](./examples/item-edit-modal.md)
 
-
 ## 코드 품질 여러 각도로 보기
 
-아쉽게도 이 4가지 기준을 모두 한꺼번에 충족하기는 어려워요. 
+아쉽게도 이 4가지 기준을 모두 한꺼번에 충족하기는 어려워요.
 
 예를 들어서, 함수나 변수가 항상 같이 수정되기 위해서 공통화 및 추상화하면, 응집도가 높아지죠. 그렇지만 코드가 한 차례 추상화되기 때문에 가독성이 떨어져요.
 
