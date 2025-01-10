@@ -9,10 +9,10 @@ comments: false
 
 ## 고민되는 코드에 대해 논의하기
 
-고민되는 코드가 있다면 GitHub Discussion의 코드 해우소에 글을 올려 보세요. 
+고민되는 코드가 있다면 깃허브 디스커션에 글을 올려 보세요. 
 내 코드에 대해서 커뮤니티에서 다각도로 리뷰를 받을 수 있고, 좋은 코드의 기준에 대해 커뮤니티와 함께 고민할 수 있어요. 
 
-- [코드 해우소에 글 올리기](https://github.com/toss/frontend-fundamentals/discussions/categories/question)
+- [깃허브 디스커션에 글 올리기](https://github.com/toss/frontend-fundamentals/discussions/categories/question)
 
 ## 좋은 코드의 기준에 의견 더하기
 

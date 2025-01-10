@@ -4,7 +4,10 @@ layout: home
 
 hero:
   name: "Frontend Fundamentals"
-  text: "프론트엔드 코드의 기본"
+  tagline: "변경하기 쉬운 프론트엔드 코드를 위한 지침서"
+  image:
+    src: /images/designs/ff-symbol-gradient.png
+    alt: Frontend Fundamentals symbol
   actions:
     - text: 좋은 코드의 기준 알아보기
       link: /code
@@ -21,5 +24,5 @@ features:
     details: 다양한 코드 개선 사례를 능동적으로 탐색해 보세요.
   - icon: 📝
     title: 내 코드가 고민된다면
-    details: 프론트엔드 코드 해우소에서 다른 개발자들과 소통해 보세요.
+    details: 깃허브 디스커션에서 다른 개발자들과 소통해 보세요.
 ---
