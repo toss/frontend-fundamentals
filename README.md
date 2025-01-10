@@ -25,7 +25,7 @@ Frontend Fundamentals(FF)는 커뮤니티와 함께 좋은 코드의 기준을 �
 
 ## License
 
-MIT © Viva Republica, Inc. See [LICENSE](./LICENSE) for details.
+MIT © Viva Republica, Inc. See [LICENSE](./LICENSE.md) for details.
 
 <a title="Toss" href="https://toss.im">
   <picture>
