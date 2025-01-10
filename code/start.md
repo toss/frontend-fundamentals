@@ -4,7 +4,7 @@ comments: false
 
 # 시작하기
 
-`Frontend Fundamentals`는 좋은 프론트엔드 코드의 기준을 제공해요.
+`Frontend Fundamentals`(FF)는 좋은 프론트엔드 코드의 기준을 제공해요.
 프론트엔드 개발자로서 코드 품질을 높이고자 할 때 방향을 찾는 나침반처럼 활용해 보세요.
 
 좋은 코드에 대한 [4개 원칙](./index.md)과 함께, 구체적인 예시 및 해결 방안을 제시해요.
