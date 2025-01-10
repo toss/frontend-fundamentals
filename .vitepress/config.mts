@@ -9,6 +9,7 @@ export default defineConfig({
   title: "Frontend Fundamentals",
   description: "프론트엔드 코드의 기준",
   lastUpdated: true,
+  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
   themeConfig: {
     logo: '/images/designs/ff-symbol.svg',
     nav: [
