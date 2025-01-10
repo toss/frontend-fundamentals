@@ -55,7 +55,7 @@ comments: false
 ### 응집도를 높이는 전략
 
 - [함께 수정되는 소스 파일을 같은 디렉토리에 두기](./examples/code-directory.md)
-- [매직 넘버에 없애기](./examples/magic-number-cohesion.md)
+- [매직 넘버 없애기](./examples/magic-number-cohesion.md)
 - [폼의 응집도 생각하기](./examples/form-fields.md)
 
 ## 4. 결합도
