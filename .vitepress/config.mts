@@ -11,9 +11,9 @@ export default defineConfig({
   lastUpdated: true,
   head: [
     ["link", { rel: "icon", href: "/images/favicon.ico" }],
-    ["meta", { property: "og:image", content: "https://github.com/user-attachments/assets/814508b1-194c-48d5-a468-5da54e47b6b0" }],
-    ["meta", { name: "twitter:image", content: "https://github.com/user-attachments/assets/814508b1-194c-48d5-a468-5da54e47b6b0" }],
-    ["meta", { name: "twitter:card", content: "https://github.com/user-attachments/assets/814508b1-194c-48d5-a468-5da54e47b6b0" }],
+    ["meta", { property: "og:image", content: "https://static.toss.im/illusts/ff-meta.png" }],
+    ["meta", { name: "twitter:image", content: "https://static.toss.im/illusts/ff-meta.png" }],
+    ["meta", { name: "twitter:card", content: "https://static.toss.im/illusts/ff-meta.png" }],
   ],
   themeConfig: {
     logo: '/images/ff-symbol.svg',
