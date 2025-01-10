@@ -10,7 +10,7 @@ export default defineConfig({
   description: "변경하기 쉬운 프론트엔드 코드를 위한 지침서",
   lastUpdated: true,
   head: [
-    ["link", { rel: "icon", href: "/favicon.ico" }],
+    ["link", { rel: "icon", href: "/images/favicon.ico" }],
     ["meta", { property: "og:image", content: "https://github.com/user-attachments/assets/814508b1-194c-48d5-a468-5da54e47b6b0" }],
     ["meta", { name: "twitter:image", content: "https://github.com/user-attachments/assets/814508b1-194c-48d5-a468-5da54e47b6b0" }],
     ["meta", { name: "twitter:card", content: "https://github.com/user-attachments/assets/814508b1-194c-48d5-a468-5da54e47b6b0" }],
