@@ -1,27 +1,27 @@
 ![Frontend Fundamentals](./public/images/ff-meta.png)
 
 # Frontend Fundamentals
-> 변경하기 쉬운 프론트엔드 코드를 위한 지침서
+> Guidelines for easily modifiable frontend code
 
-Frontend Fundamentals(FF)는 좋은 프론트엔드 코드의 기준을 제공해요. 프론트엔드 개발자로서 코드 품질을 높이고자 할 때 방향을 찾는 나침반처럼 활용해 보세요.
-좋은 코드에 대한 4개 원칙과 함께, 구체적인 예시 및 해결 방안을 제시해요.
-https://frontend-fundamentals.com
+**Frontend Fundamentals (FF)** provides standards for writing great frontend code. Think of it as a compass to help you navigate towards better code quality as a frontend developer.  
+It introduces four core principles of good code, along with practical examples and solutions.  
+https://frontend-fundamentals.com/en/
 
-## 이럴 때 활용해 보세요
-- 🦨 코드에 대해서 고민되는데 논리적으로 설명하기 어려운 개발자
-- 👀 나쁜 코드를 빠르게 감지하고 개선하는 방법을 공부하고 싶은 개발자
-- 🤓 코드 리뷰 등에서 누가 전달해준 링크를 타고 들어와 "내 코드가 이랬구나"를 객관적 시각으로 인지하게 될 개발자
-- 👥 팀과 함께 공통의 코딩 스타일과 코드 품질의 기준을 세워보고 싶은 개발자
+## When to Use
+- 🦨 When you're unsure about your code but find it hard to explain the issues logically
+- 👀 When you want to learn how to quickly identify and fix bad code
+- 🤓 When you find yourself exploring a shared link during a code review and realize, "This is exactly what my code looks like," from an objective perspective
+- 👥 When your team wants to establish a shared coding style and standards for code quality
 
 ## Contributing
 
-Frontend Fundamentals(FF)는 커뮤니티와 함께 좋은 코드의 기준을 만들어 가고 있어요.
+**Frontend Fundamentals (FF)** is a community-driven project to establish standards for writing good code.  
 
-고민되는 코드가 있다면 깃허브 디스커션에 글을 올려 보세요.
-내 코드에 대해서 커뮤니티에서 다각도로 리뷰를 받을 수 있고, 좋은 코드의 기준에 대해 커뮤니티와 함께 고민할 수 있어요.
-많은 공감을 받은 사례는 직접 Frontend Fundamentals 문서에 올릴 수 있어요. 기여 방법은 추후 공개될 예정이에요.
+If you have a piece of code you're unsure about, post it on the GitHub Discussions page.  
+The community can provide diverse reviews of your code, helping you and others think critically about what makes good code.  
+Highly supported cases may even make it into the Frontend Fundamentals documentation. Contribution guidelines will be announced soon.
 
-- [깃허브 디스커션에 글 올리기](https://github.com/toss/frontend-fundamentals/discussions)
+- [Post on GitHub Discussions](https://github.com/toss/frontend-fundamentals/discussions)
 
 ## License
 
