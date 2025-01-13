@@ -49,6 +49,13 @@ export const ko = defineConfig({
       text: "마지막 업데이트"
     },
 
+    socialLinks: [
+      {
+        icon: 'github',
+        link: 'https://github.com/toss/frontend-fundamentals',
+      },
+    ],
+
     sidebar: sidebar()
   }
 });

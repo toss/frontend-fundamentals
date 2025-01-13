@@ -29,10 +29,17 @@ export const en = defineConfig({
       }
     ]
   ],
+  
   themeConfig: {
     nav: nav(),
 
-    sidebar: sidebar()
+    sidebar: sidebar(),
+    socialLinks: [
+      {
+        icon: 'github',
+        link: 'https://github.com/toss/frontend-fundamentals',
+      },
+    ],
   }
 });
 
