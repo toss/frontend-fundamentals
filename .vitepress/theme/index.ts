@@ -6,6 +6,6 @@ export default {
   async enhanceApp() {
     const amplitudeApiKey = (import.meta as any).env.VITE_AMPLITUDE_API_KEY;
 
-    amplitude.init(amplitudeApiKey, { autocapture: true, logLevel: amplitude.Types.LogLevel.Debug });
+    amplitude.init(amplitudeApiKey, { autocapture: true });
   }
 };
