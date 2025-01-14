@@ -1,6 +1,9 @@
 {
   "name": "frontend-fundamentals",
   "packageManager": "yarn@4.6.0",
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
