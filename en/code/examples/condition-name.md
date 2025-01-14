@@ -23,6 +23,7 @@ const result = products.filter((product) =>
 ```
 
 ## 👃 Smell the Code
+
 ### Readability
 
 In this code, anonymous functions and conditions are intricately intertwined. The logic involving `filter`, `some`, and `&&` is nested in multiple layers, making it difficult to understand the exact conditions.
@@ -32,6 +33,7 @@ There are many contexts for the reader to consider at once, which reduces readab
 [^1]: According to [The Programmer's Brain](https://www.yes24.com/product/goods/105911017), the number of pieces of information that the human brain can store at one time is six.
 
 ## ✏️ Work on Improving
+
 By giving explicit names to conditions as in the following code, you can reduce the context that the reader has to consider at once.
 
 ```typescript
@@ -39,13 +41,14 @@ const matchedProducts = products.filter((product) => {
   return product.categories.some((category) => {
     const isSameCategory = category.id === targetCategory.id;
     const isPriceInRange = product.prices.some(
-      (price) => price >= minPrice && price <= maxPrice
+      (price) => price.value >= minPrice && price.value <= maxPrice
     );
 
     return isSameCategory && isPriceInRange;
   });
 });
 ```
+
 By explicitly stating that products are filtered based on being in the same category and within the price range, you can clearly convey the intent of the code without having to follow complex conditional expressions.
 
 ## 🔍 Learn More: Criteria for Naming Conditions
