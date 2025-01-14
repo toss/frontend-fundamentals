@@ -75,7 +75,7 @@ The functions `checkIsNameValid` and `checkIsAgeValid` are both used to validate
 ```typescript
 /** User names must be less than 20 characters. */
 function checkIsNameValid(name: string) {
-  const isValid = name.length > 0 && name.length <= 20;
+  const isValid = name.length > 0 && name.length < 20;
 
   return isValid;
 }
