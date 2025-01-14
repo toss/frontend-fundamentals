@@ -8,7 +8,7 @@ Props Drilling은 부모 컴포넌트와 자식 컴포넌트 사이에 결합도
 
 ## 📝 코드 예시
 
-다음 코드는 사용자가 `item`을 선택할 때 사용하는 `<ItemSelectorModal />` 컴포넌트예요. 
+다음 코드는 사용자가 `item`을 선택할 때 사용하는 `<ItemEditModal />` 컴포넌트예요. 
 사용자가 키워드를 입력해서 아이템 목록을 검색하고, 찾고 있었던 아이템을 선택하면 `onConfirm`이 호출돼요.
 
 사용자가 입력한 키워드는 `keyword`, 선택할 수 있는 아이템은 `items`, 추천 아이템의 목록은 `recommendedItems` 프롭으로 전달돼요.
