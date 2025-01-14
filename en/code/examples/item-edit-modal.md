@@ -8,7 +8,7 @@ Props Drilling is a clear indication that there is coupling between parent and c
 
 ## 📝 Code Example
 
-The following code is the `<ItemSelectorModal />` component used when a user selects an `item`. 
+The following code is the `<ItemEditModal />` component used when a user selects an `item`. 
 The user can enter a keyword to search the item list, and when the desired item is found and selected, `onConfirm` is called.
 
 The keyword entered by the user is passed as the `keyword` prop, the selectable items are passed as the `items` prop, and the list of recommended items is passed as the `recommendedItems` prop.
