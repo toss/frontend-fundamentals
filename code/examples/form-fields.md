@@ -39,7 +39,7 @@ export function Form() {
         <input
           {...register("name", {
             validate: (value) =>
-              value.trim() === "" ? "이름을 입력해주세요." : ""
+              (value.trim() === "" ? "이름을 입력해주세요." : ""),
           })}
           placeholder="이름"
         />

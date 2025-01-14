@@ -38,7 +38,7 @@ export function Form() {
         <input
           {...register("name", {
             validate: (value) =>
-              value.trim() === "" ? "Please enter your name." : ""
+              (value.trim() === "" ? "Please enter your name." : ""),
           })}
           placeholder="Name"
         />
