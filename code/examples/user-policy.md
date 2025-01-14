@@ -33,8 +33,8 @@ function getPolicyByRole(role) {
   const policy = POLICY_SET[role];
 
   return {
-    canInvite: policy.include("invite"),
-    canRead: policy.include("view"),
+    canInvite: policy.includes("invite"),
+    canRead: policy.includes("view"),
   };
 }
 
