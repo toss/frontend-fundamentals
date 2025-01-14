@@ -58,7 +58,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: "Easily Modifiable Code",
-          link: "/en/code"
+          link: "/en/code/"
         },
         {
           text: "Contributing",

@@ -75,7 +75,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: "변경하기 쉬운 코드",
-          link: "/code"
+          link: "/code/"
         },
         {
           text: "기여하기",
