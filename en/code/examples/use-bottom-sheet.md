@@ -20,10 +20,10 @@ export const useOpenMaintenanceBottomSheet = () => {
   const logger = useLogger();
 
   return async (maintainingInfo: TelecomMaintenanceInfo) => {
-    logger.log('점검 바텀시트 열림');
+    logger.log("Maintenance bottom sheet opened");
     const result = await maintenanceBottomSheet.open(maintainingInfo);
     if (result) {
-      logger.log('점검 바텀시트 알림받기 클릭');
+      logger.log("Maintenance bottom sheet notification clicked");
     }
     closeView();
   };

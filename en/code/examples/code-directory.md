@@ -34,11 +34,12 @@ Additionally, if a specific component, hook, or utility function is no longer us
 As the project grows, the dependencies between code can become significantly more complex, doubling, tenfold, or even a hundredfold. A single directory might end up containing over 100 files.
 
 ## ✏️ Work on Improving
+
 The following is an example of improving the structure so that code files that are modified together form a single directory.
 
 ```text
 └─ src
-   │  // 전체 프로젝트에서 사용되는 코드
+   │  // Code used in the entire project
    ├─ components
    ├─ containers
    ├─ hooks
@@ -46,7 +47,7 @@ The following is an example of improving the structure so that code files that a
    ├─ ...
    │
    └─ domains
-      │  // Domain1에서만 사용되는 코드
+      │  // Code used only in Domain1
       ├─ Domain1
       │     ├─ components
       │     ├─ containers
@@ -54,7 +55,7 @@ The following is an example of improving the structure so that code files that a
       │     ├─ utils
       │     └─ ...
       │
-      │  // Domain2에서만 사용되는 코드
+      │  // Code used only in Domain2
       └─ Domain2
             ├─ components
             ├─ containers
@@ -62,6 +63,7 @@ The following is an example of improving the structure so that code files that a
             ├─ utils
             └─ ...
 ```
+
 If you place code files that are modified together under a single directory, it becomes easier to understand the dependencies between the code.
 
 For example, consider a case where the sub-code of one domain (`Domain1`) references the source code of another domain (`Domain2`).
@@ -69,6 +71,7 @@ For example, consider a case where the sub-code of one domain (`Domain1`) refere
 ```typescript
 import { useFoo } '../../../Domain2/hooks/useFoo'
 ```
+
 When you encounter such an import statement, you can easily recognize that the wrong file is being referenced.
 
 Additionally, when deleting code related to a specific feature, you can delete the entire directory, ensuring that all related code is removed cleanly, leaving no unused code in the project.
