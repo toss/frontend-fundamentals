@@ -62,7 +62,7 @@ function sidebar(): DefaultTheme.Sidebar {
               text: "맥락 줄이기",
               items: [
                 {
-                  text: "A. 같이 실행되지 않는 코드 분리하기",
+                  text: "A. 동시에 실행되지 않는 코드 분리하기",
                   link: "/code/examples/submit-button"
                 },
                 {
