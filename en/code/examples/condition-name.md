@@ -14,7 +14,7 @@ The following code filters products that match the category and price range.
 const result = products.filter((product) =>
   product.categories.some(
     (category) =>
-      cagetory.id === targetCategory.id &&
+      category.id === targetCategory.id &&
       product.prices.some(
         (price) => price.value >= minPrice && price.value <= maxPrice
       )
