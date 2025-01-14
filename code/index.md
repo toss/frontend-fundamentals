@@ -18,7 +18,7 @@ comments: false
 ### 가독성을 높이는 전략
 
 - **맥락 줄이기**
-  - [같이 실행되지 않는 코드 분리하기](./examples/submit-button.md)
+  - [동시에 실행되지 않는 코드 분리하기](./examples/submit-button.md)
   - [구현 상세 추상화하기](./examples/login-start-page.md)
   - [로직 종류에 따라서 합쳐진 함수 쪼개기](./examples/use-page-state-readability.md)
 - **이름 붙이기**
