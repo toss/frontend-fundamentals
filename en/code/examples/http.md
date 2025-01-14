@@ -21,7 +21,7 @@ export const http = {
     const token = await fetchToken();
 
     return httpLibrary.get(url);
-  },
+  }
 };
 ```
 
@@ -60,9 +60,9 @@ export const httpService = {
 
     // Add authentication logic such as adding the token to the header.
     return httpLibrary.get(url, {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${token}` }
     });
-  },
+  }
 };
 ```
 

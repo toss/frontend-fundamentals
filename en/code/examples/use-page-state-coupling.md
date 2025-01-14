@@ -11,11 +11,16 @@ Avoid creating functions, components, or hooks that handle all tasks of the same
 The following `usePageState()` hook manages the URL query parameters for the entire page at once.
 
 ```typescript
-import moment, { Moment } from 'moment';
-import { useMemo } from 'react';
-import { ArrayParam, DateParam, NumberParam, useQueryParams } from 'use-query-params';
+import moment, { Moment } from "moment";
+import { useMemo } from "react";
+import {
+  ArrayParam,
+  DateParam,
+  NumberParam,
+  useQueryParams
+} from "use-query-params";
 
-const defaultDateFrom = moment().subtract(3, 'month');
+const defaultDateFrom = moment().subtract(3, "month");
 const defaultDateTo = moment();
 
 export function usePageState() {
@@ -24,7 +29,7 @@ export function usePageState() {
     statementId: NumberParam,
     dateFrom: DateParam,
     dateTo: DateParam,
-    statusList: ArrayParam,
+    statusList: ArrayParam
   });
 
   return useMemo(
@@ -32,19 +37,24 @@ export function usePageState() {
       values: {
         cardId: query.cardId ?? undefined,
         statementId: query.statementId ?? undefined,
-        dateFrom: query.dateFrom == null ? defaultDateFrom : moment(query.dateFrom),
+        dateFrom:
+          query.dateFrom == null ? defaultDateFrom : moment(query.dateFrom),
         dateTo: query.dateTo == null ? defaultDateTo : moment(query.dateTo),
-        statusList: query.statusList as StatementStatusType[] | undefined,
+        statusList: query.statusList as StatementStatusType[] | undefined
       },
       controls: {
-        setCardId: (cardId: number) => setQuery({ cardId }, 'replaceIn'),
-        setStatementId: (statementId: number) => setQuery({ statementId }, 'replaceIn'),
-        setDateFrom: (date?: Moment) => setQuery({ dateFrom: date?.toDate() }, 'replaceIn'),
-        setDateTo: (date?: Moment) => setQuery({ dateTo: date?.toDate() }, 'replaceIn'),
-        setStatusList: (statusList?: StatementStatusType[]) => setQuery({ statusList }, 'replaceIn'),
-      },
+        setCardId: (cardId: number) => setQuery({ cardId }, "replaceIn"),
+        setStatementId: (statementId: number) =>
+          setQuery({ statementId }, "replaceIn"),
+        setDateFrom: (date?: Moment) =>
+          setQuery({ dateFrom: date?.toDate() }, "replaceIn"),
+        setDateTo: (date?: Moment) =>
+          setQuery({ dateTo: date?.toDate() }, "replaceIn"),
+        setStatusList: (statusList?: StatementStatusType[]) =>
+          setQuery({ statusList }, "replaceIn")
+      }
     }),
-    [query, setQuery],
+    [query, setQuery]
   );
 }
 ```
@@ -68,20 +78,19 @@ This hook can also be analyzed from a [readability](./use-page-state-readability
 You can create separate hooks for each query parameter, as shown in the following code.
 
 ```typescript
-import { useQueryParam } from 'use-query-params';
+import { useQueryParam } from "use-query-params";
 
 export function useCardIdQueryParam() {
-  const [cardId, _setCardId] = useQueryParam('cardId', NumberParam);
+  const [cardId, _setCardId] = useQueryParam("cardId", NumberParam);
 
   const setCardId = useCallback((cardId: number) => {
-    _setCardId({ cardId }, 'replaceIn');
+    _setCardId({ cardId }, "replaceIn");
   }, []);
 
   return [cardId ?? undefined, setCardId] as const;
 }
 ```
 
-By separating the responsibilities of the hook, you can narrow the scope of impact when making changes. 
+By separating the responsibilities of the hook, you can narrow the scope of impact when making changes.
 
 This helps prevent unintended consequences when the hook is modified.
-
