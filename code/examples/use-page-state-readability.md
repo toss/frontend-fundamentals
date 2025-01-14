@@ -11,11 +11,16 @@
 다음 `usePageState()` Hook은 페이지 전체의 URL 쿼리 파라미터를 한 번에 관리해요.
 
 ```typescript
-import moment, { Moment } from 'moment';
-import { useMemo } from 'react';
-import { ArrayParam, DateParam, NumberParam, useQueryParams } from 'use-query-params';
+import moment, { Moment } from "moment";
+import { useMemo } from "react";
+import {
+  ArrayParam,
+  DateParam,
+  NumberParam,
+  useQueryParams
+} from "use-query-params";
 
-const defaultDateFrom = moment().subtract(3, 'month');
+const defaultDateFrom = moment().subtract(3, "month");
 const defaultDateTo = moment();
 
 export function usePageState() {
@@ -24,7 +29,7 @@ export function usePageState() {
     statementId: NumberParam,
     dateFrom: DateParam,
     dateTo: DateParam,
-    statusList: ArrayParam,
+    statusList: ArrayParam
   });
 
   return useMemo(
@@ -32,19 +37,24 @@ export function usePageState() {
       values: {
         cardId: query.cardId ?? undefined,
         statementId: query.statementId ?? undefined,
-        dateFrom: query.dateFrom == null ? defaultDateFrom : moment(query.dateFrom),
+        dateFrom:
+          query.dateFrom == null ? defaultDateFrom : moment(query.dateFrom),
         dateTo: query.dateTo == null ? defaultDateTo : moment(query.dateTo),
-        statusList: query.statusList as StatementStatusType[] | undefined,
+        statusList: query.statusList as StatementStatusType[] | undefined
       },
       controls: {
-        setCardId: (cardId: number) => setQuery({ cardId }, 'replaceIn'),
-        setStatementId: (statementId: number) => setQuery({ statementId }, 'replaceIn'),
-        setDateFrom: (date?: Moment) => setQuery({ dateFrom: date?.toDate() }, 'replaceIn'),
-        setDateTo: (date?: Moment) => setQuery({ dateTo: date?.toDate() }, 'replaceIn'),
-        setStatusList: (statusList?: StatementStatusType[]) => setQuery({ statusList }, 'replaceIn'),
-      },
+        setCardId: (cardId: number) => setQuery({ cardId }, "replaceIn"),
+        setStatementId: (statementId: number) =>
+          setQuery({ statementId }, "replaceIn"),
+        setDateFrom: (date?: Moment) =>
+          setQuery({ dateFrom: date?.toDate() }, "replaceIn"),
+        setDateTo: (date?: Moment) =>
+          setQuery({ dateTo: date?.toDate() }, "replaceIn"),
+        setStatusList: (statusList?: StatementStatusType[]) =>
+          setQuery({ statusList }, "replaceIn")
+      }
     }),
-    [query, setQuery],
+    [query, setQuery]
   );
 }
 ```
@@ -74,18 +84,18 @@ export function usePageState() {
 다음 코드와 같이 각각의 쿼리 파라미터별로 별도의 Hook을 작성할 수 있어요.
 
 ```typescript
-import { useQueryParam } from 'use-query-params';
+import { useQueryParam } from "use-query-params";
 
 export function useCardIdQueryParam() {
-  const [cardId, _setCardId] = useQueryParam('cardId', NumberParam);
+  const [cardId, _setCardId] = useQueryParam("cardId", NumberParam);
 
   const setCardId = useCallback((cardId: number) => {
-    _setCardId({ cardId }, 'replaceIn');
+    _setCardId({ cardId }, "replaceIn");
   }, []);
 
   return [cardId ?? undefined, setCardId] as const;
 }
 ```
 
-Hook이 담당하는 책임을 분리했기 때문에, 기존 `usePageState()` Hook보다 명확한 이름을 가져요. 
+Hook이 담당하는 책임을 분리했기 때문에, 기존 `usePageState()` Hook보다 명확한 이름을 가져요.
 또한 Hook을 수정했을 때 영향이 갈 범위를 좁혀서, 예상하지 못한 변경이 생기는 것을 막을 수 있어요.

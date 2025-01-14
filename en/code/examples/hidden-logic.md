@@ -10,10 +10,10 @@ If there is hidden logic that is not revealed in the name, parameters, or return
 The following code is a `fetchBalance` function that can be used to check a user's account balance. Each time the function is called, it implicitly logs `balance_fetched`.
 
 ```typescript 4
-async function fetchBalance(): Promise<number> {  
-  const balance = await http.get<number>('...');
+async function fetchBalance(): Promise<number> {
+  const balance = await http.get<number>("...");
 
-  logging.log('balance_fetched');
+  logging.log("balance_fetched");
 
   return balance;
 }
@@ -28,11 +28,12 @@ From the name and return type of the `fetchBalance` function, it is not clear th
 Additionally, if an error occurs in the logging logic, the logic for fetching the account balance might suddenly break.
 
 ## ✏️ Work on Improving
+
 Leave only the logic that can be predicted by the function's name, parameters, and return type in the implementation.
 
 ```typescript
 async function fetchBalance(): Promise<number> {
-  const balance = await http.get<number>('...');
+  const balance = await http.get<number>("...");
 
   return balance;
 }
@@ -41,10 +42,10 @@ async function fetchBalance(): Promise<number> {
 Separate the logging code.
 
 ```tsx
-<Button 
+<Button
   onClick={async () => {
     const balance = await fetchBalance();
-    logging.log('balance_fetched');
+    logging.log("balance_fetched");
 
     await syncBalance(balance);
   }}
