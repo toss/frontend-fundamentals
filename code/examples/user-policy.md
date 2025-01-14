@@ -96,7 +96,7 @@ function Page() {
   const policy = {
     admin: { canInvite: true, canRead: true },
     viewer: { canInvite: false, canRead: true },
-  }[user.role];
+  };
 
   return (
     <div>
