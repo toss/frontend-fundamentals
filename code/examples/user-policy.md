@@ -16,7 +16,7 @@
 - 사용자의 권한이 관리자(Admin)라면, `Invite`와 `View` 버튼을 보여줘요.
 - 사용자의 권한이 보기 전용(Viewer)라면, `Invite` 버튼은 비활성화하고, `View` 버튼을 보여줘요.
 
-```typescript
+```tsx
 function Page() {
   const user = useUser();
   const policy = getPolicyByRole(user.role);
@@ -60,7 +60,7 @@ const POLICY_SET = {
 권한에 따른 조건을 요구사항 그대로 코드에 드러내는 방법이에요. 이렇게 하면 `Invite` 버튼이 비활성화되는 때를 코드에서 바로 확인할 수 있어요. 
 코드를 위에서 아래로만 읽으면 한눈에 권한을 다루는 로직을 파악할 수 있어요.
 
-```typescript
+```tsx
 function Page() {
   const user = useUser();
 
