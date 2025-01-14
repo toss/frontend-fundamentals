@@ -11,7 +11,7 @@
 다음 코드는 `A조건`과 `B조건`에 따라서 `'BOTH'`, `'A'`, 또는 `'NONE'` 중 하나를 `status`에 지정하는 코드예요.
 
 ```typescript
-const status = A조건 && B조건 ? "BOTH" : 둘다아닌경우 ? "NONE" : A조건 ? "A" : undefined;
+const status = A조건 && B조건 ? "BOTH" : 둘 다 아닌 경우 ? "NONE" : A조건 ? "A" : undefined;
 ```
 
 ## 👃 코드 냄새 맡아보기
