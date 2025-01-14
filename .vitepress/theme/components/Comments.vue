@@ -8,6 +8,7 @@ const { frontmatter, title } = useData()
   <div v-if="frontmatter.comments !== false" :key="title" class="giscus" style="margin-top: 24px;">
     <component
       :is="'script'"
+      src="https://giscus.app/client.js"
       data-repo="toss/frontend-fundamentals"
       data-repo-id="R_kgDONfHk5g"
       data-category="Commented Docs"
@@ -18,7 +19,7 @@ const { frontmatter, title } = useData()
       data-emit-metadata="0"
       data-input-position="bottom"
       data-theme="preferred_color_scheme"
-      data-lang="ko"
+      data-lang="en"
       crossorigin="anonymous"
       data-loading="lazy"
       async
