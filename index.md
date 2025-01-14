@@ -10,7 +10,7 @@ hero:
     alt: Frontend Fundamentals symbol
   actions:
     - text: 좋은 코드의 기준 알아보기
-      link: /code
+      link: /code/
     - theme: alt
       text: 소통하기
       link: https://github.com/toss/frontend-fundamentals/discussions
