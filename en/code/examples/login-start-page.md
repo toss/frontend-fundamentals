@@ -12,18 +12,18 @@ The following `<LoginStartPage />` component contains logic to check if the user
 
 ```tsx
 function LoginStartPage() {
-   useCheckLogin({
-     onChecked: (status) => {
-       if (status === "LOGGED_IN") {
-         location.href = "/home";
-       }
-     },
-   });
-   
-   /* ... login related logic ... */
+  useCheckLogin({
+    onChecked: (status) => {
+      if (status === "LOGGED_IN") {
+        location.href = "/home";
+      }
+    }
+  });
 
-   return <>{/* ... login related components ... */}</>;
- }
+  /* ... login related logic ... */
+
+  return <>{/* ... login related components ... */}</>;
+}
 ```
 
 ### 👃 Smell the Code
@@ -45,30 +45,30 @@ Additionally, by preventing the logic within the separated component from refere
 
 ```tsx
 function App() {
-   return (
-     <AuthGuard>
-       <LoginStartPage />
-     </AuthGuard>
-   );
- }
+  return (
+    <AuthGuard>
+      <LoginStartPage />
+    </AuthGuard>
+  );
+}
 
- function AuthGuard({ children }) {
-   const status = useCheckLoginStatus();
+function AuthGuard({ children }) {
+  const status = useCheckLoginStatus();
 
-   useEffect(() => {
-     if (status === "LOGGED_IN") {
-       location.href = "/home";
-     }
-   }, [status]);
+  useEffect(() => {
+    if (status === "LOGGED_IN") {
+      location.href = "/home";
+    }
+  }, [status]);
 
-   return status !== "LOGGED_IN" ? children : null;
- }
+  return status !== "LOGGED_IN" ? children : null;
+}
 
- function LoginStartPage() {
-    /* ... login related logic ... */
+function LoginStartPage() {
+  /* ... login related logic ... */
 
-   return <>{/* ... login related components ... */}</>;
- }
+  return <>{/* ... login related components ... */}</>;
+}
 ```
 
 #### Option B: Using a Higher-Order Component (HOC)
@@ -134,12 +134,13 @@ function FriendInvitation() {
 
   return (
     <>
-      <Button onClick={handleClick}>초대하기</Button>
+      <Button onClick={handleClick}>Invite</Button>
       {/* JSX markup for UI... */}
     </>
   );
 }
 ```
+
 ### 👃 Smell the Code
 
 #### Readability
@@ -203,6 +204,7 @@ function InviteButton({ name }) {
   );
 }
 ```
+
 The `<InviteButton />` component only contains the logic for inviting users and the UI, so it can maintain a low amount of information to be aware of at once, increasing readability. Additionally, the button and the logic executed after clicking are very close together.
 
 ## 🔍 Learn More: Abstraction
