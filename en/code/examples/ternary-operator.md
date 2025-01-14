@@ -35,5 +35,5 @@ const status = (() => {
  }
 
  return "NONE";
-}, [ACondition, BCondition])();
+})();
 ```
