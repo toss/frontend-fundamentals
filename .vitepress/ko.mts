@@ -5,30 +5,6 @@ export const ko = defineConfig({
   title: "Frontend Fundamentals",
   description: "변경하기 쉬운 프론트엔드 코드를 위한 지침서",
   lastUpdated: true,
-  head: [
-    ["link", { rel: "icon", href: "/images/favicon.ico" }],
-    [
-      "meta",
-      {
-        property: "og:image",
-        content: "https://static.toss.im/illusts/ff-meta.png"
-      }
-    ],
-    [
-      "meta",
-      {
-        name: "twitter:image",
-        content: "https://static.toss.im/illusts/ff-meta.png"
-      }
-    ],
-    [
-      "meta",
-      {
-        name: "twitter:card",
-        content: "https://static.toss.im/illusts/ff-meta.png"
-      }
-    ]
-  ],
   themeConfig: {
     logo: "/images/ff-symbol.svg",
     nav: nav(),

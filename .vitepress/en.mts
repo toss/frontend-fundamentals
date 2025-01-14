@@ -5,30 +5,6 @@ export const en = defineConfig({
   title: "Frontend Fundamentals",
   description: "A guide for easily modifiable frontend code",
   lastUpdated: true,
-  head: [
-    ["link", { rel: "icon", href: "/images/favicon.ico" }],
-    [
-      "meta",
-      {
-        property: "og:image",
-        content: "https://static.toss.im/illusts/ff-meta.png"
-      }
-    ],
-    [
-      "meta",
-      {
-        name: "twitter:image",
-        content: "https://static.toss.im/illusts/ff-meta.png"
-      }
-    ],
-    [
-      "meta",
-      {
-        name: "twitter:card",
-        content: "https://static.toss.im/illusts/ff-meta.png"
-      }
-    ]
-  ],
   themeConfig: {
     nav: nav(),
 
