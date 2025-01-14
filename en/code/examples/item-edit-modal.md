@@ -37,7 +37,7 @@ function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
 function ItemEditBody({ keyword, onKeywordChange, items, recommendedItems, onConfirm, onClose }) {
   return (
     <>
-      <div style="display: flex; justify-content: space-between;">
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Input value={keyword} onChange={e => onKeywordChange(e.target.value)} />
         <Button onClick={onClose}>Close</Button>
       </div>
@@ -77,7 +77,7 @@ function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
 
   return (
     <Modal open={open} onClose={onClose}>
-      <div style="display: flex; justify-content: space-between">
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Input value={keyword} onChange={e => onKeywordChange(e.target.value)} />
         <Button onClick={onClose}>닫기</Button>
       </div>
