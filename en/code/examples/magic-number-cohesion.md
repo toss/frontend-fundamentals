@@ -23,6 +23,7 @@ async function onLikeClick() {
 ## 👃 Smell the Code
 
 ### Cohesion
+
 If you used the number `300` to wait for the animation to complete, there is a risk that the service may quietly break when the animation being played is changed. Additionally, the next logic may start immediately without waiting for a sufficient amount of time for the animation.
 
 From the perspective that only one side of the code that needs to be modified together is modified, it can also be said to be code with low cohesion.
