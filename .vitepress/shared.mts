@@ -30,8 +30,8 @@ export const shared = defineConfig({
 
   transformHead: ({ pageData }) => {
     const head: HeadConfig[] = [];
-    const title = pageData.frontmatter.title || 'Frontend Fundamentals';
-    const description = pageData.frontmatter.description || 'Guidelines for easily modifiable frontend code';
+    const title = pageData.frontmatter.title || pageData.title || 'Frontend Fundamentals';
+    const description = pageData.frontmatter.description || pageData.description || 'Guidelines for easily modifiable frontend code';
 
     head.push(['meta', { property: 'og:title', content: title }]);
     head.push(['meta', { property: 'og:description', content: description }]);
