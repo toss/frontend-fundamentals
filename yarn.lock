@@ -190,6 +190,103 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@amplitude/analytics-browser@npm:^2.11.11":
+  version: 2.11.11
+  resolution: "@amplitude/analytics-browser@npm:2.11.11::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-browser%2F-%2Fanalytics-browser-2.11.11.tgz"
+  dependencies:
+    "@amplitude/analytics-client-common": "npm:^2.3.7"
+    "@amplitude/analytics-core": "npm:^2.5.5"
+    "@amplitude/analytics-remote-config": "npm:^0.4.0"
+    "@amplitude/analytics-types": "npm:^2.8.4"
+    "@amplitude/plugin-autocapture-browser": "npm:^1.0.2"
+    "@amplitude/plugin-page-view-tracking-browser": "npm:^2.3.7"
+    tslib: "npm:^2.4.1"
+  checksum: 10/103f7117f5ac1254b17f6aa6a9434180269d786d95d572a04c6fc1210ae273c785f9a876fab1d00502fadd138dea2d0ef6bf55c2da84644a5ad8fca312904215
+  languageName: node
+  linkType: hard
+
+"@amplitude/analytics-client-common@npm:>=1 <3, @amplitude/analytics-client-common@npm:^2.3.7":
+  version: 2.3.7
+  resolution: "@amplitude/analytics-client-common@npm:2.3.7::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-client-common%2F-%2Fanalytics-client-common-2.3.7.tgz"
+  dependencies:
+    "@amplitude/analytics-connector": "npm:^1.4.8"
+    "@amplitude/analytics-core": "npm:^2.5.5"
+    "@amplitude/analytics-types": "npm:^2.8.4"
+    tslib: "npm:^2.4.1"
+  checksum: 10/c1ecb7493bc5a7cd713180ea26f745865bf53589b0eef1f2792bb22e0075e6153871b09494d35e48c33e14a69fe7c05012dff69cc4015d954a7e7c08af23b832
+  languageName: node
+  linkType: hard
+
+"@amplitude/analytics-connector@npm:^1.4.8":
+  version: 1.6.2
+  resolution: "@amplitude/analytics-connector@npm:1.6.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-connector%2F-%2Fanalytics-connector-1.6.2.tgz"
+  dependencies:
+    "@amplitude/experiment-core": "npm:^0.10.1"
+  checksum: 10/b9653ce55bb18983b2434720e61be24cd8374fd3e9fb4d33b8e0ff3f9bfd25edbf2637672c77861a14133a3b9dbad807fc4e43dffa937f89c192559292962ef0
+  languageName: node
+  linkType: hard
+
+"@amplitude/analytics-core@npm:>=1 <3, @amplitude/analytics-core@npm:^2.5.5":
+  version: 2.5.5
+  resolution: "@amplitude/analytics-core@npm:2.5.5::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-core%2F-%2Fanalytics-core-2.5.5.tgz"
+  dependencies:
+    "@amplitude/analytics-types": "npm:^2.8.4"
+    tslib: "npm:^2.4.1"
+  checksum: 10/c68e3fb614d44413914045ad604598a6cfcbf7e0d25df9c6a0f943b196436b45e01cf5a1fa0979bf8f3c05e9c284664c09e259718972929d1b0259ab59d8be01
+  languageName: node
+  linkType: hard
+
+"@amplitude/analytics-remote-config@npm:^0.4.0":
+  version: 0.4.1
+  resolution: "@amplitude/analytics-remote-config@npm:0.4.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-remote-config%2F-%2Fanalytics-remote-config-0.4.1.tgz"
+  dependencies:
+    "@amplitude/analytics-client-common": "npm:>=1 <3"
+    "@amplitude/analytics-core": "npm:>=1 <3"
+    "@amplitude/analytics-types": "npm:>=1 <3"
+    tslib: "npm:^2.4.1"
+  checksum: 10/b48564fe1830c390b8463e1fc55438f4e07d552ce1a1f8deecac59f365c5fa41ff6ea649ddb17a23b366d64971dbd0e5a489e0c837531fc6d9351bc62888fd1c
+  languageName: node
+  linkType: hard
+
+"@amplitude/analytics-types@npm:>=1 <3, @amplitude/analytics-types@npm:^2.8.2, @amplitude/analytics-types@npm:^2.8.4":
+  version: 2.8.4
+  resolution: "@amplitude/analytics-types@npm:2.8.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-types%2F-%2Fanalytics-types-2.8.4.tgz"
+  checksum: 10/ad9cb6b8a758149d870641209f166ab9fe6dd4572e5a46df6c94d5a9dbfbaddcde7935c64d7d0f09b7fa9a5ca955b2dbccff65b4208e9ca19d93a24c50d04959
+  languageName: node
+  linkType: hard
+
+"@amplitude/experiment-core@npm:^0.10.1":
+  version: 0.10.1
+  resolution: "@amplitude/experiment-core@npm:0.10.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fexperiment-core%2F-%2Fexperiment-core-0.10.1.tgz"
+  dependencies:
+    js-base64: "npm:^3.7.5"
+  checksum: 10/39ddf992b2c522827450c1c5ab363fb1344806b392c980332d79143f04536d0ec8c6e3c3fa392cf9a937a87b30e7e479431e0aaa9979518c45449d6a01973379
+  languageName: node
+  linkType: hard
+
+"@amplitude/plugin-autocapture-browser@npm:^1.0.2":
+  version: 1.0.4
+  resolution: "@amplitude/plugin-autocapture-browser@npm:1.0.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-autocapture-browser%2F-%2Fplugin-autocapture-browser-1.0.4.tgz"
+  dependencies:
+    "@amplitude/analytics-client-common": "npm:>=1 <3"
+    "@amplitude/analytics-types": "npm:^2.8.2"
+    rxjs: "npm:^7.8.1"
+    tslib: "npm:^2.4.1"
+  checksum: 10/3dc4ee871189350ee9c85639e55ce862a670072dd462b1977043b51654433caac4806b51bf69b5f8933c36a312a94d278cb73fea579e8f3ac23f056d25097361
+  languageName: node
+  linkType: hard
+
+"@amplitude/plugin-page-view-tracking-browser@npm:^2.3.7":
+  version: 2.3.7
+  resolution: "@amplitude/plugin-page-view-tracking-browser@npm:2.3.7::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-page-view-tracking-browser%2F-%2Fplugin-page-view-tracking-browser-2.3.7.tgz"
+  dependencies:
+    "@amplitude/analytics-client-common": "npm:^2.3.7"
+    "@amplitude/analytics-types": "npm:^2.8.4"
+    tslib: "npm:^2.4.1"
+  checksum: 10/e07570e34238dc8be51b80288fbfb01234b34bc1d5c6c90f9724c5c17a5b7a56e47b256659dce56c7c0b02f8f26f71027589848fcdebe7eb1fcb908ccd704ac0
+  languageName: node
+  linkType: hard
+
 "@babel/helper-string-parser@npm:^7.25.9":
   version: 7.25.9
   resolution: "@babel/helper-string-parser@npm:7.25.9::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40babel%2Fhelper-string-parser%2F-%2Fhelper-string-parser-7.25.9.tgz"
@@ -1447,6 +1544,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "frontend-fundamentals@workspace:."
   dependencies:
+    "@amplitude/analytics-browser": "npm:^2.11.11"
     markdown-it-footnote: "npm:^4.0.0"
     typescript: "npm:^5.6.3"
     vitepress: "npm:^1.4.1"
@@ -1637,6 +1735,13 @@ __metadata:
     "@pkgjs/parseargs":
       optional: true
   checksum: 10/96f8786eaab98e4bf5b2a5d6d9588ea46c4d06bbc4f2eb861fdd7b6b182b16f71d8a70e79820f335d52653b16d4843b29dd9cdcf38ae80406756db9199497cf3
+  languageName: node
+  linkType: hard
+
+"js-base64@npm:^3.7.5":
+  version: 3.7.7
+  resolution: "js-base64@npm:3.7.7::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fjs-base64%2F-%2Fjs-base64-3.7.7.tgz"
+  checksum: 10/185e34c536a6b1c4e1ad8bd96d25b49a9ea4e6803e259eaaaca95f1b392a0d590b2933c5ca8580c776f7279507944b81ff1faf889d84baa5e31f026e96d676a5
   languageName: node
   linkType: hard
 
@@ -2168,6 +2273,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rxjs@npm:^7.8.1":
+  version: 7.8.1
+  resolution: "rxjs@npm:7.8.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Frxjs%2F-%2Frxjs-7.8.1.tgz"
+  dependencies:
+    tslib: "npm:^2.1.0"
+  checksum: 10/b10cac1a5258f885e9dd1b70d23c34daeb21b61222ee735d2ec40a8685bdca40429000703a44f0e638c27a684ac139e1c37e835d2a0dc16f6fc061a138ae3abb
+  languageName: node
+  linkType: hard
+
 "safer-buffer@npm:>= 2.1.2 < 3.0.0":
   version: 2.1.2
   resolution: "safer-buffer@npm:2.1.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fsafer-buffer%2F-%2Fsafer-buffer-2.1.2.tgz"
@@ -2386,6 +2500,13 @@ __metadata:
   version: 3.0.1
   resolution: "trim-lines@npm:3.0.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ftrim-lines%2F-%2Ftrim-lines-3.0.1.tgz"
   checksum: 10/7a1325e4ce8ff7e9e52007600e9c9862a166d0db1f1cf0c9357e359e410acab1278fcd91cc279dfa5123fc37b69f080de02f471e91dbbc61b155b9ca92597929
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^2.1.0, tslib@npm:^2.4.1":
+  version: 2.8.1
+  resolution: "tslib@npm:2.8.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ftslib%2F-%2Ftslib-2.8.1.tgz"
+  checksum: 10/3e2e043d5c2316461cb54e5c7fe02c30ef6dccb3384717ca22ae5c6b5bc95232a6241df19c622d9c73b809bea33b187f6dbc73030963e29950c2141bc32a79f7
   languageName: node
   linkType: hard
 

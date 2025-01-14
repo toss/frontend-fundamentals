@@ -27,6 +27,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["@amplitude/analytics-browser", "npm:2.11.11::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-browser%2F-%2Fanalytics-browser-2.11.11.tgz"],\
           ["markdown-it-footnote", "npm:4.0.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fmarkdown-it-footnote%2F-%2Fmarkdown-it-footnote-4.0.0.tgz"],\
           ["typescript", "patch:typescript@npm%3A5.7.2%3A%3A__archiveUrl=http%253A%252F%252Fnexus.toss.bz%252Frepository%252Fnpm-group%252Ftypescript%252F-%252Ftypescript-5.7.2.tgz#optional!builtin<compat/typescript>::version=5.7.2&hash=5786d5"],\
           ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.5.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvitepress%2F-%2Fvitepress-1.5.0.tgz"]\
@@ -290,6 +291,113 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@algolia/requester-node-http", "npm:5.18.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40algolia%2Frequester-node-http%2F-%2Frequester-node-http-5.18.0.tgz"],\
           ["@algolia/client-common", "npm:5.18.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40algolia%2Fclient-common%2F-%2Fclient-common-5.18.0.tgz"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@amplitude/analytics-browser", [\
+      ["npm:2.11.11::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-browser%2F-%2Fanalytics-browser-2.11.11.tgz", {\
+        "packageLocation": "./.yarn/cache/@amplitude-analytics-browser-npm-2.11.11-ccc2fad429-103f7117f5.zip/node_modules/@amplitude/analytics-browser/",\
+        "packageDependencies": [\
+          ["@amplitude/analytics-browser", "npm:2.11.11::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-browser%2F-%2Fanalytics-browser-2.11.11.tgz"],\
+          ["@amplitude/analytics-client-common", "npm:2.3.7::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-client-common%2F-%2Fanalytics-client-common-2.3.7.tgz"],\
+          ["@amplitude/analytics-core", "npm:2.5.5::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-core%2F-%2Fanalytics-core-2.5.5.tgz"],\
+          ["@amplitude/analytics-remote-config", "npm:0.4.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-remote-config%2F-%2Fanalytics-remote-config-0.4.1.tgz"],\
+          ["@amplitude/analytics-types", "npm:2.8.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-types%2F-%2Fanalytics-types-2.8.4.tgz"],\
+          ["@amplitude/plugin-autocapture-browser", "npm:1.0.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-autocapture-browser%2F-%2Fplugin-autocapture-browser-1.0.4.tgz"],\
+          ["@amplitude/plugin-page-view-tracking-browser", "npm:2.3.7::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-page-view-tracking-browser%2F-%2Fplugin-page-view-tracking-browser-2.3.7.tgz"],\
+          ["tslib", "npm:2.8.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ftslib%2F-%2Ftslib-2.8.1.tgz"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@amplitude/analytics-client-common", [\
+      ["npm:2.3.7::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-client-common%2F-%2Fanalytics-client-common-2.3.7.tgz", {\
+        "packageLocation": "./.yarn/cache/@amplitude-analytics-client-common-npm-2.3.7-e0d2ce283e-c1ecb7493b.zip/node_modules/@amplitude/analytics-client-common/",\
+        "packageDependencies": [\
+          ["@amplitude/analytics-client-common", "npm:2.3.7::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-client-common%2F-%2Fanalytics-client-common-2.3.7.tgz"],\
+          ["@amplitude/analytics-connector", "npm:1.6.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-connector%2F-%2Fanalytics-connector-1.6.2.tgz"],\
+          ["@amplitude/analytics-core", "npm:2.5.5::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-core%2F-%2Fanalytics-core-2.5.5.tgz"],\
+          ["@amplitude/analytics-types", "npm:2.8.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-types%2F-%2Fanalytics-types-2.8.4.tgz"],\
+          ["tslib", "npm:2.8.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ftslib%2F-%2Ftslib-2.8.1.tgz"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@amplitude/analytics-connector", [\
+      ["npm:1.6.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-connector%2F-%2Fanalytics-connector-1.6.2.tgz", {\
+        "packageLocation": "./.yarn/cache/@amplitude-analytics-connector-npm-1.6.2-03b1512977-b9653ce55b.zip/node_modules/@amplitude/analytics-connector/",\
+        "packageDependencies": [\
+          ["@amplitude/analytics-connector", "npm:1.6.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-connector%2F-%2Fanalytics-connector-1.6.2.tgz"],\
+          ["@amplitude/experiment-core", "npm:0.10.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fexperiment-core%2F-%2Fexperiment-core-0.10.1.tgz"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@amplitude/analytics-core", [\
+      ["npm:2.5.5::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-core%2F-%2Fanalytics-core-2.5.5.tgz", {\
+        "packageLocation": "./.yarn/cache/@amplitude-analytics-core-npm-2.5.5-a6b93e8377-c68e3fb614.zip/node_modules/@amplitude/analytics-core/",\
+        "packageDependencies": [\
+          ["@amplitude/analytics-core", "npm:2.5.5::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-core%2F-%2Fanalytics-core-2.5.5.tgz"],\
+          ["@amplitude/analytics-types", "npm:2.8.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-types%2F-%2Fanalytics-types-2.8.4.tgz"],\
+          ["tslib", "npm:2.8.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ftslib%2F-%2Ftslib-2.8.1.tgz"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@amplitude/analytics-remote-config", [\
+      ["npm:0.4.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-remote-config%2F-%2Fanalytics-remote-config-0.4.1.tgz", {\
+        "packageLocation": "./.yarn/cache/@amplitude-analytics-remote-config-npm-0.4.1-c0e4393cff-b48564fe18.zip/node_modules/@amplitude/analytics-remote-config/",\
+        "packageDependencies": [\
+          ["@amplitude/analytics-remote-config", "npm:0.4.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-remote-config%2F-%2Fanalytics-remote-config-0.4.1.tgz"],\
+          ["@amplitude/analytics-client-common", "npm:2.3.7::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-client-common%2F-%2Fanalytics-client-common-2.3.7.tgz"],\
+          ["@amplitude/analytics-core", "npm:2.5.5::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-core%2F-%2Fanalytics-core-2.5.5.tgz"],\
+          ["@amplitude/analytics-types", "npm:2.8.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-types%2F-%2Fanalytics-types-2.8.4.tgz"],\
+          ["tslib", "npm:2.8.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ftslib%2F-%2Ftslib-2.8.1.tgz"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@amplitude/analytics-types", [\
+      ["npm:2.8.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-types%2F-%2Fanalytics-types-2.8.4.tgz", {\
+        "packageLocation": "./.yarn/cache/@amplitude-analytics-types-npm-2.8.4-a6523f54df-ad9cb6b8a7.zip/node_modules/@amplitude/analytics-types/",\
+        "packageDependencies": [\
+          ["@amplitude/analytics-types", "npm:2.8.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-types%2F-%2Fanalytics-types-2.8.4.tgz"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@amplitude/experiment-core", [\
+      ["npm:0.10.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fexperiment-core%2F-%2Fexperiment-core-0.10.1.tgz", {\
+        "packageLocation": "./.yarn/cache/@amplitude-experiment-core-npm-0.10.1-cedca0f107-39ddf992b2.zip/node_modules/@amplitude/experiment-core/",\
+        "packageDependencies": [\
+          ["@amplitude/experiment-core", "npm:0.10.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fexperiment-core%2F-%2Fexperiment-core-0.10.1.tgz"],\
+          ["js-base64", "npm:3.7.7::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fjs-base64%2F-%2Fjs-base64-3.7.7.tgz"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@amplitude/plugin-autocapture-browser", [\
+      ["npm:1.0.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-autocapture-browser%2F-%2Fplugin-autocapture-browser-1.0.4.tgz", {\
+        "packageLocation": "./.yarn/cache/@amplitude-plugin-autocapture-browser-npm-1.0.4-61c2959b3a-3dc4ee8711.zip/node_modules/@amplitude/plugin-autocapture-browser/",\
+        "packageDependencies": [\
+          ["@amplitude/plugin-autocapture-browser", "npm:1.0.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-autocapture-browser%2F-%2Fplugin-autocapture-browser-1.0.4.tgz"],\
+          ["@amplitude/analytics-client-common", "npm:2.3.7::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-client-common%2F-%2Fanalytics-client-common-2.3.7.tgz"],\
+          ["@amplitude/analytics-types", "npm:2.8.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-types%2F-%2Fanalytics-types-2.8.4.tgz"],\
+          ["rxjs", "npm:7.8.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Frxjs%2F-%2Frxjs-7.8.1.tgz"],\
+          ["tslib", "npm:2.8.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ftslib%2F-%2Ftslib-2.8.1.tgz"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@amplitude/plugin-page-view-tracking-browser", [\
+      ["npm:2.3.7::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-page-view-tracking-browser%2F-%2Fplugin-page-view-tracking-browser-2.3.7.tgz", {\
+        "packageLocation": "./.yarn/cache/@amplitude-plugin-page-view-tracking-browser-npm-2.3.7-fd551051b4-e07570e342.zip/node_modules/@amplitude/plugin-page-view-tracking-browser/",\
+        "packageDependencies": [\
+          ["@amplitude/plugin-page-view-tracking-browser", "npm:2.3.7::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-page-view-tracking-browser%2F-%2Fplugin-page-view-tracking-browser-2.3.7.tgz"],\
+          ["@amplitude/analytics-client-common", "npm:2.3.7::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-client-common%2F-%2Fanalytics-client-common-2.3.7.tgz"],\
+          ["@amplitude/analytics-types", "npm:2.8.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-types%2F-%2Fanalytics-types-2.8.4.tgz"],\
+          ["tslib", "npm:2.8.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ftslib%2F-%2Ftslib-2.8.1.tgz"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -1771,6 +1879,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["frontend-fundamentals", "workspace:."],\
+          ["@amplitude/analytics-browser", "npm:2.11.11::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-browser%2F-%2Fanalytics-browser-2.11.11.tgz"],\
           ["markdown-it-footnote", "npm:4.0.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fmarkdown-it-footnote%2F-%2Fmarkdown-it-footnote-4.0.0.tgz"],\
           ["typescript", "patch:typescript@npm%3A5.7.2%3A%3A__archiveUrl=http%253A%252F%252Fnexus.toss.bz%252Frepository%252Fnpm-group%252Ftypescript%252F-%252Ftypescript-5.7.2.tgz#optional!builtin<compat/typescript>::version=5.7.2&hash=5786d5"],\
           ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.5.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvitepress%2F-%2Fvitepress-1.5.0.tgz"]\
@@ -1972,6 +2081,15 @@ const RAW_RUNTIME_STATE =
           ["jackspeak", "npm:3.4.3::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fjackspeak%2F-%2Fjackspeak-3.4.3.tgz"],\
           ["@isaacs/cliui", "npm:8.0.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40isaacs%2Fcliui%2F-%2Fcliui-8.0.2.tgz"],\
           ["@pkgjs/parseargs", "npm:0.11.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40pkgjs%2Fparseargs%2F-%2Fparseargs-0.11.0.tgz"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["js-base64", [\
+      ["npm:3.7.7::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fjs-base64%2F-%2Fjs-base64-3.7.7.tgz", {\
+        "packageLocation": "./.yarn/cache/js-base64-npm-3.7.7-e78f8269d6-185e34c536.zip/node_modules/js-base64/",\
+        "packageDependencies": [\
+          ["js-base64", "npm:3.7.7::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fjs-base64%2F-%2Fjs-base64-3.7.7.tgz"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -2516,6 +2634,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["rxjs", [\
+      ["npm:7.8.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Frxjs%2F-%2Frxjs-7.8.1.tgz", {\
+        "packageLocation": "./.yarn/cache/rxjs-npm-7.8.1-486b587945-b10cac1a52.zip/node_modules/rxjs/",\
+        "packageDependencies": [\
+          ["rxjs", "npm:7.8.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Frxjs%2F-%2Frxjs-7.8.1.tgz"],\
+          ["tslib", "npm:2.8.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ftslib%2F-%2Ftslib-2.8.1.tgz"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["safer-buffer", [\
       ["npm:2.1.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fsafer-buffer%2F-%2Fsafer-buffer-2.1.2.tgz", {\
         "packageLocation": "./.yarn/cache/safer-buffer-npm-2.1.2-1291d4b4b9-7eaf7a0cf3.zip/node_modules/safer-buffer/",\
@@ -2760,6 +2888,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/trim-lines-npm-3.0.1-b1f001e3fb-7a1325e4ce.zip/node_modules/trim-lines/",\
         "packageDependencies": [\
           ["trim-lines", "npm:3.0.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ftrim-lines%2F-%2Ftrim-lines-3.0.1.tgz"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["tslib", [\
+      ["npm:2.8.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ftslib%2F-%2Ftslib-2.8.1.tgz", {\
+        "packageLocation": "./.yarn/cache/tslib-npm-2.8.1-fd69b02284-3e2e043d5c.zip/node_modules/tslib/",\
+        "packageDependencies": [\
+          ["tslib", "npm:2.8.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ftslib%2F-%2Ftslib-2.8.1.tgz"]\
         ],\
         "linkType": "HARD"\
       }]\
