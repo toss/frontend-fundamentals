@@ -1,4 +1,4 @@
-import { defineConfig } from "vitepress";
+import { defineConfig, HeadConfig } from "vitepress";
 import { search as koSearch } from "./ko.mts";
 
 export const shared = defineConfig({
@@ -27,6 +27,17 @@ export const shared = defineConfig({
       }
     ]
   ],
+
+  transformHead: ({ pageData }) => {
+    const head: HeadConfig[] = [];
+    const title = pageData.frontmatter.title || 'Frontend Fundamentals';
+    const description = pageData.frontmatter.description || 'Guidelines for easily modifiable frontend code';
+
+    head.push(['meta', { property: 'og:title', content: title }]);
+    head.push(['meta', { property: 'og:description', content: description }]);
+
+    return head;
+  },
 
   themeConfig: {
     logo: "/images/ff-symbol.svg",
