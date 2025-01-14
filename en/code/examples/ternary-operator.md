@@ -25,7 +25,7 @@ This code uses multiple nested ternary operators, making it difficult to quickly
 You can rewrite the conditions using `if` statements, as shown below, to make the logic clearer and easier to follow.
 
 ```typescript
-const status = useMemo(() => {
+const status = (() => {
   if (ACondition && BCondition) {
    return "BOTH";
  }
@@ -35,5 +35,5 @@ const status = useMemo(() => {
  }
 
  return "NONE";
-}, [ACondition, BCondition]);
+}, [ACondition, BCondition])();
 ```
