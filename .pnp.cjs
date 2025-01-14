@@ -27,6 +27,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["@amplitude/analytics-browser", "npm:2.11.11"],\
           ["markdown-it-footnote", "npm:4.0.0"],\
           ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"],\
           ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.5.0"]\
@@ -290,6 +291,113 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@algolia/requester-node-http", "npm:5.19.0"],\
           ["@algolia/client-common", "npm:5.19.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@amplitude/analytics-browser", [\
+      ["npm:2.11.11", {\
+        "packageLocation": "./.yarn/cache/@amplitude-analytics-browser-npm-2.11.11-3418b94cf3-103f7117f5.zip/node_modules/@amplitude/analytics-browser/",\
+        "packageDependencies": [\
+          ["@amplitude/analytics-browser", "npm:2.11.11"],\
+          ["@amplitude/analytics-client-common", "npm:2.3.7"],\
+          ["@amplitude/analytics-core", "npm:2.5.5"],\
+          ["@amplitude/analytics-remote-config", "npm:0.4.1"],\
+          ["@amplitude/analytics-types", "npm:2.8.4"],\
+          ["@amplitude/plugin-autocapture-browser", "npm:1.0.4"],\
+          ["@amplitude/plugin-page-view-tracking-browser", "npm:2.3.7"],\
+          ["tslib", "npm:2.8.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@amplitude/analytics-client-common", [\
+      ["npm:2.3.7", {\
+        "packageLocation": "./.yarn/cache/@amplitude-analytics-client-common-npm-2.3.7-d57dc99580-c1ecb7493b.zip/node_modules/@amplitude/analytics-client-common/",\
+        "packageDependencies": [\
+          ["@amplitude/analytics-client-common", "npm:2.3.7"],\
+          ["@amplitude/analytics-connector", "npm:1.6.2"],\
+          ["@amplitude/analytics-core", "npm:2.5.5"],\
+          ["@amplitude/analytics-types", "npm:2.8.4"],\
+          ["tslib", "npm:2.8.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@amplitude/analytics-connector", [\
+      ["npm:1.6.2", {\
+        "packageLocation": "./.yarn/cache/@amplitude-analytics-connector-npm-1.6.2-4840891850-b9653ce55b.zip/node_modules/@amplitude/analytics-connector/",\
+        "packageDependencies": [\
+          ["@amplitude/analytics-connector", "npm:1.6.2"],\
+          ["@amplitude/experiment-core", "npm:0.10.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@amplitude/analytics-core", [\
+      ["npm:2.5.5", {\
+        "packageLocation": "./.yarn/cache/@amplitude-analytics-core-npm-2.5.5-e7000e5652-c68e3fb614.zip/node_modules/@amplitude/analytics-core/",\
+        "packageDependencies": [\
+          ["@amplitude/analytics-core", "npm:2.5.5"],\
+          ["@amplitude/analytics-types", "npm:2.8.4"],\
+          ["tslib", "npm:2.8.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@amplitude/analytics-remote-config", [\
+      ["npm:0.4.1", {\
+        "packageLocation": "./.yarn/cache/@amplitude-analytics-remote-config-npm-0.4.1-59ac2ce6d4-b48564fe18.zip/node_modules/@amplitude/analytics-remote-config/",\
+        "packageDependencies": [\
+          ["@amplitude/analytics-remote-config", "npm:0.4.1"],\
+          ["@amplitude/analytics-client-common", "npm:2.3.7"],\
+          ["@amplitude/analytics-core", "npm:2.5.5"],\
+          ["@amplitude/analytics-types", "npm:2.8.4"],\
+          ["tslib", "npm:2.8.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@amplitude/analytics-types", [\
+      ["npm:2.8.4", {\
+        "packageLocation": "./.yarn/cache/@amplitude-analytics-types-npm-2.8.4-b44cc9d406-ad9cb6b8a7.zip/node_modules/@amplitude/analytics-types/",\
+        "packageDependencies": [\
+          ["@amplitude/analytics-types", "npm:2.8.4"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@amplitude/experiment-core", [\
+      ["npm:0.10.1", {\
+        "packageLocation": "./.yarn/cache/@amplitude-experiment-core-npm-0.10.1-87592e031f-39ddf992b2.zip/node_modules/@amplitude/experiment-core/",\
+        "packageDependencies": [\
+          ["@amplitude/experiment-core", "npm:0.10.1"],\
+          ["js-base64", "npm:3.7.7"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@amplitude/plugin-autocapture-browser", [\
+      ["npm:1.0.4", {\
+        "packageLocation": "./.yarn/cache/@amplitude-plugin-autocapture-browser-npm-1.0.4-7936c5ddf6-3dc4ee8711.zip/node_modules/@amplitude/plugin-autocapture-browser/",\
+        "packageDependencies": [\
+          ["@amplitude/plugin-autocapture-browser", "npm:1.0.4"],\
+          ["@amplitude/analytics-client-common", "npm:2.3.7"],\
+          ["@amplitude/analytics-types", "npm:2.8.4"],\
+          ["rxjs", "npm:7.8.1"],\
+          ["tslib", "npm:2.8.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@amplitude/plugin-page-view-tracking-browser", [\
+      ["npm:2.3.7", {\
+        "packageLocation": "./.yarn/cache/@amplitude-plugin-page-view-tracking-browser-npm-2.3.7-2981891894-e07570e342.zip/node_modules/@amplitude/plugin-page-view-tracking-browser/",\
+        "packageDependencies": [\
+          ["@amplitude/plugin-page-view-tracking-browser", "npm:2.3.7"],\
+          ["@amplitude/analytics-client-common", "npm:2.3.7"],\
+          ["@amplitude/analytics-types", "npm:2.8.4"],\
+          ["tslib", "npm:2.8.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -1780,6 +1888,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["frontend-fundamentals", "workspace:."],\
+          ["@amplitude/analytics-browser", "npm:2.11.11"],\
           ["markdown-it-footnote", "npm:4.0.0"],\
           ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"],\
           ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.5.0"]\
@@ -1981,6 +2090,15 @@ const RAW_RUNTIME_STATE =
           ["jackspeak", "npm:3.4.3"],\
           ["@isaacs/cliui", "npm:8.0.2"],\
           ["@pkgjs/parseargs", "npm:0.11.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["js-base64", [\
+      ["npm:3.7.7", {\
+        "packageLocation": "./.yarn/cache/js-base64-npm-3.7.7-641cff09f0-185e34c536.zip/node_modules/js-base64/",\
+        "packageDependencies": [\
+          ["js-base64", "npm:3.7.7"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -2499,6 +2617,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["rxjs", [\
+      ["npm:7.8.1", {\
+        "packageLocation": "./.yarn/cache/rxjs-npm-7.8.1-41c443a75b-b10cac1a52.zip/node_modules/rxjs/",\
+        "packageDependencies": [\
+          ["rxjs", "npm:7.8.1"],\
+          ["tslib", "npm:2.8.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["safer-buffer", [\
       ["npm:2.1.2", {\
         "packageLocation": "./.yarn/cache/safer-buffer-npm-2.1.2-8d5c0b705e-7eaf7a0cf3.zip/node_modules/safer-buffer/",\
@@ -2745,6 +2873,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/trim-lines-npm-3.0.1-24471f7e84-7a1325e4ce.zip/node_modules/trim-lines/",\
         "packageDependencies": [\
           ["trim-lines", "npm:3.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["tslib", [\
+      ["npm:2.8.1", {\
+        "packageLocation": "./.yarn/cache/tslib-npm-2.8.1-66590b21b8-3e2e043d5c.zip/node_modules/tslib/",\
+        "packageDependencies": [\
+          ["tslib", "npm:2.8.1"]\
         ],\
         "linkType": "HARD"\
       }]\
