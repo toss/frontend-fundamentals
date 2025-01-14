@@ -1,4 +1,4 @@
-# 코드를 읽을 때 시점 이동 줄이기
+# 시점 이동 줄이기
 
 <div style="margin-top: 16px">
 <Badge type="info" text="가독성" />
