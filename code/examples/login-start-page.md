@@ -15,7 +15,7 @@
 function LoginStartPage() {
    useCheckLogin({
      onChecked: (status) => {
-       if (status !== "LOGGED_IN") {
+       if (status === "LOGGED_IN") {
          location.href = "/home";
        }
      },

@@ -14,7 +14,7 @@ The following `<LoginStartPage />` component contains logic to check if the user
 function LoginStartPage() {
    useCheckLogin({
      onChecked: (status) => {
-       if (status !== "LOGGED_IN") {
+       if (status === "LOGGED_IN") {
          location.href = "/home";
        }
      },
