@@ -75,7 +75,7 @@ function useServerTime() {
 ```typescript
 /** 사용자 이름은 20자 미만이어야 해요. */
 function checkIsNameValid(name: string) {
-  const isValid = name.length > 0 && name.length <= 20;
+  const isValid = name.length > 0 && name.length < 20;
 
   return isValid;
 }
