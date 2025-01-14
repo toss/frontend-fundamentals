@@ -128,7 +128,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: "3. 응집도",
           items: [
             {
-              text: "A. 같이 수정되는 파일을 같은 디렉토리에 두기",
+              text: "A. 함께 수정되는 파일을 같은 디렉토리에 두기",
               link: "/code/examples/code-directory"
             },
             {
