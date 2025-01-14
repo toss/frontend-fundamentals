@@ -8,8 +8,8 @@ When managing forms, you can manage cohesion in two ways to ensure that code tha
 
 ## Field-Level Cohesion
 
-Field-level cohesion is a method of managing individual input elements independently. 
-Each field has its own validation logic, reducing the scope of changes needed and making it easier to maintain specific fields. 
+Field-level cohesion is a method of managing individual input elements independently.
+Each field has its own validation logic, reducing the scope of changes needed and making it easier to maintain specific fields.
 By designing with field-level cohesion in mind, the validation logic of each field is independent and does not affect other fields.
 
 ```tsx
@@ -19,12 +19,12 @@ export function Form() {
   const {
     register,
     formState: { errors },
-    handleSubmit,
+    handleSubmit
   } = useForm({
     defaultValues: {
       name: "",
-      email: "",
-    },
+      email: ""
+    }
   });
 
   const onSubmit = handleSubmit((formData) => {
@@ -37,7 +37,8 @@ export function Form() {
       <div>
         <input
           {...register("name", {
-            validate: (value) => (!value ? "Please enter your name." : ""),
+            validate: (value) =>
+              value.trim() === "" ? "Please enter your name." : ""
           })}
           placeholder="Name"
         />
@@ -48,7 +49,7 @@ export function Form() {
         <input
           {...register("email", {
             validate: (value) => {
-              if (!value) {
+              if (value.trim() === "") {
                 return "Please enter your email.";
               }
 
@@ -57,7 +58,7 @@ export function Form() {
               }
 
               return "";
-            },
+            }
           })}
           placeholder="Email"
         />
@@ -69,6 +70,7 @@ export function Form() {
   );
 }
 ```
+
 ## Form-Level Cohesion
 
 Form-level cohesion means that the validation logic for all fields is dependent on the form. It is designed considering the flow of the entire form and is considered when changes occur at the form level.
@@ -85,20 +87,20 @@ const schema = z.object({
   email: z
     .string()
     .min(1, "Please enter your email.")
-    .email("Please enter a valid email address."),
+    .email("Please enter a valid email address.")
 });
 
 export function Form() {
   const {
     register,
     formState: { errors },
-    handleSubmit,
+    handleSubmit
   } = useForm({
     defaultValues: {
       name: "",
-      email: "",
+      email: ""
     },
-    resolver: zodResolver(schema),
+    resolver: zodResolver(schema)
   });
 
   const onSubmit = handleSubmit((formData) => {
@@ -126,10 +128,10 @@ export function Form() {
 
 ## Field-Level vs. Form-Level Cohesion
 
-To increase cohesion, you should choose the approach that best fits the situation, whether it's field-level or form-level. 
+To increase cohesion, you should choose the approach that best fits the situation, whether it's field-level or form-level.
 Dividing by field level increases reusability and independence, but managing at the form level maintains a consistent flow.
 
 You need to adjust the design based on whether the unit of change is at the field level or the form level.
 
-Generally, when all fields are closely related and the form represents a single function, or in complex forms like a Wizard Form that operates step-by-step, form-level cohesion should be prioritized. 
+Generally, when all fields are closely related and the form represents a single function, or in complex forms like a Wizard Form that operates step-by-step, form-level cohesion should be prioritized.
 However, when individual field validation is very complex, or there is no dependency between different fields, and changes mainly occur at the field level, it is better to prioritize field-level cohesion.
