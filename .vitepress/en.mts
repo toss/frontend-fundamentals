@@ -34,12 +34,6 @@ export const en = defineConfig({
     nav: nav(),
 
     sidebar: sidebar(),
-    socialLinks: [
-      {
-        icon: 'github',
-        link: 'https://github.com/toss/frontend-fundamentals',
-      },
-    ],
   }
 });
 
