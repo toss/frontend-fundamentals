@@ -132,5 +132,13 @@ Dividing by field level increases reusability and independence, but managing at 
 
 You need to adjust the design based on whether the unit of change is at the field level or the form level.
 
-Generally, when all fields are closely related and the form represents a single function, or in complex forms like a Wizard Form that operates step-by-step, form-level cohesion should be prioritized.
-However, when individual field validation is very complex, or there is no dependency between different fields, and changes mainly occur at the field level, it is better to prioritize field-level cohesion.
+### When to Choose Field-Level Cohesion
+
+- **When Independent Validation is Needed**: This is suitable when fields require complex validation logic or asynchronous validation. It's useful when each field needs independent and unique validation, such as email format validation, phone number verification, username availability checks, or promotional code validation that requires API calls.
+- **When Reusability is Important**: When fields and their validation logic can be reused across different forms. This is useful when you want to manage and reuse common input fields independently.
+
+### When to Choose Form-Level Cohesion
+
+- **When Representing a Single Function**: This is appropriate when all fields are closely related and form a complete functionality. For example, payment information or shipping details where all fields constitute a single business logic.
+- **When Step-by-Step Input is Required**: This works well for complex forms like Wizard Forms that operate in steps. It's suitable for scenarios like registration or surveys where previous step values influence the next steps.
+- **When Fields are Interdependent**: This applies when multiple fields reference or affect each other. It's useful for cases like password confirmation or total amount calculations where field interactions are necessary.
