@@ -9,7 +9,7 @@ It may also include a large number of branches in the implementation, making it 
 
 ## 📝 Code Example
 
-The `<SubmitButton />` component below behaves differently depending on the user's permission. 
+The `<SubmitButton />` component below behaves differently depending on the user's permission.
 
 - If the user's permission is read-only (`"viewer"`), the invite button is disabled and the animation is not played.
 - If the user is a regular user, the invite button can be used and the animation is played.
@@ -47,7 +47,7 @@ Intermixed code that doesn't execute simultaneously creates confusion and makes 
 
 ## ✏️ Work on Improving
 
-This code is designed to completely separate the management of when the user has read-only permissions and when they are a regular user. 
+This code is designed to completely separate the management of when the user has read-only permissions and when they are a regular user.
 
 ```tsx
 function SubmitButton() {

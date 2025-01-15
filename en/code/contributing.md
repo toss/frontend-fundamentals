@@ -1,6 +1,7 @@
 ---
 comments: false
 ---
+
 # Contributing
 
 `Frontend Fundamentals` (FF) is developing standards for good code together with the community.
