@@ -39,7 +39,7 @@ export function Form() {
         <input
           {...register("name", {
             validate: (value) =>
-              (value.trim() === "" ? "이름을 입력해주세요." : ""),
+              (isEmptyStringOrNil(value) ? "이름을 입력해주세요." : ""),
           })}
           placeholder="이름"
         />
@@ -50,7 +50,7 @@ export function Form() {
         <input
           {...register("email", {
             validate: (value) => {
-              if (value.trim() === "") {
+              if (isEmptyStringOrNil(value)) {
                 return "이메일을 입력해주세요.";
               }
 
@@ -69,6 +69,16 @@ export function Form() {
       <button type="submit">제출</button>
     </form>
   );
+}
+
+function isNil(value: unknown): value is null | undefined {
+  return value == null;
+}
+
+type NullableString = string | null | undefined;
+
+function isEmptyStringOrNil(value: NullableString): boolean {
+  return isNil(value) || value.trim() === "";
 }
 ```
 
