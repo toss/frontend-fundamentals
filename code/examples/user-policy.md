@@ -95,13 +95,13 @@ function Page() {
   const user = useUser();
   const policy = {
     admin: { canInvite: true, canRead: true },
-    viewer: { canInvite: false, canRead: true }
-  };
+    viewer: { canInvite: false, canRead: true },
+  }[user.role];
 
   return (
     <div>
-      <Button disabled={policy.canInvite}>Invite</Button>
-      <Button disabled={policy.canRead}>Read</Button>
+      <Button disabled={!policy.canInvite}>Invite</Button>
+      <Button disabled={!policy.canRead}>Read</Button>
     </div>
   );
 }
