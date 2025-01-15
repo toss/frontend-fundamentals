@@ -38,7 +38,7 @@ export function Form() {
         <input
           {...register("name", {
             validate: (value) =>
-              (isEmptyStringOrNil(value) ? "Please enter your name." : ""),
+              isEmptyStringOrNil(value) ? "Please enter your name." : ""
           })}
           placeholder="Name"
         />

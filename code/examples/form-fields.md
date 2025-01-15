@@ -39,7 +39,7 @@ export function Form() {
         <input
           {...register("name", {
             validate: (value) =>
-              (isEmptyStringOrNil(value) ? "이름을 입력해주세요." : ""),
+              isEmptyStringOrNil(value) ? "이름을 입력해주세요." : ""
           })}
           placeholder="이름"
         />
