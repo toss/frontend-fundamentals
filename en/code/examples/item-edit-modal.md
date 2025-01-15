@@ -75,7 +75,7 @@ When Props Drilling occurs, the number of components unnecessarily referencing t
 If the props change, all components referencing them need to be modified.
 
 For example, if the recommendation feature for items is removed and `recommendedItems` needs to be deleted, it must be removed from all related components.
-The scope of code modification becomes unnecessarily wide, and the coupling is low.
+The scope of code modification becomes unnecessarily wide, and the coupling is high.
 
 ## ✏️ Work on Improving
 
