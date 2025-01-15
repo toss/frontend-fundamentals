@@ -1,4 +1,4 @@
-# 복잡한 조건식에 이름 붙이기
+# 복잡한 조건에 이름 붙이기
 
 <div style="margin-top: 16px">
 <Badge type="info" text="가독성" />
