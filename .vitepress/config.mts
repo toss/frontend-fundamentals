@@ -5,6 +5,7 @@ import footnote from "markdown-it-footnote";
 import { shared } from "./shared.mts";
 import { en } from "./en.mts";
 import { ko } from "./ko.mts";
+import { ja } from "./ja.mts";
 
 const require = createRequire(import.meta.url);
 
@@ -12,6 +13,7 @@ export default defineConfig({
   ...shared,
   locales: {
     en: { label: "English", ...en },
+    ja: { label: "日本語", ...ja },
     root: { label: "한국어", ...ko }
   },
   vite: {
