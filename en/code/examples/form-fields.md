@@ -37,7 +37,8 @@ export function Form() {
       <div>
         <input
           {...register("name", {
-            validate: (value) => (!value ? "Please enter your name." : "")
+            validate: (value) =>
+              isEmptyStringOrNil(value) ? "Please enter your name." : ""
           })}
           placeholder="Name"
         />
@@ -48,7 +49,7 @@ export function Form() {
         <input
           {...register("email", {
             validate: (value) => {
-              if (!value) {
+              if (isEmptyStringOrNil(value)) {
                 return "Please enter your email.";
               }
 
@@ -67,6 +68,16 @@ export function Form() {
       <button type="submit">Submit</button>
     </form>
   );
+}
+
+function isNil(value: unknown): value is null | undefined {
+  return value == null;
+}
+
+type NullableString = string | null | undefined;
+
+function isEmptyStringOrNil(value: NullableString): boolean {
+  return isNil(value) || value.trim() === "";
 }
 ```
 
