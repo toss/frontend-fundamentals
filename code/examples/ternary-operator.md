@@ -1,4 +1,4 @@
-# 복잡한 삼항 연산자를 풀어서 쓰기
+# 삼항 연산자 단순하게 하기
 
 <div style="margin-top: 16px">
 <Badge type="info" text="가독성" />
