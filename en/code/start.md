@@ -26,6 +26,7 @@ It presents [four principles](./index.md) of good code, along with specific exam
 - [bigsaigon333](https://github.com/bigsaigon333)
 - [jho2301](https://github.com/jho2301)
 - [KimChunsick](https://github.com/KimChunsick)
+- [jennybehan](https://github.com/jennybehan)
 
 ## Document Contributors
 
