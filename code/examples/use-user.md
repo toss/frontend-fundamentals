@@ -140,12 +140,12 @@ function checkIsNameValid(name: string) {
       ok: false,
       reason: "이름은 빈 값일 수 없어요."
     };
-  }
-
-  if (name.length > 20) {
+  } 
+  
+  if (name.length >= 20) {
     return {
       ok: false,
-      reason: "이름은 20자까지만 입력할 수 있어요."
+      reason: '이름은 20자 이상 입력할 수 없어요.',
     };
   }
 

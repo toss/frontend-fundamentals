@@ -138,14 +138,14 @@ function checkIsNameValid(name: string) {
   if (name.length === 0) {
     return {
       ok: false,
-      reason: "Names cannot be empty."
+      reason: 'Name cannot be empty.',
     };
-  }
-
-  if (name.length > 20) {
+  } 
+  
+  if (name.length >= 20) {
     return {
       ok: false,
-      reason: "Names can be up to 20 characters long."
+      reason: 'Name cannot be longer than 20 characters',
     };
   }
 
