@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import DefaultTheme from 'vitepress/theme'
-import Comments from './components/Comments.vue'
+import DefaultTheme from "vitepress/theme";
+import Comments from "./components/Comments.vue";
 
-const { Layout } = DefaultTheme
+const { Layout } = DefaultTheme;
 </script>
 
 <template>
@@ -12,3 +12,10 @@ const { Layout } = DefaultTheme
     </template>
   </Layout>
 </template>
+
+<style>
+html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+</style>
