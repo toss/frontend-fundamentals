@@ -16,7 +16,7 @@ const result = products.filter((product) =>
     (category) =>
       category.id === targetCategory.id &&
       product.prices.some(
-        (price) => price.value >= minPrice && price.value <= maxPrice
+        (price) => price >= minPrice && price <= maxPrice
       )
   )
 );
@@ -41,7 +41,7 @@ const matchedProducts = products.filter((product) => {
   return product.categories.some((category) => {
     const isSameCategory = category.id === targetCategory.id;
     const isPriceInRange = product.prices.some(
-      (price) => price.value >= minPrice && price.value <= maxPrice
+      (price) => price >= minPrice && price <= maxPrice
     );
 
     return isSameCategory && isPriceInRange;
