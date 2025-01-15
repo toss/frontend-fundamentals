@@ -8,20 +8,20 @@ Props Drilling is a clear indication that there is coupling between parent and c
 
 ## 📝 Code Example
 
-The following code is the `<ItemEditModal />` component used when a user selects an `item`. 
+The following code is the `<ItemEditModal />` component used when a user selects an `item`.
 The user can enter a keyword to search the item list, and when the desired item is found and selected, `onConfirm` is called.
 
 The keyword entered by the user is passed as the `keyword` prop, the selectable items are passed as the `items` prop, and the list of recommended items is passed as the `recommendedItems` prop.
 
 ```tsx 2,9-10,12-13,29-32
 function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
-  const [keyword, setKeyword] = useState('');
-  
+  const [keyword, setKeyword] = useState("");
+
   // Other ItemEditModal logic ...
 
   return (
     <Modal open={open} onClose={onClose}>
-      <ItemEditBody 
+      <ItemEditBody
         items={items}
         keyword={keyword}
         onKeywordChange={setKeyword}
@@ -31,24 +31,34 @@ function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
       />
       {/* ... Other ItemEditModal components ... */}
     </Modal>
-  )
+  );
 }
 
-function ItemEditBody({ keyword, onKeywordChange, items, recommendedItems, onConfirm, onClose }) {
+function ItemEditBody({
+  keyword,
+  onKeywordChange,
+  items,
+  recommendedItems,
+  onConfirm,
+  onClose
+}) {
   return (
     <>
-      <div style="display: flex; justify-content: space-between;">
-        <Input value={keyword} onChange={e => onKeywordChange(e.target.value)} />
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Input
+          value={keyword}
+          onChange={(e) => onKeywordChange(e.target.value)}
+        />
         <Button onClick={onClose}>Close</Button>
       </div>
-      <ItemEditList 
-        keyword={keyword} 
-        items={items} 
-        recommendedItems={recommendedItems} 
+      <ItemEditList
+        keyword={keyword}
+        items={items}
+        recommendedItems={recommendedItems}
         onConfirm={onConfirm}
       />
     </>
-  )
+  );
 }
 
 // ...
@@ -65,7 +75,7 @@ When Props Drilling occurs, the number of components unnecessarily referencing t
 If the props change, all components referencing them need to be modified.
 
 For example, if the recommendation feature for items is removed and `recommendedItems` needs to be deleted, it must be removed from all related components.
-The scope of code modification becomes unnecessarily wide, and the coupling is low.
+The scope of code modification becomes unnecessarily wide, and the coupling is high.
 
 ## ✏️ Work on Improving
 
@@ -73,16 +83,24 @@ We need to eliminate Props Drilling, where the parent component passes props dir
 
 ```tsx
 function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
-  const [keyword, setKeyword] = useState('');
+  const [keyword, setKeyword] = useState("");
 
   return (
     <Modal open={open} onClose={onClose}>
-      <div style="display: flex; justify-content: space-between">
-        <Input value={keyword} onChange={e => onKeywordChange(e.target.value)} />
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Input
+          value={keyword}
+          onChange={(e) => onKeywordChange(e.target.value)}
+        />
         <Button onClick={onClose}>닫기</Button>
       </div>
-      <ItemEditList keyword={keyword} items={items} recommendedItems={recommendedItems} onConfirm={onConfirm} />
+      <ItemEditList
+        keyword={keyword}
+        items={items}
+        recommendedItems={recommendedItems}
+        onConfirm={onConfirm}
+      />
     </Modal>
-  )
+  );
 }
 ```

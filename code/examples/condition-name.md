@@ -1,10 +1,10 @@
-# 복잡한 조건식에 이름 붙이기
+# 복잡한 조건에 이름 붙이기
 
 <div style="margin-top: 16px">
 <Badge type="info" text="가독성" />
 </div>
 
-복잡한 조건식이 특별한 이름 없이 사용되면, 조건이 뜻하는 바를 한 눈에 파악하기 어려워요.
+복잡한 조건식이 특별한 이름 없이 사용되면, 조건이 뜻하는 바를 한눈에 파악하기 어려워요.
 
 ## 📝 코드 예시
 
@@ -16,7 +16,7 @@ const result = products.filter((product) =>
     (category) =>
       category.id === targetCategory.id &&
       product.prices.some(
-        (price) => price.value >= minPrice && price.value <= maxPrice
+        (price) => price >= minPrice && price <= maxPrice
       )
   )
 );
