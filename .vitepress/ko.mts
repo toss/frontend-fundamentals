@@ -5,30 +5,6 @@ export const ko = defineConfig({
   title: "Frontend Fundamentals",
   description: "변경하기 쉬운 프론트엔드 코드를 위한 지침서",
   lastUpdated: true,
-  head: [
-    ["link", { rel: "icon", href: "/images/favicon.ico" }],
-    [
-      "meta",
-      {
-        property: "og:image",
-        content: "https://static.toss.im/illusts/ff-meta.png"
-      }
-    ],
-    [
-      "meta",
-      {
-        name: "twitter:image",
-        content: "https://static.toss.im/illusts/ff-meta.png"
-      }
-    ],
-    [
-      "meta",
-      {
-        name: "twitter:card",
-        content: "https://static.toss.im/illusts/ff-meta.png"
-      }
-    ]
-  ],
   themeConfig: {
     logo: "/images/ff-symbol.svg",
     nav: nav(),
@@ -68,7 +44,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: "변경하기 쉬운 코드",
-          link: "/code"
+          link: "/code/"
         },
         {
           text: "기여하기",
@@ -152,7 +128,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: "3. 응집도",
           items: [
             {
-              text: "A. 같이 수정되는 파일을 같은 디렉토리에 두기",
+              text: "A. 함께 수정되는 파일을 같은 디렉토리에 두기",
               link: "/code/examples/code-directory"
             },
             {

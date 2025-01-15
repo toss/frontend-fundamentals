@@ -10,7 +10,7 @@ hero:
     alt: Frontend Fundamentals symbol
   actions:
     - text: Learn about good code
-      link: /en/code
+      link: /en/code/
     - theme: alt
       text: Communicate
       link: https://github.com/toss/frontend-fundamentals/discussions

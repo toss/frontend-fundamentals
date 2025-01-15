@@ -23,7 +23,7 @@ export const shared = defineConfig({
       "meta",
       {
         name: "twitter:card",
-        content: "https://static.toss.im/illusts/ff-meta.png"
+        content: "summary"
       }
     ]
   ],

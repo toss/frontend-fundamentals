@@ -1,4 +1,4 @@
-# 복잡한 조건식에 이름 붙이기
+# 복잡한 조건에 이름 붙이기
 
 <div style="margin-top: 16px">
 <Badge type="info" text="가독성" />
@@ -16,7 +16,7 @@ const result = products.filter((product) =>
     (category) =>
       category.id === targetCategory.id &&
       product.prices.some(
-        (price) => price.value >= minPrice && price.value <= maxPrice
+        (price) => price >= minPrice && price <= maxPrice
       )
   )
 );

@@ -26,6 +26,7 @@ comments: false
 - [bigsaigon333](https://github.com/bigsaigon333)
 - [jho2301](https://github.com/jho2301)
 - [KimChunsick](https://github.com/KimChunsick)
+- [jennybehan](https://github.com/jennybehan)
 
 ## 문서 기여자
 

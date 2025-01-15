@@ -8,7 +8,7 @@ API 호출과 관련된 Hook들처럼 같은 종류의 함수나 Hook이 서로 
 
 ## 📝 코드 예시 1: useUser
 
-다음 `useUser` 와 `useServerTime` Hook은 모두 API 호출과 관련된 Hook이에요. 
+다음 `useUser` 와 `useServerTime` Hook은 모두 API 호출과 관련된 Hook이에요.
 
 그렇지만 `useUser`는 `@tanstack/react-query`의 `Query` 객체를 반환하고, `useServerTime`은 서버 시간을 가져와서 데이터만 반환해요.
 
@@ -85,22 +85,22 @@ function checkIsAgeValid(age: number) {
   if (!Number.isInteger(age)) {
     return {
       ok: false,
-      reason: '나이는 정수여야 해요.',
-    }
+      reason: "나이는 정수여야 해요."
+    };
   }
 
   if (age < 18) {
     return {
       ok: false,
-      reason: '나이는 18세 이상이어야 해요.',
-    }
+      reason: "나이는 18세 이상이어야 해요."
+    };
   }
 
   if (age > 99) {
     return {
       ok: false,
-      reason: '나이는 99세 이하이어야 해요.',
-    }
+      reason: "나이는 99세 이하이어야 해요."
+    };
   }
 
   return { ok: true };
@@ -138,7 +138,7 @@ function checkIsNameValid(name: string) {
   if (name.length === 0) {
     return {
       ok: false,
-      reason: '이름은 빈 값일 수 없어요.',
+      reason: "이름은 빈 값일 수 없어요."
     };
   } 
   
@@ -157,22 +157,22 @@ function checkIsAgeValid(age: number) {
   if (!Number.isInteger(age)) {
     return {
       ok: false,
-      reason: '나이는 정수여야 해요.',
-    }
+      reason: "나이는 정수여야 해요."
+    };
   }
 
   if (age < 18) {
     return {
       ok: false,
-      reason: '나이는 18세 이상이어야 해요.',
-    }
+      reason: "나이는 18세 이상이어야 해요."
+    };
   }
 
   if (age > 99) {
     return {
       ok: false,
-      reason: '나이는 99세 이하이어야 해요.',
-    }
+      reason: "나이는 99세 이하이어야 해요."
+    };
   }
 
   return { ok: true };

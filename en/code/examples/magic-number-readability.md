@@ -19,11 +19,12 @@ async function onLikeClick() {
   await refetchPostLike();
 }
 ```
+
 ## 👃 Smell the Code
 
 ### Readability
 
-The value `300` passed to the `delay` function is used in an unclear context. 
+The value `300` passed to the `delay` function is used in an unclear context.
 If you are not the original developer of the code, you may not know why it waits for 300ms.
 
 - Is it waiting for the animation to complete?

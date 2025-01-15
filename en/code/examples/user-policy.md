@@ -16,7 +16,7 @@ The following code displays buttons differently based on the user's permission.
 - If the user's permission is Administrator (Admin), it displays both `Invite` and `View` buttons.
 - If the user's permission is Viewer, it disables the `Invite` button and displays the `View` button.
 
-```typescript
+```tsx
 function Page() {
   const user = useUser();
   const policy = getPolicyByRole(user.role);
@@ -34,13 +34,13 @@ function getPolicyByRole(role) {
 
   return {
     canInvite: policy.includes("invite"),
-    canRead: policy.includes("view"),
+    canRead: policy.includes("view")
   };
 }
 
 const POLICY_SET = {
   admin: ["invite", "view"],
-  viewer: ["view"],
+  viewer: ["view"]
 };
 ```
 
@@ -48,7 +48,7 @@ const POLICY_SET = {
 
 ### Readability
 
-To understand why the `Invite` button is disabled in this code, you need to read the code in the order of `policy.canInvite` → `getPolicyByRole(user.role)` → `POLICY_SET`, jumping back and forth between different parts of the code. 
+To understand why the `Invite` button is disabled in this code, you need to read the code in the order of `policy.canInvite` → `getPolicyByRole(user.role)` → `POLICY_SET`, jumping back and forth between different parts of the code.
 This process involves three eye movements, making it difficult for the reader to maintain context and understand the code.
 
 Using abstractions like `POLICY_SET` to manage button states based on permissions can be useful when the permission system is complex, but in simple cases like this, it makes it harder for the reader to understand the code.
@@ -57,10 +57,10 @@ Using abstractions like `POLICY_SET` to manage button states based on permission
 
 ### A. Exposing Conditions Directly
 
-This approach involves directly exposing the conditions based on permissions in the code. This way, you can directly see in the code when the `Invite` button is disabled. 
+This approach involves directly exposing the conditions based on permissions in the code. This way, you can directly see in the code when the `Invite` button is disabled.
 By reading the code from top to bottom, you can easily understand the logic for handling permissions.
 
-```typescript
+```tsx
 function Page() {
   const user = useUser();
 
@@ -87,7 +87,7 @@ function Page() {
 
 ### B. Creating an Object to View Conditions at a Glance
 
-By managing the logic for handling permissions within the component as an object, you can modify it to be able to grasp the conditions at a glance without multiple context shifts. 
+By managing the logic for handling permissions within the component as an object, you can modify it to be able to grasp the conditions at a glance without multiple context shifts.
 You can check the conditions for `canInvite` and `canRead` just by looking at the `Page` component.
 
 ```tsx
@@ -100,8 +100,8 @@ function Page() {
 
   return (
     <div>
-      <Button disabled={policy.canInvite}>Invite</Button>
-      <Button disabled={policy.canRead}>Read</Button>
+      <Button disabled={!policy.canInvite}>Invite</Button>
+      <Button disabled={!policy.canRead}>Read</Button>
     </div>
   );
 }

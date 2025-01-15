@@ -85,22 +85,22 @@ function checkIsAgeValid(age: number) {
   if (!Number.isInteger(age)) {
     return {
       ok: false,
-      reason: 'Age must be an integer.',
-    }
+      reason: "Age must be an integer."
+    };
   }
 
   if (age < 18) {
     return {
       ok: false,
-      reason: 'Age must be 18 or older.',
-    }
+      reason: "Age must be 18 or older."
+    };
   }
 
   if (age > 99) {
     return {
       ok: false,
-      reason: 'Age must be 99 or younger.',
-    }
+      reason: "Age must be 99 or younger."
+    };
   }
 
   return { ok: true };
@@ -145,7 +145,7 @@ function checkIsNameValid(name: string) {
   if (name.length >= 20) {
     return {
       ok: false,
-      reason: 'Name (or user-name) cannot be longer than 20 characters',
+      reason: 'Name cannot be longer than 20 characters',
     };
   }
 
@@ -157,22 +157,22 @@ function checkIsAgeValid(age: number) {
   if (!Number.isInteger(age)) {
     return {
       ok: false,
-      reason: 'Age must be an integer.',
-    }
+      reason: "Age must be an integer."
+    };
   }
 
   if (age < 18) {
     return {
       ok: false,
-      reason: 'Age must be 18 or older.',
-    }
+      reason: "Age must be 18 or older."
+    };
   }
 
   if (age > 99) {
     return {
       ok: false,
-      reason: 'Age must be 99 or younger.',
-    }
+      reason: "Age must be 99 or younger."
+    };
   }
 
   return { ok: true };
