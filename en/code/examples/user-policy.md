@@ -16,7 +16,7 @@ The following code displays buttons differently based on the user's permission.
 - If the user's permission is Administrator (Admin), it displays both `Invite` and `View` buttons.
 - If the user's permission is Viewer, it disables the `Invite` button and displays the `View` button.
 
-```typescript
+```tsx
 function Page() {
   const user = useUser();
   const policy = getPolicyByRole(user.role);
@@ -60,7 +60,7 @@ Using abstractions like `POLICY_SET` to manage button states based on permission
 This approach involves directly exposing the conditions based on permissions in the code. This way, you can directly see in the code when the `Invite` button is disabled.
 By reading the code from top to bottom, you can easily understand the logic for handling permissions.
 
-```typescript
+```tsx
 function Page() {
   const user = useUser();
 
@@ -96,7 +96,7 @@ function Page() {
   const policy = {
     admin: { canInvite: true, canRead: true },
     viewer: { canInvite: false, canRead: true }
-  }[user.role];
+  };
 
   return (
     <div>

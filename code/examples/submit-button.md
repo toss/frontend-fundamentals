@@ -1,4 +1,4 @@
-# 동시에 실행되지 않는 코드 분리하기
+# 같이 실행되지 않는 코드 분리하기
 
 <div style="margin-top: 16px">
 <Badge type="info" text="가독성" />
