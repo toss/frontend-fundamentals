@@ -16,7 +16,7 @@ const result = products.filter((product) =>
     (category) =>
       category.id === targetCategory.id &&
       product.prices.some(
-        (price) => price.value >= minPrice && price.value <= maxPrice
+        (price) => price >= minPrice && price <= maxPrice
       )
   )
 );
