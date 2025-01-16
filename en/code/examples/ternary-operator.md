@@ -8,17 +8,17 @@ Using complex ternary operators can obscure the structure of the conditions, mak
 
 ## 📝 Code Example
 
-The following code assigns `'BOTH'`, `'A'`, or `'NONE'` to `status` based on `ACondition` and `BCondition`.
+The following code assigns `"BOTH"`, `"A"`, `"B"`, or `"NONE"` to `status` based on `ACondition` and `BCondition`.
 
 ```typescript
 const status =
-  ACondition && BCondition
+  (ACondition && BCondition)
     ? "BOTH"
-    : NotBoth
-    ? "NONE"
-    : ACondition
-    ? "A"
-    : undefined;
+    : (ACondition || BCondition)
+    ? (ACondition
+        ? "A"
+        : "B")
+    : "NONE";
 ```
 
 ## 👃 Smell the Code
@@ -33,14 +33,9 @@ You can rewrite the conditions using `if` statements, as shown below, to make th
 
 ```typescript
 const status = (() => {
-  if (ACondition && BCondition) {
-    return "BOTH";
-  }
-
-  if (ACondition) {
-    return "A";
-  }
-
+  if (ACondition && BCondition) return "BOTH";
+  if (ACondition) return "A";
+  if (BCondition) return "B";
   return "NONE";
 })();
 ```

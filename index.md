@@ -13,7 +13,7 @@ hero:
       link: /code/
     - theme: alt
       text: 소통하기
-      link: https://github.com/toss/frontend-fundamentals/discussions
+      link: /code/community
 
 features:
   - icon: 🤓
