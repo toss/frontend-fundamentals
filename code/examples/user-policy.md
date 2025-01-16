@@ -34,7 +34,7 @@ function getPolicyByRole(role) {
 
   return {
     canInvite: policy.includes("invite"),
-    canRead: policy.includes("view")
+    canView: policy.includes("view")
   };
 }
 
@@ -69,14 +69,14 @@ function Page() {
       return (
         <div>
           <Button disabled={false}>Invite</Button>
-          <Button disabled={false}>Read</Button>
+          <Button disabled={false}>View</Button>
         </div>
       );
     case "viewer":
       return (
         <div>
           <Button disabled={true}>Invite</Button>
-          <Button disabled={false}>Read</Button>
+          <Button disabled={false}>View</Button>
         </div>
       );
     default:
@@ -88,20 +88,20 @@ function Page() {
 ### B. 조건을 한눈에 볼 수 있는 객체로 만들기
 
 권한을 다루는 로직을 컴포넌트 안에서 객체로 관리해서, 여러 차례의 시점 이동 없이 한눈에 조건을 파악할 수 있게 수정할 수 있어요.
-`canInvite`와 `canRead`의 조건을 `Page` 컴포넌트만 보면 확인할 수 있어요.
+`canInvite`와 `canView`의 조건을 `Page` 컴포넌트만 보면 확인할 수 있어요.
 
 ```tsx
 function Page() {
   const user = useUser();
   const policy = {
-    admin: { canInvite: true, canRead: true },
-    viewer: { canInvite: false, canRead: true },
+    admin: { canInvite: true, canView: true },
+    viewer: { canInvite: false, canView: true },
   }[user.role];
 
   return (
     <div>
       <Button disabled={!policy.canInvite}>Invite</Button>
-      <Button disabled={!policy.canRead}>Read</Button>
+      <Button disabled={!policy.canView}>View</Button>
     </div>
   );
 }

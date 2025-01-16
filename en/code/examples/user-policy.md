@@ -34,7 +34,7 @@ function getPolicyByRole(role) {
 
   return {
     canInvite: policy.includes("invite"),
-    canRead: policy.includes("view")
+    canView: policy.includes("view")
   };
 }
 
@@ -69,14 +69,14 @@ function Page() {
       return (
         <div>
           <Button disabled={false}>Invite</Button>
-          <Button disabled={false}>Read</Button>
+          <Button disabled={false}>View</Button>
         </div>
       );
     case "viewer":
       return (
         <div>
           <Button disabled={true}>Invite</Button>
-          <Button disabled={false}>Read</Button>
+          <Button disabled={false}>View</Button>
         </div>
       );
     default:
@@ -88,20 +88,20 @@ function Page() {
 ### B. Creating an Object to View Conditions at a Glance
 
 By managing the logic for handling permissions within the component as an object, you can modify it to be able to grasp the conditions at a glance without multiple context shifts.
-You can check the conditions for `canInvite` and `canRead` just by looking at the `Page` component.
+You can check the conditions for `canInvite` and `canView` just by looking at the `Page` component.
 
 ```tsx
 function Page() {
   const user = useUser();
   const policy = {
-    admin: { canInvite: true, canRead: true },
-    viewer: { canInvite: false, canRead: true },
+    admin: { canInvite: true, canView: true },
+    viewer: { canInvite: false, canView: true },
   }[user.role];
 
   return (
     <div>
       <Button disabled={!policy.canInvite}>Invite</Button>
-      <Button disabled={!policy.canRead}>Read</Button>
+      <Button disabled={!policy.canView}>View</Button>
     </div>
   );
 }
