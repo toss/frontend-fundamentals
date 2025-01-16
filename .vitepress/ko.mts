@@ -58,7 +58,7 @@ function sidebar(): DefaultTheme.Sidebar {
               link: "https://github.com/toss/frontend-fundamentals/discussions?discussions_q=is%3Aopen+label%3A%22성지+⛲%22"
             },
             {
-              text: "A vs. B",
+              text: "A vs B",
               link: "https://github.com/toss/frontend-fundamentals/discussions/categories/a-vs-b?discussions_q=is%3Aopen+category%3A%22A+vs+B%22+sort%3Adate_created"
             },
             {
