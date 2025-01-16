@@ -1,7 +1,7 @@
 # 同じ種類の関数は返り値を揃える
 
 <div style="margin-top: 16px">
-<Badge type="info" text="예측 가능성" />
+<Badge type="info" text="予測可能性" />
 </div>
 
 API を叩くのと関連した Hook のように同じ種類の関数や Hook がお互い違うタイプの返り値を持っていると、コードの一貫性が損なわれ、一緒に働くチームメンバーがコードを読むのが困難になります。
