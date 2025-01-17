@@ -9,7 +9,7 @@ Use it as a compass to find direction when you want to improve code quality as a
 
 It presents [four principles](./index.md) of good code, along with specific examples and solutions.
 
-## When to Use
+## Who Is This For?
 
 - 🦨 Developers who are concerned about code but find it **difficult to explain logically**
 - 👀 Developers who want to learn how to **quickly detect and improve bad code**
