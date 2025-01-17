@@ -13,7 +13,7 @@ export const en = defineConfig({
 });
 
 function nav(): DefaultTheme.NavItem[] {
-  return [{ text: "Home", link: "/" }];
+  return [{ text: "Home", link: "/en/" }];
 }
 
 function sidebar(): DefaultTheme.Sidebar {
