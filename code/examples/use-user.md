@@ -85,21 +85,21 @@ function checkIsAgeValid(age: number) {
   if (!Number.isInteger(age)) {
     return {
       ok: false,
-      reason: "나이는 정수여야 해요."
+      reason: "나이는 정수여야 해요.",
     };
   }
 
   if (age < 18) {
     return {
       ok: false,
-      reason: "나이는 18세 이상이어야 해요."
+      reason: "나이는 18세 이상이어야 해요.",
     };
   }
 
   if (age > 99) {
     return {
       ok: false,
-      reason: "나이는 99세 이하이어야 해요."
+      reason: "나이는 99세 이하이어야 해요.",
     };
   }
 
@@ -138,7 +138,7 @@ function checkIsNameValid(name: string) {
   if (name.length === 0) {
     return {
       ok: false,
-      reason: "이름은 빈 값일 수 없어요."
+      reason: "이름은 빈 값일 수 없어요.",
     };
   } 
   
@@ -157,21 +157,21 @@ function checkIsAgeValid(age: number) {
   if (!Number.isInteger(age)) {
     return {
       ok: false,
-      reason: "나이는 정수여야 해요."
+      reason: "나이는 정수여야 해요.",
     };
   }
 
   if (age < 18) {
     return {
       ok: false,
-      reason: "나이는 18세 이상이어야 해요."
+      reason: "나이는 18세 이상이어야 해요.",
     };
   }
 
   if (age > 99) {
     return {
       ok: false,
-      reason: "나이는 99세 이하이어야 해요."
+      reason: "나이는 99세 이하이어야 해요.",
     };
   }
 
