@@ -71,15 +71,15 @@ function sidebar(): DefaultTheme.Sidebar {
       items: [
         {
           text: "はじめる",
-          link: "/code/start"
+          link: "/ja/code/start"
         },
         {
           text: "変更しやすいコード",
-          link: "/code"
+          link: "/ja/code/"
         },
         {
           text: "貢献する",
-          link: "/code/contributing"
+          link: "/ja/code/contributing"
         }
       ]
     },
@@ -94,15 +94,15 @@ function sidebar(): DefaultTheme.Sidebar {
               items: [
                 {
                   text: "A. 一緒に実行されないコードを分離する",
-                  link: "/code/examples/submit-button"
+                  link: "/ja/code/examples/submit-button"
                 },
                 {
                   text: "B. 実装の詳細を抽象化する",
-                  link: "/code/examples/login-start-page"
+                  link: "/ja/code/examples/login-start-page"
                 },
                 {
                   text: "C. ロジックの種類に応じて一体化している関数を分ける",
-                  link: "/code/examples/use-page-state-readability"
+                  link: "/ja/code/examples/use-page-state-readability"
                 }
               ],
               collapsed: true
@@ -112,11 +112,11 @@ function sidebar(): DefaultTheme.Sidebar {
               items: [
                 {
                   text: "A. 複雑な条件に名前を付ける",
-                  link: "/code/examples/condition-name"
+                  link: "/ja/code/examples/condition-name"
                 },
                 {
                   text: "B. マジックナンバーに名前を付ける",
-                  link: "/code/examples/magic-number-readability"
+                  link: "/ja/code/examples/magic-number-readability"
                 }
               ],
               collapsed: true
@@ -126,11 +126,11 @@ function sidebar(): DefaultTheme.Sidebar {
               items: [
                 {
                   text: "A. 視点の移動を減らす",
-                  link: "/code/examples/user-policy"
+                  link: "/ja/code/examples/user-policy"
                 },
                 {
                   text: "B. 三項演算子をシンプルにする",
-                  link: "/code/examples/ternary-operator"
+                  link: "/ja/code/examples/ternary-operator"
                 }
               ],
               collapsed: true
@@ -143,32 +143,32 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             {
               text: "A. 名前が被らないように管理する",
-              link: "/code/examples/http"
+              link: "/ja/code/examples/http"
             },
             {
               text: "B. 同じ種類の関数は返り値の型を統一する",
-              link: "/code/examples/use-user"
+              link: "/ja/code/examples/use-user"
             },
             {
               text: "C. 隠れたロジックを露呈させる",
-              link: "/code/examples/hidden-logic"
+              link: "/ja/code/examples/hidden-logic"
             }
           ]
         },
         {
-          text: "3. 結合度",
+          text: "3. 凝集度",
           items: [
             {
               text: "A. 緒に修正されるファイルは同じディレクトリに置く",
-              link: "/code/examples/code-directory"
+              link: "/ja/code/examples/code-directory"
             },
             {
               text: "B. マジックナンバーを排除する",
-              link: "/code/examples/magic-number-cohesion"
+              link: "/ja/code/examples/magic-number-cohesion"
             },
             {
-              text: "C. フォームの結合度について考える",
-              link: "/code/examples/form-fields"
+              text: "C. フォームの凝集度について考える",
+              link: "/ja/code/examples/form-fields"
             }
           ]
         },
@@ -177,15 +177,15 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             {
               text: "A. 責任を一つずつ管理する",
-              link: "/code/examples/use-page-state-coupling"
+              link: "/ja/code/examples/use-page-state-coupling"
             },
             {
               text: "B. 重複コードを許容する",
-              link: "/code/examples/use-bottom-sheet"
+              link: "/ja/code/examples/use-bottom-sheet"
             },
             {
               text: "C. Props Drilling を解消する",
-              link: "/code/examples/item-edit-modal"
+              link: "/ja/code/examples/item-edit-modal"
             }
           ]
         }

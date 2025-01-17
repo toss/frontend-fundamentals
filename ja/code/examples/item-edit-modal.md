@@ -1,23 +1,23 @@
-# Props Drilling 지우기
+# Props Drillingを解消する
 
 <div style="margin-top: 16px">
-<Badge type="info" text="결합도" />
+<Badge type="info" text="結合度" />
 </div>
 
-Props Drilling은 부모 컴포넌트와 자식 컴포넌트 사이에 결합도가 생겼다는 것을 나타내는 명확한 표시예요. 만약에 Drilling되는 프롭이 변경되면, 프롭을 참조하는 모든 컴포넌트가 변경되어야 하죠.
+Props Drillingは親コンポーネントと子コンポーネントの間に結合度が生じていることを示す明確なサインです。もしDrillingされているpropsが変更された場合、そのpropsを参照しているすべてのコンポーネントを修正しなくてはなりません。
 
-## 📝 코드 예시
+## 📝 コード例
 
-다음 코드는 사용자가 `item`을 선택할 때 사용하는 `<ItemEditModal />` 컴포넌트예요.
-사용자가 키워드를 입력해서 아이템 목록을 검색하고, 찾고 있었던 아이템을 선택하면 `onConfirm`이 호출돼요.
+次のコードは、ユーザーが`item`を選択する際に使用する`<ItemEditModal />`コンポーネントです。
+ユーザーがキーワードを入力してアイテムのリストを検索し、探していたアイテムを選択すると`onConfirm`が呼び出されます。
 
-사용자가 입력한 키워드는 `keyword`, 선택할 수 있는 아이템은 `items`, 추천 아이템의 목록은 `recommendedItems` 프롭으로 전달돼요.
+ユーザーが入力したキーワードは`keyword`、選択可能なアイテムは`items`、推薦アイテムのリストは`recommendedItems`のpropsとして渡されます。
 
 ```tsx 2,9-10,12-13,29-32
 function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
   const [keyword, setKeyword] = useState("");
 
-  // 다른 ItemEditModal 로직 ...
+  // 他のItemEditModalに関するロジック...
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -29,7 +29,7 @@ function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
         onConfirm={onConfirm}
         onClose={onClose}
       />
-      {/* ... 다른 ItemEditModal 컴포넌트 ... */}
+      {/* ... 他のItemEditModalコンポーネント ... */}
     </Modal>
   );
 }
@@ -44,12 +44,12 @@ function ItemEditBody({
 }) {
   return (
     <>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Input
           value={keyword}
           onChange={(e) => onKeywordChange(e.target.value)}
         />
-        <Button onClick={onClose}>닫기</Button>
+        <Button onClick={onClose}>閉じる</Button>
       </div>
       <ItemEditList
         keyword={keyword}
@@ -64,22 +64,21 @@ function ItemEditBody({
 // ...
 ```
 
-## 👃 코드 냄새 맡아보기
+## 👃 コードの不吉な臭いを嗅いでみる
 
-### 결합도
+### 結合度
 
-이 컴포넌트는 부모인 `ItemEditModal`과 자식인 `ItemEditBody`, `ItemEditList` 등이 동일한 값인 `recommendedItems`, `onConfirm`, `keyword` 등을 프롭으로 공유하고 있어요.
-부모 컴포넌트가 프롭을 그대로 자식 컴포넌트에게 넘겨주는 [Props Drilling](https://kentcdodds.com/blog/prop-drilling)이 발생하고 있어요.
+このコンポーネントは、親である`ItemEditModal`と子である`ItemEditBody`、`ItemEditList`などが同じ値である`recommendedItems`、`onConfirm`、`keyword`などをpropsとして共有しています。このため、親コンポーネントがpropsをそのまま子コンポーネントに渡す[Props Drilling](https://kentcdodds.com/blog/prop-drilling)が発生しています。
 
-Props Drilling이 발생하면, 프롭을 불필요하게 참조하는 컴포넌트의 숫자가 많아져요.
-그런데 프롭이 변경되면 프롭을 참조하는 모든 컴포넌트가 수정되어야 해요.
+Props Drillingが発生すると、propsを不必要に参照するコンポーネントの数が増えます。
+さらにpropsが変更されると、そのpropsを参照しているすべてのコンポーネントを修正する必要があります。
 
-예를 들어, 더 이상 아이템에 대한 추천 기능이 사라져서 `recommendedItems` 를 삭제해야 한다면, 연관된 모든 컴포넌트에서 삭제해야 하죠.
-코드 수정범위가 필요 이상으로 넓고, 결합도가 높아요.
+例えば、アイテムの推薦機能がなくなり、`recommendedItems`を削除する必要になった場合、関連するすべてのコンポーネントからこのpropsを削除しなければなりません。
+コードの修正範囲が必要以上に広がり、結合度が高くなります。
 
-## ✏️ 개선해보기
+## ✏️ リファクタリングしてみる
 
-부모 컴포넌트가 자식 컴포넌트에게 그대로 프롭을 전달하는 Props Drilling을 제거해야 해요. 다음과 같이 조합(Composition) 패턴을 활용할 수 있어요.
+親コンポーネントが子コンポーネントにそのままpropを渡すProps Drillingを排除する必要があります。次のようにコンポジション(Composition)パターンを活用できます。
 
 ```tsx
 function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
@@ -87,12 +86,12 @@ function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
 
   return (
     <Modal open={open} onClose={onClose}>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Input
           value={keyword}
           onChange={(e) => onKeywordChange(e.target.value)}
         />
-        <Button onClick={onClose}>닫기</Button>
+        <Button onClick={onClose}>閉じる</Button>
       </div>
       <ItemEditList
         keyword={keyword}
