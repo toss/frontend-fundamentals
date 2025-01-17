@@ -31,7 +31,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: "Contributing",
-          link: "/en/code/contributing"
+          link: "/en/code/community"
         }
       ]
     },
