@@ -13,7 +13,7 @@ export const en = defineConfig({
 });
 
 function nav(): DefaultTheme.NavItem[] {
-  return [{ text: "Home", link: "/" }];
+  return [{ text: "Home", link: "/en/" }];
 }
 
 function sidebar(): DefaultTheme.Sidebar {
@@ -30,8 +30,26 @@ function sidebar(): DefaultTheme.Sidebar {
           link: "/en/code/"
         },
         {
-          text: "Contributing",
-          link: "/en/code/contributing"
+          text: "Community",
+          items: [
+            {
+              text: "Introduction",
+              link: "/en/code/community"
+            },
+            {
+              text: "⭐ Featured Discussions",
+              link: "https://github.com/toss/frontend-fundamentals/discussions?discussions_q=is%3Aopen+label%3A%22%EC%84%B1%EC%A7%80+%E2%9B%B2%22"
+            },
+            {
+              text: "A vs B",
+              link: "https://github.com/toss/frontend-fundamentals/discussions/categories/a-vs-b?discussions_q=is%3Aopen+category%3A%22A+vs+B%22+sort%3Adate_created"
+            },
+            {
+              text: "Open Forum",
+              link: "https://github.com/toss/frontend-fundamentals/discussions/categories/open-forum?discussions_q=is%3Aopen+sort%3Adate_created+category%3A%22Open+Forum%22"
+            }
+          ],
+          collapsed: true
         }
       ]
     },

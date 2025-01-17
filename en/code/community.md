@@ -2,9 +2,17 @@
 comments: false
 ---
 
-# Contributing
+# Community
 
 `Frontend Fundamentals` (FF) is developing standards for good code together with the community.
+
+It's currently maintained by the Toss Frontend chapter.
+
+## Featured Discussions
+
+Explore some of the best discussions in the community. Expand your thinking about good code beyond what's in the Frontend Fundamentals documentation.
+
+- [Featured Discussions](https://github.com/toss/frontend-fundamentals/discussions?discussions_q=is%3Aopen+label%3A%22%EC%84%B1%EC%A7%80+%E2%9B%B2%22)
 
 ## Discussing Code Concerns
 
