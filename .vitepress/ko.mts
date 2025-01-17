@@ -55,7 +55,7 @@ function sidebar(): DefaultTheme.Sidebar {
             },
             {
               text: "⭐ 좋은 논의 모아보기",
-              link: "https://github.com/toss/frontend-fundamentals/discussions?discussions_q=is%3Aopen+label%3A%22성지+⛲%22"
+              link: "https://github.com/toss/frontend-fundamentals/discussions?discussions_q=is%3Aopen+label%3A%22%EC%84%B1%EC%A7%80+%E2%9B%B2%22"
             },
             {
               text: "A vs B",
