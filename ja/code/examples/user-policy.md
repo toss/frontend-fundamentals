@@ -99,8 +99,8 @@ function Page() {
 
   return (
     <div>
-      <Button disabled={policy.canInvite}>Invite</Button>
-      <Button disabled={policy.canView}>View</Button>
+      <Button disabled={!policy.canInvite}>Invite</Button>
+      <Button disabled={!policy.canView}>View</Button>
     </div>
   );
 }
