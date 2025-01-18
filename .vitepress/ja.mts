@@ -61,7 +61,7 @@ export const ja = defineConfig({
 });
 
 function nav(): DefaultTheme.NavItem[] {
-  return [{ text: "ホーム", link: "/" }];
+  return [{ text: "ホーム", link: "/ja" }];
 }
 
 function sidebar(): DefaultTheme.Sidebar {
