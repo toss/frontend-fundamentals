@@ -33,7 +33,7 @@ function getPolicyByRole(role) {
 
   return {
     canInvite: policy.includes("invite"),
-    canRead: policy.includes("view")
+    canView: policy.includes("view")
   };
 }
 
@@ -68,14 +68,14 @@ function Page() {
       return (
         <div>
           <Button disabled={false}>Invite</Button>
-          <Button disabled={false}>Read</Button>
+          <Button disabled={false}>View</Button>
         </div>
       );
     case "viewer":
       return (
         <div>
           <Button disabled={true}>Invite</Button>
-          <Button disabled={false}>Read</Button>
+          <Button disabled={false}>View</Button>
         </div>
       );
     default:
@@ -87,20 +87,20 @@ function Page() {
 ### B. 条件を一目で把握できるオブジェクトにする
 
 権限を扱うロジックをコンポーネントの中でオブジェクトで管理して、何度も視点移動をしなくても一目で条件を把握できるように修正できます。
-`canInvite`と`canRead`の条件を`Page`コンポーネントを見れば確認できようになりました。
+`canInvite`と`canView`の条件を`Page`コンポーネントを見れば確認できようになりました。
 
 ```tsx
 function Page() {
   const user = useUser();
   const policy = {
     admin: { canInvite: true, canRead: true },
-    viewer: { canInvite: false, canRead: true }
+    viewer: { canInvite: false, canView: true }
   }[user.role];
 
   return (
     <div>
       <Button disabled={policy.canInvite}>Invite</Button>
-      <Button disabled={policy.canRead}>Read</Button>
+      <Button disabled={policy.canView}>View</Button>
     </div>
   );
 }
