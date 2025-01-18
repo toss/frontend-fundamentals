@@ -18,7 +18,7 @@ import { useQuery } from '@tanstack/react-query';
 function useUser() {
   const query = useQuery({
     queryKey: ['user'],
-    queryFn: () => fetchUser();
+    queryFn: () => fetchUser(),
   });
 
   return query;
@@ -27,7 +27,7 @@ function useUser() {
 function useServerTime() {
   const query = useQuery({
     queryKey: ['serverTime'],
-    queryFn: () => fetchServerTime();
+    queryFn: () => fetchServerTime(),
   });
 
   return query.data;
@@ -52,7 +52,7 @@ import { useQuery } from '@tanstack/react-query';
 function useUser() {
   const query = useQuery({
     queryKey: ['user'],
-    queryFn: () => fetchUser();
+    queryFn: () => fetchUser(),
   });
 
   return query;
@@ -61,7 +61,7 @@ function useUser() {
 function useServerTime() {
   const query = useQuery({
     queryKey: ['serverTime'],
-    queryFn: () => fetchServerTime();
+    queryFn: () => fetchServerTime(),
   });
 
   return query;
@@ -157,14 +157,14 @@ function checkIsAgeValid(age: number) {
   if (!Number.isInteger(age)) {
     return {
       ok: false,
-      reason: "名前は整数でないといけません。"
+      reason: "年齢は整数でないといけません。"
     };
   }
 
   if (age < 18) {
     return {
       ok: false,
-      reason: "名前は１８歳以上でないといけません。"
+      reason: "年齢は１８歳以上でないといけません。"
     };
   }
 
