@@ -157,14 +157,14 @@ function checkIsAgeValid(age: number) {
   if (!Number.isInteger(age)) {
     return {
       ok: false,
-      reason: "名前は整数でないといけません。"
+      reason: "年齢は整数でないといけません。"
     };
   }
 
   if (age < 18) {
     return {
       ok: false,
-      reason: "名前は１８歳以上でないといけません。"
+      reason: "年齢は１８歳以上でないといけません。"
     };
   }
 
