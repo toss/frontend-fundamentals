@@ -78,8 +78,26 @@ function sidebar(): DefaultTheme.Sidebar {
           link: "/ja/code/"
         },
         {
-          text: "貢献する",
-          link: "/ja/code/contributing"
+          text: "コミュニティ",
+          items: [
+            {
+              text: "紹介",
+              link: "/code/community"
+            },
+            {
+              text: "⭐ 良い討論をまとめて見る",
+              link: "https://github.com/toss/frontend-fundamentals/discussions?discussions_q=is%3Aopen+label%3A%22성지+⛲%22"
+            },
+            {
+              text: "A vs B",
+              link: "https://github.com/toss/frontend-fundamentals/discussions/categories/a-vs-b?discussions_q=is%3Aopen+category%3A%22A+vs+B%22+sort%3Adate_created"
+            },
+            {
+              text: "自由におしゃべり",
+              link: "https://github.com/toss/frontend-fundamentals/discussions/categories/open-forum?discussions_q=is%3Aopen+sort%3Adate_created+category%3A%22Open+Forum%22"
+            }
+          ],
+          collapsed: true
         }
       ]
     },
