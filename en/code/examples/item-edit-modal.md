@@ -13,7 +13,7 @@ The user can enter a keyword to search the item list, and when the desired item 
 
 The keyword entered by the user is passed as the `keyword` prop, the selectable items are passed as the `items` prop, and the list of recommended items is passed as the `recommendedItems` prop.
 
-```tsx 2,9-10,12-13,29-32
+```tsx 2,9-10,12-13,39-42
 function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
   const [keyword, setKeyword] = useState("");
 

@@ -13,7 +13,7 @@ Props Drilling은 부모 컴포넌트와 자식 컴포넌트 사이에 결합도
 
 사용자가 입력한 키워드는 `keyword`, 선택할 수 있는 아이템은 `items`, 추천 아이템의 목록은 `recommendedItems` 프롭으로 전달돼요.
 
-```tsx 2,9-10,12-13,29-32
+```tsx 2,9-10,12-13,39-42
 function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
   const [keyword, setKeyword] = useState("");
 
