@@ -1,9 +1,9 @@
 import { type DefaultTheme, defineConfig } from "vitepress";
 
-export const ko = defineConfig({
-  lang: "ko",
+export const ch = defineConfig({
+  lang: "ch",
   title: "Frontend Fundamentals",
-  description: "변경하기 쉬운 프론트엔드 코드를 위한 지침서",
+  description: "易于修改的前端代码指南",
   lastUpdated: true,
   themeConfig: {
     logo: "/images/ff-symbol.svg",
@@ -11,18 +11,18 @@ export const ko = defineConfig({
 
     editLink: {
       pattern: "https://github.com/toss/frontend-fundamentals/edit/main/:path",
-      text: "GitHub에서 수정하기"
+      text: "在GitHub编辑此页"
     },
 
     outline: {
-      label: "페이지 내용"
+      label: "页面内容"
     },
     docFooter: {
-      prev: "이전 페이지",
-      next: "다음 페이지"
+      prev: "上一页",
+      next: "下一页"
     },
     lastUpdated: {
-      text: "마지막 업데이트"
+      text: "最后更新"
     },
 
     sidebar: sidebar()
@@ -30,31 +30,31 @@ export const ko = defineConfig({
 });
 
 function nav(): DefaultTheme.NavItem[] {
-  return [{ text: "홈", link: "/" }];
+  return [{ text: "首页", link: "/ch" }];
 }
 
 function sidebar(): DefaultTheme.Sidebar {
   return [
     {
-      text: "좋은 코드의 기준",
+      text: "好代码的标准",
       items: [
         {
-          text: "시작하기",
-          link: "/code/start"
+          text: "开始使用",
+          link: "/ch/code/start"
         },
         {
-          text: "변경하기 쉬운 코드",
-          link: "/code/"
+          text: "易于修改的代码",
+          link: "/ch/code/"
         },
         {
-          text: "커뮤니티",
+          text: "社区",
           items: [
             {
-              text: "소개",
-              link: "/code/community"
+              text: "介绍",
+              link: "/ch/code/community"
             },
             {
-              text: "⭐ 좋은 논의 모아보기",
+              text: "⭐ 专题讨论",
               link: "https://github.com/toss/frontend-fundamentals/discussions?discussions_q=is%3Aopen+label%3A%22%EC%84%B1%EC%A7%80+%E2%9B%B2%22"
             },
             {
@@ -62,7 +62,7 @@ function sidebar(): DefaultTheme.Sidebar {
               link: "https://github.com/toss/frontend-fundamentals/discussions/categories/a-vs-b?discussions_q=is%3Aopen+category%3A%22A+vs+B%22+sort%3Adate_created"
             },
             {
-              text: "자유로운 이야기",
+              text: "公开论坛",
               link: "https://github.com/toss/frontend-fundamentals/discussions/categories/open-forum?discussions_q=is%3Aopen+sort%3Adate_created+category%3A%22Open+Forum%22"
             }
           ],
@@ -71,53 +71,53 @@ function sidebar(): DefaultTheme.Sidebar {
       ]
     },
     {
-      text: "좋은 코드를 만드는 전략",
+      text: "编写好代码的策略",
       items: [
         {
-          text: "1. 가독성",
+          text: "1. 可读性",
           items: [
             {
-              text: "맥락 줄이기",
+              text: "减少语境",
               items: [
                 {
-                  text: "A. 같이 실행되지 않는 코드 분리하기",
-                  link: "/code/examples/submit-button"
+                  text: "A. 拆分不同语境下的代码",
+                  link: "/ch/code/examples/submit-button"
                 },
                 {
-                  text: "B. 구현 상세 추상화하기",
-                  link: "/code/examples/login-start-page"
+                  text: "B. 抽象实现细节",
+                  link: "/ch/code/examples/login-start-page"
                 },
                 {
-                  text: "C. 로직 종류에 따라 합쳐진 함수 쪼개기",
-                  link: "/code/examples/use-page-state-readability"
+                  text: "C. 根据逻辑类型拆分合并的函数",
+                  link: "/ch/code/examples/use-page-state-readability"
                 }
               ],
               collapsed: true
             },
             {
-              text: "이름 붙이기",
+              text: "命名",
               items: [
                 {
-                  text: "A. 복잡한 조건에 이름 붙이기",
-                  link: "/code/examples/condition-name"
+                  text: "A. 给复杂条件命名",
+                  link: "/ch/code/examples/condition-name"
                 },
                 {
-                  text: "B. 매직 넘버에 이름 붙이기",
-                  link: "/code/examples/magic-number-readability"
+                  text: "B. 给魔数命名",
+                  link: "/ch/code/examples/magic-number-readability"
                 }
               ],
               collapsed: true
             },
             {
-              text: "위에서 아래로 읽히게 하기",
+              text: "使其从上到下顺利阅读",
               items: [
                 {
-                  text: "A. 시점 이동 줄이기",
-                  link: "/code/examples/user-policy"
+                  text: "A. 减少视点转换",
+                  link: "/ch/code/examples/user-policy"
                 },
                 {
-                  text: "B. 삼항 연산자 단순하게 하기",
-                  link: "/code/examples/ternary-operator"
+                  text: "B. 简化三元运算符",
+                  link: "/ch/code/examples/ternary-operator"
                 }
               ],
               collapsed: true
@@ -126,53 +126,53 @@ function sidebar(): DefaultTheme.Sidebar {
         },
 
         {
-          text: "2. 예측 가능성",
+          text: "2. 可预测性",
           items: [
             {
-              text: "A. 이름 겹치지 않게 관리하기",
-              link: "/code/examples/http"
+              text: "A. 避免命名重复",
+              link: "/ch/code/examples/http"
             },
             {
-              text: "B. 같은 종류의 함수는 반환 타입 통일하기",
-              link: "/code/examples/use-user"
+              text: "B. 相同类型的函数统一返回类型",
+              link: "/ch/code/examples/use-user"
             },
             {
-              text: "C. 숨은 로직 드러내기",
-              link: "/code/examples/hidden-logic"
+              text: "C. 揭示隐藏的逻辑",
+              link: "/ch/code/examples/hidden-logic"
             }
           ]
         },
         {
-          text: "3. 응집도",
+          text: "3. 内聚性",
           items: [
             {
-              text: "A. 함께 수정되는 파일을 같은 디렉토리에 두기",
-              link: "/code/examples/code-directory"
+              text: "A. 需同时修改的文件位于同一目录下",
+              link: "/ch/code/examples/code-directory"
             },
             {
-              text: "B. 매직 넘버 없애기",
-              link: "/code/examples/magic-number-cohesion"
+              text: "B. 消除魔数",
+              link: "/ch/code/examples/magic-number-cohesion"
             },
             {
-              text: "C. 폼의 응집도 생각하기",
-              link: "/code/examples/form-fields"
+              text: "C. 考虑表单的内聚性",
+              link: "/ch/code/examples/form-fields"
             }
           ]
         },
         {
-          text: "4. 결합도",
+          text: "4. 耦合性",
           items: [
             {
-              text: "A. 책임을 하나씩 관리하기",
-              link: "/code/examples/use-page-state-coupling"
+              text: "A. 单独管理责任",
+              link: "/ch/code/examples/use-page-state-coupling"
             },
             {
-              text: "B. 중복 코드 허용하기",
-              link: "/code/examples/use-bottom-sheet"
+              text: "B. 允许重复代码",
+              link: "/ch/code/examples/use-bottom-sheet"
             },
             {
-              text: "C. Props Drilling 지우기",
-              link: "/code/examples/item-edit-modal"
+              text: "C. 消除 Props Drilling",
+              link: "/ch/code/examples/item-edit-modal"
             }
           ]
         }
@@ -185,23 +185,23 @@ export const search: DefaultTheme.LocalSearchOptions["locales"] = {
   root: {
     translations: {
       button: {
-        buttonText: "검색",
-        buttonAriaLabel: "검색"
+        buttonText: "搜索",
+        buttonAriaLabel: "搜索"
       },
       modal: {
-        backButtonTitle: "뒤로가기",
-        displayDetails: "더보기",
+        backButtonTitle: "返回",
+        displayDetails: "更多",
         footer: {
-          closeKeyAriaLabel: "닫기",
-          closeText: "닫기",
-          navigateDownKeyAriaLabel: "아래로",
-          navigateText: "이동",
-          navigateUpKeyAriaLabel: "위로",
-          selectKeyAriaLabel: "선택",
-          selectText: "선택"
+          closeKeyAriaLabel: "关闭",
+          closeText: "关闭",
+          navigateDownKeyAriaLabel: "向下",
+          navigateText: "移动",
+          navigateUpKeyAriaLabel: "向上",
+          selectKeyAriaLabel: "选择",
+          selectText: "选择"
         },
-        noResultsText: "검색 결과를 찾지 못했어요.",
-        resetButtonTitle: "모두 지우기"
+        noResultsText: "没有搜索结果。",
+        resetButtonTitle: "全部清除"
       }
     }
   }
