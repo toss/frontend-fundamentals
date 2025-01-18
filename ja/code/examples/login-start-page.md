@@ -180,7 +180,7 @@ function InviteButton({ name }) {
       onClick={async () => {
         const canInvite = await overlay.openAsync(({ isOpen, close }) => (
           <ConfirmDialog
-            title={`${data.name}さんにシェアする`}
+            title={`${name}さんにシェアする`}
             cancelButton={
               <ConfirmDialog.CancelButton onClick={() => close(false)}>
                 閉じる
