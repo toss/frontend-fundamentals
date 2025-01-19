@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { watch } from "vue";
 import { useData } from "vitepress";
+import { watch } from "vue";
 
 const { frontmatter, title, isDark } = useData();
+
 watch(isDark, () => {
   document.querySelector<HTMLIFrameElement>("iframe.giscus-frame")?.contentWindow?.postMessage(
     { giscus: { setConfig: { theme: isDark.value ? "noborder_dark" : "noborder_light" } } },
