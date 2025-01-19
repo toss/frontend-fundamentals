@@ -82,7 +82,7 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             {
               text: "紹介",
-              link: "/code/community"
+              link: "/ja/code/community"
             },
             {
               text: "⭐ 良い討論をまとめて見る",
