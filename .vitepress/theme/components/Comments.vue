@@ -5,18 +5,31 @@ import { watch } from "vue";
 const { frontmatter, title, isDark } = useData();
 
 watch(isDark, () => {
-  document.querySelector<HTMLIFrameElement>("iframe.giscus-frame")?.contentWindow?.postMessage(
-    { giscus: { setConfig: { theme: isDark.value ? "noborder_dark" : "noborder_light" } } },
-    "https://giscus.app"
-  );
+  document
+    .querySelector<HTMLIFrameElement>("iframe.giscus-frame")
+    ?.contentWindow?.postMessage(
+      {
+        giscus: {
+          setConfig: {
+            theme: isDark.value ? "dark_tritanopia" : "light_tritanopia"
+          }
+        }
+      },
+      "https://giscus.app"
+    );
 });
 </script>
 
 <template>
-  <div v-if="frontmatter.comments !== false" :key="title" class="giscus" style="margin-top: 24px;">
+  <div
+    v-if="frontmatter.comments !== false"
+    :key="title"
+    class="giscus"
+    style="margin-top: 24px"
+  >
     <component
       :is="'script'"
-      :data-theme="isDark ? 'noborder_dark' : 'noborder_light'"
+      :data-theme="isDark ? 'dark_tritanopia' : 'light_tritanopia'"
       src="https://giscus.app/client.js"
       data-repo="toss/frontend-fundamentals"
       data-repo-id="R_kgDONfHk5g"
