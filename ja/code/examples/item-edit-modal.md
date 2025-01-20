@@ -13,7 +13,7 @@ Props Drillingは親コンポーネントと子コンポーネントの間に結
 
 ユーザーが入力したキーワードは`keyword`、選択可能なアイテムは`items`、推薦アイテムのリストは`recommendedItems`のpropsとして渡されます。
 
-```tsx 2,9-10,12-13,29-32
+```tsx 2,9-10,12-13,39-42
 function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
   const [keyword, setKeyword] = useState("");
 
