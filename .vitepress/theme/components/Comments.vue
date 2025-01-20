@@ -2,7 +2,7 @@
 import { useData } from "vitepress";
 import { watch } from "vue";
 
-const { frontmatter, title, isDark } = useData();
+const { frontmatter, title, lang, isDark } = useData();
 
 watch(isDark, () => {
   document
@@ -40,7 +40,7 @@ watch(isDark, () => {
       data-reactions-enabled="1"
       data-emit-metadata="0"
       data-input-position="bottom"
-      data-lang="en"
+      :data-lang="lang"
       crossorigin="anonymous"
       data-loading="lazy"
       async
