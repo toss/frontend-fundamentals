@@ -18,7 +18,7 @@ import { useQuery } from '@tanstack/react-query';
 function useUser() {
   const query = useQuery({
     queryKey: ['user'],
-    queryFn: fetchUser,
+    queryFn: fetchUser
   });
 
   return query;
@@ -27,7 +27,7 @@ function useUser() {
 function useServerTime() {
   const query = useQuery({
     queryKey: ['serverTime'],
-    queryFn: fetchServerTime,
+    queryFn: fetchServerTime
   });
 
   return query.data;
@@ -52,7 +52,7 @@ import { useQuery } from '@tanstack/react-query';
 function useUser() {
   const query = useQuery({
     queryKey: ['user'],
-    queryFn: fetchUser,
+    queryFn: fetchUser
   });
 
   return query;
@@ -61,7 +61,7 @@ function useUser() {
 function useServerTime() {
   const query = useQuery({
     queryKey: ['serverTime'],
-    queryFn: fetchServerTime,
+    queryFn: fetchServerTime
   });
 
   return query;
@@ -145,7 +145,7 @@ function checkIsNameValid(name: string) {
   if (name.length >= 20) {
     return {
       ok: false,
-      reason: '이름은 20자 이상 입력할 수 없어요.',
+      reason: '이름은 20자 이상 입력할 수 없어요.'
     };
   }
 
