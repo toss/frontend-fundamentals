@@ -189,7 +189,7 @@ function sidebar(): DefaultTheme.Sidebar {
 }
 
 export const search: DefaultTheme.LocalSearchOptions["locales"] = {
-  root: {
+  ja: {
     translations: {
       button: {
         buttonText: "検索",

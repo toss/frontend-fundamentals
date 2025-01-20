@@ -1,5 +1,6 @@
 import { defineConfig, HeadConfig } from "vitepress";
 import { search as koSearch } from "./ko.mts";
+import { search as jaSearch } from "./ja.mts";
 
 export const shared = defineConfig({
   lastUpdated: true,
@@ -30,11 +31,15 @@ export const shared = defineConfig({
 
   transformHead: ({ pageData }) => {
     const head: HeadConfig[] = [];
-    const title = pageData.frontmatter.title || pageData.title || 'Frontend Fundamentals';
-    const description = pageData.frontmatter.description || pageData.description || 'Guidelines for easily modifiable frontend code';
+    const title =
+      pageData.frontmatter.title || pageData.title || "Frontend Fundamentals";
+    const description =
+      pageData.frontmatter.description ||
+      pageData.description ||
+      "Guidelines for easily modifiable frontend code";
 
-    head.push(['meta', { property: 'og:title', content: title }]);
-    head.push(['meta', { property: 'og:description', content: description }]);
+    head.push(["meta", { property: "og:title", content: title }]);
+    head.push(["meta", { property: "og:description", content: description }]);
 
     return head;
   },
@@ -50,7 +55,8 @@ export const shared = defineConfig({
       provider: "local",
       options: {
         locales: {
-          ...koSearch
+          ...koSearch,
+          ...jaSearch
         }
       }
     },
