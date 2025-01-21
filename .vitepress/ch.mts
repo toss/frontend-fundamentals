@@ -133,7 +133,7 @@ function sidebar(): DefaultTheme.Sidebar {
               link: "/ch/code/examples/http"
             },
             {
-              text: "B. 相同类型的函数统一返回类型",
+              text: "B. 统一同类函数的返回类型",
               link: "/ch/code/examples/use-user"
             },
             {
