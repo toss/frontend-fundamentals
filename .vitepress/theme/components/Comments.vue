@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useData } from "vitepress";
 import { useGiscusTheme } from "../hooks/useGiscusTheme";
-import { GISCUS_THEME } from "../utils";
+import { GISCUS_THEME, getGiscusLang } from "../utils";
 
 const { frontmatter, title, lang, isDark } = useData();
 useGiscusTheme();
@@ -27,7 +27,7 @@ useGiscusTheme();
       data-reactions-enabled="1"
       data-emit-metadata="0"
       data-input-position="bottom"
-      :data-lang="lang"
+      :data-lang="getGiscusLang(lang)"
       crossorigin="anonymous"
       data-loading="lazy"
       async
