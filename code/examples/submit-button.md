@@ -43,7 +43,8 @@ function SubmitButton() {
 예를 들어, 다음 코드에서 파란색은 사용자가 보기 전용 권한(`'viewer'`)을 가지고 있을 때, 빨간색은 일반 사용자일 때 실행되는 코드예요.
 동시에 실행되지 않는 코드가 교차되어서 나타나서 코드를 이해할 때 부담을 줘요.
 
-![](../../images/examples/submit-button.png)
+![](../../images/examples/submit-button.png){.light-only}
+![](../../images/examples/submit-button-dark.png){.dark-only}
 
 ## ✏️ 개선해보기
 
