@@ -104,3 +104,5 @@ function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
   );
 }
 ```
+
+조합(Composition) 패턴은 단순히 Props를 전달하는 문제를 줄이는 것을 넘어, 불필요한 중간 추상화를 제거하여 개발자가 컴포넌트의 역할과 의도를 명확히 이해할 수 있도록 도와줘요.

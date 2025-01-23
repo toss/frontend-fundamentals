@@ -103,3 +103,5 @@ function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
   );
 }
 ```
+
+コンポジション(Composition)パターンは、propsを渡すだけの問題を解消するだけでなく、不要な中間抽象化を削除して、開発者がコンポーネントの役割と意図を明確に理解できるように支援します。
