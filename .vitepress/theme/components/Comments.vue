@@ -1,22 +1,22 @@
 <script setup lang="ts">
 import { useData } from "vitepress";
-import { watch } from "vue";
+import { useGiscusTheme } from "../hooks/useGiscusTheme";
+import { GISCUS_THEME, getGiscusLang } from "../utils";
 
-const { frontmatter, title, isDark } = useData();
-
-watch(isDark, () => {
-  document.querySelector<HTMLIFrameElement>("iframe.giscus-frame")?.contentWindow?.postMessage(
-    { giscus: { setConfig: { theme: isDark.value ? "noborder_dark" : "noborder_light" } } },
-    "https://giscus.app"
-  );
-});
+const { frontmatter, title, lang, isDark } = useData();
+useGiscusTheme();
 </script>
 
 <template>
-  <div v-if="frontmatter.comments !== false" :key="title" class="giscus" style="margin-top: 24px;">
+  <div
+    v-if="frontmatter.comments !== false"
+    :key="title"
+    class="giscus"
+    style="margin-top: 24px"
+  >
     <component
       :is="'script'"
-      :data-theme="isDark ? 'noborder_dark' : 'noborder_light'"
+      :data-theme="isDark ? GISCUS_THEME.dark : GISCUS_THEME.light"
       src="https://giscus.app/client.js"
       data-repo="toss/frontend-fundamentals"
       data-repo-id="R_kgDONfHk5g"
@@ -27,7 +27,7 @@ watch(isDark, () => {
       data-reactions-enabled="1"
       data-emit-metadata="0"
       data-input-position="bottom"
-      data-lang="en"
+      :data-lang="getGiscusLang(lang)"
       crossorigin="anonymous"
       data-loading="lazy"
       async
