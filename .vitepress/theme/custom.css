@@ -5,3 +5,13 @@ html.dark .light-only {
 html:not(.dark) .dark-only {
   display: none !important;
 }
+
+:root {
+  --vp-font-family-base: "Toss Product Sans", ui-sans-serif, system-ui,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+}
+
+:root[lang="ko"] {
+  word-break: keep-all;
+}
