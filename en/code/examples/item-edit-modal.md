@@ -104,3 +104,5 @@ function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
   );
 }
 ```
+
+Composition pattern helps not only to reduce the problem of passing props but also to remove unnecessary intermediate abstractions, allowing developers to clearly understand the role and intent of the component.
