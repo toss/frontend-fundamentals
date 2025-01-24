@@ -98,11 +98,11 @@ function sidebar(): DefaultTheme.Sidebar {
               text: "命名",
               items: [
                 {
-                  text: "A. 给复杂条件命名",
+                  text: "A. 为复杂条件命名",
                   link: "/ch/code/examples/condition-name"
                 },
                 {
-                  text: "B. 给魔数命名",
+                  text: "B. 为魔数命名",
                   link: "/ch/code/examples/magic-number-readability"
                 }
               ],
