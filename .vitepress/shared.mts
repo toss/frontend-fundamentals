@@ -7,6 +7,20 @@ export const shared = defineConfig({
   head: [
     ["link", { rel: "icon", href: "/images/favicon.ico" }],
     [
+      "link",
+      {
+        rel: "stylesheet",
+        href: "https://static.toss.im/tps/main.css"
+      }
+    ],
+    [
+      "link",
+      {
+        rel: "stylesheet",
+        href: "https://static.toss.im/tps/others.css"
+      }
+    ],
+    [
       "meta",
       {
         property: "og:image",
