@@ -1,14 +1,14 @@
-# 숨은 로직 드러내기
+# 揭示隐藏的逻辑
 
 <div style="margin-top: 16px">
-<Badge type="info" text="예측 가능성" />
+<Badge type="info" text="可预测性" />
 </div>
 
-함수나 컴포넌트의 이름, 파라미터, 반환 값에 드러나지 않는 숨은 로직이 있다면, 함께 협업하는 동료들이 동작을 예측하는 데에 어려움을 겪을 수 있어요.
+如果函数或组件的名称、参数、返回值中存在未明确表达的隐藏逻辑，那么与你合作的同时可能会难以预测其行为。
 
-## 📝 코드 예시
+## 📝 代码示例
 
-다음 코드는 사용자의 계좌 잔액을 조회할 때 사용할 수 있는 `fetchBalance` 함수예요. 함수를 호출할 때마다 암시적으로 `balance_fetched`라는 로깅이 이루어지고 있어요.
+下面的代码是一个名为 `fetchBalance` 的函数，用于查询用户的账户余额。每次调用函数时，都会隐式地启动名为 `balance_fetched` 的日志函数。
 
 ```typescript 4
 async function fetchBalance(): Promise<number> {
@@ -20,17 +20,17 @@ async function fetchBalance(): Promise<number> {
 }
 ```
 
-## 👃 코드 냄새 맡아보기
+## 👃 闻代码
 
-### 예측 가능성
+### 可预测性
 
-`fetchBalance` 함수의 이름과 반환 타입만을 가지고는 `balance_fetched` 라는 로깅이 이루어지는지 알 수 없어요. 그래서 로깅을 원하지 않는 곳에서도 로깅이 이루어질 수 있어요.
+仅根据 `fetchBalance` 函数的名称和返回类型，无法得知是否会记录名为 `balance_fetched` 的日志。因此，即使在不需要日志记录的地方，也可能会触发日志记录。
 
-또, 로깅 로직에 오류가 발생했을 때 갑자기 계좌 잔액을 가져오는 로직이 망가질 수도 있죠.
+另外，如果日志记录逻辑出错，获取账户余额的功能也可能突然失效。
 
-## ✏️ 개선해보기
+## ✏️ 尝试改善
 
-함수의 이름과 파라미터, 반환 타입으로 예측할 수 있는 로직만 구현 부분에 남기세요.
+请仅在实现部分保留可以通过函数名、参数和返回类型来预测的逻辑。
 
 ```typescript
 async function fetchBalance(): Promise<number> {
@@ -40,7 +40,7 @@ async function fetchBalance(): Promise<number> {
 }
 ```
 
-로깅을 하는 코드는 별도로 분리하세요.
+请将日志记录的代码单独分离出来。
 
 ```tsx
 <Button
@@ -51,6 +51,6 @@ async function fetchBalance(): Promise<number> {
     await syncBalance(balance);
   }}
 >
-  계좌 잔액 갱신하기
+  更新账户余额
 </Button>
 ```

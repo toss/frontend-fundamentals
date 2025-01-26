@@ -1,15 +1,15 @@
-# 구현 상세 추상화하기
+# 抽象实现细节
 
 <div style="margin-top: 16px">
-<Badge type="info" text="가독성" />
+<Badge type="info" text="可读性" />
 </div>
 
-한 사람이 코드를 읽을 때 동시에 고려할 수 있는 총 맥락의 숫자는 제한되어 있다고 해요.
-내 코드를 읽는 사람들이 코드를 쉽게 읽을 수 있도록 하기 위해서 불필요한 맥락을 추상화할 수 있어요.
+一个人在阅读代码时，能够同时考虑的上下文总数有限。
+为了让阅读者轻松理解你的代码，可以将不必要的语境进行抽象化处理。
 
-## 📝 코드 예시 1: LoginStartPage
+## 📝 代码示例 1: LoginStartPage
 
-다음 `<LoginStartPage />` 컴포넌트는 사용자가 로그인되었는지 확인하고, 로그인이 된 경우 홈으로 이동시키는 로직을 가지고 있어요.
+以下 `<LoginStartPage />` 组件包含检查用户是否已登录的逻辑，如果已登录，则会将用户重定向到主页。
 
 ```tsx
 function LoginStartPage() {
@@ -21,28 +21,28 @@ function LoginStartPage() {
     }
   });
 
-  /* ... 로그인 관련 로직 ... */
+  /* ... 登录相关逻辑 ... */
 
-  return <>{/* ... 로그인 관련 컴포넌트 ... */}</>;
+  return <>{/* ... 登录相关组件 ... */}</>;
 }
 ```
 
-### 👃 코드 냄새 맡아보기
+### 👃 闻代码
 
-#### 가독성
+#### 可读性
 
-예시 코드에서는 로그인이 되었는지 확인하고, 사용자를 홈으로 이동시키는 로직이 추상화 없이 노출되어 있어요. 그래서 `useCheckLogin`, `onChecked`, `status`, `"LOGGED_IN"`과 같은 변수나 값을 모두 읽어야 무슨 역할을 하는 코드인지 알 수 있어요.
+在示例代码中，检查用户是否已登录以及将用户重定向到主页的逻辑没有被抽象化，而是直接显露出来。所以，你需要读懂像 `useCheckLogin` 、 `onChecked` 、 `status` 以及 `"LOGGED_IN"` 这样的变量和值，才能明白这段代码的作用。
 
-이 코드와 더불어서, 실제로 로그인과 관련된 코드가 밑에 이어지는데요. 읽는 사람이 `LoginStartPage`가 무슨 역할을 하는지 알기 위해서 한 번에 이해해야 하는 맥락이 많아요.
+除了这段代码，下面还紧接着有与实际登录相关的代码。阅读者为了理解 `LoginStartPage` 的作用，需要一次性理解很多上下文信息。
 
-### ✏️ 개선해보기
+### ✏️ 尝试改善
 
-사용자가 로그인되었는지 확인하고 이동하는 로직을 **HOC(Higher-Order Component)** 나 Wrapper 컴포넌트로 분리하여, 코드를 읽는 사람이 한 번에 알아야 하는 맥락을 줄여요.
-그래서 코드의 가독성을 높일 수 있어요.
+通过将检查用户是否登录并进行导航的逻辑提取到 **HOC（高阶组件）** 或 Wrapper 组件中，可以减少代码阅读者一次性需要理解的上下文。
+从而可以提高代码的可读性。
 
-또한, 분리된 컴포넌트 안에 있는 로직끼리 참조를 막음으로써, 코드 간의 불필요한 의존 관계가 생겨서 복잡해지는 것을 막을 수 있어요.
+此外，通过阻止不同组件中的逻辑相互引用，可以避免代码之间产生不必要地依赖关系，防止代码变得过于复杂。
 
-#### 옵션 A: Wrapper 컴포넌트 사용하기
+#### 选项 A: 使用 Wrapper 组件
 
 ```tsx
 function App() {
@@ -66,24 +66,24 @@ function AuthGuard({ children }) {
 }
 
 function LoginStartPage() {
-  /* ... 로그인 관련 로직 ... */
+  /* ... 登录相关逻辑 ... */
 
-  return <>{/* ... 로그인 관련 컴포넌트 ... */}</>;
+  return <>{/* ... 登录相关组件 ... */}</>;
 }
 ```
 
-#### 옵션 B: HOC(Higher-Order Component) 사용하기
+#### 选项 B: 使用 HOC（高阶组件）
 
 ```tsx
 function LoginStartPage() {
-  /* ... 로그인 관련 로직 ... */
+  /* ... 登录相关逻辑 ... */
 
-  return <>{/* ... 로그인 관련 컴포넌트 ... */}</>;
+  return <>{/* ... 登录相关组件 ... */}</>;
 }
 
 export default withAuthGuard(LoginStartPage);
 
-// HOC 정의
+// 高阶组件的定义
 function withAuthGuard(WrappedComponent) {
   return function AuthGuard(props) {
     const status = useCheckLoginStatus();
@@ -99,31 +99,31 @@ function withAuthGuard(WrappedComponent) {
 }
 ```
 
-## 📝 코드 예시 2: FriendInvitation
+## 📝 代码示例 2: FriendInvitation
 
-다음 `<FriendInvitation />` 컴포넌트는 클릭하면 사용자에게 동의를 받고 사용자에게 초대를 보내는 페이지 컴포넌트예요.
+以下 `<FriendInvitation />` 是一个被点击时，会向用户征求同意，并给用户发送邀请的页面组件。
 
 ```tsx 6-27,33
 function FriendInvitation() {
-  const { data } = useQuery(/* 생략.. */);
+  const { data } = useQuery(/* 省略.. */);
 
-  // 이외 이 컴포넌트에 필요한 상태 관리, 이벤트 핸들러 및 비동기 작업 로직...
+  // 该组件需要的状态管理、事件处理程序及异步操作等逻辑...
 
   const handleClick = async () => {
     const canInvite = await overlay.openAsync(({ isOpen, close }) => (
       <ConfirmDialog
-        title={`${data.name}님에게 공유해요`}
+        title={`向${data.name}分享`}
         cancelButton={
           <ConfirmDialog.CancelButton onClick={() => close(false)}>
-            닫기
+            关闭
           </ConfirmDialog.CancelButton>
         }
         confirmButton={
           <ConfirmDialog.ConfirmButton onClick={() => close(true)}>
-            확인
+            确认
           </ConfirmDialog.ConfirmButton>
         }
-        /* 중략 */
+        /* 中略 */
       />
     ));
 
@@ -132,45 +132,45 @@ function FriendInvitation() {
     }
   };
 
-  // 이외 이 컴포넌트에 필요한 상태 관리, 이벤트 핸들러 및 비동기 작업 로직...
+  // 该组件需要的状态管理、事件处理程序及异步操作等逻辑...
 
   return (
     <>
-      <Button onClick={handleClick}>초대하기</Button>
-      {/* UI를 위한 JSX 마크업... */}
+      <Button onClick={handleClick}>邀请</Button>
+      {/* 用于用户界面的 JSX 标记... */}
     </>
   );
 }
 ```
 
-### 👃 코드 냄새 맡아보기
+### 👃 闻代码
 
-#### 가독성
+#### 可读性
 
-가독성을 지키려면 코드가 한 번에 가지고 있는 맥락이 적어야 해요. 하나의 컴포넌트가 가지고 있는 맥락이 다양하면 컴포넌트의 역할을 한눈에 파악하기 어려워져요.
+为了保持可读性，代码同时承载的上下文越少越好。如果一个组件包含太多的语境，就很难一眼看出该组件的作用。
 
-`<FriendInvitation />` 컴포넌트는 실제로 사용자에게 동의를 받을 때 사용하는 자세한 로직까지 하나의 컴포넌트에 가지고 있어요. 그래서 코드를 읽을 때 따라가야 할 맥락이 많아서 읽기 어려워요.
+`<FriendInvitation />` 这一组件内实际上包含了向用户获取同意等详细的逻辑。所以在阅读代码时，需要追踪过多的语境，导致阅读难度高。
 
-#### 응집도
+#### 内聚性
 
-사용자에게 동의를 받는 로직과 실제로 그 로직을 실행하는 로직인 `<Button />` 사이에 거리가 멀어서, 실제로 어디에서 이 로직을 실행하는지 확인하려면 스크롤을 밑으로 많이 내려야 해요.
+获取用户同意的逻辑代码与实际执行该逻辑的 `<Button />` 组件之间相隔太远，为了找到逻辑的执行位置，需要不必要地滚动地页面。
 
-그래서 자주 함께 수정되는 코드인 버튼과 클릭 핸들러가 미처 함께 수정되지 못할 가능성이 있어요.
+因此，按钮及点击处理函数，作为经常需要协同修改的代码，有可能会因为相隔过远而无法及时同步更新。
 
-### ✏️ 개선해보기
+### ✏️ 尝试改善
 
-사용자에게 동의를 받는 로직과 버튼을 `<InviteButton />` 컴포넌트로 추상화했어요.
+将获取用户同意的逻辑和按钮一同抽象为 `<InviteButton />` 组件。
 
 ```tsx
 export function FriendInvitation() {
-  const { data } = useQuery(/* 생략.. */);
+  const { data } = useQuery(/* 省略.. */);
 
-  // 이외 이 컴포넌트에 필요한 상태 관리, 이벤트 핸들러 및 비동기 작업 로직...
+  // 该组件需要的状态管理、事件处理程序及异步操作等逻辑...
 
   return (
     <>
       <InviteButton name={data.name} />
-      {/* UI를 위한 JSX 마크업 */}
+      {/* 用于用户界面的 JSX 标记... */}
     </>
   );
 }
@@ -181,18 +181,18 @@ function InviteButton({ name }) {
       onClick={async () => {
         const canInvite = await overlay.openAsync(({ isOpen, close }) => (
           <ConfirmDialog
-            title={`${name}님에게 공유해요`}
+            title={`向${name}分享`}
             cancelButton={
               <ConfirmDialog.CancelButton onClick={() => close(false)}>
-                닫기
+                关闭
               </ConfirmDialog.CancelButton>
             }
             confirmButton={
               <ConfirmDialog.ConfirmButton onClick={() => close(true)}>
-                확인
+                确认
               </ConfirmDialog.ConfirmButton>
             }
-            /* 중략 */
+            /* 中略 */
           />
         ));
 
@@ -201,33 +201,33 @@ function InviteButton({ name }) {
         }
       }}
     >
-      초대하기
+      邀请
     </Button>
   );
 }
 ```
 
-`<InviteButton />` 컴포넌트는 사용자를 초대하는 로직과 UI만 가지고 있으므로, 한 번에 인지해야 하는 내용을 적게 유지해서 가독성을 높일 수 있어요. 또한, 버튼과 클릭 후 실행되는 로직이 아주 가까이에 있어요.
+`<InviteButton />` 组件仅包含邀请用户的逻辑和 UI， 因此能够减少需要一次性认知的信息量，提高可读性。而且，按钮与点击后执行的逻辑紧密相连。
 
-## 🔍 더 알아보기: 추상화
+## 🔍 深入了解： 抽象化
 
-토스 기술 블로그의 [선언적인 코드 작성하기](https://toss.tech/article/frontend-declarative-code) 문서에서는 코드를 글로 비유해요.
+在 Toss 的技术博客 [编写声明式代码](https://toss.tech/article/frontend-declarative-code) 一文中，将代码比作了文章。
 
-### 글에서 추상화
+### 文章中的抽象化
 
-"왼쪽으로 10걸음 걸어라" 라고 하는 문장이 있어요. 여기에서
+有一句话是“向左走十步”。 在这句话里
 
-- “왼쪽”은 “북쪽을 바라보았을 때 90도 돌아간 위치” 를 추상화한 것이고,
-- “90도”는 “한 번의 회전을 360등분한 각의 90배만큼 시초선에 대해 시계 반대 방향으로 돌아간 것” 을 추상화한 것이고,
-- “시계 방향” 의 정의는 “북반구에서 해시계의 바늘이 돌아가는 방향” 을 추상화한 것이에요.
+- ”向左“是”面向北方时旋转 90 度的位置“的抽象概念，
+- ”90 度“是”将一个完整的旋转（360 度）等分后，取其中 90 份，即相对于初始线逆时针方向旋转的角度“的抽象概念，
+- ”时针方向“的定义是”北半球上日晷的指针转动的方向“的抽象概念。
 
-비슷하게 "10걸음", "걸어라"와 같은 단어도 보다 구체적으로 표현할 수 있어요. 그래서 추상화 없이 그대로 문장을 나타낸다면, 다음과 같이 나타낼 수 있을 거예요.
+与此类似，”十步“、”走“这样的词汇也可以更具体的表达。因此，不进行抽象化而直接表述的句子可能会是这样：
 
-> 북쪽을 바라보았을 때 한 번의 회전을 360등분한 각의 90배만큼 북반구에서 해시계의 바늘이 돌아가는 방향으로 돌아서, 동물이 육상에서 다리를 이용해 움직이는 가장 빠른 방법보다 느린, 신체를 한 지점에서 다른 지점으로 옮겨가는 행위를 10번 반복해라
+> 面朝北方，以 1 次旋转的角度 360 等分后乘于 90 倍的度数，在北半球中沿日晷指针转动的方向转动，然后重复将身体从一点移动到另一点的动作（比动物在陆地上用腿移动的最快方式还慢的行为）10 次。
 
-이 문장은 그대로 읽었을 때 어떤 의미인지 정확하게 파악하기 어려워요.
+直接阅读该文章时很难准确理解其真正意图。
 
-### 코드에서 추상화
+### 代码中的抽象化
 
-비슷하게 코드에서도 구현 상세를 지나치게 드러내는 경우, 이 코드가 어떤 역할을 하는지 정확하게 파악하기 어려워요.
-한 번에 6~7개 정도의 맥락을 한 번에 고려해 가면서 읽을 수 있도록, 보다 작은 단위로 추상화하는 것이 필요해요.
+同样地，编程时如果显露过多实现细节，就很难把握代码的真正用途。
+为了让代码阅读时能同时兼顾六到七个不同语境，需要将这些语境抽象为更小的单位。
