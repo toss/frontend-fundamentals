@@ -44,7 +44,7 @@ When code performing the same type of action does not follow consistent rules, i
 
 ### ✏️ Work on Improving
 
-By making hooks that call server APIs consistently return a `Query` object, as shown in the following example, you can enhance the predictability of the code for your
+By making hooks that call server APIs consistently return a `Query` object, as shown in the following example, you can enhance the predictability of the code for your teammates.
 
 ```typescript 9,18
 import { useQuery } from '@tanstack/react-query';
