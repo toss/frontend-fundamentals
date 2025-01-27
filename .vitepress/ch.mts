@@ -182,7 +182,7 @@ function sidebar(): DefaultTheme.Sidebar {
 }
 
 export const search: DefaultTheme.LocalSearchOptions["locales"] = {
-  root: {
+  ch: {
     translations: {
       button: {
         buttonText: "搜索",
