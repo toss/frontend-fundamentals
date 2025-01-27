@@ -84,7 +84,7 @@ export function usePageState() {
 다음 코드와 같이 각각의 쿼리 파라미터별로 별도의 Hook을 작성할 수 있어요.
 
 ```typescript
-import { useQueryParam } from "use-query-params";
+import { NumberParam, useQueryParam } from "use-query-params";
 
 export function useCardIdQueryParam() {
   const [cardId, _setCardId] = useQueryParam("cardId", NumberParam);
