@@ -80,7 +80,7 @@ function sidebar(): DefaultTheme.Sidebar {
               text: "减少语境",
               items: [
                 {
-                  text: "A. 拆分不同语境下的代码",
+                  text: "A. 分离不一起运行的代码",
                   link: "/ch/code/examples/submit-button"
                 },
                 {

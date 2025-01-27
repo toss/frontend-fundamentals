@@ -18,7 +18,7 @@ comments: false
 ### 提高可读性的策略
 
 - **减少语境**
-  - [拆分不同语境下的代码](./examples/submit-button.md)
+  - [分离不一起运行的代码](./examples/submit-button.md)
   - [抽象实现细节](./examples/login-start-page.md)
   - [根据逻辑类型拆分合并的函数](./examples/use-page-state-readability.md)
 - **命名**
