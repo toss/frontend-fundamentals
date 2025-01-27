@@ -113,7 +113,7 @@ function checkIsAgeValid(age: number) {
 
 検証関数の返り値が違うと、チームメンバーは関数を使うたびに返り値を確認する必要があり、コードリーディングが難しくなってしまいます。
 
-特に[厳密なブールの比較](https://typescript-eslint.io/rules/strict-boolean-expressions/)のような機能を使わない場合、コードにパグが見つかる原因になっていまいます。
+特に[厳密なブールの比較](https://typescript-eslint.io/rules/strict-boolean-expressions/)のような機能を使わない場合、コードにバグが見つかる原因になっていまいます。
 
 ```typescript
 // このコードは名前が規則を守っているか検証します。
