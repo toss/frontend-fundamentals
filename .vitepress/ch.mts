@@ -112,7 +112,7 @@ function sidebar(): DefaultTheme.Sidebar {
               text: "使其从上到下顺利阅读",
               items: [
                 {
-                  text: "A. 减少视点转换",
+                  text: "A. 减少视点转移",
                   link: "/ch/code/examples/user-policy"
                 },
                 {
