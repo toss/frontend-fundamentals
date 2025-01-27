@@ -1,11 +1,26 @@
 import { defineConfig, HeadConfig } from "vitepress";
 import { search as koSearch } from "./ko.mts";
+import { search as jaSearch } from "./ja.mts";
 import { search as chSearch } from "./ch.mts";
 
 export const shared = defineConfig({
   lastUpdated: true,
   head: [
     ["link", { rel: "icon", href: "/images/favicon.ico" }],
+    [
+      "link",
+      {
+        rel: "stylesheet",
+        href: "https://static.toss.im/tps/main.css"
+      }
+    ],
+    [
+      "link",
+      {
+        rel: "stylesheet",
+        href: "https://static.toss.im/tps/others.css"
+      }
+    ],
     [
       "meta",
       {
@@ -56,6 +71,7 @@ export const shared = defineConfig({
       options: {
         locales: {
           ...koSearch,
+          ...jaSearch,
           ...chSearch
         }
       }

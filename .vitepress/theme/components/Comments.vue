@@ -1,13 +1,22 @@
 <script setup lang="ts">
-import { useData } from 'vitepress'
+import { useData } from "vitepress";
+import { useGiscusTheme } from "../hooks/useGiscusTheme";
+import { GISCUS_THEME, getGiscusLang } from "../utils";
 
-const { frontmatter, title } = useData()
+const { frontmatter, title, lang, isDark } = useData();
+useGiscusTheme();
 </script>
 
 <template>
-  <div v-if="frontmatter.comments !== false" :key="title" class="giscus" style="margin-top: 24px;">
+  <div
+    v-if="frontmatter.comments !== false"
+    :key="title"
+    class="giscus"
+    style="margin-top: 24px"
+  >
     <component
       :is="'script'"
+      :data-theme="isDark ? GISCUS_THEME.dark : GISCUS_THEME.light"
       src="https://giscus.app/client.js"
       data-repo="toss/frontend-fundamentals"
       data-repo-id="R_kgDONfHk5g"
@@ -18,8 +27,7 @@ const { frontmatter, title } = useData()
       data-reactions-enabled="1"
       data-emit-metadata="0"
       data-input-position="bottom"
-      data-theme="preferred_color_scheme"
-      data-lang="en"
+      :data-lang="getGiscusLang(lang)"
       crossorigin="anonymous"
       data-loading="lazy"
       async

@@ -95,7 +95,7 @@ function Page() {
   const user = useUser();
   const policy = {
     admin: { canInvite: true, canView: true },
-    viewer: { canInvite: false, canView: true },
+    viewer: { canInvite: false, canView: true }
   }[user.role];
 
   return (
