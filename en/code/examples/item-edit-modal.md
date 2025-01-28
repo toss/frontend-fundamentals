@@ -92,7 +92,7 @@ function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
           value={keyword}
           onChange={(e) => onKeywordChange(e.target.value)}
         />
-        <Button onClick={onClose}>닫기</Button>
+        <Button onClick={onClose}>Close</Button>
       </div>
       <ItemEditList
         keyword={keyword}
