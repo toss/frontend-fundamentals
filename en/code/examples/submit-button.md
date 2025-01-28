@@ -11,8 +11,8 @@ It may also include a large number of branches in the implementation, making it 
 
 The `<SubmitButton />` component below behaves differently depending on the user's permission.
 
-- If the user's permission is read-only (`"viewer"`), the invite button is disabled and the animation is not played.
-- If the user is a regular user, the invite button can be used and the animation is played.
+- If the user's permission is read-only (`"viewer"`), the invite button is disabled and the animation does not play.
+- If the user is a regular user, the invite button is enabled and the animation plays.
 
 ```tsx
 function SubmitButton() {
