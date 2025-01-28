@@ -104,3 +104,5 @@ function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
   );
 }
 ```
+
+组合（Composition）模式不仅可以减少传递 Props 的问题，还能消除不必要的中间抽象，帮助开发者明确理解组件的角色和意图。
