@@ -5,7 +5,12 @@ import { search as jaSearch } from "./ja.mts";
 export const shared = defineConfig({
   lastUpdated: true,
   head: [
-    ["link", { rel: "icon", href: "/images/favicon.ico" }],
+    [
+      "link",
+      { rel: "icon", type: "image/x-icon", href: "/images/favicon.ico" }
+    ],
+    ["link", { rel: "manifest", href: "/images/site.webmanifest" }],
+    ["link", { rel: "apple-touch-icon", href: "/images/apple-touch-icon.png" }],
     [
       "link",
       {
