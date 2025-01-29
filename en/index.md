@@ -6,7 +6,7 @@ hero:
   name: "Frontend Fundamentals"
   tagline: "Guidelines for easily modifiable frontend code"
   image:
-    src: /images/ff-symbol-gradient.png
+    src: /images/ff-symbol-gradient-webp-80.webp
     alt: Frontend Fundamentals symbol
   actions:
     - text: Learn about good code
