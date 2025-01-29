@@ -28,7 +28,7 @@ const result = products.filter((product) =>
 
 代码阅读者需要考虑的上下文过多，导致可读性变差。[^1]
 
-[^1]: [程序员超强大脑](https://www.yes24.com/product/goods/105911017)一书中提到，人的大脑一次性能够处理和存储的信息大约是 6 个。
+[^1]: [程序员超强大脑](https://product.dangdang.com/29567786.html)一书中提到，人的大脑一次性能够处理和存储的信息大约是 6 个。
 
 ## ✏️ 尝试改善
 
