@@ -30,7 +30,7 @@ In this code, anonymous functions and conditions are intricately intertwined. Th
 
 There are many contexts for the reader to consider at once, which reduces readability. [^1]
 
-[^1]: According to [The Programmer's Brain]([https://www.yes24.com/product/goods/105911017](https://www.amazon.com/Programmers-Brain-Every-Programmer-Cognition/dp/B09NDVG2DW/ref=sr_1_1?crid=9GGEWPMGSL8Y&dib=eyJ2IjoiMSJ9.AF5Dcf0-L-uK6TtJShyWO_10--nMWYYt347wx3dfFsot6wGbgpz_Mn5XMp9Yv-Dok-XO31xYrb3qcx4VHzmvgH2WwCwpwPSGcfleagpa3sw78VkagAXyim4LIjFL9VTTWZemu1tTng4B6rtuPrrOveuu77Eme6QUtqqaTe6Q9vHejb4QwlvkhMBL1-9f6ixQBnvYmqlgZeeB09xB5ottOCf79StZNty_Z70W876zMSg.oDUVogfe2uXKb3VZqJAvyqrmLnE8o9zJSs7gfNNfdwA&dib_tag=se&keywords=The+Programmer%27s+Brain%3A&qid=1738067574&s=books&sprefix=the+programmer%27s+brain+%2Cstripbooks-intl-ship%2C236&sr=1-1)), the number of pieces of information that the human brain can store at one time is six.
+[^1]: According to [The Programmer's Brain](https://www.amazon.com/Programmers-Brain-Every-Programmer-Cognition/dp/B09NDVG2DW/ref=sr_1_1?crid=9GGEWPMGSL8Y&dib=eyJ2IjoiMSJ9.AF5Dcf0-L-uK6TtJShyWO_10--nMWYYt347wx3dfFsot6wGbgpz_Mn5XMp9Yv-Dok-XO31xYrb3qcx4VHzmvgH2WwCwpwPSGcfleagpa3sw78VkagAXyim4LIjFL9VTTWZemu1tTng4B6rtuPrrOveuu77Eme6QUtqqaTe6Q9vHejb4QwlvkhMBL1-9f6ixQBnvYmqlgZeeB09xB5ottOCf79StZNty_Z70W876zMSg.oDUVogfe2uXKb3VZqJAvyqrmLnE8o9zJSs7gfNNfdwA&dib_tag=se&keywords=The+Programmer%27s+Brain%3A&qid=1738067574&s=books&sprefix=the+programmer%27s+brain+%2Cstripbooks-intl-ship%2C236&sr=1-1), the number of pieces of information that the human brain can store at one time is six.
 
 ## ✏️ Work on Improving
 
