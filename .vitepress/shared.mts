@@ -1,6 +1,7 @@
 import { defineConfig, HeadConfig } from "vitepress";
 import { search as koSearch } from "./ko.mts";
 import { search as jaSearch } from "./ja.mts";
+import { search as chSearch } from "./ch.mts";
 
 export const shared = defineConfig({
   lastUpdated: true,
@@ -75,7 +76,8 @@ export const shared = defineConfig({
       options: {
         locales: {
           ...koSearch,
-          ...jaSearch
+          ...jaSearch,
+          ...chSearch
         }
       }
     },
