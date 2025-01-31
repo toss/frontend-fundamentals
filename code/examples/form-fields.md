@@ -98,7 +98,7 @@ const schema = z.object({
   email: z
     .string()
     .min(1, "이메일을 입력해주세요.")
-    .email("유효한 이메일 주소를 입력해주세요")
+    .email("유효한 이메일 주소를 입력해주세요.")
 });
 
 export function Form() {

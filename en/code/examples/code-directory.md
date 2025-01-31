@@ -69,7 +69,7 @@ If you place code files that are modified together under a single directory, it 
 For example, consider a case where the sub-code of one domain (`Domain1`) references the source code of another domain (`Domain2`).
 
 ```typescript
-import { useFoo } '../../../Domain2/hooks/useFoo'
+import { useFoo } from '../../../Domain2/hooks/useFoo'
 ```
 
 When you encounter such an import statement, you can easily recognize that the wrong file is being referenced.

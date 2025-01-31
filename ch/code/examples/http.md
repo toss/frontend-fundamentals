@@ -21,7 +21,9 @@ export const http = {
   async get(url: string) {
     const token = await fetchToken();
 
-    return httpLibrary.get(url);
+    return httpLibrary.get(url, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
   }
 };
 ```

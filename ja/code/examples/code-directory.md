@@ -69,7 +69,7 @@
 例えば、次のようにあるドメイン（`Domain1`）の下にあるコードで別のドメイン（`Domain2`）のソースコードを参照していると考えてみましょう。
 
 ```typescript
-import { useFoo } '../../../Domain2/hooks/useFoo'
+import { useFoo } from '../../../Domain2/hooks/useFoo'
 ```
 
 このような import 文に遭遇した場合、誤ったファイルを参照していることを容易に認識できるようになります。
