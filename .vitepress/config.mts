@@ -6,7 +6,7 @@ import { shared } from "./shared.mts";
 import { en } from "./en.mts";
 import { ko } from "./ko.mts";
 import { ja } from "./ja.mts";
-import { ch } from "./ch.mjs";
+import { ch } from "./ch.mts";
 
 const require = createRequire(import.meta.url);
 
