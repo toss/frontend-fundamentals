@@ -4,7 +4,8 @@
 <Badge type="info" text="결합도" />
 </div>
 
-Props Drilling은 부모 컴포넌트와 자식 컴포넌트 사이에 결합도가 생겼다는 것을 나타내는 명확한 표시예요. 만약에 Drilling되는 프롭이 변경되면, 프롭을 참조하는 모든 컴포넌트가 변경되어야 하죠.
+Props Drilling은 부모 컴포넌트와 자식 컴포넌트 사이에 결합도가 생겼다는 것을 나타내는 명확한 표시예요.
+만약에 Drilling되는 `name` 프롭의 이름이 `firstName`으로 변경되면, 해당 프롭을 참조하는 모든 컴포넌트를 수정해야 해요.
 
 ## 📝 코드 예시
 
@@ -44,7 +45,7 @@ function ItemEditBody({
 }) {
   return (
     <>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Input
           value={keyword}
           onChange={(e) => onKeywordChange(e.target.value)}
@@ -87,22 +88,82 @@ function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
 
   return (
     <Modal open={open} onClose={onClose}>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <ItemEditBody onClose={onClose}>
+        <ItemEditList
+          keyword={keyword}
+          items={items}
+          recommendedItems={recommendedItems}
+          onConfirm={onConfirm}
+        />
+      </ItemEditBody>
+    </Modal>
+  );
+}
+
+function ItemEditBody({ children, onClose }) {
+  return (
+    <>
+      <div style="display: flex; justify-content: space-between;">
         <Input
           value={keyword}
           onChange={(e) => onKeywordChange(e.target.value)}
         />
         <Button onClick={onClose}>닫기</Button>
       </div>
-      <ItemEditList
-        keyword={keyword}
-        items={items}
-        recommendedItems={recommendedItems}
-        onConfirm={onConfirm}
-      />
-    </Modal>
+      {children}
+    </>
   );
 }
 ```
 
-조합(Composition) 패턴은 단순히 Props를 전달하는 문제를 줄이는 것을 넘어, 불필요한 중간 추상화를 제거하여 개발자가 컴포넌트의 역할과 의도를 명확히 이해할 수 있도록 도와줘요.
+위의 예시처럼 `children`을 사용해 필요한 컴포넌트를 부모에서 작성하도록 하면 불필요한 Props Drilling을 줄일 수 있어요.
+
+하지만, 조합 패턴만으로는 해결되지 않는 경우도 있고, 컴포넌트 트리 구조가 깊어지면 여전히 문제가 발생해요.
+위의 예시에서 `ItemEditModal` 컴포넌트는 여전히 `items`와 `recommendedItems`를 Props Drilling하고 있어요.
+
+이럴 때 가장 빠르고 확실한 해결책은 `ContextAPI`를 활용해 공통 데이터를 관리하는 거예요. `ContextAPI`를 사용하면 데이터의 흐름을 간소화하여 컴포넌트 계층 구조 전체에 쉽게 공유할 수 있어요.
+
+```tsx 1,7,14
+function ItemEditModal({ open, onConfirm, onClose }) {
+  const [keyword, setKeyword] = useState("");
+
+  return (
+    <Modal open={open} onClose={onClose}>
+      <ItemEditBody onClose={onClose}>
+        <ItemEditList keyword={keyword} onConfirm={onConfirm} />
+      </ItemEditBody>
+    </Modal>
+  );
+}
+
+function ItemEditList({ children, onClose }) {
+  const { items, recommendedItems } = useItemEditModalContext();
+
+  return (
+    <>
+      <div style="display: flex; justify-content: space-between;">
+        <Input
+          value={keyword}
+          onChange={(e) => onKeywordChange(e.target.value)}
+        />
+        <Button onClick={onClose}>닫기</Button>
+      </div>
+      {children}
+    </>
+  );
+}
+```
+
+ContextAPI를 사용하면 매우 쉽게 Props Drilling을 해결할 수 있지만, Props Drilling이 되는 모든 값을 ContextAPI로 관리해야 하는 것은 아니에요.
+
+1. 컴포넌트는 props를 통해서 어떤 데이터를 사용할지 명확하게 표현해요.
+
+   컴포넌트의 역할과 의도를 담고 있는 props라면 문제가 되지 않을 수 있어요.
+
+2. ContextAPI를 사용하기 전, `children` prop을 이용해서 컴포넌트를 전달해 뎁스를 줄일 수 있어요.
+
+   데이터를 사용하지 않는 단순히 값을 전달하기 위한 용도의 컴포넌트는 props가 컴포넌트의 역할과 의도를 나타내지 않을 수 있어요. 이러한 경우에 조합(Composition) 패턴을 사용한다면 불필요한 뎁스를 줄일 수 있어요.
+
+위 내용을 먼저 고려를 해보고 접근 방법이 모두 맞지 않을 때 최후의 방법으로 ContextAPI를 사용해야 해요.
+
+불필요한 Props Drilling을 제거하게 되면, 불필요한 중간 추상화를 제거하여 개발자가 컴포넌트의 역할과 의도를 명확히 이해할 수 있도록 도와줘요.
