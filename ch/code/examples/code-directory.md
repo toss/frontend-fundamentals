@@ -69,7 +69,7 @@
 例如，假设一个域(`Domain1`)的子代码中引用另一个域(`Domain2`)的源代码，如下所示：
 
 ```typescript
-import { useFoo } '../../../Domain2/hooks/useFoo'
+import { useFoo } from '../../../Domain2/hooks/useFoo'
 ```
 
 如果遇到这样的 import 语句，就能很容易地意识到引用了错误的文件。
