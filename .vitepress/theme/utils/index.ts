@@ -3,7 +3,8 @@ export const GISCUS_ORIGIN = "https://giscus.app" as const;
 export const GISCUS_LANG_MAP = {
   ko: "ko",
   en: "en",
-  ja: "ja"
+  ja: "ja",
+  ch: "zh-CN"
 } as const;
 
 export const GISCUS_THEME = {
