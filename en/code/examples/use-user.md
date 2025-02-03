@@ -178,3 +178,33 @@ function checkIsAgeValid(age: number) {
   return { ok: true };
 }
 ```
+
+::: tip
+
+By defining the return type of validation functions as a Discriminated Union, you can check for the presence of `reason` based on the `ok` value.
+
+```typescript {1,16,18}
+type ValidationCheckReturnType = { ok: true } | { ok: false; reason: string };
+
+function checkIsAgeValid(age: number): ValidationCheckReturnType {
+  if (!Number.isInteger(age)) {
+    return {
+      ok: false,
+      reason: "Age must be an integer."
+    };
+  }
+  // ...
+}
+
+const isAgeValid = checkIsAgeValid(1.1);
+
+if (isAgeValid.ok) {
+  isAgeValid.reason; // Type error: Property reason does not exist on type { ok: true }
+} else {
+  isAgeValid.reason; // You can only access the reason property when ok is false
+}
+```
+
+This way, you can prevent unnecessary access through the compiler.
+
+:::
