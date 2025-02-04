@@ -178,3 +178,33 @@ function checkIsAgeValid(age: number) {
   return { ok: true };
 }
 ```
+
+::: tip
+
+유효성 검사 함수의 반환 타입을 Discriminated Union으로 정의하면, `ok` 값에 따라 `reason`의 존재 유무를 확인할 수 있어요.
+
+```typescript 1,16,18
+type ValidationCheckReturnType = { ok: true } | { ok: false; reason: string };
+
+function checkIsAgeValid(age: number): ValidationCheckReturnType {
+  if (!Number.isInteger(age)) {
+    return {
+      ok: false,
+      reason: "나이는 정수여야 해요."
+    };
+  }
+  // ...
+}
+
+const isAgeValid = checkIsAgeValid(1.1);
+
+if (isAgeValid.ok) {
+  isAgeValid.reason; // 타입 에러: { ok: true } 타입에는 reason 속성이 없어요
+} else {
+  isAgeValid.reason; // ok가 false일 때만 reason 속성에 접근할 수 있어요
+}
+```
+
+이렇게 하면 컴파일러를 통해 불필요한 접근을 예방할 수 있어요.
+
+:::
