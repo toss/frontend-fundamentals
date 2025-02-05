@@ -6,7 +6,7 @@ import { shared } from "./shared.mts";
 import { en } from "./en.mts";
 import { ko } from "./ko.mts";
 import { ja } from "./ja.mts";
-import { ch } from "./ch.mts";
+import { zh } from "./zh.mts";
 
 const require = createRequire(import.meta.url);
 
@@ -15,7 +15,7 @@ export default defineConfig({
   locales: {
     en: { label: "English", ...en },
     ja: { label: "日本語", ...ja },
-    ch: { label: "简体中文", ...ch },
+    zh: { label: "简体中文", ...zh },
     root: { label: "한국어", ...ko }
   },
   vite: {
