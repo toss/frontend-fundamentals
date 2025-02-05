@@ -4,7 +4,7 @@ export const GISCUS_LANG_MAP = {
   ko: "ko",
   en: "en",
   ja: "ja",
-  ch: "zh-CN"
+  zh: "zh-CN"
 } as const;
 
 export const GISCUS_THEME = {
