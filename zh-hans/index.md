@@ -10,10 +10,10 @@ hero:
     alt: Frontend Fundamentals symbol
   actions:
     - text: 了解好代码的标准
-      link: /zh/code/
+      link: /zhHans/code/
     - theme: alt
       text: 社区
-      link: /zh/code/community
+      link: /zhHans/code/community
 
 features:
   - icon: 🤓
