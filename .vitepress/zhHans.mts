@@ -1,7 +1,7 @@
 import { type DefaultTheme, defineConfig } from "vitepress";
 
 export const zhHans = defineConfig({
-  lang: "zhHans",
+  lang: "zh-hans",
   title: "Frontend Fundamentals",
   description: "易于修改的前端代码指南",
   lastUpdated: true,
@@ -30,7 +30,7 @@ export const zhHans = defineConfig({
 });
 
 function nav(): DefaultTheme.NavItem[] {
-  return [{ text: "首页", link: "/zhHans" }];
+  return [{ text: "首页", link: "/zh-hans" }];
 }
 
 function sidebar(): DefaultTheme.Sidebar {
@@ -40,18 +40,18 @@ function sidebar(): DefaultTheme.Sidebar {
       items: [
         {
           text: "开始使用",
-          link: "/zhHans/code/start"
+          link: "/zh-hans/code/start"
         },
         {
           text: "易于修改的代码",
-          link: "/zhHans/code/"
+          link: "/zh-hans/code/"
         },
         {
           text: "社区",
           items: [
             {
               text: "介绍",
-              link: "/zhHans/code/community"
+              link: "/zh-hans/code/community"
             },
             {
               text: "⭐ 专题讨论",
@@ -81,15 +81,15 @@ function sidebar(): DefaultTheme.Sidebar {
               items: [
                 {
                   text: "A. 分离不一起运行的代码",
-                  link: "/zhHans/code/examples/submit-button"
+                  link: "/zh-hans/code/examples/submit-button"
                 },
                 {
                   text: "B. 抽象实现细节",
-                  link: "/zhHans/code/examples/login-start-page"
+                  link: "/zh-hans/code/examples/login-start-page"
                 },
                 {
                   text: "C. 根据逻辑类型拆分合并的函数",
-                  link: "/zhHans/code/examples/use-page-state-readability"
+                  link: "/zh-hans/code/examples/use-page-state-readability"
                 }
               ],
               collapsed: true
@@ -99,11 +99,11 @@ function sidebar(): DefaultTheme.Sidebar {
               items: [
                 {
                   text: "A. 为复杂条件命名",
-                  link: "/zhHans/code/examples/condition-name"
+                  link: "/zh-hans/code/examples/condition-name"
                 },
                 {
                   text: "B. 为魔数命名",
-                  link: "/zhHans/code/examples/magic-number-readability"
+                  link: "/zh-hans/code/examples/magic-number-readability"
                 }
               ],
               collapsed: true
@@ -113,11 +113,11 @@ function sidebar(): DefaultTheme.Sidebar {
               items: [
                 {
                   text: "A. 减少视点转移",
-                  link: "/zhHans/code/examples/user-policy"
+                  link: "/zh-hans/code/examples/user-policy"
                 },
                 {
                   text: "B. 简化三元运算符",
-                  link: "/zhHans/code/examples/ternary-operator"
+                  link: "/zh-hans/code/examples/ternary-operator"
                 }
               ],
               collapsed: true
@@ -130,15 +130,15 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             {
               text: "A. 避免命名重复",
-              link: "/zhHans/code/examples/http"
+              link: "/zh-hans/code/examples/http"
             },
             {
               text: "B. 统一同类函数的返回类型",
-              link: "/zhHans/code/examples/use-user"
+              link: "/zh-hans/code/examples/use-user"
             },
             {
               text: "C. 揭示隐藏的逻辑",
-              link: "/zhHans/code/examples/hidden-logic"
+              link: "/zh-hans/code/examples/hidden-logic"
             }
           ]
         },
@@ -147,15 +147,15 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             {
               text: "A. 需同时修改的文件位于同一目录下",
-              link: "/zhHans/code/examples/code-directory"
+              link: "/zh-hans/code/examples/code-directory"
             },
             {
               text: "B. 消除魔数",
-              link: "/zhHans/code/examples/magic-number-cohesion"
+              link: "/zh-hans/code/examples/magic-number-cohesion"
             },
             {
               text: "C. 考虑表单的内聚性",
-              link: "/zhHans/code/examples/form-fields"
+              link: "/zh-hans/code/examples/form-fields"
             }
           ]
         },
@@ -164,15 +164,15 @@ function sidebar(): DefaultTheme.Sidebar {
           items: [
             {
               text: "A. 单独管理责任",
-              link: "/zhHans/code/examples/use-page-state-coupling"
+              link: "/zh-hans/code/examples/use-page-state-coupling"
             },
             {
               text: "B. 允许重复代码",
-              link: "/zhHans/code/examples/use-bottom-sheet"
+              link: "/zh-hans/code/examples/use-bottom-sheet"
             },
             {
               text: "C. 消除 Props Drilling",
-              link: "/zhHans/code/examples/item-edit-modal"
+              link: "/zh-hans/code/examples/item-edit-modal"
             }
           ]
         }
@@ -182,7 +182,7 @@ function sidebar(): DefaultTheme.Sidebar {
 }
 
 export const search: DefaultTheme.LocalSearchOptions["locales"] = {
-  zhHans: {
+  "zh-hans": {
     translations: {
       button: {
         buttonText: "搜索",
