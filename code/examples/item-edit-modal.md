@@ -80,7 +80,11 @@ Props Drilling이 발생하면, prop을 불필요하게 참조하는 컴포넌�
 
 ## ✏️ 개선해보기
 
-부모 컴포넌트가 자식 컴포넌트에게 그대로 prop을 전달하는 Props Drilling을 제거해야 해요. 다음과 같이 조합(Composition) 패턴을 활용할 수 있어요.
+### A. 조합(Composition) 패턴 활용
+
+조합 패턴을 사용하면 부모 컴포넌트가 자식 컴포넌트에 Props를 일일이 전달해야 하는 Props Drilling 문제를 해결할 수 있어요.
+
+더 나아가, 조합 패턴은 불필요한 중간 추상화를 제거하여 개발자가 각 컴포넌트의 역할과 의도를 보다 명확하게 이해할 수 있어요.
 
 ```tsx
 function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
@@ -121,7 +125,11 @@ function ItemEditBody({ children, onClose }) {
 하지만, 조합 패턴만으로는 해결되지 않는 경우도 있고, 컴포넌트 트리 구조가 깊어지면 여전히 문제가 발생해요.
 위의 예시에서 `ItemEditModal` 컴포넌트는 여전히 `items`와 `recommendedItems`를 Props Drilling하고 있어요.
 
-이럴 때 가장 빠르고 확실한 해결책은 `ContextAPI`를 활용해 공통 데이터를 관리하는 거예요. `ContextAPI`를 사용하면 데이터의 흐름을 간소화하여 컴포넌트 계층 구조 전체에 쉽게 공유할 수 있어요.
+### B. ContextAPI 활용
+
+Context API를 활용하면, 데이터의 흐름을 간소화하고 계층 구조 전체에 쉽게 공유할 수 있어요.
+
+조합 패턴을 사용해도, 컴포넌트가 복잡하고 깊다면, ContextAPI를 사용함으로써 불필요한 Props Drilling을 제거할 수 있어요.
 
 ```tsx 1,7,14
 function ItemEditModal({ open, onConfirm, onClose }) {
