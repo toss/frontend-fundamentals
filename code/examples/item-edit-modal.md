@@ -154,6 +154,7 @@ function ItemEditList({ children, onClose }) {
 }
 ```
 
+::: tip
 ContextAPI를 사용하면 매우 쉽게 Props Drilling을 해결할 수 있지만, Props Drilling이 되는 모든 값을 ContextAPI로 관리해야 하는 것은 아니에요.
 
 1. 컴포넌트는 props를 통해서 어떤 데이터를 사용할지 명확하게 표현해요.
@@ -167,3 +168,4 @@ ContextAPI를 사용하면 매우 쉽게 Props Drilling을 해결할 수 있지�
 위 내용을 먼저 고려를 해보고 접근 방법이 모두 맞지 않을 때 최후의 방법으로 ContextAPI를 사용해야 해요.
 
 불필요한 Props Drilling을 제거하게 되면, 불필요한 중간 추상화를 제거하여 개발자가 컴포넌트의 역할과 의도를 명확히 이해할 수 있도록 도와줘요.
+:::
