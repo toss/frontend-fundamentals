@@ -12,8 +12,8 @@ body:
     attributes:
       value: |
         ## 전략 제목
-        디스커션 제목도 동일하게 적어주세요.
         예시) 같이 실행되지 않는 코드 분리하기
+        (본 디스커션 제목도 동일하게 맞춰주세요)
 
   - type: textarea
     id: title
