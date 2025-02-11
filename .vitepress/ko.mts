@@ -47,26 +47,8 @@ function sidebar(): DefaultTheme.Sidebar {
           link: "/code/"
         },
         {
-          text: "커뮤니티",
-          items: [
-            {
-              text: "소개",
-              link: "/code/community"
-            },
-            {
-              text: "⭐ 좋은 논의 모아보기",
-              link: "https://github.com/toss/frontend-fundamentals/discussions?discussions_q=is%3Aopen+label%3A%22%EC%84%B1%EC%A7%80+%E2%9B%B2%22"
-            },
-            {
-              text: "A vs B",
-              link: "https://github.com/toss/frontend-fundamentals/discussions/categories/a-vs-b?discussions_q=is%3Aopen+category%3A%22A+vs+B%22+sort%3Adate_created"
-            },
-            {
-              text: "자유로운 이야기",
-              link: "https://github.com/toss/frontend-fundamentals/discussions/categories/open-forum?discussions_q=is%3Aopen+sort%3Adate_created+category%3A%22Open+Forum%22"
-            }
-          ],
-          collapsed: true
+          text: "토론하기",
+          link: "/code/community"
         }
       ]
     },
@@ -175,6 +157,23 @@ function sidebar(): DefaultTheme.Sidebar {
               link: "/code/examples/item-edit-modal"
             }
           ]
+        }
+      ]
+    },
+    {
+      text: "커뮤니티",
+      items: [
+        {
+          text: "⭐ 좋은 토론 모아보기",
+          link: "/code/community/good-discussions"
+        },
+        {
+          text: "A vs B",
+          link: "https://github.com/toss/frontend-fundamentals/discussions/categories/a-vs-b?discussions_q=is%3Aopen+category%3A%22A+vs+B%22+sort%3Adate_created"
+        },
+        {
+          text: "자유로운 이야기",
+          link: "https://github.com/toss/frontend-fundamentals/discussions/categories/open-forum?discussions_q=is%3Aopen+sort%3Adate_created+category%3A%22Open+Forum%22"
         }
       ]
     }

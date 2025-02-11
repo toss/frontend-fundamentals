@@ -2,17 +2,17 @@
 comments: false
 ---
 
-# 커뮤니티
+# 토론하기
 
 `Frontend Fundamentals`(FF)는 커뮤니티와 함께 좋은 코드의 기준을 만들어 가고 있어요.
 
 지금은 토스 프론트엔드 챕터가 운영하고 있어요.
 
-## 좋은 논의 모아보기
+## 좋은 토론 모아보기
 
-커뮤니티에서 있었던 좋은 논의를 살펴보세요. Frontend Fundamentals 문서에 나오는 내용을 넘어, 좋은 코드에 대한 생각을 넓힐 수 있어요.
+커뮤니티에서 있었던 좋은 토론를 살펴보세요. Frontend Fundamentals 문서에 나오는 내용을 넘어, 좋은 코드에 대한 생각을 넓힐 수 있어요.
 
-- [좋은 논의 모아보기](https://github.com/toss/frontend-fundamentals/discussions?discussions_q=is%3Aopen+label%3A%22%EC%84%B1%EC%A7%80+%E2%9B%B2%22)
+- [좋은 토론 모아보기](/code/community/good-discussions)
 
 ## 고민되는 코드에 대해 논의하기
 
