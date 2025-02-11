@@ -1,0 +1,67 @@
+labels: ["Suggest new strategy"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## ✏️ Frontend Fundamentals 새로운 전략 문서 제안하기
+        FF 문서에 추가할 새로운 전략을 제안해 주세요!
+        제안된 전략은 디스커션에서 충분한 논의를 거친 후, 레포지토리 오너가 검토하여 FF 문서에 포함할지 결정하게 됩니다. 전략이 채택될 경우, PR 작성을 요청드릴 예정이니 부담 없이 자유롭게 의견을 나눠 주세요.
+        좋은 아이디어를 함께 발전시켜 나가길 기대하겠습니다 🚀
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 전략 제목
+        예시) 같이 실행되지 않는 코드 분리하기
+        (본 디스커션 제목도 동일하게 맞춰주세요)
+
+  - type: textarea
+    id: title
+    attributes:
+      label: 전략 제목
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 문서 위계
+        예시) 1. 가독성 > 맥락 줄이기 > D. 같이 실행되지 않는 코드 분리하기
+
+  - type: textarea
+    id: folder
+    attributes:
+      label: 문서 위계
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 내용
+        기존 문서 포맷에 맞춰서 작성해주세요.
+
+  - type: textarea
+    id: contents
+    attributes:
+      label: 내용
+      value: |
+        {한줄설명}
+
+        ## 📝 코드 예시
+
+        {예시코드 설명}
+
+        ```tsx
+        console.log("Bad code");
+        ```
+
+        ## 👃 코드 냄새 맡아보기
+
+        {냄새나는 이유}
+
+        ## ✏️ 개선해보기
+
+        {개선 방법}
+    validations:
+      required: false
