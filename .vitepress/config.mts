@@ -24,6 +24,10 @@ const titleMap: Record<string, string> = {
   尝试改善: "work-on-improving",
   リファクタリングしてみる: "work-on-improving",
 
+  "코드 품질 여러 각도로 보기": "viewing-code-quality-from-multiple-angles",
+  コード品質を多角的に見る: "viewing-code-quality-from-multiple-angles",
+  多角度审视代码质量: "viewing-code-quality-from-multiple-angles",
+
   "좋은 논의 모아보기": "featured-discussions",
   良い議論をまとめて見る: "featured-discussions",
   专题讨论: "featured-discussions",
@@ -64,15 +68,9 @@ const titleMap: Record<string, string> = {
   ドキュメント貢献者: "document-contributors",
   文档贡献者: "document-contributors",
 
-  "🔍 더 알아보기": "learn-more",
-  // "🔍 더 알아보기: 추상화": "learn-more",
-  // "🔍 더 알아보기: 조건식에 이름을 붙이는 기준": "learn-more",
-  "🔍 もっと調べる": "learn-more",
-  // "🔍 もっと調べる: 抽象化": "learn-more",
-  // "🔍 もっと調べる: 条件式に名前を付ける基準": "learn-more",
-  "🔍 深入了解": "learn-more",
-  // "🔍 深入了解： 抽象化": "learn-more",
-  // "🔍 深入了解：为条件式命名的标准": "learn-more",
+  "더 알아보기": "learn-more", // 🔍 더 알아보기 관련 모든 항목이 "learn-more"로 변환됨
+  もっと調べる: "learn-more",
+  深入了解: "learn-more",
 
   "필드 단위 응집도": "field-level-cohesion",
   フィールド単位の凝集度: "field-level-cohesion",
@@ -123,23 +121,30 @@ export default defineConfig({
     },
     anchor: {
       slugify: (str) => {
-        // Delete the emoji
+        // 1. Remove emojis and trim spaces
         let cleanedStr = str
           .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, "")
           .trim();
 
-        // find the key in titlemap and if it exists, return the value
+        // 2. Check if the cleaned string exists in titleMap
         if (titleMap[cleanedStr]) {
-          return titleMap[cleanedStr]; // ex: "코드 예시" → "code-example"
+          return titleMap[cleanedStr];
         }
 
-        // transfer space to '-' and delete the emoji.
+        // 3. If not found, split the string and check the first word in titleMap
+        let parts = cleanedStr.split(/[:\s]+/).filter(Boolean);
+        if (parts.length > 0 && titleMap[parts[0]]) {
+          return titleMap[parts[0]];
+        }
+
+        // 4. Convert remaining string into a slug
         let slug = cleanedStr
           .toLowerCase()
           .replace(/\s+/g, "-")
           .replace(/[^\w-]+/g, "");
 
-        return slug || "section"; //if it is empty, return 'section' instead
+        // 5. If slug is empty, generate a fallback ID
+        return slug || `section-${Math.floor(Math.random() * 10000)}`;
       }
     }
   }
