@@ -68,7 +68,7 @@ const titleMap: Record<string, string> = {
   ドキュメント貢献者: "document-contributors",
   文档贡献者: "document-contributors",
 
-  "더 알아보기": "learn-more", // 🔍 더 알아보기 관련 모든 항목이 "learn-more"로 변환됨
+  "더 알아보기": "learn-more",
   もっと調べる: "learn-more",
   深入了解: "learn-more",
 
@@ -115,6 +115,7 @@ export default defineConfig({
       ]
     }
   },
+
   markdown: {
     config: (md) => {
       md.use(footnote);
@@ -123,6 +124,7 @@ export default defineConfig({
       slugify: (str) => {
         // 1. Remove emojis and trim spaces
         let cleanedStr = str
+          .normalize("NFKC")
           .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, "")
           .trim();
 
@@ -131,10 +133,18 @@ export default defineConfig({
           return titleMap[cleanedStr];
         }
 
-        // 3. If not found, split the string and check the first word in titleMap
-        let parts = cleanedStr.split(/[:\s]+/).filter(Boolean);
-        if (parts.length > 0 && titleMap[parts[0]]) {
-          return titleMap[parts[0]];
+        // // 3. If not found, split the string and check the first word in titleMap
+        // let parts = cleanedStr.split(/[:\s]+/).filter(Boolean);
+        // if (parts.length > 0 && titleMap[parts[0]]) {
+        //   return titleMap[parts[0]];
+        // }
+
+        let matchedKey = Object.keys(titleMap)
+          .filter((key) => cleanedStr.includes(key)) // cleanedStr에 포함된 key 찾기
+          .sort((a, b) => b.length - a.length)[0]; // 가장 긴 매칭을 우선 사용
+
+        if (matchedKey) {
+          return titleMap[matchedKey];
         }
 
         // 4. Convert remaining string into a slug
