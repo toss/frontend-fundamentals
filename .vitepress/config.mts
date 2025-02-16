@@ -10,10 +10,10 @@ import { zhHans } from "./zhHans.mts";
 
 const require = createRequire(import.meta.url);
 
-// titleMap
+// titleMap based on english headers
 const titleMap: Record<string, string> = {
   //Criteria for Good Code
-
+  //Getting Started
   "이런 분들에게 추천해요": "who-is-this-for",
   こんな時に活用してみてください: "who-is-this-for",
   何时使用: "who-is-this-for",
@@ -26,6 +26,7 @@ const titleMap: Record<string, string> = {
   ドキュメント貢献者: "document-contributors",
   文档贡献者: "document-contributors",
 
+  //Easily Modifiable Code
   "1. 가독성": "1-readability",
   "1. 可読性": "1-readability",
   "1. 可读性": "1-readability",
@@ -46,6 +47,7 @@ const titleMap: Record<string, string> = {
   コード品質を多角的に見る: "viewing-code-quality-from-multiple-angles",
   多角度审视代码质量: "viewing-code-quality-from-multiple-angles",
 
+  //Community
   "좋은 논의 모아보기": "featured-discussions",
   良い議論をまとめて見る: "featured-discussions",
   专题讨论: "featured-discussions",
@@ -59,7 +61,8 @@ const titleMap: Record<string, string> = {
   为好代码标准添加意见: "adding-opinions-on-good-code-standards",
 
   //Strategies for Writing Good Code
-  "Code Example": "code-example",
+  //General headers
+  "Code Example": "code-example", //Every header starts with "Code Example" including 'Code Example 1: LoginStartPage' is converted to "code-example"
   "코드 예시": "code-example",
   代码示例: "code-example",
   コード例: "code-example",
@@ -80,8 +83,7 @@ const titleMap: Record<string, string> = {
   さらに詳しく: "learn-more",
   深入了解: "learn-more",
 
-  //specific headers
-
+  //Specific headers
   "필드 단위 응집도": "field-level-cohesion",
   フィールド単位の凝集度: "field-level-cohesion",
   字段级别的内聚性: "field-level-cohesion",
@@ -95,27 +97,6 @@ const titleMap: Record<string, string> = {
     "field-level-vs-form-level-cohesion",
   "字段级别 vs. 表单级别 内聚性": "field-level-vs-form-level-cohesion"
 };
-
-// const synonymsMap: Record<string, (string | RegExp)[]> = {
-//   "code-example": [
-//     "코드 예시",
-//     "代码示例",
-//     "コード例",
-//     /code\s+example/i // "Code Example" 같은 변형도 매칭 가능
-//   ],
-//   "smell-the-code": [
-//     "코드 냄새 맡아보기",
-//     "闻代码",
-//     "コードの不吉な臭いを嗅いでみる",
-//     /smell\s+the\s+code/i
-//   ],
-//   "work-on-improving": [
-//     "개선해보기",
-//     "尝试改善",
-//     "リファクタリングしてみる",
-//     /work\s+on\s+improving/i
-//   ]
-// };
 
 export default defineConfig({
   ...shared,
@@ -154,42 +135,41 @@ export default defineConfig({
     },
     anchor: {
       slugify: (str) => {
-        // 1. 이모지 제거
+        // 1. Remove emojis
         let cleanedStr = str
           .normalize("NFKC")
           .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, "")
           .trim();
 
-        // 2. titleMap에서 직접 찾기 (완전한 일치 먼저 검사)
+        // 2. Check for an exact match in titleMap
         if (titleMap[cleanedStr]) {
           return titleMap[cleanedStr];
         }
 
-        // 3. titleMap에서 가장 긴 부분 매칭 찾기
+        // 3. Find the longest partial match in titleMap
         let matchedKey = Object.keys(titleMap)
-          .filter((key) => cleanedStr.includes(key)) // 포함된 titleMap 키 찾기
-          .sort((a, b) => b.length - a.length)[0]; // 가장 긴 매칭 선택
+          .filter((key) => cleanedStr.includes(key))
+          .sort((a, b) => b.length - a.length)[0];
 
         if (matchedKey) {
           return titleMap[matchedKey];
         }
 
-        // 4. titleMap의 값(value)에서 역으로 매칭 찾기
+        //4. Reverse lookup in titleMap values
         let matchedValueKey = Object.entries(titleMap).find(([key, value]) =>
           cleanedStr.toLowerCase().includes(value)
         );
 
         if (matchedValueKey) {
-          return matchedValueKey[1]; // 해당 titleMap의 value 반환
+          return matchedValueKey[1];
         }
 
-        // 5. 일반적인 slug 변환 적용
+        // // 5. Apply general slug conversion
         let slug = cleanedStr
           .toLowerCase()
-          .replace(/[^\w가-힣0-9\s-]/g, "") // 특수문자 제거
-          .replace(/\s+/g, "-"); // 공백을 "-"로 변환
-
-        // 6. slug가 비어 있으면 예외 처리
+          .replace(/[^\w가-힣0-9\s-]/g, "")
+          .replace(/\s+/g, "-");
+        //  6. Handle cases where the slug is empty
         return slug || `section-${Math.floor(Math.random() * 10000)}`;
       }
     }
