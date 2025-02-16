@@ -10,10 +10,15 @@ import { zhHans } from "./zhHans.mts";
 
 const require = createRequire(import.meta.url);
 
-// titleMap based on english headers
+// English headers are automatically converted, so they don't need to be manually mapped in this titleMap.
+// When adding a new header, include the multilingual key in titleMap and match its value to the corresponding English anchor.
+// However, if you want slightly modified versions of general headers (e.g., 'Code Example' -> 'Code Example 1: LoginStartPage', 'Learn More' -> 'Learn More: Abstraction')
+// to have the same anchor as the general header, you need to specify how to transform the English anchor in titleMap.
+
+// titleMap based on English headers
 const titleMap: Record<string, string> = {
-  //Criteria for Good Code
-  //Getting Started
+  // Criteria for Good Code
+  // Getting Started
   "이런 분들에게 추천해요": "who-is-this-for",
   こんな時に活用してみてください: "who-is-this-for",
   何时使用: "who-is-this-for",
@@ -26,7 +31,7 @@ const titleMap: Record<string, string> = {
   ドキュメント貢献者: "document-contributors",
   文档贡献者: "document-contributors",
 
-  //Easily Modifiable Code
+  // Easily Modifiable Code
   "1. 가독성": "1-readability",
   "1. 可読性": "1-readability",
   "1. 可读性": "1-readability",
@@ -47,7 +52,7 @@ const titleMap: Record<string, string> = {
   コード品質を多角的に見る: "viewing-code-quality-from-multiple-angles",
   多角度审视代码质量: "viewing-code-quality-from-multiple-angles",
 
-  //Community
+  // Community
   "좋은 논의 모아보기": "featured-discussions",
   良い議論をまとめて見る: "featured-discussions",
   专题讨论: "featured-discussions",
@@ -60,9 +65,9 @@ const titleMap: Record<string, string> = {
   良いコードの基準に意見を追加する: "adding-opinions-on-good-code-standards",
   为好代码标准添加意见: "adding-opinions-on-good-code-standards",
 
-  //Strategies for Writing Good Code
-  //General headers
-  "Code Example": "code-example", //Every header starts with "Code Example" including 'Code Example 1: LoginStartPage' is converted to "code-example"
+  // Strategies for Writing Good Code
+  // General headers
+  "Code Example": "code-example",
   "코드 예시": "code-example",
   代码示例: "code-example",
   コード例: "code-example",
@@ -71,7 +76,6 @@ const titleMap: Record<string, string> = {
   闻代码: "smell-the-code",
   コードの不吉な臭いを嗅いでみる: "smell-the-code",
 
-  "work-on-improving": "work-on-improving",
   개선해보기: "work-on-improving",
   尝试改善: "work-on-improving",
   リファクタリングしてみる: "work-on-improving",
@@ -83,7 +87,7 @@ const titleMap: Record<string, string> = {
   さらに詳しく: "learn-more",
   深入了解: "learn-more",
 
-  //Specific headers
+  // Specific headers
   "필드 단위 응집도": "field-level-cohesion",
   フィールド単位の凝集度: "field-level-cohesion",
   字段级别的内聚性: "field-level-cohesion",
@@ -139,6 +143,7 @@ export default defineConfig({
         let cleanedStr = str
           .normalize("NFKC")
           .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, "")
+          .replace(/\uFE0F/g, "")
           .trim();
 
         // 2. Check for an exact match in titleMap
@@ -154,23 +159,14 @@ export default defineConfig({
         if (matchedKey) {
           return titleMap[matchedKey];
         }
-
-        //4. Reverse lookup in titleMap values
-        let matchedValueKey = Object.entries(titleMap).find(([key, value]) =>
-          cleanedStr.toLowerCase().includes(value)
-        );
-
-        if (matchedValueKey) {
-          return matchedValueKey[1];
-        }
-
-        // // 5. Apply general slug conversion
+        // 4. Apply general slug conversion
         let slug = cleanedStr
+          .trim()
           .toLowerCase()
-          .replace(/[^\w가-힣0-9\s-]/g, "")
+          .replace(/[^\p{L}\p{N}\s-]/gu, "")
           .replace(/\s+/g, "-");
-        //  6. Handle cases where the slug is empty
-        return slug || `section-${Math.floor(Math.random() * 10000)}`;
+
+        return slug;
       }
     }
   }
