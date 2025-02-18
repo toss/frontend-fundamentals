@@ -8,6 +8,14 @@ export const shared = defineConfig({
   head: [
     [
       "link",
+      {
+        rel: "preconnect",
+        href: "https://static.toss.im",
+        crossorigin: "anonymous"
+      }
+    ],
+    [
+      "link",
       { rel: "icon", type: "image/x-icon", href: "/images/favicon.ico" }
     ],
     ["link", { rel: "manifest", href: "/images/site.webmanifest" }],
@@ -16,14 +24,22 @@ export const shared = defineConfig({
       "link",
       {
         rel: "stylesheet",
-        href: "https://static.toss.im/tps/main.css"
+        fetchpriority: "low",
+        href: "https://static.toss.im/tps/main.css",
+        media: "none",
+        onload: "this.onload=null; this.media='all'",
+        crossorigin: "anonymous"
       }
     ],
     [
       "link",
       {
         rel: "stylesheet",
-        href: "https://static.toss.im/tps/others.css"
+        fetchpriority: "low",
+        href: "https://static.toss.im/tps/others.css",
+        media: "none",
+        onload: "this.onload=null; this.media='all'",
+        crossorigin: "anonymous"
       }
     ],
     [
@@ -66,11 +82,9 @@ export const shared = defineConfig({
 
   themeConfig: {
     logo: "/images/ff-symbol.svg",
-
     editLink: {
       pattern: "https://github.com/toss/frontend-fundamentals/edit/main/:path"
     },
-
     search: {
       provider: "local",
       options: {
@@ -81,7 +95,6 @@ export const shared = defineConfig({
         }
       }
     },
-
     socialLinks: [
       { icon: "github", link: "https://github.com/toss/frontend-fundamentals" }
     ]
