@@ -153,7 +153,7 @@ function sidebar(): DefaultTheme.Sidebar {
           text: "3. 凝集度",
           items: [
             {
-              text: "A. 緒に修正されるファイルは同じディレクトリに置く",
+              text: "A. 一緒に修正されるファイルは同じディレクトリに置く",
               link: "/ja/code/examples/code-directory"
             },
             {
