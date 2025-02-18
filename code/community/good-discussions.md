@@ -29,6 +29,10 @@ GitHub Discussion에 올라온 성지 토론만 모았어요.
 - **`ContextAPI`는 상태 관리 도구가 아니다?**: Context를 단순히 props drilling 해결책으로 쓰는 것은 위험
 - **`Redux` vs `React Query` vs `Zustand/Jotai`**: 전역 상태 라이브러리는 언제 필요할까?
 
+🎯하이라이트:
+
+- 위 토론을 기반으로, @jungpaeng님께서 [문서](https://frontend-fundamentals.com/code/examples/item-edit-modal.html)에 직접 기여 해주셨어요.
+
 ## 🎙️ ["enum" vs "as const"](https://github.com/toss/frontend-fundamentals/discussions/6)
 
 `enum`과 `as const`, TypeScript에서 어떤 방식을 선택해야 할까요?  
