@@ -42,6 +42,15 @@ const formatCategory = (category: { name: string; emoji: string }) => {
   const emoji = convertGithubEmoji(category.emoji);
   return `${emoji} ${category.name}`;
 };
+
+const formatDate = (dateString: string | null) => {
+  if (!dateString) return "";
+  return new Date(dateString).toLocaleDateString("ko-KR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
+};
 </script>
 
 <template>
@@ -101,9 +110,22 @@ const formatCategory = (category: { name: string; emoji: string }) => {
         </tr>
       </thead>
       <tbody>
-        <tr v-for="discussion in discussions" :key="discussion.id">
+        <tr
+          v-for="discussion in discussions"
+          :key="discussion.id"
+          class="discussion-item"
+          :class="{ 'is-closed': discussion.closed }"
+        >
           <td>
-            <a :href="discussion.url" target="_blank">{{ discussion.title }}</a>
+            <div class="title-container">
+              <a :href="discussion.url" target="_blank">{{
+                discussion.title
+              }}</a>
+              <span v-if="discussion.closed" class="closed-badge">닫힘</span>
+              <span v-if="discussion.closed" class="closed-date">
+                ({{ formatDate(discussion.closedAt) }})
+              </span>
+            </div>
           </td>
           <td>
             <a :href="discussion.author.url" target="_blank">{{
@@ -214,5 +236,28 @@ th {
 .page-info {
   font-size: 0.9rem;
   color: var(--vp-c-text-2);
+}
+
+.discussion-item.is-closed {
+  opacity: 0.8;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.closed-badge {
+  background-color: #d73a49;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 0.8em;
+}
+
+.closed-date {
+  color: #666;
+  font-size: 0.9em;
 }
 </style>

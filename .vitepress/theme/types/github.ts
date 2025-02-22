@@ -14,6 +14,8 @@ export interface GithubDiscussion {
   comments: {
     totalCount: number;
   };
+  closed: boolean;
+  closedAt: string | null;
 }
 
 export interface GithubDiscussionsResponse {

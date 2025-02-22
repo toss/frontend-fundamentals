@@ -36,6 +36,8 @@ export function useGithubApi(config: GithubApiConfig) {
                 comments {
                   totalCount
                 }
+                closed
+                closedAt
               }
             }
           }
