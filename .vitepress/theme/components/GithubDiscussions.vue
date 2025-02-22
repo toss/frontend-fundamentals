@@ -20,7 +20,10 @@ const {
   categories,
   selectedCategory,
   setPage,
-  setCategory
+  setCategory,
+  sortField,
+  sortDirection,
+  handleSort
 } = useGithubDiscussions(props.owner, props.repo, {
   perPage
 });
@@ -102,7 +105,20 @@ const formatDate = (dateString: string | null) => {
     <table>
       <thead>
         <tr>
-          <th>👍</th>
+          <th @click="handleSort('upvotes')" class="sortable">
+            <div class="sort-header">
+              👍
+              <span class="sort-icon">
+                {{
+                  sortField === "upvotes"
+                    ? sortDirection === "asc"
+                      ? "↑"
+                      : "↓"
+                    : "↕"
+                }}
+              </span>
+            </div>
+          </th>
           <th>제목</th>
           <th>작성자</th>
           <th>카테고리</th>
@@ -261,5 +277,31 @@ th {
 .closed-date {
   color: #666;
   font-size: 0.9em;
+}
+
+.sortable {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+
+.sort-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sort-icon {
+  color: var(--vp-c-text-3);
+  font-size: 0.8em;
+}
+
+.sortable:hover {
+  background-color: var(--vp-c-bg-mute);
+}
+
+.sortable:hover .sort-icon {
+  color: var(--vp-c-text-1);
 }
 </style>
