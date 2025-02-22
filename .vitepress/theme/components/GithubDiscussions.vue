@@ -102,6 +102,7 @@ const formatDate = (dateString: string | null) => {
     <table>
       <thead>
         <tr>
+          <th>👍</th>
           <th>제목</th>
           <th>작성자</th>
           <th>카테고리</th>
@@ -116,6 +117,7 @@ const formatDate = (dateString: string | null) => {
           class="discussion-item"
           :class="{ 'is-closed': discussion.closed }"
         >
+          <td>{{ discussion.upvotes }}</td>
           <td>
             <div class="title-container">
               <a :href="discussion.url" target="_blank">{{

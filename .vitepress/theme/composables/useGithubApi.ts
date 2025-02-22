@@ -24,6 +24,9 @@ export function useGithubApi(config: GithubApiConfig) {
                 id
                 title
                 url
+                reactions {
+                  totalCount
+                }
                 author {
                   login
                   url
@@ -59,7 +62,10 @@ export function useGithubApi(config: GithubApiConfig) {
         throw new Error(data.errors[0].message);
       }
 
-      return data.data.repository.discussions.nodes;
+      return data.data.repository.discussions.nodes.map((node: any) => ({
+        ...node,
+        upvotes: node.reactions.totalCount
+      }));
     } catch (e) {
       error.value = e as Error;
       throw e;

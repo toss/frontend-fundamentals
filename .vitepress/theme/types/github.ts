@@ -2,6 +2,7 @@ export interface GithubDiscussion {
   id: string;
   title: string;
   url: string;
+  upvotes: number;
   author: {
     login: string;
     url: string;
