@@ -19,8 +19,10 @@ const {
   currentPage,
   categories,
   selectedCategory,
+  selectedStatus,
   setPage,
   setCategory,
+  setStatus,
   sortField,
   sortDirection,
   handleSort
@@ -39,6 +41,11 @@ const handlePageChange = (page: number) => {
 const handleCategoryChange = (category: string | null) => {
   setPage(1);
   setCategory(category);
+};
+
+const handleStatusChange = (status: "all" | "open" | "closed") => {
+  setPage(1);
+  setStatus(status);
 };
 
 const formatCategory = (category: { name: string; emoji: string }) => {
@@ -63,24 +70,51 @@ const formatDate = (dateString: string | null) => {
   </div>
   <div v-else>
     <div class="filters">
-      <div class="category-filter">
-        <span class="filter-label">카테고리:</span>
-        <button
-          class="filter-button"
-          :class="{ active: selectedCategory === null }"
-          @click="handleCategoryChange(null)"
-        >
-          전체
-        </button>
-        <button
-          v-for="category in categories"
-          :key="category"
-          class="filter-button"
-          :class="{ active: selectedCategory === category }"
-          @click="handleCategoryChange(category)"
-        >
-          {{ category }}
-        </button>
+      <div class="filter-group">
+        <div class="category-filter">
+          <span class="filter-label">카테고리:</span>
+          <button
+            class="filter-button"
+            :class="{ active: selectedCategory === null }"
+            @click="handleCategoryChange(null)"
+          >
+            전체
+          </button>
+          <button
+            v-for="category in categories"
+            :key="category"
+            class="filter-button"
+            :class="{ active: selectedCategory === category }"
+            @click="handleCategoryChange(category)"
+          >
+            {{ category }}
+          </button>
+        </div>
+
+        <div class="status-filter">
+          <span class="filter-label">상태:</span>
+          <button
+            class="filter-button"
+            :class="{ active: selectedStatus === 'all' }"
+            @click="handleStatusChange('all')"
+          >
+            전체
+          </button>
+          <button
+            class="filter-button"
+            :class="{ active: selectedStatus === 'open' }"
+            @click="handleStatusChange('open')"
+          >
+            열림
+          </button>
+          <button
+            class="filter-button"
+            :class="{ active: selectedStatus === 'closed' }"
+            @click="handleStatusChange('closed')"
+          >
+            닫힘
+          </button>
+        </div>
       </div>
 
       <div class="pagination" v-if="totalPages > 1">
@@ -212,6 +246,12 @@ th {
   gap: 1rem;
 }
 
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .category-filter {
   display: flex;
   align-items: center;
@@ -243,6 +283,13 @@ th {
   background-color: var(--vp-c-brand);
   color: white;
   border-color: var(--vp-c-brand);
+}
+
+.status-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .pagination {

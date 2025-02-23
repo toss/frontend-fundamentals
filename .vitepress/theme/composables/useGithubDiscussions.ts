@@ -22,8 +22,14 @@ export function useGithubDiscussions(
     token: "_"
   });
 
-  const { filteredDiscussions, categories, selectedCategory, setCategory } =
-    useDiscussionFilter(allDiscussions);
+  const {
+    filteredDiscussions,
+    categories,
+    selectedCategory,
+    selectedStatus,
+    setCategory,
+    setStatus
+  } = useDiscussionFilter(allDiscussions);
 
   const {
     sortField,
@@ -70,8 +76,10 @@ export function useGithubDiscussions(
     currentPage,
     categories,
     selectedCategory,
+    selectedStatus,
     setPage,
     setCategory,
+    setStatus,
     sortField,
     sortDirection,
     handleSort
