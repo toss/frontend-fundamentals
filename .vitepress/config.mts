@@ -44,26 +44,5 @@ export default defineConfig({
     config: (md) => {
       md.use(footnote);
     }
-  },
-  async transformPageData(pageData) {
-    if (pageData.relativePath === "code/community.md") {
-      try {
-        const response = await fetch("https://api.github.com/graphql", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            query: `query { ... }` // GraphQL 쿼리
-          })
-        });
-        const data = await response.json();
-        pageData.discussions = data.data.repository.discussions.nodes;
-      } catch (error) {
-        console.error("Failed to fetch discussions:", error);
-      }
-    }
-    return pageData;
   }
 });

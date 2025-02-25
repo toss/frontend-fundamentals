@@ -41,20 +41,13 @@ export function useGithubApi(config: GithubApiConfig) {
                 }
                 closed
                 closedAt
-              }
             }
           }
         }
-      `;
+      }
+    `;
 
-      const response = await fetch("https://api.github.com/graphql", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${config.token}`
-        },
-        body: JSON.stringify({ query })
-      });
+      const response = await fetchGithubDiscussion(query);
 
       const data = await response.json();
 
@@ -80,3 +73,25 @@ export function useGithubApi(config: GithubApiConfig) {
     fetchDiscussions
   };
 }
+
+const fetchGithubDiscussion = async (query: string) => {
+  const isLocalhost = window.location.hostname === "localhost";
+
+  if (isLocalhost) {
+    const accessToken = await (import.meta as any).env
+      .READ_GITHUB_DISCUSSION_ACCESS_TOKEN;
+
+    return fetch("https://api.github.com/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`
+      },
+      body: JSON.stringify({ query })
+    });
+  }
+
+  return fetch("/api/github", {
+    body: JSON.stringify({ query })
+  });
+};
