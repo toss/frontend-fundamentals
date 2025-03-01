@@ -35,14 +35,29 @@ onMounted(async () => {
 
     console.log("API 요청 URL:", apiUrl);
 
-    const response = await fetch(apiUrl);
+    const options = {
+      method: "GET",
+      headers: {
+        Accept: "application/json"
+      }
+    };
+
+    const response = await fetch(apiUrl, options);
 
     if (!response.ok) {
       throw new Error(`HTTP 오류! 상태: ${response.status}`);
     }
+
     const result = await response.json();
-    data.value = result;
-    console.log("로드된 데이터:", result);
+    console.log("원본 응답 데이터:", result);
+
+    if (Array.isArray(result)) {
+      data.value = result;
+    } else {
+      data.value = Array.isArray(result) ? result : [];
+    }
+
+    console.log("처리된 데이터:", data.value);
   } catch (err) {
     console.error("데이터를 불러오는 중 오류가 발생했습니다:", err);
     error.value = err.message;
