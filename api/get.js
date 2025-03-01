@@ -1,5 +1,3 @@
-import fetch from "node-fetch";
-
 export default async function handler(request, response) {
   try {
     const res = await fetch("https://jsonplaceholder.typicode.com/todos");
