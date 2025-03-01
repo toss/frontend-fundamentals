@@ -112,7 +112,7 @@ const formatDate = (dateString: string | null) => {
             :class="{ active: selectedStatus === 'closed' }"
             @click="handleStatusChange('closed')"
           >
-            닫힘
+            🎯 마무리된 토론
           </button>
         </div>
       </div>
@@ -173,10 +173,9 @@ const formatDate = (dateString: string | null) => {
               <a :href="discussion.url" target="_blank">{{
                 discussion.title
               }}</a>
-              <span v-if="discussion.closed" class="closed-badge">닫힘</span>
-              <span v-if="discussion.closed" class="closed-date">
-                ({{ formatDate(discussion.closedAt) }})
-              </span>
+              <span v-if="discussion.closed" class="closed-badge"
+                >🎯 마무리된 토론</span
+              >
             </div>
           </td>
           <td>
@@ -319,6 +318,9 @@ th {
   padding: 2px 6px;
   border-radius: 12px;
   font-size: 0.8em;
+  display: inline-block;
+  white-space: nowrap;
+  text-align: center;
 }
 
 .closed-date {
