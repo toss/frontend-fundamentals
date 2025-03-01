@@ -168,6 +168,10 @@ function sidebar(): DefaultTheme.Sidebar {
           link: "/code/community/good-discussions"
         },
         {
+          text: "⭐ 테스트",
+          link: "/code/test"
+        },
+        {
           text: "A vs B",
           link: "https://github.com/toss/frontend-fundamentals/discussions/categories/a-vs-b?discussions_q=is%3Aopen+category%3A%22A+vs+B%22+sort%3Adate_created"
         },

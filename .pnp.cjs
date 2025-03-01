@@ -29,6 +29,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@amplitude/analytics-browser", "npm:2.11.11"],\
           ["markdown-it-footnote", "npm:4.0.0"],\
+          ["node-fetch", "npm:3.3.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fnode-fetch%2F-%2Fnode-fetch-3.3.2.tgz"],\
           ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"],\
           ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.5.0"]\
         ],\
@@ -1699,6 +1700,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["data-uri-to-buffer", [\
+      ["npm:4.0.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fdata-uri-to-buffer%2F-%2Fdata-uri-to-buffer-4.0.1.tgz", {\
+        "packageLocation": "./.yarn/cache/data-uri-to-buffer-npm-4.0.1-ac5417e48c-0d0790b67f.zip/node_modules/data-uri-to-buffer/",\
+        "packageDependencies": [\
+          ["data-uri-to-buffer", "npm:4.0.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fdata-uri-to-buffer%2F-%2Fdata-uri-to-buffer-4.0.1.tgz"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["debug", [\
       ["npm:4.4.0", {\
         "packageLocation": "./.yarn/cache/debug-npm-4.4.0-f6efe76023-1847944c2e.zip/node_modules/debug/",\
@@ -1862,6 +1872,17 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["fetch-blob", [\
+      ["npm:3.2.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ffetch-blob%2F-%2Ffetch-blob-3.2.0.tgz", {\
+        "packageLocation": "./.yarn/cache/fetch-blob-npm-3.2.0-da10206435-5264ecceb5.zip/node_modules/fetch-blob/",\
+        "packageDependencies": [\
+          ["fetch-blob", "npm:3.2.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ffetch-blob%2F-%2Ffetch-blob-3.2.0.tgz"],\
+          ["node-domexception", "npm:1.0.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fnode-domexception%2F-%2Fnode-domexception-1.0.0.tgz"],\
+          ["web-streams-polyfill", "npm:3.3.3::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fweb-streams-polyfill%2F-%2Fweb-streams-polyfill-3.3.3.tgz"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["focus-trap", [\
       ["npm:7.6.4", {\
         "packageLocation": "./.yarn/cache/focus-trap-npm-7.6.4-d90a1ce800-75bf7aa450.zip/node_modules/focus-trap/",\
@@ -1883,6 +1904,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["formdata-polyfill", [\
+      ["npm:4.0.10::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fformdata-polyfill%2F-%2Fformdata-polyfill-4.0.10.tgz", {\
+        "packageLocation": "./.yarn/cache/formdata-polyfill-npm-4.0.10-3617b75fe7-9b5001d2ed.zip/node_modules/formdata-polyfill/",\
+        "packageDependencies": [\
+          ["formdata-polyfill", "npm:4.0.10::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fformdata-polyfill%2F-%2Fformdata-polyfill-4.0.10.tgz"],\
+          ["fetch-blob", "npm:3.2.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ffetch-blob%2F-%2Ffetch-blob-3.2.0.tgz"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["frontend-fundamentals", [\
       ["workspace:.", {\
         "packageLocation": "./",\
@@ -1890,6 +1921,7 @@ const RAW_RUNTIME_STATE =
           ["frontend-fundamentals", "workspace:."],\
           ["@amplitude/analytics-browser", "npm:2.11.11"],\
           ["markdown-it-footnote", "npm:4.0.0"],\
+          ["node-fetch", "npm:3.3.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fnode-fetch%2F-%2Fnode-fetch-3.3.2.tgz"],\
           ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"],\
           ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.5.0"]\
         ],\
@@ -2378,6 +2410,27 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/negotiator-npm-1.0.0-47d727e27e-b5734e8729.zip/node_modules/negotiator/",\
         "packageDependencies": [\
           ["negotiator", "npm:1.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["node-domexception", [\
+      ["npm:1.0.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fnode-domexception%2F-%2Fnode-domexception-1.0.0.tgz", {\
+        "packageLocation": "./.yarn/cache/node-domexception-npm-1.0.0-1d18321a2c-e332522f24.zip/node_modules/node-domexception/",\
+        "packageDependencies": [\
+          ["node-domexception", "npm:1.0.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fnode-domexception%2F-%2Fnode-domexception-1.0.0.tgz"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["node-fetch", [\
+      ["npm:3.3.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fnode-fetch%2F-%2Fnode-fetch-3.3.2.tgz", {\
+        "packageLocation": "./.yarn/cache/node-fetch-npm-3.3.2-d9908ad0ae-24207ca8c8.zip/node_modules/node-fetch/",\
+        "packageDependencies": [\
+          ["node-fetch", "npm:3.3.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fnode-fetch%2F-%2Fnode-fetch-3.3.2.tgz"],\
+          ["data-uri-to-buffer", "npm:4.0.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fdata-uri-to-buffer%2F-%2Fdata-uri-to-buffer-4.0.1.tgz"],\
+          ["fetch-blob", "npm:3.2.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ffetch-blob%2F-%2Ffetch-blob-3.2.0.tgz"],\
+          ["formdata-polyfill", "npm:4.0.10::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fformdata-polyfill%2F-%2Fformdata-polyfill-4.0.10.tgz"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3135,6 +3188,15 @@ const RAW_RUNTIME_STATE =
           "@types/vue__composition-api",\
           "@vue/composition-api",\
           "vue"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["web-streams-polyfill", [\
+      ["npm:3.3.3::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fweb-streams-polyfill%2F-%2Fweb-streams-polyfill-3.3.3.tgz", {\
+        "packageLocation": "./.yarn/cache/web-streams-polyfill-npm-3.3.3-69483b8c45-8e7e13501b.zip/node_modules/web-streams-polyfill/",\
+        "packageDependencies": [\
+          ["web-streams-polyfill", "npm:3.3.3::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fweb-streams-polyfill%2F-%2Fweb-streams-polyfill-3.3.3.tgz"]\
         ],\
         "linkType": "HARD"\
       }]\
