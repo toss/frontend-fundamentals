@@ -169,7 +169,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: "디스커션 보기",
-          link: "/code/dicussions/table"
+          link: "/code/dicussions"
         },
         {
           text: "A vs B",
