@@ -51,14 +51,14 @@ export function useGithubApi(config: GithubApiConfig) {
 
       const data = await response.json();
 
-      if (data.errors) {
-        throw new Error(data.errors[0].message);
-      }
+      const discussions = data.data.repository.discussions.nodes.map(
+        (node: any) => ({
+          ...node,
+          upvotes: node.reactions.totalCount
+        })
+      );
 
-      return data.data.repository.discussions.nodes.map((node: any) => ({
-        ...node,
-        upvotes: node.reactions.totalCount
-      }));
+      return discussions;
     } catch (e) {
       error.value = e as Error;
       throw e;
@@ -91,7 +91,14 @@ const fetchGithubDiscussion = async (query: string) => {
     });
   }
 
-  return fetch("/api/github", {
+  const response = await fetch("/api/github", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
     body: JSON.stringify({ query })
   });
+
+  return response;
 };

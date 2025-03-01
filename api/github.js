@@ -1,29 +1,23 @@
 export default async function handler(req, res) {
-  const { query, variables } = req.body || {};
+  const { query } = req.body;
 
-  if (!query) {
-    return res.status(400).json({ error: 'Missing "query" in request body' });
+  const token = process.env.READ_GITHUB_DISCUSSION_ACCESS_TOKEN;
+
+  if (!token) {
+    console.error("[Server] GitHub 토큰 누락");
+    return res.status(500).json({ error: "GitHub token is not configured" });
   }
 
-  const GITHUB_ACCESS_TOKEN = process.env.READ_GITHUB_DISCUSSION_ACCESS_TOKEN;
+  const response = await fetch("https://api.github.com/graphql", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ query })
+  });
 
-  if (!GITHUB_ACCESS_TOKEN) {
-    return res.status(500).json({ error: "Missing API Key" });
-  }
+  const data = await response.json();
 
-  try {
-    const response = await fetch("https://api.github.com/graphql", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${GITHUB_ACCESS_TOKEN}`
-      },
-      body: JSON.stringify({ query })
-    });
-
-    const data = await response.json();
-    return res.status(response.status).json(data);
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
+  return res.status(200).json(data);
 }
