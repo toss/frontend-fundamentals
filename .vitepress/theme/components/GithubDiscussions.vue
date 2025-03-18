@@ -61,6 +61,10 @@ const formatDate = (dateString: string | null) => {
     day: "numeric"
   });
 };
+
+function handleClick(id: number) {
+  window.location.href = `${window.location.pathname}detail?id=${id}`;
+}
 </script>
 
 <template>
@@ -170,7 +174,7 @@ const formatDate = (dateString: string | null) => {
           <td>{{ discussion.upvotes }}</td>
           <td>
             <div class="title-container">
-              <a :href="discussion.url" target="_blank">{{
+              <a href="#" @click.prevent="handleClick(discussion.number)">{{
                 discussion.title
               }}</a>
               <span v-if="discussion.closed" class="closed-badge"
