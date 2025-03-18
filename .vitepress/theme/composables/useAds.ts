@@ -16,7 +16,15 @@ export function useAds() {
     currentAdIndex.value = (currentAdIndex.value + 1) % ads.value.length;
   };
 
+  const getRandomAdIndex = () => {
+    return Math.floor(Math.random() * ads.value.length);
+  };
+
   onMounted(() => {
+    // 초기에 랜덤한 광고 표시
+    currentAdIndex.value = getRandomAdIndex();
+
+    // 일정 시간 간격으로 광고 로테이션
     const intervalId = setInterval(rotateAd, rotationInterval);
 
     return () => {
