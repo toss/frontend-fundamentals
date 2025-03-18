@@ -61,6 +61,12 @@ const formatDate = (dateString: string | null) => {
     day: "numeric"
   });
 };
+
+const handleWriteClick = () => {
+  window.open(
+    "https://github.com/toss/frontend-fundamentals/discussions/new/choose"
+  );
+};
 </script>
 
 <template>
@@ -134,6 +140,8 @@ const formatDate = (dateString: string | null) => {
           다음
         </button>
       </div>
+
+      <button class="write-button" @click="handleWriteClick">작성하기</button>
     </div>
 
     <table>
@@ -352,5 +360,19 @@ th {
 
 .sortable:hover .sort-icon {
   color: var(--vp-c-text-1);
+}
+
+.write-button {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 6px 12px;
+  background-color: var(--vp-c-brand);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 </style>
