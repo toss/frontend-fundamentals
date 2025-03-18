@@ -44,7 +44,7 @@ body:
         해당 개선 아이디어를 제안하게 된 이유를 간단히 설명해 주세요.
 
   - type: textarea
-    id: folder
+    id: summary
     attributes:
       label: 개요
     validations:
