@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import DefaultTheme from "vitepress/theme";
 import Comments from "./components/Comments.vue";
-import CustomAd from "./components/CustomAd.vue";
+import CustomBanner from "./components/CustomBanner.vue";
 import { useLocale } from "./composables";
 
 const { Layout } = DefaultTheme;
@@ -14,7 +14,7 @@ const { isKorean } = useLocale();
       <Comments />
     </template>
     <template #aside-bottom>
-      <CustomAd v-if="isKorean" />
+      <CustomBanner v-if="isKorean" />
     </template>
   </Layout>
 </template>

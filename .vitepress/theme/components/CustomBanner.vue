@@ -1,24 +1,29 @@
 <template>
-  <div class="custom-ad-container">
-    <div class="custom-ad-box">
+  <div class="custom-banner-container">
+    <div class="custom-banner-box">
       <a
-        :href="currentAd?.link"
+        :href="currentBanner?.link"
         target="_blank"
         rel="noopener noreferrer"
-        class="custom-ad-link"
-        @click="currentAd && trackAdClick(currentAd)"
+        class="custom-banner-link"
+        @click="currentBanner && trackBannerClick(currentBanner)"
       >
-        <div class="custom-ad-content">
-          <div class="custom-ad-title">{{ currentAd?.title }}</div>
-          <div class="custom-ad-description">{{ currentAd?.description }}</div>
+        <div class="custom-banner-content">
+          <div class="custom-banner-title">{{ currentBanner?.title }}</div>
+          <div class="custom-banner-description">
+            {{ currentBanner?.description }}
+          </div>
         </div>
       </a>
-      <div class="custom-ad-controls">
+      <div class="custom-banner-controls">
         <button
-          v-for="(_, index) in ads"
+          v-for="(_, index) in banners"
           :key="index"
-          :class="['custom-ad-dot', { active: currentAdIndex === index }]"
-          @click="setAdIndex(index)"
+          :class="[
+            'custom-banner-dot',
+            { active: currentBannerIndex === index }
+          ]"
+          @click="setBannerIndex(index)"
         ></button>
       </div>
     </div>
@@ -26,14 +31,20 @@
 </template>
 
 <script setup lang="ts">
-import { useAds } from "../composables";
-import type { Ad } from "../data/adsData";
+import { useBanner } from "../composables";
+import type { Banner } from "../data/bannerData";
 
-const { ads, currentAd, setAdIndex, trackAdClick, currentAdIndex } = useAds();
+const {
+  banners,
+  currentBanner,
+  setBannerIndex,
+  trackBannerClick,
+  currentBannerIndex
+} = useBanner();
 </script>
 
 <style scoped>
-.custom-ad-container {
+.custom-banner-container {
   margin: 24px 0;
   border-radius: 8px;
   overflow: hidden;
@@ -47,23 +58,23 @@ const { ads, currentAd, setAdIndex, trackAdClick, currentAdIndex } = useAds();
   z-index: 10;
 }
 
-.custom-ad-container:hover {
+.custom-banner-container:hover {
   transform: translateY(-2px);
 }
 
-.custom-ad-box {
+.custom-banner-box {
   padding: 16px;
   display: flex;
   flex-direction: column;
 }
 
-.custom-ad-link {
+.custom-banner-link {
   display: flex;
   text-decoration: none;
   color: inherit;
 }
 
-.custom-ad-image-wrapper {
+.custom-banner-image-wrapper {
   width: 64px;
   height: 64px;
   margin-right: 12px;
@@ -71,17 +82,17 @@ const { ads, currentAd, setAdIndex, trackAdClick, currentAdIndex } = useAds();
   border-radius: 6px;
 }
 
-.custom-ad-image {
+.custom-banner-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.custom-ad-content {
+.custom-banner-content {
   flex: 1;
 }
 
-.custom-ad-title {
+.custom-banner-title {
   font-weight: 600;
   font-size: 14px;
   line-height: 1.4;
@@ -89,13 +100,13 @@ const { ads, currentAd, setAdIndex, trackAdClick, currentAdIndex } = useAds();
   color: var(--vp-c-text-1);
 }
 
-.custom-ad-description {
+.custom-banner-description {
   font-size: 13px;
   line-height: 1.4;
   color: var(--vp-c-text-2);
 }
 
-.custom-ad-label {
+.custom-banner-label {
   margin-top: 8px;
   font-size: 11px;
   text-transform: uppercase;
@@ -103,13 +114,13 @@ const { ads, currentAd, setAdIndex, trackAdClick, currentAdIndex } = useAds();
   text-align: right;
 }
 
-.custom-ad-controls {
+.custom-banner-controls {
   display: flex;
   justify-content: center;
   margin-top: 12px;
 }
 
-.custom-ad-dot {
+.custom-banner-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
@@ -122,13 +133,13 @@ const { ads, currentAd, setAdIndex, trackAdClick, currentAdIndex } = useAds();
   transition: opacity 0.2s ease;
 }
 
-.custom-ad-dot.active {
+.custom-banner-dot.active {
   opacity: 1;
   background-color: var(--vp-c-brand);
 }
 
 @media (max-width: 768px) {
-  .custom-ad-container {
+  .custom-banner-container {
     position: static;
     width: 100%;
     margin-top: 24px;

@@ -1,10 +1,10 @@
-export interface Ad {
+export interface Banner {
   title: string;
   description: string;
   link: string;
 }
 
-export const ADS_DATA: Ad[] = [
+export const BANNER_DATA: Banner[] = [
   {
     title: "🎙️ 조건부 렌더링, 어떻게 처리하시나요?",
     description:
