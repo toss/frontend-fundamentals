@@ -99,6 +99,13 @@ function handleClick(id: number) {
           <span class="filter-label">상태:</span>
           <button
             class="filter-button"
+            :class="{ active: selectedStatus === 'popular' }"
+            @click="handleStatusChange('popular')"
+          >
+            🔥 인기글
+          </button>
+          <button
+            class="filter-button"
             :class="{ active: selectedStatus === 'all' }"
             @click="handleStatusChange('all')"
           >
