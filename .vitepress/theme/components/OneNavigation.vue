@@ -1,5 +1,5 @@
 <template>
-  <div class="side-navbar">
+  <div class="one-navigation">
     <div class="nav-top">
       <div
         class="nav-item"
@@ -124,7 +124,7 @@ function isActive(path: string): boolean {
 </script>
 
 <style scoped>
-.side-navbar {
+.one-navigation {
   position: fixed;
   top: 0;
   left: 0;
@@ -228,7 +228,7 @@ function isActive(path: string): boolean {
 
 /* 모바일 대응 */
 @media (max-width: 768px) {
-  .side-navbar {
+  .one-navigation {
     top: auto;
     bottom: 0;
     left: 0;

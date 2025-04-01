@@ -2,7 +2,7 @@
 import DefaultTheme from "vitepress/theme";
 import Comments from "./components/Comments.vue";
 import CustomBanner from "./components/CustomBanner.vue";
-import SideNavbar from "./components/SideNavbar.vue";
+import OneNavigation from "./components/OneNavigation.vue";
 import { useLocale } from "./composables";
 
 const { Layout } = DefaultTheme;
@@ -10,7 +10,7 @@ const { isKorean } = useLocale();
 </script>
 
 <template>
-  <SideNavbar />
+  <OneNavigation />
   <div class="layout-wrapper">
     <Layout>
       <template #doc-after>

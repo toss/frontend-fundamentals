@@ -65,15 +65,15 @@ html:not(.dark) .dark-only {
 }
 
 /* 화면 전환 애니메이션 */
-.side-navbar {
+.one-navigation {
   transition: transform 0.3s ease;
 }
 
-.side-navbar:hover .nav-item {
+.one-navigation:hover .nav-item {
   opacity: 0.7;
 }
 
-.side-navbar:hover .nav-item:hover {
+.one-navigation:hover .nav-item:hover {
   opacity: 1;
 }
 
@@ -166,7 +166,7 @@ html:not(.dark) .dark-only {
   }
 
   /* 모바일에서 네비게이션 바 하단에 고정 */
-  .side-navbar {
+  .one-navigation {
     top: auto !important;
     bottom: 0 !important;
     left: 0 !important;
@@ -278,13 +278,13 @@ html:not(.dark) .dark-only {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.dark .side-navbar {
+.dark .one-navigation {
   border-right-color: var(--vp-c-divider);
 }
 
 /* 모바일에서 다크 모드 하단 네비게이션 바 */
 @media (max-width: 768px) {
-  .dark .side-navbar {
+  .dark .one-navigation {
     box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
   }
 }
