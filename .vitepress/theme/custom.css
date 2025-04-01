@@ -10,8 +10,281 @@ html:not(.dark) .dark-only {
   --vp-font-family-base: "Toss Product Sans", ui-sans-serif, system-ui,
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
     "Noto Color Emoji";
+  --nav-width: 64px;
+  --nav-height-mobile: 56px;
 }
 
 :root[lang="ko"] {
   word-break: keep-all;
+}
+
+/* VitePress 헤더 조정 */
+.VPNav {
+  /* 좌측 네비게이션 바 때문에 왼쪽 패딩 추가 */
+  padding-left: var(--nav-width) !important;
+  z-index: 41 !important; /* 사이드바보다 위에 표시 */
+  background-color: transparent !important; /* 배경을 투명하게 하여 사이드바 배경이 보이도록 */
+}
+
+.VPNavBar .container {
+  /* 기본 최대 너비 설정을 유지하면서 패딩 조정 */
+  max-width: calc(var(--vp-layout-max-width) - var(--nav-width)) !important;
+  margin: 0 auto !important;
+}
+
+/* 로고 영역 배경색 투명하게 처리 */
+.VPNavBar {
+  background: transparent !important;
+}
+
+/* 로고 영역에만 회색 배경 적용 */
+.VPNavBar .title {
+  background-color: var(--vp-c-bg-alt) !important;
+}
+
+/* 로고 오른쪽 영역 배경색 원래대로 복원 */
+.VPNavBar .content-body {
+  background-color: var(--vp-c-bg) !important;
+}
+
+/* 메뉴 드롭다운 뒤에는 백그라운드 추가 */
+.VPNavBarMenu {
+  background-color: var(--vp-c-bg) !important;
+}
+
+@media (max-width: 768px) {
+  .VPNav {
+    padding-left: 0 !important;
+  }
+}
+
+/* 선택된 네비게이션 아이템 스타일 */
+.nav-item.active {
+  color: var(--vp-c-brand);
+  background-color: var(--vp-c-bg-mute);
+}
+
+/* 화면 전환 애니메이션 */
+.side-navbar {
+  transition: transform 0.3s ease;
+}
+
+.side-navbar:hover .nav-item {
+  opacity: 0.7;
+}
+
+.side-navbar:hover .nav-item:hover {
+  opacity: 1;
+}
+
+/* 로고 애니메이션 */
+.logo-link {
+  transition: transform 0.2s ease;
+}
+
+.logo-link:hover {
+  transform: scale(1.1);
+}
+
+/* 다크 모드 아이콘 색상 조정 */
+.dark .nav-icon {
+  stroke: var(--vp-c-text-2);
+}
+
+.dark .nav-item:hover .nav-icon,
+.dark .nav-item.active .nav-icon {
+  stroke: var(--vp-c-brand);
+}
+
+/* 툴팁 스타일 */
+.nav-item:hover::after {
+  content: attr(title);
+  position: absolute;
+  left: calc(var(--nav-width) + 8px);
+  padding: 4px 8px;
+  background-color: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 모바일에서는 툴팁 숨김 */
+@media (max-width: 768px) {
+  .nav-item:hover::after {
+    display: none;
+  }
+}
+
+/* VitePress 사이드바 스타일 추가 조정 */
+.VPSidebar {
+  /* 상단부터 시작하도록 조정 (GNB 영역까지 확장) */
+  top: 0 !important; /* 사이드바를 페이지 상단에서 시작하도록 설정 */
+  padding-top: var(--vp-nav-height) !important; /* 헤더 높이만큼 패딩 추가 */
+  border-right: 1px solid var(--vp-c-divider) !important;
+  background-color: var(--vp-c-bg-alt) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* 사이드바 배경색이 헤더 아래에 잘 보이도록 z-index 조정 */
+.VPNav {
+  z-index: 41 !important; /* 사이드바보다 위에 표시 */
+}
+
+/* 로고 아래 테두리 제거 */
+.VPNavBar.has-sidebar .title {
+  border-bottom-color: transparent !important;
+}
+
+/* 로고 오른쪽 영역 테두리 유지 */
+.VPNavBar.has-sidebar .content-body {
+  border-bottom-color: var(--vp-c-divider) !important;
+}
+
+.VPSidebarItem.level-0 .items {
+  /* 들여쓰기 간격 조정 */
+  padding-left: 12px;
+}
+
+/* 사이드바 활성 항목 표시 강화 */
+.VPSidebarItem.is-active > .item .link {
+  font-weight: 600 !important;
+}
+
+/* 모바일 화면에서 반응형 스타일 개선 */
+@media (max-width: 768px) {
+  /* 모바일에서 헤더 패딩 제거 */
+  .VPNav {
+    padding-left: 0 !important;
+  }
+
+  /* 모바일에서도 로고 영역만 회색 배경 유지 */
+  .VPNavBar .title {
+    background-color: var(--vp-c-bg-alt) !important;
+  }
+
+  /* 모바일에서 네비게이션 바 하단에 고정 */
+  .side-navbar {
+    top: auto !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: var(--nav-height-mobile) !important;
+    flex-direction: row !important;
+    padding: 0 16px !important;
+    border-right: none !important;
+    border-top: 1px solid var(--vp-c-divider) !important;
+    z-index: 100 !important;
+    background-color: var(--vp-c-bg) !important;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08); /* 상단 그림자 추가 */
+  }
+
+  /* 모바일에서 사이드바 너비 조정 */
+  .VPSidebar {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding-left: 1.5rem !important; /* 좌측 패딩 추가 */
+    padding-right: 1.5rem !important; /* 우측 패딩 추가 */
+  }
+
+  /* 모바일에서 콘텐츠 영역 좌측 패딩 조정 */
+  .VPContent.has-sidebar {
+    padding-left: 0 !important;
+  }
+
+  /* 모바일에서는 툴팁 숨김 */
+  .nav-item:hover::after {
+    display: none !important;
+  }
+
+  /* 모바일에서 네비게이션 바 아이템 간격 조정 */
+  .nav-links {
+    flex-direction: row !important;
+    justify-content: space-around !important;
+    width: 100% !important;
+    gap: 8px !important;
+  }
+
+  /* 모바일에서 하단 아이템 표시 개선 */
+  .nav-bottom {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* 모바일에서 로고 영역 중앙 정렬 */
+  .VPNavBar .container {
+    margin: 0 auto !important;
+    justify-content: center !important;
+  }
+
+  /* 콘텐츠 영역 하단에 패딩 추가하여 하단 네비게이션 바와 겹치지 않도록 */
+  .VPContent {
+    padding-bottom: 70px !important; /* 하단 네비게이션 바 높이보다 약간 더 크게 */
+  }
+
+  /* 사이드바 아이템 들여쓰기 조정 */
+  .VPSidebarItem .items {
+    padding-left: 0.5rem !important;
+  }
+}
+
+/* 태블릿 화면 대응 */
+@media (min-width: 769px) and (max-width: 1200px) {
+  .VPSidebar {
+    margin-left: 64px !important; /* 네비게이션 바 너비만큼 마진 유지 */
+    width: 240px !important; /* 태블릿에서는 사이드바 너비 축소 */
+  }
+
+  /* 사이드바 아이템 들여쓰기 조정 */
+  .VPSidebarItem .items {
+    padding-left: 0.75rem !important;
+  }
+}
+
+/* 모든 화면 크기에서 공통 스타일 */
+/* 활성화된 사이드바 아이템 스타일 강화 */
+.VPSidebarItem.is-active > .item .text {
+  font-weight: 600 !important;
+}
+
+/* 사이드바 눈금 조정 */
+.VPSidebarItem.level-0 > .items {
+  padding-left: 1rem !important;
+}
+
+/* 페이지 콘텐츠 스타일 */
+.VPDoc {
+  background-color: var(--vp-c-bg); /* 콘텐츠 배경색 설정 */
+}
+
+/* 페이지 전환 애니메이션 추가 */
+.fade-slide-y-enter-active {
+  transition: all 0.3s ease;
+}
+.fade-slide-y-leave-active {
+  transition: all 0.3s ease;
+}
+.fade-slide-y-enter-from,
+.fade-slide-y-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+/* 다크 모드 관련 스타일 개선 */
+.dark .VPSidebar {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.dark .side-navbar {
+  border-right-color: var(--vp-c-divider);
+}
+
+/* 모바일에서 다크 모드 하단 네비게이션 바 */
+@media (max-width: 768px) {
+  .dark .side-navbar {
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
+  }
 }
