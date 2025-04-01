@@ -128,7 +128,7 @@ function isActive(path: string): boolean {
   position: fixed;
   top: 0;
   left: 0;
-  width: 64px;
+  width: 50px;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -159,7 +159,7 @@ function isActive(path: string): boolean {
 
 .nav-item {
   width: 100%;
-  height: 40px;
+  height: 36px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -178,8 +178,8 @@ function isActive(path: string): boolean {
 }
 
 .nav-item svg {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
 }
 
 .nav-item:hover a {
@@ -194,8 +194,8 @@ function isActive(path: string): boolean {
   content: "";
   position: absolute;
   left: 0;
-  top: 8px;
-  height: 24px;
+  top: 7px;
+  height: 22px;
   width: 2px;
   background-color: var(--vp-c-brand);
 }
@@ -204,7 +204,7 @@ function isActive(path: string): boolean {
 .nav-item[data-tooltip]::after {
   content: attr(data-tooltip);
   position: absolute;
-  left: 64px;
+  left: 50px;
   top: 50%;
   transform: translateY(-50%);
   background-color: var(--vp-c-bg-soft);
@@ -223,7 +223,7 @@ function isActive(path: string): boolean {
 .nav-item[data-tooltip]:hover::after {
   opacity: 1;
   visibility: visible;
-  left: 72px;
+  left: 58px;
 }
 
 /* 모바일 대응 */

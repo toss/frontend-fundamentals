@@ -10,7 +10,7 @@ html:not(.dark) .dark-only {
   --vp-font-family-base: "Toss Product Sans", ui-sans-serif, system-ui,
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
     "Noto Color Emoji";
-  --nav-width: 64px;
+  --nav-width: 50px;
   --nav-height-mobile: 56px;
 }
 
@@ -234,7 +234,7 @@ html:not(.dark) .dark-only {
 /* 태블릿 화면 대응 */
 @media (min-width: 769px) and (max-width: 1200px) {
   .VPSidebar {
-    margin-left: 64px !important; /* 네비게이션 바 너비만큼 마진 유지 */
+    margin-left: 50px !important; /* 네비게이션 바 너비만큼 마진 유지 */
     width: 240px !important; /* 태블릿에서는 사이드바 너비 축소 */
   }
 

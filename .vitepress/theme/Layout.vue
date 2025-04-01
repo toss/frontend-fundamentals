@@ -30,7 +30,7 @@ html {
 }
 
 .layout-wrapper {
-  padding-left: 64px; /* 네비게이션 바 너비만큼 여백 추가 */
+  padding-left: 50px; /* 네비게이션 바 너비만큼 여백 추가 */
 }
 
 /* VitePress 기본 사이드바 조정 */
@@ -39,13 +39,13 @@ html {
 }
 
 .VPSidebar {
-  margin-left: 64px; /* 네비게이션 바 너비만큼 왼쪽 마진 추가 */
+  margin-left: 50px; /* 네비게이션 바 너비만큼 왼쪽 마진 추가 */
   width: var(--vp-sidebar-width) !important; /* 너비 고정 */
 }
 
 .VPContent.has-sidebar {
   padding-left: calc(
-    var(--vp-sidebar-width) + 64px
+    var(--vp-sidebar-width) + 50px
   ) !important; /* 사이드바 + 네비게이션 바 너비만큼 패딩 */
 }
 
@@ -69,13 +69,13 @@ html {
 /* 태블릿 화면 대응 */
 @media (min-width: 769px) and (max-width: 1200px) {
   .VPSidebar {
-    margin-left: 64px; /* 네비게이션 바 너비만큼 마진 유지 */
+    margin-left: 50px; /* 네비게이션 바 너비만큼 마진 유지 */
     width: 240px !important; /* 태블릿에서는 사이드바 너비 축소 */
   }
 
   .VPContent.has-sidebar {
     padding-left: calc(
-      240px + 64px
+      240px + 50px
     ) !important; /* 조정된 사이드바 + 네비게이션 바 너비 */
   }
 }
