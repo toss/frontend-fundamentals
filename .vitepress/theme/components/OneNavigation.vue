@@ -4,7 +4,7 @@
       <div
         class="nav-item"
         :class="{ active: isActive('/getting-started/') }"
-        data-tooltip="시작하기"
+        data-tooltip="코드퀄리티"
       >
         <a href="/getting-started/introduction">
           <svg
@@ -27,7 +27,7 @@
       <div
         class="nav-item"
         :class="{ active: isActive('/components/') }"
-        data-tooltip="컴포넌트"
+        data-tooltip="번들링"
       >
         <a href="/components/introduction">
           <svg
@@ -46,7 +46,7 @@
       <div
         class="nav-item"
         :class="{ active: isActive('/hooks/') }"
-        data-tooltip="Hooks"
+        data-tooltip="접근성"
       >
         <a href="/hooks/introduction">
           <svg
@@ -65,7 +65,7 @@
       <div
         class="nav-item"
         :class="{ active: isActive('/utils/') }"
-        data-tooltip="유틸리티"
+        data-tooltip="디버깅"
       >
         <a href="/utils/introduction">
           <svg
@@ -92,7 +92,11 @@
     </div>
     <div class="nav-bottom">
       <div class="nav-item" data-tooltip="GitHub">
-        <a href="https://github.com/toss/slash" target="_blank" rel="noopener">
+        <a
+          href="https://github.com/toss/frontend-fundamentals"
+          target="_blank"
+          rel="noopener"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
