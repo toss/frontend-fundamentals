@@ -62,12 +62,15 @@ const formatDate = (dateString: string | null) => {
   });
 };
 
+function handleClick(id: number) {
+  window.location.href = `${window.location.pathname}detail?id=${id}`;
+}
+
 const handleWriteClick = () => {
   window.open(
     "https://github.com/toss/frontend-fundamentals/discussions/new/choose"
   );
 };
-
 </script>
 
 <template>
