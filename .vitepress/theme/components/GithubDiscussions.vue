@@ -62,9 +62,12 @@ const formatDate = (dateString: string | null) => {
   });
 };
 
-function handleClick(id: number) {
-  window.location.href = `${window.location.pathname}detail?id=${id}`;
-}
+const handleWriteClick = () => {
+  window.open(
+    "https://github.com/toss/frontend-fundamentals/discussions/new/choose"
+  );
+};
+
 </script>
 
 <template>
@@ -145,6 +148,8 @@ function handleClick(id: number) {
           다음
         </button>
       </div>
+
+      <button class="write-button" @click="handleWriteClick">작성하기</button>
     </div>
 
     <table>
@@ -363,5 +368,19 @@ th {
 
 .sortable:hover .sort-icon {
   color: var(--vp-c-text-1);
+}
+
+.write-button {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 6px 12px;
+  background-color: var(--vp-c-brand);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 </style>
