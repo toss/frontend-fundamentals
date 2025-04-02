@@ -18,8 +18,7 @@ export function useGithubDiscussions(
 
   const { loading, error, fetchDiscussions } = useGithubApi({
     owner,
-    repo,
-    token: "_"
+    repo
   });
 
   const {

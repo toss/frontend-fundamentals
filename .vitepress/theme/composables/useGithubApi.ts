@@ -4,7 +4,6 @@ import type { GithubDiscussion } from "../types/github";
 interface GithubApiConfig {
   owner: string;
   repo: string;
-  token: string;
 }
 
 export function useGithubApi(config: GithubApiConfig) {
@@ -22,6 +21,7 @@ export function useGithubApi(config: GithubApiConfig) {
             discussions(first: 100) {
               nodes {
                 id
+                number
                 title
                 url
                 reactions {
@@ -67,10 +67,114 @@ export function useGithubApi(config: GithubApiConfig) {
     }
   };
 
+  const fetchDiscussionDetail = async (
+    discussionNumber: number
+  ): Promise<GithubDiscussion> => {
+    loading.value = true;
+    error.value = null;
+
+    try {
+      const query = `
+        query {
+          repository(owner: "${config.owner}", name: "${config.repo}") {
+            discussion(number: ${discussionNumber}) {
+              id
+              title
+              url
+              body
+              reactions {
+                totalCount
+              }
+              author {
+                login
+                url
+              }
+              createdAt
+              category {
+                name
+                emoji
+              }
+              comments(first: 100) {
+                totalCount
+                nodes {
+                  id
+                  body
+                  createdAt
+                  replyTo {
+                    id
+                    author {
+                      login
+                      url
+                    }
+                  }
+                  author {
+                    login
+                    url
+                  }
+                  reactions {
+                    totalCount
+                  }
+                  replies(first: 100) {
+                    nodes {
+                      id
+                      body
+                      createdAt
+                      author {
+                        login
+                        url
+                      }
+                      reactions {
+                        totalCount
+                      }
+                      replyTo {
+                        id
+                        author {
+                          login
+                          url
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              closed
+              closedAt
+            }
+          }
+        }
+      `;
+
+      const response = await fetchGithubDiscussion(query);
+      const data = await response.json();
+
+      const discussion = {
+        ...data.data.repository.discussion,
+        upvotes: data.data.repository.discussion.reactions.totalCount,
+        comments: {
+          ...data.data.repository.discussion.comments,
+          nodes: data.data.repository.discussion.comments.nodes.map(
+            (comment: any) => ({
+              ...comment,
+              upvotes: comment.reactions.totalCount
+            })
+          )
+        }
+      };
+
+      return discussion;
+    } catch (e) {
+      error.value = e as Error;
+      throw e;
+    } finally {
+      loading.value = false;
+    }
+  };
+
   return {
     loading,
     error,
-    fetchDiscussions
+    fetchDiscussions,
+    fetchDiscussionDetail
   };
 }
 
@@ -85,7 +189,7 @@ const fetchGithubDiscussion = async (query: string) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`
+        Authorization: accessToken
       },
       body: JSON.stringify({ query })
     });

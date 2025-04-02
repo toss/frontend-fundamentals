@@ -67,6 +67,7 @@ const handleWriteClick = () => {
     "https://github.com/toss/frontend-fundamentals/discussions/new/choose"
   );
 };
+
 </script>
 
 <template>
@@ -99,6 +100,13 @@ const handleWriteClick = () => {
 
         <div class="status-filter">
           <span class="filter-label">상태:</span>
+          <button
+            class="filter-button"
+            :class="{ active: selectedStatus === 'popular' }"
+            @click="handleStatusChange('popular')"
+          >
+            🔥 인기글
+          </button>
           <button
             class="filter-button"
             :class="{ active: selectedStatus === 'all' }"
@@ -178,7 +186,7 @@ const handleWriteClick = () => {
           <td>{{ discussion.upvotes }}</td>
           <td>
             <div class="title-container">
-              <a :href="discussion.url" target="_blank">{{
+              <a href="#" @click.prevent="handleClick(discussion.number)">{{
                 discussion.title
               }}</a>
               <span v-if="discussion.closed" class="closed-badge"

@@ -4,7 +4,11 @@ import type { Ref } from "vue";
 
 export function useDiscussionFilter(discussions: Ref<GithubDiscussion[]>) {
   const selectedCategory = ref<string | null>(null);
-  const selectedStatus = ref<"all" | "open" | "closed">("all");
+  const selectedStatus = ref<"all" | "open" | "closed" | "popular">("popular");
+
+  const isPopular = (discussion: GithubDiscussion) => {
+    return discussion.comments.totalCount >= 5 || discussion.upvotes >= 10;
+  };
 
   const categories = computed(() => {
     const categorySet = new Set<string>();
@@ -23,6 +27,10 @@ export function useDiscussionFilter(discussions: Ref<GithubDiscussion[]>) {
       );
     }
 
+    if (selectedStatus.value === "popular") {
+      filtered = filtered.filter(isPopular);
+    }
+
     if (selectedStatus.value !== "all") {
       filtered = filtered.filter(
         (discussion) =>
@@ -37,7 +45,7 @@ export function useDiscussionFilter(discussions: Ref<GithubDiscussion[]>) {
     selectedCategory.value = category;
   };
 
-  const setStatus = (status: "all" | "open" | "closed") => {
+  const setStatus = (status: "all" | "open" | "closed" | "popular") => {
     selectedStatus.value = status;
   };
 
