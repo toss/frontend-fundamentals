@@ -17,7 +17,10 @@
     "lint": "eslint \"**/*.{js,jsx,ts,tsx,vue}\" --ignore-path .gitignore",
     "lint:fix": "eslint \"**/*.{js,jsx,ts,tsx,vue}\" --fix --ignore-path .gitignore"
   },
-  "devDependencies": {
-    "prettier": "^3.2.5"
+  "dependencies": {
+    "@amplitude/analytics-browser": "^2.11.11",
+    "markdown-it-footnote": "^4.0.0",
+    "typescript": "^5.6.3",
+    "vitepress": "^1.4.1"
   }
 }
