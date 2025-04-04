@@ -40,7 +40,7 @@ __assetManifest.json
 .swc
 
 .tosscore
-.vitepress/cache
-.vitepress/dist
+**/.vitepress/cache
+**/.vitepress/dist
 
 config.mts.*.js
