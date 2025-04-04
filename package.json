@@ -13,7 +13,10 @@
     "docs:build": "yarn workspace @frontend-fundamentals/clean-code docs:build",
     "docs:preview": "yarn workspace @frontend-fundamentals/clean-code docs:preview"
   },
-  "devDependencies": {
-    "prettier": "^3.5.3"
+  "dependencies": {
+    "@amplitude/analytics-browser": "^2.11.11",
+    "markdown-it-footnote": "^4.0.0",
+    "typescript": "^5.6.3",
+    "vitepress": "^1.4.1"
   }
 }

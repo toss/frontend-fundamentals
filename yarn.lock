@@ -1566,7 +1566,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "frontend-fundamentals@workspace:."
   dependencies:
-    prettier: "npm:^3.5.3"
+    "@amplitude/analytics-browser": "npm:^2.11.11"
+    markdown-it-footnote: "npm:^4.0.0"
+    typescript: "npm:^5.6.3"
+    vitepress: "npm:^1.4.1"
   languageName: unknown
   linkType: soft
 
@@ -2113,15 +2116,6 @@ __metadata:
   version: 10.25.4
   resolution: "preact@npm:10.25.4"
   checksum: 10/8b377438912965b45786d1dbfdd532157294a79bebc611b242d708317574403554ab37e34c613a3e9e862685c04695343f1426a38e12258e1e9ebafc0d7e4c5d
-  languageName: node
-  linkType: hard
-
-"prettier@npm:^3.5.3":
-  version: 3.5.3
-  resolution: "prettier@npm:3.5.3"
-  bin:
-    prettier: bin/prettier.cjs
-  checksum: 10/7050c08f674d9e49fbd9a4c008291d0715471f64e94cc5e4b01729affce221dfc6875c8de7e66b728c64abc9352eefb7eaae071b5f79d30081be207b53774b78
   languageName: node
   linkType: hard
 
