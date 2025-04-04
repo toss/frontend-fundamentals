@@ -71,7 +71,7 @@ export const httpService = {
 ```
 
 ```typescript [fetchUser.ts]
-// http.tsで定義したhttpを持ってくるコード
+// httpService.tsで定義したhttpServiceを持ってくるコード
 import { httpService } from "./httpService";
 
 export async function fetchUser() {

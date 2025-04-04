@@ -71,7 +71,7 @@ export const httpService = {
 ```
 
 ```typescript [fetchUser.ts]
-// http.ts에서 정의한 http를 가져오는 코드
+// httpService.ts에서 정의한 httpService를 가져오는 코드
 import { httpService } from "./httpService";
 
 export async function fetchUser() {
