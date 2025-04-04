@@ -1,7 +1,7 @@
 version: '0.14'
 service:
   image:
-    source: ./.vitepress/dist
+    source: ./fundamentals/clean-code/.vitepress/dist
 ci:
   - branch: dev/*
     tasks:
