@@ -1,0 +1,61 @@
+{
+  "hash": "a6da4db9",
+  "configHash": "9c5250c2",
+  "lockfileHash": "8af68c49",
+  "browserHash": "717a9aa3",
+  "optimized": {
+    "vue": {
+      "src": "../../../../../.yarn/__virtual__/vue-virtual-eb6ef78fad/0/cache/vue-npm-3.5.13-59cb3fae80-bcab4ca74c.zip/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "01f73ef5",
+      "needsInterop": false
+    },
+    "vitepress > @vue/devtools-api": {
+      "src": "../../../../../.yarn/cache/@vue-devtools-api-npm-7.7.0-740a158a14-54a47d381a.zip/node_modules/@vue/devtools-api/dist/index.js",
+      "file": "vitepress___@vue_devtools-api.js",
+      "fileHash": "7fa9945d",
+      "needsInterop": false
+    },
+    "vitepress > @vueuse/core": {
+      "src": "../../../../../.yarn/cache/@vueuse-core-npm-11.3.0-05f6e71b8d-d68ed84004.zip/node_modules/@vueuse/core/index.mjs",
+      "file": "vitepress___@vueuse_core.js",
+      "fileHash": "e74d7013",
+      "needsInterop": false
+    },
+    "vitepress > @vueuse/integrations/useFocusTrap": {
+      "src": "../../../../../.yarn/__virtual__/@vueuse-integrations-virtual-336b5e355d/0/cache/@vueuse-integrations-npm-11.3.0-78765d714a-4cab532821.zip/node_modules/@vueuse/integrations/useFocusTrap.mjs",
+      "file": "vitepress___@vueuse_integrations_useFocusTrap.js",
+      "fileHash": "c6964533",
+      "needsInterop": false
+    },
+    "vitepress > mark.js/src/vanilla.js": {
+      "src": "../../../../../.yarn/cache/mark.js-npm-8.11.1-04e3941033-3b01b9ea47.zip/node_modules/mark.js/src/vanilla.js",
+      "file": "vitepress___mark__js_src_vanilla__js.js",
+      "fileHash": "f6e8fa76",
+      "needsInterop": false
+    },
+    "vitepress > minisearch": {
+      "src": "../../../../../.yarn/cache/minisearch-npm-7.1.1-eaddb924a8-9f8cb5b926.zip/node_modules/minisearch/dist/es/index.js",
+      "file": "vitepress___minisearch.js",
+      "fileHash": "528da034",
+      "needsInterop": false
+    },
+    "@amplitude/analytics-browser": {
+      "src": "../../../../../.yarn/cache/@amplitude-analytics-browser-npm-2.11.11-3418b94cf3-103f7117f5.zip/node_modules/@amplitude/analytics-browser/lib/esm/index.js",
+      "file": "@amplitude_analytics-browser.js",
+      "fileHash": "ece32c8e",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-FOY27JG4": {
+      "file": "chunk-FOY27JG4.js"
+    },
+    "chunk-XR4SUZJZ": {
+      "file": "chunk-XR4SUZJZ.js"
+    },
+    "chunk-PZ5AY32C": {
+      "file": "chunk-PZ5AY32C.js"
+    }
+  }
+}

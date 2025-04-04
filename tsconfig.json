@@ -1,14 +1,20 @@
 {
   "compilerOptions": {
-    "lib": ["ESNext"],
     "target": "ESNext",
     "module": "ESNext",
-    "noEmit": true,
-    "allowImportingTsExtensions": true,
-    "moduleResolution": "Bundler",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "bundler",
+    "allowJs": true,
     "strict": true,
-    "skipLibCheck": true
-  }
+    "jsx": "preserve",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@frontend-fundamentals/*": ["fundamentals/*/src"]
+    }
+  },
+  "exclude": ["**/node_modules", "**/dist"]
 }

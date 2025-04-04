@@ -5,7 +5,7 @@ const { createRequire, register } = require(`module`);
 const { resolve } = require(`path`);
 const { pathToFileURL } = require(`url`);
 
-const relPnpApiPath = '../../../../.pnp.cjs';
+const relPnpApiPath = '../../../.pnp.cjs';
 
 const absPnpApiPath = resolve(__dirname, relPnpApiPath);
 const absUserWrapperPath = resolve(__dirname, `./sdk.user.cjs`);
@@ -16,7 +16,7 @@ const isPnpLoaderEnabled = existsSync(absPnpLoaderPath);
 
 if (existsSync(absPnpApiPath)) {
   if (!process.versions.pnp) {
-    // Setup the environment to be able to require typescript/lib/tsc.js
+    // Setup the environment to be able to require prettier
     require(absPnpApiPath).setup();
     if (isPnpLoaderEnabled && register) {
       register(pathToFileURL(absPnpLoaderPath));
@@ -28,5 +28,5 @@ const wrapWithUserWrapper = existsSync(absUserWrapperPath)
   ? exports => absRequire(absUserWrapperPath)(exports)
   : exports => exports;
 
-// Defer to the real typescript/lib/tsc.js your application uses
-module.exports = wrapWithUserWrapper(absRequire(`typescript/lib/tsc.js`));
+// Defer to the real prettier your application uses
+module.exports = wrapWithUserWrapper(absRequire(`prettier`));
