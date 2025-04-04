@@ -71,7 +71,7 @@ export const httpService = {
 ```
 
 ```typescript [fetchUser.ts]
-// 从 http.ts 文件中引入定义的 http 模块
+// 从 httpService.ts 文件中引入定义的 httpService 模块
 import { httpService } from "./httpService";
 
 export async function fetchUser() {
