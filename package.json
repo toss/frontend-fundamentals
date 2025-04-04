@@ -11,17 +11,7 @@
   "scripts": {
     "docs:dev": "yarn workspace @frontend-fundamentals/clean-code docs:dev",
     "docs:build": "yarn workspace @frontend-fundamentals/clean-code docs:build",
-    "docs:preview": "yarn workspace @frontend-fundamentals/clean-code docs:preview",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,mdx,css,html,yml,yaml,scss,sass}\" --ignore-path .gitignore",
-    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md,mdx,css,html,yml,yaml,scss,sass}\" --ignore-path .gitignore",
-    "lint": "eslint \"**/*.{js,jsx,ts,tsx,vue}\" --ignore-path .gitignore",
-    "lint:fix": "eslint \"**/*.{js,jsx,ts,tsx,vue}\" --fix --ignore-path .gitignore"
-  },
-  "dependencies": {
-    "@amplitude/analytics-browser": "^2.11.11",
-    "markdown-it-footnote": "^4.0.0",
-    "typescript": "^5.6.3",
-    "vitepress": "^1.4.1"
+    "docs:preview": "yarn workspace @frontend-fundamentals/clean-code docs:preview"
   },
   "devDependencies": {
     "prettier": "^3.5.3"

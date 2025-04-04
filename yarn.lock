@@ -1566,11 +1566,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "frontend-fundamentals@workspace:."
   dependencies:
-    "@amplitude/analytics-browser": "npm:^2.11.11"
-    markdown-it-footnote: "npm:^4.0.0"
     prettier: "npm:^3.5.3"
-    typescript: "npm:^5.6.3"
-    vitepress: "npm:^1.4.1"
   languageName: unknown
   linkType: soft
 
