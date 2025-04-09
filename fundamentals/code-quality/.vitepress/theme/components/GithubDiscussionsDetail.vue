@@ -15,8 +15,7 @@ const discussion = ref<any>(null);
 
 const getDiscussionIdFromUrl = () => {
   if (typeof window !== 'undefined') {
-    const url = new URL(window.location.href);
-    return url.searchParams.get("id");
+    return window.location.pathname.split('/').pop();
   }
   return '';
 };
