@@ -1,7 +1,7 @@
 import { defineConfig, HeadConfig } from "vitepress";
-import { search as koSearch } from "./ko.mts";
-import { search as jaSearch } from "./ja.mts";
-import { search as zhHansSearch } from "./zhHans.mts";
+import { search as koSearch } from "./ko.mjs";
+import { search as jaSearch } from "./ja.mjs";
+import { search as zhHansSearch } from "./zhHans.mjs";
 
 export const shared = defineConfig({
   lastUpdated: true,
