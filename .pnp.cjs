@@ -13,11 +13,16 @@ const RAW_RUNTIME_STATE =
     {\
       "name": "frontend-fundamentals",\
       "reference": "workspace:."\
+    },\
+    {\
+      "name": "@frontend-fundamentals/code-quality",\
+      "reference": "workspace:fundamentals/clean-code"\
     }\
   ],\
   "enableTopLevelFallback": true,\
   "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
   "fallbackExclusionList": [\
+    ["@frontend-fundamentals/code-quality", ["workspace:fundamentals/clean-code"]],\
     ["frontend-fundamentals", ["workspace:."]]\
   ],\
   "fallbackPool": [\
@@ -700,6 +705,19 @@ const RAW_RUNTIME_STATE =
           ["@esbuild/win32-x64", "npm:0.21.5"]\
         ],\
         "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@frontend-fundamentals/code-quality", [\
+      ["workspace:fundamentals/clean-code", {\
+        "packageLocation": "./fundamentals/clean-code/",\
+        "packageDependencies": [\
+          ["@frontend-fundamentals/code-quality", "workspace:fundamentals/clean-code"],\
+          ["@amplitude/analytics-browser", "npm:2.11.11"],\
+          ["markdown-it-footnote", "npm:4.0.0"],\
+          ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"],\
+          ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.5.0"]\
+        ],\
+        "linkType": "SOFT"\
       }]\
     ]],\
     ["@iconify-json/simple-icons", [\

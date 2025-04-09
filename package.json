@@ -1,13 +1,17 @@
 {
   "name": "frontend-fundamentals",
+  "private": true,
   "packageManager": "yarn@4.6.0",
+  "workspaces": [
+    "fundamentals/*"
+  ],
   "engines": {
     "node": ">=22.0.0"
   },
   "scripts": {
-    "docs:dev": "vitepress dev",
-    "docs:build": "vitepress build",
-    "docs:preview": "vitepress preview"
+    "docs:dev": "yarn workspace @frontend-fundamentals/code-quality docs:dev",
+    "docs:build": "yarn workspace @frontend-fundamentals/code-quality docs:build",
+    "docs:preview": "yarn workspace @frontend-fundamentals/code-quality docs:preview"
   },
   "dependencies": {
     "@amplitude/analytics-browser": "^2.11.11",
