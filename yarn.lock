@@ -526,9 +526,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@frontend-fundamentals/clean-code@workspace:fundamentals/clean-code":
+"@frontend-fundamentals/code-quality@workspace:fundamentals/clean-code":
   version: 0.0.0-use.local
-  resolution: "@frontend-fundamentals/clean-code@workspace:fundamentals/clean-code"
+  resolution: "@frontend-fundamentals/code-quality@workspace:fundamentals/clean-code"
   dependencies:
     "@amplitude/analytics-browser": "npm:^2.11.11"
     markdown-it-footnote: "npm:^4.0.0"

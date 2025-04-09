@@ -15,14 +15,14 @@ const RAW_RUNTIME_STATE =
       "reference": "workspace:."\
     },\
     {\
-      "name": "@frontend-fundamentals/clean-code",\
+      "name": "@frontend-fundamentals/code-quality",\
       "reference": "workspace:fundamentals/clean-code"\
     }\
   ],\
   "enableTopLevelFallback": true,\
   "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
   "fallbackExclusionList": [\
-    ["@frontend-fundamentals/clean-code", ["workspace:fundamentals/clean-code"]],\
+    ["@frontend-fundamentals/code-quality", ["workspace:fundamentals/clean-code"]],\
     ["frontend-fundamentals", ["workspace:."]]\
   ],\
   "fallbackPool": [\
@@ -707,11 +707,11 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["@frontend-fundamentals/clean-code", [\
+    ["@frontend-fundamentals/code-quality", [\
       ["workspace:fundamentals/clean-code", {\
         "packageLocation": "./fundamentals/clean-code/",\
         "packageDependencies": [\
-          ["@frontend-fundamentals/clean-code", "workspace:fundamentals/clean-code"],\
+          ["@frontend-fundamentals/code-quality", "workspace:fundamentals/clean-code"],\
           ["@amplitude/analytics-browser", "npm:2.11.11"],\
           ["markdown-it-footnote", "npm:4.0.0"],\
           ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"],\
