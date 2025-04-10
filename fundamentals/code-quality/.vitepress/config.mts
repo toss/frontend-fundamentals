@@ -44,5 +44,6 @@ export default defineConfig({
     config: (md) => {
       md.use(footnote);
     }
-  }
+  },
+  titleTemplate: ':title'
 });
