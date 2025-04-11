@@ -1,4 +1,4 @@
-![Frontend Fundamentals](./public/images/ff-meta.png)
+![Frontend Fundamentals](./images/ff-meta.png)
 
 # Frontend Fundamentals
 
