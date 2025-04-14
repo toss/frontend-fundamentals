@@ -2,7 +2,7 @@
 comments: false
 ---
 
-# 토론하기
+# 함께 만들기
 
 `Frontend Fundamentals`(FF)는 커뮤니티와 함께 좋은 코드의 기준을 만들어 가고 있어요.
 
