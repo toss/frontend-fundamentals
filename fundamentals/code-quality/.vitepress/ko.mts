@@ -170,11 +170,11 @@ function sidebar(): DefaultTheme.Sidebar {
       items: [
         
         {
-          text: "좋은 토론 모아보기",
+          text: "명예의 전당",
           link: "/code/community/good-discussions"
         },
         {
-          text: "디스커션 보기",
+          text: "토론하기",
           link: "/code/dicussions"
         },
       ]
