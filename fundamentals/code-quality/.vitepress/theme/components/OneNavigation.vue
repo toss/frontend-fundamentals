@@ -231,7 +231,7 @@ function isActive(path: string): boolean {
 }
 
 /* 모바일 대응 */
-@media (max-width: 768px) {
+@media (max-width: 960px) {
   .one-navigation {
     top: auto;
     bottom: 0;

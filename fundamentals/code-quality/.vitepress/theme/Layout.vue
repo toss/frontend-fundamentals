@@ -24,12 +24,28 @@ const { isKorean } = useLocale();
 </template>
 
 <style>
+:root {
+  --one-navi-width: 50px;
+}
 html {
   overflow-y: scroll;
   scrollbar-gutter: stable;
 }
 
-.layout-wrapper {
-  padding-left: 50px; /* 네비게이션 바 너비만큼 여백 추가 */
+@media (min-width: 960px) {
+  .layout-wrapper {
+    padding-left: var(--one-navi-width);
+  }
+  .VPSidebar, .divider, .container > .title, .VPNavBar.has-sidebar .content {
+    margin-left: var(--one-navi-width);
+  }
+  .container > .title {
+    background: var(--vp-sidebar-bg-color) !important;
+  }
+}
+.curtain {
+  /* background: grey !important; */
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 </style>
