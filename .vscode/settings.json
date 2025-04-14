@@ -8,5 +8,6 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit"
   },
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs"
 }

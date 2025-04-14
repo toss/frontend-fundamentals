@@ -526,6 +526,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@frontend-fundamentals/code-quality@workspace:fundamentals/code-quality":
+  version: 0.0.0-use.local
+  resolution: "@frontend-fundamentals/code-quality@workspace:fundamentals/code-quality"
+  dependencies:
+    "@amplitude/analytics-browser": "npm:^2.11.11"
+    markdown-it-footnote: "npm:^4.0.0"
+    typescript: "npm:^5.6.3"
+    vitepress: "npm:^1.4.1"
+  languageName: unknown
+  linkType: soft
+
 "@iconify-json/simple-icons@npm:^1.2.10":
   version: 1.2.20
   resolution: "@iconify-json/simple-icons@npm:1.2.20"

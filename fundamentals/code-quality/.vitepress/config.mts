@@ -2,11 +2,11 @@ import { createRequire } from "node:module";
 import path from "node:path";
 import { defineConfig } from "vitepress";
 import footnote from "markdown-it-footnote";
-import { shared } from "./shared.mts";
-import { en } from "./en.mts";
-import { ko } from "./ko.mts";
-import { ja } from "./ja.mts";
-import { zhHans } from "./zhHans.mts";
+import { shared } from "./shared.mjs";
+import { en } from "./en.mjs";
+import { ko } from "./ko.mjs";
+import { ja } from "./ja.mjs";
+import { zhHans } from "./zhHans.mjs";
 
 const require = createRequire(import.meta.url);
 
@@ -44,5 +44,6 @@ export default defineConfig({
     config: (md) => {
       md.use(footnote);
     }
-  }
+  },
+  titleTemplate: ':title'
 });
