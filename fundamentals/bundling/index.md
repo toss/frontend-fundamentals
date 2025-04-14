@@ -3,23 +3,29 @@
 layout: home
 
 hero:
-  name: "bundling"
-  text: "A VitePress Site"
-  tagline: My great project tagline
+  name: "Frontend Bundling Fundamentals"
+  tagline: ""
+  image:
+    loading: eager
+    fetchpriority: high
+    decoding: async
+    src: /images/ff-symbol-gradient-webp-80.webp
+    alt: Frontend Bundling Fundamentals symbol
   actions:
-    - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+    - text: 좋은 코드의 기준 알아보기
+      link: /tutorial/basic
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: 소통하기
+      link: /code/community
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - icon: 🤓
+    title: 코드를 보는 눈을 키우고 싶다면
+    details: 변경하기 쉬운 코드인지 판단하기 위한 원칙을 살펴보세요.
+  - icon: 🤝
+    title: 코드 리뷰를 잘하고 싶다면
+    details: 다양한 코드 개선 사례를 능동적으로 탐색해 보세요.
+  - icon: 📝
+    title: 내 코드가 고민된다면
+    details: 깃허브 디스커션에서 다른 개발자들과 소통해 보세요.
 ---
-
