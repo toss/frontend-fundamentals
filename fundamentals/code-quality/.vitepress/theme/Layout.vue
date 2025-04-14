@@ -39,13 +39,8 @@ html {
   .VPSidebar, .divider, .container > .title, .VPNavBar.has-sidebar .content {
     margin-left: var(--one-navi-width);
   }
-  .container > .title {
+  .VPNavBar.has-sidebar > .title {
     background: var(--vp-sidebar-bg-color) !important;
   }
-}
-.curtain {
-  /* background: grey !important; */
-  margin-left: 0 !important;
-  margin-right: 0 !important;
 }
 </style>
