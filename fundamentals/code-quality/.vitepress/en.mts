@@ -19,42 +19,24 @@ function nav(): DefaultTheme.NavItem[] {
 function sidebar(): DefaultTheme.Sidebar {
   return [
     {
-      text: "Criteria for Good Code",
+      text: "Introduction",
       items: [
         {
           text: "Getting Started",
           link: "/en/code/start"
         },
         {
-          text: "Easily Modifiable Code",
-          link: "/en/code/"
+          text: "Contributing Together",
+          link: "/en/code/community"
         },
         {
-          text: "Community",
-          items: [
-            {
-              text: "Introduction",
-              link: "/en/code/community"
-            },
-            {
-              text: "⭐ Featured Discussions",
-              link: "https://github.com/toss/frontend-fundamentals/discussions?discussions_q=is%3Aopen+label%3A%22%EC%84%B1%EC%A7%80+%E2%9B%B2%22"
-            },
-            {
-              text: "A vs B",
-              link: "https://github.com/toss/frontend-fundamentals/discussions/categories/a-vs-b?discussions_q=is%3Aopen+category%3A%22A+vs+B%22+sort%3Adate_created"
-            },
-            {
-              text: "Open Forum",
-              link: "https://github.com/toss/frontend-fundamentals/discussions/categories/open-forum?discussions_q=is%3Aopen+sort%3Adate_created+category%3A%22Open+Forum%22"
-            }
-          ],
-          collapsed: true
+          text: "Four Principles of Writing Good Code",
+          link: "/en/code/"
         }
       ]
     },
     {
-      text: "Strategies for Writing Good Code",
+      text: "Practical Guide",
       items: [
         {
           text: "1. Readability",
@@ -107,7 +89,6 @@ function sidebar(): DefaultTheme.Sidebar {
             }
           ]
         },
-
         {
           text: "2. Predictability",
           items: [
@@ -160,6 +141,6 @@ function sidebar(): DefaultTheme.Sidebar {
           ]
         }
       ]
-    }
+    },
   ];
 }

@@ -2,7 +2,7 @@
 comments: false
 ---
 
-# Easily Modifiable Code
+# Four Principles of Writing Good Code
 
 Good frontend code is **easily modifiable** code.
 When implementing new requirements, code that is easy to modify and deploy is considered good code.

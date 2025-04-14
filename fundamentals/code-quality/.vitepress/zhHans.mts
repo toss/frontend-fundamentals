@@ -36,42 +36,24 @@ function nav(): DefaultTheme.NavItem[] {
 function sidebar(): DefaultTheme.Sidebar {
   return [
     {
-      text: "好代码的标准",
+      text: "介绍",
       items: [
         {
           text: "开始使用",
           link: "/zh-hans/code/start"
         },
         {
-          text: "易于修改的代码",
-          link: "/zh-hans/code/"
+          text: "一起构建",
+          link: "/zh-hans/code/community"
         },
         {
-          text: "社区",
-          items: [
-            {
-              text: "介绍",
-              link: "/zh-hans/code/community"
-            },
-            {
-              text: "⭐ 专题讨论",
-              link: "https://github.com/toss/frontend-fundamentals/discussions?discussions_q=is%3Aopen+label%3A%22%EC%84%B1%EC%A7%80+%E2%9B%B2%22"
-            },
-            {
-              text: "A vs B",
-              link: "https://github.com/toss/frontend-fundamentals/discussions/categories/a-vs-b?discussions_q=is%3Aopen+category%3A%22A+vs+B%22+sort%3Adate_created"
-            },
-            {
-              text: "公开论坛",
-              link: "https://github.com/toss/frontend-fundamentals/discussions/categories/open-forum?discussions_q=is%3Aopen+sort%3Adate_created+category%3A%22Open+Forum%22"
-            }
-          ],
-          collapsed: true
+          text: "编写优秀代码的四大原则",
+          link: "/zh-hans/code/"
         }
       ]
     },
     {
-      text: "编写好代码的策略",
+      text: "实践指南",
       items: [
         {
           text: "1. 可读性",
@@ -124,7 +106,6 @@ function sidebar(): DefaultTheme.Sidebar {
             }
           ]
         },
-
         {
           text: "2. 可预测性",
           items: [
