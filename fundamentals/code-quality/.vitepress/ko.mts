@@ -46,13 +46,8 @@ function sidebar(): DefaultTheme.Sidebar {
           text: "함께 만들기",
           link: "/code/community"
         },
-      ]
-    },
-    {
-      text: "개념",
-      items: [
         {
-          text: "변경하기 쉬운 코드",
+          text: "좋은 코드를 위한 4가지 기준",
           link: "/code/"
         },
       ]
@@ -170,7 +165,7 @@ function sidebar(): DefaultTheme.Sidebar {
       items: [
         
         {
-          text: "명예의 전당",
+          text: "🏆 명예의 전당",
           link: "/code/community/good-discussions"
         },
         {
