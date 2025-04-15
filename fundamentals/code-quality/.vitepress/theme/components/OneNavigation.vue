@@ -98,7 +98,7 @@ function isActive(path: string): boolean {
 }
 
 .nav-item.active a {
-  color: #474747;
+  color: var(--vp-c-brand);
 }
 
 .nav-item.active::before {
