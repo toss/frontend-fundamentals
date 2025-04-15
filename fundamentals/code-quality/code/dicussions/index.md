@@ -1,3 +1,3 @@
-# 디스커션
+# 토론하기
 
 <GithubDiscussions owner="toss" repo="frontend-fundamentals"  />

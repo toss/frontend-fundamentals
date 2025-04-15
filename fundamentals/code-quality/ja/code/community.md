@@ -2,7 +2,7 @@
 comments: false
 ---
 
-# コミュニティ
+# みんなで作る
 
 `Frontend Fundamentals`(FF)は、コミュニティと共に良いコードの基準を作り上げています。
 

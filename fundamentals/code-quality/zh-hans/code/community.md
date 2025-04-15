@@ -2,7 +2,7 @@
 comments: false
 ---
 
-# 社区
+# 一起构建
 
 `Frontend Fundamentals`(FF)与社区一起制定好代码的标准。
 

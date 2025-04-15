@@ -43,42 +43,24 @@ function nav(): DefaultTheme.NavItem[] {
 function sidebar(): DefaultTheme.Sidebar {
   return [
     {
-      text: "良いコードの基準",
+      text: "はじめに",
       items: [
         {
           text: "はじめる",
           link: "/ja/code/start"
         },
         {
-          text: "変更しやすいコード",
-          link: "/ja/code/"
+          text: "みんなで作る",
+          link: "/ja/code/community"
         },
         {
-          text: "コミュニティ",
-          items: [
-            {
-              text: "紹介",
-              link: "/ja/code/community"
-            },
-            {
-              text: "⭐ 良い討論をまとめて見る",
-              link: "https://github.com/toss/frontend-fundamentals/discussions?discussions_q=is%3Aopen+label%3A%22성지+⛲%22"
-            },
-            {
-              text: "A vs B",
-              link: "https://github.com/toss/frontend-fundamentals/discussions/categories/a-vs-b?discussions_q=is%3Aopen+category%3A%22A+vs+B%22+sort%3Adate_created"
-            },
-            {
-              text: "自由におしゃべり",
-              link: "https://github.com/toss/frontend-fundamentals/discussions/categories/open-forum?discussions_q=is%3Aopen+sort%3Adate_created+category%3A%22Open+Forum%22"
-            }
-          ],
-          collapsed: true
+          text: "良いコードの4つの原則",
+          link: "/ja/code/"
         }
       ]
     },
     {
-      text: "良いコードを書くための戦略",
+      text: "実践ガイド",
       items: [
         {
           text: "1. 可読性",
@@ -131,7 +113,6 @@ function sidebar(): DefaultTheme.Sidebar {
             }
           ]
         },
-
         {
           text: "2. 予測可能性",
           items: [
@@ -184,7 +165,7 @@ function sidebar(): DefaultTheme.Sidebar {
           ]
         }
       ]
-    }
+    },
   ];
 }
 

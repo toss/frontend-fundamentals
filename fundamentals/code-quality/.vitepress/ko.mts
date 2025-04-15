@@ -36,24 +36,24 @@ function nav(): DefaultTheme.NavItem[] {
 function sidebar(): DefaultTheme.Sidebar {
   return [
     {
-      text: "좋은 코드의 기준",
+      text: "소개",
       items: [
         {
           text: "시작하기",
           link: "/code/start"
         },
         {
-          text: "변경하기 쉬운 코드",
-          link: "/code/"
+          text: "함께 만들기",
+          link: "/code/community"
         },
         {
-          text: "토론하기",
-          link: "/code/community"
-        }
+          text: "좋은 코드를 위한 4가지 기준",
+          link: "/code/"
+        },
       ]
     },
     {
-      text: "좋은 코드를 만드는 전략",
+      text: "실전 가이드",
       items: [
         {
           text: "1. 가독성",
@@ -163,22 +163,15 @@ function sidebar(): DefaultTheme.Sidebar {
     {
       text: "커뮤니티",
       items: [
+        
         {
-          text: "⭐ 좋은 토론 모아보기",
+          text: "🏆 명예의 전당",
           link: "/code/community/good-discussions"
         },
         {
-          text: "디스커션 보기",
+          text: "토론하기",
           link: "/code/dicussions"
         },
-        {
-          text: "A vs B",
-          link: "https://github.com/toss/frontend-fundamentals/discussions/categories/a-vs-b?discussions_q=is%3Aopen+category%3A%22A+vs+B%22+sort%3Adate_created"
-        },
-        {
-          text: "자유로운 이야기",
-          link: "https://github.com/toss/frontend-fundamentals/discussions/categories/open-forum?discussions_q=is%3Aopen+sort%3Adate_created+category%3A%22Open+Forum%22"
-        }
       ]
     }
   ];
