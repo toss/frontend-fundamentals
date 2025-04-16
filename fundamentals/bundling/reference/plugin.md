@@ -31,7 +31,7 @@ module.exports = {
 
 ### `HtmlWebpackPlugin`
 
-웹팩이 빌드한 자바스크립트 및 CSS 파일이 포함된 `index.html`을 자동으로 생성해요.  
+웹팩이 빌드한 JavaScript 및 CSS 파일이 포함된 `index.html`을 자동으로 생성해요.  
 템플릿 파일을 지정하면 해당 파일을 기반으로 HTML을 생성할 수 있어요.
 
 ### `HotModuleReplacementPlugin`

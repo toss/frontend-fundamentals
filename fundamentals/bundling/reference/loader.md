@@ -1,8 +1,8 @@
 # 로더
 
-로더(Loader)는 웹팩이 자바스크립트 파일이 아닌 CSS, 이미지 등의 리소스를 자바스크립트로 변환해, 모듈처럼 불러올 수 있도록 도와주는 도구예요.
+로더(Loader)는 웹팩이 JavaScript 파일이 아닌 CSS, 이미지 등의 리소스를 JavaScript로 변환해, 모듈처럼 불러올 수 있도록 도와주는 도구예요.
 
-예를 들어, 다음과 같이 자바스크립트 파일에서 CSS를 `import`하는 코드를 작성해본 경험이 있을 거예요.
+예를 들어, 다음과 같이 JavaScript 파일에서 CSS를 `import`하는 코드를 작성해본 경험이 있을 거예요.
 
 ```jsx
 // Main.tsx
@@ -13,7 +13,7 @@ export function Main() {
 }
 ```
 
-코드상으로는 문제가 없어 보이지만, 웹팩은 기본적으로 자바스크립트만 해석할 수 있어요.
+코드상으로는 문제가 없어 보이지만, 웹팩은 기본적으로 JavaScript만 해석할 수 있어요.
 따라서 웹팩이 `.css` 파일은 처리하지 못해 다음과 같은 에러가 발생해요.
 
 > Module parse failed: Unexpected token (1:5)
@@ -54,17 +54,17 @@ ___CSS_LOADER_EXPORT___.push([
 
 ### `babel-loader`
 
-최신 자바스크립트, 타입스크립트, JSX를 구형 브라우저에서도 동작하는 자바스크립트로 변환하는 로더예요.
+최신 JavaScript, 타입스크립트, JSX를 구형 브라우저에서도 동작하는 JavaScript로 변환하는 로더예요.
 
-- **JSX 변환**: React의 JSX 문법을 브라우저가 이해할 수 있는 자바스크립트로 변환
+- **JSX 변환**: React의 JSX 문법을 브라우저가 이해할 수 있는 JavaScript로 변환
 
   `<Component />` → `React.createElement(Component)`
 
-- **자바스크립트 변환**: 최신 자바스크립트 문법을 구형 브라우저에서 실행 가능한 코드로 변환
+- **JavaScript 변환**: 최신 JavaScript 문법을 구형 브라우저에서 실행 가능한 코드로 변환
 
   `const`, `async/await`, `옵셔널 체이닝(obj?.prop)`, `null 병합 연산자(??)`
 
-- **타입스크립트 변환**: 타입스크립트 코드를 자바스크립트로 변환
+- **타입스크립트 변환**: 타입스크립트 코드를 JavaScript로 변환
 
 다음과 같이 `babel-loader`를 사용해 `.js` 또는 `.jsx` 파일을 변환하도록 설정할 수 있어요. `presets`은 여러 개의 플러그인을 한 번에 적용할 수 있도록 도와주는 옵션이에요.
 
@@ -79,9 +79,9 @@ module.exports = {
         loader: "babel-loader",
         options: {
           presets: [
-            "@babel/preset-env", // 구형 브라우저가 지원되는 자바스크립트 문법으로 변환
-            "@babel/preset-react", // JSX → 자바스크립트
-            "@babel/preset-typescript", // 타입스크립트 → 자바스크립트
+            "@babel/preset-env", // 구형 브라우저가 지원되는 JavaScript 문법으로 변환
+            "@babel/preset-react", // JSX → JavaScript
+            "@babel/preset-typescript", // 타입스크립트 → JavaScript
           ],
         },
       },
@@ -92,17 +92,17 @@ module.exports = {
 
 ### `css-loader`
 
-CSS 파일을 웹팩이 처리할 수 있도록 변환하는 로더예요. 로더를 사용하면 자바스크립트에서 CSS 파일을 `import`하여 사용할 수 있어요.
+CSS 파일을 웹팩이 처리할 수 있도록 변환하는 로더예요. 로더를 사용하면 JavaScript에서 CSS 파일을 `import`하여 사용할 수 있어요.
 단독으로는 DOM에 스타일을 적용할 수 없으며, `style-loader`와 함께 사용해요.
 
 ### `style-loader`
 
-`css-loader`로 변환된 자바스크립트 모듈을 DOM의 `<style>` 태그에 삽입해 스타일을 적용하는 로더예요.
+`css-loader`로 변환된 JavaScript 모듈을 DOM의 `<style>` 태그에 삽입해 스타일을 적용하는 로더예요.
 
 ### `file-loader`
 
 이미지, 폰트 같은 정적 파일을 웹팩이 번들링할 수 있도록 파일로 저장하고, URL로 변환하는 로더예요.  
-이렇게 변환된 URL을 자바스크립트 코드에서 `import`하여 사용할 수 있어요.
+이렇게 변환된 URL을 JavaScript 코드에서 `import`하여 사용할 수 있어요.
 
 다음과 같이 `file-loader`를 설정하면 이미지 파일을 처리할 수 있어요.
 
@@ -200,10 +200,10 @@ module.exports = {
 
 만약 로더의 순서를 잘못 정의하면 웹팩이 파일을 제대로 처리하지 못해 에러가 발생할 수 있어요. 예를 들어 CSS 파일을 처리할 때 다음과 같은 순서로 로더가 실행되어야 해요.
 
-1. `css-loader`가 먼저 실행돼 CSS 파일을 자바스크립트로 변환
+1. `css-loader`가 먼저 실행돼 CSS 파일을 JavaScript로 변환
 2. 변환된 결과를 `style-loader`가 실행해서 DOM의 `<style>` 태그에 삽입
 
-만약 반대로 작성하면, 웹팩은 CSS 파일을 자바스크립트로 변환하기 전에 CSS를 DOM에 삽입하려고 시도해 에러가 발생해요.
+만약 반대로 작성하면, 웹팩은 CSS 파일을 JavaScript로 변환하기 전에 CSS를 DOM에 삽입하려고 시도해 에러가 발생해요.
 
 ```js
 rules: [

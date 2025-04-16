@@ -40,7 +40,7 @@ APP_ENV=production API_URL=https://api.example.com webpack
 런타임 환경변수는 웹팩에서 기본 제공하는 [`DefinePlugin`](https://webpack.kr/plugins/define-plugin/#root)을 사용해 설정할 수 있어요. 이 플러그인은 번들링 과정에서 환경변수를 **문자열로 치환**해 코드에 적용해요.
 
 ::: warning 민감한 정보는 절대 포함하면 안 돼요!
-런타임 환경변수는 번들된 자바스크립트 코드에 **평문으로 저장**되기 때문에, 민감한 정보(API 키, 비밀번호 등)를 포함하면 안 돼요.
+런타임 환경변수는 번들된 JavaScript 코드에 **평문으로 저장**되기 때문에, 민감한 정보(API 키, 비밀번호 등)를 포함하면 안 돼요.
 :::
 
 ### DefinePlugin 사용 방법
