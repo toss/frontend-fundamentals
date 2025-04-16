@@ -33,7 +33,7 @@ export function Component() {
 그런데 이렇게 JavaScript에서 CSS를 import하면 어떤 일이 일어날까요?
 JavaScript 파일과 다르게, CSS 파일은 import하면 무슨 일이 일어날지 명확하지 않아요.
 
-이렇게 JavaScript가 아닌 파일을 import하면 무슨 일이 일어나는지 정의하기 위해서는 [로더(Loader)](../reference/loader.md)가 필요해요. 
+이렇게 JavaScript가 아닌 파일을 import하면 무슨 일이 일어나는지 정의하기 위해서는 [로더](../reference/loader.md)가 필요해요. 
 로더는 웹팩에게 "이런 종류의 파일을 JavaScript에서 import하면 어떤 일이 일어나는지"를 알려줘요.
 
 대표적인 로더 중 하나인 CSS 로더(`css-loader`)는 다음과 같이 CSS 파일을 JavaScript 객체로 변환해요. 
@@ -165,7 +165,7 @@ webpack-tutorial/
 
 ### 3. CSS 로더 설치하기
 
-웹팩이 CSS 파일을 해석하고 JavaScript로 변환할 수 있도록 하기 위해 [로더(Loader)](../reference/loader.md)를 활용해 볼게요.
+웹팩이 CSS 파일을 해석하고 JavaScript로 변환할 수 있도록 하기 위해 [로더](../reference/loader.md)를 활용해 볼게요.
 다음 2가지 로더를 설치할 거예요.
 
 ```bash

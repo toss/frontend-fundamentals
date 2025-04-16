@@ -171,11 +171,11 @@ import getSum from "@utils/getSum";
   하지만 웹팩은 컴파일러가 알고 있는 규칙을 모르기 때문에, 웹팩이 `components`을 경로로 인식하지 못하고
   외부 패키지로 판단해 모듈을 찾으려 하기 때문에, Module not found 에러가 발생할 수 있어요.
 
-  > Module not found: Error: Cannot resolve module ‘components/Header’ in '/Users/hany/Desktop/webpack/src'...
+  > Module not found: Error: Cannot resolve module ‘components/Header’ in '/Users/kimtoss/Desktop/webpack/src'...
 
 - 반대로 웹팩 설정의 `resolve.alias` 옵션으로 경로에 별칭을 설정하고, `tsconfig.json`를 수정하지 않으면, 다음과 같은 컴파일 에러가 발생해요.
 
-  <img style="border-radius: 8px; opacity: 0.9" src="/images/knowledge/webpack/resolve_compile-error.png" alt="compile-error" />
+  <img style="border-radius: 8px; opacity: 0.9" src="../images/resolve_compile-error.png" alt="compile-error" />
 
   > error TS2307: Cannot find module 'pages/Main' or its corresponding type declarations.
 

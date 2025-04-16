@@ -109,7 +109,7 @@ module.exports = {
 
 이제 브라우저의 개발자 도구(DevTools) → 네트워크(Network)탭을 열어보면, 웹팩이 단일 번들 파일 하나만 로드되는 것을 확인할 수 있어요.
 
-![단일 엔트리 포인트로 생성한 번들파일을 브라우저에게 로드하기](/images/knowledge/webpack/entry_single-network.png)
+![단일 엔트리 포인트로 생성한 번들파일을 브라우저에게 로드하기](../images/entry_single-network.png)
 
 ### 문제 해결하기: 번들 파일 경로 추가 자동화하기
 
@@ -188,7 +188,7 @@ module.exports = {
 };
 ```
 
-자세한 동작 방식에 대해서는 [예제2: 중복 모듈 제거하기](#예제2-중복-모듈-제거하기)를 참고하세요.
+자세한 동작 방식에 대해서는 [예제2: 중복 모듈 제거하기](#예제2-중복-모듈-제거하기)를 참고하세요.
 
 ### 예제1: 브라우저에서 객체 구문 번들 파일 로드하기
 
@@ -221,7 +221,7 @@ module.exports = {
 
 이제 브라우저의 개발자 도구(DevTools) → 네트워크(Network)탭을 열어보면, 두 개의 번들 파일이 각각 로드되는 것을 확인할 수 있어요.
 
-![객체 구문으로 생성한 번들파일 로드하기](/images/knowledge/webpack/entry_object-network.png)
+![객체 구문으로 생성한 번들파일 로드하기](../images/entry_object-network.png)
 
 ### 예제2: 중복 모듈 제거하기
 
@@ -351,10 +351,10 @@ exports["default"] = AdminPage;
 
 공통 모듈을 분리하기 전에는 각 번들 파일의 크기는 427kB였어요.
 
-![dependOn to app](/images/knowledge/webpack/entry_object-dependon-shared-before.png)
+![dependOn to app](../images/entry_object-dependon-shared-before.png)
 
 하지만 `shared` 공통 모듈을 분리해 중복 코드가 제거되면서, 각 번들 파일의 크기가 360kB로 줄어들었어요.
 
-![dependOn to app](/images/knowledge/webpack/entry_object-dependon-shared-after.png)
+![dependOn to app](../images/entry_object-dependon-shared-after.png)
 
 이처럼 `dependOn` 옵션을 활용하면, 공통 모듈을 별도로 관리해 번들 크기를 최적화할 수 있어요! 🚀

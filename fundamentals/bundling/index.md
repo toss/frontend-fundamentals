@@ -12,11 +12,11 @@ hero:
     src: /images/ff-symbol-gradient-webp-80.webp
     alt: Frontend Fundamentals symbol
   actions:
-    - text: 첫 번째 번들링 설정해보기
-      link: /tutorial/basic
+    - text: 시작하기
+      link: /get-started
     - theme: alt
-      text: 소통하기
-      link: /code/community
+      text: 첫 번째 번들링 설정하기
+      link: /tutorial/basic
 
 features:
   - icon: 📦

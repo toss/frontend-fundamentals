@@ -9,7 +9,7 @@
 
 만약 직접 개발 서버를 구성하려면 `webpack-dev-middleware`와 `webpack-hot-middleware`를 사용할 수 있어요. 하지만 이 방법은 복잡하고 일반적인 경우에는 권장하지 않아요. 서버를 직접 구성하면 아래와 같은 구조를 가지게 돼요.
 
-![개발 서버 구성도](../../../images/webpack/hmr-1.png)
+![개발 서버 구성도](/images/hmr-1.png)
 
 웹팩은 이런 불편함을 해소하기 위해 개발 서버인 `webpack-dev-server`를 제공해요. 이 서버는 웹팩과 통합되어 있어 변경된 부분만 다시 빌드하고 **HMR(Hot Module Replacement)** 기능을 사용해서 브라우저에 실시간으로 반영할 수 있어요.
 

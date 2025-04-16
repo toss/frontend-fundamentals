@@ -102,7 +102,7 @@ webpack-tutorial/
 
 ## 3. 웹팩 설정하기
 
-웹팩이 React의 JSX 코드를 처리할 수 있도록 하기 위해 [로더(Loader)](../reference/loader.md)를 활용해 볼게요. 로더를 사용하면 웹팩에게 JSX 같은 JavaScript 코드가 아닌 문법을 어떻게 다뤄야 하는지 알려줄 수 있어요.
+웹팩이 React의 JSX 코드를 처리할 수 있도록 하기 위해 [로더](../reference/loader.md)를 활용해 볼게요. 로더를 사용하면 웹팩에게 JSX 같은 JavaScript 코드가 아닌 문법을 어떻게 다뤄야 하는지 알려줄 수 있어요.
 
 [TypeScript 프로젝트를 만들 때](./typescript.md)와 같이, JSX 코드도 [Babel](./typescript.md#babel)을 활용해서 변환할 수 있어요.
 
@@ -155,7 +155,7 @@ module.exports = {
 
 ### 경로 탐색 규칙 설정하기
 
-`import` 문에서 `.js`와 더불어 `.ts` 또는 `.tsx` 확장자를 생략하더라도 올바르게 파일을 찾을 수 있도록, 기본 확장자를 [`resolve.extensions`](../../knowledge/webpack/resolution.md#확장자를-찾는-우선순위-설정하기-extensions)에 지정해 주세요.
+`import` 문에서 `.js`와 더불어 `.ts` 또는 `.tsx` 확장자를 생략하더라도 올바르게 파일을 찾을 수 있도록, 기본 확장자를 [`resolve.extensions`](/reference/resolution.md#확장자를-찾는-우선순위-설정하기-extensions)에 지정해 주세요.
 
 ```javascript 3
 {
@@ -191,7 +191,7 @@ React는 JavaScript로 사용자 인터페이스를 만들어서 HTML 문서 안
 
 ### `HtmlWebpackPlugin` 정의하기
 
-웹팩 빌드가 될 때마다 번들된 결과물을 참조하는 HTML 파일이 생성되도록 하기 위해서는 [플러그인](../../knowledge/webpack/plugin.md#htmlwebpackplugin) 설정이 필요해요. 먼저 `html-webpack-plugin` 패키지를 설치해 주세요.
+웹팩 빌드가 될 때마다 번들된 결과물을 참조하는 HTML 파일이 생성되도록 하기 위해서는 [플러그인](../..../reference/plugin.md#htmlwebpackplugin) 설정이 필요해요. 먼저 `html-webpack-plugin` 패키지를 설치해 주세요.
 
 ```bash
 npm install html-webpack-plugin --save-dev

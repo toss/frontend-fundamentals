@@ -1,4 +1,4 @@
-# TypeScript와 사용해보기
+# TypeScript와 사용하기
 
 현대 웹 개발은 JavaScript만 사용하지 않고, TypeScript도 사용해요.
 
@@ -76,7 +76,7 @@ webpack-tutorial/
 
 ## 로더 설정하기
 
-웹팩도 기본적으로 JavaScript 코드만 처리할 수 있어요. TypeScript 같이 JavaScript가 아닌 파일을 웹팩에서 사용하려면 [로더(Loader)](../reference/loader.md)라는 도구가 필요해요. 로더는 웹팩에게 "이런 종류의 파일을 어떻게 JavaScript로 변환해서 다뤄야 하는지"를 알려줘요.
+웹팩도 기본적으로 JavaScript 코드만 처리할 수 있어요. TypeScript 같이 JavaScript가 아닌 파일을 웹팩에서 사용하려면 [로더](../reference/loader.md)라는 도구가 필요해요. 로더는 웹팩에게 "이런 종류의 파일을 어떻게 JavaScript로 변환해서 다뤄야 하는지"를 알려줘요.
 
 ### 필요한 패키지 설치하기
 

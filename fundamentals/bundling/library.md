@@ -4,13 +4,6 @@
 
 웹팩을 사용해서 번들링을 진행하고, 결과 파일을 Node.js 환경과 브라우저 환경에서 사용하는 방법까지 다뤄요.
 
-:::info 번들링이란?
-
-번들링은 여러 개의 파일을 하나(또는 여러 개의 그룹)로 묶는 과정이에요.
-더 자세한 번들링 개념과 웹팩의 기본 사용법이 궁금하다면 [번들링 시작하기](/knowledge/get-started)에서 학습해보세요.
-
-:::
-
 ## 1. 프로젝트 초기화
 
 새 프로젝트를 위한 폴더를 만들고 번들링 도구 추가 등 초기 설정을 해요.
@@ -25,7 +18,7 @@ npm init -y
 
 ![](./images/project-reset.png)
 
-이제 번들링 도구로 사용할 [웹팩](/knowledge/webpack/overview)을 설치해요.
+이제 번들링 도구로 사용할 [웹팩](/reference/overview)을 설치해요.
 
 ```bash
 npm install webpack webpack-cli --save-dev
@@ -35,8 +28,8 @@ npm install webpack webpack-cli --save-dev
 
 ## 2. 예제 파일의 src 옮겨오기
 
-[JavaScript Math 유틸리티 라이브러리 예제](https://github.toss.bz/toss/frontend-lounge/blob/main/bundling/files/example.zip)를 다운로드하고 압축을 풉니다.  
-`math-utils` 디렉토리 안에 `src` 폴더를 만든 다음, 압축을 푼 예제에서 `index.js`, `clamp.js`, `inRange.js` 등의 JavaScript 파일을 `src` 폴더로 옮깁니다.
+[JavaScript Math 유틸리티 라이브러리 예제](https://github.com/toss/frontend-fundamentals/blob/main/public/files/bundling-example.zip)를 다운로드하고 압축을 풀어주세요.  
+`math-utils` 디렉토리 안에 `src` 폴더를 만든 다음, 압축을 푼 예제에서 `index.js`, `clamp.js`, `inRange.js` 등의 JavaScript 파일을 `src` 폴더로 옮겨주세요.
 
 다음과 같은 구조로 만들면 돼요.
 
@@ -133,7 +126,7 @@ HTML 파일에서 `<script>` 태그로 번들 파일을 추가하면 전역 객�
 
 번들을 최적화하는 대표적인 방법으로 트리 셰이킹과 코드 스플리팅이 있어요.
 
-각 방법에 대한 자세한 내용은 [번들 파일 최적화](/knowledge/optimization/overview) 문서에서 확인하세요.
+각 방법에 대한 자세한 내용은 [번들 파일 최적화](./reference/optimization/overview) 문서에서 확인하세요.
 
 ### `webpack.config.js`의 `mode` 설정하기
 
