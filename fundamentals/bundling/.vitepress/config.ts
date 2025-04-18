@@ -7,7 +7,7 @@ export default defineConfig({
   description: "프론트엔드 번들링의 모든 것",
   ignoreDeadLinks: false,
   lastUpdated: true,
-  base: "/fundamentals/bundle",
+  base: "/fundamentals/bundling",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
