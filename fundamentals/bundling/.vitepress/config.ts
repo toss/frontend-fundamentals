@@ -163,7 +163,7 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: '' }
+      { icon: 'github', link: 'https://github.com/toss/frontend-fundamentals' }
     ]
   },
   markdown: {
