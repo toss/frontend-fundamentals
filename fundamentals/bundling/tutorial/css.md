@@ -34,7 +34,6 @@ export function Component() {
 JavaScript 파일과 다르게, CSS 파일은 import하면 무슨 일이 일어날지 명확하지 않아요.
 
 이렇게 JavaScript가 아닌 파일을 import하면 무슨 일이 일어나는지 정의하기 위해서는 [로더](../reference/loader.md)가 필요해요. 
-로더는 웹팩에게 "이런 종류의 파일을 JavaScript에서 import하면 어떤 일이 일어나는지"를 알려줘요.
 
 대표적인 로더 중 하나인 CSS 로더(`css-loader`)는 다음과 같이 CSS 파일을 JavaScript 객체로 변환해요. 
 CSS Modules를 사용할 때, 원본 클래스 이름은 프로퍼티로, 겹치지 않도록 변환된 클래스 이름은 값이 되죠.
