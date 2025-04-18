@@ -12,7 +12,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "번들링이란", link: "./overview" },
-      { text: "튜토리얼", link: "/tutorial/basic" },
+      { text: "실전 가이드", link: "/tutorial/basic" },
       { text: "웹팩 깊이 이해하기", link: "/reference/overview" }
     ],
 
