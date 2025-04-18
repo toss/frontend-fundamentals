@@ -31,7 +31,7 @@ export function Component() {
 ```
 
 그런데 이렇게 JavaScript에서 CSS를 import하면 어떤 일이 일어날까요?
-JavaScript 파일과 다르게, CSS 파일은 import하면 무슨 일이 일어날지 명확하지 않아요.
+JavaScript는 본래 CSS를 직접 해석하거나 적용할 수 없기 때문에, 단순히 import한다고 해서 스타일이 자동으로 적용되지는 않아요.
 
 이렇게 JavaScript가 아닌 파일을 import하면 무슨 일이 일어나는지 정의하기 위해서는 [로더](../reference/loader.md)가 필요해요. 
 
