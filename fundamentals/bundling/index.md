@@ -28,7 +28,7 @@ features:
     details: 진입점, 로더, 플러그인 등 웹팩의 핵심 개념을 자세히 알아보세요.
     link: /reference/overview
   - icon: ⚡
-    title: 최적화에 관심이 있다면
-    details: 트리 셰이킹, 코드 스플리팅 등 성능 최적화 기법을 살펴보세요.
+    title: 성능 최적화에 관심이 있다면
+    details: 트리 셰이킹, 코드 스플리팅 등 최적화 기법을 살펴보세요.
     link: /reference/optimization
 ---
