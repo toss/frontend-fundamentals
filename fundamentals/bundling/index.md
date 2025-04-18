@@ -21,7 +21,7 @@ hero:
 features:
   - icon: 📦
     title: 번들링이 처음이신가요?
-    details: 실습하면서 웹팩의 기본 개념부터 차근차근 배워보세요.
+    details: 실습을 통해 웹팩의 기본 개념부터 차근차근 배워보세요.
     link: /tutorial/basic
   - icon: 🔧
     title: 웹팩을 깊이 이해하고 싶다면
