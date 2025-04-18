@@ -25,7 +25,7 @@ features:
     link: /tutorial/basic
   - icon: 🔧
     title: 웹팩을 깊이 이해하고 싶다면
-    details: 진입점, 로더, 플러그인 등 웹팩의 핵심 개념을 상세히 알아보세요.
+    details: 진입점, 로더, 플러그인 등 웹팩의 핵심 개념을 자세히 알아보세요.
     link: /reference/overview
   - icon: ⚡
     title: 최적화에 관심이 있다면
