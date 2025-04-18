@@ -18,15 +18,20 @@ export default defineConfig({
 
     sidebar: [
       {
-        text: "시작하기",
-        link: "/get-started",
+        text: "소개",
+        items: [
+          {
+            text: "시작하기",
+            link: "/get-started",
+          },
+          {
+            text: "번들링이란",
+            link: "/overview",
+          },
+        ]
       },
       {
-        text: "번들링이란",
-        link: "/overview",
-      },
-      {
-        text: "튜토리얼",
+        text: "실전 가이드",
         items: [
           {
             text: "1. 첫 번째 번들링 설정하기",
@@ -67,84 +72,94 @@ export default defineConfig({
         ],
       },
       {
-        text: "웹팩 깊이 이해하기",
+        text: "개념",
         items: [
           {
-            text: "소개",
-            link: "/reference/overview",
-          },
-          {
-            text: "진입점",
-            link: "/reference/entry",
-          },
-          {
-            text: "경로 탐색",
-            link: "/reference/resolution",
-          },
-          {
-            text: "로더",
-            link: "/reference/loader",
-          },
-          {
-            text: "플러그인",
-            link: "/reference/plugin",
-          },
-          {
-            text: "출력",
-            link: "/reference/output",
-          },
-          {
-            text: "최적화 기능",
-            link: "/reference/optimization",
-          },
-          {
-            text: "개발환경",
+            text: "웹팩 깊이 이해하기",
             items: [
               {
                 text: "소개",
-                link: "/reference/dev/overview",
+                link: "/reference/overview",
               },
               {
-                text: "개발 서버",
-                link: "/reference/dev/dev-server",
+                text: "진입점",
+                link: "/reference/entry",
               },
               {
-                text: "HMR",
-                link: "/reference/dev/hmr",
+                text: "경로 탐색",
+                link: "/reference/resolution",
               },
               {
-                text: "소스맵",
-                link: "/reference/dev/source-map",
+                text: "로더",
+                link: "/reference/loader",
               },
               {
-                text: "환경 변수",
-                link: "/reference/dev/env-variable",
+                text: "플러그인",
+                link: "/reference/plugin",
               },
+              {
+                text: "출력",
+                link: "/reference/output",
+              },
+              {
+                text: "최적화 기능",
+                link: "/reference/optimization",
+              },
+              {
+                text: "개발환경",
+                items: [
+                  {
+                    text: "소개",
+                    link: "/reference/dev/overview",
+                  },
+                  {
+                    text: "개발 서버",
+                    link: "/reference/dev/dev-server",
+                  },
+                  {
+                    text: "HMR",
+                    link: "/reference/dev/hmr",
+                  },
+                  {
+                    text: "소스맵",
+                    link: "/reference/dev/source-map",
+                  },
+                  {
+                    text: "환경 변수",
+                    link: "/reference/dev/env-variable",
+                  },
+                ],
+              }
             ],
           },
           {
-            text: "설정 템플릿 모음",
-            link: "/setting-template",
+            text: "최적화 깊이 이해하기",
+            items: [
+              {
+                text: "소개",
+                link: "/reference/optimization",
+              },
+              {
+                text: "트리셰이킹",
+                link: "/reference/optimization/tree-shaking",
+              },
+              {
+                text: "코드 스플리팅",
+                link: "/reference/optimization/code-splitting",
+              },
+            ],
           },
         ],
       },
       {
-        text: "최적화 깊이 이해하기",
+        text: "심화 학습",
         items: [
           {
-            text: "소개",
-            link: "/reference/optimization",
+            text: "설정 템플릿",
+            link: "/setting-template",
           },
-          {
-            text: "트리셰이킹",
-            link: "/reference/optimization/tree-shaking",
-          },
-          {
-            text: "코드 스플리팅",
-            link: "/reference/optimization/code-splitting",
-          },
-        ],
-      },
+        ]
+      }
     ],
 
     socialLinks: [
