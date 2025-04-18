@@ -2,18 +2,24 @@
 
 # Frontend Fundamentals
 
-> Guidelines for easily modifiable frontend code
+> Essential principles for frontend development
 
-**Frontend Fundamentals (FF)** provides standards for writing great frontend code. Think of it as a compass to help you navigate towards better code quality as a frontend developer.  
-It introduces four core principles of good code, along with practical examples and solutions.  
+**Frontend Fundamentals (FF)** is a growing collection of essential principles for building reliable, maintainable, and accessible frontend applications. It helps you answer common but tricky questions like how to judge code quality, why bundling behaves differently in dev vs. production, how screen readers interpret your UI, and how to debug efficiently.
+
 https://frontend-fundamentals.com/en/
 
-## When to Use
+## 🧭 When to Use
 
 - 🦨 When you're unsure about your code but find it hard to explain the issues logically
-- 👀 When you want to learn how to quickly identify and fix bad code
-- 🤓 When you find yourself exploring a shared link during a code review and realize, "This is exactly what my code looks like," from an objective perspective
-- 👥 When your team wants to establish a shared coding style and standards for code quality
+- 🧯 When you're trying to debug a persistent frontend bug and want to double-check your fundamentals
+- 👥 When you're reviewing UI code for accessibility and want concrete do's and don'ts
+- 🛠️ When your team is setting shared standards for clean, robust frontend code
+
+## 📚 Collections
+
+- [Code Quality Fundamentals](https://frontend-fundamentals.com/code-quality/)
+- [Bundling Fundamentals](https://frontend-fundamentals.com/bundling/)
+- A11y Fundamentals (coming soon!)
 
 ## Contributing
 
