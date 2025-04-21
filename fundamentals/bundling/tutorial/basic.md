@@ -42,9 +42,9 @@ console.log(add(1, 2));
 
 ### 1. 새 프로젝트 폴더 만들고 npm 초기화하기
 
-먼저 웹팩 설정을 실습할 새 폴더를 만들어 주세요. Node.js 버전은 [가이드](https://nodejs.org/ko/download)를 참고해서 `22.14.0` 버전으로 설치해 주세요. 그 안에서 Node.js 패키지 관리를 시작할 수 있도록 npm을 초기화해요. 
+먼저 웹팩 설정을 실습할 새 폴더를 만들어 주세요. Node.js 버전은 [가이드](https://nodejs.org/ko/download)를 참고해서 `22.14.0` 버전으로 설치해 주세요. 
 
-터미널에서 다음 명령어를 입력하면 돼요. `npm init -y` 명령어는 기본 설정으로 `package.json` 파일을 자동으로 만들어줘요. `package.json` 파일은 프로젝트의 정보와 사용 중인 패키지를 기록하는 역할을 해요.
+그 안에서 Node.js 패키지 관리를 시작할 수 있도록 npm을 초기화해요. 터미널에서 다음 명령어를 입력하면 돼요. `npm init -y` 명령어는 기본 설정으로 `package.json` 파일을 자동으로 만들어줘요. `package.json` 파일은 프로젝트의 정보와 사용 중인 패키지를 기록하는 역할을 해요.
 
 ```bash
 mkdir webpack-tutorial
