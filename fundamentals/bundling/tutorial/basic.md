@@ -63,7 +63,16 @@ npm init -y
 npm install webpack webpack-cli --save-dev
 ```
 
-`--save-dev` 옵션은 이 도구들이 앱 코드가 아니라 **개발 도구**라는 의미로 설치해요. 설치가 끝나면 `node_modules` 폴더와 `package-lock.json` 파일이 생겨요.
+`--save-dev` 옵션은 이 도구들이 앱 코드가 아니라 **개발 도구**라는 의미로 설치해요. 설치가 끝나면 `node_modules` 폴더와 `package-lock.json` 파일이 생겨요. 
+
+::: details 개발 도구로 설치하는 것의 의미
+
+라이브러리를 `--save-dev` 옵션으로 개발 도구로 설치하면, 실제 운영 환경이나 라이브러리 코드로 사용될 때 설치를 건너뜀으로써 설치 시간과 공간을 아낄 수 있어요.
+
+- `npm install` 명령어를 `--production` 옵션과 함께 실행하거나, `NODE_ENV` 환경 변수가 `"production"` 으로 설정되었을 때, 개발 도구들은 설치되지 않아요.
+- 만든 프로젝트가 라이브러리로 다른 프로젝트에서 사용되면, 개발 도구들은 설치되지 않아요.
+
+:::
 
 ### 3. 기본 폴더 구조 만들기
 
