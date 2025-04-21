@@ -126,7 +126,7 @@ ReactDOM.createRoot(domNode).render(
    React.createElement(App)
 );
 ```
-이렇게 변환된 코드는 브라우저에서 정상적으로 실행돼요.  
+이렇게 변환된 코드는 브라우저에서 문제 없이 실행돼요.  
 즉, 번들러는 JSX 같은 확장 문법을 일반 JavaScript로 바꿔서 React 애플리케이션이 브라우저에서 동작할 수 있게 도와줘요.
 ## 번들링이 필요한 이유
 
