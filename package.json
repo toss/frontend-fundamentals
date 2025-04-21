@@ -12,7 +12,6 @@
     "docs:dev": "yarn workspace @frontend-fundamentals/code-quality docs:dev",
     "docs:build": "yarn workspace @frontend-fundamentals/code-quality docs:build",
     "docs:preview": "yarn workspace @frontend-fundamentals/code-quality docs:preview",
-    
     "docs:bundle:dev": "yarn workspace @frontend-fundamentals/bundling docs:dev",
     "docs:bundle:build": "yarn workspace @frontend-fundamentals/bundling docs:build",
     "docs:bundle:preview": "yarn workspace @frontend-fundamentals/bundling docs:preview"

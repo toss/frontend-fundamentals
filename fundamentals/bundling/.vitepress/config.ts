@@ -179,4 +179,20 @@ export default defineConfig({
     }
     `,
   },
+  head: [
+    [
+      "meta",
+      {
+        property: "og:image",
+        content: "https://static.toss.im/illusts/bf-meta.png"
+      }
+    ],
+    [
+      "meta",
+      {
+        name: "twitter:image",
+        content: "https://static.toss.im/illusts/bf-meta.png"
+      }
+    ],
+  ]
 })

@@ -9,7 +9,7 @@ hero:
     loading: eager
     fetchpriority: high
     decoding: async
-    src: /images/ff-symbol-gradient-webp-80.webp
+    src: /images/bf-symbol.webp
     alt: Frontend Fundamentals symbol
   actions:
     - text: 시작하기
