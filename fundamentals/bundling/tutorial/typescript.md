@@ -1,4 +1,4 @@
-# TypeScript와 사용하기
+# TypeScript 코드 번들링하기
 
 현대 웹 개발은 JavaScript만 사용하지 않고, TypeScript도 사용해요.
 

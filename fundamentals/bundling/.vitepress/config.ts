@@ -38,15 +38,15 @@ export default defineConfig({
             link: "/tutorial/basic",
           },
           {
-            text: "2. TypeScript와 사용하기",
+            text: "2. TypeScript 코드 번들링하기",
             link: "/tutorial/typescript",
           },
           {
-            text: "3. React와 함께 사용하기",
+            text: "3. React 코드 번들링하기",
             link: "/tutorial/with-react",
           },
           {
-            text: "4. CSS 파일 처리하기",
+            text: "4. CSS 파일 번들링하기",
             link: "/tutorial/css",
           },
           {
