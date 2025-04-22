@@ -1,0 +1,4 @@
+{
+  "buildCommand": "yarn docs:bundle:build",
+  "outputDirectory": "fundamentals/bundling/.vitepress/dist"
+} 

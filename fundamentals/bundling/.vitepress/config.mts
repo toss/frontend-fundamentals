@@ -196,14 +196,6 @@ export default defineConfig({
       md.use(footnote);
     },
   },
-  mermaid: {
-    fontFamily: "inherit",
-    themeCSS: `
-    p {
-      line-height: revert;
-    }
-    `,
-  },  
   head: [
     [
       "meta",
