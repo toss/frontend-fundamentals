@@ -109,7 +109,7 @@ export default defineConfig({
             collapsed: true,
             items: [
               {
-                text: "웹팩의 역할",
+                text: "핵심 개념",
                 link: "/reference/overview",
               },
               {
@@ -139,10 +139,6 @@ export default defineConfig({
             collapsed: true,
             items: [
               {
-                text: "소개",
-                link: "/reference/dev/overview",
-              },
-              {
                 text: "개발 서버",
                 link: "/reference/dev/dev-server",
               },
@@ -164,10 +160,6 @@ export default defineConfig({
             text: "웹팩 최적화하기",
             collapsed: true,
             items: [
-              {
-                text: "소개",
-                link: "/reference/optimization",
-              },
               {
                 text: "트리셰이킹",
                 link: "/reference/optimization/tree-shaking",
