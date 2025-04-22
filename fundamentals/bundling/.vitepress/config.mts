@@ -1,5 +1,9 @@
 import { defineConfig } from 'vitepress'
 import footnote from "markdown-it-footnote";
+import path from "node:path";
+import { createRequire } from "node:module";
+
+const require = createRequire(import.meta.url);
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -199,7 +203,7 @@ export default defineConfig({
       line-height: revert;
     }
     `,
-  },
+  },  
   head: [
     [
       "meta",
@@ -215,5 +219,27 @@ export default defineConfig({
         content: "https://static.toss.im/illusts/bf-meta.png"
       }
     ],
-  ]
+  ],
+  vite: {
+    resolve: {
+      alias: [
+        {
+          find: /^vue$/,
+          replacement: path.dirname(
+            require.resolve("vue/package.json", {
+              paths: [require.resolve("vitepress")]
+            })
+          )
+        },
+        {
+          find: /^vue\/server-renderer$/g,
+          replacement: path.dirname(
+            require.resolve("vue/server-renderer", {
+              paths: [require.resolve("vitepress")]
+            })
+          )
+        }
+      ]
+    }
+  },
 })
