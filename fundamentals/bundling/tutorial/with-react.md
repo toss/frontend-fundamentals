@@ -191,7 +191,7 @@ React는 JavaScript로 사용자 인터페이스를 만들어서 HTML 문서 안
 
 ### `HtmlWebpackPlugin` 정의하기
 
-웹팩 빌드가 될 때마다 번들된 결과물을 참조하는 HTML 파일이 생성되도록 하기 위해서는 [플러그인](../..../reference/plugin.md#htmlwebpackplugin) 설정이 필요해요. 먼저 `html-webpack-plugin` 패키지를 설치해 주세요.
+웹팩 빌드가 될 때마다 번들된 결과물을 참조하는 HTML 파일이 생성되도록 하기 위해서는 [플러그인](../reference/plugin.md#htmlwebpackplugin) 설정이 필요해요. 먼저 `html-webpack-plugin` 패키지를 설치해 주세요.
 
 ```bash
 npm install html-webpack-plugin --save-dev
