@@ -12,7 +12,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "번들링이란", link: "./overview" },
-      { text: "실전 가이드", link: "/tutorial/basic" },
+      { text: "가이드", link: "/tutorial/basic" },
       { text: "웹팩 깊이 이해하기", link: "/reference/overview" }
     ],
 
@@ -25,72 +25,104 @@ export default defineConfig({
             link: "/get-started",
           },
           {
-            text: "번들링이란",
+            text: "번들링이 필요한 이유",
             link: "/overview",
+          },
+          {
+            text: "웹팩의 역할",
+            link: "/reference/overview",
           },
         ]
       },
       {
-        text: "실전 가이드",
+        text: "가이드",
         items: [
           {
-            text: "1. 첫 번째 번들링 설정하기",
-            link: "/tutorial/basic",
+            text: "웹팩 튜토리얼",
+            items: [
+              {
+                text: "1. 번들링 시작하기",
+                items: [
+                  {
+                    text: "웹팩 설정 파일 만들기",
+                    link: "/tutorial/basic",
+                  },
+                ]
+              },
+              {
+                text: "2. 프로젝트 확장하기",
+                items: [
+                  {
+                    text: "TypeScript 코드 번들링하기",
+                    link: "/tutorial/typescript",
+                  },
+                  {
+                    text: "React 코드 번들링하기",
+                    link: "/tutorial/with-react",
+                  },
+                  {
+                    text: "CSS 파일 번들링하기",
+                    link: "/tutorial/css",
+                  },
+                  {
+                    text: "이미지와 폰트 다루기",
+                    link: "/tutorial/image-and-font",
+                  },
+                ]
+              },
+              {
+                text: "3. 자주 쓰는 웹팩 설정들",
+                items: [
+                  
+                  {
+                    text: "플러그인 추가하기",
+                    link: "/tutorial/plugin",
+                  },
+                  {
+                    text: "최적화하기",
+                    link: "/tutorial/optimization",
+                  },
+                  {
+                    text: "개발서버로 생산성 높이기",
+                    link: "/tutorial/dev-server",
+                  },
+                ]
+              }
+            ]
           },
           {
-            text: "2. TypeScript 코드 번들링하기",
-            link: "/tutorial/typescript",
-          },
-          {
-            text: "3. React 코드 번들링하기",
-            link: "/tutorial/with-react",
-          },
-          {
-            text: "4. CSS 파일 번들링하기",
-            link: "/tutorial/css",
-          },
-          {
-            text: "5. 이미지와 폰트 다루기",
-            link: "/tutorial/image-and-font",
-          },
-          {
-            text: "6. 개발서버로 생산성 높이기",
-            link: "/tutorial/dev-server",
-          },
-          {
-            text: "7. 플러그인 추가하기",
-            link: "/tutorial/plugin",
-          },
-          {
-            text: "8. 최적화하기",
-            link: "/tutorial/optimization",
-          },
-          {
-            text: "실습: 라이브러리 예제 코드로 번들링 이해하기",
-            link: "/library",
+            text: "실전 웹팩 예시",
+            items: [
+              {
+                text: "라이브러리 번들링하기",
+                link: "/library",
+              },
+              {
+                text: "상황별 웹팩 설정 템플릿",
+                link: "/setting-template",
+              },
+            ]
           },
         ],
       },
       {
-        text: "개념",
+        text: "심화 학습",
         items: [
           {
-            text: "웹팩 깊이 이해하기",
+            text: "웹팩 속성 이해하기",
+            collapsed: true,
             items: [
+              
               {
-                text: "소개",
-                link: "/reference/overview",
-              },
-              {
-                text: "진입점",
+                text: "진입점 설정하기",
                 link: "/reference/entry",
               },
               {
-                text: "경로 탐색",
+                text: "경로 탐색 규칙 이해하기",
                 link: "/reference/resolution",
               },
               {
-                text: "로더",
+                text: "로더 구조 살펴보기",
                 link: "/reference/loader",
               },
               {
@@ -101,39 +133,37 @@ export default defineConfig({
                 text: "출력",
                 link: "/reference/output",
               },
-              {
-                text: "최적화 기능",
-                link: "/reference/optimization",
-              },
-              {
-                text: "개발환경",
-                items: [
-                  {
-                    text: "소개",
-                    link: "/reference/dev/overview",
-                  },
-                  {
-                    text: "개발 서버",
-                    link: "/reference/dev/dev-server",
-                  },
-                  {
-                    text: "HMR",
-                    link: "/reference/dev/hmr",
-                  },
-                  {
-                    text: "소스맵",
-                    link: "/reference/dev/source-map",
-                  },
-                  {
-                    text: "환경 변수",
-                    link: "/reference/dev/env-variable",
-                  },
-                ],
-              }
             ],
           },
           {
-            text: "최적화 깊이 이해하기",
+            text: "개발 편의를 높이는 웹팩 설정",
+            collapsed: true,
+            items: [
+              {
+                text: "소개",
+                link: "/reference/dev/overview",
+              },
+              {
+                text: "개발 서버",
+                link: "/reference/dev/dev-server",
+              },
+              {
+                text: "HMR",
+                link: "/reference/dev/hmr",
+              },
+              {
+                text: "소스맵",
+                link: "/reference/dev/source-map",
+              },
+              {
+                text: "환경 변수",
+                link: "/reference/dev/env-variable",
+              },
+            ]
+          },
+          {
+            text: "웹팩 최적화하기",
+            collapsed: true,
             items: [
               {
                 text: "소개",
@@ -151,15 +181,6 @@ export default defineConfig({
           },
         ],
       },
-      {
-        text: "심화 학습",
-        items: [
-          {
-            text: "설정 템플릿",
-            link: "/setting-template",
-          },
-        ]
-      }
     ],
 
     socialLinks: [
