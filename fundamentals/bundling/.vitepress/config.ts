@@ -38,7 +38,7 @@ export default defineConfig({
         text: "가이드",
         items: [
           {
-            text: "기초 웹팩 튜토리얼",
+            text: "웹팩 튜토리얼",
             items: [
               {
                 text: "1. 번들링 시작하기",
@@ -46,10 +46,6 @@ export default defineConfig({
                   {
                     text: "웹팩 설정 파일 만들기",
                     link: "/tutorial/basic",
-                  },
-                  {
-                    text: "개발서버로 생산성 높이기",
-                    link: "/tutorial/dev-server",
                   },
                 ]
               },
@@ -86,7 +82,10 @@ export default defineConfig({
                     text: "최적화하기",
                     link: "/tutorial/optimization",
                   },
-                  
+                  {
+                    text: "개발서버로 생산성 높이기",
+                    link: "/tutorial/dev-server",
+                  },
                 ]
               }
             ]
@@ -115,15 +114,15 @@ export default defineConfig({
             items: [
               
               {
-                text: "진입점 설정하기 (entry)",
+                text: "진입점 설정하기",
                 link: "/reference/entry",
               },
               {
-                text: "경로 탐색 규칙 이해하기 (resolve)",
+                text: "경로 탐색 규칙 이해하기",
                 link: "/reference/resolution",
               },
               {
-                text: "로더 구조 살펴보기 (module.rules)",
+                text: "로더 구조 살펴보기",
                 link: "/reference/loader",
               },
               {
