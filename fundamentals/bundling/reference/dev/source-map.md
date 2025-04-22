@@ -166,17 +166,17 @@ if (process.env.ENV === "production") {
 
 만약 `counter` 제너레이터 함수에 `-1`을 전달하면 에러가 발생해요. 브라우저는 다음과 같이 표시해요.
 
-![](/fundamentals/bundling/images/source-map-1.png)
+![](../../images/source-map-1.png)
 
 에러 로그를 확인해보면, 에러가 발생한 지점을 번들 코드 기준으로 보여줘요.
 
-![](/fundamentals/bundling/images/source-map-2.png)
+![](../../images/source-map-2.png)
 
 하지만 번들 코드만 보고 원본 소스 코드를 바로 파악하기는 어려워요. 지금처럼 에러 메시지로 추적할 수도 있지만, 프로젝트 규모가 커지면 이 작업은 점점 어려워질 거예요.
 
 소스맵을 사용하면 원본 코드를 바로 추적할 수 있어요.
 
-![](/fundamentals/bundling/images/source-map-3.png)
+![](../../images/source-map-3.png)
 
 ## 소스맵의 동작 원리
 
