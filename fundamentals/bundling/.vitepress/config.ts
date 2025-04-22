@@ -40,7 +40,7 @@ export default defineConfig({
                 text: "1. 번들링 시작하기",
                 items: [
                   {
-                    text: "웹팩 설정 파일 만들기",
+                    text: "웹팩 설정하기",
                     link: "/tutorial/basic",
                   },
                 ]

@@ -1,58 +1,22 @@
-# 첫 번째 번들링 설정하기
+# 웹팩 기본 설정하기
 
-웹 개발을 하다 보면 JavaScript 코드를 여러 개의 파일로 쪼개어 개발하게 돼요. 
-예를 들어, 다음과 같이 숫자를 계산하는 코드를 작성한다고 가정해 볼게요. 
+## 1. 새 프로젝트 폴더 만들고 npm 초기화하기
 
-이 프로젝트는 숫자를 계산하는 로직을 역할과 책임에 따라 4개의 파일로 쪼개어 개발했어요.
-
-```javascript
-// src/utils/add.js
-export function add(a, b) {
-  return a + b;
-}
-```
-
-```javascript
-// src/utils/subtract.js
-export function subtract(a, b) {
-  return a + b;
-}
-```
-
-```javascript
-// src/utils/index.js
-export { add } from './add.js';
-export { subtract } from './subtract.js';
-```
-
-```javascript
-// src/index.js
-import { add } from './utils/index.js';
-
-console.log(add(1, 2));
-```
-
-그런데 프로젝트가 커질수록 이런 방식에는 한계가 있어요. 각 파일마다 HTTP 요청이 발생해서 페이지 로딩 속도가 느려지고, 죽은 코드가 불필요하게 로딩되기도 하죠.
-
-이런 문제를 해결하려고 우리는 번들링 도구를 사용해요. 여러 파일을 하나 또는 몇 개의 파일로 합치고, 사용하지 않는 코드를 제거하는 등 최적화를 하기 위함이죠.
-
-그중에서도 가장 널리 사용되는 도구가 **웹팩**(Webpack)이에요. 이제 프로젝트에 직접 웹팩을 설치하고 가장 기본적인 설정을 만들어 볼게요.
-
-## 웹팩 기본 설정하기
-
-### 1. 새 프로젝트 폴더 만들고 npm 초기화하기
-
-먼저 웹팩 설정을 실습할 새 폴더를 만들어 주세요. Node.js 버전은 [가이드](https://nodejs.org/ko/download)를 참고해서 `22.14.0` 버전으로 설치해 주세요. 
-
-그 안에서 Node.js 패키지 관리를 시작할 수 있도록 npm을 초기화해요. 터미널에서 다음 명령어를 입력하면 돼요. `npm init -y` 명령어는 기본 설정으로 `package.json` 파일을 자동으로 만들어줘요. `package.json` 파일은 프로젝트의 정보와 사용 중인 패키지를 기록하는 역할을 해요.
+먼저 웹팩 설정을 실습할 새 폴더를 만들어 주세요. Node.js 버전은 [가이드](https://nodejs.org/ko/download)를 참고해서 `22.14.0` 버전으로 설치해 주세요.
 
 ```bash
 mkdir webpack-tutorial
+```
+
+프로젝트 폴더로 이동한 뒤 터미널에 다음 명령어를 입력해 npm을 초기화해요
+
+```bash
 cd webpack-tutorial
 npm init -y
 ```
+`npm init -y` 명령어는 기본 설정으로 `package.json` 파일을 자동으로 만들어줘요. `package.json` 파일은 프로젝트의 정보와 사용 중인 패키지를 기록하는 역할을 해요.
 
-### 2. 웹팩과 웹팩 CLI 설치하기
+## 2. 웹팩과 웹팩 CLI 설치하기
 
 웹팩을 실행하려면 두 가지 패키지를 설치해야 해요.
 
@@ -69,12 +33,12 @@ npm install webpack webpack-cli --save-dev
 
 라이브러리를 `--save-dev` 옵션으로 개발 도구로 설치하면, 실제 운영 환경이나 라이브러리 코드로 사용될 때 설치를 건너뜀으로써 설치 시간과 공간을 아낄 수 있어요.
 
-- `npm install` 명령어를 `--production` 옵션과 함께 실행하거나, `NODE_ENV` 환경 변수가 `"production"` 으로 설정되었을 때, 개발 도구들은 설치되지 않아요.
-- 만든 프로젝트가 라이브러리로 다른 프로젝트에서 사용되면, 개발 도구들은 설치되지 않아요.
+- `npm install` 명령어를 `--production` 옵션과 함께 실행하거나, `NODE_ENV` 환경 변수가 `"production"` 으로 설정되었을 때, devDependencies 에 명시된 패키지들은 설치되지 않아요.
+- 내가 만든 패키지를 다른 프로젝트에서 다운로드 하더라도, devDependencies에 명시된 패키지들은 함께 설치되지 않아요.
 
 :::
 
-### 3. 기본 폴더 구조 만들기
+## 3. 기본 폴더 구조 만들기
 
 아래와 같이 간단한 4개 파일을 만들어 보세요.
 
@@ -120,7 +84,7 @@ webpack-tutorial/
 └── node_modules/
 ```
 
-### 4. 웹팩 설정 파일 만들기
+## 4. 웹팩 설정 파일 만들기
 
 웹팩을 사용하려면 [어떤 파일부터 읽고](../reference/entry.md), [결과를 어디에 저장할지](../reference/output.md) 알려줘야 해요. 이걸 설정하는 파일이 `webpack.config.js`예요.
 

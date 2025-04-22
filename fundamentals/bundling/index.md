@@ -15,7 +15,7 @@ hero:
     - text: 시작하기
       link: /get-started
     - theme: alt
-      text: 첫 번째 번들링 설정하기
+      text: 웹팩 설정하기
       link: /tutorial/basic
 
 features:
