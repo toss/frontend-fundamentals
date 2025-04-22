@@ -25,12 +25,8 @@ export default defineConfig({
             link: "/get-started",
           },
           {
-            text: "모듈 번들러란?",
+            text: "모듈 번들러",
             link: "/overview",
-          },
-          {
-            text: "웹팩의 역할",
-            link: "/reference/overview",
           },
         ]
       },
@@ -112,7 +108,10 @@ export default defineConfig({
             text: "웹팩 속성 이해하기",
             collapsed: true,
             items: [
-              
+              {
+                text: "웹팩의 역할",
+                link: "/reference/overview",
+              },
               {
                 text: "진입점 설정하기",
                 link: "/reference/entry",
