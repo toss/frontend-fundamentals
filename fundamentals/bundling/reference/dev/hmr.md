@@ -29,7 +29,7 @@ HMR이 활성화되면 웹팩의 `watch` 기능이 변경된 파일을 감지해
 특정 모듈이 업데이트 되면 해당 모듈에서 부터 이벤트가 버블링으로 전파돼요. 전파 과정에서 `accept`메서드의 핸들러를 통해서 렌더링 이벤트를 다시 호출해서 렌더링을 처리해줄 수 있어요.
 
 <figure>
-<img src="../../images/hmr-2.png" style="padding:12px;background-color: #fff;" />
+<img src="/images/hmr-2.png" style="padding:12px;background-color: #fff;" />
 <figcaption style="font-size: 14px;opacity: 0.8;">
 (출처: <a target="_blank" href="https://yoiyoy.gitbooks.io/dev/content/hot-module-replacement.html">https://yoiyoy.gitbooks.io/dev/content/hot-module-replacement.html</a>)
 </figcaption>
