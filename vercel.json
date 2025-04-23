@@ -2,18 +2,18 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "/code-quality/",
+      "destination": "/fundamentals/code-quality/",
       "permanent": true
     }
   ],
   "rewrites": [
     {
-      "source": "/fundamentals/code-quality(?:/(.*))?",
-      "destination": "/dist/fundamentals/code-quality/$1"
+      "source": "/fundamentals/code-quality/:path*",
+      "destination": "/dist/fundamentals/code-quality/:path*"
     },
     {
-      "source": "/fundamentals/bundling(?:/(.*))?",
-      "destination": "/dist/fundamentals/bundling/$1"
+      "source": "/fundamentals/bundling/:path*",
+      "destination": "/dist/fundamentals/bundling/:path*"
     },
     {
       "source": "/",
