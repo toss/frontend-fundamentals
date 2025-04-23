@@ -16,7 +16,7 @@
     "docs:bundle:build": "yarn workspace @frontend-fundamentals/bundling docs:build",
     "docs:bundle:preview": "yarn workspace @frontend-fundamentals/bundling docs:preview",
     "postbuild": "mkdir -p dist/fundamentals/code-quality dist/fundamentals/bundling && cp -r fundamentals/code-quality/.vitepress/dist/* dist/fundamentals/code-quality/ && cp -r fundamentals/bundling/.vitepress/dist/* dist/fundamentals/bundling/",
-    "build": "yarn docs:build:code-quality && yarn docs:build:bundling && yarn postbuild"
+    "build": "yarn docs:build && yarn docs:bundle:build && yarn postbuild"
   },
   "dependencies": {
     "@amplitude/analytics-browser": "^2.11.11",
