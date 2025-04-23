@@ -12,11 +12,11 @@
   "routes": [
     {
       "src": "/fundamentals/code-quality(?:/(.*))?",
-      "dest": "/fundamentals/code-quality/.vitepress/dist/$1"
+      "dest": "/dist/code-quality/$1"
     },
     {
       "src": "/fundamentals/bundling(?:/(.*))?",
-      "dest": "/fundamentals/bundling/.vitepress/dist/$1"
+      "dest": "/dist/bundling/$1"
     },
     {
       "src": "/",
