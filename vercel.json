@@ -1,14 +1,4 @@
 {
-  "builds": [
-    {
-      "src": "dist/fundamentals/code-quality/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "dist/fundamentals/bundling/**",
-      "use": "@vercel/static"
-    }
-  ],
   "routes": [
     {
       "src": "/fundamentals/code-quality(?:/(.*))?",
