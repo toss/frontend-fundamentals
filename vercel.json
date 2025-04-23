@@ -2,7 +2,7 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "/fundamentals/code-quality/",
+      "destination": "/code-quality/",
       "permanent": true
     }
   ],
