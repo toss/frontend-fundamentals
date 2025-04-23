@@ -10,7 +10,7 @@
     },
     {
       "src": "/",
-      "dest": "/fundamentals/code-quality/"
+      "dest": "/dist/fundamentals/code-quality/"
     }
   ]
 }
