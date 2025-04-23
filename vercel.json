@@ -11,20 +11,16 @@
   ],
   "routes": [
     {
-      "src": "/fundamentals/code-quality/(.*)",
+      "src": "/fundamentals/code-quality(?:/(.*))?",
       "dest": "/fundamentals/code-quality/.vitepress/dist/$1"
     },
     {
-      "src": "/fundamentals/code-quality",
-      "dest": "/fundamentals/code-quality/.vitepress/dist/index.html"
-    },
-    {
-      "src": "/fundamentals/bundling/(.*)",
+      "src": "/fundamentals/bundling(?:/(.*))?",
       "dest": "/fundamentals/bundling/.vitepress/dist/$1"
     },
     {
-      "src": "/fundamentals/bundling",
-      "dest": "/fundamentals/bundling/.vitepress/dist/index.html"
+      "src": "/",
+      "dest": "/fundamentals/code-quality/"
     }
   ]
 }
