@@ -1,22 +1,22 @@
 {
   "builds": [
     {
-      "src": "fundamentals/code-quality/.vitepress/dist/**",
+      "src": "dist/fundamentals/code-quality/**",
       "use": "@vercel/static"
     },
     {
-      "src": "fundamentals/bundling/.vitepress/dist/**",
+      "src": "dist/fundamentals/bundling/**",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/fundamentals/code-quality(?:/(.*))?",
-      "dest": "/dist/code-quality/$1"
+      "dest": "/dist/fundamentals/code-quality/$1"
     },
     {
       "src": "/fundamentals/bundling(?:/(.*))?",
-      "dest": "/dist/bundling/$1"
+      "dest": "/dist/fundamentals/bundling/$1"
     },
     {
       "src": "/",
