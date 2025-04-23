@@ -12,7 +12,7 @@ const require = createRequire(import.meta.url);
 
 export default defineConfig({
   ...shared,
-  base: "/fundamentals/code-quality/",
+  base: "/code-quality/",
   locales: {
     en: { label: "English", ...en },
     ja: { label: "日本語", ...ja },
