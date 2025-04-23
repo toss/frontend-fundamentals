@@ -25,7 +25,7 @@ export default defineConfig({
             link: "/get-started",
           },
           {
-            text: "번들링이란?",
+            text: "번들링이란",
             link: "/overview",
           },
         ]
@@ -38,12 +38,7 @@ export default defineConfig({
             items: [
               {
                 text: "1. 번들링 시작하기",
-                items: [
-                  {
-                    text: "웹팩 설정하기",
-                    link: "/tutorial/basic",
-                  },
-                ]
+                link: "/tutorial/basic",
               },
               {
                 text: "2. 프로젝트 확장하기",
