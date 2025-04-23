@@ -25,7 +25,7 @@ export default defineConfig({
             link: "/get-started",
           },
           {
-            text: "모듈 번들러",
+            text: "번들링이란?",
             link: "/overview",
           },
         ]
