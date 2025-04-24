@@ -183,6 +183,7 @@ export default defineConfig({
     },
   },
   head: [
+    ['link', { rel: 'icon', href: 'images/favicon.ico' }],
     [
       "meta",
       {
