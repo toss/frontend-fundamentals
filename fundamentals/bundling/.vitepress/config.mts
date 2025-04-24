@@ -11,7 +11,7 @@ export default defineConfig({
   description: "프론트엔드 번들링의 모든 것",
   ignoreDeadLinks: false,
   lastUpdated: true,
-  base: "/fundamentals/bundling",
+  base: "/fundamentals/bundling/",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -181,14 +181,6 @@ export default defineConfig({
     config: (md) => {
       md.use(footnote);
     },
-  },
-  mermaid: {
-    fontFamily: "inherit",
-    themeCSS: `
-    p {
-      line-height: revert;
-    }
-    `,
   },
   head: [
     [
