@@ -17,4 +17,6 @@
 - [mycolki](https://github.com/mycolki)
 - [helloworld-hellohyeon](https://github.com/helloworld-hellohyeon)
 - [raon0211](https://github.com/raon0211)
+- [donghyeon](https://github.com/Kimbangg)
+- [milooy](https://github.com/milooy)
 - [jennybehan](https://github.com/jennybehan)

@@ -17,7 +17,7 @@ npm init -y
 
 ![](/images/project-reset.png)
 
-이제 번들링 도구로 사용할 [웹팩](/reference/overview)을 설치해요.
+여기서는 번들링 도구로 [웹팩](/reference/overview)을 설치해요.
 
 ```bash
 npm install webpack webpack-cli --save-dev
@@ -27,7 +27,8 @@ npm install webpack webpack-cli --save-dev
 
 ## 2. 예제 파일의 src 옮겨오기
 
-[JavaScript Math 유틸리티 라이브러리 예제](https://github.com/toss/frontend-fundamentals/blob/main/public/files/bundling-example.zip)를 다운로드하고 압축을 풀어주세요.  
+[JavaScript Math 유틸리티 라이브러리 예제](https://github.com/toss/frontend-fundamentals/blob/main/public/files/bundling-example.zip)를 다운로드하고 압축을 풀어주세요.
+
 `math-utils` 디렉토리 안에 `src` 폴더를 만든 다음, 압축을 푼 예제에서 `index.js`, `clamp.js`, `inRange.js` 등의 JavaScript 파일을 `src` 폴더로 옮겨주세요.
 
 결과적으로 다음과 같은 구조가 만들어지면 돼요.

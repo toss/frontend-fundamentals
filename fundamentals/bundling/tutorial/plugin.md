@@ -53,7 +53,7 @@ module.exports = {
 
 빌드하면 `dist/index.html` 파일이 자동 생성되고, 번들된 JavaScript 파일도 자동으로 포함돼요. 템플릿에는 EJS 문법을 사용할 수 있어서 `title` 같은 값을 동적으로 넣을 수도 있어요.
 
-## 2. `MiniCssExtractPlugin` – CSS 파일 분리하기
+## 2. [`MiniCssExtractPlugin`](https://webpack.js.org/plugins/mini-css-extract-plugin/) – CSS 파일 분리하기
 
 기본적으로 웹팩은 CSS 파일을 JavaScript 코드 내부에 포함시켜 실행 시 `<style>` 태그로 주입해요. 하지만 **운영 환경에서는 CSS를 별도의 `.css` 파일로 분리하는 것이 성능과 유지보수 측면에서 더 좋아요.**
 
@@ -94,7 +94,7 @@ module.exports = {
 
 이제 빌드를 실행하면 CSS 파일이 `dist/styles/main.css` 와 같은 경로에 생성되고, HTML에도 자동으로 `<link rel="stylesheet" ...>` 태그가 추가돼요. 이렇게하면 CSS 파일이 별도로 다운로드되기 때문에 브라우저 캐시 활용도 좋아지고, 로딩 성능도 향상돼요.
 
-## 3. `CleanWebpackPlugin` – 빌드 결과 정리하기
+## 3. [`CleanWebpackPlugin`](https://github.com/johnagan/clean-webpack-plugin) – 빌드 결과 정리하기
 
 웹팩은 기본적으로 매번 `dist` 폴더를 덮어쓰지만 때때로 예전 파일이 남아 있을 수도 있어요.
 그래서 **빌드 전에 기존 결과를 깨끗하게 정리하고 시작하는 게 더 안전해요.**

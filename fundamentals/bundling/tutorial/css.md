@@ -6,9 +6,9 @@
 
 ## CSS를 JavaScript 모듈처럼 다루기
 
-CSS 파일을 JavaScript 모듈처럼 다룰 수 있다는 것은 무엇일까요? 
+CSS 파일을 JavaScript 모듈처럼 다룰 수 있다는 것은 JavaScript 코드 안에서 import 문을 사용해 특정 컴포넌트나 모듈에 필요한 스타일만 가져올 수 있다는 뜻이에요. 이렇게 하면 스타일 충돌을 방지하고, 유지 보수가 쉬운 구조로 만들 수 있어요.
 
-다음과 같이 스타일을 다루기 위해 [CSS Modules](https://css-tricks.com/css-modules-part-1-need/)를 사용하는 React 앱을 살펴볼게요. CSS Modules는 CSS 클래스 이름을 겹치지 않게 컴포넌트 단위로 사용할 수 있도록 도와주는 기술이에요.
+CSS 클래스 이름을 겹치지 않게 컴포넌트 단위로 사용할 수 있도록 도와주는 [CSS Modules](https://css-tricks.com/css-modules-part-1-need/)를 사용하는 React 앱을 살펴볼게요.
 
 `Component.js` 파일에서 `Component.module.css`를 import하고 있어요. 
 
@@ -32,10 +32,9 @@ export function Component() {
 }
 ```
 
-그런데 이렇게 JavaScript에서 CSS를 import하면 어떤 일이 일어날까요?
-JavaScript는 본래 CSS를 직접 해석하거나 적용할 수 없기 때문에, 단순히 import한다고 해서 스타일이 자동으로 적용되지는 않아요.
+그런데 이렇게 JavaScript에서 CSS를 import하면 어떤 일이 일어날까요? JavaScript는 CSS를 직접 해석하거나 적용할 수 없기 때문에, 단순히 import한다고 해서 스타일이 자동으로 적용되지는 않아요.
 
-이 문제를 해결하기 위해 번들러는 [로더](../reference/loader.md)를 사용해 CSS 파일을 자바스크립트가 사용할 수 있는 모듈 형태로 변환해줘요. 대표적인 예로 CSS 로더(css-loader)는 CSS 파일을 객체 형태로 바꿔주는데, 특히 CSS Modules와 함께 사용하면 원본 클래스 이름은 객체의 프로퍼티로, 중복을 방지하기 위해 변환된 클래스 이름은 프로퍼티 값으로 저장돼요.
+이 문제를 해결하기 위해 **번들러는 [로더](../reference/loader.md)를 사용해 CSS 파일을 자바스크립트가 사용할 수 있는 모듈 형태로 변환해줘요.** 대표적인 예로 CSS 로더(css-loader)는 CSS 파일을 객체 형태로 바꿔주는데, 특히 CSS Modules와 함께 사용하면 원본 클래스 이름은 객체의 프로퍼티로, 중복을 방지하기 위해 변환된 클래스 이름은 프로퍼티 값으로 저장돼요.
 
 ```javascript
 // 변환된 Component.module.css

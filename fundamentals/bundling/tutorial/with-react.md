@@ -187,7 +187,7 @@ React는 JavaScript로 사용자 인터페이스를 만들어서 HTML 문서 안
 </html>
 ```
 
-- `<div id="root"></div>`: React 앱이 실제로 렌더링될 공간이에요. `src/index.tsx`에서 `ReactDOM.createRoot(document.getElementById('root'))` 코드가 여기서 동작해요.
+`<div id="root"></div>`은 React 앱이 실제로 렌더링될 공간이에요. `src/index.tsx`에서 `ReactDOM.createRoot(document.getElementById('root'))` 코드가 여기서 동작해요.
 
 ### `HtmlWebpackPlugin` 정의하기
 
