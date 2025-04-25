@@ -10,8 +10,8 @@ export interface NavItem {
 
 export const ONE_NAVIGATION_ITEMS: NavItem[] = [
   {
-    path: "/",
-    href: "/",
+    path: "/code-quality/",
+    href: "/code-quality/",
     tooltip: {
       ko: "코드퀄리티",
       en: "Code Quality"
@@ -20,7 +20,7 @@ export const ONE_NAVIGATION_ITEMS: NavItem[] = [
   },
   {
     path: "/bundling",
-    href: "/code/coming-soon",
+    href: "/code-quality/code/coming-soon",
     tooltip: {
       ko: "번들링",
       en: "Bundling"
@@ -29,7 +29,7 @@ export const ONE_NAVIGATION_ITEMS: NavItem[] = [
   },
   {
     path: "/accessibility",
-    href: "/code/coming-soon",
+    href: "/code-quality/code/coming-soon",
     tooltip: {
       ko: "접근성",
       en: "Accessibility"
