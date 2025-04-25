@@ -114,7 +114,7 @@ Babel의 핵심 로직은 `@babel/core` 패키지에 포함되어 있고, Babel�
 
 ### 웹팩 설정에 로더 추가하기
 
-이제 `webpack.config.js` 파일을 열고 TypeScript를 처리할 수 있도록 `module.rules` 를 추가해요. 
+이제 `webpack.config.js` 파일을 열고 TypeScript를 처리할 수 있도록 `module.rules`를 추가해요. 
 
 ```js 11-26
 // webpack.config.js

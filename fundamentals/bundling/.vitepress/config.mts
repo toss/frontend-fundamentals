@@ -29,12 +29,8 @@ export default defineConfig({
             link: "/get-started",
           },
           {
-            text: "번들링이 필요한 이유",
+            text: "번들링이란",
             link: "/overview",
-          },
-          {
-            text: "웹팩의 역할",
-            link: "/reference/overview",
           },
         ]
       },
@@ -46,12 +42,7 @@ export default defineConfig({
             items: [
               {
                 text: "1. 번들링 시작하기",
-                items: [
-                  {
-                    text: "웹팩 설정 파일 만들기",
-                    link: "/tutorial/basic",
-                  },
-                ]
+                link: "/tutorial/basic",
               },
               {
                 text: "2. 프로젝트 확장하기",
@@ -116,7 +107,10 @@ export default defineConfig({
             text: "웹팩 속성 이해하기",
             collapsed: true,
             items: [
-              
+              {
+                text: "핵심 개념",
+                link: "/reference/overview",
+              },
               {
                 text: "진입점 설정하기",
                 link: "/reference/entry",
@@ -144,10 +138,6 @@ export default defineConfig({
             collapsed: true,
             items: [
               {
-                text: "소개",
-                link: "/reference/dev/overview",
-              },
-              {
                 text: "개발 서버",
                 link: "/reference/dev/dev-server",
               },
@@ -169,10 +159,6 @@ export default defineConfig({
             text: "웹팩 최적화하기",
             collapsed: true,
             items: [
-              {
-                text: "소개",
-                link: "/reference/optimization",
-              },
               {
                 text: "트리셰이킹",
                 link: "/reference/optimization/tree-shaking",
@@ -197,6 +183,7 @@ export default defineConfig({
     },
   },
   head: [
+    ['link', { rel: 'icon', href: 'images/favicon.ico' }],
     [
       "meta",
       {

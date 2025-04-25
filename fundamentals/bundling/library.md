@@ -1,12 +1,11 @@
-# 라이브러리 예제 코드로 번들링 이해하기
+# 라이브러리 번들링하기
 
-라이브러리를 만들 때 번들링 설정을 어떻게 해야 하는지 막막할 때가 많아요. 이 글에서는 간단한 JavaScript Math 유틸리티 라이브러리를 예제로 사용해서 번들링 설정을 하나씩 배워볼게요.
-
-웹팩을 사용해서 번들링을 진행하고, 결과 파일을 Node.js 환경과 브라우저 환경에서 사용하는 방법까지 다뤄요.
+라이브러리를 만들 때는 번들링 설정을 어떻게 해야 할지 막막할 때가 많아요. 이번에는 간단한 JavaScript Math 유틸리티 라이브러리를 예제로 사용해서 번들링 과정을 단계별로 배워볼게요.
+이 글에서는 웹팩을 활용해 라이브러리를 번들링하고, 결과물을 Node.js 환경과 브라우저 환경에서 사용하는 방법까지 모두 다뤄요.
 
 ## 1. 프로젝트 초기화
 
-새 프로젝트를 위한 폴더를 만들고 번들링 도구 추가 등 초기 설정을 해요.
+먼저 프로젝트를 위한 새 폴더를 만들고, 웹팩과 같은 번들링 도구를 설치해서 기본 환경을 준비해요.
 
 ```bash
 mkdir math-utils
@@ -16,22 +15,23 @@ npm init -y
 
 [`npm init`](https://docs.npmjs.com/cli/v8/commands/npm-init) 명령어를 실행하면 `package.json` 파일이 생성돼요. `package.json`은 프로젝트의 설정과 의존성을 관리해줘요.
 
-![](./images/project-reset.png)
+![](/images/project-reset.png)
 
-이제 번들링 도구로 사용할 [웹팩](/reference/overview)을 설치해요.
+여기서는 번들링 도구로 [웹팩](/reference/overview)을 설치해요.
 
 ```bash
 npm install webpack webpack-cli --save-dev
 ```
 
-`webpack-cli`는 웹팩을 터미널에서 명령어로 실행할 수 있도록 도와줘요.
+`webpack-cli`는 웹팩을 터미널에서 명령어로 쉽게 사용할 수 있게 해주는 도구예요.
 
 ## 2. 예제 파일의 src 옮겨오기
 
-[JavaScript Math 유틸리티 라이브러리 예제](https://github.com/toss/frontend-fundamentals/blob/main/public/files/bundling-example.zip)를 다운로드하고 압축을 풀어주세요.  
+[JavaScript Math 유틸리티 라이브러리 예제](https://github.com/toss/frontend-fundamentals/blob/main/public/files/bundling-example.zip)를 다운로드하고 압축을 풀어주세요.
+
 `math-utils` 디렉토리 안에 `src` 폴더를 만든 다음, 압축을 푼 예제에서 `index.js`, `clamp.js`, `inRange.js` 등의 JavaScript 파일을 `src` 폴더로 옮겨주세요.
 
-다음과 같은 구조로 만들면 돼요.
+결과적으로 다음과 같은 구조가 만들어지면 돼요.
 
 ```plaintext
 math-utils/
@@ -43,7 +43,7 @@ math-utils/
 ├── package.json
 ```
 
-![](./images/code-insert.png)
+![](/images/code-insert.png)
 
 `index.js`는 라이브러리의 진입점(entry) 역할을 하는 파일이고, `clamp.js`, `inRange.js` 같은 파일에는 각각 유틸리티 함수가 들어 있어요.
 
@@ -80,11 +80,10 @@ module.exports = {
 npx webpack
 ```
 
-커맨드를 실행하면 `dist` 폴더가 생성되고, 그 안에 `bundle.js` 파일이 만들어져요. 이 파일은 우리가 만든 유틸리티 함수들을 하나로 묶은 번들 파일이에요.
+빌드를 실행하면 `dist` 폴더가 생성되고 그 안에 `bundle.js` 파일이 만들어져요. 이 파일은 우리가 만든 여러 개의 유틸리티 함수들을 하나로 묶은 결과물이에요.
+다음 이미지를 클릭해보면, 원래 여러 파일로 나뉘어 있던 코드가 하나의 파일로 합쳐져 있는 것을 확인할 수 있어요.
 
-다음 이미지를 클릭해서 보면 `src` 폴더 아래에 있던 여러 파일들이 하나의 파일로 합쳐져 번들링 된 결과를 볼 수 있을 거예요.
-
-![](./images/build-result.png)
+![](/images/build-result.png)
 
 이제 우리가 번들링한 `MathUtils`의 유틸 함수들을 Node.js 환경과 브라우저 환경에서 사용할 수 있는지 확인해 볼게요.
 
@@ -119,14 +118,12 @@ HTML 파일에서 `<script>` 태그로 번들 파일을 추가하면 전역 객�
 
 ## 5. 번들 파일 최적화하기
 
-이번에는 번들링한 파일을 최적화까지 해볼게요.
+이번에는 번들 파일을 더 효율적으로 만들어 볼게요.
 
-번들링한 파일을 최적화해서 로딩 속도를 개선할 수 있어요.  
-번들 크기가 커지면 브라우저에서 로드하는 데 시간이 오래 걸릴 수 있기 때문에, 불필요한 코드를 제거하고 압축하는 등 파일 크기를 줄이는 것이 중요해요.
+번들 파일의 크기가 커지면 로딩 속도가 느려지기 때문에, 불필요한 코드를 제거하고 압축하는 등 번들 파일 크기를 최적화하는 것이 중요해요.
 
-번들을 최적화하는 대표적인 방법으로 트리 셰이킹과 코드 스플리팅이 있어요.
+이러한 최적화의 대표적인 방법으로 트리 셰이킹과 코드 스플리팅이 있어요.
 
-각 방법에 대한 자세한 내용은 [번들 파일 최적화](./reference/optimization/overview) 문서에서 확인하세요.
 
 ### `webpack.config.js`의 `mode` 설정하기
 
@@ -148,7 +145,7 @@ module.exports = {
 
 ### `development`와 `production` 비교하기
 
-아래와 같이 `mode`를 `development`로 설정하고 웹팩을 실행하고 위 `production`일 때 결과와 비교해 볼게요.
+mode를 `development`로 설정하고 빌드한 결과를 `production` 설정일 때와 비교해볼게요.
 
 ```javascript
 const path = require("path");
@@ -162,7 +159,7 @@ module.exports = {
 
 #### 1. 번들 결과 비교하기
 
-![](./images/mode-compare1.png)
+![](/images/mode-compare1.png)
 
 `development`로 번들링한 `bundle-development.js` 파일은 코드가 난독화나 최소화 되지 않아 **읽을 수 있는 형태이고 주석이 남아있어요.**
 
@@ -170,7 +167,7 @@ module.exports = {
 
 #### 2. 번들 파일 크기 비교하기
 
-![](./images/mode-compare2.png)
+![](/images/mode-compare2.png)
 
 `bundle-development.js` 파일은 26KB, `bundle-production.js` 파일은 2KB로 크기가 **열 배 이상** 차이나는 걸 확인할 수 있어요.
 

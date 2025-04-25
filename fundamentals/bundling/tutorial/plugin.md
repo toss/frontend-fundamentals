@@ -1,16 +1,15 @@
-# 플러그인으로 더 강력한 개발 환경 만들기
+# 플러그인 추가하기
 
-앞서 본 것처럼 웹팩은 로더로 다양한 파일을 처리할 수 있지만, **빌드 과정 전체를 제어하거나 자동화하는 작업**은 [플러그인](../reference/plugin.md)이 담당해요.
+앞서 웹팩이 로더로 다양한 파일을 처리하는 과정을 살펴봤어요. 하지만 로더가 개별 파일을 처리하는 반면, 프로젝트 전체의 빌드 과정과 결과물을 제어하거나 자동화하는 작업은 [플러그인](../reference/plugin.md)이 담당해요.
 
-플러그인은 HTML 파일을 자동으로 만들어 주거나, CSS 파일을 별도로 추출하거나, 빌드 결과를 정리하고, 코드를 압축하고 최적화하는 등 **프로젝트 전체에 영향을 주는 작업**을 처리해요.
+플러그인은 HTML 파일을 자동으로 만들어 주거나, CSS 파일을 별도로 추출하거나, 빌드 결과를 정리하고, 코드를 압축하고 최적화하는 등 **애플리케이션 빌드 전반에 걸쳐 영향을 주는 작업**을 수행해요.
 
 이번에는 웹팩에서 자주 사용하는 대표적인 플러그인들을 직접 사용해 볼게요.
 
 ## 1. [`HtmlWebpackPlugin`](../reference/plugin.md#htmlwebpackplugin) – HTML 파일 자동 생성하기
 
-웹팩은 기본적으로 JavaScript만 처리할 수 있기 때문에, HTML 파일은 직접 만들어야 했어요. 하지만 `HtmlWebpackPlugin`을 사용하면 HTML도 자동으로 생성할 수 있어요. 이 플러그인은 **번들된 JavaScript 파일을 HTML에 자동으로 삽입**해 줘서 훨씬 편리해요.
-
-다음 커맨드로 `HtmlWebpackPlugin`을 추가해요.
+기본적으로 웹팩은 JavaScript만 처리할 수 있어서, HTML 파일은 직접 만들어야 했어요. 하지만 `HtmlWebpackPlugin`을 사용하면 HTML 파일 생성도 자동화할 수 있어요. 이 플러그인은 **번들된 JavaScript 파일을 HTML에 자동으로 삽입**해 줘서 훨씬 편리해요.
+다음 커맨드로 `HtmlWebpackPlugin`을 설치해요.
 
 ```bash
 npm install html-webpack-plugin --save-dev
@@ -33,7 +32,7 @@ module.exports = {
 };
 ```
 
-이렇게 설정하면 웹팩은 지정된 템플릿을 기반으로 `dist/index.html` 파일을 자동으로 생성해요. `bundle.js` 같은 출력 파일도 `<script>` 태그로 자동 삽입돼요.
+이렇게 설정하면 웹팩은 지정된 템플릿을 기반으로 `dist/index.html` 파일을 자동으로 생성해요. 번들링된 JavaScript 파일도 `<script>` 태그로 자동으로 추가돼요.
 
 ### 템플릿 예시
 
@@ -54,13 +53,13 @@ module.exports = {
 
 빌드하면 `dist/index.html` 파일이 자동 생성되고, 번들된 JavaScript 파일도 자동으로 포함돼요. 템플릿에는 EJS 문법을 사용할 수 있어서 `title` 같은 값을 동적으로 넣을 수도 있어요.
 
-## 2. `MiniCssExtractPlugin` – CSS 파일 분리하기
+## 2. [`MiniCssExtractPlugin`](https://webpack.js.org/plugins/mini-css-extract-plugin/) – CSS 파일 분리하기
 
-지금과 같은 웹팩 기본 설정에서는 CSS가 JavaScript 코드 안에 포함되어 있고, 실행할 때 `<style>` 태그로 삽입돼요. 하지만 **운영 환경에서는 CSS를 별도의 `.css` 파일로 분리하는 것이 성능과 유지보수 측면에서 더 좋아요.**
+기본적으로 웹팩은 CSS 파일을 JavaScript 코드 내부에 포함시켜 실행 시 `<style>` 태그로 주입해요. 하지만 **운영 환경에서는 CSS를 별도의 `.css` 파일로 분리하는 것이 성능과 유지보수 측면에서 더 좋아요.**
 
 이때 사용하는 것이 `MiniCssExtractPlugin`이에요. 이 플러그인은 **CSS를 별도 파일로 추출하고, HTML에서 자동으로 `<link>` 태그로 연결**해 줘요.
 
-이런 용도로 `MiniCssExtractPlugin`을 사용해요. 다음 커맨드로 `MiniCssExtractPlugin`을 추가해요.
+다음 명령어로 `MiniCssExtractPlugin`를 설치할 수 있어요.
 
 ```bash
 npm install mini-css-extract-plugin --save-dev
@@ -93,19 +92,20 @@ module.exports = {
 };
 ```
 
-이제 빌드하면 `dist/styles/main.css` 같은 파일이 생성되고, 자동으로 `<link rel="stylesheet" ...>` 태그가 추가돼요. 이렇게하면 CSS 파일이 별도로 다운로드되기 때문에 브라우저 캐시 활용도 좋아지고, 로딩 성능도 향상돼요.
+이제 빌드를 실행하면 CSS 파일이 `dist/styles/main.css` 와 같은 경로에 생성되고, HTML에도 자동으로 `<link rel="stylesheet" ...>` 태그가 추가돼요. 이렇게하면 CSS 파일이 별도로 다운로드되기 때문에 브라우저 캐시 활용도 좋아지고, 로딩 성능도 향상돼요.
 
-## 3. `CleanWebpackPlugin` – 빌드 결과 정리하기
+## 3. [`CleanWebpackPlugin`](https://github.com/johnagan/clean-webpack-plugin) – 빌드 결과 정리하기
 
-웹팩은 기본적으로 매번 `dist` 폴더를 덮어쓰기만 해요. 그런데 예전 파일이 남아 있을 수도 있어서, **빌드 전에 기존 결과를 깨끗하게 정리하고 시작하는 게 더 안전해요.**
+웹팩은 기본적으로 매번 `dist` 폴더를 덮어쓰지만 때때로 예전 파일이 남아 있을 수도 있어요.
+그래서 **빌드 전에 기존 결과를 깨끗하게 정리하고 시작하는 게 더 안전해요.**
 
-이런 기능은 `CleanWebpackPlugin`으로 처리할 수 있어요. 다음 커맨드로 `CleanWebpackPlugin`을 추가해요.
+이를 위해 사용하는 플러그인이 바로 `CleanWebpackPlugin`이에요. 다음 명령어로 설치할 수 있어요.
 
 ```bash
 npm install clean-webpack-plugin --save-dev
 ```
 
-이제 웹팩에 설정을 추가해요.
+웹팩 설정에 플러그인을 추가해요.
 
 ```javascript{2,8}
 // webpack.config.js
@@ -136,9 +136,9 @@ output: {
 
 ## 4. [`DefinePlugin`](../reference/plugin.md#defineplugin) – 환경 변수 설정하기
 
-개발 환경과 운영 환경에 따라 다르게 동작해야 할 때는 **환경 변수를 설정해서 코드 안에서 조건에 따라 분기할 수 있어요.**
+개발 환경과 운영 환경에서 애플리케이션이 다르게 동작해야 하는 경우가 있어요. 이때 **환경 변수를 사용해 코드 안에서 조건부로 동작을 제어할 수 있어요.**
 
-웹팩 기본 플러그인인 `DefinePlugin`을 사용하면 빌드 시점에 전역 상수처럼 사용할 수 있어요. 다음과 같이 웹팩 설정에 추가하면 돼요.
+웹팩 기본 플러그인인 `DefinePlugin`을 사용하면 빌드 시점에 전역 상수처럼 사용할 수 있어요. 웹팩 설정에 다음과 같이 추가해요.
 
 ```javascript{6-8}
 // webpack.config.js
@@ -152,8 +152,7 @@ module.exports = {
   ],
 };
 ```
-
-이렇게 하면 코드 안에서 `process.env.NODE_ENV` 값을 사용할 수 있어요.
+코드 내에서 아래와 같이 환경 변수에 따라 다르게 동작하도록 만들 수 있어요.
 
 ```javascript
 if (process.env.NODE_ENV === 'development') {
@@ -165,7 +164,7 @@ if (process.env.NODE_ENV === 'development') {
 
 ---
 
-플러그인은 다양한 작업을 자동화하고, 웹팩을 더 강력하게 만들어 줘요. 아래는 자주 사용하는 플러그인 요약이에요.
+플러그인은 웹팩을 더 강력하고 편리하게 만들어주는 도구예요. 아래는 자주 쓰이는 플러그인들의 사용 목적을 간략히 정리한 거예요.
 
 | 목적 | 플러그인 |
 |------|----------|

@@ -175,7 +175,7 @@ import getSum from "@utils/getSum";
 
 - 반대로 웹팩 설정의 `resolve.alias` 옵션으로 경로에 별칭을 설정하고, `tsconfig.json`를 수정하지 않으면, 다음과 같은 컴파일 에러가 발생해요.
 
-  <img style="border-radius: 8px; opacity: 0.9" src="../images/resolve_compile-error.png" alt="compile-error" />
+  <img style="border-radius: 8px; opacity: 0.9" src="/images/resolve_compile-error.png" alt="compile-error" />
 
   > error TS2307: Cannot find module 'pages/Main' or its corresponding type declarations.
 
