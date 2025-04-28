@@ -32,7 +32,7 @@
 
 - 매우 강력한 플러그인/로더 생태계를 가지고 있어 어떤 프로젝트에도 적용 가능해요.
 - 다만 설정이 복잡하고 번들링 속도가 상대적으로 느린 편이에요.
-- webpack-dev-server를 통해 개발 서버를 제공해요.
+- [webpack-dev-server](https://www.npmjs.com/package/webpack-dev-server)를 사용해 개발 서버를 제공해요.
 
 ### Rollup
 > 라이브러리 제작에 최적화된 번들러.
