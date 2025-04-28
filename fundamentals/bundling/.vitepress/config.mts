@@ -32,6 +32,10 @@ export default defineConfig({
             text: "번들링이란",
             link: "/overview",
           },
+          {
+            text: "번들러란",
+            link: "/bundler",
+          },
         ]
       },
       {
