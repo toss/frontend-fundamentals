@@ -50,9 +50,9 @@
 ```
 
 ### 5. 번들러가 추가 최적화 작업도 해줘요
-- 사용되지 않는 코드는 제거해요. (Tree shaking)
+- 사용되지 않는 코드는 제거해요. ([트리 셰이킹](/reference/optimization/tree-shaking))
+- 필요한 경우, 여러 개의 작은 번들로 나누기도 해요. ([코드 스플리팅](/reference/optimization/code-splitting))
 - 코드에서 공백, 주석을 없애서 크기를 줄여요. (Minification)
-- 필요한 경우, 여러 개의 작은 번들로 나누기도 해요. (Code splitting)
 
 ### 6. 최종 결과물을 배포해요
 
