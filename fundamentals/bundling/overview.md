@@ -12,39 +12,39 @@
 
 - 트랜스파일(Transpile): 최신 JavaScript 문법이나 TypeScript 코드를 구형 브라우저에서도 실행할 수 있도록 변환해요.
 - 코드 최적화: 사용하지 않는 코드를 제거하거나 변수명을 줄여서 파일 크기를 줄여요. 이렇게 하면 사용자에게 더 빠르게 전달할 수 있어요.
-- 에셋 처리: CSS, 이미지, 폰트 같은 리소스도 함께 처리해서 하나의 번들에 포함하거나 연결할 수 있어요.
+- 에셋 처리: CSS, 이미지, 폰트 같은 리소스도 함께 변환해서 하나의 번들에 포함하거나 연결할 수 있어요.
 - 개발 서버 제공: 개발 중 코드 변경 사항을 실시간으로 반영할 수 있어요.
 
 번들러가 하는 역할 중 번들링을 중심으로 주요 과정을 하나씩 자세히 살펴볼게요.
 
-##  번들링 과정
+## 번들링 과정
 
 예를 들어 다음 프로젝트는 기능마다 JavaScript 파일이 따로 나누어져 있어서, 여러 개의 파일이 존재해요. 
 
 네 번째 예제 코드인 `index.js`에서 확인할 수 있는 것처럼 `add` 함수만 사용하고 있지만, 필요 없는 `subtract` 함수까지 불러오고 있어요. 
 이렇게 파일이 여러 개로 나뉘어 있으면, 브라우저는 각 파일을 내려받기 위해 여러 번 네트워크 요청을 해야 하기 때문에 로딩 시간이 더 길어져요.
 
-```javascript
+```js
 // utils/add.js
 export function add(a, b) {
   return a + b;
 }
 ```
 
-```javascript
+```js
 // utils/subtract.js
 export function subtract(a, b) {
   return a + b;
 }
 ```
 
-```javascript
+```js
 // utils/index.js
 export { add } from './add.js';
 export { subtract } from './subtract.js';
 ```
 
-```javascript 4
+```js 4
 // index.js
 import { add } from './utils/index.js';
 
@@ -55,7 +55,7 @@ console.log(add(1, 2));
 
 이때 실제 사용하지 않는 코드인 `subtract` 함수는 포함하지 않아요. 따라서 브라우저가 다운로드해야 하는 파일 개수는 4개에서 1개로 줄어들고, 번들링 결과에서도 불필요한 코드는 제거되어 최적화돼요.
 
-```javascript
+```js
 // bundle.js (번들링 결과)
 export function add(a, b) {
   return a + b;
@@ -70,7 +70,7 @@ console.log(add(1, 2));
 
 예를 들어, 다음과 같이 TypeScript로 작성된 코드는 브라우저가 직접 실행할 수 없어요. `: number`와 같은 타입 표시(Type Annotation)는 JavaScript에 없는 문법이라 브라우저는 이해하지 못하고 오류를 발생시켜요.
 
-```typescript
+```ts
 // utils/add.ts
 // 여기의 `:number` 같은 타입 표시가 있으면 브라우저가 실행할 수 없어요
 function add(a: number, b: number): number {
@@ -78,7 +78,7 @@ function add(a: number, b: number): number {
 }
 ```
 
-```typescript
+```ts
 // index.ts
 import { add } from './utils/add.ts';
 
@@ -88,7 +88,7 @@ console.log(add(1, 2));
 트랜스파일러는 TypeScript 코드를 브라우저가 이해할 수 있는 일반 JavaScript로 바꿔줘요. 
 번들러는 트랜스파일러를 이용해서 위 예시처럼 나뉘어 있는 파일을 브라우저가 이해할 수 있는 하나의 JavaScript 파일로 만들 수 있어요.
 
-```javascript
+```js
 // bundle.js (번들링 결과)
 function add(a, b) {
   return a + b;
@@ -108,7 +108,7 @@ React에서는 JavaScript 안에서 UI를 편리하게 표현하기 위해 확�
 
 예를 들어, 아래와 같은 JSX 코드는 브라우저에서 그대로 실행할 수 없어요.
 
-```javascript
+```js
 // components/App.jsx
 export function App() {
   // 다음 JSX 문법은 브라우저에서 실행할 수 없어요
@@ -116,7 +116,7 @@ export function App() {
 }
 ```
 
-```javascript
+```js
 // index.jsx
 import { App } from './components/App.jsx';
 
@@ -129,7 +129,7 @@ ReactDOM.createRoot(domNode).render(
 
 그래서 트랜스파일러는 JSX 문법을 일반 JavaScript로 바꿔줘요. 예를 들어 위 JSX 코드는 다음과 같이 바뀌어요.
 
-```javascript
+```js
 function App() {
   // JSX 문법이 일반 JavaScript로 변환되었어요
   return React.createElement("h1", null, "Hello, world!");
@@ -143,17 +143,17 @@ ReactDOM.createRoot(domNode).render(
 ```
 변환된 코드는 브라우저에서 문제 없이 실행돼요. 
 
-이렇게 트랜스파일러는 JSX 같은 확장 문법을 일반 JavaScript로 바꿔서 React 애플리케이션이 브라우저에서 동작할 수 있게 도와줘요.
+이렇게 트랜스파일러는 JSX 같은 확장 문법을 일반 JavaScript 문법으로 바꿔서 React 애플리케이션이 브라우저에서 동작할 수 있게 도와줘요.
 
 ## 번들링이 필요한 이유
 
 앞서 살펴본 내용을 바탕으로 번들링이 제공하는 핵심 이점을 간단히 정리해볼게요.
 
-### 1. 네트워크 요청을 줄여 로딩 시간 단축
+### 1. 네트워크 요청을 줄여 페이지 로딩 시간 단축
 
 브라우저가 스크립트를 실행할 때, 불러와야 하는 JavaScript 파일이 많을수록 네트워크 요청 횟수가 늘어나고, 그만큼 로딩 속도가 느려질 수 있어요.
 
-번들링을 하면 여러 개의 파일들을 하나로 합쳐 요청 수를 줄이고, 리소스를 더 빠르게 다운로드할 수 있어서 로딩 속도가 빨라져요.
+번들링을 하면 여러 개의 파일들을 하나로 합쳐 요청 수를 줄이고, 리소스를 더 빠르게 다운로드할 수 있어서 페이지 로딩 속도가 빨라져요.
 
 ### 2. 코드 최적화
 
