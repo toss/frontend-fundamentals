@@ -2,7 +2,7 @@
   <div class="one-navigation">
     <div class="nav-top">
       <div
-        v-for="item in ONE_NAVIGATION_ITEMS"
+        v-for="item in navigationItems"
         :key="item.path"
         class="nav-item"
         :class="{ active: isActive(item.path) }"
@@ -22,9 +22,17 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute } from "vitepress";
+import { useRoute, useData } from "vitepress";
 import { useLocale } from "../composables/useLocale";
 import { ONE_NAVIGATION_ITEMS } from "../config/OneNavigationItems";
+import { computed } from "vue";
+
+const { lang } = useData();
+
+const navigationItems = computed(() =>ONE_NAVIGATION_ITEMS.map((item) => ({
+  ...item,
+  href: item.href.replace('/{lang}', `/${lang.value}`).replace("/ko", "")
+})));
 
 const route = useRoute();
 const { isKorean } = useLocale();
