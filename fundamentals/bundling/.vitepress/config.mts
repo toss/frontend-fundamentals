@@ -2,24 +2,25 @@ import { defineConfig } from 'vitepress'
 import footnote from "markdown-it-footnote";
 import path from "node:path";
 import { createRequire } from "node:module";
+import { sharedConfig } from './shared.mjs';
 
 const require = createRequire(import.meta.url);
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  ...sharedConfig,
   title: "Bundling Fundamentals",
   description: "프론트엔드 번들링의 모든 것",
   ignoreDeadLinks: false,
-  lastUpdated: true,
   base: "/bundling/",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
+    ...sharedConfig.themeConfig,
     nav: [
       { text: "번들링이란", link: "./overview" },
       { text: "가이드", link: "/tutorial/basic" },
       { text: "웹팩 깊이 이해하기", link: "/reference/overview" }
     ],
-
     sidebar: [
       {
         text: "소개",
@@ -176,33 +177,12 @@ export default defineConfig({
         ],
       },
     ],
-
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/toss/frontend-fundamentals' }
-    ]
   },
   markdown: {
     config: (md) => {
       md.use(footnote);
     },
   },
-  head: [
-    ['link', { rel: 'icon', href: 'images/favicon.ico' }],
-    [
-      "meta",
-      {
-        property: "og:image",
-        content: "https://static.toss.im/illusts/bf-meta.png"
-      }
-    ],
-    [
-      "meta",
-      {
-        name: "twitter:image",
-        content: "https://static.toss.im/illusts/bf-meta.png"
-      }
-    ],
-  ],
   vite: {
     resolve: {
       alias: [
@@ -226,3 +206,5 @@ export default defineConfig({
     }
   },
 })
+
+
