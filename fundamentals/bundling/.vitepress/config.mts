@@ -42,7 +42,74 @@ export default defineConfig({
         text: "가이드",
         items: [
           {
-            text: "웹팩 튜토리얼",
+            text: "웹팩으로 배우는 번들링",
+            items: [
+              {
+                text: "1. 웹팩 시작하기",
+                items: [
+                  {
+                    text: "첫 번들 만들기",
+                    link: "/tutorial/basic",
+                  },
+                ]
+              },
+              {
+                text: "2. 실전 프로젝트 구성하기",
+                items: [
+                  {
+                    text: "TypeScript 프로젝트 설정",
+                    link: "/tutorial/basic",
+                  },
+                  {
+                    text: "React 애플리케이션 번들링",
+                    link: "/tutorial/basic",
+                  },
+                  {
+                    text: "스타일 관리하기",
+                    link: "/tutorial/basic",
+                  },
+                  {
+                    text: "리소스 관리하기",
+                    link: "/tutorial/basic",
+                  },
+                ]
+              },
+              {
+                text: "3. 프로덕션 최적화",
+                items: [
+                  {
+                    text: "플러그인 활용하기",
+                    link: "/tutorial/basic",
+                  },
+                  {
+                    text: "성능 최적화하기",
+                    link: "/tutorial/basic",
+                  },
+                  {
+                    text: "개발 환경 개선하기",
+                    link: "/tutorial/basic",
+                  },
+                ]
+              },
+            ]
+          },
+          {
+            text: "롤업으로 배우는 라이브러리 번들링",
+            items: [
+              {
+                text: "1. 롤업 시작하기",
+                items: [
+                  {
+                    text: "첫 번들 만들기",
+                    link: "/tutorial/basic",
+                  },
+                ]
+              },
+            ]  
+            },
+          {
+            text: "(Legacy) 웹팩 튜토리얼",
+            collapsed: true,
             items: [
               {
                 text: "1. 번들링 시작하기",
@@ -90,7 +157,8 @@ export default defineConfig({
             ]
           },
           {
-            text: "실전 웹팩 예시",
+            text: "(Leagacy) 실전 웹팩 예시",
+            collapsed: true,
             items: [
               {
                 text: "라이브러리 번들링하기",
