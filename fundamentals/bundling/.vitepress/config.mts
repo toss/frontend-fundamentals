@@ -176,73 +176,51 @@ export default defineConfig({
         text: "심화 학습",
         items: [
           {
-            text: "웹팩 속성 이해하기",
-            collapsed: true,
+            text: "1. 웹팩의 동작 원리",
+            collapsed: true, 
             items: [
-              {
-                text: "핵심 개념",
-                link: "/reference/overview",
-              },
-              {
-                text: "진입점 설정하기",
-                link: "/reference/entry",
-              },
-              {
-                text: "경로 탐색 규칙 이해하기",
-                link: "/reference/resolution",
-              },
-              {
-                text: "로더 구조 살펴보기",
-                link: "/reference/loader",
-              },
-              {
-                text: "플러그인",
-                link: "/reference/plugin",
-              },
-              {
-                text: "출력",
-                link: "/reference/output",
-              },
+              { text: "웹팩 핵심 개념", link: "/reference/overview" },
+              { text: "진입점", link: "/reference/entry-output" },
+              { text: "모듈 해석 규칙", link: "/reference/resolution" },
+              { text: "로더 활용", link: "/reference/loader" },
+              { text: "에셋 모듈 관리", link: "/reference/asset-modules" },
+              { text: "플러그인 구성", link: "/reference/plugin" },
+              { text: "결과물", link: "/reference/output" },
             ],
           },
           {
-            text: "개발 편의를 높이는 웹팩 설정",
+            text: "2. 번들 최적화 기법",
             collapsed: true,
             items: [
-              {
-                text: "개발 서버",
-                link: "/reference/dev/dev-server",
-              },
-              {
-                text: "HMR",
-                link: "/reference/dev/hmr",
-              },
-              {
-                text: "소스맵",
-                link: "/reference/dev/source-map",
-              },
-              {
-                text: "환경 변수",
-                link: "/reference/dev/env-variable",
-              },
-            ]
+              { text: "트리셰이킹", link: "/reference/optimization/tree-shaking" },
+              { text: "코드 스플리팅", link: "/reference/optimization/code-splitting" },
+              { text: "캐싱 최적화", link: "/reference/optimization/caching" },
+              { text: "번들 분석", link: "/reference/optimization/bundle-analysis" },
+            ],
           },
           {
-            text: "웹팩 최적화하기",
+            text: "3. 개발 환경 고도화",
             collapsed: true,
             items: [
-              {
-                text: "트리셰이킹",
-                link: "/reference/optimization/tree-shaking",
-              },
-              {
-                text: "코드 스플리팅",
-                link: "/reference/optimization/code-splitting",
-              },
+              { text: "개발 서버", link: "/reference/dev/dev-server" },
+              { text: "HMR", link: "/reference/dev/hmr" },
+              { text: "소스맵", link: "/reference/dev/source-map" },
+              { text: "환경 변수 관리", link: "/reference/dev/env-variable" },
+              { text: "절대 경로 설정", link: "/reference/alias" },
+              { text: "프록시 설정", link: "/reference/dev/proxy" },
+              { text: "빌드 성능 개선", link: "/reference/dev/build-performance" },
+            ],
+          },
+          {
+            text: "4. 실전 활용 사례",
+            collapsed: true,
+            items: [
+              { text: "라이브러리 번들링", link: "/reference/advanced/library" },
+              { text: "모듈 페더레이션", link: "/reference/advanced/micro-frontend" }
             ],
           },
         ],
-      },
+      }
     ],
 
     socialLinks: [
