@@ -251,6 +251,26 @@ export default defineConfig({
       md.use(footnote);
     },
   },
+  head: [
+    [
+      "link",
+      { rel: "icon", type: "image/x-icon", href: "/images/favicon.ico" }
+    ],
+    [
+      "meta",
+      {
+        property: "og:image",
+        content: "https://static.toss.im/illusts/bf-meta.png"
+      }
+    ],
+    [
+      "meta",
+      {
+        name: "twitter:image",
+        content: "https://static.toss.im/illusts/bf-meta.png"
+      }
+    ],
+  ],
   vite: {
     resolve: {
       alias: [
