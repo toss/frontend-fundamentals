@@ -1,13 +1,22 @@
 {
   "name": "frontend-fundamentals",
+  "private": true,
   "packageManager": "yarn@4.6.0",
+  "workspaces": [
+    "fundamentals/*"
+  ],
   "engines": {
     "node": ">=22.0.0"
   },
   "scripts": {
-    "docs:dev": "vitepress dev",
-    "docs:build": "vitepress build",
-    "docs:preview": "vitepress preview"
+    "docs:dev": "yarn workspace @frontend-fundamentals/code-quality docs:dev",
+    "docs:build": "yarn workspace @frontend-fundamentals/code-quality docs:build",
+    "docs:preview": "yarn workspace @frontend-fundamentals/code-quality docs:preview",
+    "docs:bundle:dev": "yarn workspace @frontend-fundamentals/bundling docs:dev",
+    "docs:bundle:build": "yarn workspace @frontend-fundamentals/bundling docs:build",
+    "docs:bundle:preview": "yarn workspace @frontend-fundamentals/bundling docs:preview",
+    "postbuild": "mkdir -p dist/fundamentals/code-quality dist/fundamentals/bundling && cp -r fundamentals/code-quality/.vitepress/dist/* dist/fundamentals/code-quality/ && cp -r fundamentals/bundling/.vitepress/dist/* dist/fundamentals/bundling/",
+    "build": "yarn docs:build && yarn docs:bundle:build && yarn postbuild"
   },
   "dependencies": {
     "@amplitude/analytics-browser": "^2.11.11",
