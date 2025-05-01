@@ -176,7 +176,7 @@ export default defineConfig({
         text: "심화 학습",
         items: [
           {
-            text: "웹팩 완벽 이해하기",
+            text: "웹팩 깊이 이해하기",
             collapsed: false,
             items: [
               { text: "웹팩 기본 개념", link: "/reference/overview" },
