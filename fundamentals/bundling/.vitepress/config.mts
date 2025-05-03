@@ -46,13 +46,9 @@ export default defineConfig({
             text: "웹팩으로 배우는 번들링",
             items: [
               {
-                text: "1. 웹팩 시작하기",
-                items: [
-                  {
-                    text: "첫 번들 만들기",
-                    link: "/tutorial/basic",
-                  },
-                ]
+                text: "1. 소개",
+                link: "/webpack-tutorial/intro",
+                
               },
               {
                 text: "2. 실전 프로젝트 구성하기",
