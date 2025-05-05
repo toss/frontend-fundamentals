@@ -54,6 +54,10 @@ export default defineConfig({
                 link: "/webpack-tutorial/make-first-bundle",
               },
               {
+                text: "모듈 시스템으로 코드 구조화하기",
+                link: "/webpack-tutorial/module-system",
+              },
+              {
                 text: "3. 실전 프로젝트 구성하기",
                 items: [
                   {
