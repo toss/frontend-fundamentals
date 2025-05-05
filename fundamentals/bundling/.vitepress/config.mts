@@ -58,6 +58,10 @@ export default defineConfig({
                 link: "/webpack-tutorial/module-system",
               },
               {
+                text: "타입스크립트 적용하기",
+                link: "/webpack-tutorial/typescript",
+              },
+              {
                 text: "3. 실전 프로젝트 구성하기",
                 items: [
                   {
