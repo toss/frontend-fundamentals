@@ -46,12 +46,15 @@ export default defineConfig({
             text: "웹팩으로 배우는 번들링",
             items: [
               {
-                text: "1. 소개",
+                text: "소개",
                 link: "/webpack-tutorial/intro",
-                
               },
               {
-                text: "2. 실전 프로젝트 구성하기",
+                text: "웹팩 도입하고 첫 번들 만들기",
+                link: "/webpack-tutorial/make-first-bundle",
+              },
+              {
+                text: "3. 실전 프로젝트 구성하기",
                 items: [
                   {
                     text: "TypeScript 프로젝트 설정",
