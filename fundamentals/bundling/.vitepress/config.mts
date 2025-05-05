@@ -62,43 +62,29 @@ export default defineConfig({
                 link: "/webpack-tutorial/typescript",
               },
               {
-                text: "3. 실전 프로젝트 구성하기",
-                items: [
-                  {
-                    text: "TypeScript 프로젝트 설정",
-                    link: "/tutorial/basic",
-                  },
-                  {
-                    text: "React 애플리케이션 번들링",
-                    link: "/tutorial/basic",
-                  },
-                  {
-                    text: "스타일 관리하기",
-                    link: "/tutorial/basic",
-                  },
-                  {
-                    text: "리소스 관리하기",
-                    link: "/tutorial/basic",
-                  },
-                ]
+                text: "리액트 적용하기",
+                link: "/webpack-tutorial/react",
               },
               {
-                text: "3. 프로덕션 최적화",
-                items: [
-                  {
-                    text: "플러그인 활용하기",
-                    link: "/tutorial/basic",
-                  },
-                  {
-                    text: "성능 최적화하기",
-                    link: "/tutorial/basic",
-                  },
-                  {
-                    text: "개발 환경 개선하기",
-                    link: "/tutorial/basic",
-                  },
-                ]
+                text: "스타일 관리하기",
+                link: "/webpack-tutorial/style",
               },
+              {
+                text: "정적 리소스 관리하기",
+                link: "/webpack-tutorial/assets",
+              },
+              {
+                text: "플러그인 활용하기",
+                link: "/webpack-tutorial/plugin",
+              },
+              {
+                text: "개발 서버로 생산성 높이기",
+                link: "/webpack-tutorial/dev-server",
+              },
+              {
+                text: "환경 변수와 보안 관리하기",
+                link: "/webpack-tutorial/environment",
+              }
             ]
           },
           {
