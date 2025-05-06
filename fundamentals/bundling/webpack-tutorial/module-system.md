@@ -33,7 +33,7 @@
 지금 우리 프로젝트에는 몇 가지 구조적인 문제가 있어요:
 
 1. **전역 변수 사용**  
-   `emoji.js`의 `emojis` 변수가 전역에 노출돼 있어요. 다른 코드랑 충돌날 수도 있어요.
+   `emoji.js`의 변수가 전역에 노출돼 있어요. 다른 코드랑 충돌날 수도 있어요.
 
 2. **불명확한 의존성**  
    `main.js`는 `emoji.js`에 의존하고 있지만 코드에서 명시적으로 드러나지 않아요.
@@ -48,7 +48,7 @@
 
 :::
 
-이제, 이 문제들을 해결하기 위해 모듈 시스템을 적용해보도록 할게요.
+이 문제를 해결하기 위해 모듈 시스템을 적용해보도록 할게요.
 
 ## JS 파일을 모듈로 변환하기
 
@@ -77,16 +77,16 @@ export const emojis = [
 
 ```javascript
 // emoji.js에서 필요한 것만 가져와요
-import { getRandomEmoji } from './emoji.js';
+import { emojis } from './emoji.js';
 
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener('DOMContentLoaded', function() {
   const today = new Date();
   // date-fns는 아직  CDN을 통해 불러오고 있어서 여기서는 직접 import하지 않아요. 곧 이 부분도 수정할 거예요!
-  const formattedDate = dateFns.format(today, "MMMM d, yyyy");
-  document.getElementById("dateDisplay").textContent = formattedDate;
+  const formattedDate = dateFns.format(today, 'MMMM d, yyyy');
+  document.getElementById('dateDisplay').textContent = formattedDate;
   
-  updateEmoji();
+  showRandomEmoji();
 });
 
 function showRandomEmoji() {
