@@ -1,4 +1,4 @@
-# CSS와 스타일 관리하기
+# 스타일 관리하기
 
 이번 단계에서는 '오늘의 이모지' 프로젝트의 스타일을 웹팩으로 관리하는 방법을 배워볼게요. 웹팩의 로더를 사용하면 CSS 파일도 자바스크립트 모듈처럼 import해서 사용할 수 있어요.
 
@@ -13,20 +13,20 @@ import './style.css';
 
 ## CSS 로더 설치하기
 
-웹팩이 CSS를 처리할 수 있도록 필요한 로더들을 설치해볼게요:
+웹팩이 CSS를 처리할 수 있도록 필요한 로더들을 설치해볼게요.
 
 ```bash
 npm install --save-dev style-loader css-loader
 ```
 
-- `css-loader`: CSS 파일을 자바스크립트 모듈로 변환해요.
-- `style-loader`: 변환된 CSS를 `<style>` 태그로 만들어 HTML에 주입해요.
+- `css-loader`: CSS 파일을 자바스크립트에서 import할 수 있는 형태로 바꿔줘요.  
+- `style-loader`: 변환된 CSS를 브라우저 실행 시 `<style>` 태그로 만들어 동적으로 삽입해요.
 
 ## 웹팩에 CSS 로더 설정 추가하기
 
 `webpack.config.js` 파일에 CSS를 처리하는 로더를 추가해요:
 
-```js
+```js{6-12}
 module.exports = {
   // ... 기존 설정 유지
   module: {
@@ -46,115 +46,45 @@ module.exports = {
 
 로더는 배열의 뒤에서부터 앞으로 순서대로 실행돼요. 즉, `css-loader`가 먼저 실행되고, 그 다음 `style-loader`가 실행되는 거예요.
 
-## CSS 모듈 사용하기
+## 스타일 파일을 HTML로부터 JS로 옮기기
 
-CSS 모듈을 사용하면 클래스 이름이 고유하게 만들어져서 스타일 충돌을 방지할 수 있어요. 웹팩 설정을 수정해서 CSS 모듈을 활성화해볼게요:
-
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true // CSS 모듈을 활성화해요
-            }
-          }
-        ]
-      }
-    ]
-  }
-};
+먼저 `index.html` 에서 `style link 태그`를 지워주세요
+```html{7-8}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emoji of the Day</title>
+  <!-- HTML에 넣었던 style을 지워주세요 -->
+  <!-- <link rel="stylesheet" href="./style.css"> -->
+</head>
+<!-- 동일 -->
+</html>
 ```
 
-이제 CSS 파일을 모듈로 import해서 사용할 수 있어요:
+`App.tsx` 에 `style.css` 파일을 import 해주세요
 
-```tsx
-// App.module.css
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
+```jsx{4-4}
+import React from 'react';
+import { emojis } from './emoji';
+import { format } from 'date-fns';
+import './style.css';
 
-// App.tsx
-import styles from './App.module.css';
-
-const App: React.FC = () => {
-  return (
-    <div className={styles.container}>
-      {/* ... */}
-    </div>
-  );
-};
+// 동일
 ```
 
-## 스타일 파일 구조화하기
+## 빌드하기
 
-프로젝트가 커지면 스타일 파일도 체계적으로 관리해야 해요. 일반적인 구조를 추천해드릴게요:
-
-```
-src/
-├── styles/
-│   ├── variables.css    # CSS 변수
-│   ├── reset.css       # 브라우저 기본 스타일 초기화
-│   └── global.css      # 전역 스타일
-├── components/
-│   ├── Button/
-│   │   ├── Button.tsx
-│   │   └── Button.module.css
-│   └── Card/
-│       ├── Card.tsx
-│       └── Card.module.css
-└── App.tsx
-```
-
-## 👣 한 걸음 더: CSS 전처리기 사용하기
-
-웹팩은 SASS, LESS 같은 CSS 전처리기도 지원해요. 예를 들어 SASS를 사용하고 싶다면:
+이제 코드를 빌드해볼게요:
 
 ```bash
-npm install --save-dev sass sass-loader
+npm run build
 ```
+브라우저에서 `index.html`을 열어보면, HTML 안에 스타일이 직접 보이지 않더라도
+페이지에는 CSS가 잘 적용된 걸 확인할 수 있어요.
+![](/images/style-less.png)
 
-그리고 웹팩 설정에 추가해요:
-
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.scss$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader' // SASS를 CSS로 변환해요
-        ]
-      }
-    ]
-  }
-};
-```
-
-이제 `.scss` 파일을 import해서 사용할 수 있어요:
-
-```scss
-// variables.scss
-$primary-color: #007bff;
-$font-size-large: 1.5rem;
-
-// App.scss
-@import './variables.scss';
-
-.container {
-  color: $primary-color;
-  font-size: $font-size-large;
-}
-```
 
 ## 다음 단계
 
