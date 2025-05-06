@@ -108,7 +108,7 @@ $ npm run build
 
 이제 HTML 파일에서 더 이상 `emoji.js`, `main.js`를 로드할 필요가 없어요. `index.html` 파일을 다음과 같이 수정해주세요:
 
-```html{21-26}
+```html{22-27}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -117,6 +117,7 @@ $ npm run build
   <title>Emoji of the Day</title>
   <link rel="stylesheet" href="./style.css">
   <script src="https://cdn.jsdelivr.net/npm/date-fns@3.6.0/cdn.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
@@ -183,13 +184,14 @@ $ npm run build
 
 이제 HTML 파일에서 더 이상 `date-fns` cdn을 로드할 필요가 없어요. `index.html` 파일을 다음과 같이 수정해주세요:
 
-```html{8-9}
+```html{9-10}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Emoji of the Day</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
   <!-- cdn 스크립트도 더 이상 필요 없어요 -->
   <!-- <script src="https://cdn.jsdelivr.net/npm/date-fns@3.6.0/cdn.min.js"></script> -->

@@ -49,13 +49,14 @@ module.exports = {
 ## 스타일 파일을 HTML로부터 JS로 옮기기
 
 먼저 `index.html` 에서 `style link 태그`를 지워주세요
-```html{7-8}
+```html{8-9}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Emoji of the Day</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
   <!-- HTML에 넣었던 style을 지워주세요 -->
   <!-- <link rel="stylesheet" href="./style.css"> -->
 </head>
@@ -76,7 +77,7 @@ import './style.css';
 
 ## 빌드하기
 
-이제 코드를 빌드해볼게요:
+이제 코드를 빌드해볼게요.
 
 ```bash
 npm run build

@@ -133,13 +133,14 @@ var sum = function(a, b) {
 
 이제 HTML을 리액트 컴포넌트로 변환해볼게요. 먼저 `index.html`을 수정해요.
 
-```html{10-11}
+```html{11-12}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Emoji of the Day</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
@@ -168,6 +169,7 @@ const App = () => {
 
   return (
     <div className="container">
+      <img src="./assets/logo.svg" alt="Logo" className="logo"></img>
       <h1>Emoji of the Day</h1>
       <div className="date-display">
         {format(new Date(), 'MMMM d, yyyy')}

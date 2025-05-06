@@ -46,7 +46,7 @@ export default defineConfig({
             text: "웹팩으로 배우는 번들링",
             items: [
               {
-                text: "소개",
+                text: "튜토리얼 소개",
                 link: "/webpack-tutorial/intro",
               },
               {
@@ -70,7 +70,7 @@ export default defineConfig({
                 link: "/webpack-tutorial/style",
               },
               {
-                text: "정적 리소스 관리하기",
+                text: "이미지와 폰트 등 정적 자원 다루기",
                 link: "/webpack-tutorial/assets",
               },
               {

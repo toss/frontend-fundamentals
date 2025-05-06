@@ -1,31 +1,18 @@
 # 이미지와 폰트 등 정적 자원 다루기
 
-이번 단계에서는 '오늘의 이모지' 프로젝트의 이미지와 폰트 같은 정적 자원을 웹팩으로 관리하는 방법을 배워볼게요. 웹팩의 Asset Modules를 사용하면 이런 파일들도 자바스크립트 모듈처럼 import해서 사용할 수 있어요.
+웹사이트를 만들다 보면 이미지, 아이콘, 폰트 같은 파일들을 자주 사용하게 돼요. 이런 파일들은 자바스크립트나 CSS처럼 코드를 변환하지 않고 '그대로' 브라우저에서 사용되는 파일이에요. 그래서 보통 '정적 자원'이라고 불러요.
+
+이번 단계에서는 '오늘의 이모지' 프로젝트의 이미지와 폰트 같은 정적 자원을 웹팩으로 관리하는 방법을 배워볼게요. 웹팩의 `Asset Modules`를 사용하면 이런 파일들도 자바스크립트 모듈처럼 import해서 사용할 수 있어요.
 
 ## Asset Modules란?
 
-웹팩 5부터는 `file-loader`, `url-loader`, `raw-loader` 같은 로더들이 내장된 Asset Modules로 대체되었어요. Asset Modules는 이미지, 폰트, 아이콘 등의 파일을 자동으로 처리해주는 기능이에요.
+예전에는 이미지나 폰트 같은 정적 자원을 웹팩에서 처리하기 위해 `file-loader`, `url-loader`, `raw-loader` 같은 별도 로더를 설치했어요.
 
-## 이미지 파일 사용하기
-
-이미지 파일을 자바스크립트에서 import해서 사용할 수 있어요:
-
-```tsx
-// App.tsx
-import logo from './assets/logo.svg';
-
-const App: React.FC = () => {
-  return (
-    <div>
-      <img src={logo} alt="로고" />
-    </div>
-  );
-};
-```
+하지만 웹팩 5부터는 이런 작업을 훨씬 쉽게 해주는 기능인 `Asset Modules`가 내장되었어요. 이제는 따로 로더를 설치하지 않아도 웹팩이 이미지, 폰트, 아이콘 같은 파일을 자동으로 처리하고, 필요하면 압축하거나 base64로 변환해주는 일까지 대신 해줘요.
 
 ## 웹팩에 Asset Modules 설정 추가하기
 
-`webpack.config.js` 파일에 Asset Modules 설정을 추가해요:
+`webpack.config.js` 파일을 수정해주세요.
 
 ```js
 module.exports = {
@@ -36,10 +23,50 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i, // 이미지 파일 확장자
         type: 'asset', // Asset Modules 사용
-        parser: {
-          dataUrlCondition: {
-            maxSize: 8 * 1024 // 8kb 미만은 base64로 변환
-          }
+      }
+    ]
+  }
+};
+```
+
+::: details Asset Modules의 `type` 옵션은 뭔가요?
+- `asset/resource`: 파일을 별도 파일로 내보내고 URL을 반환해요.
+- `asset/inline`: 파일을 base64로 인코딩된 data URL로 변환해요.
+- `asset/source`: 파일의 내용을 문자열로 변환해요.
+- `asset`: 파일 크기에 따라 자동으로 `asset/resource`와 `asset/inline` 중 하나를 선택해요.
+:::
+
+## 이미지 파일 JS에서 import하기
+
+`App.tsx`에서 logo 파일을 import하고 로고 이미지 태그 `src`에 넣어주세요.
+
+```tsx
+// logo.svg 를 import로 가져옴 (타입에러는 일단 무시해주세요)
+import logo from './assets/logo.svg';
+
+// 가져온 logo 모듈을 src에 넣어줌
+<img src={logo} alt="Logo" className="logo"></img>
+```
+
+코드를 빌드하고 브라우저에서 로고 이미지가 잘 보이는지 확인해주세요.
+
+```bash
+npm run build
+```
+
+## CSS에서 이미지와 폰트 사용하기
+
+폰트 파일도 같은 방식으로 사용할 수 있어요. 웹팩 설정에 폰트 파일 처리를 추가할게요.
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i, // 폰트 파일 확장자
+        type: 'asset/resource', // 폰트는 항상 별도 파일로 내보내요
+        generator: {
+          filename: 'assets/[name][ext]' // 원하는 폴더와 이름 형태로 설정
         }
       }
     ]
@@ -47,16 +74,7 @@ module.exports = {
 };
 ```
 
-Asset Modules의 `type` 옵션은 다음과 같아요:
-- `asset/resource`: 파일을 별도 파일로 내보내고 URL을 반환해요.
-- `asset/inline`: 파일을 base64로 인코딩된 data URL로 변환해요.
-- `asset/source`: 파일의 내용을 문자열로 변환해요.
-- `asset`: 파일 크기에 따라 자동으로 `asset/resource`와 `asset/inline` 중 하나를 선택해요.
-
-## 폰트 파일 사용하기
-
-폰트 파일도 같은 방식으로 사용할 수 있어요:
-
+이제 css 파일에서 폰트 파일을 직접 접근할 수 있어요.
 ```css
 /* style.css */
 @font-face {
@@ -68,84 +86,14 @@ body {
   font-family: 'Inter', sans-serif;
 }
 ```
+:::details 왜 폰트는 별도 파일로 내보내는게 좋나요?
 
-웹팩 설정에 폰트 파일 처리를 추가해요:
+폰트는 이미지보다 훨씬 용량이 크고, 자주 바뀌지 않는 정적 자원이에요. 그래서 다음과 같은 이유로 항상 asset/resource처럼 별도 파일로 내보내는 것이 좋아요.
 
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/i, // 폰트 파일 확장자
-        type: 'asset/resource' // 폰트는 항상 별도 파일로 내보내요
-      }
-    ]
-  }
-};
-```
-
-## 👣 한 걸음 더: 이미지 최적화하기
-
-웹팩으로 이미지를 최적화하는 방법도 알아볼게요. `image-minimizer-webpack-plugin`을 사용하면 빌드 시 이미지를 자동으로 압축할 수 있어요:
-
-```bash
-npm install --save-dev image-minimizer-webpack-plugin imagemin imagemin-gifsicle imagemin-mozjpeg imagemin-pngquant imagemin-svgo
-```
-
-그리고 웹팩 설정에 추가해요:
-
-```js
-const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
-
-module.exports = {
-  // ... 기존 설정 유지
-  optimization: {
-    minimizer: [
-      new ImageMinimizerPlugin({
-        minimizer: {
-          implementation: ImageMinimizerPlugin.imageminMinify,
-          options: {
-            plugins: [
-              ['gifsicle', { interlaced: true }],
-              ['mozjpeg', { quality: 80 }],
-              ['pngquant', { quality: [0.6, 0.8] }],
-              ['svgo']
-            ]
-          }
-        }
-      })
-    ]
-  }
-};
-```
-
-이렇게 설정하면 빌드 시 이미지가 자동으로 최적화돼요. 파일 크기가 줄어들어 웹사이트 로딩 속도가 빨라질 거예요.
-
-## 정적 자원 관리 팁
-
-프로젝트가 커지면 정적 자원도 체계적으로 관리해야 해요:
-
-1. **폴더 구조**
-   ```
-   src/
-   ├── assets/
-   │   ├── images/
-   │   │   ├── logo.svg
-   │   │   └── icons/
-   │   └── fonts/
-   │       └── Inter-Regular.woff2
-   └── components/
-   ```
-
-2. **이름 규칙**
-   - 이미지: `feature-name.png`
-   - 아이콘: `icon-name.svg`
-   - 폰트: `font-name-weight.woff2`
-
-3. **최적화**
-   - SVG는 가능한 인라인으로 사용해요
-   - 작은 이미지는 base64로 변환해요
-   - 큰 이미지는 별도 파일로 내보내요
+- **성능**: JS에 inline하면 번들 크기가 커져서 초기 로딩 속도가 느려져요.
+- **렌더링 시점 제어**: 브라우저는 외부 폰트를 병렬로 다운로드하고 캐시할 수 있지만, JS 내부에 포함되면 그럴 수 없어요.
+- **캐싱 효율**: 번들에 포함되면 JS가 바뀔 때마다 다시 다운로드되지만, 외부 폰트 파일은 변경되지 않으면 브라우저가 캐시를 재사용할 수 있어요.
+:::
 
 ## 다음 단계
 
