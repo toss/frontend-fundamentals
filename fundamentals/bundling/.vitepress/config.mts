@@ -74,7 +74,7 @@ export default defineConfig({
                 link: "/webpack-tutorial/assets",
               },
               {
-                text: "플러그인 활용하기",
+                text: "플러그인으로 빌드 확장하기",
                 link: "/webpack-tutorial/plugin",
               },
               {

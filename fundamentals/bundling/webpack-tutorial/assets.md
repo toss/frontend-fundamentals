@@ -56,8 +56,25 @@ npm run build
 
 ## CSS에서 이미지와 폰트 사용하기
 
-폰트 파일도 같은 방식으로 사용할 수 있어요. 웹팩 설정에 폰트 파일 처리를 추가할게요.
+폰트 파일도 같은 방식으로 사용할 수 있어요. 먼저 `index.html`에서 font파일을 지워주세요.
+```html{7-8}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emoji of the Day</title>
+  <!-- HTML에 넣었던 font을 지워주세요 -->
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet"> -->
+</head>
+<body>
+  <div id="root"></div>
+  <script src="./dist/bundle.js"></script>
+</body>
+</html>
+```
 
+`webpack.config.js`에 폰트 파일 처리를 추가할게요.
 ```js
 module.exports = {
   module: {
@@ -73,6 +90,8 @@ module.exports = {
   }
 };
 ```
+
+
 
 이제 css 파일에서 폰트 파일을 직접 접근할 수 있어요.
 ```css
@@ -97,6 +116,6 @@ body {
 
 ## 다음 단계
 
-이제 우리 프로젝트의 정적 자원을 웹팩으로 관리할 수 있게 되었어요. 이미지와 폰트를 모듈처럼 사용하고, 최적화까지 할 수 있게 되었죠.
+이미지나 폰트 같은 정적 자원을 웹팩으로 다룰 수 있게 되면서 이제는 파일을 직접 복사하거나 경로를 손으로 맞출 필요가 거의 없어졌어요.
 
-다음 단계에서는 웹팩 플러그인을 사용해서 빌드 과정을 더 효율적으로 만드는 방법을 배워볼 거예요. HtmlWebpackPlugin과 MiniCssExtractPlugin을 사용하면 HTML과 CSS를 자동으로 처리할 수 있답니다.
+다음 단계에서는 HTML과 CSS 파일을 좀 더 똑똑하게 관리해주는 **웹팩 플러그인**을 배워볼 거예요.

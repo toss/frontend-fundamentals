@@ -1,47 +1,54 @@
-# 플러그인으로 기능 확장하기
+# 플러그인으로 빌드 확장하기
 
-이번 단계에서는 '오늘의 이모지' 프로젝트에 웹팩 플러그인을 적용해서 빌드 과정을 더 효율적으로 만들어볼게요. 플러그인은 웹팩의 빌드 과정 전체에 영향을 주는 도구예요.
+이번에는 ‘오늘의 이모지’ 프로젝트에 웹팩 플러그인을 적용해볼 거예요.  
+HTML, CSS, 정적 자원 같은 요소들을 더 편리하게 다루고, 빌드도 깔끔하게 정리할 수 있도록 말이죠.
 
-## 플러그인이란?
+## 플러그인
 
-로더가 파일 단위로 변환을 처리한다면, 플러그인은 번들링된 결과물의 형태를 바꾸거나 최적화하는 등의 작업을 수행해요. 예를 들어:
-- HTML 파일 자동 생성
-- CSS 파일 분리
-- 번들 파일 압축
-- 환경 변수 주입
-- 빌드 결과물 정리
+우리는 지금까지 필요한 파일을 변환할 때 '로더'를 사용했어요. 이에 반면 프로젝트 전체 빌드 흐름을 조금 더 유연하게 제어하고 싶을 땐 '플러그인'이 필요해요.
 
-## HtmlWebpackPlugin 적용하기
+예를 들면,
 
-지금까지는 `index.html`을 수동으로 관리했어요. HtmlWebpackPlugin을 사용하면 번들링된 자바스크립트 파일을 자동으로 HTML에 주입할 수 있어요.
+- 빌드할 때마다 `index.html`을 새로 만들어야 한다면?
+- CSS를 자바스크립트랑 분리해서 따로 관리하고 싶다면?
+- dist 폴더에 쌓인 오래된 파일들을 지우고 싶다면?
+- public 폴더 안의 이미지나 폰트를 그대로 복사하고 싶다면?
 
-먼저 플러그인을 설치해요:
+이런 작업들을 자동으로 처리해주는 게 바로 웹팩 플러그인이에요.
+
+## HTML 자동 생성: HtmlWebpackPlugin
+
+지금까지는 우리가 만든 `index.html`에 우리가 빌드한 `<script src="./dist/bundle.js">`경로를 직접 넣어서 자바스크립트 번들을 불러왔어요.  
+이 방식도 괜찮지만, 나중에 프로젝트가 커지고 파일 이름이 바뀌거나 CSS가 추가되면 매번 HTML을 직접 고쳐야 할 수도 있어요.
+
+이럴 때 유용한 게 `HtmlWebpackPlugin`이에요. HTML 파일을 템플릿으로 등록해두면, 웹팩이 알아서 필요한 자바스크립트와 CSS 파일을 자동으로 삽입해줘요.  
+
+먼저 플러그인을 설치해볼게요.
 
 ```bash
-npm install --save-dev html-webpack-plugin
+$ npm install --save-dev html-webpack-plugin
 ```
 
-그리고 `webpack.config.js`에 플러그인을 추가해요:
+`webpack.config.js` 에 플러그인 설정을 추가해주세요.
 
 ```js
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
 
 module.exports = {
-  // ... 기존 설정 유지
+  // ...기존과 동일
   plugins: [
     new HtmlWebpackPlugin({
-      template: './index.html', // 템플릿으로 사용할 HTML 파일
-      filename: 'index.html', // 생성될 HTML 파일 이름
-      inject: true // 자동으로 번들 파일을 주입할지 여부
+      template: './index.html', // 템플릿 HTML
+      filename: 'index.html',   // 출력될 HTML 파일 이름
+      inject: true              // <script> 태그 자동 삽입
     })
   ]
 };
 ```
 
-이제 `index.html`에서 스크립트 태그를 제거할 수 있어요:
+이제 index.html에서 `<script>` 태그는 지워도 돼요. 웹팩이 알아서 넣어줄 거예요.
 
-```html
+```html{10-10}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,118 +58,49 @@ module.exports = {
 </head>
 <body>
   <div id="root"></div>
-  <!-- 스크립트 태그는 HtmlWebpackPlugin이 자동으로 추가해요 -->
+  <!-- <script src="./dist/bundle.js"></script> -->
 </body>
 </html>
 ```
 
-## MiniCssExtractPlugin 적용하기
+## 빌드하기
 
-지금까지는 CSS가 자바스크립트 번들 안에 포함되어 있었어요. MiniCssExtractPlugin을 사용하면 CSS를 별도의 파일로 분리할 수 있어요.
-
-먼저 플러그인을 설치해요:
+이제 코드를 빌드해볼게요.
 
 ```bash
-npm install --save-dev mini-css-extract-plugin
+npm run build
 ```
 
-그리고 `webpack.config.js`를 수정해요:
-
-```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
-module.exports = {
-  // ... 기존 설정 유지
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader, // style-loader 대신 사용
-          'css-loader'
-        ]
-      }
-    ]
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './index.html'
-    }),
-    new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css' // 생성될 CSS 파일 이름
-    })
-  ]
-};
+기존과는 다르게, dist 폴더에 `index.html` 파일이 생긴걸 확인할 수 있어요.
+```
+dist/
+├── assets/
+│   └── Inter-Regular.woff2
+├── bundle.js
+└── index.html
 ```
 
-이렇게 하면 CSS가 별도의 파일로 분리되어 캐싱이 더 효율적으로 동작해요.
-
-## 👣 한 걸음 더: 플러그인 조합하기
-
-여러 플러그인을 조합하면 더 강력한 빌드 과정을 만들 수 있어요:
-
-1. **DefinePlugin**: 환경 변수 주입
-```js
-const webpack = require('webpack');
-
-module.exports = {
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    })
-  ]
-};
+`/dist/index.html`파일을 열어보면 `bundle.js` 스크립트가 추가된걸 확인할 수 있어요. 이제는 이 파일을 브라우저에서 열어서 테스트해주세요.
+```html{7-7}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emoji of the Day</title>
+<script defer src="bundle.js"></script></head>
+<body>
+  <div id="root"></div>
+</body>
+</html>
 ```
 
-2. **CleanWebpackPlugin**: 빌드 전 dist 폴더 정리
-```bash
-npm install --save-dev clean-webpack-plugin
-```
-```js
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+:::details script에 있는 defer가 뭔가요?
+HTML 파싱을 멈추지 않고, 브라우저가 HTML을 모두 읽은 후 스크립트를 실행하라는 옵션이에요.
 
-module.exports = {
-  plugins: [
-    new CleanWebpackPlugin()
-  ]
-};
-```
-
-3. **CopyWebpackPlugin**: 정적 파일 복사
-```bash
-npm install --save-dev copy-webpack-plugin
-```
-```js
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-
-module.exports = {
-  plugins: [
-    new CopyWebpackPlugin({
-      patterns: [
-        { from: 'public', to: 'public' }
-      ]
-    })
-  ]
-};
-```
-
-## 플러그인 사용 팁
-
-1. **플러그인 순서**
-   - 플러그인은 배열 순서대로 실행돼요
-   - CleanWebpackPlugin은 보통 맨 앞에 두어요
-   - HtmlWebpackPlugin은 보통 맨 뒤에 두어요
-
-2. **환경별 설정**
-   - 개발 환경과 운영 환경에서 다른 플러그인을 사용할 수 있어요
-   - `process.env.NODE_ENV`로 환경을 구분해요
-
-3. **성능 고려**
-   - 너무 많은 플러그인은 빌드 시간을 늘려요
-   - 필요한 플러그인만 사용해요
+즉, DOM이 다 만들어진 뒤에 실행되게 보장하는 방식이라 리액트 앱처럼 `document.getElementById('root')` 같은 코드를 쓸 때 안정적이에요.
+:::
 
 ## 다음 단계
 
-이제 우리 프로젝트에 웹팩 플러그인을 적용해서 빌드 과정을 더 효율적으로 만들었어요. HTML과 CSS를 자동으로 처리하고, 환경 변수를 주입할 수 있게 되었죠.
-
-다음 단계에서는 웹팩 개발 서버를 사용해서 개발 환경을 개선하는 방법을 배워볼 거예요. Hot Module Replacement(HMR)를 사용하면 코드를 수정할 때마다 페이지를 새로고침하지 않고도 변경사항을 바로 확인할 수 있답니다.
+다음 단계에서는 웹팩 개발 서버를 설정해서, 매번 새로고침하지 않고도 실시간으로 코드 변경을 반영하는 방법을 배워볼게요!
