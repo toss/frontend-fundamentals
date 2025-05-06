@@ -174,45 +174,50 @@ export default defineConfig({
       },
       {
         text: "심화 학습",
+        collapsed: false,
         items: [
           {
-            text: "웹팩 깊이 이해하기",
+            text: "번들링의 핵심 요소",
             collapsed: false,
             items: [
-              { text: "웹팩 기본 개념", link: "/reference/overview" },
-              { text: "진입점과 결과물 설정", link: "/reference/entry-output" },
-              { text: "모듈 경로 해석 방법", link: "/reference/resolution" },
-              { text: "로더 활용 방법", link: "/reference/loader" },
-              { text: "에셋 파일 관리하기", link: "/reference/loader" },
-              { text: "플러그인 사용하기", link: "/reference/plugin" },
-              { text: "빌드 결과물 관리하기", link: "/reference/output" },
+              { text: "의존성 그래프", link: "/reference/overview" },
+              { text: "진입점과 출력", link: "/reference/entry-output" },
+              { text: "로더와 플러그인", link: "/reference/loader" },
+              {
+                text: "모듈 해석",
+                collapsed: true,
+                items: [
+                  { text: "절대 경로와 별칭", link: "/reference/loader" },
+                  { text: "NPM 모듈 해석", link: "/reference/loader" },
+                  { text: "순환 의존성 제거", link: "/reference/loader" },
+                  { text: "모듈 중복 관리", link: "/reference/loader" },
+                ],
+              },
             ],
           },
           {
-            text: "개발 환경 설정하기",
+            text: "개발 환경",
             collapsed: false,
             items: [
-              { text: "개발 서버 설정하기", link: "/reference/dev/dev-server" },
-              { text: "빠른 개발을 위한 HMR", link: "/reference/dev/hmr" },
-              { text: "절대 경로 설정", link: "/reference/dev/hmr" },
-              { text: "프록시 설정하기", link: "/reference/dev/source-map" },
-              { text: "디버깅을 위한 소스맵 설정", link: "/reference/dev/source-map" },
-              { text: "환경 변수 관리하기", link: "/reference/dev/env-variable" },
-              { text: "빌드 성능 높이기", link: "/reference/dev/env-variable" },
+              { text: "개발 서버 설정", link: "/reference/dev/dev-server" },
+              { text: "HMR", link: "/reference/dev/hmr" },
+              { text: "소스맵", link: "/reference/dev/source-map" },
+              { text: "환경별 설정", link: "/reference/dev/source-map" },
             ],
           },
           {
-            text: "성능 최적화 가이드",
+            text: "번들 최적화",
             collapsed: false,
             items: [
-              { text: "번들 파일 분석하기", link: "/reference/optimization/tree-shaking" },
-              { text: "불필요한 코드 제거하기", link: "/reference/optimization/tree-shaking" },
-              { text: "코드 스플리팅으로 성능 개선하기", link: "/reference/optimization/code-splitting" },
-              { text: "효율적인 캐싱 전략", link: "/reference/optimization/code-splitting" },
+              { text: "코드 스플리팅", link: "/reference/optimization/code-splitting" },
+              { text: "트리 쉐이킹", link: "/reference/optimization/tree-shaking" },
+              { text: "번들 분석", link: "/reference/optimization/tree-shaking" },
+
             ],
           },
+
         ],
-      }
+      },
     ],
 
     socialLinks: [
