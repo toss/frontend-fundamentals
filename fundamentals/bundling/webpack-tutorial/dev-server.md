@@ -1,49 +1,55 @@
-# 개발 환경 개선하기
+# 개발 서버로 생산성 높이기
 
-이번 단계에서는 '오늘의 이모지' 프로젝트에 웹팩 개발 서버를 도입해서 개발 환경을 더 편리하게 만들어볼게요. 개발 서버는 코드를 수정할 때마다 자동으로 페이지를 새로고침하고, Hot Module Replacement(HMR)를 통해 상태를 유지한 채로 변경사항을 바로 확인할 수 있게 해줘요.
+지금까지는 코드를 수정할 때마다 매번 `npm run build`를 돌리고, 브라우저 새로고침을 직접 눌러야 했죠.
 
-## 웹팩 개발 서버란?
+이제는 그럴 필요 없어요. **웹팩 개발 서버**를 도입하면 코드를 저장하는 순간 자동으로 브라우저에 반영돼요.  
+게다가 화면이 리로드되지 않아도 컴포넌트가 실시간으로 바뀌는 `Hot Module Replacement` 기능까지 쓸 수 있어요.
 
-웹팩 개발 서버는 개발 중에 사용하는 가상 서버예요. 다음과 같은 기능을 제공해요:
-- 자동 새로고침
-- Hot Module Replacement (HMR)
-- 소스맵 지원
-- 에러 메시지 표시
-- 프록시 설정
+## 웹팩 개발 서버
+`webpack-dev-server`는 우리가 작성한 코드를 메모리에 번들링해서,  
+브라우저에 빠르게 반영해주는 가상의 개발용 서버예요.
+
+이런 걸 도와줘요.
+- 코드 저장시 자동 새로고침
+- 스타일이나 컴포넌트 수정 시 상태를 유지하면서 실시간 반영 (`Hot Module Replacement`)
+- 브라우저에서 에러 메시지를 오버레이로 띄워줌
+- API 서버와 연동 시 프록시 설정도 가능
 
 ## 개발 서버 설치하기
 
-먼저 웹팩 개발 서버를 설치해요:
+먼저 개발 서버 패키지를 설치할게요.
 
 ```bash
 npm install --save-dev webpack-dev-server
 ```
 
-## 개발 서버 설정하기
+## 웹팩 설정에 devServer 추가하기
 
-`webpack.config.js` 파일에 개발 서버 설정을 추가해요:
+`webpack.config.js` 파일에 개발 서버 설정을 추가해주세요:
 
 ```js
+const path = require("path");
+
 module.exports = {
-  // ... 기존 설정 유지
+  // ... 기존 설정
   devServer: {
     static: {
-      directory: path.join(__dirname, 'public'), // 정적 파일 제공 경로
+      directory: path.join(__dirname, "dist") // 빌드된 파일을 이 경로에서 서빙해요
     },
-    port: 3000, // 서버 포트
-    open: true, // 서버 시작 시 브라우저 자동 실행
-    hot: true, // HMR 활성화
-    historyApiFallback: true, // SPA를 위한 설정
+    port: 3000, // localhost:3000에서 실행
+    open: true, // 서버 실행 시 브라우저 자동 열기
+    hot: true, // HMR 사용
+    historyApiFallback: true, // SPA 라우팅 지원
     client: {
-      overlay: true, // 에러 발생 시 브라우저에 오버레이 표시
+      overlay: true // 에러 발생 시 브라우저에 띄워줘요
     }
   }
 };
 ```
 
-## 개발 스크립트 추가하기
+## package.json에 실행 스크립트 추가하기
 
-`package.json` 파일에 개발 서버 실행 스크립트를 추가해요:
+`npm start`로 바로 실행할 수 있도록 `package.json`에 스크립트를 추가해요:
 
 ```json
 {
@@ -54,107 +60,26 @@ module.exports = {
 }
 ```
 
-이제 다음 명령어로 개발 서버를 실행할 수 있어요:
+이제 아래 명령어로 개발 서버를 실행해볼 수 있어요:
 
 ```bash
 npm start
 ```
 
-## Hot Module Replacement (HMR) 사용하기
+브라우저가 자동으로 열리고, 코드를 수정하면 바로바로 반영되는 걸 확인할 수 있어요.
 
-HMR을 사용하면 페이지를 새로고침하지 않고도 변경사항을 바로 확인할 수 있어요. 리액트 컴포넌트를 수정할 때 특히 유용해요.
 
-`App.tsx`에서 HMR을 활성화해요:
+## 정리
 
-```tsx
-import React from 'react';
-import { emojis } from './emoji';
-import { format } from 'date-fns';
+지금까지는 코드를 수정할 때마다 `npm run build`를 직접 실행하고, 브라우저를 새로고침해가며 웹팩의 동작을 직접 경험해봤죠.
 
-const App: React.FC = () => {
-  const [selectedEmoji, setSelectedEmoji] = React.useState(emojis[0]);
+개발 서버를 마지막에 소개한 건 의도적인 선택이었어요. 이 과정을 거쳤기 때문에, 이제 `webpack-dev-server`의 편리함이 훨씬 더 와닿을 거예요. 마치 수동 변속기로 운전을 배운 뒤 자동 변속기의 고마움을 느끼는 것처럼요. 😊
 
-  const showRandomEmoji = () => {
-    const randomIndex = Math.floor(Math.random() * emojis.length);
-    setSelectedEmoji(emojis[randomIndex]);
-  };
+## 아자 아자 화이팅!
 
-  return (
-    <div className="container">
-      <h1>Emoji of the Day</h1>
-      <div className="date-display">
-        {format(new Date(), 'MMMM d, yyyy')}
-      </div>
-      <div className="emoji-container">
-        <div className="emoji">{selectedEmoji.icon}</div>
-        <div className="emoji-name">{selectedEmoji.name}</div>
-        <button onClick={showRandomEmoji}>다른 이모지 보기</button>
-      </div>
-    </div>
-  );
-};
+지금까지 웹팩의 핵심 개념부터 실전 적용까지 한 걸음씩 밟아왔어요. 단계마다 실제 '오늘의 이모지' 프로젝트를 개선하면서 웹팩이 어떤 역할을 하고, 어떤 문제를 해결해주는지 몸으로 익힐 수 있었을 거예요.
 
-// HMR 활성화
-if (module.hot) {
-  module.hot.accept();
-}
+이제 여러분은 웹팩을 단순한 설정 도구가 아니라 프로젝트를 더 잘 구조화하고 유지보수하기 위한 도구로 활용할 수 있을 거예요.
 
-export default App;
-```
-
-## 👣 한 걸음 더: 개발 환경 최적화하기
-
-1. **소스맵 설정**
-```js
-module.exports = {
-  devtool: 'eval-source-map', // 개발 환경에서 상세한 소스맵 사용
-  // ... 기존 설정 유지
-};
-```
-
-2. **프록시 설정**
-```js
-module.exports = {
-  devServer: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8080',
-        pathRewrite: { '^/api': '' }
-      }
-    }
-  }
-};
-```
-
-3. **환경 변수 설정**
-```js
-const webpack = require('webpack');
-
-module.exports = {
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
-    })
-  ]
-};
-```
-
-## 개발 서버 사용 팁
-
-1. **에러 처리**
-   - 개발 서버는 에러가 발생하면 브라우저에 오버레이로 표시해요
-   - 콘솔에서도 자세한 에러 메시지를 확인할 수 있어요
-
-2. **성능 최적화**
-   - 개발 서버는 메모리에 번들을 저장해요
-   - 실제 파일은 생성하지 않아서 빌드 시간이 단축돼요
-
-3. **보안**
-   - 개발 서버는 로컬에서만 접근 가능해요
-   - 필요한 경우 `host` 옵션으로 접근 제한을 설정할 수 있어요
-
-## 다음 단계
-
-이제 우리 프로젝트에 웹팩 개발 서버를 적용해서 개발 환경을 더 편리하게 만들었어요. 자동 새로고침과 HMR을 통해 개발 생산성이 크게 향상되었죠.
-
-다음 단계에서는 환경 변수와 보안을 관리하는 방법을 배워볼 거예요. `.env` 파일과 `dotenv-webpack`을 사용하면 환경별로 다른 설정을 적용할 수 있답니다.
+앞으로 새로운 프로젝트를 시작할 때 자신만의 웹팩 설정을 만들어보세요.
+이 튜토리얼이 그 출발점이 되어주길 바랍니다.

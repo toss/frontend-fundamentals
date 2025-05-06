@@ -46,58 +46,49 @@ export default defineConfig({
             text: "웹팩으로 배우는 번들링",
             items: [
               {
-                text: "튜토리얼 소개",
+                text: "1. 튜토리얼 소개",
                 link: "/webpack-tutorial/intro",
               },
               {
-                text: "웹팩 도입하고 첫 번들 만들기",
+                text: "2. 웹팩 도입하고 첫 번들 만들기",
                 link: "/webpack-tutorial/make-first-bundle",
               },
               {
-                text: "모듈 시스템으로 코드 구조화하기",
+                text: "3. 모듈로 코드 구조화하기",
                 link: "/webpack-tutorial/module-system",
               },
               {
-                text: "타입스크립트 적용하기",
+                text: "4. 타입스크립트 적용하기",
                 link: "/webpack-tutorial/typescript",
               },
               {
-                text: "리액트 적용하기",
+                text: "5. 리액트 적용하기",
                 link: "/webpack-tutorial/react",
               },
               {
-                text: "스타일 관리하기",
+                text: "6. 스타일 관리하기",
                 link: "/webpack-tutorial/style",
               },
               {
-                text: "이미지와 폰트 등 정적 자원 다루기",
+                text: "7. 이미지 등 정적 자원 다루기",
                 link: "/webpack-tutorial/assets",
               },
               {
-                text: "플러그인으로 빌드 확장하기",
+                text: "8. 플러그인으로 빌드 확장하기",
                 link: "/webpack-tutorial/plugin",
               },
               {
-                text: "개발 서버로 생산성 높이기",
+                text: "9. 개발 서버로 생산성 높이기",
                 link: "/webpack-tutorial/dev-server",
               },
-              {
-                text: "환경 변수와 보안 관리하기",
-                link: "/webpack-tutorial/environment",
-              }
             ]
           },
           {
             text: "롤업으로 배우는 라이브러리 번들링",
             items: [
               {
-                text: "1. 롤업 시작하기",
-                items: [
-                  {
-                    text: "첫 번들 만들기",
-                    link: "/tutorial/basic",
-                  },
-                ]
+                text: "1. 튜토리얼 소개",
+                link: "/library",
               },
             ]  
             },
