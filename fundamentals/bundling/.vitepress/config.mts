@@ -19,7 +19,7 @@ export default defineConfig({
     nav: [
       { text: "번들링이란", link: "./overview" },
       { text: "가이드", link: "/tutorial/basic" },
-      { text: "웹팩 깊이 이해하기", link: "/reference/overview" }
+      { text: "번들링 딥다이브", link: "/deep-dive/overview" }
     ],
     sidebar: [
       {
@@ -174,45 +174,48 @@ export default defineConfig({
         ],
       },
       {
-        text: "심화 학습",
-        collapsed: false,
+        text: "번들링 딥다이브",
         items: [
           {
-            text: "번들링의 핵심 요소",
+            text: "소개",
+            link: "/deep-dive/overview",
+          },
+          {
+            text: "번들링 작동 방식 이해하기",
             collapsed: false,
             items: [
-              { text: "의존성 그래프", link: "/reference/overview" },
-              { text: "진입점과 출력", link: "/reference/entry-output" },
-              { text: "로더와 플러그인", link: "/reference/loader" },
+              { text: "번들링, 꼭 필요할까요?", link: "/deep-dive/bundling-process" },
+              { text: "진입점과 출력", link: "/deep-dive/entry-output" },
               {
-                text: "모듈 해석",
+                text: "모듈 연결 방식 이해하기",
                 collapsed: true,
                 items: [
-                  { text: "절대 경로와 별칭", link: "/reference/loader" },
-                  { text: "NPM 모듈 해석", link: "/reference/loader" },
-                  { text: "순환 의존성 제거", link: "/reference/loader" },
-                  { text: "모듈 중복 관리", link: "/reference/loader" },
+                  { text: "절대 경로와 별칭", link: "/deep-dive/loader" },
+                  { text: "NPM 모듈 찾기", link: "/deep-dive/loader" },
+                  { text: "순환 참조 다루기", link: "/deep-dive/loader" },
+                  { text: "중복 모듈 정리", link: "/deep-dive/loader" },
                 ],
               },
+              { text: "로더와 플러그인", link: "/deep-dive/loader" },
             ],
           },
           {
             text: "개발 환경",
             collapsed: false,
             items: [
-              { text: "개발 서버 설정", link: "/reference/dev/dev-server" },
-              { text: "HMR", link: "/reference/dev/hmr" },
-              { text: "소스맵", link: "/reference/dev/source-map" },
-              { text: "환경별 설정", link: "/reference/dev/source-map" },
+              { text: "개발 서버 설정", link: "/deep-dive/dev/dev-server" },
+              { text: "HMR", link: "/deep-dive/dev/hmr" },
+              { text: "소스맵", link: "/deep-dive/dev/source-map" },
+              { text: "환경별 설정", link: "/deep-dive/dev/source-map" },
             ],
           },
           {
             text: "번들 최적화",
             collapsed: false,
             items: [
-              { text: "코드 스플리팅", link: "/reference/optimization/code-splitting" },
-              { text: "트리 쉐이킹", link: "/reference/optimization/tree-shaking" },
-              { text: "번들 분석", link: "/reference/optimization/tree-shaking" },
+              { text: "코드 스플리팅", link: "/deep-dive/optimization/code-splitting" },
+              { text: "트리 쉐이킹", link: "/deep-dive/optimization/tree-shaking" },
+              { text: "번들 분석", link: "/deep-dive/optimization/tree-shaking" },
 
             ],
           },
