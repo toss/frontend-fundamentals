@@ -30,8 +30,7 @@
    - 환경 변수로 보안을 강화해요
 
 ## 예제 프로젝트 세팅하기
-(TODO: 예제 폴더 경로 변경)
-1. [오늘의 이모지 예제 프로젝트](https://github.com/toss/frontend-fundamentals/blob/main/public/files/bundling-example.zip)를 다운로드하고 압축을 풀어주세요.
+1. [오늘의 이모지 예제 프로젝트](https://github.com/toss/frontend-fundamentals/blob/main/public/files/bundling-example-project.zip)를 다운로드하고 압축을 풀어주세요.
 2. 압축을 풀면 다음 파일 구조가 나타나요.
    ```
    example-project/
@@ -54,5 +53,4 @@
 :::
 
 ## 다음 단계
-(TODO: 다음 단계에 맞게 윤문)
-이제 프로젝트 환경을 설정하고 첫 번째 번들을 만들어 볼게요. 차근차근 따라오시면 어느새 모던 웹 개발의 핵심 도구인 웹팩을 자유롭게 활용할 수 있게 될 거예요.
+이제 프로젝트 환경을 설정하고 첫 번째 번들을 만들어 볼게요. 차근차근 따라오시면 어느새 웹 개발의 핵심 도구인 웹팩을 자유롭게 활용할 수 있게 될 거예요.
