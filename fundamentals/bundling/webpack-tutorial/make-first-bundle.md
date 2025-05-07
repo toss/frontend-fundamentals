@@ -30,7 +30,7 @@ $ npm -v
 
 ### 프로젝트 초기화하기
 
-이제 기존 프로젝트 폴더에서 npm을 초기화할게요. 터미널에서 example-project 폴더로 이동한 후 다음 명령어를 실행하세요.
+이제 기존 프로젝트 폴더에서 npm을 초기화 할게요. 터미널에서 `example-project` 폴더로 이동한 후 다음 명령어를 실행하세요.
 
 ```bash
 $ cd example-project
