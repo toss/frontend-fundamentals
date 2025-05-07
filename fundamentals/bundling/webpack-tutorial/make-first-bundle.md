@@ -37,34 +37,35 @@ $ cd example-project
 $ npm init -y
 ```
 
-이 명령어는 `package.json` 파일을 생성해요. `-y`옵션은 모든 필드를 기본값으로 생성하겠다(yes 의 약자)라는 의미예요. 
-:::details `package.json`이 뭔가요?
-Node.js 기반 프로젝트의 '설계도'라고 생각하면 돼요.
+이 명령어는 `package.json` 파일을 생성해요. `-y` 옵션은 'yes'의 약자로 모든 필드를 기본값으로 생성하겠다라는 의미예요.
+
+:::details Q. `package.json`이 뭔가요?
+Node.js 기반 프로젝트의 '설계도'라고 생각하면 돼요. 이 프로젝트 설계도에는 다음과 같은 내용이 담겨있어요.
+
 - 프로젝트 이름, 버전, 설명
 - 설치된 패키지 목록 (dependencies)
 - 실행 스크립트 (예: npm run dev)
 - 저자 정보, 라이선스 등
-
-와 같은 정보들을 담고있죠.
 :::
 
 ## 웹팩 설치하기
 
-이제 웹팩과 웹팩 CLI를 개발 의존성으로 설치해볼게요.
+이제 웹팩과 웹팩 CLI를 개발 의존성으로 설치해 볼게요.
 
 ```bash
 $ npm install --save-dev webpack webpack-cli
 ```
 
-- `webpack`: 실제 번들링을 수행하는 도구
-- `webpack-cli`: 터미널에서 webpack 명령어를 쓸 수 있게 해주는 CLI
+- `webpack`: 실제 번들링을 수행하는 도구예요.
+- `webpack-cli`: 터미널에서 webpack 명령어를 쓸 수 있게 해주는 CLI예요.
 
-웹팩은 빌드 도구라 실제 배포되는 코드에서는 필요 없기 때문에 `--save-dev` 옵션을 통해 개발 의존성으로 설치해요.
+웹팩은 번들링 도구로, 실제 배포되는 코드에서는 필요 없기 때문에 `--save-dev` 옵션을 통해 개발 의존성으로 설치해요.
 
 ## 웹팩 설정 파일 만들기
 
-이제 `main.js` 파일을 번들링해서 `bundle.js` 로 만들어보려고 해요.
-이를 위해 프로젝트 루트에 `webpack.config.js` 이름의 파일을 생성하고 다음과 같이 작성해주세요.
+이제 `main.js` 파일을 번들링해서 `bundle.js` 로 만들어 볼게요.
+
+먼저 프로젝트 루트에 `webpack.config.js` 이름의 파일을 생성하고 다음과 같이 작성해 주세요. 이 설정 파일을 보고 웹팩은 `main.js` 파일을 번들링해서 `bundle.js` 파일로 만들어요.
 
 ```javascript
 const path = require('path');
@@ -77,11 +78,10 @@ module.exports = {
   },
 };
 ```
-이 설정 파일을 보고 웹팩은 `main.js` 파일을 번들링해서 `bundle.js` 파일로 만들어요.
 
 ## 첫 번들 만들기
 
-이제 웹팩으로 번들을 만들어볼게요. 다음 명령어를 실행해주세요.
+이제 웹팩으로 번들을 만들어 볼게요. 다음 명령어를 실행하면 빌드가 시작돼요.
 
 ```bash
 $ npx webpack
@@ -93,15 +93,17 @@ $ npx webpack
 `npx`는 Node.js와 함께 설치된 도구로, 로컬에 설치된 패키지를 실행할 수 있게 해줘요.
 :::
 
-`/dist/bundle.js` 를 열어보면 우리가 `main.js` 에 적었던 코드가 한 줄로 압축되고, 변수명이 t, e같은 짧은 이름으로 바뀐걸 볼 수 있어요. 이처럼 웹팩은 기본적으로 추가 설정 없이도 어느 정도 코드를 최적화 해줘요.
+`/dist/bundle.js` 를 열어보면 우리가 `main.js`에 적었던 코드가 한 줄로 압축되고, 변수명이 `t`, `e`같은 짧은 이름으로 바뀐걸 볼 수 있어요. 이렇게 웹팩은 추가 설정을 하지 않아도 기본적으로 코드를 최적화 해줘요.
 
 ```js
 document.addEventListener("DOMContentLoaded",(function(){const t=new Date,e=dateFns.format(t,"MMMM d, yyyy");document.getElementById("dateDisplay").textContent=e,function(){const t=Math.floor(Math.random()*emojis.length),e=emojis[t];document.getElementById("emojiDisplay").textContent=e.icon,document.getElementById("emojiName").textContent=e.name}()}));
 ```
-첫 번째 번들 파일을 만든것, 축하해요! 🥳
 
-지금까지 만들어진 파일 구조를 돌아볼게요.
-```
+첫 번째 번들 파일을 만든 것, 축하해요! 🥳
+
+지금까지 만들어진 파일 구조를 다시 살펴볼게요.
+
+```{6-10}
 example-project/
 ├── index.html
 ├── style.css
@@ -119,11 +121,9 @@ example-project/
 
 ## package.json에 빌드 스크립트 추가하기
 
-매번 `npx webpack` 명령어를 실행하는 대신, `package.json` 파일에 스크립트를 추가하면 프로젝트 관리가 더 체계적이게 돼요. 
+이렇게 매번 `npx webpack` 명령어를 실행하는 대신, `package.json` 파일에 스크립트를 추가하면 빌드 명령어를 한 곳에서 관리할 수 있어요. 나중에 빌드 과정이 복잡해져도 명령어는 간단하게 유지할 수 있어서 작업을 더 일관되고 효율적으로 진행할 수 있어요.
 
-프로젝트의 모든 명령어를 한 곳에서 관리할 수 있고, 나중에 빌드 과정이 복잡해져도 명령어는 간단하게 유지할 수 있답니다.
-
-`package.json` 파일을 열고 "scripts" 부분을 다음과 같이 수정하세요:
+`package.json` 파일을 열고 `scripts` 부분을 다음과 같이 수정해 볼게요.
 
 ```json
 "scripts": {
@@ -131,7 +131,7 @@ example-project/
 }
 ```
 
-이제 다음 명령어로 웹팩 빌드를 실행할 수 있어요:
+이제 추가한 명령어로 웹팩 빌드를 실행할 수 있어요.
 
 ```bash
 npm run build
@@ -139,7 +139,7 @@ npm run build
 
 ## HTML 파일 수정하기
 
-마지막으로 HTML 파일을 수정하여 `main.js` 대신 웹팩으로 번들링된 `bundle.js` 파일을 사용하도록 변경해볼게요.
+마지막으로 HTML 파일을 수정해서 `main.js` 대신 웹팩으로 번들링된 `bundle.js` 파일을 사용하도록 변경해 볼게요.
 
 `index.html` 파일을 열고 스크립트 부분을 다음과 같이 수정해주세요.
 
@@ -156,7 +156,8 @@ npm run build
 
 ## 👣 한 걸음 더: 웹팩 모드 설정
 
-우리가 실행한 번들링 결과를 찬찬히 살펴보면, 다음과 같은 경고 문장을 볼 수 있어요.
+우리가 실행한 번들링 결과를 살펴보면, 다음과 같은 경고가 있어요.
+
 ```
 WARNING in configuration
 The 'mode' option has not been set, webpack will fallback to 'production' for this value.
@@ -164,12 +165,13 @@ Set 'mode' option to 'development' or 'production' to enable defaults for each e
 You can also set it to 'none' to disable any default behavior.
 ```
 
-이 경고는 우리가 웹팩 설정 파일에 `mode`를 넘기지 않아서, 웹팩이 기본적으로 프로덕션 모드로 빌드를 수행했음을 의미해요. 
+이 경고는 우리가 웹팩 설정 파일에 `mode`를 추가하지 않아서, 웹팩이 기본값인 프로덕션(`production`) 모드로 빌드했다는 뜻이예요.
  
-웹팩은 크게 세 가지 모드를 지원해요.
+웹팩은 크게 세 가지 모드를 지원해요. `mode`를 명시하면 개발(`development`)과 배포(`production`) 환경에 맞는 기본 설정이 자동으로 적용돼서, 경고도 사라지고 환경에 맞는 최적화도 더 잘 이뤄져요. 각각을 좀 더 자세히 살펴볼게요.
+
 - `development`: 코드를 완전히 압축하지는 않지만, 일부 기본적인 최적화를 수행해요. 변수명을 짧게 바꾸거나 공백을 제거하는 정도의 최소한의 압축이 이루어져요. 개발 모드에서는 디버깅이 쉽도록 소스맵을 제공하는 데 초점을 맞춰요.
 - `production`: 훨씬 강력한 압축과 최적화가 자동으로 이루어져요. 코드 압축, 사용하지 않는 코드 제거 등이 기본적으로 적용되며, 파일 크기를 최소화하는 데 중점을 둬요.
-- `none`: 어떤 기본 최적화도 적용되지 않아요. 자신만의 최적화를 완전히 커스터마이징하고 싶을 때 사용해요.
+- `none`: 아무 최적화도 적용하지 않아요. 설정을 전부 직접 커스터마이징하고 싶을 때 사용해요.
 
 우리는 현재 개발환경에서만 작업하고 있으니, 개발 모드로 설정해주세요.
 
@@ -186,5 +188,6 @@ module.exports = {
 
 ## 다음 단계
 
-이제 웹팩을 사용해서 첫 번째 번들을 만들었어요! 비록 현재는 단순한 설정이지만, 이것이 더 복잡한 애플리케이션을 구축하는 기초가 될 거예요.
+이제 웹팩을 사용해서 첫 번째 번들을 만들었어요! 아직 단순한 설정이지만, 앞으로 더 복잡한 애플리케이션을 구축하는 기초가 될 거예요.
+
 다음 단계에서는 코드를 더 효율적으로 구조화하고, CDN 대신 npm으로 외부 라이브러리를 관리하는 방법을 배워볼게요. 

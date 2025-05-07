@@ -40,13 +40,13 @@ export default defineConfig({
         ]
       },
       {
-        text: "가이드",
+        text: "튜토리얼",
         items: [
           {
             text: "웹팩으로 배우는 번들링",
             items: [
               {
-                text: "1. 튜토리얼 소개",
+                text: "1. 소개",
                 link: "/webpack-tutorial/intro",
               },
               {
@@ -58,11 +58,11 @@ export default defineConfig({
                 link: "/webpack-tutorial/module-system",
               },
               {
-                text: "4. 타입스크립트 적용하기",
+                text: "4. TypeScript 적용하기",
                 link: "/webpack-tutorial/typescript",
               },
               {
-                text: "5. 리액트 적용하기",
+                text: "5. React 적용하기",
                 link: "/webpack-tutorial/react",
               },
               {
@@ -87,7 +87,7 @@ export default defineConfig({
             text: "롤업으로 배우는 라이브러리 번들링",
             items: [
               {
-                text: "1. 튜토리얼 소개",
+                text: "1. 소개",
                 link: "/library",
               },
             ]  
