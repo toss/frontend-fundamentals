@@ -215,8 +215,7 @@ export default defineConfig({
             items: [
               { text: "코드 스플리팅", link: "/deep-dive/optimization/code-splitting" },
               { text: "트리 쉐이킹", link: "/deep-dive/optimization/tree-shaking" },
-              { text: "번들 분석", link: "/deep-dive/optimization/tree-shaking" },
-
+              { text: "번들 분석", link: "/deep-dive/optimization/bundle-analyzer" },
             ],
           },
 
