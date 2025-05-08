@@ -1,66 +1,52 @@
-# 개발 서버
+# 개발 서버란?
 
-개발 서버는 일반적으로 여러 개발자가 공유하는 환경에서 애플리케이션을 테스트하고, 운영 서버에 배포하기 전에 검증하는 용도로 사용되는 서버예요.
-하지만 여기서 다룰 웹팩의 개발 서버(`webpack-dev-server`)는 각 개발자가 자신의 로컬 환경에서 실행하는 서버로, 코드 변경 사항을 실시간으로 반영해서 새로고침없이 빠르게 테스트할 수 있게 도와주는 서버예요.
+개발 서버는 로컬 환경에서 코드 변경 사항을 실시간으로 반영하고 빠르게 테스트할 수 있게 도와주는 도구예요. 다양한 번들러에서 개발 서버를 제공하며, 이를 사용하면 브라우저 새로고침 없이 개발 효율을 높일 수 있어요.
 
 ## 개발 서버가 필요한 이유
 
-프론트엔드 개발에서는 브라우저가 JavaScript 파일(에셋)을 네트워크 요청을 통해 가져와야 하기 때문에 반드시 웹 서버가 필요해요. 그런데 웹 서버를 직접 띄워서 개발 환경을 구성하면 파일이 변경될 때마다 새로 빌드하고 브라우저를 새로고침해야 하는 번거로움이 생겨요.
-
-만약 직접 개발 서버를 구성하려면 `webpack-dev-middleware`와 `webpack-hot-middleware`를 사용할 수 있어요. 하지만 이 방법은 복잡하고 일반적인 경우에는 권장하지 않아요. 서버를 직접 구성하면 아래와 같은 구조를 가지게 돼요.
+프론트엔드 개발은 브라우저가 JavaScript와 에셋을 HTTP 요청으로 가져오기 때문에 웹 서버가 필수예요. 직접 웹 서버를 설정하면 파일 변경 시 매번 수동으로 빌드하고 새로고침해야 해서 불편해요. 개발 서버를 사용하면 이런 과정을 자동화해 효율적으로 개발할 수 있어요.
 
 ![개발 서버 구성도](/images/hmr-1.png)
 
-웹팩은 이런 불편함을 해소하기 위해 개발 서버인 `webpack-dev-server`를 제공해요. 이 서버는 웹팩과 통합되어 있어 변경된 부분만 다시 빌드하고 **HMR(Hot Module Replacement)** 기능을 사용해서 브라우저에 실시간으로 반영할 수 있어요.
+## 개발 서버 유형
 
-## `devServer` 옵션으로 개발 환경에 최적화하기
+### 번들링 기반
 
-개발 서버를 단순히 웹서버로 사용하는 게 아니라면 `devServer` 필드의 옵션을 수정해 개발 서버의 동작을 프론트엔드 개발환경에 최적화할 수 있어요. 자주 사용하는 옵션들을 소개할게요.
+번들링 기반의 서버는 시작하기 전에 모든 모듈의 의존성을 분석하고 하나의 번들로 묶어요. 프로젝트 규모가 클수록 번들링 과정에서 시간이 걸려 초기 서버 실행이 느릴 수 있어요. 대신, 변경된 모듈만 즉시 반영하는 HMR(Hot Module Replacement) 기능을 지원해 빠르게 테스트할 수 있어요.
 
-### 클라이언트 측 라우팅 문제 해결: [`historyApiFallback`](https://webpack.kr/configuration/dev-server/#devserverhistoryapifallback)
+대표적인 번들러로는 Webpack, Rollup이 있어요.
 
-단일 페이지 애플리케이션(SPA)에서는 클라이언트 측 라우팅을 위해 **History API**를 사용해요. 하지만 브라우저에서 특정 URL로 직접 접근하면 서버가 해당 경로를 찾지 못해 404 에러가 발생할 수 있어요.
+![](/images/bundle-dev-server)
 
-이 문제를 해결하려면, 존재하지 않는 모든 경로에 대해 `index.html`을 반환하도록 설정하면 돼요. 이렇게 하면 어떤 경로로 접근해도 `index.html`이 제공되며, 이후 클라이언트 측에서 라우팅을 처리할 수 있어요. 이렇게 하면 모든 경로에 `index.html`이 제공되고, 이후 클라이언트 측에서 라우팅을 처리할 수 있어요.
+### ESM 기반
 
-### HTTPS 서버 설정: [`server`](https://webpack.kr/configuration/dev-server/#devserverserver)
+ESM(ES Module)을 사용하는 서버는 번들을 만들지 않고 필요한 모듈만 요청할 때마다 로딩해요. 그래서 서버가 즉시 시작되며, 변경된 코드만 바로 갱신하는 HMR 성능도 뛰어나요.
 
-로컬 개발 환경에서 HTTPS가 필요할 때 `server` 옵션을 사용해서 프로토콜을 HTTPS로 설정할 수 있어요. 기본값은 HTTP이지만, 인증서를 추가로 설정하면 HTTPS를 지원하는 개발 서버를 사용할 수 있어요.
+대표적인 번들러로는 Vite, Esbuild가 있어요.
 
-HTTPS를 사용하려면 로컬 인증서가 필요해요. 인증서는 `mkcert`를 사용하면 간단히 발급받을 수 있고, 발급받은 인증서를 아래와 같이 설정하면 HTTPS를 지원하는 개발 서버를 띄울 수 있어요. 로컬 인증서를 발급받는 방법은 다음과 같은 [자료](https://yung-developer.tistory.com/112)를 검색해서 쉽게 찾아볼 수 있어요.
+![](/images/esm-dev-server)
 
-```js{4-10}
-module.exports = {
-  //...
-  devServer: {
-    server: {
-      type: "https",
-      options: {
-        key: "./path/to/server-key.pem",
-        cert: "./path/to/server.pem",
-      },
-    },
-  },
-};
+
+## 개발 서버 설정 방법
+
+### Webpack 설정 예시
+
+Webpack은 `webpack-dev-server`로 개발 서버를 제공하며, 다양한 옵션으로 최적화할 수 있어요.
+
+```bash
+npm install -D webpack-dev-server
 ```
 
-### API 요청 프록시 설정: [`proxy`](https://webpack.kr/configuration/dev-server/#devserverproxy)
+```js
+// webpack.config.js
+const path = require("path");
 
-`proxy` 옵션을 사용해서 개발 서버를 프록시 서버로 구성해 API 요청을 백엔드 서버로 전달할 수 있어요. 주로 CORS(Cross-Origin Resource Sharing) 문제를 해결하기 위해 사용해요.
-
-#### 문제 해결하기
-
-예를 들어, 프론트엔드 서버(`localhost:5000`)에서 백엔드 서버(`localhost:3000`)로 요청을 보내야 한다고 가정해 볼게요. 브라우저는 두 서버의 포트가 다르기 때문에 Cross-Origin 요청으로 간주하고 CORS 에러를 발생시킬 거예요.
-
-이런 상황을 해결하기 위해서는 백엔드 서버의 CORS 설정을 통해서 모든 Origin 접근을 허용해주거나, `localhost:3000` Origin을 허용해주면 될거예요. 하지만 이 방법은 보안상 그렇게 좋은 방법은 아니예요.
-대신 개발 환경에서는 웹팩의 proxy 옵션으로 프록시 서버를 설정해, 클라이언트가 같은 출처(Same Origin)에서 API 요청을 보내는 것처럼 만들어 CORS 문제를 우회할 수 있어요.
-
-다음과 같이 설정하면 `localhost:5000/api` 로 보내는 요청을 `localhost:3000/api`로 보내주고 응답을 받을 수 있어요.
-
-```js{4-11}
 module.exports = {
-  //...
   devServer: {
+    static: { directory: path.join(__dirname, "public") },
+    compress: true,
+    port: 9000,
+    historyApiFallback: true,
     proxy: [
       {
         context: ["/api"],
@@ -71,41 +57,127 @@ module.exports = {
 };
 ```
 
-위 설정은 `localhost:5000/api`로 들어오는 요청을 모두 `localhost:3000/api`로 전달해요. 브라우저 입장에서는 요청과 응답이 동일한 Origin에서 처리된 것처럼 인식하기 때문에 CORS 문제가 발생하지 않아요.
+### Vite 설정 예시
 
-## 사용하기
-
-다음 명령어로 `webpack-dev-server` 패키지를 설치해 주세요.
+Vite는 ESM 기반으로 동작하며 빠른 시작 속도를 제공해요.
 
 ```bash
-yarn install -D webpack-dev-server @types/webpack-dev-server
+npm install -D vite
 ```
 
-설치 후, 다음 코드와 같이 `webpack.config.js` 파일에 `devServer` 필드를 추가하면 `webpack serve` 명령어로 개발 서버를 바로 사용할 수 있어요.
+```js
+// vite.config.js
+import { defineConfig } from 'vite';
 
-```js{5-14}
-const path = require("path");
-
-module.exports = {
-  //...
-  devServer: {
-    // static으로 서빙할 파일의 디렉토리 지정
-    static: {
-      directory: path.join(__dirname, "public"),
+export default defineConfig({
+  server: {
+    port: 3000,
+    proxy: {
+      '/api': 'http://localhost:5000',
     },
-    // gzip 압축 활성화
-    compress: true,
-    // 사용할 포트 번호
-    port: 9000,
+  },
+});
+```
+
+### Esbuild 설정 예시
+
+Esbuild도 빠른 빌드 속도를 제공하며, 간단한 개발 서버 설정을 지원해요.
+
+```bash
+npm install -D esbuild esbuild-serve
+```
+
+```js
+// package.json
+"scripts": {
+  "dev": "esbuild src/index.js --bundle --servedir=public"
+}
+```
+
+## 자주 사용하는 개발 서버 옵션
+
+### 클라이언트 측 라우팅 문제 해결
+
+단일 페이지 애플리케이션(SPA)에서는 클라이언트 측 라우팅을 위해 **History API**를 사용해요. 하지만 브라우저에서 특정 URL로 직접 접근하면 서버가 해당 경로를 찾지 못해 404 에러가 발생할 수 있어요.
+
+이 문제를 해결하려면, 존재하지 않는 모든 경로에 대해 `index.html`을 반환하도록 설정하면 돼요. 이렇게 하면 어떤 경로로 접근해도 `index.html`이 제공되며, 이후 클라이언트 측에서 라우팅을 처리할 수 있어요. 이렇게 하면 모든 경로에 `index.html`이 제공되고, 이후 클라이언트 측에서 라우팅을 처리할 수 있어요.
+
+* Webpack: `historyApiFallback: true`
+* Vite: Default
+
+### HTTPS 설정
+
+로컬 개발 환경에서 HTTPS가 필요할 때 `server` 옵션으로 프로토콜을 HTTPS로 설정할 수 있어요. 기본값은 HTTP이지만, 로컬 인증서를 설정하면 HTTPS로 서비스할 수 있어요.
+
+HTTPS를 사용하려면 로컬 인증서가 필요해요. `mkcert`를 사용하면 간편하게 인증서를 발급받을 수 있어요:
+
+```bash
+mkcert -install
+mkcert localhost
+```
+
+위 명령으로 생성된 `localhost-key.pem`과 `localhost.pem`을 아래와 같이 `devServer`에 적용하세요.
+
+```js
+devServer: {
+  server: {
+    type: "https",
+    options: {
+      key: "./localhost-key.pem",
+      cert: "./localhost.pem",
+    },
+  },
+}
+```
+
+### API 프록시 설정
+
+클라이언트와 서버 도메인이 다르면 브라우저는 보안상 다른 출처로 간주해 CORS(Cross-Origin Resource Sharing) 정책에 따라 요청을 차단할 수 있어요.
+
+프론트엔드에서 `/api` 요청을 백엔드(`https://test.com`)로 전달해 CORS 문제를 우회할 수 있어요. 다음 예시를 참고하세요.
+
+:::info CORS란?
+브라우저가 프론트엔드 코드가 다른 출처(API 서버 등)에 요청을 보낼 때 기본적으로 차단하는 보안 정책이에요.이는 악의적 스크립트가 사용자의 인증 정보(쿠키, 토큰 등)를 훔치거나 조작하지 못하도록 보호하기 위함이에요.서버가 Access-Control-Allow-Origin 헤더에 허용할 도메인을 지정하면, 브라우저는 그 도메인에서 온 요청만 통과시켜요.
+:::
+
+**Webpack 예시:**
+
+```js
+// webpack.config.js
+module.exports = {
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'https://test.com',
+        changeOrigin: true,
+        secure: false, 
+      },
+    },
   },
 };
 ```
 
-<!-- 진영님 Plugin 문서 링크하기 -->
+**Vite 예시:**
 
-개발 서버를 띄운다고 브라우저를 통해서 바로 접속할 수 있지는 않아요. 먼저 JavaScript를 로드할 `index.html`이 필요해요. `HtmlWebpackPlugin`을 사용하면 HTML 파일을 자동으로 생성하고 서빙할 수 있어요.
+```js
+// vite.config.js
+import { defineConfig } from 'vite';
 
-::: info 서버를 직접 띄우기
+export default defineConfig({
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://test.com',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
+});
+```
+
+## 추가 자료
+
 
 `webpack-dev-server`는 Node.js를 통해 직접 서버를 구성할 수도 있어요. 자세한 방법은 아래 문서를 참고하세요.
 
@@ -113,3 +185,4 @@ module.exports = {
 - [Github API 예제](https://github.com/webpack/webpack-dev-server/tree/master/examples/api/simple)
 
 :::
+
