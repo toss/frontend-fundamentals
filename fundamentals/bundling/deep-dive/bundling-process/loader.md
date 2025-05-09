@@ -1,6 +1,12 @@
 # 로더
 
-로더(Loader)는 웹팩이 JavaScript 파일이 아닌 CSS, 이미지 등의 리소스를 JavaScript로 변환해, 모듈처럼 불러올 수 있도록 도와주는 도구예요.
+로더(Loader)는 웹팩이 JavaScript가 아닌 파일(CSS, 이미지, 타입스크립트 등)을 JavaScript 모듈로 변환해, 모듈 리졸루션 과정에서 정상적으로 처리할 수 있도록 해주는 도구예요.
+
+모듈 리졸루션은 import나 require를 따라 파일을 찾는 과정이에요.
+하지만 찾은 파일이 JavaScript 모듈이 아니라면, 번들러는 해당 파일을 읽거나 연결할 수 없어요.
+
+이때 로더를 적용해 파일을 JavaScript 모듈로 변환하면,
+다른 모듈과 동일하게 리졸루션을 계속 이어나갈 수 있어요.
 
 예를 들어, 다음과 같이 JavaScript 파일에서 CSS를 `import`하는 코드를 작성해본 경험이 있을 거예요.
 
@@ -13,7 +19,7 @@ export function Main() {
 }
 ```
 
-코드상으로는 문제가 없어 보이지만, 웹팩은 기본적으로 JavaScript만 해석할 수 있어요.
+코드상으로는 문제가 없어 보이지만, 번들러는 기본적으로 JavaScript만 해석할 수 있어요.
 따라서 웹팩이 `.css` 파일은 처리하지 못해 다음과 같은 에러가 발생해요.
 
 > Module parse failed: Unexpected token (1:5)
