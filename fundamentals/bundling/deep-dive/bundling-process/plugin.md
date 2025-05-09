@@ -37,7 +37,7 @@ module.exports = {
 
 ### `HotModuleReplacementPlugin`
 
-애플리케이션이 실행 중일 때 변경된 모듈만 갱신하는 [HMR](../reference/dev/hmr) 기술 제공해요. 개발 중 코드 변경 시 브라우저를 새로고침하지 않고도 최신 상태를 유지할 수 있어요.
+애플리케이션이 실행 중일 때 변경된 모듈만 갱신하는 [HMR](../dev/hmr.md) 기술 제공해요. 개발 중 코드 변경 시 브라우저를 새로고침하지 않고도 최신 상태를 유지할 수 있어요.
 
 ### `DefinePlugin`
 

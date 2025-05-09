@@ -184,25 +184,64 @@ if (process.env.ENV === "production") {
 
 소스맵의 작동 방식에 대해 더 알고 싶다면 [구글의 소스 맵 문서](https://web.dev/articles/source-maps?hl=ko)를 참고하세요.
 
-## 웹팩에서 사용하기
+## 소스맵 설정
+디버깅과 오류 추적을 위해 개발(Dev) 환경과 배포(Prod) 환경별로 적절한 소스맵 옵션을 설정해 보세요.
 
-웹팩에서는 [`devtool`](https://webpack.kr/configuration/devtool/#devtool) 속성을 사용해 소스맵 파일을 설정할 수 있어요.
+### Webpack
 
-### 개발 환경에서 사용
+* **개발 환경**
+  * `devtool: 'eval-cheap-module-source-map'`: 빠른 리빌드를 지원하며, 기본 매핑 정보를 inline으로 포함해요.
+  * `devtool: 'eval-source-map'`: 열 단위 매핑도 제공하지만 초기 빌드가 느려질 수 있어요.
 
-다음은 [개발 환경에서는 사용하는 것을 권장하는 옵션](https://webpack.kr/configuration/devtool/#development)들이에요.
+* **배포 환경**
+  * `devtool: 'source-map'`: 별도의 `.map` 파일을 생성해 오류 추적에 용이하지만, 배포 시 함께 업로드하지 않도록 주의하세요.
 
-- `eval-source-map`: [`eval()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/eval)을 사용해 모듈 코드 내부에 소스맵을 포함해요. 초기 빌드는 느리지만, 이후 빌드는 빠르게 진행돼요.
-- `eval-cheap-module-source-map`: `eval-source-map`과 비슷하지만, 행 단위로만 매핑해서 열 단위 정보는 제공하지 않아요. 대신 속도가 더 빨라요.
+```js
+// webpack.dev.config.js
+module.exports = {
+  mode: 'development',
+  devtool: 'eval-cheap-module-source-map',
+};
 
-### 배포용 빌드에서 사용
+// webpack.prod.config.js
+module.exports = {
+  mode: 'production',
+  devtool: 'source-map',
+};
+```
 
-배포용 빌드에서는 주로 아래 옵션을 사용해요.
+### Vite
 
-- `source-map`: 별도의 소스맵 파일을 생성하고, 번들 파일과 연결해요.
+* **개발 환경**
+  Vite는 기본적으로 ESM 소스맵을 inline으로 제공해 빠른 디버깅을 지원해요.
 
-배포용 빌드에서는 소스맵을 코드에 포함하지 않는 것이 일반적이에요. 소스맵은 배포된 서비스에서 특정 오류를 추적하거나, 모니터링 서비스(예: 센트리)와 통합할 때 주로 사용돼요.
+* **배포 환경**
+  `build.sourcemap: true`로 별도 소스맵 파일을 생성할 수 있어요.
 
-::: warning 소스맵을 같이 배포하지 마세요
-배포용 번들에는 난독화 작업을 거쳐 소스 코드를 숨기는데, 소스맵을 함께 배포하면 원본 코드가 노출될 위험이 있어요.
-:::
+```js
+// vite.config.js
+import { defineConfig } from 'vite';
+export default defineConfig({
+  build: {
+      // 개발 모드에선 기본 inline 소스맵 사용
+      // production에서 .map 파일 생성
+    sourcemap: true,
+  },
+});
+```
+
+### Esbuild
+
+* **개발 환경**
+  CLI에서 `--sourcemap=inline` 옵션을 사용해 inline 소스맵을 생성해요.
+
+* **배포 환경**
+  `--sourcemap` 옵션만 지정하면 별도 `.map` 파일을 출력해요.
+
+```bash
+# 개발
+esbuild src/index.js --bundle --servedir=public --sourcemap=inline
+
+# production
+esbuild src/index.js --bundle --outfile=dist/bundle.js --sourcemap
+```

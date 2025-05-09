@@ -17,7 +17,7 @@ npm init -y
 
 ![](/images/project-reset.png)
 
-여기서는 번들링 도구로 [웹팩](/reference/overview)을 설치해요.
+여기서는 번들링 도구로 웹팩을 설치해요.
 
 ```bash
 npm install webpack webpack-cli --save-dev
