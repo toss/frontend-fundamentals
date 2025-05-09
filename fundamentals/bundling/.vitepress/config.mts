@@ -184,11 +184,12 @@ export default defineConfig({
             text: "번들링 작동 방식 이해하기",
             collapsed: false,
             items: [
-              { text: "번들링, 꼭 필요할까요?", link: "/deep-dive/bundling-process" },
+              { text: "번들링, 꼭 필요할까요?", link: "/deep-dive/bundling-process/overview" },
               { text: "진입점", link: "/deep-dive/bundling-process/entry" },
               { text: "경로 탐색", link: "/deep-dive/bundling-process/resolution" },
-              { text: "출력", link: "/deep-dive/bundling-process/entry" },
-              { text: "로더와 플러그인", link: "/deep-dive/loader" },
+              { text: "로더", link: "/deep-dive/bundling-process/loader" },
+              { text: "플러그인", link: "/deep-dive/bundling-process/plugin" },
+              { text: "출력", link: "/deep-dive/bundling-process/output" },
             ],
           },
           {
