@@ -16,7 +16,7 @@
 
 대표적인 번들러로는 Webpack, Rollup이 있어요.
 
-![](/images/bundle-dev-server)
+![](/images/bundle-dev-server.png)
 
 ### ESM 기반
 
@@ -24,7 +24,7 @@ ESM(ES Module)을 사용하는 서버는 번들을 만들지 않고 필요한 �
 
 대표적인 번들러로는 Vite, Esbuild가 있어요.
 
-![](/images/esm-dev-server)
+![](/images/esm-dev-server.png)
 
 
 ## 개발 서버 설정 방법
