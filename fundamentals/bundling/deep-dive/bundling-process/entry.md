@@ -1,16 +1,14 @@
 # 진입점
 
-진입점(Entry Points)는 애플리케이션을 실행하는 시작점으로, 웹팩이 가장 먼저 읽는 파일이나 경로예요. 웹팩은 이 진입점에서부터 모든 의존성 파일들을 추적하고 하나로 묶어 **배포 가능한 파일**을 만들어요.
+진입점(Entry Point)은 번들러가 애플리케이션을 분석하기 시작하는 최초의 파일이에요. 
 
-<!-- - 차이점
-- 언제 사용하는지 -->
-
-진입점을 설정하는 방식에는 **단일 엔트리 구문**과 **객체 구문** 두 가지가 있어요.
-두 방식의 차이점은 생성되는 번들 파일 개수예요.
+번들러는 **이 파일을 기준**으로 애플리케이션 내 모든 파일과 의존 관계를 추적하여 **실행 가능한 번들**을 생성해요.
 
 ## 구문 방식 비교
 
-프로젝트의 규모와 성격에 따라 적절한 방식을 선택하세요.
+진입점을 설정하는 방식에는 **단일 엔트리 구문**과 **객체 구문** 두 가지가 있어요.
+
+프로젝트의 구조와 필요에 따라 단일 엔트리 또는 객체 구문 방식을 선택할 수 있어요.
 
 <!-- prettier-ignore-start -->
 |            | 단일 엔트리 구문                            | 객체 구문                                 |
@@ -27,7 +25,7 @@
 
 브라우저가 번들 파일을 로드할 때 파일 하나만 요청하기 때문에 설정과 관리가 간단해요.
 
-웹팩 설정 파일의 `entry` 필드에서 **문자열** 또는 **배열**을 지정하여 진입점을 설정할 수 있어요.
+설정 파일의 `entry` 필드에서 **문자열** 또는 **배열**을 지정하여 진입점을 설정할 수 있어요.
 
 :::info 기본 시작 경로
 진입점을 따로 설정하지 않으면, 웹팩은 `src/index.js`파일을 기본 진입점으로 사용해요.
@@ -41,6 +39,10 @@
 // webpack.config.js
 module.exports = {
   entry: "./src/index.tsx",
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
+  },
   // ...
 };
 ```
@@ -49,22 +51,32 @@ module.exports = {
 
 ```text{2}
 ├─ dist
-│   └─ main.js
+│   └─ bundle.js
 ├─ src
-│   └─ index.tsx
+│   ├─ index.tsx
+│   ├─ log.js
+│   └─ utils
+│       └─ helper.js 
 ├─ public
 │   └─ index.html
 ```
+
+![단일 엔트리 결과물 다이어그램](/images/bundling/single-entry.png)
 
 ### 배열로 지정하기
 
 `entry` 필드에 여러 개의 경로를 배열로 작성하면, 웹팩은 각 파일을 개별적으로 번들링하고 이를 하나의 단일 번들 파일로 병합해요.
+주로 실행 순서를 보장해야 할 때, 배열 순서대로 로드하도록 지정할 수 있어요.
 
 ```tsx
 // webpack.config.js
 module.exports = {
-  // ...
   entry: ["./src/index1.tsx", "./src/index2.tsx"],
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
+  },
+  // ...
 };
 ```
 
@@ -72,18 +84,19 @@ module.exports = {
 
 ```text{2}
 ├─ dist
-│   └─ main.js
+│   └─ bundle.js
 ├─ src
 │   ├─ index1.tsx
-│   └─ index2.tsx
+│   ├─ index2.tsx
 ├─ public
 │   └─ index.html
 ```
 
+![](/images/bundling/array-entry.png)
+
 ### 예제: 단일 엔트리 구문으로 생성한 번들 파일 로드하기
 
 단일 엔트리 구문으로 생성된 JavaScript 번들 파일이 브라우저에서 어떻게 로드되는지 살펴볼게요.
-
 다음과 같이 `<script>`에 번들 파일 경로를 추가하고, `yarn dev` 명령으로 개발 서버를 실행해요.
 
 ```html{16}
@@ -98,7 +111,6 @@ module.exports = {
   </head>
   <body>
     <div id="root"></div>
-
     <!-- webpack-dev-server는 dist 폴더를 루트에 있는 것처럼 가상 경로로 취급해요.
      그래서 브라우저에서 접근할 때는 실제 파일이 dist 폴더에 있더라도
      마치 루트(/)에 있는 것처럼 번들 파일에 접근할 수 있어요. -->
@@ -111,16 +123,19 @@ module.exports = {
 
 ![단일 엔트리 포인트로 생성한 번들파일을 브라우저에게 로드하기](/images/entry_single-network.png)
 
-### 문제 해결하기: 번들 파일 경로 추가 자동화하기
+:::info 번들 파일 경로 추가 자동화
 
 원칙적으로 HTML에 필요한 번들 파일이 추가되거나 변경될 때마다 HTML을 직접 수정해야 해요. 하지만 이런 방식은 유지보수에 비효율적일 뿐만 아니라 경로와 관련된 에러가 발생할 가능성도 높아요.
 
-이 과정을 자동화해 수고를 덜어주는 유용한 도구가 있는데, 바로 [HtmlWebpackPlugin](https://webpack.kr/plugins/html-webpack-plugin/)이라는 플러그인이에요. 이 플러그인은 HTML 파일을 템플릿처럼 사용해서, 빌드 과정에서 번들 파일 경로를 자동으로 삽입하고 완성된 HTML을 출력 경로에 생성해줘요.
+이 과정을 자동화하려면 HtmlWebpackPlugin을 사용하는 게 좋아요.
+이 플러그인은 HTML 파일을 템플릿으로 사용해서, 빌드 시점에 최신 번들 파일 경로를 자동으로 삽입하고 완성된 HTML을 출력 경로에 생성해줘요.
 덕분에 매번 수동으로 HTML을 수정하지 않아도 되고, 브라우저에서도 번들 파일 경로가 바르게 설정된 HTML을 사용할 수 있어요.
+
+:::
 
 ## 객체 구문
 
-객체 구문(Object Syntax)은 **여러 개의 번들 파일을 생성**하기 위해 여러 개의 진입점을 지정하는 방식이에요.
+**여러 개의 번들 파일을 생성**하기 위해 여러 개의 진입점을 지정하는 방식이에요.
 
 이 방식을 사용하면 페이지별로 독립적인 번들링이 가능해서, 각 페이지에서 필요한 코드만 로드할 수 있어 불필요한 코드 로드를 줄이고 초기 로딩 속도를 개선할 수 있어요. 또한, 기능별로 번들 파일을 나누어 불필요한 코드 로드를 줄일 수 있어 대규모의 애플리케이션에 적합해요.
 
@@ -162,6 +177,8 @@ module.exports = {
 │   └─ index.html
 ```
 
+![](/images/bundling/multiple-entry.png)
+
 ### 공통 모듈로 코드 중복 줄이기: [`dependOn`](https://webpack.kr/configuration/entry-context/#dependencies)
 
 `dependOn` 옵션은 여러 진입점에서 공통 모듈을 공유할 때 사용해요. 이 옵션을 사용하면 공통 모듈이 한 번만 번들링되며, 각 진입점에서 중복으로 포함되지 않아요. 그 결과 번들 크기가 줄어들어 로딩 속도를 최적화할 수 있어요.
@@ -177,7 +194,7 @@ module.exports = {
 module.exports = {
   entry: {
     app: {
-      import: "./src/admin.tsx",
+      import: "./src/index.tsx",
       dependOn: "shared",
     },
     shared: {
@@ -187,12 +204,13 @@ module.exports = {
   //...
 };
 ```
-
 자세한 동작 방식에 대해서는 [예제2: 중복 모듈 제거하기](#예제2-중복-모듈-제거하기)를 참고하세요.
+
+![](/images/bundling/depend-on.png)
 
 ### 예제1: 브라우저에서 객체 구문 번들 파일 로드하기
 
-객체 구문으로 생성된 JavaScript 번들 파일들이 브라우저에서 어떻게 로드되는지 살펴볼게요.
+다중 엔트리로 생성된 JavaScript 번들 파일들이 브라우저에서 어떻게 로드되는지 살펴볼게요.
 
 다음과 같이 `<script>`에 각 번들 파일 경로를 추가하고, `yarn dev` 명령으로 개발 서버를 실행해요.
 
@@ -221,7 +239,9 @@ module.exports = {
 
 이제 브라우저의 개발자 도구(DevTools) → 네트워크(Network)탭을 열어보면, 두 개의 번들 파일이 각각 로드되는 것을 확인할 수 있어요.
 
-![객체 구문으로 생성한 번들파일 로드하기](/images/entry_object-network.png)
+![다중 엔트리로 생성한 번들파일 로드하기](/images/entry_object-network.png)
+
+![다중 엔트리로 생성한 번들 다이어그램](/images/bundling/depend-on-before.png)
 
 ### 예제2: 중복 모듈 제거하기
 
@@ -351,10 +371,18 @@ exports["default"] = AdminPage;
 
 공통 모듈을 분리하기 전에는 각 번들 파일의 크기는 427kB였어요.
 
-![dependOn to app](/images/entry_object-dependon-shared-before.png)
-
 하지만 `shared` 공통 모듈을 분리해 중복 코드가 제거되면서, 각 번들 파일의 크기가 360kB로 줄어들었어요.
 
 ![dependOn to app](/images/entry_object-dependon-shared-after.png)
 
+![dependOn to app Diagram](/images/bundling/depend-on-example.png)
+
+
 이처럼 `dependOn` 옵션을 활용하면, 공통 모듈을 별도로 관리해 번들 크기를 최적화할 수 있어요! 🚀
+
+## 다음 단계
+
+진입점을 기준으로 탐색을 시작한 번들러는, 이제 각 모듈을 하나씩 따라가며 실제 파일 경로를 찾아야 해요.
+이 과정을 **모듈 리졸루션(Module Resolution)**이라고 불러요.
+
+다음 문서에서는 모듈 리졸루션이 어떻게 작동하고, 번들링 흐름 안에서 어떤 역할을 하는지 살펴볼게요.

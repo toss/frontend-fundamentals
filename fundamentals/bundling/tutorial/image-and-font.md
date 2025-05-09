@@ -27,7 +27,7 @@ export default `{로고 이미지가 있는 위치}`;
 
 이제 `webpack.config.js` 파일에 이미지와 폰트 파일을 처리하는 규칙을 추가해 볼게요.
 
-`type: 'asset/resource'`는 해당 파일을 번들에 포함하지 않고, 복사만 한 뒤 [파일 경로(URL)](../reference/resolution.html#파일시스템-경로)를 반환해 줘요. JavaScript나 CSS에서 이 경로를 사용할 수 있어요.
+`type: 'asset/resource'`는 해당 파일을 번들에 포함하지 않고, 복사만 한 뒤 [파일 경로(URL)](../deep-dive/bundling-process/resolution.html#파일시스템-경로)를 반환해 줘요. JavaScript나 CSS에서 이 경로를 사용할 수 있어요.
 
 ```javascript{18-25}
 // webpack.config.js
