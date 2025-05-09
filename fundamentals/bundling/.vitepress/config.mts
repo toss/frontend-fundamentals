@@ -185,17 +185,9 @@ export default defineConfig({
             collapsed: false,
             items: [
               { text: "번들링, 꼭 필요할까요?", link: "/deep-dive/bundling-process" },
-              { text: "진입점과 출력", link: "/deep-dive/entry-output" },
-              {
-                text: "모듈 연결 방식 이해하기",
-                collapsed: true,
-                items: [
-                  { text: "절대 경로와 별칭", link: "/deep-dive/loader" },
-                  { text: "NPM 모듈 찾기", link: "/deep-dive/loader" },
-                  { text: "순환 참조 다루기", link: "/deep-dive/loader" },
-                  { text: "중복 모듈 정리", link: "/deep-dive/loader" },
-                ],
-              },
+              { text: "진입점", link: "/deep-dive/bundling-process/entry" },
+              { text: "경로 탐색", link: "/deep-dive/bundling-process/resolution" },
+              { text: "출력", link: "/deep-dive/bundling-process/entry" },
               { text: "로더와 플러그인", link: "/deep-dive/loader" },
             ],
           },
