@@ -12,6 +12,7 @@
     "@amplitude/analytics-browser": "^2.11.11",
     "markdown-it-footnote": "^4.0.0",
     "typescript": "^5.6.3",
-    "vitepress": "^1.4.1"
+    "vitepress": "^1.4.1",
+    "vitepress-plugin-tabs": "^0.7.1"
   }
 }

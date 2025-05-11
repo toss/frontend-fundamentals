@@ -1,6 +1,7 @@
 import DefaultTheme from "vitepress/theme";
 import Layout from "./Layout.vue";
 import * as amplitude from "@amplitude/analytics-browser";
+import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 import "./custom.css";
 
 export default {
@@ -10,6 +11,7 @@ export default {
     if (typeof window !== "undefined") {
       const amplitudeApiKey = (import.meta as any).env.VITE_AMPLITUDE_API_KEY;
       amplitude.init(amplitudeApiKey, { autocapture: true });
+      enhanceAppWithTabs(app)
     }
   }
 }; 

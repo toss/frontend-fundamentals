@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 import footnote from "markdown-it-footnote";
 import path from "node:path";
 import { createRequire } from "node:module";
+import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 import { sharedConfig } from './shared.mjs';
 
 const require = createRequire(import.meta.url);
@@ -219,6 +220,7 @@ export default defineConfig({
   markdown: {
     config: (md) => {
       md.use(footnote);
+      md.use(tabsMarkdownPlugin);
     },
   },
   head: [
