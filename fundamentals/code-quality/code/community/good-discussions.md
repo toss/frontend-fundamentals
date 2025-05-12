@@ -31,7 +31,7 @@ GitHub Discussion에 올라온 성지 토론만 모았어요.
 
 🎯하이라이트:
 
-- 위 토론을 기반으로, @jungpaeng님께서 [문서](https://frontend-fundamentals.com/code/examples/item-edit-modal.html)에 직접 기여 해주셨어요.
+- 위 토론을 기반으로, @jungpaeng님께서 [문서](https://frontend-fundamentals.com/code-quality/code/examples/item-edit-modal.html)에 직접 기여 해주셨어요.
 
 ## 🎙️ ["enum" vs "as const"](https://github.com/toss/frontend-fundamentals/discussions/6)
 
