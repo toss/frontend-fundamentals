@@ -184,5 +184,4 @@ export default defineConfig({
 - [웹팩 공식 문서](https://webpack.kr/api/webpack-dev-server/)
 - [Github API 예제](https://github.com/webpack/webpack-dev-server/tree/master/examples/api/simple)
 
-:::
 
