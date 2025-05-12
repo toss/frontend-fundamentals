@@ -4,13 +4,6 @@
 
 번들러는 **이 파일을 기준**으로 애플리케이션 내 모든 파일과 의존 관계를 추적하여 **실행 가능한 번들**을 생성해요.
 
-:::tabs
-== tab a
-a content 2
-== tab b
-b content 2
-:::
-
 ## 구문 방식 비교
 
 진입점을 설정하는 방식에는 **단일 엔트리 구문**과 **객체 구문** 두 가지가 있어요.
@@ -128,7 +121,11 @@ module.exports = {
 
 이제 브라우저의 개발자 도구(DevTools) → 네트워크(Network)탭을 열어보면, 웹팩이 단일 번들 파일 하나만 로드되는 것을 확인할 수 있어요.
 
+<<<<<<< Updated upstream:fundamentals/bundling/deep-dive/bundling-process/entry.md
 ![단일 엔트리 포인트로 생성한 번들파일을 브라우저에게 로드하기](/images/entry_single-network.png)
+=======
+![단일 엔트리 포인트로 생성한 번들파일을 브라우저에게 로드하기](../images/knowledge/webpack/entry_single-network.png)
+>>>>>>> Stashed changes:fundamentals/bundling/reference/entry.md
 
 :::info 번들 파일 경로 추가 자동화
 
@@ -246,9 +243,13 @@ module.exports = {
 
 이제 브라우저의 개발자 도구(DevTools) → 네트워크(Network)탭을 열어보면, 두 개의 번들 파일이 각각 로드되는 것을 확인할 수 있어요.
 
+<<<<<<< Updated upstream:fundamentals/bundling/deep-dive/bundling-process/entry.md
 ![다중 엔트리로 생성한 번들파일 로드하기](/images/entry_object-network.png)
 
 ![다중 엔트리로 생성한 번들 다이어그램](/images/bundling/depend-on-before.png)
+=======
+![객체 구문으로 생성한 번들파일 로드하기](../images/knowledge/webpack/entry_object-network.png)
+>>>>>>> Stashed changes:fundamentals/bundling/reference/entry.md
 
 ### 예제2: 중복 모듈 제거하기
 
@@ -378,18 +379,17 @@ exports["default"] = AdminPage;
 
 공통 모듈을 분리하기 전에는 각 번들 파일의 크기는 427kB였어요.
 
+![dependOn to app](../images/knowledge/webpack/entry_object-dependon-shared-before.png)
+
 하지만 `shared` 공통 모듈을 분리해 중복 코드가 제거되면서, 각 번들 파일의 크기가 360kB로 줄어들었어요.
 
-![dependOn to app](/images/entry_object-dependon-shared-after.png)
-
-![dependOn to app Diagram](/images/bundling/depend-on-example.png)
-
+![dependOn to app](../images/knowledge/webpack/entry_object-dependon-shared-after.png)
 
 이처럼 `dependOn` 옵션을 활용하면, 공통 모듈을 별도로 관리해 번들 크기를 최적화할 수 있어요! 🚀
 
 ## 다음 단계
 
 진입점을 기준으로 탐색을 시작한 번들러는, 이제 각 모듈을 하나씩 따라가며 실제 파일 경로를 찾아야 해요.
-이 과정을 **모듈 리졸루션(Module Resolution)**이라고 불러요.
+이 과정을 **경로 탐색(Module Resolution)**이라고 불러요.
 
-다음 문서에서는 모듈 리졸루션이 어떻게 작동하고, 번들링 흐름 안에서 어떤 역할을 하는지 살펴볼게요.
+다음 문서에서는 경로 탐색이 어떻게 작동하고, 번들링 흐름 안에서 어떤 역할을 하는지 살펴볼게요.
