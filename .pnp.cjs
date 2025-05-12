@@ -720,7 +720,8 @@ const RAW_RUNTIME_STATE =
           ["@amplitude/analytics-browser", "npm:2.11.11"],\
           ["markdown-it-footnote", "npm:4.0.0"],\
           ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"],\
-          ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.5.0"]\
+          ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.5.0"],\
+          ["vitepress-plugin-tabs", "virtual:8e127a5e27ae2cb3b40ff46ba1c93b869b4048b87e5bfc6876be067a6acd078326b2b3dca4c079bbda681f937a734de08dce3d13334ac4c6d5cdb12613d7854f#npm:0.7.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvitepress-plugin-tabs%2F-%2Fvitepress-plugin-tabs-0.7.1.tgz"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -3118,6 +3119,32 @@ const RAW_RUNTIME_STATE =
           "@types/postcss",\
           "markdown-it-mathjax3",\
           "postcss"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["vitepress-plugin-tabs", [\
+      ["npm:0.7.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvitepress-plugin-tabs%2F-%2Fvitepress-plugin-tabs-0.7.1.tgz", {\
+        "packageLocation": "./.yarn/cache/vitepress-plugin-tabs-npm-0.7.1-caa49b15fd-ffb53eab55.zip/node_modules/vitepress-plugin-tabs/",\
+        "packageDependencies": [\
+          ["vitepress-plugin-tabs", "npm:0.7.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvitepress-plugin-tabs%2F-%2Fvitepress-plugin-tabs-0.7.1.tgz"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:8e127a5e27ae2cb3b40ff46ba1c93b869b4048b87e5bfc6876be067a6acd078326b2b3dca4c079bbda681f937a734de08dce3d13334ac4c6d5cdb12613d7854f#npm:0.7.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvitepress-plugin-tabs%2F-%2Fvitepress-plugin-tabs-0.7.1.tgz", {\
+        "packageLocation": "./.yarn/__virtual__/vitepress-plugin-tabs-virtual-6eae2726ec/0/cache/vitepress-plugin-tabs-npm-0.7.1-caa49b15fd-ffb53eab55.zip/node_modules/vitepress-plugin-tabs/",\
+        "packageDependencies": [\
+          ["vitepress-plugin-tabs", "virtual:8e127a5e27ae2cb3b40ff46ba1c93b869b4048b87e5bfc6876be067a6acd078326b2b3dca4c079bbda681f937a734de08dce3d13334ac4c6d5cdb12613d7854f#npm:0.7.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvitepress-plugin-tabs%2F-%2Fvitepress-plugin-tabs-0.7.1.tgz"],\
+          ["@types/vitepress", null],\
+          ["@types/vue", null],\
+          ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.5.0"],\
+          ["vue", null]\
+        ],\
+        "packagePeers": [\
+          "@types/vitepress",\
+          "@types/vue",\
+          "vitepress",\
+          "vue"\
         ],\
         "linkType": "HARD"\
       }]\
