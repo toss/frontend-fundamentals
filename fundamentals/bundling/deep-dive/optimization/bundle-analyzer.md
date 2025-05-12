@@ -1,6 +1,7 @@
 # 번들 분석
 
-번들 분석(Bundle Analysis)은 번들의 크기와 구성 요소를 시각화해 불필요한 코드와 라이브러리를 제거하는 최적화 방법이에요. 번들이 크면 로딩이 느려지고 성능이 떨어지므로, 번들 분석을 통해 문제를 찾아 성능을 높일 수 있어요.
+번들 분석(Bundle Analysis)은 번들의 크기와 구성 요소를 시각화해 불필요한 코드와 라이브러리를 제거하는 최적화 방법이에요. 
+번들이 크면 로딩이 느려지고 성능이 떨어지므로, 번들 분석을 통해 문제를 찾아 성능을 높일 수 있어요.
 
 ![](/images/bundle-analyzer.png)
 
@@ -25,8 +26,7 @@ Webpack Bundle Analyzer의 주요 옵션은 다음과 같아요.
 * `analyzerMode: 'server'`: 로컬 서버에서 분석 결과를 보여줘요.
 * `openAnalyzer: true`: 브라우저에서 자동으로 분석 페이지를 열어줘요.
 
-```js
-// webpack.config.js
+```javascript
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
@@ -47,8 +47,7 @@ Rollup Visualizer의 주요 옵션은 다음과 같아요.
 * `filename`: 분석 결과 파일을 저장할 위치를 지정해요.
 * `template`: 결과 시각화 형태(예: 'treemap', 'sunburst', 'network')를 선택해요.
 
-```ts
-// vite.config.ts
+```javascript
 import { defineConfig } from 'vite';
 import { visualizer } from 'rollup-plugin-visualizer';
 
@@ -65,12 +64,7 @@ export default defineConfig({
 
 ### Esbuild 설정 예시
 
-Esbuild Analyzer의 주요 기능은 다음과 같아요.
-
-* 빌드 후 생성되는 메타파일(metafile)을 기반으로 분석 결과를 콘솔에 출력해줘요.
-
-```js
-// build-and-analyze.js
+```javascript
 const esbuild = require('esbuild');
 const { analyzeMetafile } = require('esbuild-analyzer');
 
@@ -103,10 +97,6 @@ npm install dayjs date-fns
 npm install es-toolkit
 ```
 
-```js
-import { debounce } from 'es-toolkit';
-```
-
 #### 중복 모듈 제거하기
 
 중복 설치된 모듈을 제거해 번들 크기를 줄이세요.
@@ -127,7 +117,7 @@ yarn dedupe
 
 부수 효과가 있는 모듈은 트리 셰이킹 대상에서 제외돼요. 순수 모듈만 남겨 번들을 최적화하세요.
 
-* Webpack의 `webpack-cli --json` 또는 `StatsWriterPlugin`을 이용해 부수 효과 모듈을 찾으세요.
-* `package.json`의 `sideEffects: true` 필드를 설정해 부수 효과가 없는 모듈만 남기세요.
+* webpack의 `webpack-cli --json` 또는 `StatsWriterPlugin`을 이용해 Side Effect 모듈을 찾으세요.
+* `package.json`의 `sideEffects: true` 필드를 설정해 Side Effect가 없는 모듈만 남기세요.
 
 ---
