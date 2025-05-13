@@ -1,3 +1,4 @@
 # 토론 상세
 
-<GithubDiscussionsDetail />
+123
+<!-- <GithubDiscussionsDetail /> -->
