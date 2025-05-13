@@ -16,7 +16,7 @@ export const shared = defineConfig({
     ],
     [
       "link",
-      { rel: "icon", type: "image/x-icon", href: "/images/favicon.ico" }
+      { rel: "icon", type: "image/x-icon", href: "/code-quality/images/favicon.ico" }
     ],
     ["link", { rel: "manifest", href: "/images/site.webmanifest" }],
     ["link", { rel: "apple-touch-icon", href: "/images/apple-touch-icon.png" }],
