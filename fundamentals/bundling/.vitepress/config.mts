@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 import footnote from "markdown-it-footnote";
 import path from "node:path";
 import { createRequire } from "node:module";
+import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 import { sharedConfig } from './shared.mjs';
 
 const require = createRequire(import.meta.url);
@@ -17,9 +18,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     ...sharedConfig.themeConfig,
     nav: [
-      { text: "번들링이란", link: "./overview" },
-      { text: "가이드", link: "/tutorial/basic" },
-      { text: "번들링 딥다이브", link: "/deep-dive/overview" }
+      { text: "홈", link: "/" },
     ],
     sidebar: [
       {
@@ -40,57 +39,46 @@ export default defineConfig({
         ]
       },
       {
-        text: "가이드",
+        text: "튜토리얼",
         items: [
           {
             text: "웹팩으로 배우는 번들링",
             items: [
               {
-                text: "1. 웹팩 시작하기",
-                items: [
-                  {
-                    text: "첫 번들 만들기",
-                    link: "/tutorial/basic",
-                  },
-                ]
+                text: "1. 소개",
+                link: "/webpack-tutorial/intro",
               },
               {
-                text: "2. 실전 프로젝트 구성하기",
-                items: [
-                  {
-                    text: "TypeScript 프로젝트 설정",
-                    link: "/tutorial/basic",
-                  },
-                  {
-                    text: "React 애플리케이션 번들링",
-                    link: "/tutorial/basic",
-                  },
-                  {
-                    text: "스타일 관리하기",
-                    link: "/tutorial/basic",
-                  },
-                  {
-                    text: "리소스 관리하기",
-                    link: "/tutorial/basic",
-                  },
-                ]
+                text: "2. 웹팩 도입하고 첫 번들 만들기",
+                link: "/webpack-tutorial/make-first-bundle",
               },
               {
-                text: "3. 프로덕션 최적화",
-                items: [
-                  {
-                    text: "플러그인 활용하기",
-                    link: "/tutorial/basic",
-                  },
-                  {
-                    text: "성능 최적화하기",
-                    link: "/tutorial/basic",
-                  },
-                  {
-                    text: "개발 환경 개선하기",
-                    link: "/tutorial/basic",
-                  },
-                ]
+                text: "3. 모듈로 코드 구조화하기",
+                link: "/webpack-tutorial/module-system",
+              },
+              {
+                text: "4. TypeScript 적용하기",
+                link: "/webpack-tutorial/typescript",
+              },
+              {
+                text: "5. React 적용하기",
+                link: "/webpack-tutorial/react",
+              },
+              {
+                text: "6. 스타일 관리하기",
+                link: "/webpack-tutorial/style",
+              },
+              {
+                text: "7. 이미지 등 정적 자원 다루기",
+                link: "/webpack-tutorial/assets",
+              },
+              {
+                text: "8. 플러그인으로 빌드 확장하기",
+                link: "/webpack-tutorial/plugin",
+              },
+              {
+                text: "9. 개발 서버로 생산성 높이기",
+                link: "/webpack-tutorial/dev-server",
               },
             ]
           },
@@ -98,13 +86,8 @@ export default defineConfig({
             text: "롤업으로 배우는 라이브러리 번들링",
             items: [
               {
-                text: "1. 롤업 시작하기",
-                items: [
-                  {
-                    text: "첫 번들 만들기",
-                    link: "/tutorial/basic",
-                  },
-                ]
+                text: "1. 소개",
+                link: "/rollup-tutorial/intro",
               },
             ]  
             },
@@ -184,8 +167,8 @@ export default defineConfig({
             text: "번들링 작동 방식 이해하기",
             collapsed: false,
             items: [
-              { text: "번들링, 꼭 필요할까요?", link: "/deep-dive/bundling-process/overview" },
-              { text: "진입점 설정", link: "/deep-dive/bundling-process/entry" },
+              { text: "번들링이 필요한 이유", link: "/deep-dive/bundling-process/overview" },
+              { text: "진입점", link: "/deep-dive/bundling-process/entry" },
               { text: "경로 탐색", link: "/deep-dive/bundling-process/resolution" },
               { text: "로더", link: "/deep-dive/bundling-process/loader" },
               { text: "플러그인", link: "/deep-dive/bundling-process/plugin" },
@@ -199,7 +182,6 @@ export default defineConfig({
               { text: "개발 서버", link: "/deep-dive/dev/dev-server" },
               { text: "HMR", link: "/deep-dive/dev/hmr" },
               { text: "소스맵", link: "/deep-dive/dev/source-map" },
-              { text: "환경별 설정 가이드", link: "/deep-dive/dev/source-map" },
             ],
           },
           {
@@ -207,7 +189,7 @@ export default defineConfig({
             collapsed: false,
             items: [
               { text: "코드 스플리팅", link: "/deep-dive/optimization/code-splitting" },
-              { text: "트리 쉐이킹", link: "/deep-dive/optimization/tree-shaking" },
+              { text: "트리 셰이킹", link: "/deep-dive/optimization/tree-shaking" },
               { text: "번들 분석", link: "/deep-dive/optimization/bundle-analyzer" },
             ],
           },
@@ -219,6 +201,7 @@ export default defineConfig({
   markdown: {
     config: (md) => {
       md.use(footnote);
+      md.use(tabsMarkdownPlugin);
     },
   },
   head: [

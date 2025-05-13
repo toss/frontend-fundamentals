@@ -22,7 +22,6 @@ npm install html-webpack-plugin --save-dev
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  // ...생략
   plugins: [
     new HtmlWebpackPlugin({
       title: '웹팩 튜토리얼',  // <title> 태그 내용

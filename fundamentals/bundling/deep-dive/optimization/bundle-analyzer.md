@@ -1,29 +1,34 @@
 # 번들 분석
 
-번들 분석(Bundle Analysis)은 번들의 크기와 구성 요소를 시각화해 불필요한 코드와 라이브러리를 제거하는 최적화 방법이에요. 번들이 크면 로딩이 느려지고 성능이 떨어지므로, 번들 분석을 통해 문제를 찾아 성능을 높일 수 있어요.
+번들 분석(Bundle Analysis)은 번들의 크기와 구성 요소를 시각화해 불필요한 코드와 라이브러리를 제거하는 최적화 방법이에요. 
+
+번들이 크면 로딩이 느려지고 성능이 떨어지기 때문에, 번들 분석을 사용해 문제를 찾고 성능을 높일 수 있어요.
 
 ![](/images/bundle-analyzer.png)
 
-이제 번들 분석 도구를 설치해 볼게요.
-
 ## 사전 준비: 번들 분석 도구 설치
 
-번들 분석을 하려면 사용하는 번들러에 맞는 도구를 설치하세요.
+먼저 번들 분석 도구를 설치해 볼게요.
 
-| 번들러     | 설치 명령어                                            |
-| ------- | ------------------------------------------------- |
-| Webpack | `npm install --save-dev webpack-bundle-analyzer`  |
-| Vite    | `npm install --save-dev rollup-plugin-visualizer` |
-| Esbuild | `npm install --save-dev esbuild-analyzer`         |
+:::tabs key:bundler-analyzer
 
-설치가 끝났다면 각 번들러의 설정 방법을 확인하세요.
+== Webpack
 
-### Webpack 설정 예시
+**번들 분석 설정**
 
-Webpack Bundle Analyzer의 주요 옵션은 다음과 같아요.
+* `webpack-bundle-analyzer`를 사용해 번들 크기를 시각화할 수 있어요.
+* 주요 옵션
 
-* `analyzerMode: 'server'`: 로컬 서버에서 분석 결과를 보여줘요.
-* `openAnalyzer: true`: 브라우저에서 자동으로 분석 페이지를 열어줘요.
+  * `analyzerMode: 'server'`: 로컬 서버에서 분석 결과를 보여줘요.
+  * `openAnalyzer: true`: 빌드 후 자동으로 브라우저를 열어줘요.
+
+**설치 방법**
+
+```bash
+npm install --save-dev webpack-bundle-analyzer
+```
+
+**설정 예시**
 
 ```js
 // webpack.config.js
@@ -39,16 +44,27 @@ module.exports = {
 };
 ```
 
-### Vite 설정 예시
+== Vite
 
-Rollup Visualizer의 주요 옵션은 다음과 같아요.
+**번들 분석 설정**
 
-* `open: true`: 빌드 후 자동으로 분석 결과를 브라우저에서 열어줘요.
-* `filename`: 분석 결과 파일을 저장할 위치를 지정해요.
-* `template`: 결과 시각화 형태(예: 'treemap', 'sunburst', 'network')를 선택해요.
+* `rollup-plugin-visualizer`를 사용해 번들 구성을 시각화할 수 있어요.
+* 주요 옵션
 
-```ts
-// vite.config.ts
+  * `open: true`: 빌드 후 분석 결과를 브라우저에서 자동으로 열어요.
+  * `filename`: 결과 파일 저장 위치를 지정할 수 있어요.
+  * `template`: 시각화 형태(`treemap`, `sunburst`, `network`)를 선택할 수 있어요.
+
+**설치 방법**
+
+```bash
+npm install --save-dev rollup-plugin-visualizer
+```
+
+**설정 예시**
+
+```js
+// vite.config.js
 import { defineConfig } from 'vite';
 import { visualizer } from 'rollup-plugin-visualizer';
 
@@ -63,14 +79,23 @@ export default defineConfig({
 });
 ```
 
-### Esbuild 설정 예시
+== Esbuild
 
-Esbuild Analyzer의 주요 기능은 다음과 같아요.
+**번들 분석 설정**
 
-* 빌드 후 생성되는 메타파일(metafile)을 기반으로 분석 결과를 콘솔에 출력해줘요.
+* `esbuild-analyzer`를 사용해 메타파일을 분석할 수 있어요.
+* 결과를 콘솔에 출력해 번들 크기와 구성을 확인할 수 있어요.
+
+**설치 방법**
+
+```bash
+npm install --save-dev esbuild-analyzer
+```
+
+**설정 예시**
 
 ```js
-// build-and-analyze.js
+// 분석 스크립트 예시
 const esbuild = require('esbuild');
 const { analyzeMetafile } = require('esbuild-analyzer');
 
@@ -85,11 +110,14 @@ esbuild.build({
 });
 ```
 
+:::
+
+
 ## 번들 분석 결과 활용하기
 
 번들 분석 결과를 바탕으로 번들의 크기를 줄이고 성능을 개선할 수 있어요.
 
-### 📦 불필요한 라이브러리 제거하기
+### 불필요한 라이브러리 제거하기
 
 #### 가벼운 라이브러리 사용
 
@@ -101,10 +129,6 @@ npm install dayjs date-fns
 
 # lodash → es-toolkit으로 교체
 npm install es-toolkit
-```
-
-```js
-import { debounce } from 'es-toolkit';
 ```
 
 #### 중복 모듈 제거하기
@@ -123,11 +147,11 @@ yarn dedupe
 
 [Bundle Phobia](https://bundlephobia.com/)에서 패키지 크기를 확인하고 설치를 결정하세요.
 
-### 🔍 부수 효과(side-effect) 관리하기
+### 부수 효과(side-effect) 관리하기
 
 부수 효과가 있는 모듈은 트리 셰이킹 대상에서 제외돼요. 순수 모듈만 남겨 번들을 최적화하세요.
 
-* Webpack의 `webpack-cli --json` 또는 `StatsWriterPlugin`을 이용해 부수 효과 모듈을 찾으세요.
-* `package.json`의 `sideEffects: true` 필드를 설정해 부수 효과가 없는 모듈만 남기세요.
+* 웹팩의 `webpack-cli --json` 또는 `StatsWriterPlugin`을 이용해 Side Effect 모듈을 찾으세요.
+* `package.json`의 `sideEffects: true` 필드를 설정해 Side Effect가 없는 모듈만 남기세요.
 
----
+

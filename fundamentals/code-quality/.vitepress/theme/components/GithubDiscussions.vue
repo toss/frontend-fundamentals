@@ -63,7 +63,7 @@ const formatDate = (dateString: string | null) => {
 };
 
 function handleClick(id: number) {
-  window.location.href = `${window.location.pathname}detail?id=${id}`;
+  window.location.href = `/code-quality/code/detail?id=${id}`;
 }
 
 const handleWriteClick = () => {

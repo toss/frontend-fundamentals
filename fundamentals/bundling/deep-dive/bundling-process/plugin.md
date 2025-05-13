@@ -3,32 +3,60 @@
 플러그인(Plugin)은 번들링 과정에서 모듈을 추적하고 변환하는 흐름에 맞춰 추가 작업을 수행하는 도구예요.
 경로 탐색(Module Resolution), 변환(Transformation), 출력(Output) 같은 다양한 단계에서 동작하며, 파일을 수정하거나 생성하고, 최종 빌드 결과를 최적화할 수 있어요.
 
-다음과 같이 사용할 플러그인들을 웹팩 설정 파일의 `plugins` 필드에 배열로 정의하면 돼요.
+다음과 같이 사용할 플러그인을 번들러 설정 파일의 `plugins` 필드에 배열로 정의하면 돼요.
 
-```js{8-14}
-const { HotModuleReplacementPlugin, DefinePlugin } = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+:::tabs key:bundler-plugins-setup
 
+=== Webpack
+
+```tsx
 // webpack.config.js
+const { HotModuleReplacementPlugin, DefinePlugin } = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+
 module.exports = {
-  // ...
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/index.html",
+      template: './src/index.html',
     }),
     new HotModuleReplacementPlugin(),
     new DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify("production"),
-      VERSION: JSON.stringify("1.0.0"),
+      'process.env.NODE_ENV': JSON.stringify('production'),
+      VERSION: JSON.stringify('1.0.0'),
     }),
   ],
 };
 ```
 
+=== Vite
+
+```ts
+// vite.config.js
+import { defineConfig } from 'vite';
+import { createHtmlPlugin } from 'vite-plugin-html';
+
+export default defineConfig({
+  plugins: [
+    createHtmlPlugin({
+      minify: true,
+      entry: 'src/index.tsx',
+      template: 'src/index.html',
+    }),
+  ],
+  define: {
+    'process.env.NODE_ENV': JSON.stringify('production'),
+    VERSION: JSON.stringify('1.0.0'),
+  },
+});
+```
+
+:::
+
+
 ## 주요 플러그인
 
-웹팩에서 자주 사용되는 플러그인을 소개해요.  
-공개된 플러그인은 `npm`이나 `yarn`으로 설치한 후, `plugins` 필드에 정의해 사용할 수 있어요.
+개발할 때 자주 사용하는 플러그인을 소개할게요. 공개된 플러그인은 `npm`이나 `yarn`으로 설치한 후, `plugins` 필드에 정의해 사용할 수 있어요.
 
 ### `HtmlWebpackPlugin`
 
@@ -117,7 +145,7 @@ plugins: [
 
 ## 플러그인의 구조와 동작 원리
 
-웹팩에서 제공하는 플러그인뿐만 아니라, 필요에 따라 커스텀 플러그인을 만들어 빌드 과정에서 원하는 작업을 추가하거나 기존 기능을 확장할 수 있어요. 플러그인이 어떻게 동작하는지 이해하면, 웹팩과 플러그인이 상호작용하는 원리를 더 쉽게 파악할 수 있어요.
+제공하는 플러그인뿐만 아니라, 필요에 따라 커스텀 플러그인을 만들어 빌드 과정에서 원하는 작업을 추가하거나 기존 기능을 확장할 수 있어요. 플러그인이 어떻게 동작하는지 이해하면, 웹팩과 플러그인이 상호작용하는 원리를 더 쉽게 파악할 수 있어요.
 
 플러그인은 기본적으로 클래스로 작성돼요. 다음은 클래스로 작성한 간단한 커스텀 플러그인 예시예요.
 
@@ -149,7 +177,7 @@ module.exports = MyPlugin;
 이를 활용하면 빌드 과정에서 원하는 작업을 수행하거나, 결과를 변경할 수도 있어요.
 
 ## 다음 단계
-플러그인을 통해 번들링 과정을 유연하게 제어할 수 있게 됐어요.
-이제 모듈 리졸루션 결과를 바탕으로, 실제로 브라우저가 실행할 수 있는 최종 번들 파일을 생성하는 출력(Output) 단계로 넘어가 볼게요.
+플러그인을 사용해서 번들링 과정을 유연하게 제어할 수 있게 됐어요.
+이제 경로 탐색 결과를 바탕으로, 실제로 브라우저가 실행할 수 있는 최종 번들 파일을 생성하는 **출력** 단계로 넘어가 볼게요.
 
-여기서 번들러는 이전 단계에서 만들어진 모듈 맵을 활용해, 하나의 파일(또는 여러 청크 파일)로 코드를 묶어 최종 결과물을 만듭니다.
+출력 단계에서 번들러는 이전 단계에서 만들어진 모듈 맵을 활용해, 하나의 파일(또는 여러 청크 파일)로 코드를 묶어 최종 결과물을 만듭니다.
