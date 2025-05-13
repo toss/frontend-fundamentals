@@ -86,7 +86,7 @@ export default defineConfig({
             items: [
               {
                 text: "1. 소개",
-                link: "/library",
+                link: "/rollup-tutorial/intro",
               },
             ]  
             },
