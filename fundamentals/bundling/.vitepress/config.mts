@@ -17,9 +17,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     ...sharedConfig.themeConfig,
     nav: [
-      { text: "번들링이란", link: "./overview" },
-      { text: "가이드", link: "/tutorial/basic" },
-      { text: "웹팩 깊이 이해하기", link: "/reference/overview" }
+      { text: "홈", link: "/" },
     ],
     sidebar: [
       {
@@ -40,57 +38,46 @@ export default defineConfig({
         ]
       },
       {
-        text: "가이드",
+        text: "튜토리얼",
         items: [
           {
             text: "웹팩으로 배우는 번들링",
             items: [
               {
-                text: "1. 웹팩 시작하기",
-                items: [
-                  {
-                    text: "첫 번들 만들기",
-                    link: "/tutorial/basic",
-                  },
-                ]
+                text: "1. 소개",
+                link: "/webpack-tutorial/intro",
               },
               {
-                text: "2. 실전 프로젝트 구성하기",
-                items: [
-                  {
-                    text: "TypeScript 프로젝트 설정",
-                    link: "/tutorial/basic",
-                  },
-                  {
-                    text: "React 애플리케이션 번들링",
-                    link: "/tutorial/basic",
-                  },
-                  {
-                    text: "스타일 관리하기",
-                    link: "/tutorial/basic",
-                  },
-                  {
-                    text: "리소스 관리하기",
-                    link: "/tutorial/basic",
-                  },
-                ]
+                text: "2. 웹팩 도입하고 첫 번들 만들기",
+                link: "/webpack-tutorial/make-first-bundle",
               },
               {
-                text: "3. 프로덕션 최적화",
-                items: [
-                  {
-                    text: "플러그인 활용하기",
-                    link: "/tutorial/basic",
-                  },
-                  {
-                    text: "성능 최적화하기",
-                    link: "/tutorial/basic",
-                  },
-                  {
-                    text: "개발 환경 개선하기",
-                    link: "/tutorial/basic",
-                  },
-                ]
+                text: "3. 모듈로 코드 구조화하기",
+                link: "/webpack-tutorial/module-system",
+              },
+              {
+                text: "4. TypeScript 적용하기",
+                link: "/webpack-tutorial/typescript",
+              },
+              {
+                text: "5. React 적용하기",
+                link: "/webpack-tutorial/react",
+              },
+              {
+                text: "6. 스타일 관리하기",
+                link: "/webpack-tutorial/style",
+              },
+              {
+                text: "7. 이미지 등 정적 자원 다루기",
+                link: "/webpack-tutorial/assets",
+              },
+              {
+                text: "8. 플러그인으로 빌드 확장하기",
+                link: "/webpack-tutorial/plugin",
+              },
+              {
+                text: "9. 개발 서버로 생산성 높이기",
+                link: "/webpack-tutorial/dev-server",
               },
             ]
           },
@@ -98,13 +85,8 @@ export default defineConfig({
             text: "롤업으로 배우는 라이브러리 번들링",
             items: [
               {
-                text: "1. 롤업 시작하기",
-                items: [
-                  {
-                    text: "첫 번들 만들기",
-                    link: "/tutorial/basic",
-                  },
-                ]
+                text: "1. 소개",
+                link: "/rollup-tutorial/intro",
               },
             ]  
             },
