@@ -71,52 +71,49 @@ function App() {
   );
 }
 ```
-
 ## 빌드 도구별 코드 스플리팅 설정
 
-### 웹팩(Webpack) 설정
+코드 스플리팅은 애플리케이션의 초기 로딩 속도를 개선하고, 필요한 파일만 로드하여 성능을 최적화하는 중요한 기술이에요.
+
+:::tabs key:code-splitting-setup
+
+== Webpack
 
 웹팩에서는 다양한 옵션을 통해 코드 스플리팅을 쉽게 설정할 수 있어요. 대표적인 두 가지 방법을 소개할게요.
 
-#### 1. dependOn 옵션 사용하기
+### dependOn 옵션 사용하기
 
 dependOn 옵션을 사용하면 여러 진입점에서 공통으로 사용하는 모듈을 별도로 분리하여 한 번만 번들링할 수 있어요. 이렇게 하면 코드 중복을 줄이고, 브라우저 캐시를 효율적으로 활용할 수 있어서 빌드 속도와 로딩 성능이 개선돼요.
 
 설정 방법과 예제는 [`dependOn` 옵션 문서](./code-splitting.md#공통-모듈로-코드-중복-줄이기-dependon)에서 확인할 수 있어요.
 
-#### 2. SplitChunksPlugin 플러그인 사용하기
+### SplitChunksPlugin 사용하기
 
-[`SplitChunkPlugin`](https://webpack.kr/plugins/split-chunks-plugin/)을 사용하면 웹팩에서 코드 스플리팅을 자동화할 수 있어요.
-이 플러그인을 사용하면 중복되는 모듈을 하나의 청크로 분리하거나, 특정 크기 이상의 파일을 자동으로 나눠 번들 크기를 최적화할 수 있어요.
-
-웹팩 설정 파일에서 사용하는 예시는 다음과 같아요.
+[`SplitChunksPlugin`](https://webpack.kr/plugins/split-chunks-plugin/)을 사용하면 웹팩에서 코드 스플리팅을 자동화할 수 있어요. 이 플러그인을 활용하면 중복되는 모듈을 하나의 청크로 분리하거나, 특정 크기 이상의 파일을 자동으로 나눠 번들 크기를 최적화할 수 있어요.
 
 ```javascript
 module.exports = {
-  // ...
   optimization: {
     splitChunks: {
-      chunks: "all", // 처리할 청크의 유형 (모든 유형 처리)
-      minSize: 20000, // 청크가 나뉘는 최소 크기
-      maxSize: 0, // 청크의 최대 크기 (0은 제한 없음)
-      minChunks: 1, // 모듈이 분할되기 위해 최소 몇 번 재사용되는지 지정
-      maxAsyncRequests: 30, // 비동기 로딩 시 최대 요청 수
-      maxInitialRequests: 30, // 초기 로딩 시 최대 요청 수
-      automaticNameDelimiter: "~", // 생성된 파일 이름의 구분자
-      name: true, // 청크 이름을 자동으로 설정할지 여부
+      chunks: "all",
+      minSize: 20000,
+      maxSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      automaticNameDelimiter: "~",
+      name: true,
     },
   },
 };
 ```
 
-웹팩의 SplitChunksPlugin과 같은 고급 기능을 함께 사용하면, 코드 스플리팅을 더욱 효율적으로 활용할 수 있어요. 이렇게 하면 사용자가 실제로 필요한 코드만 빠르게 로드할 수 있어서 웹 애플리케이션의 성능이 눈에 띄게 개선돼요.
+== Vite
 
-### Vite 설정
-Vite는 기본적으로 Rollup을 내부적으로 사용하기 때문에 코드 스플리팅이 자동으로 적용돼요.
-다만, 외부 라이브러리를 별도로 분리하거나 청크 전략을 직접 정의하고 싶다면 build.rollupOptions.output.manualChunks 옵션을 설정해야 해요.
+기본적으로 Rollup을 내부적으로 사용하기 때문에 코드 스플리팅이 자동으로 적용돼요. 
+다만, 외부 라이브러리를 별도로 분리하거나 청크 전략을 직접 정의하고 싶다면 `build.rollupOptions.output.manualChunks` 옵션을 설정할 수 있어요.
 
-node_modules에 포함된 외부 라이브러리를 vendor.js로 분리하면 성능이 향상돼요. 외부 라이브러리는 변경이 거의 없기 때문에, 브라우저가 이를 캐시로 재사용할 수 있어요.
-덕분에 애플리케이션 코드가 수정되더라도 변경된 부분만 다시 받아오게 되어 재방문 시 로딩 속도가 빨라지고, 초기 렌더링 성능도 함께 개선돼요.
+변경 가능성이 적은 외부 라이브러리를 vendor.js로 분리하면 브라우저 캐시를 효율적으로 사용할 수 있어 초기 로딩 속도가 개선돼요.
 
 ```javascript
 import { defineConfig } from "vite";
@@ -127,7 +124,7 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes("node_modules")) {
-            return "vendor"; // node_modules를 vendor.js로 분리
+            return "vendor";
           }
         },
       },
@@ -135,3 +132,5 @@ export default defineConfig({
   },
 });
 ```
+
+:::

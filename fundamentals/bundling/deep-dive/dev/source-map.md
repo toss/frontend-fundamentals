@@ -187,14 +187,25 @@ if (process.env.ENV === "production") {
 ## 소스맵 설정
 디버깅과 오류 추적을 위해 개발(Dev) 환경과 배포(Prod) 환경별로 적절한 소스맵 옵션을 설정해 보세요.
 
-### Webpack
+:::tabs key\:bundler-sourcemap
 
-* **개발 환경**
-  * `devtool: 'eval-cheap-module-source-map'`: 빠른 리빌드를 지원하며, 기본 매핑 정보를 inline으로 포함해요.
-  * `devtool: 'eval-source-map'`: 열 단위 매핑도 제공하지만 초기 빌드가 느려질 수 있어요.
+== Webpack
 
-* **배포 환경**
-  * `devtool: 'source-map'`: 별도의 `.map` 파일을 생성해 오류 추적에 용이하지만, 배포 시 함께 업로드하지 않도록 주의하세요.
+**개발 환경**
+
+- `devtool: 'eval-cheap-module-source-map'`
+
+  - 빠른 빌드를 지원하고, 기본 매핑 정보를 inline으로 포함해요.
+- `devtool: 'eval-source-map'`
+
+  - 열 단위 매핑까지 지원하지만, 초기 빌드 속도가 느려질 수 있어요.
+
+**배포 환경**
+
+- `devtool: 'source-map'`
+
+  - 별도의 `.map` 파일을 생성해 오류 추적에 도움이 돼요.
+  - 배포 시 `.map` 파일을 함께 업로드하지 않도록 주의해야 해요.
 
 ```js
 // webpack.dev.config.js
@@ -210,38 +221,24 @@ module.exports = {
 };
 ```
 
-### Vite
+== Vite
 
-* **개발 환경**
-  Vite는 기본적으로 ESM 소스맵을 inline으로 제공해 빠른 디버깅을 지원해요.
+**개발 환경**
 
-* **배포 환경**
-  `build.sourcemap: true`로 별도 소스맵 파일을 생성할 수 있어요.
+* 기본적으로 ESM 소스맵을 inline으로 제공해 빠른 디버깅을 지원해요.
+
+**배포 환경**
+
+* `build.sourcemap: true` 설정으로 별도의 `.map` 파일을 생성할 수 있어요.
 
 ```js
 // vite.config.js
 import { defineConfig } from 'vite';
+
 export default defineConfig({
   build: {
-      // 개발 모드에선 기본 inline 소스맵 사용
-      // production에서 .map 파일 생성
     sourcemap: true,
   },
 });
 ```
-
-### Esbuild
-
-* **개발 환경**
-  CLI에서 `--sourcemap=inline` 옵션을 사용해 inline 소스맵을 생성해요.
-
-* **배포 환경**
-  `--sourcemap` 옵션만 지정하면 별도 `.map` 파일을 출력해요.
-
-```bash
-# 개발
-esbuild src/index.js --bundle --servedir=public --sourcemap=inline
-
-# production
-esbuild src/index.js --bundle --outfile=dist/bundle.js --sourcemap
-```
+:::

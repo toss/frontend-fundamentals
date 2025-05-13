@@ -26,40 +26,52 @@ ESM(ES Module)을 사용하는 서버는 번들을 만들지 않고 필요한 �
 
 ![](/images/esm-dev-server.png)
 
+(출처: <a target="_blank" href="https://ko.vite.dev/guide/why.html">https://ko.vite.dev/guide/why.html</a>)
+
 
 ## 개발 서버 설정 방법
 
-### Webpack 설정 예시
+:::tabs key:bundler-devserver
 
-Webpack은 `webpack-dev-server`로 개발 서버를 제공하며, 다양한 옵션으로 최적화할 수 있어요.
+== Webpack
+
+**설치 방법**
 
 ```bash
 npm install -D webpack-dev-server
 ```
 
+**개발 서버 설정**
+
 ```js
 // webpack.config.js
-const path = require("path");
+const path = require('path');
 
 module.exports = {
   devServer: {
-    static: { directory: path.join(__dirname, "public") },
+    static: { directory: path.join(__dirname, 'public') },
     compress: true,
     port: 9000,
     historyApiFallback: true,
     proxy: [
       {
-        context: ["/api"],
-        target: "http://localhost:3000",
+        context: ['/api'],
+        target: 'http://localhost:3000',
       },
     ],
   },
 };
 ```
 
-### Vite 설정 예시
+== Vite
 
-Vite는 ESM 기반으로 동작하며 빠른 시작 속도를 제공해요.
+**설치 방법**
+
+```bash
+npm install -D webpack-dev-server
+```
+
+**개발 서버 설정**
 
 ```bash
 npm install -D vite
@@ -79,20 +91,25 @@ export default defineConfig({
 });
 ```
 
-### Esbuild 설정 예시
+== Esbuild
 
-Esbuild도 빠른 빌드 속도를 제공하며, 간단한 개발 서버 설정을 지원해요.
+**설치 방법**
 
 ```bash
 npm install -D esbuild esbuild-serve
 ```
 
-```js
+**개발 서버 설정**
+
+```json
 // package.json
 "scripts": {
   "dev": "esbuild src/index.js --bundle --servedir=public"
 }
 ```
+
+:::
+
 
 ## 자주 사용하는 개발 서버 옵션
 
@@ -139,8 +156,11 @@ devServer: {
 :::info CORS란?
 브라우저가 프론트엔드 코드가 다른 출처(API 서버 등)에 요청을 보낼 때 기본적으로 차단하는 보안 정책이에요.이는 악의적 스크립트가 사용자의 인증 정보(쿠키, 토큰 등)를 훔치거나 조작하지 못하도록 보호하기 위함이에요.서버가 Access-Control-Allow-Origin 헤더에 허용할 도메인을 지정하면, 브라우저는 그 도메인에서 온 요청만 통과시켜요.
 :::
+:::tabs key:bundler-proxy
 
-**Webpack 예시:**
+== Webpack
+  - `changeOrigin: true`로 요청 헤더의 `Origin`을 대상 서버에 맞게 변경하고,
+  - `secure: false`로 HTTPS 인증서 검증을 생략할 수 있어요.
 
 ```js
 // webpack.config.js
@@ -150,14 +170,16 @@ module.exports = {
       '/api': {
         target: 'https://test.com',
         changeOrigin: true,
-        secure: false, 
+        secure: false,
       },
     },
   },
 };
 ```
 
-**Vite 예시:**
+== Vite
+  - Webpack과 구조는 비슷하지만, Vite는 내부적으로 `http-proxy`를 사용해 설정이 더 직관적이고 간단해요.
+  - 필요에 따라 `rewrite` 옵션을 사용해 요청 경로를 수정할 수도 있어요.
 
 ```js
 // vite.config.js
@@ -170,11 +192,14 @@ export default defineConfig({
         target: 'https://test.com',
         changeOrigin: true,
         secure: false,
+        rewrite: (path) => path.replace(/^\/api/, '/api-web/v3'),
       },
     },
   },
 });
 ```
+:::
+
 
 ## 추가 자료
 

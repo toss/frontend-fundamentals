@@ -2,8 +2,7 @@
 
 경로 탐색(Module Resolution)은 `import`나 `require`로 연결된 모듈이 실제 어떤 파일을 가리키는지 결정하는 과정이에요.
 
-번들러는 이 작업을 위해 내부에 리졸버(resolver)를 두고, 설정된 규칙에 따라 파일 경로를 찾아요.
-이 과정을 리졸루션(resolution)이라고 불러요.
+번들러는 이를 위해 내부에 리졸버(Resolver) 를 두고, 설정된 규칙에 따라 파일 경로를 찾아요. 이 과정을 리졸루션(Resolution) 이라고 불러요.
 
 리졸버는 모듈을 만났을 때 다음 두 가지 방식으로 파일을 탐색해요:
 
@@ -72,22 +71,22 @@ import { Header } from "./components/Header.tsx";
 ## 모듈 맵
 
 경로 탐색(Module Resolution)은 단순히 파일 경로를 찾는 것으로 끝나지 않아요.  
-번들러는 탐색 결과를 **전역 모듈 맵(Module Map)**에 저장해서, 동일 모듈에 대한 중복 탐색을 줄이고, 순환 참조에도 안정적으로 대응할 수 있도록 해요.
+번들러는 탐색 결과를 모듈 맵(Module Map)에 저장해서, 동일 모듈에 대한 중복 탐색을 줄이고, 순환 참조에도 안정적으로 대응할 수 있도록 해요.
 
 **모듈 맵은 이렇게 활용돼요:**
 - 요청한 모듈이 이미 모듈 맵에 등록돼 있다면, 리졸루션을 건너뛰고 바로 참조해요.
 - 등록되어 있지 않다면 새로 리졸루션을 수행하고, 결과를 모듈 맵에 추가해요.
 - 모듈 맵에 저장된 정보들은 결국 **의존성 그래프**를 구축하는 기반이 돼요.
 
-![모듈 리졸루션 과정 도식화](/images/bundling/module-resolution.png)
+![경로 탐색 과정 도식화](/images/bundling/module-resolution.png)
 
 ## 리졸브 규칙
 
-웹팩 설정 파일의 `resolve` 필드에서 모듈을 찾고 해석하는 규칙을 정의할 수 있어요.
+번들러 설정 파일의 `resolve` 필드에서 모듈을 찾고 해석하는 규칙을 정의할 수 있어요.
 
 ### 탐색할 경로 설정하기: [`modules`](https://webpack.kr/configuration/resolve/#resolvemodules)
 
-`modules`는 웹팩이 모듈을 탐색할 기준이 되는 디렉토리를 정의해요.
+`modules`는 번들러가 모듈을 탐색할 기준이 되는 디렉토리를 정의해요.
 
 예를 들어, `modules`를 다음과 같이 설정해 볼게요.
 
@@ -116,25 +115,45 @@ import _ from "lodash";
 
 ### 확장자를 찾는 우선순위 설정하기: [`extensions`](https://webpack.kr/configuration/resolve/#resolveextensions)
 
-웹팩의 `extensions` 옵션을 설정하면, import 및 require 구문에서 확장자가 생략된 경우에도 지정된 확장자 목록의 순서대로 파일을 찾아 리졸브할 수 있어요.
+`extensions` 옵션을 설정하면, import 및 require 구문에서 확장자가 생략된 경우에도 지정된 확장자 목록의 순서대로 파일을 찾아 리졸브할 수 있어요.
 
-예를 들어, `extensions` 옵션을 다음과 같이 설정하고, 확장자가 생략된 Header 컴포넌트를 가져오는 import 구문을 실행하면 웹팩이 어떻게 동작하는지 살펴볼게요.
+예를 들어, `extensions` 옵션을 다음과 같이 설정하고, 확장자가 생략된 Header 컴포넌트를 가져오는 import 구문을 실행하면 번들러가 어떻게 동작하는지 살펴볼게요.
 
-```js{5}
+:::tabs key:bundler-resolve-setup
+
+=== Webpack
+
+```js
 // webpack.config.js
 module.exports = {
-  //...
   resolve: {
-    extensions: [".tsx", "ts"],
+    extensions: ['.tsx', '.ts'],
   },
 };
 ```
+
+=== Vite
+
+```ts
+// vite.config.js
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  resolve: {
+    extensions: ['.tsx', '.ts'],
+  },
+});
+```
+
+:::
+
+
 
 ```tsx
 import { Header } from "./components/Header";
 ```
 
-확장자가 생략되어 있지만, 웹팩은 `extensions` 옵션에 정의된 확장자 목록 순서대로 파일을 찾고 해석해, `./components/Header.tsx`를 번들 파일에 포함해요.
+확장자가 생략되어 있지만, `extensions` 옵션에 정의된 확장자 목록 순서대로 파일을 찾고 해석해, `./components/Header.tsx`를 번들 파일에 포함해요.
 
 ```text{3}
 /components
@@ -149,18 +168,42 @@ import { Header } from "./components/Header";
 
 다음과 같이 `src/components`에는 @components, `src/utils`에는 @utils라는 별칭을 설정할 수 있어요.
 
-```tsx{5-8}
+:::tabs key:bundler-resolve-alias-setup
+
+=== Webpack
+
+```tsx
 // webpack.config.js
+const path = require('path');
+
 module.exports = {
-  //...
   resolve: {
     alias: {
-      "@components": path.resolve(__dirname, "src/components"),
-      "@utils": path.resolve(__dirname, "src/utils"),
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
     },
   },
 };
 ```
+
+=== Vite
+
+```ts
+// vite.config.js
+import { defineConfig } from 'vite';
+import path from 'path';
+
+export default defineConfig({
+  resolve: {
+    alias: {
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
+    },
+  },
+});
+```
+
+:::
 
 이제 별칭만 사용해서 모듈을 가져올 수 있어요.
 
@@ -225,24 +268,45 @@ import getSum from "@utils/getSum";
 import sleep from "@utils/sleep";
 ```
 
-그리고 **웹팩도 동일한 규칙을 따르도록 `webpack.config.js`을 설정**해요.
+그리고 **번들러가 동일한 규칙을 따르도록 아래와 같이 설정**해요.
 
-```js{5-12}
+:::tabs key:bundler-resolve-alias-modules-setup
+
+=== Webpack
+
+```tsx
 // webpack.config.js
+const path = require('path');
+
 module.exports = {
-  //...
   resolve: {
     alias: {
-      "@components": path.resolve(__dirname, "src/components"),
-      "@utils": path.resolve(__dirname, "src/utils"),
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
     },
-    modules: [
-      path.resolve(__dirname), // 프로젝트 루트 기준 탐색
-      "node_modules", // 외부 패키지를 탐색하는 기본 경로
-    ],
   },
 };
 ```
+
+=== Vite
+
+```ts
+// vite.config.js
+import { defineConfig } from 'vite';
+import path from 'path';
+
+export default defineConfig({
+  resolve: {
+    alias: {
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
+    },
+  },
+});
+```
+
+:::
+
 
 ::: tip path.resolve
 
@@ -253,28 +317,43 @@ Node.js가 제공하는 Path 함수인 [`path.resolve([...paths])`](https://node
 :::
 <br />
 
-### 2. 웹팩 플러그인
+### 2. 플러그인
 
 웹팩에서 타입스크립트의 `baseUrl` 및 `paths` 설정을 자동으로 적용하려면,
 [`tsconfig-paths-webpack-plugin`](https://github.com/dividab/tsconfig-paths-webpack-plugin) 플러그인을 사용할 수 있어요.
 
 이 플러그인은 빌드 타임에 `tsconfig.json`에 정의된 경로 설정을 읽고, 웹팩의 `resolve.alias`에 자동으로 반영해줘요.
 
-```js{8}
+:::tabs key:bundler-tsconfig-paths-setup
+
+=== Webpack
+
+```tsx
 // webpack.config.js
-const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+const path = require('path');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
-  //...
   resolve: {
-    //...
     plugins: [new TsconfigPathsPlugin()],
   },
 };
 ```
 
-::: tip Vite 플러그인
-Vite에서는 같은 역할을 하는 [`vite-tsconfig-paths`](https://github.com/aleclarson/vite-tsconfig-paths) 플러그인을 사용할 수 있어요.
+=== Vite
+
+```ts
+// vite.config.js
+import { defineConfig } from 'vite';
+import tsconfigPaths from 'vite-tsconfig-paths';
+
+export default defineConfig({
+  plugins: [
+    tsconfigPaths(),
+  ],
+});
+```
+
 :::
 
 ## 다음 단계
@@ -282,4 +361,4 @@ Vite에서는 같은 역할을 하는 [`vite-tsconfig-paths`](https://github.com
 모듈의 경로를 찾아내는 리졸루션 과정이 끝나면, 이제 각 파일을 실제로 읽어 들여야 해요.
 그런데 이때 파일이 JavaScript가 아니라 CSS, 이미지, 타입스크립트처럼 브라우저가 바로 이해할 수 없는 경우도 많아요.
 
-다음 문서에서는 이렇게 다양한 파일들을 JavaScript 모듈로 변환해, 번들링 흐름을 이어갈 수 있게 도와주는 **로더(Loader)**의 역할을 살펴볼게요.
+다음 문서에서는 이렇게 다양한 파일들을 JavaScript 모듈로 변환해, 번들링 흐름을 이어갈 수 있게 도와주는 로더(Loader)의 역할을 살펴볼게요.

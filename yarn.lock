@@ -534,6 +534,7 @@ __metadata:
     markdown-it-footnote: "npm:^4.0.0"
     typescript: "npm:^5.6.3"
     vitepress: "npm:^1.4.1"
+    vitepress-plugin-tabs: "npm:^0.7.1"
   languageName: unknown
   linkType: soft
 
@@ -2662,6 +2663,16 @@ __metadata:
   bin:
     vite: bin/vite.js
   checksum: 10/719c4dea896e9547958643354003c8c9ea98e5367196d98f5f46cffb3ec963fead3ea5853f5af941c79bbfb73583dec19bbb0d28d2f644b95d7f59c55e22919d
+  languageName: node
+  linkType: hard
+
+"vitepress-plugin-tabs@npm:^0.7.1":
+  version: 0.7.1
+  resolution: "vitepress-plugin-tabs@npm:0.7.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvitepress-plugin-tabs%2F-%2Fvitepress-plugin-tabs-0.7.1.tgz"
+  peerDependencies:
+    vitepress: ^1.0.0
+    vue: ^3.5.0
+  checksum: 10/ffb53eab55ef94106ac86af7e8734df70c45e34668360ab523add89f36197a0ac0862fd5a3bc145f32a6c010979e3182c5d9766982b3404a89adbfb763a45b84
   languageName: node
   linkType: hard
 

@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 import footnote from "markdown-it-footnote";
 import path from "node:path";
 import { createRequire } from "node:module";
+import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 import { sharedConfig } from './shared.mjs';
 
 const require = createRequire(import.meta.url);
@@ -185,7 +186,7 @@ export default defineConfig({
             collapsed: false,
             items: [
               { text: "번들링, 꼭 필요할까요?", link: "/deep-dive/bundling-process/overview" },
-              { text: "진입점 설정", link: "/deep-dive/bundling-process/entry" },
+              { text: "진입점", link: "/deep-dive/bundling-process/entry" },
               { text: "경로 탐색", link: "/deep-dive/bundling-process/resolution" },
               { text: "로더", link: "/deep-dive/bundling-process/loader" },
               { text: "플러그인", link: "/deep-dive/bundling-process/plugin" },
@@ -199,7 +200,6 @@ export default defineConfig({
               { text: "개발 서버", link: "/deep-dive/dev/dev-server" },
               { text: "HMR", link: "/deep-dive/dev/hmr" },
               { text: "소스맵", link: "/deep-dive/dev/source-map" },
-              { text: "환경별 설정 가이드", link: "/deep-dive/dev/source-map" },
             ],
           },
           {
@@ -219,6 +219,7 @@ export default defineConfig({
   markdown: {
     config: (md) => {
       md.use(footnote);
+      md.use(tabsMarkdownPlugin);
     },
   },
   head: [

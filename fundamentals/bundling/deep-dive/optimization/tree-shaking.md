@@ -249,27 +249,37 @@ const Icon = React.createElement(...);
 
 ## 번들러 세팅 가이드
 
-트리셰이킹을 효과적으로 활용하려면 번들러 설정도 중요해요.
+:::tabs key:bundler-minify
 
-### Webpack
+== Webpack
 
-Webpack에서는 `TerserPlugin`을 활용해 고급 압축 설정을 적용할 수 있어요.
+코드를 스플리팅한 뒤에도 파일 크기를 줄이려면 추가적인 압축이 필요해요.
 
-```javascript
-const TerserPlugin = require("terser-webpack-plugin");
+**TerserPlugin**은 프로덕션 빌드 시 JavaScript 코드를 최적화하고 불필요한 부분을 제거해주는 플러그인이에요. 파일 크기를 줄이고, 최적화된 코드를 제공할 수 있어요.
+
+```bash
+npm install --save-dev terser-webpack-plugin
+```
+
+```js
+// webpack.config.js
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-  // ...
   optimization: {
-    minimize: true, 
-    minimizer: [new TerserPlugin()]
+    minimize: true,
+    minimizer: [new TerserPlugin()],
   },
 };
 ```
 
-### Vite
+== Vite
 
-```javascript
+esbuild를 사용해 JavaScript 파일을 빠르게 압축하고 최적화해요.
+
+**설정**
+```js
+// vite.config.js
 import { defineConfig } from 'vite';
 
 export default defineConfig({
@@ -278,3 +288,5 @@ export default defineConfig({
   },
 });
 ```
+
+:::

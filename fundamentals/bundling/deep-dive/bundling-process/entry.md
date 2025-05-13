@@ -28,24 +28,49 @@
 설정 파일의 `entry` 필드에서 **문자열** 또는 **배열**을 지정하여 진입점을 설정할 수 있어요.
 
 :::info 기본 시작 경로
-진입점을 따로 설정하지 않으면, 웹팩은 `src/index.js`파일을 기본 진입점으로 사용해요.
+진입점을 따로 설정하지 않으면, `src/index.js`파일을 기본 진입점으로 사용해요.
 :::
 
 ### 문자열로 지정하기
 
-`entry` 필드에 특정 경로를 작성하면, 웹팩은 해당 파일을 번들링하여 단일 번들 파일을 생성해요.
+`entry` 필드에 특정 경로를 작성하면, 해당 파일을 번들링하여 단일 번들 파일을 생성해요.
 
-```tsx{3}
+:::tabs key:bundler-single-entry-setup
+
+=== Webpack
+
+```tsx
 // webpack.config.js
+const path = require('path');
+
 module.exports = {
-  entry: "./src/index.tsx",
+  entry: './src/index.tsx',
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
   },
-  // ...
 };
 ```
+
+=== Vite
+
+```ts
+// vite.config.js
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  build: {
+    rollupOptions: {
+      input: './src/index.tsx',
+      output: {
+        entryFileNames: 'bundle.js',
+      },
+    },
+  },
+});
+```
+
+:::
 
 `yarn build` 명령을 실행하면, output 경로에 번들 파일이 출력된 것을 확인할 수 있어요.
 
@@ -65,20 +90,45 @@ module.exports = {
 
 ### 배열로 지정하기
 
-`entry` 필드에 여러 개의 경로를 배열로 작성하면, 웹팩은 각 파일을 개별적으로 번들링하고 이를 하나의 단일 번들 파일로 병합해요.
+`entry` 필드에 여러 개의 경로를 배열로 작성하면, 각 파일을 개별적으로 번들링하고 이를 하나의 단일 번들 파일로 병합해요.
 주로 실행 순서를 보장해야 할 때, 배열 순서대로 로드하도록 지정할 수 있어요.
+
+:::tabs key:bundler-multi-entry-array-setup
+
+=== Webpack
 
 ```tsx
 // webpack.config.js
+const path = require('path');
+
 module.exports = {
-  entry: ["./src/index1.tsx", "./src/index2.tsx"],
+  entry: ['./src/index1.tsx', './src/index2.tsx'],
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
   },
-  // ...
 };
 ```
+
+=== Vite
+
+```ts
+// vite.config.js
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  build: {
+    rollupOptions: {
+      input: ['./src/index1.tsx', './src/index2.tsx'],
+      output: {
+        entryFileNames: 'bundle.js',
+      },
+    },
+  },
+});
+```
+
+:::
 
 `yarn build` 명령을 실행하면, output 경로에 번들 파일이 출력된 것을 확인할 수 있어요.
 
@@ -119,7 +169,7 @@ module.exports = {
 </html>
 ```
 
-이제 브라우저의 개발자 도구(DevTools) → 네트워크(Network)탭을 열어보면, 웹팩이 단일 번들 파일 하나만 로드되는 것을 확인할 수 있어요.
+이제 브라우저의 개발자 도구(DevTools) → 네트워크(Network)탭을 열어보면, 단일 번들 파일 하나만 로드되는 것을 확인할 수 있어요.
 
 ![단일 엔트리 포인트로 생성한 번들파일을 브라우저에게 로드하기](/images/entry_single-network.png)
 
@@ -141,28 +191,52 @@ module.exports = {
 
 예를 들어, 사용자 페이지와 관리자 페이지를 각각 독립된 번들 파일로 분리하면, 필요할 때만 로드할 수 있어 성능이 향상돼요.
 
-웹팩 설정 파일의 `entry` 필드에서 key에 생성될 번들 파일의 이름을, value 객체에는 해당 번들 파일의 진입점과 관련된 설정을 정의할 수 있어요.
+설정 파일의 `entry` 필드에서 key에 생성될 번들 파일의 이름을, value 객체에는 해당 번들 파일의 진입점과 관련된 설정을 정의할 수 있어요.
 
 ### 시작 파일 지정하기: [`import`](https://webpack.kr/concepts/entry-points/#entrydescription-object)
 
-`import` 옵션에는 웹팩이 진입점으로 사용할 시작 **파일의 경로 또는 모듈**을 작성해 주세요.
+`import` 옵션에는 진입점으로 사용할 시작 **파일의 경로 또는 모듈**을 작성해 주세요.
 
 예를 들어, 다음과 같이 두 개의 번들 파일의 이름과 경로를 설정해볼게요.
 
-```tsx{5,8}
+:::tabs key:bundler-multiple-entry-setup
+
+=== Webpack
+
+```tsx
 // webpack.config.js
 module.exports = {
   entry: {
     app: {
-      import: "./src/index.tsx",
+      import: './src/index.tsx',
     },
     adminApp: {
-      import: "./src/admin.tsx",
+      import: './src/admin.tsx',
     },
   },
-  //...
 };
 ```
+
+=== Vite
+
+```ts
+// vite.config.js
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  build: {
+    rollupOptions: {
+      input: {
+        app: './src/index.tsx',
+        adminApp: './src/admin.tsx',
+      },
+    },
+  },
+});
+```
+
+:::
+
 
 `yarn build` 명령을 실행하면, output 경로인 dist 폴더에 설정한 이름으로 두 개의 번들 파일이 생성돼요.
 
@@ -189,21 +263,50 @@ module.exports = {
 - `shared`에는 공통 모듈만 포함돼요.
 - `app`은 `shared`에 의존해요.
 
-```js{6}
-// webpack.config.js
+:::tabs key:bundler-dependon-entry-setup
+
+=== Webpack
+
+```js
+const path = require('path');
+
 module.exports = {
   entry: {
     app: {
-      import: "./src/index.tsx",
-      dependOn: "shared",
+      import: './src/index.tsx',
+      dependOn: 'shared',
     },
     shared: {
-      import: "./src/shared.js",
+      import: './src/shared.js',
     },
   },
-  //...
 };
 ```
+
+=== Vite
+
+```ts
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  build: {
+    rollupOptions: {
+      input: {
+        app: './src/index.tsx',
+        shared: './src/shared.js',
+      },
+      output: {
+        manualChunks: {
+          shared: ['./src/shared.js'],
+        },
+      },
+    },
+  },
+});
+```
+
+:::
+
 자세한 동작 방식에 대해서는 [예제2: 중복 모듈 제거하기](#예제2-중복-모듈-제거하기)를 참고하세요.
 
 ![](/images/bundling/depend-on.png)
@@ -311,7 +414,7 @@ module.exports = {
 │  └─ shared.js
 ```
 
-`shared` 번들 파일에만 `getSum` 공통 함수가 들어있는 것을 확인할 수 있어요. 웹팩은 `getSum`을 별도의 번들 파일로 분리하고, 해당 모듈에 **고유한 모듈 ID**를 할당해요. 여기서는 `getSum` 모듈에 810을 할당했어요.
+`shared` 번들 파일에만 `getSum` 공통 함수가 들어있는 것을 확인할 수 있어요. 번들러는 `getSum`을 별도의 번들 파일로 분리하고, 해당 모듈에 **고유한 모듈 ID**를 할당해요. 여기서는 `getSum` 모듈에 810을 할당했어요.
 
 ```js{3}
 // shared.js
@@ -383,6 +486,6 @@ exports["default"] = AdminPage;
 ## 다음 단계
 
 진입점을 기준으로 탐색을 시작한 번들러는, 이제 각 모듈을 하나씩 따라가며 실제 파일 경로를 찾아야 해요.
-이 과정을 **모듈 리졸루션(Module Resolution)**이라고 불러요.
+이 과정을 경로 탐색(Module Resolution)이라고 불러요.
 
-다음 문서에서는 모듈 리졸루션이 어떻게 작동하고, 번들링 흐름 안에서 어떤 역할을 하는지 살펴볼게요.
+다음 문서에서는 경로 탐색(Module Resolution)이 어떻게 작동하고, 번들링 흐름 안에서 어떤 역할을 하는지 살펴볼게요.

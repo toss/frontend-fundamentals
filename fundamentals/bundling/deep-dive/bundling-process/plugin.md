@@ -5,25 +5,54 @@
 
 다음과 같이 사용할 플러그인들을 웹팩 설정 파일의 `plugins` 필드에 배열로 정의하면 돼요.
 
-```js{8-14}
-const { HotModuleReplacementPlugin, DefinePlugin } = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+:::tabs key:bundler-plugins-setup
 
+=== Webpack
+
+```tsx
 // webpack.config.js
+const { HotModuleReplacementPlugin, DefinePlugin } = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+
 module.exports = {
-  // ...
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/index.html",
+      template: './src/index.html',
     }),
     new HotModuleReplacementPlugin(),
     new DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify("production"),
-      VERSION: JSON.stringify("1.0.0"),
+      'process.env.NODE_ENV': JSON.stringify('production'),
+      VERSION: JSON.stringify('1.0.0'),
     }),
   ],
 };
 ```
+
+=== Vite
+
+```ts
+// vite.config.js
+import { defineConfig } from 'vite';
+import { createHtmlPlugin } from 'vite-plugin-html';
+
+export default defineConfig({
+  plugins: [
+    createHtmlPlugin({
+      minify: true,
+      entry: 'src/index.tsx',
+      template: 'src/index.html',
+    }),
+  ],
+  define: {
+    'process.env.NODE_ENV': JSON.stringify('production'),
+    VERSION: JSON.stringify('1.0.0'),
+  },
+});
+```
+
+:::
+
 
 ## 주요 플러그인
 
@@ -150,6 +179,6 @@ module.exports = MyPlugin;
 
 ## 다음 단계
 플러그인을 통해 번들링 과정을 유연하게 제어할 수 있게 됐어요.
-이제 모듈 리졸루션 결과를 바탕으로, 실제로 브라우저가 실행할 수 있는 최종 번들 파일을 생성하는 출력(Output) 단계로 넘어가 볼게요.
+이제 경로 탐색 결과를 바탕으로, 실제로 브라우저가 실행할 수 있는 최종 번들 파일을 생성하는 출력(Output) 단계로 넘어가 볼게요.
 
 여기서 번들러는 이전 단계에서 만들어진 모듈 맵을 활용해, 하나의 파일(또는 여러 청크 파일)로 코드를 묶어 최종 결과물을 만듭니다.

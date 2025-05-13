@@ -56,7 +56,16 @@ export const getContent = () => "Hello World";
 
 ### 기본 설정
 
-`webpack-dev-server`를 사용하는 경우, `devServer.hot` 옵션을 `true`로 설정하면 바로 HMR을 사용할 수 있어요. 별도의 추가 설정은 필요하지 않아요.
+별도의 복잡한 설정 없이 두 번들러 모두 간단하게 HMR을 적용할 수 있습니다.
+
+* **Webpack**
+  * `webpack-dev-server`를 사용할 때 `devServer.hot` 옵션을 `true`로 설정하면 HMR을 사용할 수 있어요.
+* **Vite**
+  * 기본적으로 HMR이 활성화되어 있으며, `server.hmr` 옵션을 통해 명시적으로 설정할 수도 있어요.
+
+:::tabs key:hmr-setting-setup
+
+=== Webpack
 
 ```javascript
 // webpack.config.js
@@ -66,6 +75,22 @@ module.exports = {
   },
 };
 ```
+
+=== Vite
+
+```javascript
+// vite.config.js
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  server: {
+    hmr: true, // HMR 활성화, default: true
+  },
+});
+```
+
+:::
+
 
 ### 수동으로 HMR 적용하기
 
