@@ -250,18 +250,19 @@ const Icon = React.createElement(...);
 
 ## 번들러 세팅 가이드
 
-:::tabs key:bundler-minify
+트리셰이킹으로 사용하지 않는 코드를 제거하더라도, 빌드 결과물에는 여전히 불필요한 공백, 주석, 최적화되지 않은 표현 등이 남아 있을 수 있어요.
+프로덕션 빌드에서는 이 잔여 요소를 압축(minify)해 코드 크기를 추가로 줄여야 최종 번들의 성능 최적화 효과를 극대화할 수 있어요.
 
-== Webpack
+\:::tabs key\:bundler-minify
 
-코드를 스플리팅한 뒤에도 파일 크기를 줄이려면 추가적인 압축이 필요해요.
+\== Webpack
 
-**TerserPlugin**은 프로덕션 빌드 시 JavaScript 코드를 최적화하고 불필요한 부분을 제거해주는 플러그인이에요. 파일 크기를 줄이고, 최적화된 코드를 제공할 수 있어요.
-
+**설치 방법**
 ```bash
 npm install --save-dev terser-webpack-plugin
 ```
 
+**설정 예시**
 ```js
 // webpack.config.js
 const TerserPlugin = require('terser-webpack-plugin');
@@ -274,11 +275,10 @@ module.exports = {
 };
 ```
 
-== Vite
+\== Vite
 
-esbuild를 사용해 JavaScript 파일을 빠르게 압축하고 최적화해요.
 
-**설정**
+**설정 예시**
 ```js
 // vite.config.js
 import { defineConfig } from 'vite';
@@ -290,4 +290,4 @@ export default defineConfig({
 });
 ```
 
-:::
+\:::

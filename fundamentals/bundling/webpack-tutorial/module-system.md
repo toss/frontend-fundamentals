@@ -190,7 +190,7 @@ $ npm run build
 
 ![](/images/network-minified.png)
 
-네트워크 요청 감소 뿐 아니라, 기존 CDN 방식에서는 date-fns 라이브러리 전체를 불러왔지만, 웹팩의 모듈 시스템에서는 우리가 실제로 사용하는 `format` 함수만 번들에 포함시키고 불필요한 코드는 제거해 성능이 더 좋아졌어요. 이 기능은 [트리 쉐이킹(Tree-shaking)](../reference/optimization/tree-shaking.md)이라고 불러요. 나무를 흔들어 죽은 잎을 털어내듯, 사용하지 않는 코드를 털어내는거죠.
+네트워크 요청 감소 뿐 아니라, 기존 CDN 방식에서는 date-fns 라이브러리 전체를 불러왔지만, 웹팩의 모듈 시스템에서는 우리가 실제로 사용하는 `format` 함수만 번들에 포함시키고 불필요한 코드는 제거해 성능이 더 좋아졌어요. 이 기능은 [트리 쉐이킹(Tree-shaking)](../deep-dive/optimization/tree-shaking.md)이라고 불러요. 나무를 흔들어 죽은 잎을 털어내듯, 사용하지 않는 코드를 털어내는거죠.
 
 ## 👣 한 걸음 더: 모듈 시스템 비교해보기 - ESM vs CommonJS
 

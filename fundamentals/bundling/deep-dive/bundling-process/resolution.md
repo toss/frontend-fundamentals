@@ -85,7 +85,7 @@ import { Header } from "./components/Header.tsx";
 
 번들러 설정 파일의 `resolve` 필드에서 모듈을 찾고 해석하는 규칙을 정의할 수 있어요.
 
-### 탐색할 경로 설정하기: [`modules`](https://webpack.kr/configuration/resolve/#resolvemodules)
+### 탐색할 경로 설정하기:
 
 `modules`는 번들러가 모듈을 탐색할 기준이 되는 디렉토리를 정의해요.
 
@@ -114,7 +114,7 @@ import calculate from "src/helpers/calculate";
 import _ from "lodash";
 ```
 
-### 확장자를 찾는 우선순위 설정하기: [`extensions`](https://webpack.kr/configuration/resolve/#resolveextensions)
+### 확장자를 찾는 우선순위 설정하기:
 
 `extensions` 옵션을 설정하면, import 및 require 구문에서 확장자가 생략된 경우에도 지정된 확장자 목록의 순서대로 파일을 찾아 리졸브할 수 있어요.
 
@@ -163,7 +163,7 @@ import { Header } from "./components/Header";
  └── Button.tsx
 ```
 
-### 경로의 별칭 만들기: [`alias`](https://webpack.kr/configuration/resolve/#resolvealias)
+### 경로의 별칭 만들기:
 
 `alias`를 사용하면 특정 디렉토리에 별칭을 지정할 수 있어요. 이렇게 설정하면 길거나 복잡한 상대 경로 대신 간결한 경로로 가져올 수 있어 가독성을 높일 수 있어요.
 
@@ -355,10 +355,3 @@ export default defineConfig({
 ```
 
 :::
-
-## 다음 단계
-
-모듈의 경로를 찾아내는 리졸루션 과정이 끝나면, 이제 각 파일을 실제로 읽어 들여야 해요.
-그런데 이때 파일이 JavaScript가 아니라 CSS, 이미지, TypeScript처럼 브라우저가 바로 이해할 수 없는 경우도 많아요.
-
-다음 문서에서는 이렇게 다양한 파일들을 JavaScript 모듈로 변환해, 번들링 흐름을 이어갈 수 있게 도와주는 로더(Loader)의 역할을 살펴볼게요.

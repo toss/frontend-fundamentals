@@ -157,7 +157,7 @@ export default defineConfig({
         ],
       },
       {
-        text: "번들링 딥다이브",
+        text: "심화 학습",
         items: [
           {
             text: "소개",
@@ -167,7 +167,7 @@ export default defineConfig({
             text: "번들링 작동 방식 이해하기",
             collapsed: false,
             items: [
-              { text: "번들링이 필요한 이유", link: "/deep-dive/bundling-process/overview" },
+              { text: "번들링, 꼭 필요할까요?", link: "/deep-dive/bundling-process/overview" },
               { text: "진입점", link: "/deep-dive/bundling-process/entry" },
               { text: "경로 탐색", link: "/deep-dive/bundling-process/resolution" },
               { text: "로더", link: "/deep-dive/bundling-process/loader" },

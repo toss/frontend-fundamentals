@@ -7,7 +7,7 @@
 
 이제 자주 사용하는 옵션들을 하나씩 살펴볼게요.
 
-## 번들 파일 이름 설정하기: [`filename`](https://webpack.kr/configuration/output/#outputfilename)
+## 번들 파일 이름 설정하기:
 
 `filename`은 생성된 번들 파일의 이름을 설정하는 옵션이에요.
 
@@ -130,7 +130,7 @@ export default defineConfig({
 
 :::
 
-## 빌드 전 출력 디렉토리를 초기화하기: [`clean`](https://webpack.kr/configuration/output/#outputclean)
+## 빌드 전 출력 디렉토리를 초기화하기:
 
 빌드할 때마다 이전 결과물을 자동으로 삭제할 수 있어요.  
 이렇게 하면 출력 디렉토리에 불필요한 파일이 쌓이는 것을 방지하고, 항상 최신 번들 파일만 유지할 수 있어요.

@@ -104,18 +104,17 @@ esbuild.build({
   bundle: true,
   metafile: true,
   outfile: 'dist/bundle.js',
-}).then(async (result) => {
-  const analysis = await analyzeMetafile(result.metafile);
-  console.log(analysis);
-});
+}).then((result) => analyzeMetafile(result.metafile));
 ```
 
 :::
 
+도구를 설치하고 설정을 완료했다면, 실제로 번들을 분석한 결과를 확인할 수 있어요.  
+분석 결과를 보면, 어떤 모듈이 번들 크기에 많이 기여하고 있는지, 중복되거나 최적화되지 않은 부분이 있는지를 한눈에 파악할 수 있어요.
 
 ## 번들 분석 결과 활용하기
 
-번들 분석 결과를 바탕으로 번들의 크기를 줄이고 성능을 개선할 수 있어요.
+분석 결과를 바탕으로, 번들 크기를 줄이고 성능을 개선하는 방법을 살펴볼게요.
 
 ### 불필요한 라이브러리 제거하기
 
