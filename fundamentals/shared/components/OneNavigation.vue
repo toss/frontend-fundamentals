@@ -8,7 +8,7 @@
         :class="{ active: isActive(item.path) }"
         :data-tooltip="(isKorean ? item.tooltip.ko : item.tooltip.en)"
       >
-        <a :href="item.href">
+        <a :href="location.origin + item.href">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -25,9 +25,15 @@
 import { useRoute } from "vitepress";
 import { useLocale } from "../composables/useLocale";
 import { ONE_NAVIGATION_ITEMS } from "../config/OneNavigationItems";
+import { ref, onMounted } from "vue";
 
 const route = useRoute();
 const { isKorean } = useLocale();
+const location = ref({ origin: "" });
+
+onMounted(() => {
+  location.value = window.location;
+});
 
 function isActive(path: string): boolean {
   return route.path.startsWith(path);
