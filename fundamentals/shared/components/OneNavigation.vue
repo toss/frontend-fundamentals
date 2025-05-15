@@ -8,7 +8,10 @@
         :class="{ active: isActive(item.path) }"
         :data-tooltip="(isKorean ? item.tooltip.ko : item.tooltip.en)"
       >
-        <a :href="location.origin + item.href">
+        <a 
+          href="javascript:void(0)" 
+          @click="handleNavigation(item.href)"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -20,7 +23,7 @@
     </div>
   </div>
 </template>
-
+ㄴ
 <script setup lang="ts">
 import { useRoute } from "vitepress";
 import { useLocale } from "../composables/useLocale";
@@ -29,14 +32,21 @@ import { ref, onMounted } from "vue";
 
 const route = useRoute();
 const { isKorean } = useLocale();
-const location = ref({ origin: "" });
+const locationOrigin = ref("");
 
 onMounted(() => {
-  location.value = window.location;
+  locationOrigin.value = window.location.origin;
 });
 
 function isActive(path: string): boolean {
   return route.path.startsWith(path);
+}
+
+function handleNavigation(href: string): void {
+  // 현재 URL의 origin을 사용하여 전체 URL 생성
+  const fullUrl = locationOrigin.value + href;
+  // 현재 창에서 이동
+  window.location.href = fullUrl;
 }
 </script>
 
