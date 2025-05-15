@@ -242,6 +242,10 @@ export default defineConfig({
               paths: [require.resolve("vitepress")]
             })
           )
+        },
+        {
+          find: /^@shared/,
+          replacement: path.resolve(__dirname, '../../shared'),
         }
       ]
     }
