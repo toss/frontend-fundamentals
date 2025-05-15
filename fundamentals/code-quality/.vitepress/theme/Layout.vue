@@ -2,7 +2,7 @@
 import DefaultTheme from "vitepress/theme";
 import Comments from "./components/Comments.vue";
 import CustomBanner from "./components/CustomBanner.vue";
-import OneNavigation from "./components/OneNavigation.vue";
+import OneNavigation from "@shared/components/OneNavigation.vue";
 import { useLocale } from "./composables";
 
 const { Layout } = DefaultTheme;
