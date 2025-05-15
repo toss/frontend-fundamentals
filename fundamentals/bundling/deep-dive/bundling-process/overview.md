@@ -18,7 +18,7 @@
 
 예를 들어, index.js에서 math.js 모듈을 가져와 사용하는 경우를 살펴볼게요.
 
-번들러는 **진입점(Entry Point)**인 index.js에서 시작해, import나 require를 따라가며 연결된 모듈들을 하나씩 찾아가요.
+번들러는 진입점(Entry Point)인 index.js에서 시작해, import나 require를 따라가며 연결된 모듈들을 하나씩 찾아가요.
 코드 속 참조를 따라 이동하며 전체 애플리케이션이 어떤 식으로 구성되어 있는지 탐색해요.
 
 ```javascript
