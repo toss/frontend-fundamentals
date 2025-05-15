@@ -1,12 +1,12 @@
 # 플러그인 추가하기
 
-앞서 웹팩이 로더로 다양한 파일을 처리하는 과정을 살펴봤어요. 하지만 로더가 개별 파일을 처리하는 반면, 프로젝트 전체의 빌드 과정과 결과물을 제어하거나 자동화하는 작업은 [플러그인](../reference/plugin.md)이 담당해요.
+앞서 웹팩이 로더로 다양한 파일을 처리하는 과정을 살펴봤어요. 하지만 로더가 개별 파일을 처리하는 반면, 프로젝트 전체의 빌드 과정과 결과물을 제어하거나 자동화하는 작업은 [플러그인](../deep-dive/bundling-process/plugin.md)이 담당해요.
 
 플러그인은 HTML 파일을 자동으로 만들어 주거나, CSS 파일을 별도로 추출하거나, 빌드 결과를 정리하고, 코드를 압축하고 최적화하는 등 **애플리케이션 빌드 전반에 걸쳐 영향을 주는 작업**을 수행해요.
 
 이번에는 웹팩에서 자주 사용하는 대표적인 플러그인들을 직접 사용해 볼게요.
 
-## 1. [`HtmlWebpackPlugin`](../reference/plugin.md#htmlwebpackplugin) – HTML 파일 자동 생성하기
+## 1. [`HtmlWebpackPlugin`](../deep-dive/bundling-process/plugin.md#htmlwebpackplugin) – HTML 파일 자동 생성하기
 
 기본적으로 웹팩은 JavaScript만 처리할 수 있어서, HTML 파일은 직접 만들어야 했어요. 하지만 `HtmlWebpackPlugin`을 사용하면 HTML 파일 생성도 자동화할 수 있어요. 이 플러그인은 **번들된 JavaScript 파일을 HTML에 자동으로 삽입**해 줘서 훨씬 편리해요.
 다음 커맨드로 `HtmlWebpackPlugin`을 설치해요.
@@ -22,7 +22,6 @@ npm install html-webpack-plugin --save-dev
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  // ...생략
   plugins: [
     new HtmlWebpackPlugin({
       title: '웹팩 튜토리얼',  // <title> 태그 내용
@@ -134,7 +133,7 @@ output: {
 다만, 여러 폴더를 정리하거나 더 정교한 동작을 원한다면 여전히 `CleanWebpackPlugin`이 더 유용해요.
 :::
 
-## 4. [`DefinePlugin`](../reference/plugin.md#defineplugin) – 환경 변수 설정하기
+## 4. [`DefinePlugin`](../deep-dive/bundling-process/plugin.md#defineplugin) – 환경 변수 설정하기
 
 개발 환경과 운영 환경에서 애플리케이션이 다르게 동작해야 하는 경우가 있어요. 이때 **환경 변수를 사용해 코드 안에서 조건부로 동작을 제어할 수 있어요.**
 

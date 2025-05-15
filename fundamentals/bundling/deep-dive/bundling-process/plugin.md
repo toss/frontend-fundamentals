@@ -1,33 +1,62 @@
 # 플러그인
 
-플러그인(Plugin)을 사용하면 번들링의 특정 시점에서 추가 작업을 실행할 수 있게 해주는 도구예요. 이를 통해 빌드 결과물을 수정하거나, 파일을 생성하는 등 다양한 기능을 확장할 수 있어요.
+플러그인(Plugin)은 번들링 과정에서 모듈을 추적하고 변환하는 흐름에 맞춰 추가 작업을 수행하는 도구예요.
+경로 탐색(Module Resolution), 변환(Transformation), 출력(Output) 같은 다양한 단계에서 동작하며, 파일을 수정하거나 생성하고, 최종 빌드 결과를 최적화할 수 있어요.
 
-다음과 같이 사용할 플러그인들을 웹팩 설정 파일의 `plugins` 필드에 배열로 정의하면 돼요.
+다음과 같이 사용할 플러그인을 번들러 설정 파일의 `plugins` 필드에 배열로 정의하면 돼요.
 
-```js{8-14}
-const { HotModuleReplacementPlugin, DefinePlugin } = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+:::tabs key:bundler-plugins-setup
 
+=== Webpack
+
+```tsx
 // webpack.config.js
+const { HotModuleReplacementPlugin, DefinePlugin } = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+
 module.exports = {
-  // ...
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/index.html",
+      template: './src/index.html',
     }),
     new HotModuleReplacementPlugin(),
     new DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify("production"),
-      VERSION: JSON.stringify("1.0.0"),
+      'process.env.NODE_ENV': JSON.stringify('production'),
+      VERSION: JSON.stringify('1.0.0'),
     }),
   ],
 };
 ```
 
+=== Vite
+
+```ts
+// vite.config.js
+import { defineConfig } from 'vite';
+import { createHtmlPlugin } from 'vite-plugin-html';
+
+export default defineConfig({
+  plugins: [
+    createHtmlPlugin({
+      minify: true,
+      entry: 'src/index.tsx',
+      template: 'src/index.html',
+    }),
+  ],
+  define: {
+    'process.env.NODE_ENV': JSON.stringify('production'),
+    VERSION: JSON.stringify('1.0.0'),
+  },
+});
+```
+
+:::
+
+
 ## 주요 플러그인
 
-웹팩에서 자주 사용되는 플러그인을 소개해요.  
-공개된 플러그인은 `npm`이나 `yarn`으로 설치한 후, `plugins` 필드에 정의해 사용할 수 있어요.
+개발할 때 자주 사용하는 웹팩 플러그인을 소개할게요.공식 플러그인은 `npm`이나 `yarn`으로 설치한 후, `plugins` 필드에 추가해 사용할 수 있어요.
 
 ### `HtmlWebpackPlugin`
 
@@ -36,7 +65,7 @@ module.exports = {
 
 ### `HotModuleReplacementPlugin`
 
-애플리케이션이 실행 중일 때 변경된 모듈만 갱신하는 [HMR](../reference/dev/hmr) 기술 제공해요. 개발 중 코드 변경 시 브라우저를 새로고침하지 않고도 최신 상태를 유지할 수 있어요.
+애플리케이션이 실행 중일 때 변경된 모듈만 갱신하는 [HMR](../dev/hmr.md) 기술 제공해요. 개발 중 코드 변경 시 브라우저를 새로고침하지 않고도 최신 상태를 유지할 수 있어요.
 
 ### `DefinePlugin`
 
@@ -116,7 +145,7 @@ plugins: [
 
 ## 플러그인의 구조와 동작 원리
 
-웹팩에서 제공하는 플러그인뿐만 아니라, 필요에 따라 커스텀 플러그인을 만들어 빌드 과정에서 원하는 작업을 추가하거나 기존 기능을 확장할 수 있어요. 플러그인이 어떻게 동작하는지 이해하면, 웹팩과 플러그인이 상호작용하는 원리를 더 쉽게 파악할 수 있어요.
+제공하는 플러그인뿐만 아니라, 필요에 따라 커스텀 플러그인을 만들어 빌드 과정에서 원하는 작업을 추가하거나 기존 기능을 확장할 수 있어요. 플러그인이 어떻게 동작하는지 이해하면, 웹팩과 플러그인이 상호작용하는 원리를 더 쉽게 파악할 수 있어요.
 
 플러그인은 기본적으로 클래스로 작성돼요. 다음은 클래스로 작성한 간단한 커스텀 플러그인 예시예요.
 

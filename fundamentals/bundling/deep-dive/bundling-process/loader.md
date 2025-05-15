@@ -1,6 +1,8 @@
 # 로더
 
-로더(Loader)는 웹팩이 JavaScript 파일이 아닌 CSS, 이미지 등의 리소스를 JavaScript로 변환해, 모듈처럼 불러올 수 있도록 도와주는 도구예요.
+로더(Loader)는 JavaScript가 아닌 파일(CSS, 이미지, TypeScript 등)을 JavaScript 모듈로 변환해 번들러가 [경로 탐색](./resolution.md) 과정에서 읽고 연결할 수 있도록 만들어주는 도구예요.
+
+경로 탐색은 `import`나 `require` 구문을 따라 필요한 파일을 찾아가는 과정인데, **이때 파일이 JavaScript 모듈이 아니라면 번들러가 읽거나 연결할 수 없어요.** 그래서 CSS, 이미지, TypeScript 파일처럼 브라우저가 바로 해석할 수 없는 리소스는 로더를 통해 JavaScript 모듈로 변환해주어야, 다른 모듈처럼 경로 탐색을 이어갈 수 있어요.
 
 예를 들어, 다음과 같이 JavaScript 파일에서 CSS를 `import`하는 코드를 작성해본 경험이 있을 거예요.
 
@@ -13,15 +15,14 @@ export function Main() {
 }
 ```
 
-코드상으로는 문제가 없어 보이지만, 웹팩은 기본적으로 JavaScript만 해석할 수 있어요.
-따라서 웹팩이 `.css` 파일은 처리하지 못해 다음과 같은 에러가 발생해요.
+코드상으로는 문제가 없어 보이지만, 번들러는 기본적으로 JavaScript만 해석할 수 있기 때문에 `.css` 파일을 처리하지 못하고 다음과 같은 에러가 발생해요.
 
 > Module parse failed: Unexpected token (1:5)
 > You may need an appropriate loader to handle this file type, currently no
 > loaders are configured to process this file.
 
-이 문제를 해결하려면 웹팩이 CSS 파일을 처리할 수 있도록 `css-loader`를 추가해야 해요.
-웹팩 설정 파일에서 `rules` 필드에 확장자와 사용할 로더를 지정하면 정상적으로 빌드되어 스타일이 적용돼요.
+이 문제를 해결하려면 번들러가 CSS 파일을 처리할 수 있도록 `css-loader`를 추가해야 해요.
+웹팩이라면 설정 파일에서 `rules` 필드에 확장자와 사용할 로더를 지정하면 정상적으로 빌드되어 스타일이 적용돼요.
 
 ```js{7}
 // webpack.config.js
@@ -54,7 +55,7 @@ ___CSS_LOADER_EXPORT___.push([
 
 ### `babel-loader`
 
-최신 JavaScript, 타입스크립트, JSX를 구형 브라우저에서도 동작하는 JavaScript로 변환하는 로더예요.
+최신 JavaScript, TypeScript, JSX를 구형 브라우저에서도 동작하는 JavaScript로 변환하는 로더예요.
 
 - **JSX 변환**: React의 JSX 문법을 브라우저가 이해할 수 있는 JavaScript로 변환
 
@@ -64,7 +65,7 @@ ___CSS_LOADER_EXPORT___.push([
 
   `const`, `async/await`, `옵셔널 체이닝(obj?.prop)`, `null 병합 연산자(??)`
 
-- **타입스크립트 변환**: 타입스크립트 코드를 JavaScript로 변환
+- **TypeScript 변환**: TypeScript 코드를 JavaScript로 변환
 
 다음과 같이 `babel-loader`를 사용해 `.js` 또는 `.jsx` 파일을 변환하도록 설정할 수 있어요. `presets`은 여러 개의 플러그인을 한 번에 적용할 수 있도록 도와주는 옵션이에요.
 
@@ -81,7 +82,7 @@ module.exports = {
           presets: [
             "@babel/preset-env", // 구형 브라우저가 지원되는 JavaScript 문법으로 변환
             "@babel/preset-react", // JSX → JavaScript
-            "@babel/preset-typescript", // 타입스크립트 → JavaScript
+            "@babel/preset-typescript", // TypeScript → JavaScript
           ],
         },
       },
@@ -258,3 +259,32 @@ module.exports = {
   },
 };
 ```
+
+## Vite에 로더 설정이 없는 이유
+
+Vite를 사용할 때는 웹팩처럼 직접 로더를 설정할 필요가 없어요.
+
+### 개발 서버에서는 번들링 없이 파일을 직접 제공해요
+
+Vite는 ESM(ES Modules) 기반으로 동작하기 때문에, 개발 환경에서는 파일을 한 번에 번들링하지 않고 **요청된 파일만 변환해서** 브라우저에 제공합니다.
+
+* `.ts`, `.tsx`, `.jsx` 파일 → **esbuild**를 사용해 JavaScript로 변환
+* `.css`, `.json`, 이미지 파일 → Vite 내장 플러그인으로 변환
+
+### 빌드할 때는 Rollup 플러그인 체인이 처리해요
+
+프로덕션 빌드(`vite build`) 단계에서는 **Rollup**이 전체 프로젝트를 번들링합니다. 이 과정에서도 로더가 아닌 **Rollup 플러그인 체인**을 통해 파일을 처리합니다.
+
+* CSS 파일 → Rollup 내장 플러그인으로 추출 및 번들링
+* 이미지 파일 → Asset 플러그인으로 관리
+* JavaScript 최적화 → Tree-shaking, Code-splitting 적용
+
+따라서 개발자는 추가적인 설정 작업 없이 기능 개발에만 집중할 수 있어요.
+
+웹팩과 Vite의 방식을 비교하자면 다음과 같아요.
+
+| 항목             | 웹팩          | Vite                  |
+| :------------- | :--------------- | :-------------------- |
+| 파일 변환 방법       | Rule + Loader 조합 | esbuild + Rollup 플러그인 |
+| 개발 서버 처리       | 모든 파일 번들링 후 제공   | 요청된 파일만 변환하여 제공       |
+| 별도 로더 설정 필요 여부 | 필요               | 불필요                   |

@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 import footnote from "markdown-it-footnote";
 import path from "node:path";
 import { createRequire } from "node:module";
+import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 import { sharedConfig } from './shared.mjs';
 
 const require = createRequire(import.meta.url);
@@ -157,45 +158,39 @@ export default defineConfig({
       },
       {
         text: "심화 학습",
-        collapsed: false,
         items: [
           {
-            text: "번들링의 핵심 요소",
+            text: "소개",
+            link: "/deep-dive/overview",
+          },
+          {
+            text: "번들링 작동 방식 이해하기",
             collapsed: false,
             items: [
-              { text: "의존성 그래프", link: "/reference/overview" },
-              { text: "진입점과 출력", link: "/reference/entry-output" },
-              { text: "로더와 플러그인", link: "/reference/loader" },
-              {
-                text: "모듈 해석",
-                collapsed: true,
-                items: [
-                  { text: "절대 경로와 별칭", link: "/reference/loader" },
-                  { text: "NPM 모듈 해석", link: "/reference/loader" },
-                  { text: "순환 의존성 제거", link: "/reference/loader" },
-                  { text: "모듈 중복 관리", link: "/reference/loader" },
-                ],
-              },
+              { text: "번들링, 꼭 필요할까요?", link: "/deep-dive/bundling-process/overview" },
+              { text: "진입점", link: "/deep-dive/bundling-process/entry" },
+              { text: "경로 탐색", link: "/deep-dive/bundling-process/resolution" },
+              { text: "로더", link: "/deep-dive/bundling-process/loader" },
+              { text: "플러그인", link: "/deep-dive/bundling-process/plugin" },
+              { text: "출력", link: "/deep-dive/bundling-process/output" },
             ],
           },
           {
             text: "개발 환경",
             collapsed: false,
             items: [
-              { text: "개발 서버 설정", link: "/reference/dev/dev-server" },
-              { text: "HMR", link: "/reference/dev/hmr" },
-              { text: "소스맵", link: "/reference/dev/source-map" },
-              { text: "환경별 설정", link: "/reference/dev/source-map" },
+              { text: "개발 서버", link: "/deep-dive/dev/dev-server" },
+              { text: "HMR", link: "/deep-dive/dev/hmr" },
+              { text: "소스맵", link: "/deep-dive/dev/source-map" },
             ],
           },
           {
             text: "번들 최적화",
             collapsed: false,
             items: [
-              { text: "코드 스플리팅", link: "/reference/optimization/code-splitting" },
-              { text: "트리 쉐이킹", link: "/reference/optimization/tree-shaking" },
-              { text: "번들 분석", link: "/reference/optimization/tree-shaking" },
-
+              { text: "코드 스플리팅", link: "/deep-dive/optimization/code-splitting" },
+              { text: "트리 셰이킹", link: "/deep-dive/optimization/tree-shaking" },
+              { text: "번들 분석", link: "/deep-dive/optimization/bundle-analyzer" },
             ],
           },
 
@@ -206,12 +201,13 @@ export default defineConfig({
   markdown: {
     config: (md) => {
       md.use(footnote);
+      md.use(tabsMarkdownPlugin);
     },
   },
   head: [
     [
       "link",
-      { rel: "icon", type: "image/x-icon", href: "/images/favicon.ico" }
+      { rel: "icon", type: "image/x-icon", href: "/bundling/images/favicon.ico" }
     ],
     [
       "meta",

@@ -34,7 +34,7 @@ export function Component() {
 
 그런데 이렇게 JavaScript에서 CSS를 import하면 어떤 일이 일어날까요? JavaScript는 CSS를 직접 해석하거나 적용할 수 없기 때문에, 단순히 import한다고 해서 스타일이 자동으로 적용되지는 않아요.
 
-이 문제를 해결하기 위해 **번들러는 [로더](../reference/loader.md)를 사용해 CSS 파일을 자바스크립트가 사용할 수 있는 모듈 형태로 변환해줘요.** 대표적인 예로 CSS 로더(css-loader)는 CSS 파일을 객체 형태로 바꿔주는데, 특히 CSS Modules와 함께 사용하면 원본 클래스 이름은 객체의 프로퍼티로, 중복을 방지하기 위해 변환된 클래스 이름은 프로퍼티 값으로 저장돼요.
+이 문제를 해결하기 위해 **번들러는 [로더](../deep-dive/bundling-process/loader.md)를 사용해 CSS 파일을 자바스크립트가 사용할 수 있는 모듈 형태로 변환해줘요.** 대표적인 예로 CSS 로더(css-loader)는 CSS 파일을 객체 형태로 바꿔주는데, 특히 CSS Modules와 함께 사용하면 원본 클래스 이름은 객체의 프로퍼티로, 중복을 방지하기 위해 변환된 클래스 이름은 프로퍼티 값으로 저장돼요.
 
 ```javascript
 // 변환된 Component.module.css
@@ -162,7 +162,7 @@ webpack-tutorial/
 
 ### 3. CSS 로더 설치하기
 
-웹팩이 CSS 파일을 해석하고 JavaScript로 변환할 수 있도록 하기 위해 [로더](../reference/loader.md)를 활용해 볼게요.
+웹팩이 CSS 파일을 해석하고 JavaScript로 변환할 수 있도록 하기 위해 [로더](../deep-dive/bundling-process/loader.md)를 활용해 볼게요.
 다음 2가지 로더를 설치할 거예요.
 
 ```bash
@@ -171,8 +171,8 @@ npm install style-loader css-loader --save-dev
 
 각 로더의 역할은 아래와 같아요.
 
-- [`css-loader`](../reference/loader.md#css-loader): `.css` 파일의 내용을 읽고, JavaScript에서 사용할 수 있는 형식으로 바꿔줘요.
-- [`style-loader`](../reference/loader.md#style-loader): JavaScript로 바뀐 CSS를 웹페이지에 `<style>` 태그로 삽입해서 실제로 스타일이 적용되도록 해줘요.
+- [`css-loader`](../deep-dive/bundling-process/loader.md#css-loader): `.css` 파일의 내용을 읽고, JavaScript에서 사용할 수 있는 형식으로 바꿔줘요.
+- [`style-loader`](../deep-dive/bundling-process/loader.md#style-loader): JavaScript로 바뀐 CSS를 웹페이지에 `<style>` 태그로 삽입해서 실제로 스타일이 적용되도록 해줘요.
 
 ### 4. 웹팩 설정에 로더 추가하기
 

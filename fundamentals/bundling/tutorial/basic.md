@@ -86,7 +86,7 @@ webpack-tutorial/
 
 ## 4. 웹팩 설정 파일 만들기
 
-웹팩을 사용하려면 [어떤 파일부터 읽고](../reference/entry.md), [결과를 어디에 저장할지](../reference/output.md) 알려줘야 해요. 이걸 설정하는 파일이 `webpack.config.js`예요.
+웹팩을 사용하려면 [어떤 파일부터 읽고](../deep-dive/bundling-process/entry.md), [결과를 어디에 저장할지](../deep-dive/bundling-process/output.md) 알려줘야 해요. 이걸 설정하는 파일이 `webpack.config.js`예요.
 
 프로젝트 루트에 다음처럼 작성해요.
 
@@ -111,8 +111,8 @@ module.exports = {
 
 여기서 중요한 설정 두 가지는 `entry`와 `output`이에요. 각 설정에 대한 더 자세한 내용은 링크에서 학습할 수 있어요.
 
-- [`entry`](../reference/entry.md): 웹팩이 처음으로 불러올 파일이에요. 이 파일에서부터 필요한 모든 모듈을 찾아요.
-- [`output`](../reference/output.md): 번들 파일을 어느 위치에 어떤 이름으로 저장할지 정해요.
+- [`entry`](../deep-dive/bundling-process/entry.md): 웹팩이 처음으로 불러올 파일이에요. 이 파일에서부터 필요한 모든 모듈을 찾아요.
+- [`output`](../deep-dive/bundling-process/output.md): 번들 파일을 어느 위치에 어떤 이름으로 저장할지 정해요.
 
 ### 5. `npm run build` 명령어 등록하기
 

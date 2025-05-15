@@ -7,7 +7,7 @@ TypeScript는 JavaScript에 타입 시스템을 추가한 언어예요. 하지�
 ## 웹팩이 TypeScript를 이해하게 만드는 법: 로더(Loader)
 
 웹팩은 기본적으로 `.js`와 `.json`만 이해할 수 있어요.  
-그래서 `.ts`나 `.scss`, `.png` 같은 파일을 처리하려면 [로더](../reference/loader.md)라는 도구가 필요해요. 로더가 웹팩에게 통역사 역할을 해주는거죠.
+그래서 `.ts`나 `.scss`, `.png` 같은 파일을 처리하려면 [로더](../deep-dive/bundling-process/loader.md)라는 도구가 필요해요. 로더가 웹팩에게 통역사 역할을 해주는거죠.
 
 `ts-loader`라는 로더가 TypeScript 파일을 웹팩이 이해할 수 있는 JavaScript로 변환해줘요.
 
