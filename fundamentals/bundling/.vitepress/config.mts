@@ -86,74 +86,11 @@ export default defineConfig({
             text: "롤업으로 배우는 라이브러리 번들링",
             items: [
               {
-                text: "1. 소개",
+                text: "🚧 준비중",
                 link: "/rollup-tutorial/intro",
               },
             ]  
-            },
-          {
-            text: "(Legacy) 웹팩 튜토리얼",
-            collapsed: true,
-            items: [
-              {
-                text: "1. 번들링 시작하기",
-                link: "/tutorial/basic",
-              },
-              {
-                text: "2. 프로젝트 확장하기",
-                items: [
-                  {
-                    text: "TypeScript 코드 번들링하기",
-                    link: "/tutorial/typescript",
-                  },
-                  {
-                    text: "React 코드 번들링하기",
-                    link: "/tutorial/with-react",
-                  },
-                  {
-                    text: "CSS 파일 번들링하기",
-                    link: "/tutorial/css",
-                  },
-                  {
-                    text: "이미지와 폰트 다루기",
-                    link: "/tutorial/image-and-font",
-                  },
-                ]
-              },
-              {
-                text: "3. 자주 쓰는 웹팩 설정들",
-                items: [
-                  
-                  {
-                    text: "플러그인 추가하기",
-                    link: "/tutorial/plugin",
-                  },
-                  {
-                    text: "최적화하기",
-                    link: "/tutorial/optimization",
-                  },
-                  {
-                    text: "개발서버로 생산성 높이기",
-                    link: "/tutorial/dev-server",
-                  },
-                ]
-              }
-            ]
-          },
-          {
-            text: "(Leagacy) 실전 웹팩 예시",
-            collapsed: true,
-            items: [
-              {
-                text: "라이브러리 번들링하기",
-                link: "/library",
-              },
-              {
-                text: "상황별 웹팩 설정 템플릿",
-                link: "/setting-template",
-              },
-            ]
-          },
+            }
         ],
       },
       {
@@ -165,7 +102,7 @@ export default defineConfig({
           },
           {
             text: "번들링 작동 방식 이해하기",
-            collapsed: false,
+            collapsed: true,
             items: [
               { text: "번들링, 꼭 필요할까요?", link: "/deep-dive/bundling-process/overview" },
               { text: "진입점", link: "/deep-dive/bundling-process/entry" },
@@ -177,7 +114,7 @@ export default defineConfig({
           },
           {
             text: "개발 환경",
-            collapsed: false,
+            collapsed: true,
             items: [
               { text: "개발 서버", link: "/deep-dive/dev/dev-server" },
               { text: "HMR", link: "/deep-dive/dev/hmr" },
@@ -186,7 +123,7 @@ export default defineConfig({
           },
           {
             text: "번들 최적화",
-            collapsed: false,
+            collapsed: true,
             items: [
               { text: "코드 스플리팅", link: "/deep-dive/optimization/code-splitting" },
               { text: "트리 셰이킹", link: "/deep-dive/optimization/tree-shaking" },
