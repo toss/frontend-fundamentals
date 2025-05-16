@@ -318,9 +318,9 @@ Node.js가 제공하는 Path 함수인 [`path.resolve([...paths])`](https://node
 :::
 <br />
 
-### 2. 플러그인
+### 2. 리졸브 규칙 동기화
 
-TypeScript의 `baseUrl` 및 `paths` 설정을 자동으로 적용하려면, `tsconfig-paths` 플러그인을 사용할 수 있어요.
+TypeScript의 `baseUrl` 및 `paths` 설정을 자동으로 동기화하려면, `tsconfig-paths` 플러그인을 사용할 수 있어요.
 
 이 플러그인은 빌드 타임에 `tsconfig.json`에 정의된 경로 설정을 읽고, `alias`에 자동으로 반영해줘요.
 
