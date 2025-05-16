@@ -18,9 +18,6 @@
 
 예를 들어, index.js에서 math.js 모듈을 가져와 사용하는 경우를 살펴볼게요.
 
-번들러는 진입점(Entry Point)인 index.js에서 시작해, import나 require를 따라가며 연결된 모듈들을 하나씩 찾아가요.
-코드 속 참조를 따라 이동하며 전체 애플리케이션이 어떤 식으로 구성되어 있는지 탐색해요.
-
 ```javascript
 // index.js
 import { add } from './math.js';
@@ -32,7 +29,9 @@ export function add(a, b) {
 }
 ```
 
-이렇게 모듈 간 연결 흐름을 수집하면, 각 파일이 어떤 파일과 연결되어 있는지 파악할 수 있어요.
+번들러는 진입점(Entry Point)인 index.js에서 시작해, import나 require를 따라가며 연결된 모듈들을 하나씩 찾아가요.
+
+코드 속 참조를 따라 이동하며 전체 애플리케이션이 어떤 식으로 구성되어 있는지 탐색해요.
 
 ### 2. 의존성 구조 정리
 
