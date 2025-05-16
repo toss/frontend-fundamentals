@@ -30,5 +30,5 @@ features:
   - icon: 🔍
     title: 더 깊이 배우고 싶다면
     details: 웹팩의 핵심 개념과 고급 기법까지 단계별로 배워봐요.
-    link: /reference/overview
+    link: /deep-dive/bundling-process/overview
 ---

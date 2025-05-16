@@ -101,7 +101,7 @@ export default defineConfig({
             link: "/deep-dive/overview",
           },
           {
-            text: "번들링 작동 방식 이해하기",
+            text: "번들링 동작 이해하기",
             collapsed: true,
             items: [
               { text: "번들링, 꼭 필요할까요?", link: "/deep-dive/bundling-process/overview" },
@@ -130,7 +130,6 @@ export default defineConfig({
               { text: "번들 분석", link: "/deep-dive/optimization/bundle-analyzer" },
             ],
           },
-
         ],
       },
     ],
