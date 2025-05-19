@@ -253,9 +253,9 @@ const Icon = React.createElement(...);
 트리셰이킹으로 사용하지 않는 코드를 제거하더라도, 빌드 결과물에는 여전히 불필요한 공백, 주석, 최적화되지 않은 표현 등이 남아 있을 수 있어요.
 프로덕션 빌드에서는 이 잔여 요소를 압축(minify)해 코드 크기를 추가로 줄여야 최종 번들의 성능 최적화 효과를 극대화할 수 있어요.
 
-\:::tabs key\:bundler-minify
+:::tabs key:bundler-minify
 
-\== Webpack
+== Webpack
 
 **설치 방법**
 ```bash
@@ -275,7 +275,7 @@ module.exports = {
 };
 ```
 
-\== Vite
+== Vite
 
 
 **설정 예시**
@@ -290,4 +290,4 @@ export default defineConfig({
 });
 ```
 
-\:::
+:::
