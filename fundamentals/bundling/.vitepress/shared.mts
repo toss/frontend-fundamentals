@@ -49,6 +49,13 @@ export const sharedConfig = defineConfig({
         content: "https://static.toss.im/illusts/bf-meta.png"
       }
     ],
+    [
+      "meta",
+      {
+        name: "twitter:card",
+        content: "summary"
+      }
+    ],
   ],
   transformHead: ({ pageData }) => {
     const head: HeadConfig[] = [];
