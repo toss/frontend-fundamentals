@@ -159,6 +159,13 @@ export default defineConfig({
         content: "https://static.toss.im/illusts/bf-meta.png"
       }
     ],
+    [
+      "meta",
+      {
+        name: "twitter:card",
+        content: "summary"
+      }
+    ],
   ],
   vite: {
     resolve: {
