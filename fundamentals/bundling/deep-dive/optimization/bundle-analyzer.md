@@ -151,6 +151,6 @@ yarn dedupe
 부수 효과가 있는 모듈은 트리 셰이킹 대상에서 제외돼요. 순수 모듈만 남겨 번들을 최적화하세요.
 
 * 웹팩의 `webpack-cli --json` 또는 `StatsWriterPlugin`을 이용해 Side Effect 모듈을 찾으세요.
-* `package.json`의 `sideEffects: true` 필드를 설정해 Side Effect가 없는 모듈만 남기세요.
+* `package.json`의 `sideEffects: false` 필드를 설정해 Side Effect가 없는 모듈만 남기세요.
 
 
