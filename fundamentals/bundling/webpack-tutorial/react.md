@@ -53,8 +53,8 @@ $ npm install --save-dev @babel/core babel-loader @babel/preset-env @babel/prese
 
 - `@babel/core`: JavaScript 코드를 변환해주는 도구예요
 - `babel-loader`: 웹팩에서 바벨을 사용할 수 있도록 연결해주는 역할이에요.
-- `@babel/preset-react`: 바벨에게 JSX를 어떻게 변환할지 알려주는 설정이에요
-- `@babel/preset-typescript`: 바벨에게 타입스크립트를 어떻게 변환할지 알려주는 설정이에요
+- `@babel/preset-react`: 바벨에게 JSX를 어떻게 변환할지 알려주는 설정이에요.
+- `@babel/preset-typescript`: 바벨에게 타입스크립트를 어떻게 변환할지 알려주는 설정이에요.
 - `@babel/preset-env`: 최신 JavaScript 문법을 구버전 브라우저에서도 작동하게 변환해줘요. React를 해석하는데 필수는 아니지만, 최신 JavaScript 문법을 쓸 계획이 있다면 넣는 걸 추천해요.
 
 그리고 `webpack.config.js` 파일의 `module.rules`와 `resolve`를 다음과 같이 수정해 주세요.
