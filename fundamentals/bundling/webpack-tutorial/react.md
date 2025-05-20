@@ -57,11 +57,12 @@ $ npm install --save-dev @babel/core babel-loader @babel/preset-env @babel/prese
 - `@babel/preset-typescript`: 바벨에게 타입스크립트를 어떻게 변환할지 알려주는 설정이에요.
 - `@babel/preset-env`: 최신 JavaScript 문법을 구버전 브라우저에서도 작동하게 변환해 줘요. React를 해석하는데 필수는 아니지만, 최신 JavaScript 문법을 쓸 계획이 있다면 넣는 걸 추천해요.
 
-그리고 `webpack.config.js` 파일의 `module.rules`와 `resolve`를 다음과 같이 수정해 주세요.
+그리고 `webpack.config.js` 파일의 `entry`, `module.rules`, `resolve`를 다음과 같이 수정해 주세요.
 
 ```js
 module.exports = {
   // ... 기존 설정 유지
+  entry: './main.tsx', // 웹팩이 읽기 시작할 파일을 .tsx로 변경했어요.
   module: {
     rules: [
       {
