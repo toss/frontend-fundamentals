@@ -1,6 +1,6 @@
 # React 적용하기
 
-이번 단계에서는 '오늘의 이모지' 프로젝트에 React를 도입하고, 컴포넌트 기반으로 UI를 재구성해볼게요. React는 JavaScript 라이브러리지만, JSX라는 특별한 문법을 사용하기 때문에 웹팩의 도움이 필요해요.
+이번 단계에서는 '오늘의 이모지' 프로젝트에 React를 도입하고, 컴포넌트 기반으로 UI를 재구성해 볼게요. React는 JavaScript 라이브러리지만, JSX라는 특별한 문법을 사용하기 때문에 웹팩의 도움이 필요해요.
 
 ## JSX란
 
@@ -51,11 +51,11 @@ $ npm install --save-dev @types/react @types/react-dom
 $ npm install --save-dev @babel/core babel-loader @babel/preset-env @babel/preset-react @babel/preset-typescript
 ```
 
-- `@babel/core`: JavaScript 코드를 변환해주는 도구예요
-- `babel-loader`: 웹팩에서 바벨을 사용할 수 있도록 연결해주는 역할이에요.
+- `@babel/core`: JavaScript 코드를 변환해 주는 도구예요
+- `babel-loader`: 웹팩에서 바벨을 사용할 수 있도록 연결해 주는 역할이에요.
 - `@babel/preset-react`: 바벨에게 JSX를 어떻게 변환할지 알려주는 설정이에요.
 - `@babel/preset-typescript`: 바벨에게 타입스크립트를 어떻게 변환할지 알려주는 설정이에요.
-- `@babel/preset-env`: 최신 JavaScript 문법을 구버전 브라우저에서도 작동하게 변환해줘요. React를 해석하는데 필수는 아니지만, 최신 JavaScript 문법을 쓸 계획이 있다면 넣는 걸 추천해요.
+- `@babel/preset-env`: 최신 JavaScript 문법을 구버전 브라우저에서도 작동하게 변환해 줘요. React를 해석하는데 필수는 아니지만, 최신 JavaScript 문법을 쓸 계획이 있다면 넣는 걸 추천해요.
 
 그리고 `webpack.config.js` 파일의 `module.rules`와 `resolve`를 다음과 같이 수정해 주세요.
 
@@ -90,7 +90,7 @@ module.exports = {
 
 :::info 바벨이란
 
-바벨은 최신 JavaScript 코드를 이전 버전의 JavaScript로 변환해주는 도구예요. 예를 들어, ES6+ 문법을 ES5로 변환해서 오래된 브라우저에서도 동작하게 만들어줘요.
+바벨은 최신 JavaScript 코드를 이전 버전의 JavaScript로 변환해 주는 도구예요. 예를 들어, ES6+ 문법을 ES5로 변환해서 오래된 브라우저에서도 동작하게 만들어줘요.
 
 성경에 나오는 '바벨탑'처럼, 많은 언어가 혼재하는 혼란스러운 상황을 상징해요. 
 
@@ -132,7 +132,7 @@ React에서는 JSX를 일반 JavaScript로 변환하는 데 바벨이 필수적�
 
 ## 4. HTML을 React 컴포넌트로 변환하기
 
-이제 HTML을 React 컴포넌트로 변환해볼게요. 먼저 `index.html`을 수정해요.
+이제 HTML을 React 컴포넌트로 변환해 볼게요. 먼저 `index.html`을 수정해요.
 
 ```html{11-12}
 <!DOCTYPE html>
@@ -188,7 +188,7 @@ const App = () => {
 export default App;
 ```
 
-마지막으로 `main.ts`파일 이름을 `main.tsx`로 변경하고, `App.tsx`에 만들었던 React 앱을 그리도록 수정해줘요.
+마지막으로 `main.ts`파일 이름을 `main.tsx`로 변경하고, `App.tsx`에 만들었던 React 앱을 그리도록 수정해 줘요.
 
 ```tsx
 import React from 'react';
@@ -200,7 +200,7 @@ createRoot(document.getElementById('root')!).render(<App />);
 
 ## 5. React 앱 빌드하기
 
-이제 코드를 빌드해볼게요.
+이제 코드를 빌드해 볼게요.
 
 ```bash
 npm run build
