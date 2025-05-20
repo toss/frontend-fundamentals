@@ -69,13 +69,17 @@ import { defineConfig } from 'vite';
 import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig({
-  plugins: [
-    visualizer({
-      open: true,
-      filename: 'dist/stats.html',
-      template: 'treemap',
-    }),
-  ],
+  build: {
+    rollupOptions: {
+      plugins: [
+        visualizer({
+          open: true,
+          filename: 'dist/stats.html',
+          template: 'treemap',
+        }),
+      ],
+    },
+  },
 });
 ```
 
