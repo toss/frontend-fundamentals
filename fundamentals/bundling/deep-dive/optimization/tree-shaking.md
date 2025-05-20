@@ -217,7 +217,7 @@ const Icon = /* @__PURE__ */ React.createElement(...);
 번들러는 해당 코드가 사이드 이펙트가 없다고 판단할 수 있어요. 그 결과, 최적화 과정에서 필요하지 않은 경우 아래처럼 제거될 수 있어요.
 
 ```js
-const Icon = React.createElement(...);
+const Icon = /* @__PURE__ */ React.createElement(...);
 ```
 
 ### `sideEffects` 필드 활용
