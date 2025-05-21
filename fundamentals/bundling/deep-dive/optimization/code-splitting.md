@@ -97,12 +97,19 @@ module.exports = {
     splitChunks: {
       chunks: "all",
       minSize: 20000,
-      maxSize: 0,
+      maxSize: 50000,
       minChunks: 1,
       maxAsyncRequests: 30,
       maxInitialRequests: 30,
       automaticNameDelimiter: "~",
-      name: true,
+      name(module, chunks, cacheGroupKey) {
+        const moduleFileName = module
+          .identifier()
+          .split("/")
+          .reduceRight((item) => item);
+        const allChunksNames = chunks.map((item) => item.name).join("~");
+        return `${cacheGroupKey}-${allChunksNames}-${moduleFileName}`;
+      },
     },
   },
 };
