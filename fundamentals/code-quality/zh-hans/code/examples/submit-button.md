@@ -43,8 +43,24 @@ function SubmitButton() {
 例如，在下面的代码中，蓝色部分表示当用户具有仅查看权限（`'viewer'`）时运行的代码，红色部分表示当用户是普通用户时运行的代码。
 由于不同时运行的代码交织在一起，理解代码时产生负担。
 
-![](../../../images/examples/submit-button.png){.light-only}
-![](../../../images/examples/submit-button-dark.png){.dark-only}
+```typescript 8,14
+function SubmitButton() {
+  const isViewer = useRole() === "viewer";
+
+  useEffect(() => {
+    if (isViewer) {
+      return;
+    }
+    showButtonAnimation();
+  }, [isViewer]);
+
+  return isViewer ? (
+    <TextButton disabled>Submit</TextButton>
+  ) : (
+    <Button type="submit">Submit</Button>
+  );
+}
+```
 
 ## ✏️ 尝试改善
 
