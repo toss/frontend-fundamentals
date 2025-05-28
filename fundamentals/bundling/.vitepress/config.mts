@@ -146,6 +146,17 @@ export default defineConfig({
       { rel: "icon", type: "image/x-icon", href: "/bundling/images/favicon.ico" }
     ],
     [
+      "link",
+      {
+        rel: "stylesheet",
+        fetchpriority: "low",
+        href: "https://static.toss.im/tps/others.css",
+        media: "none",
+        onload: "this.onload=null; this.media='all'",
+        crossorigin: "anonymous"
+      }
+    ],
+    [
       "meta",
       {
         property: "og:image",
