@@ -1,0 +1,18 @@
+{
+  "name": "@frontend-fundamentals/a11y",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "dependencies": {
+    "@amplitude/analytics-browser": "^2.11.11",
+    "markdown-it-footnote": "^4.0.0",
+    "typescript": "^5.6.3",
+    "vitepress": "^1.4.1",
+    "vitepress-plugin-tabs": "^0.7.1"
+  }
+}

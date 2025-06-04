@@ -526,6 +526,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@frontend-fundamentals/a11y@workspace:fundamentals/a11y":
+  version: 0.0.0-use.local
+  resolution: "@frontend-fundamentals/a11y@workspace:fundamentals/a11y"
+  dependencies:
+    "@amplitude/analytics-browser": "npm:^2.11.11"
+    markdown-it-footnote: "npm:^4.0.0"
+    typescript: "npm:^5.6.3"
+    vitepress: "npm:^1.4.1"
+    vitepress-plugin-tabs: "npm:^0.7.1"
+  languageName: unknown
+  linkType: soft
+
 "@frontend-fundamentals/bundling@workspace:fundamentals/bundling":
   version: 0.0.0-use.local
   resolution: "@frontend-fundamentals/bundling@workspace:fundamentals/bundling"
@@ -546,6 +558,18 @@ __metadata:
     markdown-it-footnote: "npm:^4.0.0"
     typescript: "npm:^5.6.3"
     vitepress: "npm:^1.4.1"
+  languageName: unknown
+  linkType: soft
+
+"@frontend-fundamentals/debug@workspace:fundamentals/debug":
+  version: 0.0.0-use.local
+  resolution: "@frontend-fundamentals/debug@workspace:fundamentals/debug"
+  dependencies:
+    "@amplitude/analytics-browser": "npm:^2.11.11"
+    markdown-it-footnote: "npm:^4.0.0"
+    typescript: "npm:^5.6.3"
+    vitepress: "npm:^1.4.1"
+    vitepress-plugin-tabs: "npm:^0.7.1"
   languageName: unknown
   linkType: soft
 
@@ -2529,11 +2553,11 @@ __metadata:
 
 "typescript@patch:typescript@npm%3A^5.6.3#optional!builtin<compat/typescript>":
   version: 5.7.3
-  resolution: "typescript@patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"
+  resolution: "typescript@patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=8c6c40"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10/dc58d777eb4c01973f7fbf1fd808aad49a0efdf545528dab9b07d94fdcb65b8751742804c3057e9619a4627f2d9cc85547fdd49d9f4326992ad0181b49e61d81
+  checksum: 10/3ac7b7e3e899273d2fbdce6e24b93d4d53a705ad7a7e4cc83b4c57bcb6d25948abcd2a21994f6b9c73ab03960f395aae95f0458de292a66ce0134233261714c3
   languageName: node
   linkType: hard
 
