@@ -49,7 +49,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@amplitude/analytics-browser", "npm:2.11.11"],\
           ["markdown-it-footnote", "npm:4.0.0"],\
-          ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=8c6c40"],\
+          ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"],\
           ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.5.0"]\
         ],\
         "linkType": "SOFT"\
@@ -729,7 +729,7 @@ const RAW_RUNTIME_STATE =
           ["@frontend-fundamentals/a11y", "workspace:fundamentals/a11y"],\
           ["@amplitude/analytics-browser", "npm:2.11.11"],\
           ["markdown-it-footnote", "npm:4.0.0"],\
-          ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=8c6c40"],\
+          ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"],\
           ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.5.0"],\
           ["vitepress-plugin-tabs", "virtual:88dd596434121ca52e83acf1605e629b5dee0f0009464fe66a58d8dda13a773912568c4269d5ea4c5d64f9e2189898420c180c8e837f6ef7e40dde4d2abef475#npm:0.7.1"]\
         ],\
@@ -743,7 +743,7 @@ const RAW_RUNTIME_STATE =
           ["@frontend-fundamentals/bundling", "workspace:fundamentals/bundling"],\
           ["@amplitude/analytics-browser", "npm:2.11.11"],\
           ["markdown-it-footnote", "npm:4.0.0"],\
-          ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=8c6c40"],\
+          ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"],\
           ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.5.0"],\
           ["vitepress-plugin-tabs", "virtual:88dd596434121ca52e83acf1605e629b5dee0f0009464fe66a58d8dda13a773912568c4269d5ea4c5d64f9e2189898420c180c8e837f6ef7e40dde4d2abef475#npm:0.7.1"]\
         ],\
@@ -757,7 +757,7 @@ const RAW_RUNTIME_STATE =
           ["@frontend-fundamentals/code-quality", "workspace:fundamentals/code-quality"],\
           ["@amplitude/analytics-browser", "npm:2.11.11"],\
           ["markdown-it-footnote", "npm:4.0.0"],\
-          ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=8c6c40"],\
+          ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"],\
           ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.5.0"]\
         ],\
         "linkType": "SOFT"\
@@ -770,7 +770,7 @@ const RAW_RUNTIME_STATE =
           ["@frontend-fundamentals/debug", "workspace:fundamentals/debug"],\
           ["@amplitude/analytics-browser", "npm:2.11.11"],\
           ["markdown-it-footnote", "npm:4.0.0"],\
-          ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=8c6c40"],\
+          ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"],\
           ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.5.0"],\
           ["vitepress-plugin-tabs", "virtual:88dd596434121ca52e83acf1605e629b5dee0f0009464fe66a58d8dda13a773912568c4269d5ea4c5d64f9e2189898420c180c8e837f6ef7e40dde4d2abef475#npm:0.7.1"]\
         ],\
@@ -1965,7 +1965,7 @@ const RAW_RUNTIME_STATE =
           ["frontend-fundamentals", "workspace:."],\
           ["@amplitude/analytics-browser", "npm:2.11.11"],\
           ["markdown-it-footnote", "npm:4.0.0"],\
-          ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=8c6c40"],\
+          ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"],\
           ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.5.0"]\
         ],\
         "linkType": "SOFT"\
@@ -2962,10 +2962,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["typescript", [\
-      ["patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=8c6c40", {\
-        "packageLocation": "./.yarn/cache/typescript-patch-d15822a933-3ac7b7e3e8.zip/node_modules/typescript/",\
+      ["patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5", {\
+        "packageLocation": "./.yarn/cache/typescript-patch-6da68bae26-dc58d777eb.zip/node_modules/typescript/",\
         "packageDependencies": [\
-          ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=8c6c40"]\
+          ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5914,7 +5914,7 @@ class MountFS extends BasePortableFakeFS {
         if (this.notMount.has(filePath))
           continue;
         try {
-          if (this.typeCheck !== null && (this.baseFs.lstatSync(filePath).mode & fs.constants.S_IFMT) !== this.typeCheck) {
+          if (this.typeCheck !== null && (this.baseFs.statSync(filePath).mode & fs.constants.S_IFMT) !== this.typeCheck) {
             this.notMount.add(filePath);
             continue;
           }
@@ -8927,18 +8927,20 @@ Require stack:
     }
     return false;
   };
-  const originalExtensionJSFunction = require$$0.Module._extensions[`.js`];
-  require$$0.Module._extensions[`.js`] = function(module, filename) {
-    if (filename.endsWith(`.js`)) {
-      const pkg = readPackageScope(filename);
-      if (pkg && pkg.data?.type === `module`) {
-        const err = ERR_REQUIRE_ESM(filename, module.parent?.filename);
-        Error.captureStackTrace(err);
-        throw err;
+  if (!process.features.require_module) {
+    const originalExtensionJSFunction = require$$0.Module._extensions[`.js`];
+    require$$0.Module._extensions[`.js`] = function(module, filename) {
+      if (filename.endsWith(`.js`)) {
+        const pkg = readPackageScope(filename);
+        if (pkg && pkg.data?.type === `module`) {
+          const err = ERR_REQUIRE_ESM(filename, module.parent?.filename);
+          Error.captureStackTrace(err);
+          throw err;
+        }
       }
-    }
-    originalExtensionJSFunction.call(this, module, filename);
-  };
+      originalExtensionJSFunction.call(this, module, filename);
+    };
+  }
   const originalDlopen = process.dlopen;
   process.dlopen = function(...args) {
     const [module, filename, ...rest] = args;
