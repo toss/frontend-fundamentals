@@ -15,8 +15,14 @@
     "docs:bundle:dev": "yarn workspace @frontend-fundamentals/bundling docs:dev",
     "docs:bundle:build": "yarn workspace @frontend-fundamentals/bundling docs:build",
     "docs:bundle:preview": "yarn workspace @frontend-fundamentals/bundling docs:preview",
-    "postbuild": "mkdir -p dist/fundamentals/code-quality dist/fundamentals/bundling && cp -r fundamentals/code-quality/.vitepress/dist/* dist/fundamentals/code-quality/ && cp -r fundamentals/bundling/.vitepress/dist/* dist/fundamentals/bundling/",
-    "build": "yarn docs:build && yarn docs:bundle:build && yarn postbuild"
+    "docs:debug:dev": "yarn workspace @frontend-fundamentals/debug docs:dev",
+    "docs:debug:build": "yarn workspace @frontend-fundamentals/debug docs:build",
+    "docs:debug:preview": "yarn workspace @frontend-fundamentals/debug docs:preview",
+    "docs:a11y:dev": "yarn workspace @frontend-fundamentals/a11y docs:dev",
+    "docs:a11y:build": "yarn workspace @frontend-fundamentals/a11y docs:build",
+    "docs:a11y:preview": "yarn workspace @frontend-fundamentals/a11y docs:preview",
+    "postbuild": "mkdir -p dist/fundamentals/code-quality dist/fundamentals/bundling dist/fundamentals/debug dist/fundamentals/a11y && cp -r fundamentals/code-quality/.vitepress/dist/* dist/fundamentals/code-quality/ && cp -r fundamentals/bundling/.vitepress/dist/* dist/fundamentals/bundling/ && cp -r fundamentals/debug/.vitepress/dist/* dist/fundamentals/debug/ && cp -r fundamentals/a11y/.vitepress/dist/* dist/fundamentals/a11y/",
+    "build": "yarn docs:build && yarn docs:bundle:build && yarn docs:debug:build && yarn docs:a11y:build && yarn postbuild"
   },
   "dependencies": {
     "@amplitude/analytics-browser": "^2.11.11",
