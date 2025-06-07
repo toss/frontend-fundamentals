@@ -8,12 +8,10 @@ export const zhHans = defineConfig({
   themeConfig: {
     logo: "/images/ff-symbol.svg",
     nav: nav(),
-
     editLink: {
-      pattern: "https://github.com/toss/frontend-fundamentals/edit/main/:path",
+      pattern: "https://github.com/toss/frontend-fundamentals/edit/main/fundamentals/code-quality/:path",
       text: "在GitHub编辑此页"
     },
-
     outline: {
       label: "页面内容"
     },
@@ -24,7 +22,6 @@ export const zhHans = defineConfig({
     lastUpdated: {
       text: "最后更新"
     },
-
     sidebar: sidebar()
   }
 });

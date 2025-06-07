@@ -8,12 +8,10 @@ export const ja = defineConfig({
   themeConfig: {
     logo: "/images/ff-symbol.svg",
     nav: nav(),
-
     editLink: {
-      pattern: "https://github.com/toss/frontend-fundamentals/edit/main/:path",
+      pattern: "https://github.com/toss/frontend-fundamentals/edit/main/fundamentals/code-quality/:path",
       text: "GitHubで修正する"
     },
-
     outline: {
       label: "ページの内容"
     },
@@ -24,14 +22,12 @@ export const ja = defineConfig({
     lastUpdated: {
       text: "最後のアップデート"
     },
-
     socialLinks: [
       {
         icon: "github",
         link: "https://github.com/toss/frontend-fundamentals"
       }
     ],
-
     sidebar: sidebar()
   }
 });
