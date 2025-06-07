@@ -83,7 +83,7 @@ export const shared = defineConfig({
   themeConfig: {
     logo: "/images/ff-symbol.svg",
     editLink: {
-      pattern: "https://github.com/toss/frontend-fundamentals/edit/main/:path"
+      pattern: "https://github.com/toss/frontend-fundamentals/edit/main/fundamentals/code-quality/:path"
     },
     search: {
       provider: "local",

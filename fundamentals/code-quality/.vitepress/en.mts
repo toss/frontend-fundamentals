@@ -7,7 +7,9 @@ export const en = defineConfig({
   lastUpdated: true,
   themeConfig: {
     nav: nav(),
-
+    editLink: {
+      pattern: "https://github.com/toss/frontend-fundamentals/edit/main/fundamentals/code-quality/:path",
+    },
     sidebar: sidebar()
   }
 });

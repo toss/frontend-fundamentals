@@ -8,12 +8,10 @@ export const ko = defineConfig({
   themeConfig: {
     logo: "/images/ff-symbol.svg",
     nav: nav(),
-
     editLink: {
-      pattern: "https://github.com/toss/frontend-fundamentals/edit/main/:path",
+      pattern: "https://github.com/toss/frontend-fundamentals/edit/main/fundamentals/code-quality/:path",
       text: "GitHub에서 수정하기"
     },
-
     outline: {
       label: "페이지 내용"
     },
@@ -24,7 +22,6 @@ export const ko = defineConfig({
     lastUpdated: {
       text: "마지막 업데이트"
     },
-
     sidebar: sidebar()
   }
 });
@@ -163,7 +160,7 @@ function sidebar(): DefaultTheme.Sidebar {
     {
       text: "커뮤니티",
       items: [
-        
+
         {
           text: "🏆 명예의 전당",
           link: "/code/community/good-discussions"
