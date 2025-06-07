@@ -11,7 +11,7 @@ export interface NavItem {
 export const ONE_NAVIGATION_ITEMS: NavItem[] = [
   {
     path: "/code-quality/",
-    href: "/code-quality/",
+    href: "/code-quality/{lang}",
     tooltip: {
       ko: "코드퀄리티",
       en: "Code Quality"
@@ -20,7 +20,7 @@ export const ONE_NAVIGATION_ITEMS: NavItem[] = [
   },
   {
     path: "/bundling",
-    href: "/bundling/",
+    href: "/bundling/{lang}",
     tooltip: {
       ko: "번들링",
       en: "Bundling"
