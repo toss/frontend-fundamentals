@@ -3,20 +3,20 @@ import footnote from "markdown-it-footnote";
 import path from "node:path";
 import { createRequire } from "node:module";
 import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
-import { sharedConfig } from './shared.mjs';
+import { shared } from './shared.mjs';
 
 const require = createRequire(import.meta.url);
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  ...sharedConfig,
+  ...shared,
   title: "Bundling Fundamentals",
   description: "프론트엔드 번들링의 모든 것",
   ignoreDeadLinks: false,
   base: "/bundling/",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    ...sharedConfig.themeConfig,
+    ...shared.themeConfig,
     nav: [
       { text: "홈", link: "/" },
     ],
@@ -140,33 +140,7 @@ export default defineConfig({
       md.use(tabsMarkdownPlugin);
     },
   },
-  head: [
-    [
-      "link",
-      { rel: "icon", type: "image/x-icon", href: "/bundling/images/favicon.ico" }
-    ],
-    [
-      "meta",
-      {
-        property: "og:image",
-        content: "https://static.toss.im/illusts/bf-meta.png"
-      }
-    ],
-    [
-      "meta",
-      {
-        name: "twitter:image",
-        content: "https://static.toss.im/illusts/bf-meta.png"
-      }
-    ],
-    [
-      "meta",
-      {
-        name: "twitter:card",
-        content: "summary"
-      }
-    ],
-  ],
+  
   vite: {
     resolve: {
       alias: [
