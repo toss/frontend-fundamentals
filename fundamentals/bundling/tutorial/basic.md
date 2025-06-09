@@ -52,7 +52,7 @@ export function add(a, b) {
 ```javascript
 // src/utils/subtract.js
 export function subtract(a, b) {
-  return a + b;
+  return a - b;
 }
 ```
 
