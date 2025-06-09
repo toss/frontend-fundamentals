@@ -101,7 +101,7 @@ export default defineConfig({
                 text: "🚧 준비중",
                 link: "/rollup-tutorial/intro",
               },
-            ]  
+            ]
             }
         ],
       },
@@ -152,7 +152,6 @@ export default defineConfig({
       md.use(tabsMarkdownPlugin);
     },
   },
-  
   vite: {
     resolve: {
       alias: [
@@ -180,4 +179,3 @@ export default defineConfig({
     }
   },
 })
-
