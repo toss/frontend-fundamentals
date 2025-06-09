@@ -14,6 +14,18 @@ export default defineConfig({
   description: "프론트엔드 번들링의 모든 것",
   ignoreDeadLinks: false,
   base: "/bundling/",
+  locales: {
+    // temporary
+    en: {
+      label: "English",
+      themeConfig: { sidebar: [], nav: [] }
+    },
+    ja: {
+      label: "日本語",
+      themeConfig: { sidebar: [], nav: [] }
+    },
+    "zh-hans": { label: "简体中文", themeConfig: { sidebar: [], nav: [] } }
+  },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     ...shared.themeConfig,

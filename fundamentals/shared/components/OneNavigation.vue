@@ -2,7 +2,7 @@
   <div class="one-navigation">
     <div class="nav-top">
       <div
-        v-for="item in ONE_NAVIGATION_ITEMS"
+        v-for="item in navigationItems"
         :key="item.path"
         class="nav-item"
         :class="{ active: isActive(item.path) }"
@@ -23,12 +23,23 @@
     </div>
   </div>
 </template>
-ㄴ
+
 <script setup lang="ts">
-import { useRoute } from "vitepress";
+import { useRoute, useData } from "vitepress";
 import { useLocale } from "../composables/useLocale";
 import { ONE_NAVIGATION_ITEMS } from "../config/OneNavigationItems";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
+
+const { lang } = useData();
+
+const navigationItems = computed(() =>
+  ONE_NAVIGATION_ITEMS.map((item) => ({
+    ...item,
+    href: item.href
+      .replace("/{lang}", `/${lang.value.split("-").at(0)}`)
+      .replace("/ko", "")
+  }))
+);
 
 const route = useRoute();
 const { isKorean } = useLocale();
@@ -163,7 +174,7 @@ function handleNavigation(href: string): void {
     flex-direction: row;
     border-right: none;
     border-top: 1px solid var(--vp-c-divider);
-    z-index: 100; 
+    z-index: 100;
     padding-top: 0;
   }
 
