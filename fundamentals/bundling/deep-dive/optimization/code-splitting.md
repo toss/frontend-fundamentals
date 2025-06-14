@@ -91,6 +91,71 @@ function App() {
 
 [`SplitChunksPlugin`](https://webpack.kr/plugins/split-chunks-plugin/)을 사용하면 웹팩에서 코드 스플리팅을 자동화할 수 있어요. 이 플러그인을 활용하면 중복되는 모듈을 하나의 청크로 분리하거나, 특정 크기 이상의 파일을 자동으로 나눠 번들 크기를 최적화할 수 있어요.
 
+Webpack 5부터 name 값을 `false` | `string` | `function` 만 받을 수 있돋록 더 strict하게 강화되었어요.
+각각을 좀 더 자세하게 살펴볼게요.
+
+::: 실습 전에 번들 파일의 이름을 동적으로 설정해주세요!
+
+특정 크기 이상의 파일을 각각 청크로 분리하면, 1개 이상의 번들 파일이 생겨요. 각 번들 파일의 이름이 중복되지 않도록, 플레이스홀더를 사용하여 번들 파일의 이름을 동적으로 설정해주어야 해요.
+
+[번들링 동작 이해하기 > 출력 > 객체구문에서 설정하기](https://frontend-fundamentals.com/bundling/deep-dive/bundling-process/output.html#_2-%E1%84%80%E1%85%A2%E1%86%A8%E1%84%8E%E1%85%A6-%E1%84%80%E1%85%AE%E1%84%86%E1%85%AE%E1%86%AB%E1%84%8B%E1%85%A6%E1%84%89%E1%85%A5-%E1%84%89%E1%85%A5%E1%86%AF%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%92%E1%85%A1%E1%84%80%E1%85%B5)
+
+```javascript
+// webpack.config.js
+module.exports = {
+  entry: "./main.tsx",
+  output: {
+    filename: '[name].bundle.js', // name 플레이스홀더 이용
+    path: path.resolve(__dirname, 'dist'),
+  },
+};
+```
+
+:::
+
+
+
+- `false`: 청크 이름을 자동으로 생성하지 않고, Webpack이 내부적으로 관리해요. `production` 환경일 때 권장하는 값이에요.
+
+```javascript
+module.exports = {
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+      minSize: 20000,
+      maxSize: 50000,
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      automaticNameDelimiter: "~", // 자동으로 생성된 청크 이름을 구분할 때 사용하는 문자열
+      name: false, // ex) 1234.bundle.js
+    },
+  },
+};
+```
+
+- `string`: 청크 이름을 명시적으로 지정할 수 있어요. (ex `vendor.js`, `chunk.js`)
+
+```javascript
+module.exports = {
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+      minSize: 20000,
+      maxSize: 50000,
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      automaticNameDelimiter: "~",
+      name: 'chunk', // ex) chunk~abcd1234.bundle.js
+    }
+  }
+};
+```
+
+- `function`: 청크 이름을 동적으로 생성할 수 있어요. 그룹 이름, 청크 이름, 모듈명 등을 포함해서 가독성 있게 만들고 싶을 때 권장해요. 
+
+
 ```javascript
 module.exports = {
   optimization: {
@@ -108,7 +173,8 @@ module.exports = {
           .split("/")
           .reduceRight((item) => item);
         const allChunksNames = chunks.map((item) => item.name).join("~");
-        return `${cacheGroupKey}-${allChunksNames}-${moduleFileName}`;
+        return `${cacheGroupKey}-${allChunksNames}-${moduleFileName}`; 
+        // ex) defaultVendors-main-formatters.js.bundle.js
       },
     },
   },
