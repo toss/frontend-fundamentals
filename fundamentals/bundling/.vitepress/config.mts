@@ -150,6 +150,18 @@ export default defineConfig({
             ],
           },
         ],
+        editLink: {
+          pattern: "https://github.com/toss/frontend-fundamentals/edit/main/fundamentals/bundling/:path",
+          text: "GitHub에서 수정하기"
+        },
+        outline: {
+          label: "페이지 내용"
+        },
+        docFooter: {
+          prev: "이전 페이지",
+          next: "다음 페이지"
+        },
+        lastUpdated: {text:'마지막 업데이트'},
       },
     }
   },
@@ -186,4 +198,3 @@ export default defineConfig({
     }
   },
 })
-
