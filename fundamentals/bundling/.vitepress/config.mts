@@ -106,7 +106,7 @@ export default defineConfig({
                     text: "🚧 준비중",
                     link: "/rollup-tutorial/intro",
                   },
-                ]  
+                ]
                 }
             ],
           },
@@ -147,54 +147,6 @@ export default defineConfig({
                   { text: "번들 분석", link: "/deep-dive/optimization/bundle-analyzer" },
                 ],
               },
-            ]
-          },
-          {
-            text: "롤업으로 배우는 라이브러리 번들링",
-            items: [
-              {
-                text: "🚧 준비중",
-                link: "/rollup-tutorial/intro",
-              },
-            ]
-            }
-        ],
-      },
-      {
-        text: "심화 학습",
-        items: [
-          {
-            text: "소개",
-            link: "/deep-dive/overview",
-          },
-          {
-            text: "번들링 동작 이해하기",
-            collapsed: true,
-            items: [
-              { text: "번들링, 꼭 필요할까요?", link: "/deep-dive/bundling-process/overview" },
-              { text: "진입점", link: "/deep-dive/bundling-process/entry" },
-              { text: "경로 탐색", link: "/deep-dive/bundling-process/resolution" },
-              { text: "로더", link: "/deep-dive/bundling-process/loader" },
-              { text: "플러그인", link: "/deep-dive/bundling-process/plugin" },
-              { text: "출력", link: "/deep-dive/bundling-process/output" },
-            ],
-          },
-          {
-            text: "개발 환경",
-            collapsed: true,
-            items: [
-              { text: "개발 서버", link: "/deep-dive/dev/dev-server" },
-              { text: "HMR", link: "/deep-dive/dev/hmr" },
-              { text: "소스맵", link: "/deep-dive/dev/source-map" },
-            ],
-          },
-          {
-            text: "번들 최적화",
-            collapsed: true,
-            items: [
-              { text: "코드 스플리팅", link: "/deep-dive/optimization/code-splitting" },
-              { text: "트리 셰이킹", link: "/deep-dive/optimization/tree-shaking" },
-              { text: "번들 분석", link: "/deep-dive/optimization/bundle-analyzer" },
             ],
           },
         ],
