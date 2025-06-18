@@ -108,7 +108,7 @@ export const shared = defineConfig({
     ],
     editLink: {
       pattern: "https://github.com/toss/frontend-fundamentals/edit/main/fundamentals/bundling/:path",
-      text: "Github에서 수정하기"
+      text: "GitHub에서 수정하기"
     },
     search: {
       provider: "local",
