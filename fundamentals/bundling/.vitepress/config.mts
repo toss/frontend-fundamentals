@@ -106,7 +106,7 @@ export default defineConfig({
                     text: "🚧 준비중",
                     link: "/rollup-tutorial/intro",
                   },
-                ]  
+                ]
                 }
             ],
           },
@@ -186,4 +186,3 @@ export default defineConfig({
     }
   },
 })
-
