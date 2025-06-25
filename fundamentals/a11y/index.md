@@ -13,9 +13,6 @@ hero:
     alt: Frontend Fundamentals symbol
   actions:
     - text: 시작하기
-      link: /get-started
-    - theme: alt
-      text: 접근성이란?
       link: /overview
 
 features:

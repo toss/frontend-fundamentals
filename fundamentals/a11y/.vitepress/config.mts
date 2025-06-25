@@ -22,21 +22,89 @@ export default defineConfig({
     ],
     sidebar: [
       {
-        text: "소개",
+        text: "시작하기",
+        link: "/overview",
+      },
+      {
+        text: "접근성을 지켜야 하는 이유",
+        link: "/why",
+      },
+      {
+        text: "주요 고려사항",
+        link: "/principles",
+      },
+      {
+        text: "실전 가이드",
         items: [
           {
-            text: "시작하기",
-            link: "/get-started",
+            text: "1. 구조를 명확하게 만들기",
+            items: [
+              {
+                text: "버튼 안에 버튼 넣지 않기",
+                link: "/structure/button-inside-button",
+              },
+              {
+                text: "테이블 행에 직접 onClick 붙이지 않기",
+                link: "/structure/table-row-link",
+              },
+            ],
           },
-        ]
+          {
+            text: "2. 의미를 정확히 전달하기",
+            items: [
+              {
+                text: "인터렉티브 요소에 이름 붙이기",
+                link: "/semantic/required-label",
+              },
+              {
+                text: "같은 이름의 요소에는 설명 추가하기",
+                link: "/semantic/duplicate-interactive-element",
+              },
+            ],
+          },
+          {
+            text: "3. 예상 가능한 동작 만들기",
+            items: [
+              {
+                text: "버튼의 역할과 동작이 일치하게 만들기",
+                link: "/predictability/fake-button",
+              },
+              {
+                text: "입력 요소 상위에는 폼을 사용하기",
+                link: "/predictability/form",
+              },
+            ],
+          },
+          {
+            text: "4. 시각 정보 보완하기",
+            items: [
+              {
+                text: "이미지와 아이콘에 적절한 대체 텍스트 제공하기",
+                link: "/alt-text/image-alt",
+              },
+            ],
+          },
+        ],
       },
       {
-        text: "튜토리얼",
+        text: "심화 가이드",
+        items: [
+          {
+            text: "eslint로 접근성 개선하기",
+            items: [
+              {
+                text: "주요 규칙 소개",
+                link: "/eslint/rules",
+              },
+              {
+                text: "디자인 시스템과 결합하기",
+                link: "/eslint/design-system",
+              },
+            ],
+          },
+        ],
       },
-      {
-        text: "심화 학습",
-      },
-    ],
+    ]
   },
   markdown: {
     config: (md) => {
