@@ -9,7 +9,7 @@
 1. **경계값**: 정상과 비정상의 경계에 있는 값을 테스트해서 오류를 찾는 전략이에요.
 2. **예상보다 큰 값 또는 작은 값**: 정상 범위를 벗어난 아주 큰 값이나 아주 작은 값으로 테스트해서 오류를 찾는 전략이에요.
 
-### 경계값
+## 경계값 - 숫자
 
 먼저 **경계값(boundary value)**에 대해 이야기해볼게요. 경계값 테스트는 정상 입력의 양 끝 지점을 중심으로 발생할 수 있는 문제를 발견하는 데 효과적인 전략이에요. 주로 **범위의 끝에 위치한 값들**, 즉 경계에서 ±1 정도의 값을 넣어 테스트해요.
 
@@ -24,7 +24,7 @@ function NameInput() {
   const [name, setName] = React.useState('');
 
   const handleChange = (e) => {
-    if (e.target.value.length > 10) return; // 경계 조건: 최대 10자
+    if (e.target.value.length > 10) return;
     setName(e.target.value);
   };
 
@@ -37,6 +37,7 @@ function NameInput() {
 }
 ```
 
+## 경계값 - 날짜
 숫자뿐 아니라 **날짜**에서도 경계값 조건은 자주 등장해요. 다음은 실제로 제품 개발에서 자주 요구되는 날짜 관련 조건들이에요. 경계값 처리가 잘못되면 사용자 입장에선 혼란을 느끼거나, 의도와 다르게 동작할 수 있어요.
 
 | 상황 | 조건 |
@@ -47,40 +48,36 @@ function NameInput() {
 | **"오늘 이후 예약만 가능"** | 오늘은 불가능, 내일부터 허용 |
 | **"지난 날짜는 비활성화" (캘린더)** | 오늘보다 이전이면 비활성화 |
 
-그럼 실제로 경계값을 테스트하는 방법을 살펴볼게요. 아래는 `date-fns` 라이브러리를 사용해서, 주어진 날짜가 **오늘 포함 3일 전 이내인지 확인하는 함수**예요.
+그럼 실제로 경계값을 테스트하는 방법을 살펴볼게요. 아래는 `date-fns` 라이브러리를 사용해서, 주어진 날짜가 **오늘 포함 3일 전 이내인지 확인하는 함수**예요. 아래 코드와 같이 다양한 날짜 값을 넣어서 테스트할 수 있어요.
 
-```tsx
+```tsx 6
 import { differenceInCalendarDays, format } from 'date-fns';
 
-function 오늘포함3일전(date: Date) {
+function is오늘포함3일전(date: Date) {
   const today = new Date();
   const diff = differenceInCalendarDays(today, date);
-  console.log(`오늘: ${format(today, 'yyyy-MM-dd')}, 대상: ${format(date, 'yyyy-MM-dd')}, 차이: ${diff}`);
-  return diff <= 3; // ✅ 오늘 포함, 3일 전까지 유효
+  return diff <= 3;
 }
-```
 
-
-위 함수는 다음과 같이 다양한 날짜 값을 넣어서 테스트할 수 있어요.
-
-```tsx
 const today = new Date('2025-04-27');
 
 const testDates = [
-  new Date('2025-04-28'), // ❌ diff = -1 (미래)
-  new Date('2025-04-27'), // ✅ diff = 0
-  new Date('2025-04-26'), // ✅ diff = 1
-  new Date('2025-04-23'), // ❌ diff = 4 (범위 밖)
+  new Date('2025-04-28'), 
+  new Date('2025-04-27'), 
+  new Date('2025-04-26'), 
+  new Date('2025-04-23'),
 ];
 
-testDates.forEach((d) => {
-  console.log(`isValid: ${오늘포함3일전(d)}`);
+testDates.forEach((date) => {
+  console.log({ date, isValid:is오늘포함3일전(date) });
 });
 ```
 
+
+
 이처럼 **경계값은 예상치 못한 에러가 가장 많이 발생하는 지점**이에요. 이런 값들을 미리 테스트해두면 안정성과 사용자 경험을 모두 향상시킬 수 있어요.
 
-### 예상보다 큰 값 혹은 작은 값
+## 예상보다 큰 값 혹은 작은 값
 
 이번에는 **예상 범위를 벗어나는 값**으로 테스트하는 방법을 소개할게요. 코드가 정상적으로 작동하리라 가정하고 넘어가기 쉬운 부분이지만, 실제 사용자 입력은 언제든 예외적인 값을 포함할 수 있어요.
 
@@ -99,37 +96,15 @@ calculateDiscount(-500);
 
 이처럼 입력 값의 조건을 명확히 하지 않으면, 시스템은 예상치 못한 동작을 하거나 오류 없이 잘못된 결과를 반환할 수 있어요.
 
-숫자의 최대값, 최소값 같은 **극단적인 값**으로도 테스트해볼 수 있어요. 
+
+## 그 외 범위를 벗어난 값
+숫자의 최대값, 최소값 같은 **극단적인 값**으로도 테스트해볼 수 있어요. 이런 값을 테스트하면, 숫자 오버플로우(overflow)나 정밀도 손실 같은 문제가 발생하는지 확인할 수 있어요.
+    
 
 ```tsx
 const numbers = [Number.MAX_SAFE_INTEGER, Number.MIN_SAFE_INTEGER];
-console.log(Math.max(...numbers)); // 극단 값으로 테스트
+calculateDiscount(Math.max(...numbers));
 ```
 
-이런 값을 테스트하면, 숫자 오버플로우(overflow)나 정밀도 손실 같은 문제가 발생하는지 확인할 수 있어요.
-
-### 그 외  범위값을 벗어난 예시
-
-- **문자열 입력에 숫자가 들어오는 경우**
-    
-    예: `parseInt('abc')` → `NaN` 반환
-    
-    사용자 입력이 숫자라고 가정하지 말고, 항상 **형 변환 실패** 가능성을 테스트해요.
-    
-- **0, null, undefined 입력**
-    
-    특히 `0`은 falsy한 값이기 때문에 의도치 않게 조건문에서 걸러질 수 있어요.
-    
-    ```jsx
-    function applyFee(amount) {
-    	if (!amount) {
-    	throw new Error('금액이 필요해요');
-    	}
-    	return amount * 0.05;
-    }
-    
-    applyFee(0); // ❌ 0도 금액인데 조건에서 걸러짐
-    ```
-    
 
 "이 값은 절대 안 들어올 거야"라고 생각하는 순간, 버그는 그 틈을 타고 들어와요. 예상보다 작은 값이나 큰 값을 미리 테스트해두면, 에러를 미리 차단하고 더 튼튼한 시스템을 만들 수 있어요.

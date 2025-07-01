@@ -4,9 +4,11 @@
 
 **재현 과정을 자동화하면**, 버튼 한 번만 눌러서 문제 상황을 바로 다시 만들 수 있어요. 이 덕분에 분석과 수정이 훨씬 빨라져요. 자동화는 특히 상태 변화가 복잡하거나, 연속 클릭이나 빠른 입력처럼 사용자 행동에 민감한 UI 문제를 다룰 때 큰 도움이 돼요.
 
+## 자동화 코드
+
 예를 들어, 버튼에 이미 더블클릭 방지 처리를 해두었지만, 실제 사용자 환경에서 동일한 요청이 여러 번 발생하는 버그 리포트를 받았다고 가정해 볼게요. 이 문제를 재현하려면, 다음처럼 **자동 클릭 함수**를 만들어 반복적인 클릭 상황을 쉽게 만들 수 있어요.
 
-```tsx
+```tsx 3,4,5,6,7,8,9,10,26
 import React, { useState } from "react";
 
 function simulateRapidClicks(target: HTMLElement, count: number, interval: number) {
@@ -25,14 +27,14 @@ const DoubleClickTest = () => {
   const handleClick = () => {
     if (disabled) return;
     setDisabled(true);
-    setTimeout(() => setDisabled(false), 1000); // 1초 동안 중복 클릭 방지
+    setTimeout(() => setDisabled(false), 1000);
     setCount((prev) => prev + 1);
   };
 
   const handleAutoClick = () => {
     const button = document.getElementById("click-button");
     if (button) {
-      simulateRapidClicks(button, 10, 50); // 50ms 간격으로 10번 클릭
+      simulateRapidClicks(button, 10, 50);
     }
   };
 
@@ -51,15 +53,11 @@ export default DoubleClickTest;
 
 ```
 
-- `simulateRapidClicks`: 지정된 DOM 요소를 일정 간격으로 여러 번 클릭하는 유틸리티 함수예요.
-- `handleClick`: 중복 클릭을 막는 로직이 들어 있는 이벤트 핸들러예요.
-
 이런 식으로 재현 로직을 자동화하면, 복잡한 상황에서도 일관되게 문제를 재현할 수 있고, 원인 분석과 회귀 테스트에도 유용하게 활용할 수 있어요.
 
-🧪 테스트 코드 예시
+## 테스트 코드
 
-```tsx
-// DoubleClickButton.test.tsx
+```tsx 7
 import React from 'react';
 import { render, fireEvent, screen, act } from '@testing-library/react';
 import { DoubleClickButton } from './DoubleClickButton';

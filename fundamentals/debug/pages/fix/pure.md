@@ -4,12 +4,12 @@
 
 간단한 예시로, 결제 금액에 따라 할인율을 적용하는 로직을 구현해볼게요.
 
-**As-is**
+## 예시 1
 
 결제 금액에 따라 할인율을 적용하는 로직이 UI 컴포넌트 안에 섞여 있다면 테스트를 하려면 UI까지 함께 렌더링해야 해서 불편해요.
 
+### 기존코드
 ```tsx
-// OrderSummary.tsx
 function OrderSummary({ totalAmount, discountRate }: { totalAmount: number; discountRate: number }) {
   const discountAmount = totalAmount >= 50000 ? totalAmount * discountRate : 0;
   const finalAmount = totalAmount - discountAmount;
@@ -25,13 +25,11 @@ function OrderSummary({ totalAmount, discountRate }: { totalAmount: number; disc
 
 ```
 
-**To-be**
-
+### 순수함수로 분리해보기
 비즈니스 로직을 분리해 순수 함수로 만들면 다양한 금액에 대해 독립적으로 테스트할 수 있어요. UI와 분리돼 있어 재사용성과 유지보수성도 높아져요.
 
+##### util.ts
 ```tsx
-
-// utils/discount.ts
 export function calculateDiscount(amount: number, discountRate: number) {
   return amount >= 50000 ? amount * discountRate : 0;
 }
@@ -40,9 +38,8 @@ export function calculateFinalAmount(amount: number, discountAmount: number) {
   return amount - discountAmount;
 }
 ```
-
+##### OrderSummary.tsx
 ```tsx
-// OrderSummary.tsx
 import { calculateDiscount, calculateFinalAmount } from './utils/discount';
 
 function OrderSummary({ totalAmount, discountRate }: { totalAmount: number; discountRate: number }) {
@@ -59,15 +56,14 @@ function OrderSummary({ totalAmount, discountRate }: { totalAmount: number; disc
 }
 ```
 
+## 예시 2
 react의 hook예시도 들어볼게요. 알림 동의 모달을 보여주는 로직이에요.
 
-**As-is**
-
+### 기존코드
 비즈니스 로직이 `useEffect` 내부에 흩어져 있어 테스트가 어렵고 모듈화되어 있지 않아요.
 
 ```tsx
 const STORAGE_KEY = 'notification-modal-shownAt'
-// HomePage.tsx
 import { useEffect, useState } from 'react';
 
 function HomePage() {
@@ -102,10 +98,14 @@ function HomePage() {
 
 ```
 
-**To-be**
-
+### 순수함수로 분리해보기
 로직을 커스텀 훅 `useNotificationConsentModal`로 분리해서 커스텀 훅을 독립적으로 테스트할 수 있어요. UI와 분리돼 있어 재사용성과 유지보수성도 높아져요.
 
+##### useNotificationConsentModal.ts
+```tsx
+```
+
+##### HomePage.tsx
 ```tsx
 import { useNotificationConsentModal } from './hooks/useNotificationConsentModal';
 
@@ -122,10 +122,3 @@ function HomePage() {
 ```
 
 순수한 함수로 비즈니스 로직을 분리하면, 코드의 복잡도가 줄어들고 디버깅과 테스트가 쉬워져요. 특히 버그 수정 후 같은 문제가 다시 생기는 걸 막기 위해, 테스트 가능한 구조로 바꾸는 습관은 장기적으로 큰 도움이 돼요.
-
-### 📝 핵심 포인트 요약
-
-- 비즈니스 로직은 UI와 분리해 순수 함수로 만들기
-    - 순수 함수는 입력과 출력이 명확해서 테스트가 쉬움
-    - 로직이 컴포넌트에 섞이면 테스트와 유지보수가 어려워짐
-- 커스텀 훅을 활용하면 로직 재사용성과 컴포넌트 가독성 향상
