@@ -30,7 +30,7 @@ export default defineConfig({
         link: "/why",
       },
       {
-        text: "주요 고려사항",
+        text: "주요 원칙",
         link: "/principles",
       },
       {
@@ -70,7 +70,7 @@ export default defineConfig({
                 link: "/predictability/fake-button",
               },
               {
-                text: "입력 요소 상위에는 폼을 사용하기",
+                text: "입력 요소는 &lt;form&gt; 으로 감싸기",
                 link: "/predictability/form",
               },
             ],
