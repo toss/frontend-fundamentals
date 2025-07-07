@@ -1,6 +1,8 @@
 # 버튼의 역할과 동작이 일치하게 만들기
 
-일반 HTML 요소에 `cursor: pointer`와 `onClick` 이벤트만 추가하는 것은 진짜 버튼이 아니에요. 이런 방식은 키보드 사용자는 키보드로 이동하지 못하게 되고, 스크린 리더 사용자는 버튼이라고 인식하지 못할 수 있어요.
+## 문제: 버튼이 아닌 요소에 클릭 이벤트 리스너를 부여함
+
+일반 HTML 요소에 `cursor: pointer`와 `onclick` 이벤트만 추가하는 것은 진짜 버튼이 아니에요. 이런 방식은 키보드 사용자는 키보드로 이동하지 못하게 되고, 스크린 리더 사용자는 버튼이라고 인식하지 못할 수 있어요.
 
 ::: tip 링크에도 똑같이 적용돼요
 
@@ -10,15 +12,15 @@
 
 :::
 
-## ❌ 잘못된 예시
+### 잘못된 예시
 
 다음과 같은 코드는 위에서 설명한 모든 접근성 문제를 발생시켜요.
 
 ```jsx
 <div
-  className="button-style"
-  style={{ cursor: 'pointer' }}
-  onClick={() => handleAnything()}
+  class="button-style"
+  style="cursor: pointer"
+  onclick="handleAnything()"
 >
   문의하기
 </div>

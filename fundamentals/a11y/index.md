@@ -9,7 +9,7 @@ hero:
     loading: eager
     fetchpriority: high
     decoding: async
-    src: /images/bf-symbol.webp
+    src: /images/ff-symbol-gradient-webp-80.webp
     alt: Frontend Fundamentals symbol
   actions:
     - text: 시작하기
@@ -17,15 +17,15 @@ hero:
 
 features:
   - icon: 📦
-    title: 1
-    details: 1-설명
-    link: /overview
+    title: 접근성을 왜 지켜야 할까요?
+    details: 장애인, 비장애인, 개발자 모두에게 더 나은 웹 경험을 제공할 수 있어요.
+    link: /why
   - icon: 🚀
-    title: 2
-    details: 2-설명
-    link: /webpack-tutorial/intro
+    title: 주요 원칙
+    details: 올바른 구조, 명확한 의미, 예측 가능한 인터랙션, 시각 정보 보완의 4가지 핵심 원칙을 살펴봐요.
+    link: /principles
   - icon: 🔍
-    title: 3
-    details: 3-설명
-    link: /deep-dive/bundling-process/overview
+    title: eslint로 접근성 개선하기
+    details: 코드 작성 단계에서 접근성 문제를 미리 발견하고 해결하고 디자인 시스템과 결합하는 방법을 배워요.
+    link: /eslint/rules
 ---

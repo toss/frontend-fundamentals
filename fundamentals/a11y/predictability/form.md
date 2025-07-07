@@ -27,13 +27,13 @@
 ## `<form>` 을 올바르게 사용하려면
 
 - 입력 요소(input, textarea 등)를 `<form>` 요소로 감싸야 해요.
-- 사용자가 폼을 제출했을 때 특정 페이지에 전송하는게 아닌 현재 페이지에서 새로고침 없이 동작하게 하려면 `onSubmit`에서 `event.preventDefault()` 를 호출해야 해요.
+- 사용자가 폼을 제출했을 때 특정 페이지에 전송하는게 아닌 현재 페이지에서 새로고침 없이 동작하게 하려면 `onsubmit` 에서 `event.preventDefault()` 를 호출해야 해요.
 - 제출 버튼은 `<button type="submit">`으로 만들어야 해요. `<button>`의 기본 타입은 submit이기 때문에, 단순 클릭용 버튼은 반드시 `type="button"`을 명시해야 해요.
 
 다음 예제 코드로 접근성을 고려한 올바른 폼 작성법을 살펴보세요.
 
-```jsx
-<form onSubmit={e => { e.preventDefault(); /* 원하는 동작 */ }}>
+```html
+<form onsubmit="event.preventDefault(); /* 원하는 동작 */">
   <input type="text" name="username" />
   <input type="password" name="password" />
   <button type="submit">로그인</button>
@@ -49,8 +49,8 @@
 
 실무에서는 submit 버튼이 폼과 떨어져 있는 경우가 종종 있어요. 이럴 때는 `<button>`에 `form` 속성을 사용해서 `<form>` 과 연결할 수 있어요. 다음과 같이 `<form>` 의 `id` 와 연결하면 돼요.
 
-```jsx
-<form id="my-form" onSubmit={e => e.preventDefault()}>
+```html
+<form id="my-form" onsubmit="event.preventDefault(); /* 원하는 동작 */">
   <input type="text" name="search" />
 </form>
 <button type="submit" form="my-form">검색</button>
@@ -64,12 +64,12 @@
 
 실제로 많이 쓰이는 로그인 폼의 마크업을 해볼게요. 아이디와 비밀번호 입력칸이 있고, submit을 할 수 있는 로그인 버튼이 있어요. 각 입력칸에 값이 있을 때만 보이는 삭제 버튼이 있어요.
 
-```jsx
-<form onSubmit={e => e.preventDefault()}>
-  <label htmlFor="login-id">아이디</label>
+```html
+<form onsubmit="event.preventDefault(); /* 원하는 동작 */">
+  <label for="login-id">아이디</label>
   <div>
     <input id="login-id" name="id" type="text" />
-    {/* 입력값이 있을 때만 보이는 삭제 버튼 */}
+    <!-- 입력값이 있을 때만 보이는 삭제 버튼 -->
     <button
       type="button"
       tabIndex={-1}
@@ -78,13 +78,13 @@
       ❌
     </button>
   </div>
-  <label htmlFor="login-pw">비밀번호</label>
+  <label for="login-pw">비밀번호</label>
   <div>
     <input id="login-pw" name="pw" type="password" />
-    {/* 입력값이 있을 때만 보이는 삭제 버튼 */}
+    <!-- 입력값이 있을 때만 보이는 삭제 버튼 -->
     <button
       type="button"
-      tabIndex={-1}
+      tabindex="-1"
       aria-label="비밀번호 입력값 삭제"
     >
       ❌
@@ -94,7 +94,7 @@
 </form>
 ```
 
-위와 같이 작성하면 `<form>`을 사용해서 Enter 키로도 로그인 동작을 실행할 수 있어요. 또, 삭제 버튼은 `tabIndex={-1}`을 지정해서 키보드 포커스를 받지 않게 했어요.
+위와 같이 작성하면 `<form>`을 사용해서 Enter 키로도 로그인 동작을 실행할 수 있어요. 또, 삭제 버튼은 `tabindex="-1"`을 지정해서 키보드 포커스를 받지 않게 했어요.
 
 ::: info 입력값 삭제 버튼이 키보드 사용자에게 필요없는 이유?
 삭제 버튼은 키보드 사용자가 입력값을 지우는 데 꼭 필요하지 않아서 포커스를 받지 않도록 했어요. 텍스트는 `Backspace` 키로 지울 수 있기 때문이에요.
