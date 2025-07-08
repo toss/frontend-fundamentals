@@ -6,7 +6,7 @@
 
 **Frontend Fundamentals (FF)** is a growing collection of essential principles for building reliable, maintainable, and accessible frontend applications. It helps you answer common but tricky questions like how to judge code quality, why bundling behaves differently in dev vs. production, how screen readers interpret your UI, and how to debug efficiently.
 
-https://frontend-fundamentals.com/en/
+https://frontend-fundamentals.com/code-quality/en/
 
 ## 🧭 When to Use
 
