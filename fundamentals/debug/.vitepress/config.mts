@@ -25,13 +25,59 @@ export default defineConfig({
         text: "소개",
         items: [
           {
+            text: "소개",
+            link: "/pages/introduce.md",
+          },
+          {
             text: "시작하기",
-            link: "/get-started",
+            link: "/pages/start.md",
           },
         ]
       },
       {
         text: "튜토리얼",
+        items: [
+          {
+            text: "진단하기",
+            link: "/pages/diagnose/index.md",
+            collapsed: false,
+            items: [
+              { text: "에러 메세지로 원인 추측하기", link: "/pages/diagnose/error-message.md" },
+              { text: "에러 로그 상세히 남기기", link: "/pages/diagnose/error-log.md" },
+              { text: "작업 지도 그리기", link: "/pages/diagnose/map.md" },
+             ],
+          },
+          {
+            text: "재현하기",
+            link: "/pages/reproduce/index.md",
+            collapsed:false,
+            items: [
+              { text: "최대한 간단하게 재현하기", link: "/pages/reproduce/simply.md" },
+              { text: "일반적인 범위에서 벗어난 값 재현하기", link: "/pages/reproduce/out-range.md" },
+              { text: "반복적인 재현 과정을 자동화하기", link: "/pages/reproduce/repeat.md" },
+              { text: "버그 발생 경로를 추적하기", link: "/pages/reproduce/trace.md" },
+             ],
+          },
+          {
+            text: "수정하기",
+            link: "/pages/fix.md/index.md",
+            collapsed:false,
+            items: [
+              { text: "순수함수 만들기", link: "/pages/fix/pure.md" },
+              { text: "데드코드 제거하기", link: "/pages/fix/dead-code.md" },
+             ],
+          },
+          {
+            text: "재발방지하기",
+            link: "/pages/prevent/index.md",
+            collapsed:false,
+            items: [
+              { text: "버그 리포트 남기기", link: "/pages/prevent/bug-report.md" },
+              { text: "공통 유틸에 반영하기", link: "/pages/prevent/util.md" },
+              { text: "팀과 공유하여 집단지성화 하기", link: "/pages/prevent/share.md" },
+             ],
+          },
+        ]
       },
       {
         text: "심화 학습",
