@@ -36,7 +36,7 @@ const navigationItems = computed(() =>
   ONE_NAVIGATION_ITEMS.map((item) => ({
     ...item,
     href: item.href
-      .replace("/{lang}", `/${lang.value.split("-").at(0)}`)
+      .replace("/{lang}", `/${lang.value}`)
       .replace("/ko", "")
   }))
 );
