@@ -59,43 +59,6 @@ export default defineConfig({
             text: "튜토리얼",
             items: [
               {
-                text: "기초부터 배우는 번들링",
-                items: [
-                  {
-                    text: "1. 번들링 시작하기",
-                    link: "/tutorial/basic",
-                  },
-                  {
-                    text: "2. TypeScript 코드 번들링하기",
-                    link: "/tutorial/typescript"
-                  },
-                  {
-                    text: "3. React와 함께 웹팩 사용하기",
-                    link: "/tutorial/with-react"
-                  },
-                     {
-                    text: "4. CSS 파일 번들링하기",
-                    link: "/tutorial/css"
-                  },
-                  {
-                    text: "5. 이미지와 폰트 다루기",
-                    link: "/tutorial/image-and-font"
-                  },
-                  {
-                    text: "6. 플러그인 추가하기",
-                    link: "/tutorial/plugin"
-                  },
-                  {
-                    text: "7. 개발 서버로 생산성 높이기",
-                    link: "/tutorial/dev-server"
-                  },
-                  {
-                    text: "8. 최적화하기",
-                    link: "/tutorial/optimization"
-                  },
-                ]
-              },
-              {
                 text: "웹팩으로 배우는 번들링",
                 items: [
                   {
