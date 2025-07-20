@@ -80,7 +80,19 @@ export default defineConfig({
         ]
       },
       {
-        text: "심화 학습",
+        text: "디버깅 인터뷰",
+        items:[
+          {text: "react-query 상태는 어떻게 돌아가는가?",
+          link: "/pages/interview/react-query/index.md",
+          collapsed:false,
+          items: [
+                { text: "진단하기", link: "/pages/interview/react-query/diagnose.md" },
+                { text: "재현하기", link: "/pages/interview/react-query/reproduce.md" },
+                { text: "수정하기", link: "/pages/interview/react-query/fix.md" },
+                { text: "추가질문", link: "/pages/interview/react-query/tip.md" },
+               ],
+            },
+        ],
       },
     ],
   },
