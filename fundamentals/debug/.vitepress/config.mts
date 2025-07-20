@@ -25,17 +25,17 @@ export default defineConfig({
         text: "소개",
         items: [
           {
-            text: "소개",
+            text: "시작하기",
             link: "/pages/introduce.md",
           },
           {
-            text: "시작하기",
+            text: "효과적인 디버깅을 위한 4가지 단계",
             link: "/pages/start.md",
           },
         ]
       },
       {
-        text: "튜토리얼",
+        text: "실전 가이드",
         items: [
           {
             text: "진단하기",
@@ -60,7 +60,7 @@ export default defineConfig({
           },
           {
             text: "수정하기",
-            link: "/pages/fix.md/index.md",
+            link: "/pages/fix/index.md",
             collapsed:false,
             items: [
               { text: "순수함수 만들기", link: "/pages/fix/pure.md" },
