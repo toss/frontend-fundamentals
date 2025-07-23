@@ -20,7 +20,7 @@ SyntaxError: Unexpected token '{'
 ```
 
 <br/>
-작은따옴표와 큰따옴표의 매칭이 잘못된 경우엔 이런 메세지가 보여요.
+작은따옴표와 큰따옴표의 매칭이 잘못된 경우엔 이런 에러 메세지가 보여요.
 
 ```tsx
 JSON.parse('{ foo: "bar" }");
@@ -36,9 +36,20 @@ the expected pattern.
 
 ## 모듈 import 오류
 
-모듈을 import하는 과정에서도 문법 오류(`SyntaxError`)가 발생할 수 있어요. 특히 ES 모듈(ESM)과 CommonJS(CJS) 방식이 혼합된 환경에서는 설정이 어긋나기 쉽고, 이로 인해 문법 오류처럼 보이는 에러가 나타날 수 있어요.
+모듈을 import하는 과정에서도 문법 오류(`SyntaxError`)가 발생할 수 있어요. 특히 ES 모듈(ESM)과 CommonJS(CJS) 방식이 혼합된 환경에서는 설정이 어긋나기 쉽고, 이로 인해 문법 오류처럼 보이는 에러가 나타날 수 있어요. 모듈 관련 에러 메시지를 보면 단순 문법 문제가 아니라 **모듈 시스템 설정에 문제가 있을 가능성**을 유추할 수 있어요. 
 
-예를 들어, 다음과 같은 메시지를 보면 단순 문법 문제가 아니라 **모듈 시스템 설정에 문제가 있을 가능성**을 유추할 수 있어요:
+
+예를들어, .js 파일에 import 구문을 사용하게 되면 아래와 같은 에러머세지가 나타나요. Node.js는 기본적으로 .js 파일을 CommonJS로 해석하기 때문에, import를 사용할 수 없고 require()를 써야 해요.
+
+```js
+// example.js
+import fs from 'fs';
+
+fs.readFile('example.txt', 'utf8', (err, data) => {
+  if (err) throw err;
+  console.log(data);
+});
+```
 ```
 SyntaxError: Cannot use import statement outside a module
 ```
@@ -46,7 +57,7 @@ SyntaxError: Cannot use import statement outside a module
 ### 확인할 것 
 - 프로젝트의 모듈 시스템 설정이 올바른지 확인해요
   - ESM 사용 시: `package.json`에 `"type": "module"` 설정을 확인해요
-  - CommonJS 사용 시: `"type": "commonjs"` (기본값) 또는 설정을 제거해요
+  - CommonJS 사용 시: `"type"` 필드를 생략하거나, `"type": "commonjs"`로 명시해도 돼요
 - `.mjs`, `.cjs`, `.js` 확장자가 적절히 사용됐는지 확인해요
 - 잘못된 번들 경로로 `esm` 전용 모듈을 가져오지 않았는지 확인해요
 
@@ -64,6 +75,7 @@ console.log(user.name);
 TypeError: Cannot read property 'name' of null  
 ```
 
+<br/>
 
 함수가 아닌 객체를 호출하면 다음과 같은 에러 메세지가 나요
 ```tsx 2
