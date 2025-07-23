@@ -63,6 +63,7 @@ export default defineConfig({
             link: "/pages/fix/index.md",
             collapsed:false,
             items: [
+              { text: "근본 원인 수정하기", link: "/pages/fix/correct.md" },
               { text: "순수함수 만들기", link: "/pages/fix/pure.md" },
               { text: "데드코드 제거하기", link: "/pages/fix/dead-code.md" },
              ],

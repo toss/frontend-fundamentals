@@ -7,21 +7,37 @@
 실험 코드도 예외가 아니에요. A/B 테스트나 기능 플래그 실험이 끝났다면, 관련 분기 코드는 바로 정리하는 게 좋아요. 실험이 끝났는데도 코드가 남아 있으면, 버그를 추적할 때 잘못된 조건 분기를 따라가거나, 같은 기능을 다시 구현하는 실수를 할 수 있어요.
 
 ## 실제 호출되지 않는 유틸 함수 
-과거 기능을 개발할 때 만들었지만, 현재는 어떤 컴포넌트에서도 사용되지 않는 함수
-```
- export const DeadCode = () => ...
+과거 특정 기획에 맞춰 특정 기능을 개발할 때 만들었지만, 현재는 어떤 컴포넌트에서도 사용되지 않는 함수가 있어요. 유지보수 중 “이 함수 아직 쓰이는 건가?”라는 혼란을 겪을 수 있어요. 이렇게 사용되지 않는 함수는 해당 이벤트가 끝나거나 기능이 제거될때 함께 제거하는 것이 좋아요.
+```tsx
+export function formatDateForChristmasEventUser(date: Date): string {
+  const year = date.getFullYear();
+  const month = `${date.getMonth() + 1}`.padStart(2, '0');
+  const day = `${date.getDate()}`.padStart(2, '0');
+  return `Merry Christmas ${year}-${month}-${day}`;
+}
 ```
     
-## 스타일이 사라진 클래스  
-더 이상 사용하지 않는데 CSS 파일에만 남아 있는 클래스
-```
- <div `className="title"`.../>
+## 더이상 사용되지 않는 스타일  
+더 이상 사용하지 않는데 CSS 파일에만 남아 있는 스타일 또는 존재하지 않는 클래스명이 들어가 있는 element가 종종 있어요. 사용되지 않는 CSS가 많아질수록 스타일시트의 가독성과 퍼포먼스 저하되기 때문에 사용되지 않는 스타일이 있다면 바로 제거해요.
+```css
+.title {
+  font-size: 24px;
+  color: #333;
+  font-weight: bold;
+}
 ```
 
+
 ## 실험 종료 후 조건 분기
-실험이 종료됐음에도 남아 있는 조건 분기코드
+실험이 종료됐음에도 조건 분기코드가 남아있는 경우가 종종 있어요. A/B 테스트는 1개월 전에 종료됐고, B안이 채택되었음에도 여전히 조건 분기가 코드에 남아 있는 경우에요. 분기 조건을 읽는 개발자는 아직 실험 중이라고 오해할 수 있어요. 실험 종료 후에도 코드가 남아 있으면 불필요한 경로로 디버깅하거나 리팩토링 시 혼란 발생할 수 있어요.
 ```tsx
-    if (variant === 'A') { ... } else { ... }
+export function RecommendationBanner({ variant }: { variant: 'A' | 'B' }) {
+  if (variant === 'A') {
+    return <BannerA />;
+  } else {
+    return <BannerB />;
+  }
+}
 ```
     
 

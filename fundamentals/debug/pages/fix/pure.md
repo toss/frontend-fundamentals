@@ -28,8 +28,8 @@ function OrderSummary({ totalAmount, discountRate }: { totalAmount: number; disc
 ### 순수함수로 분리하기
 비즈니스 로직을 분리해 순수 함수로 만들면 다양한 금액에 대해 독립적으로 테스트할 수 있어요. UI와 분리돼 있어 재사용성과 유지보수성도 높아져요.
 
-##### util.ts
 ```tsx
+// util.ts
 export function calculateDiscount(amount: number, discountRate: number) {
   return amount >= 50000 ? amount * discountRate : 0;
 }
@@ -38,8 +38,8 @@ export function calculateFinalAmount(amount: number, discountAmount: number) {
   return amount - discountAmount;
 }
 ```
-##### OrderSummary.tsx
 ```tsx
+// OrderSummary.tsx
 import { calculateDiscount, calculateFinalAmount } from './utils/discount';
 
 function OrderSummary({ totalAmount, discountRate }: { totalAmount: number; discountRate: number }) {
@@ -101,47 +101,47 @@ function HomePage() {
 ### 순수함수로 분리하기
 로직을 커스텀 훅 `useNotificationConsentModal`로 분리해서 커스텀 훅을 독립적으로 테스트할 수 있어요. UI와 분리돼 있어 재사용성과 유지보수성도 높아져요.
 
-##### useNotificationConsentModal.ts
 ```tsx
-  import { useEffect, useState } from 'react';
-  import { useNotificationAgreementState } from './useNotificationAgreementState'; // 필요 시 경로 조정
+// useNotificationConsentModal.ts
+import { useEffect, useState } from 'react';
+import { useNotificationAgreementState } from './useNotificationAgreementState'; // 필요 시 경로 조정
 
-  const STORAGE_KEY = 'notification-modal-shownAt';
+const STORAGE_KEY = 'notification-modal-shownAt';
 
-  export function useNotificationConsentModal() {
-    const [showModal, setShowModal] = useState(false);
-    const { isAgreed, updateAgreementState } = useNotificationAgreementState();
+export function useNotificationConsentModal() {
+  const [showModal, setShowModal] = useState(false);
+  const { isAgreed, updateAgreementState } = useNotificationAgreementState();
 
-    useEffect(() => {
-      const lastShown = localStorage.getItem(STORAGE_KEY);
-      const todayDateString = new Date().toDateString();
-      const isTodayShown = lastShown === todayDateString;
+  useEffect(() => {
+    const lastShown = localStorage.getItem(STORAGE_KEY);
+    const todayDateString = new Date().toDateString();
+    const isTodayShown = lastShown === todayDateString;
 
-      if (!isAgreed && !isTodayShown) {
-        localStorage.setItem(STORAGE_KEY, todayDateString);
-        setShowModal(true);
-      }
-    }, [isAgreed]);
+    if (!isAgreed && !isTodayShown) {
+      localStorage.setItem(STORAGE_KEY, todayDateString);
+      setShowModal(true);
+    }
+  }, [isAgreed]);
 
-    const agree = () => {
-      updateAgreementState(true);
-      setShowModal(false);
-    };
+  const agree = () => {
+    updateAgreementState(true);
+    setShowModal(false);
+  };
 
-    const close = () => {
-      setShowModal(false);
-    };
+  const close = () => {
+    setShowModal(false);
+  };
 
-    return {
-      showModal,
-      agree,
-      close,
-    };
-  }
+  return {
+    showModal,
+    agree,
+    close,
+  };
+}
 ```
 
-##### HomePage.tsx
 ```tsx
+// HomePage.tsx
 import { useNotificationConsentModal } from './hooks/useNotificationConsentModal';
 
 function HomePage() {
