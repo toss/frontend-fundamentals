@@ -74,8 +74,7 @@ export default defineConfig({
             collapsed:false,
             items: [
               { text: "버그 리포트 남기기", link: "/pages/prevent/bug-report.md" },
-              { text: "공통 유틸에 반영하기", link: "/pages/prevent/util.md" },
-              { text: "팀과 공유하여 집단지성화 하기", link: "/pages/prevent/share.md" },
+              { text: "팀과 공유하고 공통 유틸에 반영하기", link: "/pages/prevent/util.md" },
              ],
           },
         ]

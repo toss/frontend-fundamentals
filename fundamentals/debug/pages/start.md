@@ -31,7 +31,7 @@ comments: false
 
 ### 수정 효과를 높이는 전략
 - [근본 원인 수정하기](./fix/correct.md)
-- [순수 함수만들기](./fix/pure.md)
+- [순수 함수 분리하기](./fix/pure.md)
 - [데드코드 제거하기](./fix/dead-code.md)
 
 ## 4. 재발 방지하기
@@ -39,5 +39,4 @@ comments: false
 
 ### 재발을 막는 전략
 - [버그 리포트 남기기](./prevent/bug-report.md)
-- [공통 유틸에 반영하기](./prevent/util.md)
-- [팀과 공유하여 집단지성화 하기](./prevent/share.md)
+- [팀과 공유하고 공통 유틸에 반영하기](./prevent/util.md)
