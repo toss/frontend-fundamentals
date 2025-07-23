@@ -12,7 +12,7 @@ console.log(selectedUser.name);
 
 ```
 
-#### 겉보기에만 해결된 코드
+### 겉보기에만 해결된 코드
 겉으로는 에러가 사라졌지만, 로직상 undefined.name이 undefined로 처리되어 잘못된 데이터가 조용히 넘어가요. 문제의 원인(해당 유저가 없다는 사실)을 숨기기만 하고, 애초에 find() 결과를 제대로 확인하지 않았다는 잘못된 가정을 그대로 유지한 셈이에요.
 ```tsx
 const selectedUser = users.find((user) => user.id === 3) || {};
@@ -20,7 +20,7 @@ const selectedUser = users.find((user) => user.id === 3) || {};
 console.log(selectedUser.name);
 ```
 
-#### 근본 원인을 해결한 코드
+### 근본 원인을 해결한 코드
 데이터의 불완전성을 명시적으로 확인하고, 문제가 생기면 명확하게 처리해요. 이 접근은 버그의 원인과 위치를 정확히 알 수 있게 해주고, 의도하지 않은 조용한 실패(silent fail)를 방지해요.
 ```tsx
 const selectedUser = users.find((user) => user.id === 3);
@@ -69,7 +69,7 @@ function SearchBox() {
   );
 }
 ```
-#### 겉보기에 해결된 코드: 
+### 겉보기에 해결된 코드: 
 setTimeout으로 딜레이를 주어서 겉보기에 깔끔해 보이도록 수정되었지만, 여전히 응답 순서가 꼬이면 이전 응답이 나중에 덮을 수 있어요. 근본 원인인 "응답 순서 관리" 를 하지 않았기 때문에 race condition은 그대로 존재해요.
 
 ```tsx
@@ -88,7 +88,7 @@ useEffect(() => {
 }, [query]);
 ```
 
-#### 근본 원인을 해결한 코드
+### 근본 원인을 해결한 코드
 AbortController 또는 요청 순서 관리하도록 수정했어요. useEffect가 재실행될 때 이전 요청을 명시적으로 abort(취소) 함으로써 race condition 방지해요. 사용자 입력이 빠르게 바뀌어도 마지막 요청만 유효한 결과로 인정되고, 의도한 흐름을 코드로 명확하게 제어되어요.
 
 ```tsx
