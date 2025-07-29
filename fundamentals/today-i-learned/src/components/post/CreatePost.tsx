@@ -144,14 +144,12 @@ interface PostFooterProps {
   control: Control<CreatePostForm>;
   isSubmitting: boolean;
   isValid: boolean;
-  onCancel: () => void;
 }
 
 function PostFooter({
   control,
   isSubmitting,
   isValid,
-  onCancel
 }: PostFooterProps) {
   const title = useWatch({
     control,
@@ -169,7 +167,6 @@ function PostFooter({
   const contentLength = content?.length || 0;
   const maxTitleLength = APP_CONSTANTS.MAX_TITLE_LENGTH;
   const maxContentLength = APP_CONSTANTS.MAX_CONTENT_LENGTH;
-  const isContentNearLimit = contentLength > maxContentLength * 0.8;
   const isContentOverLimit = contentLength > maxContentLength;
   const isTitleOverLimit = titleLength > maxTitleLength;
 
@@ -270,10 +267,6 @@ export function CreatePost({
     [onSubmit, reset]
   );
 
-  const handleCancel = useCallback(() => {
-    reset();
-    setIsFocused(false);
-  }, [reset]);
 
   const handleKeyDown = useCallback(
     async (e: React.KeyboardEvent) => {
@@ -314,7 +307,7 @@ export function CreatePost({
         "shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.3)]",
         "p-6 transition-all duration-300",
         isFocused &&
-          "shadow-[0_20px_40px_rgb(128,128,128,0.15)] border-gray-200/60 scale-[1.02]",
+        "shadow-[0_20px_40px_rgb(128,128,128,0.15)] border-gray-200/60 scale-[1.02]",
         isProcessing && "opacity-90",
         className
       )}
@@ -367,7 +360,6 @@ export function CreatePost({
                   control={control}
                   isSubmitting={isProcessing}
                   isValid={isValid && !errors.content}
-                  onCancel={handleCancel}
                 />
               </div>
             )}

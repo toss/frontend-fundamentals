@@ -30,7 +30,7 @@ const sidebarData: SidebarItem[] = [
     ]
   },
   {
-    title: "Customization", 
+    title: "Customization",
     children: [
       { title: "Using a Custom Theme", href: "/custom-theme" },
       { title: "Extending the Default Theme", href: "/extending-theme" },
@@ -63,7 +63,7 @@ export function Sidebar() {
     setExpandedItems(newExpanded);
   };
 
-  const renderSidebarItem = (item: SidebarItem, level = 0) => {
+  const renderSidebarItem = (item: SidebarItem) => {
     const isExpanded = expandedItems.has(item.title);
     const hasChildren = item.children && item.children.length > 0;
 

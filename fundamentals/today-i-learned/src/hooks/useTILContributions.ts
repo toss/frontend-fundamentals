@@ -1,7 +1,6 @@
 import { useMemo } from "react";
-import { useAllDiscussions } from "./useAllDiscussions";
-import { PAGE_SIZE } from "../constants/github";
 import type { ActivityDay, GitHubDiscussion } from "../types";
+import { useAllDiscussions } from "./useAllDiscussions";
 
 // 기여도 레벨 계산 상수
 const CONTRIBUTION_LEVELS = {
@@ -105,7 +104,7 @@ const calculatePeriodCounts = (
 
 export function useTILContributions(): TILContributionsData {
   // 모든 TIL 포스트 데이터 가져오기 (경량화된 쿼리 사용)
-  const { data: discussionsData, isLoading } = useAllDiscussions();
+  const { data: discussionsData } = useAllDiscussions();
 
   const contributionsData = useMemo(() => {
     const allDiscussions = discussionsData ?? [];

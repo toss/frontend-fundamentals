@@ -44,8 +44,6 @@ function PostCardComponent({
   discussion,
   onLike,
   onComment,
-  isLast = false,
-  isLoading = false
 }: PostCardProps) {
   const [likeCount, setLikeCount] = useState(discussion.reactions.totalCount);
   const { toggleLike, isLoading: isTogglingLike } = useToggleReaction();

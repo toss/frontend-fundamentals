@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ONE_NAVIGATION_ITEMS } from '../../config/OneNavigationItems';
 import '../styles/OneNavigation.css';
 
@@ -18,7 +18,7 @@ export const OneNavigationReact = ({ lang, isKorean, pathname }: OneNavigationPr
 	const navigationItems = ONE_NAVIGATION_ITEMS.map(item => ({
 		...item,
 		href: item.href
-			.replace("/{lang}", `/${lang.split("-").at(0)}`)
+			.replace("/{lang}", `/${lang.split("-")[0]}`)
 			.replace("/ko", "")
 	}));
 
@@ -27,8 +27,10 @@ export const OneNavigationReact = ({ lang, isKorean, pathname }: OneNavigationPr
 	};
 
 	const handleNavigation = (href: string): void => {
-		const fullUrl = locationOrigin + href;
-		window.location.href = fullUrl;
+		if (typeof window !== 'undefined') {
+			const fullUrl = locationOrigin + href;
+			window.location.href = fullUrl;
+		}
 	};
 
 	return (

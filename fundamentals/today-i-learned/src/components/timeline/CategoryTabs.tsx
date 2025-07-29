@@ -56,7 +56,7 @@ interface CategoryTabsProps extends BaseComponentProps {
   onTabChange: (tab: PostCategory) => void;
 }
 
-export function CategoryTabs({ activeTab, onTabChange, className }: CategoryTabsProps) {
+export function CategoryTabs({ activeTab, onTabChange }: CategoryTabsProps) {
   return (
     <nav className="flex space-x-6 justify-center" aria-label="게시물 카테고리" role="tablist">
       {TAB_CONFIG.map((tab) => {

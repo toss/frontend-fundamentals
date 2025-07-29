@@ -1,12 +1,12 @@
-import { useState, useEffect, useLayoutEffect, useRef, useMemo } from "react";
 import { cn } from "@/lib/utils";
+import type { BaseComponentProps } from "@/types";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import {
   useTILContributions,
   type ContributionDay
 } from "../../hooks/useTILContributions";
-import type { BaseComponentProps } from "@/types";
 
-interface ContributionGraphProps extends BaseComponentProps {}
+interface ContributionGraphProps extends BaseComponentProps { }
 
 // GitHub 잔디 색상 레벨 (기존 브랜드 컬러 활용)
 const CONTRIBUTION_COLORS = {
@@ -55,8 +55,6 @@ export function ContributionGraph({ className }: ContributionGraphProps) {
     totalContributions,
     currentStreak,
     longestStreak,
-    thisWeekCount,
-    thisMonthCount
   } = useTILContributions();
   const [tooltip, setTooltip] = useState<TooltipData | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -177,7 +175,7 @@ export function ContributionGraph({ className }: ContributionGraphProps) {
         <div className="min-w-[800px]">
           {/* Month Labels - 상단에 독립적으로 배치 */}
           <div className="flex mb-2">
-            <div className="w-10 flex-shrink-0"></div> {/* 요일 라벨 공간 */}
+            <div className="w-10 flex-shrink-0" /> {/* 요일 라벨 공간 */}
             <div className="flex-1 relative h-4">
               {monthLabels.map((label, index) => (
                 <div

@@ -24,6 +24,7 @@
     "docs:til:dev": "yarn workspace @frontend-fundamentals/today-i-learned dev",
     "docs:til:build": "yarn workspace @frontend-fundamentals/today-i-learned build",
     "docs:til:preview": "yarn workspace @frontend-fundamentals/today-i-learned preview",
+    "shared:typecheck": "yarn workspace @frontend-fundamentals/shared typecheck",
     "postbuild": "mkdir -p dist/fundamentals/code-quality dist/fundamentals/bundling dist/fundamentals/debug dist/fundamentals/a11y dist/fundamentals/today-i-learned && cp -r fundamentals/code-quality/.vitepress/dist/* dist/fundamentals/code-quality/ && cp -r fundamentals/bundling/.vitepress/dist/* dist/fundamentals/bundling/ && cp -r fundamentals/debug/.vitepress/dist/* dist/fundamentals/debug/ && cp -r fundamentals/a11y/.vitepress/dist/* dist/fundamentals/a11y/ && cp -r fundamentals/today-i-learned/dist/* dist/fundamentals/today-i-learned/",
     "build": "yarn docs:build && yarn docs:bundle:build && yarn docs:debug:build && yarn docs:a11y:build && yarn docs:til:build && yarn postbuild"
   },
