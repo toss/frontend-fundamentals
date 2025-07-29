@@ -21,9 +21,9 @@
     "docs:a11y:dev": "yarn workspace @frontend-fundamentals/a11y docs:dev",
     "docs:a11y:build": "yarn workspace @frontend-fundamentals/a11y docs:build",
     "docs:a11y:preview": "yarn workspace @frontend-fundamentals/a11y docs:preview",
-    "docs:til:dev": "yarn workspace @fundamentals/today-i-learned dev",
-    "docs:til:build": "yarn workspace @fundamentals/today-i-learned build",
-    "docs:til:preview": "yarn workspace @fundamentals/today-i-learned preview",
+    "docs:til:dev": "yarn workspace @frontend-fundamentals/today-i-learned dev",
+    "docs:til:build": "yarn workspace @frontend-fundamentals/today-i-learned build",
+    "docs:til:preview": "yarn workspace @frontend-fundamentals/today-i-learned preview",
     "postbuild": "mkdir -p dist/fundamentals/code-quality dist/fundamentals/bundling dist/fundamentals/debug dist/fundamentals/a11y dist/fundamentals/today-i-learned && cp -r fundamentals/code-quality/.vitepress/dist/* dist/fundamentals/code-quality/ && cp -r fundamentals/bundling/.vitepress/dist/* dist/fundamentals/bundling/ && cp -r fundamentals/debug/.vitepress/dist/* dist/fundamentals/debug/ && cp -r fundamentals/a11y/.vitepress/dist/* dist/fundamentals/a11y/ && cp -r fundamentals/today-i-learned/dist/* dist/fundamentals/today-i-learned/",
     "build": "yarn docs:build && yarn docs:bundle:build && yarn docs:debug:build && yarn docs:a11y:build && yarn docs:til:build && yarn postbuild"
   },
