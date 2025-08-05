@@ -39,7 +39,7 @@ const generateYearDates = (endDate: Date = new Date()): string[] => {
   const startDate = new Date(endDate);
   startDate.setFullYear(startDate.getFullYear() - 1);
 
-  const currentDate = new Date(startDate);
+const currentDate = new Date(startDate);
   while (currentDate <= endDate) {
     dates.push(currentDate.toISOString().split("T")[0]);
     currentDate.setDate(currentDate.getDate() + 1);

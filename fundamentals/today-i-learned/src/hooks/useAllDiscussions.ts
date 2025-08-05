@@ -3,6 +3,8 @@ import type { GitHubDiscussion } from "../types";
 import { fetchGithub, handleGraphQLResponse } from "../utils/github";
 import { allMockDiscussions } from "../data/mockData";
 import { PAGE_SIZE } from "../constants/github";
+import { useAuth } from "../contexts/AuthContext";
+import { ENV_CONFIG, shouldUseMockData } from "../lib/env";
 
 // 기존 정상 작동하는 쿼리 구조 사용 (useInfiniteDiscussions와 동일)
 const DISCUSSIONS_QUERY = `
@@ -73,11 +75,13 @@ async function fetchMockAllDiscussions({
 async function fetchRealAllDiscussions({
   owner,
   repo,
-  categoryName
+  categoryName,
+  accessToken
 }: {
   owner: string;
   repo: string;
   categoryName?: string;
+  accessToken?: string;
 }): Promise<GitHubDiscussion[]> {
   const allDiscussions: GitHubDiscussion[] = [];
   let hasNextPage = true;
@@ -93,7 +97,7 @@ async function fetchRealAllDiscussions({
         repo,
         first: pageSize,
         after: cursor
-      });
+      }, accessToken);
 
       const data = await handleGraphQLResponse(
         response,
@@ -135,12 +139,12 @@ async function fetchRealAllDiscussions({
 }
 
 export function useAllDiscussions({
-  owner = import.meta.env.VITE_GITHUB_OWNER || "toss",
-  repo = import.meta.env.VITE_GITHUB_REPO || "frontend-fundamentals",
-  categoryName = import.meta.env.VITE_GITHUB_CATEGORY || "Today I Learned"
+  owner = ENV_CONFIG.GITHUB_OWNER,
+  repo = ENV_CONFIG.GITHUB_REPO,
+  categoryName = ENV_CONFIG.GITHUB_CATEGORY
 }: UseAllDiscussionsParams = {}) {
-  // 환경변수에서 목업 데이터 사용 여부 확인
-  const useMockData = import.meta.env.VITE_USE_MOCK_DATA === "true";
+  const { user } = useAuth();
+  const useMockData = shouldUseMockData();
 
   return useQuery({
     queryKey: [
@@ -148,13 +152,14 @@ export function useAllDiscussions({
       owner,
       repo,
       categoryName,
-      useMockData ? "mock" : "real"
+      useMockData ? "mock" : "real",
+      user?.access_token ? "authenticated" : "anonymous"
     ],
     queryFn: () => {
       if (useMockData) {
         return fetchMockAllDiscussions({ categoryName });
       }
-      return fetchRealAllDiscussions({ owner, repo, categoryName });
+      return fetchRealAllDiscussions({ owner, repo, categoryName, accessToken: user?.access_token });
     },
     staleTime: 1000 * 60 * 5, // 5분간 캐시
     gcTime: 1000 * 60 * 30, // 30분간 가비지 컬렉션 방지

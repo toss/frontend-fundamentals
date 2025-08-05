@@ -1,12 +1,23 @@
-// 환경에 맞는 GitHub API fetch 함수
+import { createAuthenticatedApiRequest, createApiRequest } from "../lib/api";
+import { ENV_CONFIG, isLocalhost } from "../lib/env";
+
+// OAuth 기반 GitHub API fetch 함수
 export async function fetchGithub(
   query: string,
-  variables: unknown
+  variables: unknown,
+  accessToken?: string
 ): Promise<Response> {
-  const isLocalhost = window.location.hostname === "localhost";
+  // 사용자 토큰이 있으면 새로운 GraphQL 엔드포인트 사용
+  if (accessToken) {
+    return createAuthenticatedApiRequest('GRAPHQL', accessToken, {
+      method: "POST",
+      body: JSON.stringify({ query, variables })
+    });
+  }
 
-  if (isLocalhost) {
-    const token = import.meta.env.VITE_GITHUB_TOKEN;
+  // 사용자 토큰이 없으면 기존 앱 토큰 방식 사용 (읽기 전용)
+  if (isLocalhost()) {
+    const token = ENV_CONFIG.GITHUB_TOKEN;
     if (!token) {
       throw new Error("GitHub token is not configured");
     }
@@ -20,11 +31,8 @@ export async function fetchGithub(
       body: JSON.stringify({ query, variables })
     });
   } else {
-    return fetch("/api/github", {
+    return createApiRequest('GITHUB', {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
       body: JSON.stringify({ query, variables })
     });
   }

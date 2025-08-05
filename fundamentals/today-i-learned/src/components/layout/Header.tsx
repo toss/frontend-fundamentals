@@ -1,15 +1,19 @@
-import { Moon, Sun, Menu } from "lucide-react";
+import { Moon, Sun, Menu, LogOut, LogIn } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "../ui/Button";
 import { useTheme } from "../../contexts/ThemeContext";
 import { useUserProfile } from "../../hooks/useUserProfile";
+import { useAuth } from "../../contexts/AuthContext";
 import { cn } from "@/lib/utils";
 import ffSymbolUrl from "../../assets/ff-symbol.svg";
 
 export function Header() {
   const { theme, toggleTheme } = useTheme();
-  const { userProfile, isLoading } = useUserProfile();
+  const { user, isAuthenticated, login, logout, isLoading: authLoading } = useAuth();
+  const { userProfile, isLoading: profileLoading } = useUserProfile();
   const location = useLocation();
+
+  const isLoading = authLoading || profileLoading;
 
   return (
     <header className="fixed top-0 left-[88px] right-0 z-50 border-b backdrop-blur-md dark:bg-[#1b1b1f]/95">
@@ -71,22 +75,37 @@ export function Header() {
           <div className="flex items-center space-x-2 ml-2">
             {isLoading ? (
               <div className="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
-            ) : userProfile ? (
+            ) : isAuthenticated && (user || userProfile) ? (
               <div className="flex items-center space-x-2">
                 <img
-                  src={userProfile.avatar_url}
-                  alt={`${userProfile.login} avatar`}
+                  src={(user?.avatar_url || userProfile?.avatar_url) || ""}
+                  alt={`${(user?.login || userProfile?.login)} avatar`}
                   className="w-8 h-8 rounded-full object-cover"
                   style={{ aspectRatio: "1 / 1" }}
                 />
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {userProfile.login}
+                  {user?.login || userProfile?.login}
                 </span>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={logout}
+                  className="h-8 w-8 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+                  aria-label="로그아웃"
+                >
+                  <LogOut className="h-4 w-4" />
+                </Button>
               </div>
             ) : (
-              <div className="text-sm text-gray-500 dark:text-gray-400">
-                Guest
-              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={login}
+                className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+              >
+                <LogIn className="h-4 w-4" />
+                <span className="text-sm">GitHub 로그인</span>
+              </Button>
             )}
           </div>
 

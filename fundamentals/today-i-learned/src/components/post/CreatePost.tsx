@@ -1,10 +1,11 @@
 import { APP_CONSTANTS, UI_CONFIG } from "@/constants";
 import { cn, validateContent } from "@/lib/utils";
 import type { BaseComponentProps } from "@/types";
-import { User } from "lucide-react";
+import { User, LogIn } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
 import { Control, useController, useForm, useWatch } from "react-hook-form";
 import { useUserProfile } from "../../hooks/useUserProfile";
+import { useAuth } from "../../contexts/AuthContext";
 import { Button } from "../ui/Button";
 
 interface CreatePostForm {
@@ -207,6 +208,7 @@ export function CreatePost({
 }: CreatePostProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { user, isAuthenticated, login } = useAuth();
   const { userProfile, isLoading: isProfileLoading } = useUserProfile();
 
   const {
@@ -298,6 +300,48 @@ export function CreatePost({
 
   const isProcessing = isSubmitting || isLoading;
 
+  // 로그인하지 않은 사용자에게 로그인 유도 UI 표시
+  if (!isAuthenticated) {
+    return (
+      <div
+        className={cn(
+          "relative rounded-2xl",
+          "dark:from-gray-800 dark:via-gray-800 dark:to-gray-800",
+          "border border-gray-100/50 dark:border-gray-700",
+          "shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.3)]",
+          "p-6 transition-all duration-300",
+          className
+        )}
+      >
+        <div className="flex flex-col items-center justify-center py-8 space-y-4">
+          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-r from-gray-400 to-gray-500 shadow-sm">
+            <User className="h-5 w-5 text-white" aria-hidden="true" />
+          </div>
+          <div className="text-center space-y-2">
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+              TIL을 작성하려면 로그인이 필요해요
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              GitHub 계정으로 로그인하여 오늘 배운 것을 기록해보세요
+            </p>
+            <Button
+              onClick={login}
+              className={cn(
+                "bg-[#5672cd] hover:bg-[#4a5db0]",
+                "text-white font-semibold px-6 py-2 rounded-full",
+                "transform transition-all duration-300 hover:scale-105 hover:-translate-y-0.5",
+                "flex items-center space-x-2 mt-4"
+              )}
+            >
+              <LogIn className="h-4 w-4" />
+              <span>GitHub으로 로그인</span>
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       className={cn(
@@ -319,10 +363,10 @@ export function CreatePost({
         <div className="flex items-start space-x-3">
           {/* Profile Picture */}
           <div className="flex-shrink-0 pt-1">
-            {userProfile && !isProfileLoading ? (
+            {(user || userProfile) && !isProfileLoading ? (
               <img
-                src={userProfile.avatar_url}
-                alt={`${userProfile.login}님의 프로필`}
+                src={(user?.avatar_url || userProfile?.avatar_url) || ""}
+                alt={`${(user?.login || userProfile?.login)}님의 프로필`}
                 className="h-11 w-11 rounded-full object-cover ring-2 ring-gray-200/40 shadow-sm"
               />
             ) : (
