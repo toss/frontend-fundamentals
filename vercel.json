@@ -1,4 +1,27 @@
 {
-  "buildCommand": "echo 'Skip build'",
-  "installCommand": "echo 'Skip install'"
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/code-quality/",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/fundamentals/code-quality/:path*",
+      "destination": "/dist/fundamentals/code-quality/:path*"
+    },
+    {
+      "source": "/fundamentals/bundling/:path*",
+      "destination": "/dist/fundamentals/bundling/:path*"
+    },
+    {
+      "source": "/fundamentals/today-i-learned/:path*",
+      "destination": "/dist/fundamentals/today-i-learned/:path*"
+    },
+    {
+      "source": "/code-quality/:path*",
+      "destination": "/dist/fundamentals/code-quality/:path*"
+    }
+  ]
 }
