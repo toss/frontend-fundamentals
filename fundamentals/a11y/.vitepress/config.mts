@@ -26,6 +26,10 @@ export default defineConfig({
         link: "/overview",
       },
       {
+        text: "체험하기",
+        link: "/playground"
+      },
+      {
         text: "접근성을 지켜야 하는 이유",
         link: "/why",
       },
