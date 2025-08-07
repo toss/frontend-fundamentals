@@ -30,7 +30,7 @@ export const ONE_NAVIGATION_ITEMS: NavItem[] = [
       <rect x="11" y="3" width="2" height="10" fill="currentColor"/>`
   },
   {
-    path: "/accessibility",
+    path: "/a11y",
     href: "/a11y/{lang}",
     tooltip: {
       ko: "접근성",
