@@ -1,0 +1,22 @@
+{
+  "name": "@frontend-fundamentals/shared",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "vitepress": "^1.0.0",
+    "vue": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.43",
+    "react": "^18.2.0",
+    "typescript": "^5.2.2",
+    "vitepress": "^1.4.1",
+    "vue": "^3.4.0"
+  }
+}

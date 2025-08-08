@@ -1,0 +1,101 @@
+{
+  "rules": {
+    "eslint/no-unused-vars": "warn",
+    "eslint/no-console": "off",
+    "eslint/prefer-const": "error",
+    "eslint/no-var": "error",
+    "eslint/eqeqeq": "error",
+    "eslint/no-duplicate-imports": "error",
+    "eslint/no-empty": "warn",
+    "eslint/no-unreachable": "error",
+    "eslint/no-undef": "error",
+    "eslint/curly": "error",
+    "eslint/no-eval": "error",
+    "eslint/no-implied-eval": "error",
+    "eslint/no-new-wrappers": "error",
+    "eslint/no-throw-literal": "error",
+    "react/jsx-key": "error",
+    "react/jsx-no-duplicate-props": "error",
+    "react/jsx-no-target-blank": "error",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "react/no-children-prop": "error",
+    "react/no-danger-with-children": "error",
+    "react/no-deprecated": "warn",
+    "react/no-direct-mutation-state": "error",
+    "react/no-find-dom-node": "error",
+    "react/no-is-mounted": "error",
+    "react/no-render-return-value": "error",
+    "react/no-string-refs": "error",
+    "react/no-unescaped-entities": "error",
+    "react/no-unknown-property": "error",
+    "react/require-render-return": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "unicorn/better-regex": "error",
+    "unicorn/catch-error-name": "error",
+    "unicorn/consistent-destructuring": "error",
+    "unicorn/consistent-function-scoping": "off",
+    "unicorn/explicit-length-check": "error",
+    "unicorn/new-for-builtins": "error",
+    "unicorn/no-array-instanceof": "error",
+    "unicorn/no-console-spaces": "error",
+    "unicorn/no-for-loop": "error",
+    "unicorn/no-hex-escape": "error",
+    "unicorn/no-instanceof-array": "error",
+    "unicorn/no-new-buffer": "error",
+    "unicorn/no-unsafe-regex": "error",
+    "unicorn/prefer-includes": "error",
+    "unicorn/prefer-string-starts-ends-with": "error",
+    "unicorn/prefer-text-content": "error",
+    "unicorn/prefer-type-error": "error",
+    "import/no-duplicates": "error",
+    "import/no-self-import": "error",
+    "import/no-cycle": "error",
+    "import/no-useless-path-segments": "error"
+  },
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "globals": {
+    "React": "readonly",
+    "JSX": "readonly"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "rules": {
+        "typescript/no-unused-vars": "warn",
+        "typescript/no-explicit-any": "warn",
+        "typescript/no-non-null-assertion": "warn",
+        "typescript/prefer-as-const": "error",
+        "typescript/prefer-optional-chain": "error",
+        "typescript/prefer-nullish-coalescing": "error",
+        "typescript/no-unnecessary-type-assertion": "error",
+        "typescript/no-empty-interface": "error",
+        "typescript/no-inferrable-types": "error"
+      }
+    },
+    {
+      "files": [
+        "**/*.test.ts",
+        "**/*.test.tsx",
+        "**/*.spec.ts",
+        "**/*.spec.tsx"
+      ],
+      "rules": {
+        "eslint/no-console": "off",
+        "typescript/no-explicit-any": "off"
+      }
+    },
+    {
+      "files": ["vite.config.ts", "*.config.js", "*.config.ts"],
+      "rules": {
+        "eslint/no-console": "off",
+        "unicorn/prefer-module": "off"
+      }
+    }
+  ]
+}

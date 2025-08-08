@@ -16,6 +16,10 @@
       "destination": "/dist/fundamentals/bundling/:path*"
     },
     {
+      "source": "/fundamentals/today-i-learned/:path*",
+      "destination": "/dist/fundamentals/today-i-learned/:path*"
+    },
+    {
       "source": "/code-quality/:path*",
       "destination": "/dist/fundamentals/code-quality/:path*"
     }

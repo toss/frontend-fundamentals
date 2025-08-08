@@ -44,3 +44,4 @@ __assetManifest.json
 **/.vitepress/dist
 
 config.mts.*.js
+.vercel
