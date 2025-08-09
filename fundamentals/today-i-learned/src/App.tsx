@@ -8,6 +8,7 @@ import { CategoryTabs, TabContent } from "./components/timeline/CategoryTabs";
 import { useCreateDiscussion } from "./hooks/useCreateDiscussion";
 import { MyPage } from "./pages/MyPage";
 import type { PostCategory } from "./types";
+import { NewHomePage } from "./pages/NewHomePage";
 
 function HomePage() {
   const [activeTab, setActiveTab] = useState<PostCategory>("latest");
@@ -74,6 +75,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/profile" element={<MyPage />} />
+        <Route path="/new-home" element={<NewHomePage />} />
       </Routes>
     </Layout>
   );
