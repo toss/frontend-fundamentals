@@ -51,7 +51,7 @@ render(
   </ul>
 );
 const 복숭아 = screen.getByRole('listitem', { name: '복숭아' });
-const 복숭아저장버튼 = getByRole(복숭아, 'button', { name: '저장' })
+const 복숭아저장버튼 = within(복숭아).getByRole('button', { name: '저장' });
 expect(복숭아저장버튼).toBeInTheDocument();
 ```
 
