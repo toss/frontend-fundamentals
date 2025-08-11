@@ -198,7 +198,7 @@ const fetchGithubDiscussion = async (query: string) => {
   /**
    * /api/github.js
    */
-  const response = await fetch("/api/graphql", {
+  const response = await fetch("/api/github/graphql", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
