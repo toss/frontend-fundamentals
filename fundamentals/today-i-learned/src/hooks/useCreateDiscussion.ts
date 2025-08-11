@@ -89,8 +89,8 @@ async function createDiscussion({
 export function useCreateDiscussion() {
   const queryClient = useQueryClient();
 
-  const owner = import.meta.env.VITE_GITHUB_OWNER || "al-bur";
-  const repo = import.meta.env.VITE_GITHUB_REPO || "test";
+  const owner = "toss";
+  const repo = "frontend-fundamentals";
 
   return useMutation({
     mutationFn: ({ title, body }: { title: string; body: string }) =>

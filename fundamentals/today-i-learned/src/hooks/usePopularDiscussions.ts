@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import type { GitHubDiscussion } from "../types";
-import { allMockDiscussions } from "../data/mockData";
 import { graphqlRequest } from "../lib/api";
 import { PAGE_SIZE } from "../constants/github";
 
@@ -43,50 +42,6 @@ const POPULAR_DISCUSSIONS_QUERY = `
   }
 `;
 
-// 목업 데이터에서 인기글 가져오기
-async function fetchMockPopularDiscussions({
-  categoryName,
-  limit
-}: {
-  categoryName?: string;
-  limit: number;
-}): Promise<GitHubDiscussion[]> {
-  const API_SIMULATION_DELAY_MS = 300;
-  await new Promise((resolve) => setTimeout(resolve, API_SIMULATION_DELAY_MS));
-
-  let discussions = allMockDiscussions;
-
-  // 카테고리 필터링
-  if (categoryName) {
-    discussions = discussions.filter(
-      (discussion) => discussion.category?.name === categoryName
-    );
-  }
-
-  const REACTIONS_WEIGHT = 2;
-  const COMMENTS_WEIGHT = 1;
-
-  const calculatePopularityScore = (discussion: GitHubDiscussion) => {
-    const reactionsCount = discussion.reactions?.totalCount || 0;
-    const commentsCount = discussion.comments?.totalCount || 0;
-    return reactionsCount * REACTIONS_WEIGHT + commentsCount * COMMENTS_WEIGHT;
-  };
-
-  const MIN_POPULARITY_THRESHOLD = 1; // 최소 1개의 반응(좋아요 또는 댓글)이 있어야 함
-
-  const sortedDiscussions = discussions
-    .map((discussion) => ({
-      ...discussion,
-      popularityScore: calculatePopularityScore(discussion)
-    }))
-    .filter(
-      (discussion) => discussion.popularityScore >= MIN_POPULARITY_THRESHOLD
-    )
-    .sort((a, b) => b.popularityScore - a.popularityScore)
-    .slice(0, limit);
-
-  return sortedDiscussions;
-}
 
 // GitHub API를 사용한 실제 인기글 데이터 페치
 async function fetchRealPopularDiscussions({
@@ -150,27 +105,20 @@ const STALE_TIME_MS = 1000 * 60 * 10; // 10분
 const GC_TIME_MS = 1000 * 60 * 30; // 30분
 
 export function usePopularDiscussions({
-  owner = import.meta.env.VITE_GITHUB_OWNER,
-  repo = import.meta.env.VITE_GITHUB_REPO,
+  owner = "toss",
+  repo = "frontend-fundamentals",
   categoryName = import.meta.env.VITE_GITHUB_CATEGORY,
   limit = DEFAULT_LIMIT
 }: UsePopularDiscussionsParams = {}) {
-  const useMockData = import.meta.env.VITE_USE_MOCK_DATA === "true";
-  const dataSource = useMockData ? "mock" : "real";
-
   const queryKey = [
     "popular-discussions",
     owner,
     repo,
     categoryName,
-    limit,
-    dataSource
+    limit
   ];
 
   const queryFn = () => {
-    if (useMockData) {
-      return fetchMockPopularDiscussions({ categoryName, limit });
-    }
     return fetchRealPopularDiscussions({ owner, repo, categoryName, limit });
   };
 

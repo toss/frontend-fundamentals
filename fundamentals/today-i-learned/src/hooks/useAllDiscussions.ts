@@ -1,10 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import type { GitHubDiscussion } from "../types";
 import { graphqlRequest } from "../lib/api";
-import { allMockDiscussions } from "../data/mockData";
 import { PAGE_SIZE } from "../constants/github";
 import { useAuth } from "../contexts/AuthContext";
-import { ENV_CONFIG, shouldUseMockData } from "../lib/env";
+import { ENV_CONFIG } from "../lib/env";
 
 // 기존 정상 작동하는 쿼리 구조 사용 (useInfiniteDiscussions와 동일)
 const DISCUSSIONS_QUERY = `
@@ -50,26 +49,6 @@ interface UseAllDiscussionsParams {
   categoryName?: string;
 }
 
-// 목업 데이터 사용 함수
-async function fetchMockAllDiscussions({
-  categoryName
-}: {
-  categoryName?: string;
-}): Promise<GitHubDiscussion[]> {
-  // API 호출 시뮬레이션
-  await new Promise((resolve) => setTimeout(resolve, 300));
-
-  let discussions = allMockDiscussions;
-
-  // 카테고리 필터링
-  if (categoryName) {
-    discussions = discussions.filter(
-      (discussion) => discussion.category?.name === categoryName
-    );
-  }
-
-  return discussions;
-}
 
 // 모든 페이지를 자동으로 가져오는 함수 (실제 API)
 async function fetchRealAllDiscussions({
@@ -139,7 +118,6 @@ export function useAllDiscussions({
   categoryName = ENV_CONFIG.GITHUB_CATEGORY
 }: UseAllDiscussionsParams = {}) {
   const { user } = useAuth();
-  const useMockData = shouldUseMockData();
 
   return useQuery({
     queryKey: [
@@ -147,13 +125,9 @@ export function useAllDiscussions({
       owner,
       repo,
       categoryName,
-      useMockData ? "mock" : "real",
       user?.access_token ? "authenticated" : "anonymous"
     ],
     queryFn: () => {
-      if (useMockData) {
-        return fetchMockAllDiscussions({ categoryName });
-      }
       return fetchRealAllDiscussions({ owner, repo, categoryName, accessToken: user?.access_token });
     },
     staleTime: 1000 * 60 * 5, // 5분간 캐시

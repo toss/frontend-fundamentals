@@ -62,8 +62,10 @@ export function PostList({ owner, repo, categoryName }: PostListProps) {
     );
   }
 
+  console.log({ data })
   // 데이터가 없는 경우
   const allDiscussions = data?.pages.flatMap((page) => page.discussions) ?? [];
+
 
   if (allDiscussions.length === 0) {
     return (

@@ -115,8 +115,8 @@ async function getUserReactions(discussionId: string) {
 
 export function useAddReaction() {
   const queryClient = useQueryClient();
-  const owner = import.meta.env.VITE_GITHUB_OWNER || "al-bur";
-  const repo = import.meta.env.VITE_GITHUB_REPO || "test";
+  const owner = "toss";
+  const repo = "frontend-fundamentals";
 
   return useMutation({
     mutationFn: addReaction,
@@ -134,8 +134,8 @@ export function useAddReaction() {
 
 export function useRemoveReaction() {
   const queryClient = useQueryClient();
-  const owner = import.meta.env.VITE_GITHUB_OWNER || "al-bur";
-  const repo = import.meta.env.VITE_GITHUB_REPO || "test";
+  const owner = "toss";
+  const repo = "frontend-fundamentals";
 
   return useMutation({
     mutationFn: removeReaction,
