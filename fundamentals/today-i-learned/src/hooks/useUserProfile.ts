@@ -25,27 +25,6 @@ const GET_VIEWER_QUERY = `
   }
 `;
 
-// 특정 사용자 정보 가져오기
-const GET_USER_QUERY = `
-  query GetUser($login: String!) {
-    user(login: $login) {
-      id
-      login
-      avatarUrl
-      name
-      bio
-      repositories {
-        totalCount
-      }
-      followers {
-        totalCount
-      }
-      following {
-        totalCount
-      }
-    }
-  }
-`;
 
 // GraphQL API를 통해 현재 인증된 사용자 정보 가져오기
 const fetchUserProfile = async (

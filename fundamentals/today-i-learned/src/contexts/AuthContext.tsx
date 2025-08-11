@@ -83,9 +83,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   const login = () => {
-    const currentHost = window.location.host;
-    const protocol = window.location.protocol;
-    const redirectUri = `${protocol}//${currentHost}/api/github/login-callback`;
+    const redirectUri = 'https://frontend-fundamentals.com/api/github/login-callback';
 
     const loginUrl = `${AUTH_LOGIN_URL}?redirect_uri=${encodeURIComponent(redirectUri)}`;
     window.location.href = loginUrl;

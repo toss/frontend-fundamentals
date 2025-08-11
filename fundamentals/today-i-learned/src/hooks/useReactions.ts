@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { graphqlRequest } from "../lib/api";
 
 const ADD_REACTION_MUTATION = `

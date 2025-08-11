@@ -1,19 +1,17 @@
-import { Moon, Sun, Menu, LogOut, LogIn } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
-import { Button } from "../ui/Button";
-import { useTheme } from "../../contexts/ThemeContext";
-import { useUserProfile } from "../../hooks/useUserProfile";
-import { useAuth } from "../../contexts/AuthContext";
 import { cn } from "@/lib/utils";
+import { LogIn, LogOut, Menu, Moon, Sun } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import ffSymbolUrl from "../../assets/ff-symbol.svg";
+import { useAuth } from "../../contexts/AuthContext";
+import { useTheme } from "../../contexts/ThemeContext";
+import { Button } from "../ui/Button";
 
 export function Header() {
   const { theme, toggleTheme } = useTheme();
   const { user, isAuthenticated, login, logout, isLoading: authLoading } = useAuth();
-  const { userProfile, isLoading: profileLoading } = useUserProfile();
   const location = useLocation();
 
-  const isLoading = authLoading || profileLoading;
+  const isLoading = authLoading;
 
   return (
     <header className="fixed top-0 left-[88px] right-0 z-50 border-b backdrop-blur-md dark:bg-[#1b1b1f]/95">
