@@ -115,7 +115,7 @@ async function fetchRealAllDiscussions({
 export function useAllDiscussions({
   owner = ENV_CONFIG.GITHUB_OWNER,
   repo = ENV_CONFIG.GITHUB_REPO,
-  categoryName = ENV_CONFIG.GITHUB_CATEGORY
+  categoryName = "Today I Learned"
 }: UseAllDiscussionsParams = {}) {
   const { user } = useAuth();
 

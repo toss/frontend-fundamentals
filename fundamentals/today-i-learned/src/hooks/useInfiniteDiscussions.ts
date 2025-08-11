@@ -57,13 +57,11 @@ const DISCUSSIONS_QUERY = `
 async function fetchRealDiscussionsPage({
   owner,
   repo,
-  categoryName,
   pageSize,
   pageParam
 }: {
   owner: string;
   repo: string;
-  categoryName: string;
   pageSize: number;
   pageParam?: string;
 }): Promise<DiscussionsResponse> {
@@ -77,15 +75,8 @@ async function fetchRealDiscussionsPage({
   const discussionsData = data.data?.repository?.discussions;
   const allDiscussions = discussionsData?.nodes || [];
 
-  // 클라이언트 사이드에서 카테고리 필터링
-  const filteredDiscussions = categoryName
-    ? allDiscussions.filter(
-        (discussion: any) => discussion.category?.name === categoryName
-      )
-    : allDiscussions;
-
   return {
-    discussions: filteredDiscussions,
+    discussions: allDiscussions,
     hasNextPage: discussionsData?.pageInfo?.hasNextPage || false,
     endCursor: discussionsData?.pageInfo?.endCursor || null
   };
@@ -94,7 +85,6 @@ async function fetchRealDiscussionsPage({
 export function useInfiniteDiscussions({
   owner = "toss",
   repo = "frontend-fundamentals",
-  categoryName = import.meta.env.VITE_GITHUB_CATEGORY || "Today I Learned",
   pageSize = PAGE_SIZE.INFINITE_SCROLL
 }: UseInfiniteDiscussionsParams = {}) {
   return useInfiniteQuery({
@@ -102,13 +92,11 @@ export function useInfiniteDiscussions({
       "discussions",
       owner,
       repo,
-      categoryName
     ],
     queryFn: ({ pageParam }: { pageParam: string | undefined }) => {
       return fetchRealDiscussionsPage({
         owner,
         repo,
-        categoryName,
         pageSize,
         pageParam
       });

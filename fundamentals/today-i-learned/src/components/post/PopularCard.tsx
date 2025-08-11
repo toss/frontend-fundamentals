@@ -1,4 +1,4 @@
-import { memo, useState, useEffect } from "react";
+import { memo, useState } from "react";
 import {
   Heart,
   MessageCircle,
@@ -8,8 +8,7 @@ import {
 } from "lucide-react";
 import type { GitHubDiscussion } from "../../types";
 import {
-  useToggleReaction,
-  useUserReactionStatus
+  useToggleReaction
 } from "../../hooks/useReactions";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/Button";
@@ -57,18 +56,8 @@ function PopularCardComponent({
   onClick
 }: PopularCardProps) {
   const [likeCount, setLikeCount] = useState(discussion.reactions.totalCount);
-  const { toggleLike, isLoading: isTogglingLike } = useToggleReaction();
-
-  // GitHub API에서 실제 좋아요 상태 확인
-  const { data: reactionStatus } = useUserReactionStatus(discussion.id);
   const [isLiked, setIsLiked] = useState(false);
-
-  // API에서 데이터가 로드되면 실제 좋아요 상태로 업데이트
-  useEffect(() => {
-    if (reactionStatus !== undefined) {
-      setIsLiked(reactionStatus.isLiked);
-    }
-  }, [reactionStatus]);
+  const { toggleLike, isLoading: isTogglingLike } = useToggleReaction();
 
   const handleLike = async (e: React.MouseEvent) => {
     e.stopPropagation();

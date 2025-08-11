@@ -45,33 +45,6 @@ const REMOVE_REACTION_MUTATION = `
   }
 `;
 
-const GET_USER_REACTIONS_QUERY = `
-  query GetUserReactions($discussionId: ID!) {
-    node(id: $discussionId) {
-      ... on Discussion {
-        id
-        reactions(first: 100) {
-          nodes {
-            id
-            content
-            user {
-              login
-            }
-          }
-        }
-        viewerCanReact
-      }
-    }
-  }
-`;
-
-const GET_CURRENT_USER_QUERY = `
-  query GetCurrentUser {
-    viewer {
-      login
-    }
-  }
-`;
 
 async function addReaction({
   discussionId,
@@ -101,17 +74,6 @@ async function removeReaction({
   return data.data?.removeReaction;
 }
 
-async function getCurrentUser() {
-  const data = await graphqlRequest(GET_CURRENT_USER_QUERY, {});
-  return data.data?.viewer;
-}
-
-async function getUserReactions(discussionId: string) {
-  const data = await graphqlRequest(GET_USER_REACTIONS_QUERY, {
-    discussionId
-  });
-  return data.data?.node;
-}
 
 export function useAddReaction() {
   const queryClient = useQueryClient();
@@ -151,45 +113,6 @@ export function useRemoveReaction() {
   });
 }
 
-// 현재 사용자 정보를 가져오는 훅
-export function useCurrentUser() {
-  return useQuery({
-    queryKey: ["currentUser"],
-    queryFn: getCurrentUser,
-    staleTime: 1000 * 60 * 10 // 10분
-  });
-}
-
-// 특정 게시물에 대한 사용자의 좋아요 상태를 확인하는 훅
-export function useUserReactionStatus(discussionId: string) {
-  const { data: currentUser } = useCurrentUser();
-  console.log("🚀 ~ useUserReactionStatus ~ currentUser:", currentUser);
-
-  return useQuery({
-    queryKey: ["userReactions", discussionId],
-    queryFn: () => getUserReactions(discussionId),
-    enabled: !!currentUser?.login,
-    staleTime: 1000 * 60 * 5, // 5분
-    select: (data) => {
-      console.log(data, "data");
-      if (!data || !currentUser) return { isLiked: false, canReact: true };
-
-      // THUMBS_UP 리액션이 있는지 확인
-      const hasThumbsUp = data.reactions?.nodes?.some(
-        (reaction: any) =>
-          reaction.content === "THUMBS_UP" &&
-          reaction.user.login === currentUser.login
-      );
-
-      return {
-        isLiked: Boolean(hasThumbsUp),
-        canReact: data.viewerCanReact ?? true
-      };
-    }
-  });
-}
-
-// 사용자의 현재 리액션 상태를 확인하는 훅
 export function useToggleReaction() {
   const addReaction = useAddReaction();
   const removeReaction = useRemoveReaction();

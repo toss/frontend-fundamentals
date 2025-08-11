@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { usePopularDiscussions } from "../../hooks/usePopularDiscussions";
 import type { GitHubDiscussion } from "../../types";
 import {
-  useToggleReaction,
-  useUserReactionStatus
+  useToggleReaction
 } from "../../hooks/useReactions";
 import { cn } from "@/lib/utils";
 
@@ -73,7 +72,6 @@ function PopularCarousel({
   const { toggleLike } = useToggleReaction();
 
   const currentDiscussion = discussions[currentIndex];
-  const { data: reactionStatus } = useUserReactionStatus(currentDiscussion?.id);
 
   const AUTO_SLIDE_INTERVAL = 7000; // 7초
 
@@ -100,7 +98,7 @@ function PopularCarousel({
     if (!currentDiscussion) return;
 
     try {
-      await toggleLike(currentDiscussion.id, reactionStatus?.isLiked || false);
+      await toggleLike(currentDiscussion.id, false); // 일단 false로 고정
       onLike?.(currentDiscussion.id);
     } catch (error) {
       console.error("Failed to toggle like:", error);
@@ -156,18 +154,13 @@ function PopularCarousel({
               </span>
             </button>
             <button
-              className={cn(
-                "flex items-center space-x-1 transition-colors",
-                reactionStatus?.isLiked
-                  ? "text-red-500"
-                  : "text-gray-600 dark:text-gray-400 hover:text-red-500"
-              )}
+              className="flex items-center space-x-1 text-gray-600 dark:text-gray-400 hover:text-red-500 transition-colors"
               onClick={(e) => {
                 e.stopPropagation();
                 handleLike();
               }}
             >
-              <span>{reactionStatus?.isLiked ? "❤️" : "🤍"}</span>
+              <span>🤍</span>
               <span className="text-sm">
                 {currentDiscussion.reactions.totalCount}
               </span>
