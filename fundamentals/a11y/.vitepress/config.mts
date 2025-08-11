@@ -42,20 +42,25 @@ export default defineConfig({
         ],
         sidebar: [
           {
-            text: "시작하기",
-            link: "/overview",
-          },
-          {
-            text: "체험하기",
-            link: "/playground"
-          },
-          {
-            text: "접근성을 지켜야 하는 이유",
-            link: "/why",
-          },
-          {
-            text: "주요 원칙",
-            link: "/principles",
+            text: "소개",
+            items: [
+              {
+                text: "시작하기",
+                link: "/overview",
+              },
+              {
+                text: "체험하기",
+                link: "/playground"
+              },
+              {
+                text: "접근성을 지켜야 하는 이유",
+                link: "/why",
+              },
+              {
+                text: "주요 원칙",
+                link: "/principles",
+              },
+            ]
           },
           {
             text: "실전 가이드",
