@@ -5,7 +5,6 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // Authorization 헤더에서 토큰 추출
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res.status(401).json({ error: 'Authorization token required' });
@@ -14,7 +13,6 @@ export default async function handler(req, res) {
   const token = authHeader.replace('Bearer ', '');
 
   try {
-    // GitHub API를 통해 현재 사용자 정보 가져오기
     const userResponse = await fetch('https://api.github.com/user', {
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -28,7 +26,6 @@ export default async function handler(req, res) {
 
     const userData = await userResponse.json();
 
-    // 사용자 정보 반환
     return res.status(200).json({
       id: userData.id,
       login: userData.login,

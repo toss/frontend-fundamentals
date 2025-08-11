@@ -4,10 +4,10 @@ import { ENV_CONFIG } from './env';
 export const API_CONFIG = {
   BASE_URL: ENV_CONFIG.API_BASE_URL || '', // 빈 문자열이면 상대 경로 사용 (프록시)
   ENDPOINTS: {
-    AUTH: '/api/auth/github',
-    GRAPHQL: '/api/graphql/github',
-    GITHUB: '/api/github',
-    USER_ME: '/api/user/me',
+    AUTH: '/api/github/login',
+    GRAPHQL: '/api/github/graphql',
+    GITHUB: '/api/github/graphql',
+    USER_ME: '/api/github/me',
   }
 } as const;
 

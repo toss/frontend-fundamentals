@@ -28,6 +28,28 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  // 토큰으로 사용자 정보 조회
+  const fetchUserInfo = async (token: string) => {
+    try {
+      const response = await fetch(getApiUrl('USER_ME'), {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const userData = await response.json();
+        const userWithToken = { ...userData, access_token: token };
+        setUser(userWithToken);
+        localStorage.setItem("github_user", JSON.stringify(userWithToken));
+      } else {
+        console.error('Failed to fetch user info');
+      }
+    } catch (error) {
+      console.error('Error fetching user info:', error);
+    }
+  };
+
   useEffect(() => {
     // 페이지 로드 시 로컬 스토리지에서 사용자 정보 복원
     const savedUser = localStorage.getItem("github_user");
@@ -44,14 +66,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
     // URL 파라미터에서 OAuth 콜백 처리
     const urlParams = new URLSearchParams(window.location.search);
     const authStatus = urlParams.get("auth");
-    const userParam = urlParams.get("user");
+    const tokenParam = urlParams.get("token");
     const error = urlParams.get("error");
 
-    if (authStatus === "success" && userParam) {
+    if (authStatus === "success" && tokenParam) {
       try {
-        const userData = JSON.parse(atob(userParam));
-        setUser(userData);
-        localStorage.setItem("github_user", JSON.stringify(userData));
+        const token = atob(tokenParam);
+        // 토큰으로 사용자 정보 조회
+        fetchUserInfo(token);
 
         // URL에서 파라미터 제거
         window.history.replaceState(
