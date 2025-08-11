@@ -44,7 +44,6 @@ export default async function handler(req, res) {
 
     const { access_token } = tokenData;
 
-    // 프론트엔드로 리다이렉트 (토큰만 전달)
     const redirectUrl = new URL(homeUrl);
     redirectUrl.searchParams.set('auth', 'success');
     redirectUrl.searchParams.set('token', btoa(access_token));

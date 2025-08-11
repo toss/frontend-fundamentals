@@ -7,15 +7,12 @@ export default async function handler(req, res) {
 
   const { query, variables } = req.body;
 
-  // 사용자 토큰이 있으면 사용, 없으면 서버 토큰 사용
   const authHeader = req.headers.authorization;
   let token;
 
   if (authHeader && authHeader.startsWith('Bearer ')) {
-    // 로그인된 사용자의 토큰 사용
     token = authHeader.replace('Bearer ', '');
   } else {
-    // 비로그인 사용자는 서버 공용 토큰 사용
     token = process.env.READ_GITHUB_DISCUSSION_ACCESS_TOKEN;
     
     if (!token) {
