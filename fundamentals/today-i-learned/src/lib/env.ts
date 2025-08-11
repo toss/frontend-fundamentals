@@ -10,8 +10,13 @@ interface EnvConfig {
 
 // 환경 변수 파싱 및 기본값 설정
 function parseEnvConfig(): EnvConfig {
+  const isDev = import.meta.env.DEV;
+  const isLocalhost = window.location.hostname === 'localhost';
+  
   return {
-    API_BASE_URL: import.meta.env.VITE_API_BASE_URL || 'https://frontend-fundamentals.com',
+    // 로컬 개발에서는 프록시 사용, 프로덕션에서는 실제 도메인 사용
+    API_BASE_URL: import.meta.env.VITE_API_BASE_URL || 
+                  (isDev && isLocalhost ? '' : 'https://frontend-fundamentals.com'),
     GITHUB_TOKEN: import.meta.env.VITE_GITHUB_TOKEN,
     GITHUB_OWNER: import.meta.env.VITE_GITHUB_OWNER || 'toss',
     GITHUB_REPO: import.meta.env.VITE_GITHUB_REPO || 'frontend-fundamentals',

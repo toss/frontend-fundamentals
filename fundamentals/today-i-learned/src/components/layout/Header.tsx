@@ -75,16 +75,16 @@ export function Header() {
           <div className="flex items-center space-x-2 ml-2">
             {isLoading ? (
               <div className="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
-            ) : isAuthenticated && (user || userProfile) ? (
+            ) : isAuthenticated && user ? (
               <div className="flex items-center space-x-2">
                 <img
-                  src={(user?.avatar_url || userProfile?.avatar_url) || ""}
-                  alt={`${(user?.login || userProfile?.login)} avatar`}
+                  src={user.avatar_url}
+                  alt={`${user.login} avatar`}
                   className="w-8 h-8 rounded-full object-cover"
                   style={{ aspectRatio: "1 / 1" }}
                 />
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {user?.login || userProfile?.login}
+                  {user.login}
                 </span>
                 <Button
                   variant="ghost"

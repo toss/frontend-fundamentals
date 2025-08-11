@@ -209,7 +209,7 @@ export function CreatePost({
   const [isFocused, setIsFocused] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { user, isAuthenticated, login } = useAuth();
-  const { userProfile, isLoading: isProfileLoading } = useUserProfile();
+  const { isLoading: isProfileLoading } = useUserProfile();
 
   const {
     control,
@@ -363,10 +363,10 @@ export function CreatePost({
         <div className="flex items-start space-x-3">
           {/* Profile Picture */}
           <div className="flex-shrink-0 pt-1">
-            {(user || userProfile) && !isProfileLoading ? (
+            {user && !isProfileLoading ? (
               <img
-                src={(user?.avatar_url || userProfile?.avatar_url) || ""}
-                alt={`${(user?.login || userProfile?.login)}님의 프로필`}
+                src={user.avatar_url}
+                alt={`${user.login}님의 프로필`}
                 className="h-11 w-11 rounded-full object-cover ring-2 ring-gray-200/40 shadow-sm"
               />
             ) : (

@@ -47,84 +47,60 @@ const GET_USER_QUERY = `
   }
 `;
 
-// GraphQL API를 통해 사용자 정보 가져오기
+// GraphQL API를 통해 현재 인증된 사용자 정보 가져오기
 const fetchUserProfile = async (
-  username?: string,
-  accessToken?: string
+  accessToken: string
 ): Promise<GitHubUser | null> => {
   try {
-    let response: Response;
-    let data: any;
+    const response = await fetchGithub(GET_VIEWER_QUERY, {}, accessToken);
+    const data = await handleGraphQLResponse(
+      response,
+      "Failed to fetch current user profile"
+    );
+    const userData = data.data?.viewer;
 
-    if (!username && accessToken) {
-      // 현재 인증된 사용자 정보 가져오기
-      response = await fetchGithub(GET_VIEWER_QUERY, {}, accessToken);
-      data = await handleGraphQLResponse(
-        response,
-        "Failed to fetch current user profile"
-      );
-      const userData = data.data?.viewer;
-
-      if (!userData) {
-        return null;
-      }
-
-      return {
-        id: userData.id,
-        login: userData.login,
-        avatar_url: userData.avatarUrl,
-        name: userData.name,
-        bio: userData.bio,
-        public_repos: userData.repositories?.totalCount || 0,
-        followers: userData.followers?.totalCount || 0,
-        following: userData.following?.totalCount || 0
-      };
-    } else {
-      // 특정 사용자 정보 가져오기 (fallback to al-bur)
-      const targetUsername = username || "al-bur";
-      response = await fetchGithub(GET_USER_QUERY, { login: targetUsername }, accessToken);
-      data = await handleGraphQLResponse(
-        response,
-        `Failed to fetch user profile for ${targetUsername}`
-      );
-      const userData = data.data?.user;
-
-      if (!userData) {
-        return null;
-      }
-
-      return {
-        id: userData.id,
-        login: userData.login,
-        avatar_url: userData.avatarUrl,
-        name: userData.name,
-        bio: userData.bio,
-        public_repos: userData.repositories?.totalCount || 0,
-        followers: userData.followers?.totalCount || 0,
-        following: userData.following?.totalCount || 0
-      };
+    if (!userData) {
+      return null;
     }
+
+    return {
+      id: userData.id,
+      login: userData.login,
+      avatar_url: userData.avatarUrl,
+      name: userData.name,
+      bio: userData.bio,
+      public_repos: userData.repositories?.totalCount || 0,
+      followers: userData.followers?.totalCount || 0,
+      following: userData.following?.totalCount || 0
+    };
   } catch (error) {
     console.error(`Failed to fetch user profile:`, error);
     return null;
   }
 };
 
-// username을 받아서 해당 사용자 정보 조회, username이 없으면 현재 인증된 사용자 정보 조회
-export function useUserProfile(username?: string) {
+// 현재 인증된 사용자 정보만 조회 (로그인한 사용자만)
+export function useUserProfile() {
   const { user } = useAuth();
   const [userProfile, setUserProfile] = useState<GitHubUser | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!user?.access_token) {
+      setUserProfile(null);
+      setIsLoading(false);
+      setError(null);
+      return;
+    }
+
     let isMounted = true;
 
     const loadProfile = async () => {
       try {
         setIsLoading(true);
         setError(null);
-        const profile = await fetchUserProfile(username, user?.access_token);
+        const profile = await fetchUserProfile(user.access_token);
 
         if (isMounted) {
           setUserProfile(profile);
@@ -147,17 +123,19 @@ export function useUserProfile(username?: string) {
     return () => {
       isMounted = false;
     };
-  }, [username, user?.access_token]);
+  }, [user?.access_token]);
 
   return {
     userProfile,
     isLoading,
     error,
     refetch: () => {
-      setUserProfile(null);
-      setIsLoading(true);
-      setError(null);
-      fetchUserProfile(username, user?.access_token).then(setUserProfile);
+      if (user?.access_token) {
+        setUserProfile(null);
+        setIsLoading(true);
+        setError(null);
+        fetchUserProfile(user.access_token).then(setUserProfile);
+      }
     }
   };
 }
