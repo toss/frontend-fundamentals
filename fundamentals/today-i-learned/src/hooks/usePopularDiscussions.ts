@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import type { GitHubDiscussion } from "../types";
 import { allMockDiscussions } from "../data/mockData";
-import { fetchGithub, handleGraphQLResponse } from "../utils/github";
+import { graphqlRequest } from "../lib/api";
 import { PAGE_SIZE } from "../constants/github";
 
 interface UsePopularDiscussionsParams {
@@ -103,16 +103,11 @@ async function fetchRealPopularDiscussions({
   const FETCH_MULTIPLIER = 5;
 
   const fetchCount = Math.min(limit * FETCH_MULTIPLIER, PAGE_SIZE.DEFAULT);
-  const response = await fetchGithub(POPULAR_DISCUSSIONS_QUERY, {
+  const data = await graphqlRequest(POPULAR_DISCUSSIONS_QUERY, {
     owner,
     repo,
     first: fetchCount
   });
-
-  const data = await handleGraphQLResponse(
-    response,
-    "Failed to fetch popular discussions"
-  );
 
   const discussionsData = data.data?.repository?.discussions;
   let allDiscussions = discussionsData?.nodes || [];

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import type { GitHubDiscussion } from "../types";
-import { fetchGithub, handleGraphQLResponse } from "../utils/github";
+import { graphqlRequest } from "../lib/api";
 import { allMockDiscussions } from "../data/mockData";
 import { PAGE_SIZE } from "../constants/github";
 import { useAuth } from "../contexts/AuthContext";
@@ -92,17 +92,12 @@ async function fetchRealAllDiscussions({
 
   while (hasNextPage) {
     try {
-      const response = await fetchGithub(DISCUSSIONS_QUERY, {
+      const data = await graphqlRequest(DISCUSSIONS_QUERY, {
         owner,
         repo,
         first: pageSize,
         after: cursor
       }, accessToken);
-
-      const data = await handleGraphQLResponse(
-        response,
-        "Failed to fetch discussions"
-      );
 
       const discussionsData = data.data?.repository?.discussions;
 

@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
-import { fetchGithub, handleGraphQLResponse } from "../utils/github";
+import { graphqlRequest } from "../lib/api";
 
 const ADD_REACTION_MUTATION = `
   mutation AddReaction($subjectId: ID!, $content: ReactionContent!) {
@@ -80,12 +80,10 @@ async function addReaction({
   discussionId: string;
   content?: "THUMBS_UP" | "HEART" | "HOORAY" | "ROCKET" | "EYES" | "LAUGH";
 }) {
-  const response = await fetchGithub(ADD_REACTION_MUTATION, {
+  const data = await graphqlRequest(ADD_REACTION_MUTATION, {
     subjectId: discussionId,
     content
   });
-
-  const data = await handleGraphQLResponse(response, "Failed to add reaction");
   return data.data?.addReaction;
 }
 
@@ -96,37 +94,22 @@ async function removeReaction({
   discussionId: string;
   content?: "THUMBS_UP" | "HEART" | "HOORAY" | "ROCKET" | "EYES" | "LAUGH";
 }) {
-  const response = await fetchGithub(REMOVE_REACTION_MUTATION, {
+  const data = await graphqlRequest(REMOVE_REACTION_MUTATION, {
     subjectId: discussionId,
     content
   });
-
-  const data = await handleGraphQLResponse(
-    response,
-    "Failed to remove reaction"
-  );
   return data.data?.removeReaction;
 }
 
 async function getCurrentUser() {
-  const response = await fetchGithub(GET_CURRENT_USER_QUERY, {});
-  const data = await handleGraphQLResponse(
-    response,
-    "Failed to get current user"
-  );
-
+  const data = await graphqlRequest(GET_CURRENT_USER_QUERY, {});
   return data.data?.viewer;
 }
 
 async function getUserReactions(discussionId: string) {
-  const response = await fetchGithub(GET_USER_REACTIONS_QUERY, {
+  const data = await graphqlRequest(GET_USER_REACTIONS_QUERY, {
     discussionId
   });
-  const data = await handleGraphQLResponse(
-    response,
-    "Failed to get user reactions"
-  );
-
   return data.data?.node;
 }
 

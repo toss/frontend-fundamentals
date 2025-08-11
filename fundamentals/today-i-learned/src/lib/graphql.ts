@@ -1,4 +1,4 @@
-import { fetchGithub, handleGraphQLResponse } from '../utils/github';
+import { graphqlRequest } from '../lib/api';
 
 // GraphQL 쿼리 타입 정의
 export interface GraphQLQueryOptions {
@@ -19,8 +19,7 @@ export async function executeGraphQLQuery<T = any>(
 ): Promise<T> {
   const { query, variables, accessToken } = options;
   
-  const response = await fetchGithub(query, variables, accessToken);
-  const data = await handleGraphQLResponse(response, 'GraphQL query failed');
+  const data = await graphqlRequest(query, variables, accessToken);
   
   return data.data as T;
 }

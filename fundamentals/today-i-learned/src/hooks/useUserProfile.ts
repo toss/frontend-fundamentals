@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchGithub, handleGraphQLResponse } from "../utils/github";
+import { graphqlRequest } from "../lib/api";
 import { useAuth } from "../contexts/AuthContext";
 import type { GitHubUser } from "../types/api";
 
@@ -52,11 +52,7 @@ const fetchUserProfile = async (
   accessToken: string
 ): Promise<GitHubUser | null> => {
   try {
-    const response = await fetchGithub(GET_VIEWER_QUERY, {}, accessToken);
-    const data = await handleGraphQLResponse(
-      response,
-      "Failed to fetch current user profile"
-    );
+    const data = await graphqlRequest(GET_VIEWER_QUERY, {}, accessToken);
     const userData = data.data?.viewer;
 
     if (!userData) {

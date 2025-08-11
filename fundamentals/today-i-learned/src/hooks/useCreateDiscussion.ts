@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { fetchGithub, handleGraphQLResponse } from "../utils/github";
+import { graphqlRequest } from "../lib/api";
 
 const CREATE_DISCUSSION_MUTATION = `
   mutation CreateDiscussion($repositoryId: ID!, $categoryId: ID!, $title: String!, $body: String!) {
@@ -58,14 +58,10 @@ async function createDiscussion({
   repo: string;
 }) {
   // 1. Repository 정보 조회
-  const repoResponse = await fetchGithub(GET_REPOSITORY_INFO_QUERY, {
+  const repoData = await graphqlRequest(GET_REPOSITORY_INFO_QUERY, {
     owner,
     repo
   });
-  const repoData = await handleGraphQLResponse(
-    repoResponse,
-    "Failed to get repository info"
-  );
 
   const repositoryId = repoData.data?.repository?.id;
   const categories =
@@ -80,17 +76,12 @@ async function createDiscussion({
   }
 
   // 3. Discussion 생성
-  const createResponse = await fetchGithub(CREATE_DISCUSSION_MUTATION, {
+  const createData = await graphqlRequest(CREATE_DISCUSSION_MUTATION, {
     repositoryId,
     categoryId: category.id,
     title,
     body
   });
-
-  const createData = await handleGraphQLResponse(
-    createResponse,
-    "Failed to create discussion"
-  );
 
   return createData.data?.createDiscussion?.discussion;
 }

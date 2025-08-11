@@ -5,7 +5,7 @@ import {
   useEffect,
   type ReactNode,
 } from "react";
-import { getApiUrl } from "../lib/api";
+import { AUTH_LOGIN_URL, getUserInfo } from "../lib/api";
 import type { AuthenticatedUser } from "../types/api";
 
 export type User = AuthenticatedUser;
@@ -31,20 +31,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
   // 토큰으로 사용자 정보 조회
   const fetchUserInfo = async (token: string) => {
     try {
-      const response = await fetch(getApiUrl('USER_ME'), {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-
-      if (response.ok) {
-        const userData = await response.json();
-        const userWithToken = { ...userData, access_token: token };
-        setUser(userWithToken);
-        localStorage.setItem("github_user", JSON.stringify(userWithToken));
-      } else {
-        console.error('Failed to fetch user info');
-      }
+      const userData = await getUserInfo(token);
+      const userWithToken = { ...userData, access_token: token };
+      setUser(userWithToken);
+      localStorage.setItem("github_user", JSON.stringify(userWithToken));
     } catch (error) {
       console.error('Error fetching user info:', error);
     }
@@ -93,7 +83,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   const login = () => {
-    window.location.href = getApiUrl('AUTH');
+    window.location.href = AUTH_LOGIN_URL;
   };
 
   const logout = () => {

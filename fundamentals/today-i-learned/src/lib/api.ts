@@ -1,43 +1,38 @@
-import { ENV_CONFIG } from './env';
-
-// API 설정 중앙화
-export const API_CONFIG = {
-  BASE_URL: ENV_CONFIG.API_BASE_URL || '', // 빈 문자열이면 상대 경로 사용 (프록시)
-  ENDPOINTS: {
-    AUTH: '/api/github/login',
-    GRAPHQL: '/api/github/graphql',
-    GITHUB: '/api/github/graphql',
-    USER_ME: '/api/github/me',
-  }
-} as const;
-
-// API URL 생성 헬퍼
-export function getApiUrl(endpoint: keyof typeof API_CONFIG.ENDPOINTS): string {
-  return `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS[endpoint]}`;
-}
-
-// API 요청 헬퍼 (기본 설정)
-export function createApiRequest(endpoint: keyof typeof API_CONFIG.ENDPOINTS, options: RequestInit = {}): Promise<Response> {
-  return fetch(getApiUrl(endpoint), {
+// Simple GraphQL API client for GitHub
+export async function graphqlRequest(query: string, variables?: any, token?: string): Promise<any> {
+  const response = await fetch('/api/github/graphql', {
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      ...options.headers,
+      ...(token && { Authorization: `Bearer ${token}` }),
     },
-    ...options,
+    body: JSON.stringify({ query, variables }),
   });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || 'GraphQL request failed');
+  }
+
+  return data;
 }
 
-// 인증이 필요한 API 요청 헬퍼
-export function createAuthenticatedApiRequest(
-  endpoint: keyof typeof API_CONFIG.ENDPOINTS,
-  token: string,
-  options: RequestInit = {}
-): Promise<Response> {
-  return createApiRequest(endpoint, {
-    ...options,
+// Auth endpoints
+export const AUTH_LOGIN_URL = '/api/github/login';
+export const USER_ME_URL = '/api/github/me';
+
+// User info request
+export async function getUserInfo(token: string): Promise<any> {
+  const response = await fetch(USER_ME_URL, {
     headers: {
-      'Authorization': `Bearer ${token}`,
-      ...options.headers,
+      Authorization: `Bearer ${token}`,
     },
   });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch user info');
+  }
+
+  return response.json();
 }

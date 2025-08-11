@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import type { GitHubDiscussion } from "../types";
 import { allMockDiscussions } from "../data/mockData";
-import { fetchGithub, handleGraphQLResponse } from "../utils/github";
+import { graphqlRequest } from "../lib/api";
 import { PAGE_SIZE } from "../constants/github";
 
 interface DiscussionsResponse {
@@ -95,17 +95,12 @@ async function fetchRealDiscussionsPage({
   pageSize: number;
   pageParam?: string;
 }): Promise<DiscussionsResponse> {
-  const response = await fetchGithub(DISCUSSIONS_QUERY, {
+  const data = await graphqlRequest(DISCUSSIONS_QUERY, {
     owner,
     repo,
     first: pageSize,
     after: pageParam || null
   });
-
-  const data = await handleGraphQLResponse(
-    response,
-    "Failed to fetch discussions"
-  );
 
   const discussionsData = data.data?.repository?.discussions;
   const allDiscussions = discussionsData?.nodes || [];
