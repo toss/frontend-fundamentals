@@ -83,7 +83,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   const login = () => {
-    window.location.href = AUTH_LOGIN_URL;
+    const currentHost = window.location.host;
+    const protocol = window.location.protocol;
+    const redirectUri = `${protocol}//${currentHost}/api/github/login-callback`;
+
+    const loginUrl = `${AUTH_LOGIN_URL}?redirect_uri=${encodeURIComponent(redirectUri)}`;
+    window.location.href = loginUrl;
   };
 
   const logout = () => {

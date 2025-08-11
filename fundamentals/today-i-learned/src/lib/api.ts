@@ -19,7 +19,7 @@ export async function graphqlRequest(query: string, variables?: any, token?: str
 }
 
 // Auth endpoints
-export const AUTH_LOGIN_URL = '/api/github/login';
+export const AUTH_LOGIN_URL = 'https://frontend-fundamentals.com/api/github/login';
 export const USER_ME_URL = '/api/github/me';
 
 // User info request

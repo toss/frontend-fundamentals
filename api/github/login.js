@@ -1,9 +1,10 @@
 export default async function handler(req, res) {
-  const { method } = req;
+  const { method, query } = req;
 
   if (method === 'GET') {
     const clientId = process.env.GITHUB_CLIENT_ID;
-    const redirectUri = process.env.GITHUB_REDIRECT_URI;
+    
+    const redirectUri = query.redirect_uri || process.env.GITHUB_REDIRECT_URI;
     
     if (!clientId || !redirectUri) {
       return res.status(500).json({ error: 'GitHub OAuth configuration not complete' });
