@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback } from "react";
 import { PostCard } from "./PostCard";
 import { Button } from "../ui/Button";
 import { useInfiniteDiscussions } from "../../hooks/useInfiniteDiscussions";
@@ -22,16 +22,18 @@ export function PostList({ owner, repo, categoryName }: PostListProps) {
     refetch
   } = useInfiniteDiscussions({ owner, repo, categoryName });
 
-  const { elementRef, isIntersecting } = useIntersectionObserver({
-    enabled: hasNextPage && !isFetchingNextPage
-  });
-
-  // 무한스크롤 트리거
-  useEffect(() => {
-    if (isIntersecting && hasNextPage && !isFetchingNextPage) {
+  // 무한스크롤 핸들러를 useCallback으로 메모이제이션
+  const handleLoadMore = useCallback(() => {
+    if (hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
-  }, [isIntersecting, hasNextPage, isFetchingNextPage, fetchNextPage]);
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  const { elementRef } = useIntersectionObserver({
+    enabled: hasNextPage && !isFetchingNextPage,
+    onIntersect: handleLoadMore,
+    rootMargin: "300px" // 트리거 요소가 화면에서 300px 전에 미리 호출
+  });
 
   const handleComment = (id: string) => {
     console.log("Comment clicked:", id);
