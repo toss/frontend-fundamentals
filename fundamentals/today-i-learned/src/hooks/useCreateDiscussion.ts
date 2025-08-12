@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { graphqlRequest } from "../lib/api";
+import { useAuth } from "../contexts/AuthContext";
 
 const CREATE_DISCUSSION_MUTATION = `
   mutation CreateDiscussion($repositoryId: ID!, $categoryId: ID!, $title: String!, $body: String!) {
@@ -50,18 +51,20 @@ async function createDiscussion({
   title,
   body,
   owner,
-  repo
+  repo,
+  accessToken
 }: {
   title: string;
   body: string;
   owner: string;
   repo: string;
+  accessToken: string;
 }) {
   // 1. Repository 정보 조회
   const repoData = await graphqlRequest(GET_REPOSITORY_INFO_QUERY, {
     owner,
     repo
-  });
+  }, accessToken);
 
   const repositoryId = repoData.data?.repository?.id;
   const categories =
@@ -81,20 +84,25 @@ async function createDiscussion({
     categoryId: category.id,
     title,
     body
-  });
+  }, accessToken);
 
   return createData.data?.createDiscussion?.discussion;
 }
 
 export function useCreateDiscussion() {
   const queryClient = useQueryClient();
+  const { user } = useAuth();
 
   const owner = "toss";
   const repo = "frontend-fundamentals";
 
   return useMutation({
-    mutationFn: ({ title, body }: { title: string; body: string }) =>
-      createDiscussion({ title, body, owner, repo }),
+    mutationFn: ({ title, body }: { title: string; body: string }) => {
+      if (!user?.access_token) {
+        throw new Error("User not authenticated");
+      }
+      return createDiscussion({ title, body, owner, repo, accessToken: user.access_token });
+    },
     onSuccess: () => {
       // 성공 시 discussions 목록을 새로고침
       queryClient.invalidateQueries({

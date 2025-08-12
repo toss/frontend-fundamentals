@@ -208,6 +208,7 @@ export function CreatePost({
 }: CreatePostProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const { user, isAuthenticated, login } = useAuth();
   const { isLoading: isProfileLoading } = useUserProfile();
 
@@ -257,11 +258,27 @@ export function CreatePost({
 
       try {
         setIsSubmitting(true);
+        setSubmitError(null);
         await onSubmit(trimmedTitle, trimmedContent);
         reset();
         setIsFocused(false);
       } catch (error) {
         console.error("Failed to create post:", error);
+        
+        // GitHub OAuth App 접근 제한 에러 처리
+        if (error instanceof Error) {
+          const errorMessage = error.message;
+          if (errorMessage.includes("OAuth App access restrictions") || 
+              errorMessage.includes("organization has enabled OAuth App access restrictions")) {
+            setSubmitError("GitHub 조직의 OAuth App 접근 제한으로 인해 글을 작성할 수 없습니다. 조직 관리자에게 앱 승인을 요청해주세요.");
+          } else if (errorMessage.includes("FORBIDDEN")) {
+            setSubmitError("접근 권한이 없습니다. 로그인을 다시 시도해주세요.");
+          } else {
+            setSubmitError("글 작성 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+          }
+        } else {
+          setSubmitError("알 수 없는 오류가 발생했습니다.");
+        }
       } finally {
         setIsSubmitting(false);
       }
@@ -397,6 +414,22 @@ export function CreatePost({
               placeholder={contentPlaceholder}
               isSubmitting={isProcessing}
             />
+
+            {/* Error Message */}
+            {submitError && (
+              <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                <p className="text-sm text-red-700 dark:text-red-300 leading-relaxed">
+                  {submitError}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setSubmitError(null)}
+                  className="mt-2 text-xs text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-200 underline"
+                >
+                  닫기
+                </button>
+              </div>
+            )}
 
             {shouldShowFooter && (
               <div className="mt-3">
