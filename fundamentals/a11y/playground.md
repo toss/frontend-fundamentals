@@ -1,3 +1,9 @@
+---
+head:
+  - [meta, { property: 'og:image', content: 'https://static.toss.im/illusts/a11y-use-meta.jpg' }]
+  - [meta, { name: 'twitter:image', content: 'https://static.toss.im/illusts/a11y-use-meta.jpg' }]
+  - [meta, { name: 'twitter:card', content: 'summary_large_image' }]
+---
 <script setup>
 import ScreenReaderExperience from './components/ScreenReaderExperience.vue';
 </script>
