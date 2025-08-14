@@ -9,7 +9,7 @@ hero:
     loading: eager
     fetchpriority: high
     decoding: async
-    src: /images/bf-symbol.webp
+    src: /images/bf-symbol-with-padding.webp
     alt: Frontend Fundamentals symbol
   actions:
     - text: 시작하기
