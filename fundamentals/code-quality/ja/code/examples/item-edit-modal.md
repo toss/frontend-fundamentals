@@ -104,7 +104,7 @@ function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
 function ItemEditBody({ children, onClose }) {
   return (
     <>
-      <div style="display: flex; justify-content: space-between;">
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Input
           value={keyword}
           onChange={(e) => onKeywordChange(e.target.value)}
