@@ -10,17 +10,65 @@ src/
 │   ├── remote/      # API 함수와 도메인별 타입
 │   ├── hooks/       # React Query 훅들
 │   └── types.ts     # API 공통 타입
-├── components/      # 컴포넌트 (기능별 분류)
-│   ├── layout/      # 레이아웃 컴포넌트
-│   ├── post/        # 게시글 관련
-│   ├── profile/     # 프로필 관련
-│   └── ui/          # 공통 UI 컴포넌트
+├── components/      # 컴포넌트 (응집도별 분류)
+│   ├── shared/      # 진짜 재사용 가능한 컴포넌트
+│   │   ├── ui/      # Button, Input, LoadingSpinner, Toast
+│   │   ├── layout/  # Header, Layout, Sidebar
+│   │   └── common/  # UserAvatar, ErrorBoundary
+│   └── features/    # 도메인별 공유 컴포넌트
+│       └── discussions/  # PostCard, PopularCard, LoginPrompt
+├── pages/           # 페이지별 컴포넌트
+│   ├── timeline/
+│   │   └── components/  # CreatePost, PostList, CategoryTabs
+│   └── profile/
+│       └── components/  # ProfileHeader, MyStreak, ContributionGraph
 ├── hooks/           # 도메인별 커스텀 hooks
 ├── types/           # 공통 타입 정의
 ├── contexts/        # React Context
 ├── constants/       # 상수 정의
 └── styles/          # 스타일 토큰
 ```
+
+## 컴포넌트 구조 원칙 (2024-08-16 리팩토링 기준)
+
+### 응집도 기반 분류
+
+- **shared/** - 진정한 재사용 가능 컴포넌트
+  - 비즈니스 로직 없이 순수한 UI/공통 기능만
+  - 프로젝트 전반에서 사용 가능
+  - 예: Button, LoadingSpinner, UserAvatar
+
+- **features/** - 도메인별 공유 컴포넌트  
+  - 특정 도메인 지식을 포함하지만 여러 페이지에서 공유
+  - 예: PostCard (타임라인과 프로필에서 공유)
+
+- **pages/[page]/components/** - 페이지 전용 컴포넌트
+  - 특정 페이지에서만 사용되는 컴포넌트
+  - 해당 페이지와 강하게 결합된 비즈니스 로직 포함
+  - 예: CreatePost, WeeklyTop5, ProfileHeader
+
+### Import 경로 규칙
+
+- **절대 경로 필수**: 모든 import는 `@/`로 시작
+- **상대 경로 금지**: `../` 사용 금지 (유지보수성 향상)
+- **경로 예시**:
+  ```typescript
+  // 공유 컴포넌트
+  import { Button } from "@/components/shared/ui/Button";
+  
+  // 도메인 컴포넌트
+  import { PostCard } from "@/components/features/discussions/PostCard";
+  
+  // 페이지 내부 컴포넌트 (같은 페이지 내에서만)
+  import { CreatePost } from "./components/CreatePost";
+  ```
+
+### 컴포넌트 이동 기준
+
+1. **두 곳 이상에서 사용** → `features/` 또는 `shared/`로 이동
+2. **비즈니스 로직 포함** → `features/`에 배치
+3. **순수 UI만** → `shared/ui/`에 배치
+4. **페이지 전용** → `pages/[page]/components/`에 유지
 
 ## 파일 명명 규칙
 
