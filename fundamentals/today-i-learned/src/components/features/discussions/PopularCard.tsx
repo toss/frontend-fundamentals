@@ -9,7 +9,7 @@ import {
 import type { GitHubDiscussion } from "@/api/remote/discussions";
 import { useToggleReaction } from "@/api/hooks/useReactions";
 import { cn } from "@/lib/utils";
-import { Button } from "../ui/Button";
+import { Button } from "../../shared/ui/Button";
 
 interface PopularCardProps {
   discussion: GitHubDiscussion;

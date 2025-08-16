@@ -1,9 +1,9 @@
 import { cn } from "@/lib/utils";
 import { LogIn, LogOut, Menu, Moon, Sun } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import ffSymbolUrl from "../../assets/ff-symbol.svg";
-import { useAuth } from "../../contexts/AuthContext";
-import { useTheme } from "../../contexts/ThemeContext";
+import ffSymbolUrl from "@/assets/ff-symbol.svg";
+import { useAuth } from "@/contexts/AuthContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import { Button } from "../ui/Button";
 
 export function Header() {

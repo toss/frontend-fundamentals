@@ -3,10 +3,10 @@ import { cn } from "@/lib/utils";
 import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
 import { useUserProfile } from "@/api/hooks/useUser";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
-import { PostCard } from "../post/PostCard";
-import { LoadingSpinner } from "../ui/LoadingSpinner";
-import { Button } from "../ui/Button";
-import { PAGE_SIZE } from "../../constants/github";
+import { PostCard } from "@/components/features/discussions/PostCard";
+import { LoadingSpinner } from "@/components/shared/ui/LoadingSpinner";
+import { Button } from "@/components/shared/ui/Button";
+import { PAGE_SIZE } from "@/constants/github";
 import type { BaseComponentProps } from "@/types";
 import { FileText, Calendar, Heart } from "lucide-react";
 

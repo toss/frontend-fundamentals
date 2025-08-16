@@ -4,7 +4,7 @@ import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import {
   useTILContributions,
   type ContributionDay
-} from "../../hooks/useTILContributions";
+} from "@/hooks/useTILContributions";
 
 interface ContributionGraphProps extends BaseComponentProps { }
 

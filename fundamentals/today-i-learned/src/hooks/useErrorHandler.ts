@@ -1,4 +1,4 @@
-import { useToast } from "@/components/ui/Toast";
+import { useToast } from "@/components/shared/ui/Toast";
 import { ERROR_MESSAGES } from "@/constants";
 import { AuthError, getUserFriendlyErrorMessage, logError } from "@/lib/errors";
 import { useCallback } from "react";

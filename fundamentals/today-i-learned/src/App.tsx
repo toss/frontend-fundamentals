@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import { Layout } from "./components/layout/Layout";
-import { MyPage } from "./pages/MyPage";
-import { TimelinePage } from "./pages/TimelinePage";
+import { Layout } from "./components/shared/layout/Layout";
+import { MyPage } from "./pages/profile/MyPage";
+import { TimelinePage } from "./pages/timeline/TimelinePage";
 
 
 function App() {

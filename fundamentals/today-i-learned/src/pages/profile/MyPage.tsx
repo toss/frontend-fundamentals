@@ -1,6 +1,6 @@
-import { ProfileHeader } from "../components/profile/ProfileHeader";
-import { ContributionGraph } from "../components/profile/ContributionGraph";
-import { MyPostList } from "../components/profile/MyPostList";
+import { ProfileHeader } from "./components/ProfileHeader";
+import { ContributionGraph } from "./components/ContributionGraph";
+import { MyPostList } from "./components/MyPostList";
 
 export function MyPage() {
   return (

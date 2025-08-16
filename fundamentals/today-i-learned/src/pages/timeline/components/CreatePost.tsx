@@ -1,10 +1,10 @@
 import { cn } from "@/lib/utils";
 import type { BaseComponentProps } from "@/types";
 import { useState } from "react";
-import { useAuth } from "../../contexts/AuthContext";
+import { useAuth } from "@/contexts/AuthContext";
 import { CreatePostForm } from "./CreatePostForm";
-import { LoginPrompt } from "./LoginPrompt";
-import { UserAvatar } from "./UserAvatar";
+import { LoginPrompt } from "@/components/features/discussions/LoginPrompt";
+import { UserAvatar } from "@/components/shared/common/UserAvatar";
 import { useUserProfile } from "@/api/hooks/useUser";
 
 interface CreatePostProps extends BaseComponentProps {

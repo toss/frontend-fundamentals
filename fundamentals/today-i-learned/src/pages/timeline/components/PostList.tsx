@@ -1,7 +1,7 @@
 import { useCallback } from "react";
-import { PostCard } from "./PostCard";
-import { Button } from "../ui/Button";
-import { LoadingSpinner } from "../ui/LoadingSpinner";
+import { PostCard } from "@/components/features/discussions/PostCard";
+import { Button } from "@/components/shared/ui/Button";
+import { LoadingSpinner } from "@/components/shared/ui/LoadingSpinner";
 import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 

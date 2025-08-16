@@ -3,7 +3,7 @@ import { Control, useController, useForm, useWatch } from "react-hook-form";
 import { APP_CONSTANTS, UI_CONFIG } from "@/constants";
 import { cn, validateContent } from "@/lib/utils";
 import { useFormErrorHandler } from "@/hooks/useErrorHandler";
-import { Button } from "../ui/Button";
+import { Button } from "@/components/shared/ui/Button";
 
 interface CreatePostForm {
   title: string;
