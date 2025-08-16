@@ -9,9 +9,19 @@ interface PostListProps {
   owner?: string;
   repo?: string;
   categoryName?: string;
+  sortBy?: "latest" | "lastActivity" | "created" | "popularity";
+  filterBy?: {
+    label?: string;
+  };
 }
 
-export function PostList({ owner, repo, categoryName }: PostListProps) {
+export function PostList({
+  owner,
+  repo,
+  categoryName,
+  sortBy = "latest",
+  filterBy
+}: PostListProps) {
   const {
     data,
     fetchNextPage,
@@ -20,7 +30,9 @@ export function PostList({ owner, repo, categoryName }: PostListProps) {
     isLoading,
     error,
     refetch
-  } = useInfiniteDiscussions({ owner, repo, categoryName });
+  } = useInfiniteDiscussions({ owner, repo, categoryName, sortBy, filterBy });
+
+  console.log({ filterBy });
 
   // 무한스크롤 핸들러를 useCallback으로 메모이제이션
   const handleLoadMore = useCallback(() => {
@@ -64,10 +76,9 @@ export function PostList({ owner, repo, categoryName }: PostListProps) {
     );
   }
 
-  console.log({ data })
+  console.log({ data });
   // 데이터가 없는 경우
   const allDiscussions = data?.pages.flatMap((page) => page.discussions) ?? [];
-
 
   if (allDiscussions.length === 0) {
     return (
@@ -102,7 +113,10 @@ export function PostList({ owner, repo, categoryName }: PostListProps) {
       {hasNextPage && (
         <div ref={elementRef} className="flex justify-center py-8">
           {isFetchingNextPage && (
-            <LoadingSpinner text="더 많은 게시물 불러오는 중..." variant="primary" />
+            <LoadingSpinner
+              text="더 많은 게시물 불러오는 중..."
+              variant="primary"
+            />
           )}
         </div>
       )}

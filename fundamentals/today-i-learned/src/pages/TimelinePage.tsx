@@ -25,24 +25,20 @@ export function TimelinePage() {
     setActiveTab(tab);
   }, []);
 
-  const renderTabContent = () => {
+  // 탭별 PostList props 조건부 계산
+  const getPostListProps = () => {
     switch (activeTab) {
       case "latest":
-        return <PostList />;
+        return { sortBy: "latest" as const };
       case "weekly":
-        return (
-          <div className="text-center py-8 text-gray-500 dark:text-gray-400">
-            주간 인기글 기능을 준비중입니다...
-          </div>
-        );
+        return { sortBy: "popularity" as const };
       case "hall-of-fame":
-        return (
-          <div className="text-center py-8 text-gray-500 dark:text-gray-400">
-            명예의 전당 기능을 준비중입니다...
-          </div>
-        );
+        return {
+          sortBy: "latest" as const,
+          filterBy: { label: "성지 ⛲" }
+        };
       default:
-        return null;
+        return { sortBy: "latest" as const };
     }
   };
 
@@ -55,7 +51,9 @@ export function TimelinePage() {
           isLoading={createDiscussionMutation.isPending}
         />
         <CategoryTabs activeTab={activeTab} onTabChange={handleTabChange} />
-        <TabContent activeTab={activeTab}>{renderTabContent()}</TabContent>
+        <TabContent activeTab={activeTab}>
+          <PostList {...getPostListProps()} />
+        </TabContent>
       </div>
 
       <div className="lg:col-span-1">
