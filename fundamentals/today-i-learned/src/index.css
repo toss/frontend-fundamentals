@@ -191,7 +191,6 @@
   }
 
   h2 {
-    margin: 56px 0 24px; /* 더 넉넉한 상하 여백 */
     padding-top: 0; /* 패딩 제거 */
     letter-spacing: -0.01em; /* 자간 완화 */
     line-height: 1.4; /* 상대값으로 변경 */
@@ -200,7 +199,6 @@
   }
 
   h3 {
-    margin: 40px 0 16px; /* 여백 증가 */
     letter-spacing: -0.005em; /* 자간 완화 */
     line-height: 1.5; /* 상대값으로 변경 */
     font-size: 20px;
@@ -209,7 +207,6 @@
 
   p,
   summary {
-    margin: 20px 0; /* 단락 간격 증가 */
     line-height: 1.7; /* 줄간격 증가 */
   }
 

@@ -24,9 +24,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
 
         {/* Simple centered layout */}
         <main className="flex-1 pt-16">
-          <div className="mx-auto max-w-3xl px-4 py-8">
-            {children}
-          </div>
+          <div className="mx-auto max-w-5xl px-4 py-8">{children}</div>
         </main>
       </div>
     </div>
