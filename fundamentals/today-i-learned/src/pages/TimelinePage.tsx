@@ -4,8 +4,8 @@ import { PostList } from "../components/post/PostList";
 import { MyStreak } from "../components/streak/MyStreak";
 import { CategoryTabs, TabContent } from "../components/timeline/CategoryTabs";
 import { WeeklyTop5 } from "../components/weekly/WeeklyTop5";
-import { useCreateDiscussion } from "../hooks/useCreateDiscussion";
 import type { PostCategory } from "../types";
+import { useCreateDiscussion } from "@/api/hooks/useDiscussions";
 
 export function TimelinePage() {
   const [activeTab, setActiveTab] = useState<PostCategory>("latest");

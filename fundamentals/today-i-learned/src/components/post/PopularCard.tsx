@@ -6,10 +6,8 @@ import {
   Calendar,
   Crown
 } from "lucide-react";
-import type { GitHubDiscussion } from "../../types";
-import {
-  useToggleReaction
-} from "../../hooks/useReactions";
+import type { GitHubDiscussion } from "@/api/remote/discussions";
+import { useToggleReaction } from "@/api/hooks/useReactions";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/Button";
 

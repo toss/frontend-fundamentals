@@ -1,8 +1,8 @@
 import { useMemo, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { useInfiniteDiscussions } from "../../hooks/useInfiniteDiscussions";
-import { useUserProfile } from "../../hooks/useUserProfile";
-import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
+import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
+import { useUserProfile } from "@/api/hooks/useUser";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { PostCard } from "../post/PostCard";
 import { LoadingSpinner } from "../ui/LoadingSpinner";
 import { Button } from "../ui/Button";
@@ -13,7 +13,7 @@ import { FileText, Calendar, Heart } from "lucide-react";
 interface MyPostListProps extends BaseComponentProps {}
 
 export function MyPostList({ className }: MyPostListProps) {
-  const { userProfile } = useUserProfile();
+  const { data: userProfile } = useUserProfile();
   const {
     data,
     fetchNextPage,

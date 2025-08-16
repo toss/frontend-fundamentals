@@ -37,8 +37,30 @@
 
 - `src/components`의 기능별 분류 구조 따르기
 - `src/hooks`의 커스텀 훅 패턴 활용
-- `src/lib`의 유틸리티 함수 스타일 유지
+- `src/api`의 레이어 분리 구조 준수
 - `src/types`의 타입 정의 방식 준수
+
+### API 레이어 아키텍처
+
+**3계층 분리 원칙:**
+
+1. **GraphQL/Client 계층** (`src/api/graphql/`, `src/api/client.ts`)
+   - 순수 쿼리/뮤테이션 정의
+   - HTTP 클라이언트 설정
+
+2. **비즈니스 로직 계층** (`src/api/remote/`)
+   - API 함수들 + 도메인 타입
+   - 데이터 변환 및 에러 처리
+   - GitHub API 원본 응답 활용
+
+3. **React Query 계층** (`src/api/hooks/`)
+   - 캐싱, 무효화, 상태 관리
+   - 컴포넌트에서 사용할 간단한 인터페이스 제공
+
+**Query Key 관리:**
+
+- 중앙 집중화된 Query Keys (`DISCUSSIONS_QUERY_KEYS`)
+- 계층적 구조로 무효화 최적화
 
 ## 에러 처리 원칙
 

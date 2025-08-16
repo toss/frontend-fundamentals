@@ -1,27 +1,11 @@
-// API 관련 타입 정의
-
-// GitHub 사용자 정보
-export interface GitHubUser {
-  id: number;
-  login: string;
-  name?: string;
-  avatar_url: string;
-  bio?: string;
-  public_repos?: number;
-  followers?: number;
-  following?: number;
-}
-
-// 인증된 사용자 (access_token 포함)
-export interface AuthenticatedUser extends GitHubUser {
-  access_token: string;
-}
+// API 레이어 공통 타입 정의
 
 // API 응답 기본 구조
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   data?: T;
-  error?: string;
+  status: number;
   message?: string;
+  error?: string;
 }
 
 // GraphQL 페이지네이션 정보

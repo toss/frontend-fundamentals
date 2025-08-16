@@ -1,11 +1,9 @@
 import { memo, useState } from "react";
 import { Heart, MessageCircle, Share, Calendar, User } from "lucide-react";
-import type { GitHubDiscussion } from "../../types";
-import {
-  useToggleReaction
-} from "../../hooks/useReactions";
+import type { GitHubDiscussion } from "../../api/remote/discussions";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/Button";
+import { useToggleReaction } from "@/api/hooks/useReactions";
 
 interface PostCardProps {
   discussion: GitHubDiscussion;
@@ -39,11 +37,7 @@ function formatRelativeTime(dateString: string): string {
   });
 }
 
-function PostCardComponent({
-  discussion,
-  onLike,
-  onComment,
-}: PostCardProps) {
+function PostCardComponent({ discussion, onLike, onComment }: PostCardProps) {
   const [likeCount, setLikeCount] = useState(discussion.reactions.totalCount);
   const [isLiked, setIsLiked] = useState(false);
   const { toggleLike, isLoading: isTogglingLike } = useToggleReaction();

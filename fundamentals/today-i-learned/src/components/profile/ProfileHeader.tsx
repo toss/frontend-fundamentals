@@ -1,12 +1,12 @@
+import { useUserProfile } from "@/api/hooks/useUser";
 import { cn } from "@/lib/utils";
-import { useUserProfile } from "../../hooks/useUserProfile";
 import type { BaseComponentProps } from "@/types";
 import { User, Calendar, GitBranch } from "lucide-react";
 
 interface ProfileHeaderProps extends BaseComponentProps {}
 
 export function ProfileHeader({ className }: ProfileHeaderProps) {
-  const { userProfile, isLoading } = useUserProfile();
+  const { data: userProfile, isLoading } = useUserProfile();
 
   if (isLoading) {
     return (

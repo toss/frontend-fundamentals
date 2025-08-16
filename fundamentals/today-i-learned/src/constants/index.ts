@@ -63,6 +63,9 @@ export const UI_CONFIG = {
     NORMAL: 300,
     SLOW: 500,
   },
+  TOAST: {
+    DEFAULT_DURATION: 5000,
+  },
   BREAKPOINTS: {
     SM: 640,
     MD: 768,

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { X, CheckCircle, AlertCircle, AlertTriangle, Info } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { UI_CONFIG } from '@/constants';
 import type { BaseComponentProps } from '@/types';
 
 export type ToastType = 'success' | 'error' | 'warning' | 'info';
@@ -57,7 +58,7 @@ export function Toast({
   isVisible, 
   onClose,
   autoClose = true,
-  duration = 5000,
+  duration = UI_CONFIG.TOAST.DEFAULT_DURATION,
   className 
 }: ToastProps) {
   const [isLeaving, setIsLeaving] = useState(false);
@@ -66,7 +67,7 @@ export function Toast({
     if (isVisible && autoClose) {
       const timer = setTimeout(() => {
         setIsLeaving(true);
-        setTimeout(onClose, 300); // Wait for exit animation
+        setTimeout(onClose, UI_CONFIG.ANIMATION_DURATION.NORMAL); // Wait for exit animation
       }, duration);
 
       return () => clearTimeout(timer);
@@ -75,7 +76,7 @@ export function Toast({
 
   const handleClose = () => {
     setIsLeaving(true);
-    setTimeout(onClose, 300);
+    setTimeout(onClose, UI_CONFIG.ANIMATION_DURATION.NORMAL);
   };
 
   if (!isVisible) return null;

@@ -1,4 +1,4 @@
-import { useWeeklyTopDiscussions } from "../../hooks/useWeeklyTopDiscussions";
+import { useWeeklyTopDiscussions } from "@/api/hooks/useDiscussions";
 
 interface CardProps {
   children: React.ReactNode;
@@ -75,7 +75,12 @@ function RankBadge({ rank }: { rank: number }) {
 }
 
 // 사용자 정보
-function UserInfo({ avatarUrl, author, reactionsCount, commentsCount }: {
+function UserInfo({
+  avatarUrl,
+  author,
+  reactionsCount,
+  commentsCount
+}: {
   avatarUrl: string;
   author: string;
   reactionsCount: number;
@@ -83,14 +88,8 @@ function UserInfo({ avatarUrl, author, reactionsCount, commentsCount }: {
 }) {
   return (
     <div className="flex items-center gap-1.5 mb-0.5">
-      <img
-        src={avatarUrl}
-        alt={author}
-        className="w-3 h-3 rounded-full"
-      />
-      <span className="text-xs text-gray-600 dark:text-gray-400">
-        {author}
-      </span>
+      <img src={avatarUrl} alt={author} className="w-3 h-3 rounded-full" />
+      <span className="text-xs text-gray-600 dark:text-gray-400">{author}</span>
       {(reactionsCount > 0 || commentsCount > 0) && (
         <span className="text-xs text-gray-400 dark:text-gray-500">
           👍 {reactionsCount} 💬 {commentsCount}

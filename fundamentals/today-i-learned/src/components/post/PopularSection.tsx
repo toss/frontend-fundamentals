@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
-import { usePopularDiscussions } from "../../hooks/usePopularDiscussions";
-import type { GitHubDiscussion } from "../../types";
-import {
-  useToggleReaction
-} from "../../hooks/useReactions";
+import { usePopularDiscussions } from "@/api/hooks/useDiscussions";
+import type { GitHubDiscussion } from "@/api/remote/discussions";
+import { useToggleReaction } from "@/api/hooks/useReactions";
 import { cn } from "@/lib/utils";
 
 interface PopularSectionProps {

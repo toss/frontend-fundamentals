@@ -1,0 +1,242 @@
+import { useAuth } from "@/contexts/AuthContext";
+import { ENV_CONFIG } from "@/lib/env";
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient
+} from "@tanstack/react-query";
+import {
+  createDiscussion,
+  fetchAllDiscussions,
+  fetchInfiniteDiscussions,
+  fetchRepositoryInfo,
+  fetchWeeklyTopDiscussions,
+  type DiscussionsApiParams
+} from "../remote/discussions";
+
+// Query Keys 중앙 관리
+export const DISCUSSIONS_QUERY_KEYS = {
+  all: ["discussions"] as const,
+  lists: () => [...DISCUSSIONS_QUERY_KEYS.all, "list"] as const,
+  list: (params: Partial<DiscussionsApiParams>) =>
+    [...DISCUSSIONS_QUERY_KEYS.lists(), params] as const,
+  infinite: (params: Partial<UseInfiniteDiscussionsParams>) =>
+    [...DISCUSSIONS_QUERY_KEYS.all, "infinite", params] as const,
+  weekly: () => [...DISCUSSIONS_QUERY_KEYS.all, "weekly"] as const,
+  repository: (owner: string, repo: string) =>
+    ["repository", owner, repo] as const
+} as const;
+
+// 기본 파라미터 인터페이스
+interface UseDiscussionsParams {
+  owner?: string;
+  repo?: string;
+  categoryName?: string;
+  enabled?: boolean;
+}
+
+interface UseInfiniteDiscussionsParams {
+  owner?: string;
+  repo?: string;
+  categoryName?: string;
+  pageSize?: number;
+  sortBy?: "latest" | "lastActivity" | "created" | "popularity";
+  filterBy?: {
+    label?: string;
+  };
+  enabled?: boolean;
+}
+
+// 모든 Discussions 가져오기 (페이지네이션 없이)
+export function useAllDiscussions({
+  owner = ENV_CONFIG.GITHUB_OWNER,
+  repo = ENV_CONFIG.GITHUB_REPO,
+  categoryName = "Today I Learned",
+  enabled = true
+}: UseDiscussionsParams = {}) {
+  const { user } = useAuth();
+
+  return useQuery({
+    queryKey: DISCUSSIONS_QUERY_KEYS.list({ owner, repo, categoryName }),
+    queryFn: () =>
+      fetchAllDiscussions({
+        owner,
+        repo,
+        categoryName,
+        accessToken: user?.accessToken
+      }),
+    enabled,
+    staleTime: 1000 * 60 * 5, // 5분
+    gcTime: 1000 * 60 * 30, // 30분
+    retry: 2
+  });
+}
+
+// 무한 스크롤을 위한 Discussions (정렬 및 필터링 지원)
+export function useInfiniteDiscussions({
+  owner = ENV_CONFIG.GITHUB_OWNER,
+  repo = ENV_CONFIG.GITHUB_REPO,
+  categoryName,
+  pageSize = 5,
+  sortBy = "latest",
+  filterBy,
+  enabled = true
+}: UseInfiniteDiscussionsParams = {}) {
+  const { user } = useAuth();
+
+  return useInfiniteQuery({
+    queryKey: DISCUSSIONS_QUERY_KEYS.infinite({
+      owner,
+      repo,
+      categoryName,
+      sortBy,
+      filterBy
+    }),
+    queryFn: ({ pageParam }) =>
+      fetchInfiniteDiscussions({
+        owner,
+        repo,
+        first: pageSize,
+        after: pageParam,
+        sortBy,
+        filterBy,
+        accessToken: user?.accessToken
+      }),
+    enabled,
+    getNextPageParam: (lastPage) =>
+      lastPage.pageInfo.hasNextPage ? lastPage.pageInfo.endCursor : undefined,
+    initialPageParam: null as string | null,
+    staleTime: 1000 * 60 * 2, // 2분
+    gcTime: 1000 * 60 * 10 // 10분
+  });
+}
+
+// 주간 인기 Discussions
+export function useWeeklyTopDiscussions({
+  owner = ENV_CONFIG.GITHUB_OWNER,
+  repo = ENV_CONFIG.GITHUB_REPO,
+  limit,
+  enabled = true
+}: Omit<UseDiscussionsParams, "categoryName"> & { limit?: number } = {}) {
+  const { user } = useAuth();
+
+  return useQuery({
+    queryKey: DISCUSSIONS_QUERY_KEYS.weekly(),
+    queryFn: async () => {
+      const discussions = await fetchWeeklyTopDiscussions({
+        owner,
+        repo,
+        accessToken: user?.accessToken
+      });
+      // limit이 지정된 경우 결과를 제한
+      return limit ? discussions.slice(0, limit) : discussions;
+    },
+    enabled,
+    staleTime: 1000 * 60 * 30, // 30분
+    gcTime: 1000 * 60 * 60, // 1시간
+    retry: 1
+  });
+}
+
+// Repository 정보
+export function useRepositoryInfo({
+  owner = ENV_CONFIG.GITHUB_OWNER,
+  repo = ENV_CONFIG.GITHUB_REPO,
+  enabled = true
+}: Omit<UseDiscussionsParams, "categoryName"> = {}) {
+  const { user } = useAuth();
+
+  return useQuery({
+    queryKey: DISCUSSIONS_QUERY_KEYS.repository(owner, repo),
+    queryFn: () =>
+      fetchRepositoryInfo({
+        owner,
+        repo,
+        accessToken: user?.accessToken
+      }),
+    enabled: enabled && !!user?.accessToken,
+    staleTime: 1000 * 60 * 60, // 1시간
+    gcTime: 1000 * 60 * 60 * 24 // 24시간
+  });
+}
+
+// Discussion 생성을 위한 간단한 인터페이스
+interface CreatePostParams {
+  title: string;
+  body: string;
+}
+
+// Discussion 생성 Mutation
+export function useCreateDiscussion() {
+  const queryClient = useQueryClient();
+  const { user } = useAuth();
+
+  return useMutation({
+    mutationFn: async (params: CreatePostParams) => {
+      if (!user?.accessToken) {
+        throw new Error("Authentication required");
+      }
+
+      // Repository 정보를 가져와서 repositoryId와 categoryId를 얻음
+      const repoInfo = await fetchRepositoryInfo({
+        owner: ENV_CONFIG.GITHUB_OWNER,
+        repo: ENV_CONFIG.GITHUB_REPO,
+        accessToken: user.accessToken
+      });
+
+      // "Today I Learned" 카테고리 찾기
+      const tilCategory = repoInfo.categories.find(
+        (cat) => cat.name === "Today I Learned"
+      );
+
+      if (!tilCategory) {
+        throw new Error("Today I Learned category not found");
+      }
+
+      return createDiscussion({
+        repositoryId: repoInfo.repositoryId,
+        categoryId: tilCategory.id,
+        title: params.title,
+        body: params.body,
+        accessToken: user.accessToken
+      });
+    },
+    onSuccess: () => {
+      // 관련 쿼리들 무효화
+      queryClient.invalidateQueries({
+        queryKey: DISCUSSIONS_QUERY_KEYS.all
+      });
+    }
+  });
+}
+
+// 특정 카테고리 Discussions만 가져오기
+export function useDiscussionsByCategory(
+  categoryName: string,
+  options?: UseDiscussionsParams
+) {
+  return useAllDiscussions({
+    ...options,
+    categoryName
+  });
+}
+
+// 인기 Discussions (리액션 수 기준)
+export function usePopularDiscussions({
+  owner = ENV_CONFIG.GITHUB_OWNER,
+  repo = ENV_CONFIG.GITHUB_REPO,
+  enabled = true
+}: Omit<UseDiscussionsParams, "categoryName"> = {}) {
+  const allDiscussionsQuery = useAllDiscussions({ owner, repo, enabled });
+
+  const popularDiscussions = allDiscussionsQuery.data
+    ?.filter((discussion) => discussion.reactions.totalCount > 0)
+    ?.sort((a, b) => b.reactions.totalCount - a.reactions.totalCount)
+    ?.slice(0, 10);
+
+  return {
+    ...allDiscussionsQuery,
+    data: popularDiscussions
+  };
+}

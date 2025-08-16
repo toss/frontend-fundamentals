@@ -1,47 +1,4 @@
-// === Core Domain Types ===
-
-export interface User {
-  id: string;
-  username: string;
-  displayName: string;
-  avatarUrl?: string;
-  email?: string;
-  bio?: string;
-  postsCount: number;
-  followersCount: number;
-  followingCount: number;
-}
-
-export interface Post {
-  id: string;
-  title: string;
-  content: string;
-  author: Pick<User, 'username' | 'avatarUrl'>;
-  createdAt: string;
-  updatedAt: string;
-  likesCount: number;
-  commentsCount: number;
-  isLiked: boolean;
-  tags?: string[];
-  category?: PostCategory;
-}
-
-export interface Comment {
-  id: string;
-  postId: string;
-  content: string;
-  author: Pick<User, 'username' | 'avatarUrl'>;
-  createdAt: string;
-  updatedAt: string;
-  likesCount: number;
-  isLiked: boolean;
-  parentId?: string;
-  replies?: Comment[];
-}
-
-// === Category & Tab Types ===
-
-export type PostCategory = 'latest' | 'weekly' | 'hall-of-fame';
+export type PostCategory = "latest" | "weekly" | "hall-of-fame";
 
 export interface TabItem<T extends string = PostCategory> {
   id: T;
@@ -95,43 +52,6 @@ export interface ValidationRule {
   custom?: (value: string) => boolean | string;
 }
 
-// === API & External Service Types ===
-
-export interface GitHubDiscussion {
-  id: string;
-  title: string;
-  body: string;
-  author: {
-    login: string;
-    avatarUrl: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-  reactions: {
-    totalCount: number;
-  };
-  comments: {
-    totalCount: number;
-  };
-  category: {
-    name: string;
-  };
-}
-
-export interface ApiResponse<T> {
-  data: T;
-  status: number;
-  message?: string;
-  error?: string;
-}
-
-export interface CreatePostRequest {
-  title: string;
-  body: string;
-}
-
-export interface CreatePostResponse extends GitHubDiscussion {}
-
 // === UI & Component Types ===
 
 export interface BaseComponentProps {
@@ -146,9 +66,9 @@ export interface NavigationItem {
   icon?: React.ReactNode;
 }
 
-export type LoadingState = 'idle' | 'loading' | 'success' | 'error';
+export type LoadingState = "idle" | "loading" | "success" | "error";
 
-export type Theme = 'light' | 'dark' | 'system';
+export type Theme = "light" | "dark" | "system";
 
 export interface ThemeContextValue {
   theme: Theme;

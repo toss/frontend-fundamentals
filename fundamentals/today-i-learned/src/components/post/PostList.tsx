@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import { PostCard } from "./PostCard";
 import { Button } from "../ui/Button";
-import { useInfiniteDiscussions } from "../../hooks/useInfiniteDiscussions";
-import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 import { LoadingSpinner } from "../ui/LoadingSpinner";
+import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 interface PostListProps {
   owner?: string;

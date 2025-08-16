@@ -5,8 +5,8 @@ import {
   useEffect,
   type ReactNode,
 } from "react";
-import { AUTH_LOGIN_URL, getUserInfo } from "../lib/api";
-import type { AuthenticatedUser } from "../types/api";
+import { AUTH_LOGIN_URL, getUserInfo } from "../api/client";
+import type { AuthenticatedUser } from "../api/remote/user";
 
 export type User = AuthenticatedUser;
 
@@ -32,7 +32,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const fetchUserInfo = async (token: string) => {
     try {
       const userData = await getUserInfo(token);
-      const userWithToken = { ...userData, access_token: token };
+      const userWithToken = { ...userData, accessToken: token };
       setUser(userWithToken);
       localStorage.setItem("github_user", JSON.stringify(userWithToken));
     } catch (error) {
