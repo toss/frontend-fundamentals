@@ -1,11 +1,16 @@
 # Claude Code Rules
 
-이 프로젝트의 Claude Code 규칙은 다음 파일들로 분리하여 관리합니다:
+실용적이고 핵심적인 규칙들로 구성했습니다:
 
-- [개발 원칙](./.claude/development.md) - 프론트엔드 개발 흐름, 실용적 테스트 전략, 커밋 규칙
-- [아키텍처 원칙](./.claude/architecture.md) - 설계 원칙, 의사결정 기준, 단순성 가이드
-- [프론트엔드 규칙](./.claude/frontend-fundamentals.md) - Frontend fundamentals문서 기반의 규칙. 수정 금지.
-- [프로젝트 구조](./.claude/project-structure.md) - 디렉토리 구조, 파일 명명 규칙
-- [컴포넌트 가이드라인](./.claude/component-guidelines.md) - 응집도 기반 컴포넌트 구조 원칙 (2024-08-16 리팩토링 기준)
+## 필수 규칙 (반드시 준수)
 
-각 파일은 해당 영역의 구체적인 가이드라인과 규칙을 포함합니다.
+- **[핵심 규칙](./.claude/rules.md)** - 컴포넌트 구조, Import 규칙, API 패턴, 에러 처리
+
+## 세부 가이드라인 (참고용)
+
+- **[프로젝트 구조](./.claude/project-structure.md)** - 디렉토리 구조와 컴포넌트 분류 원칙
+- **[개발 원칙](./.claude/development.md)** - TDD, 커밋 규칙, 타입 안전성
+- **[API 패턴](./.claude/api-patterns.md)** - 3-Layer API 아키텍처와 GitHub API 사용법
+- **[프론트엔드 원칙](./.claude/frontend-fundamentals.md)** - Frontend Fundamentals 기반 (수정 금지)
+
+**우선순위**: 필수 규칙을 먼저 지키고, 세부사항은 상황에 따라 판단하세요.
