@@ -32,9 +32,6 @@ export function PostList({
     refetch
   } = useInfiniteDiscussions({ owner, repo, categoryName, sortBy, filterBy });
 
-  console.log({ filterBy });
-
-  // 무한스크롤 핸들러를 useCallback으로 메모이제이션
   const handleLoadMore = useCallback(() => {
     if (hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
@@ -44,15 +41,13 @@ export function PostList({
   const { elementRef } = useIntersectionObserver({
     enabled: hasNextPage && !isFetchingNextPage,
     onIntersect: handleLoadMore,
-    rootMargin: "300px" // 트리거 요소가 화면에서 300px 전에 미리 호출
+    rootMargin: "300px"
   });
 
   const handleComment = (id: string) => {
-    console.log("Comment clicked:", id);
     // TODO: 댓글 페이지로 이동
   };
 
-  // 로딩 상태
   if (isLoading) {
     return (
       <div className="space-y-6">
@@ -61,7 +56,6 @@ export function PostList({
     );
   }
 
-  // 에러 상태
   if (error) {
     return (
       <div className="rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-6 text-center">
@@ -76,8 +70,6 @@ export function PostList({
     );
   }
 
-  console.log({ data });
-  // 데이터가 없는 경우
   const allDiscussions = data?.pages.flatMap((page) => page.discussions) ?? [];
 
   if (allDiscussions.length === 0) {
@@ -96,7 +88,6 @@ export function PostList({
 
   return (
     <div className="space-y-6">
-      {/* Posts feed */}
       <div className="space-y-4">
         {allDiscussions.map((discussion, index) => (
           <PostCard
@@ -109,7 +100,6 @@ export function PostList({
         ))}
       </div>
 
-      {/* 무한스크롤 트리거 요소 */}
       {hasNextPage && (
         <div ref={elementRef} className="flex justify-center py-8">
           {isFetchingNextPage && (

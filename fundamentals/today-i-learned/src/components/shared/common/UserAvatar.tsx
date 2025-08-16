@@ -7,7 +7,6 @@ interface UserAvatarProps {
 }
 
 export function UserAvatar({ user, isLoading }: UserAvatarProps) {
-  console.log({ user });
   if (user && !isLoading) {
     return (
       <img

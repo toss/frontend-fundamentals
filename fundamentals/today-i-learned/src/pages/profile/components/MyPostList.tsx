@@ -30,14 +30,12 @@ export function MyPostList({ className }: MyPostListProps) {
     enabled: hasNextPage && !isFetchingNextPage
   });
 
-  // 무한스크롤 트리거
   useEffect(() => {
     if (isIntersecting && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
   }, [isIntersecting, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-  // 현재 사용자가 작성한 포스트만 필터링
   const myPosts = useMemo(() => {
     if (!userProfile?.login || !data) return [];
 
@@ -47,7 +45,6 @@ export function MyPostList({ className }: MyPostListProps) {
     );
   }, [data, userProfile?.login]);
 
-  // 통계 계산
   const stats = useMemo(() => {
     const totalPosts = myPosts.length;
     const totalLikes = myPosts.reduce(
@@ -59,7 +56,6 @@ export function MyPostList({ className }: MyPostListProps) {
       0
     );
 
-    // 최근 30일 포스트 수
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
     const recentPosts = myPosts.filter(
@@ -75,13 +71,10 @@ export function MyPostList({ className }: MyPostListProps) {
   }, [myPosts]);
 
   const handleComment = (id: string) => {
-    console.log("Comment clicked:", id);
     // TODO: 댓글 페이지로 이동 또는 댓글 모달 열기
   };
 
-  // 콘텐츠 렌더링 함수
   const renderContent = () => {
-    // 로딩 상태
     if (isLoading) {
       return (
         <div className="min-h-[200px] flex items-center justify-center">
@@ -90,7 +83,6 @@ export function MyPostList({ className }: MyPostListProps) {
       );
     }
 
-    // 에러 상태
     if (error) {
       return (
         <div className="text-center py-8">
@@ -105,7 +97,6 @@ export function MyPostList({ className }: MyPostListProps) {
       );
     }
 
-    // 빈 상태 - 로딩이 완료되고, 데이터와 사용자 프로필이 있는데도 게시물이 없을 때
     if (!isLoading && data && userProfile && myPosts.length === 0) {
       return (
         <div className="rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-8 text-center">
@@ -120,7 +111,6 @@ export function MyPostList({ className }: MyPostListProps) {
       );
     }
 
-    // 포스트 목록
     if (myPosts.length > 0) {
       return (
         <div className="space-y-4">
@@ -133,7 +123,6 @@ export function MyPostList({ className }: MyPostListProps) {
             />
           ))}
 
-          {/* 무한스크롤 트리거 및 로딩 상태 */}
           {hasNextPage && (
             <div
               ref={elementRef}
@@ -148,7 +137,6 @@ export function MyPostList({ className }: MyPostListProps) {
             </div>
           )}
 
-          {/* 더 이상 불러올 글이 없을 때 */}
           {!hasNextPage && myPosts.length > 0 && (
             <div className="text-center py-4 text-gray-500 dark:text-gray-400 text-sm">
               모든 글을 불러왔습니다.
@@ -158,7 +146,6 @@ export function MyPostList({ className }: MyPostListProps) {
       );
     }
 
-    // 데이터 로딩 중이거나 사용자 프로필이 없는 경우
     return (
       <div className="min-h-[200px] flex items-center justify-center">
         <LoadingSpinner text="내 글을 불러오는 중..." variant="primary" />
@@ -175,12 +162,10 @@ export function MyPostList({ className }: MyPostListProps) {
         className
       )}
     >
-      {/* Header with Statistics - 항상 표시 */}
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white mt-2">
           내가 작성한 글
         </h2>
-        {/* 통계는 항상 표시 - 로딩 중에는 0으로, 데이터 로드 후 실제 값으로 */}
         <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-300">
           <div className="flex items-center gap-1">
             <FileText className="w-4 h-4" />
@@ -199,7 +184,6 @@ export function MyPostList({ className }: MyPostListProps) {
         </div>
       </div>
 
-      {/* Content Area */}
       {renderContent()}
     </div>
   );
