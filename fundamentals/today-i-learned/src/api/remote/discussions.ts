@@ -5,7 +5,8 @@ import {
   CREATE_DISCUSSION_MUTATION,
   GET_REPOSITORY_INFO_QUERY,
   GET_INFINITE_DISCUSSIONS_QUERY,
-  SEARCH_DISCUSSIONS_QUERY
+  SEARCH_DISCUSSIONS_QUERY,
+  GET_MY_CONTRIBUTIONS_QUERY
 } from "../graphql/discussions";
 
 export interface GitHubAuthor {
@@ -319,4 +320,60 @@ export async function fetchInfiniteDiscussions({
       endCursor: discussionsData?.pageInfo?.endCursor || null
     }
   };
+}
+
+// 경량화된 컨트리뷰션 데이터 타입 (날짜 정보만)
+export interface ContributionData {
+  id: string;
+  createdAt: string;
+  author: {
+    login: string;
+  };
+}
+
+// 내 기여도 계산을 위한 경량화된 데이터 가져오기
+export async function fetchMyContributions({
+  owner,
+  repo,
+  accessToken,
+  authorLogin
+}: Omit<DiscussionsApiParams, "categoryName"> & { authorLogin: string }): Promise<ContributionData[]> {
+  const allContributions: ContributionData[] = [];
+  let hasNextPage = true;
+  let cursor: string | null = null;
+  const maxItems = 1000; // 안전장치
+
+  // "Today I Learned" 카테고리와 작성자 필터링이 포함된 검색 쿼리
+  const searchQuery = `repo:${owner}/${repo} is:discussion author:${authorLogin} in:title,body`;
+
+  while (hasNextPage && allContributions.length < maxItems) {
+    try {
+      const data = await graphqlRequest(
+        GET_MY_CONTRIBUTIONS_QUERY,
+        {
+          query: searchQuery,
+          first: PAGE_SIZE.DEFAULT,
+          after: cursor || null
+        },
+        accessToken
+      );
+
+      const searchData = data.data?.search;
+      
+      if (!searchData) {
+        break;
+      }
+
+      const contributions = searchData.nodes || [];
+      allContributions.push(...contributions);
+
+      hasNextPage = searchData.pageInfo?.hasNextPage || false;
+      cursor = searchData.pageInfo?.endCursor || null;
+    } catch (error) {
+      console.warn("Failed to fetch contributions page:", error);
+      break;
+    }
+  }
+
+  return allContributions;
 }

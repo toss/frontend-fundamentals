@@ -1,7 +1,7 @@
 import { memo, useState } from "react";
 import { Heart, MessageCircle, Share, Calendar, User } from "lucide-react";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
-import { cn } from "@/lib/utils";
+import { cn } from "@/libs/utils";
 import { Button } from "../../shared/ui/Button";
 import { useToggleReaction } from "@/api/hooks/useReactions";
 

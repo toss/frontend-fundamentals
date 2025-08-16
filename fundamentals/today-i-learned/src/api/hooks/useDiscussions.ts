@@ -1,5 +1,5 @@
 import { useAuth } from "@/contexts/AuthContext";
-import { ENV_CONFIG } from "@/lib/env";
+import { ENV_CONFIG } from "@/libs/env";
 import {
   useInfiniteQuery,
   useMutation,
@@ -12,6 +12,7 @@ import {
   fetchInfiniteDiscussions,
   fetchRepositoryInfo,
   fetchWeeklyTopDiscussions,
+  fetchMyContributions,
   type DiscussionsApiParams
 } from "../remote/discussions";
 
@@ -25,7 +26,9 @@ export const DISCUSSIONS_QUERY_KEYS = {
     [...DISCUSSIONS_QUERY_KEYS.all, "infinite", params] as const,
   weekly: () => [...DISCUSSIONS_QUERY_KEYS.all, "weekly"] as const,
   repository: (owner: string, repo: string) =>
-    ["repository", owner, repo] as const
+    ["repository", owner, repo] as const,
+  contributions: (authorLogin: string) =>
+    [...DISCUSSIONS_QUERY_KEYS.all, "contributions", authorLogin] as const
 } as const;
 
 // 기본 파라미터 인터페이스
@@ -48,8 +51,8 @@ interface UseInfiniteDiscussionsParams {
   enabled?: boolean;
 }
 
-// 모든 Discussions 가져오기 (페이지네이션 없이)
-export function useAllDiscussions({
+// 전체 Discussions 가져오기 (인기글 등을 위한 완전한 데이터)
+export function useAllDiscussionsWithFullData({
   owner = ENV_CONFIG.GITHUB_OWNER,
   repo = ENV_CONFIG.GITHUB_REPO,
   categoryName = "Today I Learned",
@@ -211,32 +214,30 @@ export function useCreateDiscussion() {
   });
 }
 
-// 특정 카테고리 Discussions만 가져오기
-export function useDiscussionsByCategory(
-  categoryName: string,
-  options?: UseDiscussionsParams
-) {
-  return useAllDiscussions({
-    ...options,
-    categoryName
-  });
-}
-
-// 인기 Discussions (리액션 수 기준)
-export function usePopularDiscussions({
+// 내 기여도 정보 (컨트리뷰션 그래프용 경량화된 데이터)
+export function useMyContributions({
   owner = ENV_CONFIG.GITHUB_OWNER,
   repo = ENV_CONFIG.GITHUB_REPO,
   enabled = true
 }: Omit<UseDiscussionsParams, "categoryName"> = {}) {
-  const allDiscussionsQuery = useAllDiscussions({ owner, repo, enabled });
+  const { user } = useAuth();
 
-  const popularDiscussions = allDiscussionsQuery.data
-    ?.filter((discussion) => discussion.reactions.totalCount > 0)
-    ?.sort((a, b) => b.reactions.totalCount - a.reactions.totalCount)
-    ?.slice(0, 10);
-
-  return {
-    ...allDiscussionsQuery,
-    data: popularDiscussions
-  };
+  return useQuery({
+    queryKey: DISCUSSIONS_QUERY_KEYS.contributions(user?.login || ""),
+    queryFn: () => {
+      if (!user?.accessToken || !user?.login) {
+        throw new Error("Authentication required");
+      }
+      return fetchMyContributions({
+        owner,
+        repo,
+        accessToken: user.accessToken,
+        authorLogin: user.login
+      });
+    },
+    enabled: enabled && !!user?.accessToken && !!user?.login,
+    staleTime: 1000 * 60 * 10, // 10분
+    gcTime: 1000 * 60 * 30, // 30분
+    retry: 2
+  });
 }

@@ -1,6 +1,10 @@
 import { useToast } from "@/components/shared/ui/Toast";
 import { ERROR_MESSAGES } from "@/constants";
-import { AuthError, getUserFriendlyErrorMessage, logError } from "@/lib/errors";
+import {
+  AuthError,
+  getUserFriendlyErrorMessage,
+  logError
+} from "@/libs/errors";
 import { useCallback } from "react";
 
 interface ErrorHandlerOptions {

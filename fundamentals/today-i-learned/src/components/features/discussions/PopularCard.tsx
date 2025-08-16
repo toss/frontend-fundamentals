@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
 import { useToggleReaction } from "@/api/hooks/useReactions";
-import { cn } from "@/lib/utils";
+import { cn } from "@/libs/utils";
 import { Button } from "../../shared/ui/Button";
 
 interface PopularCardProps {

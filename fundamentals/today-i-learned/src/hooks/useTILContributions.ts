@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import type { ActivityDay } from "../types";
-import type { GitHubDiscussion } from "../api/remote/discussions";
-import { useAllDiscussions } from "../api/hooks/useDiscussions";
+import type { ContributionData } from "../api/remote/discussions";
+import { useMyContributions } from "../api/hooks/useDiscussions";
 
 // 기여도 레벨 계산 상수
 const CONTRIBUTION_LEVELS = {
@@ -104,17 +104,17 @@ const calculatePeriodCounts = (
 };
 
 export function useTILContributions(): TILContributionsData {
-  // 모든 TIL 포스트 데이터 가져오기 (경량화된 쿼리 사용)
-  const { data: discussionsData } = useAllDiscussions();
+  // 내가 작성한 TIL 포스트 데이터 가져오기 (경량화된 쿼리 사용)
+  const { data: contributionsData } = useMyContributions();
 
-  const contributionsData = useMemo(() => {
-    const allDiscussions = discussionsData ?? [];
+  const processedData = useMemo(() => {
+    const allContributions = contributionsData ?? [];
     const yearDates = generateYearDates();
 
     // 각 날짜별로 작성된 포스트 개수 계산
-    const contributionsByDate = allDiscussions.reduce(
-      (acc, discussion: GitHubDiscussion) => {
-        const date = new Date(discussion.createdAt).toISOString().split("T")[0];
+    const contributionsByDate = allContributions.reduce(
+      (acc, contribution: ContributionData) => {
+        const date = new Date(contribution.createdAt).toISOString().split("T")[0];
         acc[date] = (acc[date] || 0) + 1;
         return acc;
       },
@@ -148,7 +148,7 @@ export function useTILContributions(): TILContributionsData {
       thisWeekCount: periodCounts.week,
       thisMonthCount: periodCounts.month
     };
-  }, [discussionsData]);
+  }, [contributionsData]);
 
-  return contributionsData;
+  return processedData;
 }

@@ -1,5 +1,5 @@
 import { useMemo, useEffect } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/libs/utils";
 import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
 import { useUserProfile } from "@/api/hooks/useUser";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";

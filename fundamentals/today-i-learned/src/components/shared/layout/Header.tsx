@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/libs/utils";
 import { LogIn, LogOut, Menu, Moon, Sun } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import ffSymbolUrl from "@/assets/ff-symbol.svg";
@@ -8,7 +8,13 @@ import { Button } from "../ui/Button";
 
 export function Header() {
   const { theme, toggleTheme } = useTheme();
-  const { user, isAuthenticated, login, logout, isLoading: authLoading } = useAuth();
+  const {
+    user,
+    isAuthenticated,
+    login,
+    logout,
+    isLoading: authLoading
+  } = useAuth();
   const location = useLocation();
 
   const isLoading = authLoading;

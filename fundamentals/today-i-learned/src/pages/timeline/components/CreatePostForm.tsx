@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import { Control, useController, useForm, useWatch } from "react-hook-form";
 import { APP_CONSTANTS, UI_CONFIG } from "@/constants";
-import { cn, validateContent } from "@/lib/utils";
+import { cn, validateContent } from "@/libs/utils";
 import { useFormErrorHandler } from "@/hooks/useErrorHandler";
 import { Button } from "@/components/shared/ui/Button";
 
@@ -144,11 +144,7 @@ interface PostFooterProps {
   isValid: boolean;
 }
 
-function PostFooter({
-  control,
-  isSubmitting,
-  isValid,
-}: PostFooterProps) {
+function PostFooter({ control, isSubmitting, isValid }: PostFooterProps) {
   const title = useWatch({
     control,
     name: "title",
@@ -235,7 +231,7 @@ export function CreatePostForm({
     () => title?.trim().length > 0 || content?.trim().length > 0,
     [title, content]
   );
-  
+
   const shouldShowFooter = useMemo(
     () => isFocused || hasContent,
     [isFocused, hasContent]

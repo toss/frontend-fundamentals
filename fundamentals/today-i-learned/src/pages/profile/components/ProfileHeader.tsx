@@ -1,5 +1,5 @@
 import { useUserProfile } from "@/api/hooks/useUser";
-import { cn } from "@/lib/utils";
+import { cn } from "@/libs/utils";
 import type { BaseComponentProps } from "@/types";
 import { User, Calendar, GitBranch } from "lucide-react";
 

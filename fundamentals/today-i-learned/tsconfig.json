@@ -25,8 +25,12 @@
     "paths": {
       "@/*": ["src/*"],
       "@shared/*": ["../shared/*"]
-    }
+    },
+    
+    /* Jest */
+    "types": ["jest", "@testing-library/jest-dom"],
+    "esModuleInterop": true
   },
-  "include": ["src", "../shared"],
+  "include": ["src", "../shared", "jest.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

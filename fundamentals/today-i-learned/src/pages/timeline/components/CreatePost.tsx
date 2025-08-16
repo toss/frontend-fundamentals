@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/libs/utils";
 import type { BaseComponentProps } from "@/types";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";

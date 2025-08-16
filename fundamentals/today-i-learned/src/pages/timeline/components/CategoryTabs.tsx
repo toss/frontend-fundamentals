@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/libs/utils";
 import type { BaseComponentProps, PostCategory, TabItem } from "@/types";
 import { Clock, Crown, TrendingUp } from "lucide-react";
 
@@ -6,7 +6,7 @@ import { Clock, Crown, TrendingUp } from "lucide-react";
 const ICON_MAP = {
   Clock: Clock,
   TrendingUp: TrendingUp,
-  Crown: Crown,
+  Crown: Crown
 } as const;
 
 // Tab configuration with typed icons
@@ -14,20 +14,19 @@ const TAB_CONFIG: TabItem<PostCategory>[] = [
   {
     id: "latest",
     label: "최신글",
-    icon: "Clock",
+    icon: "Clock"
   },
   {
     id: "weekly",
     label: "실시간 인기글",
-    icon: "TrendingUp",
+    icon: "TrendingUp"
   },
   {
     id: "hall-of-fame",
     label: "명예의 전당",
-    icon: "Crown",
+    icon: "Crown"
   }
 ] as const;
-
 
 interface CategoryTabsProps extends BaseComponentProps {
   activeTab: PostCategory;
@@ -36,7 +35,11 @@ interface CategoryTabsProps extends BaseComponentProps {
 
 export function CategoryTabs({ activeTab, onTabChange }: CategoryTabsProps) {
   return (
-    <nav className="flex space-x-6 justify-center" aria-label="게시물 카테고리" role="tablist">
+    <nav
+      className="flex space-x-6 justify-center"
+      aria-label="게시물 카테고리"
+      role="tablist"
+    >
       {TAB_CONFIG.map((tab) => {
         const IconComponent = ICON_MAP[tab.icon as keyof typeof ICON_MAP];
         const isActive = activeTab === tab.id;
@@ -71,14 +74,17 @@ export function CategoryTabs({ activeTab, onTabChange }: CategoryTabsProps) {
   );
 }
 
-
 interface TabContentProps {
   activeTab: PostCategory;
   children?: React.ReactNode;
   className?: string;
 }
 
-export function TabContent({ activeTab, children, className }: TabContentProps) {
+export function TabContent({
+  activeTab,
+  children,
+  className
+}: TabContentProps) {
   return (
     <div
       className={className}
@@ -90,4 +96,3 @@ export function TabContent({ activeTab, children, className }: TabContentProps) 
     </div>
   );
 }
-

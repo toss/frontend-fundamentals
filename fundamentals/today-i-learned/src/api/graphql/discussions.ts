@@ -169,3 +169,29 @@ export const SEARCH_DISCUSSIONS_QUERY = `
     }
   }
 `;
+
+// 내 기여도(컨트리뷰션) 계산을 위한 경량화된 쿼리 - 날짜 정보만 필요
+export const GET_MY_CONTRIBUTIONS_QUERY = `
+  query GetMyContributions($query: String!, $first: Int!, $after: String) {
+    search(
+      query: $query
+      type: DISCUSSION
+      first: $first
+      after: $after
+    ) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      nodes {
+        ... on Discussion {
+          id
+          createdAt
+          author {
+            login
+          }
+        }
+      }
+    }
+  }
+`;

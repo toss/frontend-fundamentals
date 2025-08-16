@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/libs/utils";
 import type { BaseComponentProps } from "@/types";
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import {
@@ -6,7 +6,7 @@ import {
   type ContributionDay
 } from "@/hooks/useTILContributions";
 
-interface ContributionGraphProps extends BaseComponentProps { }
+interface ContributionGraphProps extends BaseComponentProps {}
 
 // GitHub 잔디 색상 레벨 (기존 브랜드 컬러 활용)
 const CONTRIBUTION_COLORS = {
@@ -50,12 +50,8 @@ interface TooltipData {
 }
 
 export function ContributionGraph({ className }: ContributionGraphProps) {
-  const {
-    contributions,
-    totalContributions,
-    currentStreak,
-    longestStreak,
-  } = useTILContributions();
+  const { contributions, totalContributions, currentStreak, longestStreak } =
+    useTILContributions();
   const [tooltip, setTooltip] = useState<TooltipData | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
