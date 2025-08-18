@@ -68,8 +68,8 @@ export function NewHomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-white pt-[72px]">
-      <div className="max-w-[1440px] mx-auto lg:px-8 pt-4">
+    <div className="min-h-screen bg-white">
+      <div className="max-w-[1440px] mx-auto lg:px-8">
         {/* 메인 그리드 레이아웃 */}
         <div className="grid grid-cols-1 lg:grid-cols-[5fr_3fr] gap-8">
           {/* 왼쪽 컬럼: 메인 피드 */}

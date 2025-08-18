@@ -19,12 +19,12 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
         pathname={location.pathname}
       />
 
-      <NewHomeHeader />
-
-      <div className="relative flex min-h-screen flex-col">
-        {/* Simple centered layout */}
+      <div className="relative flex min-h-screen flex-col mt-[120px]">
+        <NewHomeHeader />
         <main className="flex-1">
-          <div className="mx-auto min-w-3xl px-4 py-8">{children}</div>
+          <div className="mx-auto min-w-3xl px-4 max-w-[1440px]">
+            {children}
+          </div>
         </main>
       </div>
     </div>
