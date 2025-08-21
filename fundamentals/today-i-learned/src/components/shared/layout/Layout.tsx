@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { OneNavigationReact } from "@shared/components";
-import { Header } from "./Header";
+import { NewHomeHeader } from "@/pages/newHome/components/NewHomeHeader";
 
 export const Layout: React.FC<{ children: React.ReactNode }> = ({
   children
@@ -12,19 +12,19 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
     !location.pathname.startsWith("/zh-hans");
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#1b1b1f] font-sans antialiased">
+    <div className="min-h-screen bg-white font-sans antialiased">
       <OneNavigationReact
         lang={location.pathname.split("/")[1] || "ko"}
         isKorean={isKorean}
         pathname={location.pathname}
       />
 
-      <div className="relative flex min-h-screen flex-col">
-        <Header />
-
-        {/* Simple centered layout */}
-        <main className="flex-1 pt-16">
-          <div className="mx-auto max-w-5xl px-4 py-8">{children}</div>
+      <div className="relative flex min-h-screen flex-col mt-[120px]">
+        <NewHomeHeader />
+        <main className="flex-1">
+          <div className="mx-auto min-w-3xl px-4 max-w-[1440px]">
+            {children}
+          </div>
         </main>
       </div>
     </div>

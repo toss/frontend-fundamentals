@@ -103,7 +103,7 @@
   left: 58px;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1024px) {
   .one-navigation {
     top: auto;
     bottom: 0;
@@ -145,4 +145,4 @@
     height: 2px;
     width: calc(100% - 16px);
   }
-} 
+}
