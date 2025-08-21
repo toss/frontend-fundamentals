@@ -33,7 +33,7 @@ export const sharedConfig = defineConfig({
   head: [
     [
       "link",
-      { rel: "icon", type: "image/x-icon", href: "/images/favicon.ico" }
+      { rel: "icon", type: "image/x-icon", href: "/a11y/images/favicon.ico" }
     ],
     [
       "meta",
