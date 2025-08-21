@@ -35,7 +35,7 @@ When multiple developers work on the same code, the intention may not be accurat
 
 ::: info
 
-This Hook can also be viewed from the perspective of [cohesion](./magic-number-cohesion.md).
+This function can also be viewed from the perspective of [cohesion](./magic-number-cohesion.md).
 
 :::
 

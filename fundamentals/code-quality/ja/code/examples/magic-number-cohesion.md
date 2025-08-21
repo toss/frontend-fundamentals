@@ -31,7 +31,7 @@ async function onLikeClick() {
 
 ::: info
 
-この Hook は[可読性](./magic-number-readability.md)の観点からも考えることができます。
+この Function は[可読性](./magic-number-readability.md)の観点からも考えることができます。
 
 :::
 

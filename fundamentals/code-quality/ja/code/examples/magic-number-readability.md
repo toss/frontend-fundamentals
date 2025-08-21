@@ -36,7 +36,7 @@ async function onLikeClick() {
 
 ::: info
 
-この Hook は[凝集度](./magic-number-cohesion.md)の観点からも考えることができます。
+この Function は[凝集度](./magic-number-cohesion.md)の観点からも考えることができます。
 
 :::
 

@@ -32,7 +32,7 @@ async function onLikeClick() {
 
 ::: info
 
-이 Hook은 [가독성](./magic-number-readability.md) 관점으로도 볼 수 있어요.
+이 함수는 [가독성](./magic-number-readability.md) 관점으로도 볼 수 있어요.
 
 :::
 

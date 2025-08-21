@@ -30,7 +30,7 @@ From the perspective that only one side of the code that needs to be modified to
 
 ::: info
 
-This hook can also be viewed from the perspective of [readability](./magic-number-readability.md).
+This function can also be viewed from the perspective of [readability](./magic-number-readability.md).
 
 :::
 

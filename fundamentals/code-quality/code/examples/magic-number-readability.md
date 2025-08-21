@@ -1,4 +1,4 @@
-# 매직 넘버에 이름 붙이기
+훅# 매직 넘버에 이름 붙이기
 
 <div style="margin-top: 16px">
 <Badge type="info" text="가독성" />
@@ -36,7 +36,7 @@ async function onLikeClick() {
 
 ::: info
 
-이 Hook은 [응집도](./magic-number-cohesion.md) 관점으로도 볼 수 있어요.
+이 함수는 [응집도](./magic-number-cohesion.md) 관점으로도 볼 수 있어요.
 
 :::
 
