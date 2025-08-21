@@ -145,10 +145,6 @@ export default defineConfig({
   },
   head: [
     [
-      "link",
-      { rel: "icon", type: "image/x-icon", href: "/bundling/images/favicon.ico" }
-    ],
-    [
       "meta",
       {
         property: "og:image",
