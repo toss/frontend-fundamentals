@@ -86,5 +86,50 @@ export interface MonthlyChallengeProps {
 export interface WeeklyTop5Props {
   posts: PopularPost[];
   weekInfo: string;
-  onPostClick: (postId: string) => void;
+}
+
+// Comment Types
+export interface Comment {
+  id: string;
+  content: string;
+  author: User;
+  createdAt: string;
+  stats: {
+    upvotes: number;
+    replies: number;
+  };
+  parentId?: string;
+  replies?: Comment[];
+}
+
+export interface CommentInputProps {
+  onSubmit: (content: string) => void;
+  placeholder?: string;
+  isReply?: boolean;
+  parentId?: string;
+}
+
+export interface CommentProps {
+  comment: Comment;
+  onUpvote: (commentId: string) => void;
+  onReply: (commentId: string, content: string) => void;
+  depth?: number;
+}
+
+export interface CommentListProps {
+  comments: Comment[];
+  onUpvote: (commentId: string) => void;
+  onReply: (commentId: string, content: string) => void;
+}
+
+export interface PostDetailProps {
+  post: Post;
+  comments: Comment[];
+  onLike: (postId: string) => void;
+  onComment: (postId: string) => void;
+  onShare: (postId: string) => void;
+  onUpvote: (postId: string) => void;
+  onCommentUpvote: (commentId: string) => void;
+  onReply: (commentId: string, content: string) => void;
+  onNewComment: (content: string) => void;
 }

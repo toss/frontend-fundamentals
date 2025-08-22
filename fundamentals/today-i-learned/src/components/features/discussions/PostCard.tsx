@@ -1,5 +1,6 @@
 import { memo, useState } from "react";
 import { Heart, MessageCircle, Share, Calendar, User } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
 import { cn } from "@/libs/utils";
 import { Button } from "../../shared/ui/Button";
@@ -41,6 +42,7 @@ function PostCardComponent({ discussion, onLike, onComment }: PostCardProps) {
   const [likeCount, setLikeCount] = useState(discussion.reactions.totalCount);
   const [isLiked, setIsLiked] = useState(false);
   const { toggleLike, isLoading: isTogglingLike } = useToggleReaction();
+  const navigate = useNavigate();
 
   const handleLike = async () => {
     // 현재 상태 저장 (롤백용)
@@ -68,6 +70,10 @@ function PostCardComponent({ discussion, onLike, onComment }: PostCardProps) {
 
   const handleComment = () => {
     onComment?.(discussion.id);
+  };
+
+  const handleTitleClick = () => {
+    navigate(`/post/${discussion.id}`);
   };
 
   return (
@@ -114,11 +120,17 @@ function PostCardComponent({ discussion, onLike, onComment }: PostCardProps) {
 
           {/* 콘텐츠 */}
           <div className="mt-4 space-y-3">
-            <h3 className="line-clamp-2 text-lg font-bold leading-6 text-gray-900 group-hover:text-gray-600 transition-colors duration-200">
+            <h3 
+              onClick={handleTitleClick}
+              className="line-clamp-2 text-lg font-bold leading-6 text-gray-900 group-hover:text-gray-600 transition-colors duration-200 cursor-pointer hover:underline"
+            >
               {discussion.title}
             </h3>
             {discussion.body && (
-              <div className="line-clamp-3 text-sm text-gray-600 leading-[1.7]">
+              <div 
+                onClick={handleTitleClick}
+                className="line-clamp-3 text-sm text-gray-600 leading-[1.7] cursor-pointer"
+              >
                 {discussion.body.length > 200
                   ? `${discussion.body.slice(0, 200)}...`
                   : discussion.body}

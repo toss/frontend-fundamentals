@@ -1,19 +1,14 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import { Avatar, Card } from "../ui";
 import { cn } from "../utils/cn";
 import type { WeeklyTop5Props, PopularPost } from "../utils/types";
 
-function PopularPostItem({
-  post,
-  rank,
-  onClick
-}: {
-  post: PopularPost;
-  rank: number;
-  onClick: (postId: string) => void;
-}) {
+function PopularPostItem({ post, rank }: { post: PopularPost; rank: number }) {
+  const navigate = useNavigate();
+
   const handleClick = () => {
-    onClick(post.id);
+    navigate(`/post/${post.id}`);
   };
 
   return (
@@ -58,7 +53,7 @@ function PopularPostItem({
   );
 }
 
-export function WeeklyTop5({ posts, weekInfo, onPostClick }: WeeklyTop5Props) {
+export function WeeklyTop5({ posts, weekInfo }: WeeklyTop5Props) {
   return (
     <div className="space-y-6">
       {/* 헤더 */}
@@ -74,12 +69,7 @@ export function WeeklyTop5({ posts, weekInfo, onPostClick }: WeeklyTop5Props) {
       {/* 포스트 리스트 */}
       <div className="space-y-4">
         {posts.map((post) => (
-          <PopularPostItem
-            key={post.id}
-            post={post}
-            rank={post.rank}
-            onClick={onPostClick}
-          />
+          <PopularPostItem key={post.id} post={post} rank={post.rank} />
         ))}
       </div>
     </div>
