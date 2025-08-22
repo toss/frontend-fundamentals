@@ -14,7 +14,11 @@ import {
   fetchWeeklyTopDiscussions,
   fetchMyContributions,
   fetchDiscussionDetail,
-  type DiscussionsApiParams
+  addDiscussionComment,
+  addDiscussionReaction,
+  removeDiscussionReaction,
+  type DiscussionsApiParams,
+  type GitHubComment
 } from "../remote/discussions";
 
 // Query Keys 중앙 관리
@@ -259,5 +263,144 @@ export function useDiscussionDetail(id: string) {
     staleTime: 1000 * 60 * 5, // 5분
     gcTime: 1000 * 60 * 30, // 30분
     retry: 2
+  });
+}
+
+export function useAddDiscussionComment() {
+  const queryClient = useQueryClient();
+  const { user } = useAuth();
+
+  return useMutation({
+    mutationFn: async ({ discussionId, body }: { discussionId: string; body: string }) => {
+      if (!user?.accessToken) {
+        throw new Error("Authentication required");
+      }
+      return addDiscussionComment({
+        discussionId,
+        body,
+        accessToken: user.accessToken
+      });
+    },
+    onMutate: async ({ discussionId, body }) => {
+      await queryClient.cancelQueries({ 
+        queryKey: DISCUSSIONS_QUERY_KEYS.detail(discussionId) 
+      });
+
+      const previousData = queryClient.getQueryData(
+        DISCUSSIONS_QUERY_KEYS.detail(discussionId)
+      );
+
+      queryClient.setQueryData(
+        DISCUSSIONS_QUERY_KEYS.detail(discussionId),
+        (old: any) => {
+          if (!old || !user) return old;
+
+          const optimisticComment = {
+            id: `temp-${Date.now()}`,
+            body,
+            createdAt: new Date().toISOString(),
+            author: {
+              login: user.login,
+              avatarUrl: user.avatarUrl
+            },
+            reactions: { totalCount: 0 },
+            replies: { totalCount: 0, nodes: [] }
+          };
+
+          return {
+            ...old,
+            comments: {
+              ...old.comments,
+              totalCount: old.comments.totalCount + 1,
+              nodes: [...old.comments.nodes, optimisticComment]
+            }
+          };
+        }
+      );
+
+      return { previousData };
+    },
+    onError: (err, variables, context) => {
+      if (context?.previousData) {
+        queryClient.setQueryData(
+          DISCUSSIONS_QUERY_KEYS.detail(variables.discussionId),
+          context.previousData
+        );
+      }
+    },
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: DISCUSSIONS_QUERY_KEYS.detail(variables.discussionId)
+      });
+    }
+  });
+}
+
+export function useToggleDiscussionReaction() {
+  const queryClient = useQueryClient();
+  const { user } = useAuth();
+
+  return useMutation({
+    mutationFn: async ({ 
+      subjectId, 
+      isReacted, 
+      content = "THUMBS_UP" 
+    }: { 
+      subjectId: string; 
+      isReacted: boolean;
+      content?: "THUMBS_UP" | "THUMBS_DOWN" | "LAUGH" | "HOORAY" | "CONFUSED" | "HEART" | "ROCKET" | "EYES";
+    }) => {
+      if (!user?.accessToken) {
+        throw new Error("Authentication required");
+      }
+
+      if (isReacted) {
+        return removeDiscussionReaction({
+          subjectId,
+          content,
+          accessToken: user.accessToken
+        });
+      } else {
+        return addDiscussionReaction({
+          subjectId,
+          content,
+          accessToken: user.accessToken
+        });
+      }
+    },
+    onMutate: async ({ subjectId, isReacted, content }) => {
+      const detailQueryKey = DISCUSSIONS_QUERY_KEYS.detail(subjectId);
+      await queryClient.cancelQueries({ queryKey: detailQueryKey });
+
+      const previousData = queryClient.getQueryData(detailQueryKey);
+
+      queryClient.setQueryData(detailQueryKey, (old: any) => {
+        if (!old) return old;
+
+        const delta = isReacted ? -1 : 1;
+        return {
+          ...old,
+          reactions: {
+            ...old.reactions,
+            totalCount: Math.max(0, old.reactions.totalCount + delta)
+          }
+        };
+      });
+
+      return { previousData };
+    },
+    onError: (err, variables, context) => {
+      if (context?.previousData) {
+        queryClient.setQueryData(
+          DISCUSSIONS_QUERY_KEYS.detail(variables.subjectId),
+          context.previousData
+        );
+      }
+    },
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: DISCUSSIONS_QUERY_KEYS.all
+      });
+    }
   });
 }

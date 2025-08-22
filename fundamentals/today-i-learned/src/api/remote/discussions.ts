@@ -7,7 +7,10 @@ import {
   GET_INFINITE_DISCUSSIONS_QUERY,
   SEARCH_DISCUSSIONS_QUERY,
   GET_MY_CONTRIBUTIONS_QUERY,
-  GET_DISCUSSION_DETAIL_QUERY
+  GET_DISCUSSION_DETAIL_QUERY,
+  ADD_DISCUSSION_COMMENT_MUTATION,
+  ADD_DISCUSSION_REACTION_MUTATION,
+  REMOVE_DISCUSSION_REACTION_MUTATION
 } from "../graphql/discussions";
 
 export interface GitHubAuthor {
@@ -426,4 +429,80 @@ export async function fetchDiscussionDetail({
   }
 
   return discussion;
+}
+
+export async function addDiscussionComment({
+  discussionId,
+  body,
+  accessToken
+}: {
+  discussionId: string;
+  body: string;
+  accessToken: string;
+}): Promise<GitHubComment> {
+  const data = await graphqlRequest(
+    ADD_DISCUSSION_COMMENT_MUTATION,
+    { discussionId, body },
+    accessToken
+  );
+
+  const comment = data.data?.addDiscussionComment?.comment;
+
+  if (!comment) {
+    throw new Error("Failed to add comment");
+  }
+
+  return comment;
+}
+
+export async function addDiscussionReaction({
+  subjectId,
+  content = "THUMBS_UP",
+  accessToken
+}: {
+  subjectId: string;
+  content?: "THUMBS_UP" | "THUMBS_DOWN" | "LAUGH" | "HOORAY" | "CONFUSED" | "HEART" | "ROCKET" | "EYES";
+  accessToken: string;
+}): Promise<{ totalCount: number }> {
+  const data = await graphqlRequest(
+    ADD_DISCUSSION_REACTION_MUTATION,
+    { subjectId, content },
+    accessToken
+  );
+
+  const subject = data.data?.addReaction?.subject;
+
+  if (!subject) {
+    throw new Error("Failed to add reaction");
+  }
+
+  return {
+    totalCount: subject.reactions.totalCount
+  };
+}
+
+export async function removeDiscussionReaction({
+  subjectId,
+  content = "THUMBS_UP",
+  accessToken
+}: {
+  subjectId: string;
+  content?: "THUMBS_UP" | "THUMBS_DOWN" | "LAUGH" | "HOORAY" | "CONFUSED" | "HEART" | "ROCKET" | "EYES";
+  accessToken: string;
+}): Promise<{ totalCount: number }> {
+  const data = await graphqlRequest(
+    REMOVE_DISCUSSION_REACTION_MUTATION,
+    { subjectId, content },
+    accessToken
+  );
+
+  const subject = data.data?.removeReaction?.subject;
+
+  if (!subject) {
+    throw new Error("Failed to remove reaction");
+  }
+
+  return {
+    totalCount: subject.reactions.totalCount
+  };
 }

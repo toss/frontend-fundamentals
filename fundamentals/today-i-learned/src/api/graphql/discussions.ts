@@ -255,3 +255,98 @@ export const GET_DISCUSSION_DETAIL_QUERY = `
     }
   }
 `;
+
+export const ADD_DISCUSSION_COMMENT_MUTATION = `
+  mutation AddDiscussionComment($discussionId: ID!, $body: String!) {
+    addDiscussionComment(input: {
+      discussionId: $discussionId
+      body: $body
+    }) {
+      comment {
+        id
+        body
+        createdAt
+        author {
+          login
+          avatarUrl
+        }
+        reactions {
+          totalCount
+        }
+        replies(first: 10) {
+          totalCount
+          nodes {
+            id
+            body
+            createdAt
+            author {
+              login
+              avatarUrl
+            }
+            reactions {
+              totalCount
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const ADD_DISCUSSION_REACTION_MUTATION = `
+  mutation AddDiscussionReaction($subjectId: ID!, $content: ReactionContent!) {
+    addReaction(input: {
+      subjectId: $subjectId
+      content: $content
+    }) {
+      reaction {
+        content
+        user {
+          login
+        }
+      }
+      subject {
+        id
+        ... on Discussion {
+          reactions {
+            totalCount
+          }
+        }
+        ... on DiscussionComment {
+          reactions {
+            totalCount
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const REMOVE_DISCUSSION_REACTION_MUTATION = `
+  mutation RemoveDiscussionReaction($subjectId: ID!, $content: ReactionContent!) {
+    removeReaction(input: {
+      subjectId: $subjectId
+      content: $content
+    }) {
+      reaction {
+        content
+        user {
+          login
+        }
+      }
+      subject {
+        id
+        ... on Discussion {
+          reactions {
+            totalCount
+          }
+        }
+        ... on DiscussionComment {
+          reactions {
+            totalCount
+          }
+        }
+      }
+    }
+  }
+`;

@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { useDiscussionDetail, useWeeklyTopDiscussions } from "@/api/hooks/useDiscussions";
+import { 
+  useDiscussionDetail, 
+  useWeeklyTopDiscussions,
+  useAddDiscussionComment,
+  useToggleDiscussionReaction
+} from "@/api/hooks/useDiscussions";
 import type { 
   GitHubDiscussionDetail, 
   GitHubComment 
@@ -66,6 +71,8 @@ function mapDiscussionToPost(discussion: GitHubDiscussionDetail): Post {
 export function usePostDetail(postId: string | undefined) {
   const { data: discussion, isLoading, error } = useDiscussionDetail(postId || "");
   const { data: weeklyPosts } = useWeeklyTopDiscussions({ limit: 5 });
+  const addComment = useAddDiscussionComment();
+  const toggleReaction = useToggleDiscussionReaction();
 
   const [interactionState, setInteractionState] = useState({
     likes: new Set<string>(),
@@ -73,7 +80,13 @@ export function usePostDetail(postId: string | undefined) {
   });
 
   const handleLike = (postId: string) => {
-    console.log("Like post:", postId);
+    const isLiked = interactionState.likes.has(postId);
+    toggleReaction.mutate({ 
+      subjectId: postId, 
+      isReacted: isLiked,
+      content: "HEART"
+    });
+    
     setInteractionState(prev => {
       const newLikes = new Set(prev.likes);
       if (newLikes.has(postId)) {
@@ -94,7 +107,13 @@ export function usePostDetail(postId: string | undefined) {
   };
 
   const handleUpvote = (postId: string) => {
-    console.log("Upvote post:", postId);
+    const isUpvoted = interactionState.upvotes.has(postId);
+    toggleReaction.mutate({ 
+      subjectId: postId, 
+      isReacted: isUpvoted,
+      content: "THUMBS_UP"
+    });
+    
     setInteractionState(prev => {
       const newUpvotes = new Set(prev.upvotes);
       if (newUpvotes.has(postId)) {
@@ -107,15 +126,34 @@ export function usePostDetail(postId: string | undefined) {
   };
 
   const handleCommentUpvote = (commentId: string) => {
-    console.log("Upvote comment:", commentId);
+    toggleReaction.mutate({ 
+      subjectId: commentId, 
+      isReacted: false,
+      content: "THUMBS_UP"
+    });
   };
 
   const handleReply = (commentId: string, content: string) => {
-    console.log("Reply to comment:", commentId, content);
+    if (!discussion?.id || !content.trim()) return;
+    
+    const parentComment = comments.find(comment => comment.id === commentId);
+    const replyPrefix = parentComment 
+      ? `> @${parentComment.author.name}: ${content}\n\n`
+      : `> ${content}\n\n`;
+    
+    addComment.mutate({
+      discussionId: discussion.id,
+      body: `${replyPrefix}답글 내용을 입력하세요.`
+    });
   };
 
   const handleNewComment = (content: string) => {
-    console.log("New comment:", content);
+    if (!discussion?.id || !content.trim()) return;
+    
+    addComment.mutate({
+      discussionId: discussion.id,
+      body: content
+    });
   };
 
   const postData = discussion ? mapDiscussionToPost(discussion) : null;
