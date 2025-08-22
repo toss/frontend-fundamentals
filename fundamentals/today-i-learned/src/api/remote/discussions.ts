@@ -6,7 +6,11 @@ import {
   GET_REPOSITORY_INFO_QUERY,
   GET_INFINITE_DISCUSSIONS_QUERY,
   SEARCH_DISCUSSIONS_QUERY,
-  GET_MY_CONTRIBUTIONS_QUERY
+  GET_MY_CONTRIBUTIONS_QUERY,
+  GET_DISCUSSION_DETAIL_QUERY,
+  ADD_DISCUSSION_COMMENT_MUTATION,
+  ADD_DISCUSSION_REACTION_MUTATION,
+  REMOVE_DISCUSSION_REACTION_MUTATION
 } from "../graphql/discussions";
 
 export interface GitHubAuthor {
@@ -376,4 +380,129 @@ export async function fetchMyContributions({
   }
 
   return allContributions;
+}
+
+// GitHub 댓글 타입
+export interface GitHubComment {
+  id: string;
+  body: string;
+  createdAt: string;
+  author: GitHubAuthor;
+  reactions: {
+    totalCount: number;
+  };
+  replies?: {
+    totalCount: number;
+    nodes: GitHubComment[];
+  };
+}
+
+// Discussion 상세 타입 (댓글 포함)
+export interface GitHubDiscussionDetail extends GitHubDiscussion {
+  labels?: {
+    nodes: Array<{ name: string }>;
+  };
+  comments: {
+    totalCount: number;
+    nodes: GitHubComment[];
+  };
+}
+
+// Discussion 상세 조회
+export async function fetchDiscussionDetail({
+  id,
+  accessToken
+}: {
+  id: string;
+  accessToken?: string;
+}): Promise<GitHubDiscussionDetail> {
+  const data = await graphqlRequest(
+    GET_DISCUSSION_DETAIL_QUERY,
+    { id },
+    accessToken
+  );
+
+  const discussion = data.data?.node;
+
+  if (!discussion) {
+    throw new Error("Discussion not found");
+  }
+
+  return discussion;
+}
+
+export async function addDiscussionComment({
+  discussionId,
+  body,
+  accessToken
+}: {
+  discussionId: string;
+  body: string;
+  accessToken: string;
+}): Promise<GitHubComment> {
+  const data = await graphqlRequest(
+    ADD_DISCUSSION_COMMENT_MUTATION,
+    { discussionId, body },
+    accessToken
+  );
+
+  const comment = data.data?.addDiscussionComment?.comment;
+
+  if (!comment) {
+    throw new Error("Failed to add comment");
+  }
+
+  return comment;
+}
+
+export async function addDiscussionReaction({
+  subjectId,
+  content = "THUMBS_UP",
+  accessToken
+}: {
+  subjectId: string;
+  content?: "THUMBS_UP" | "THUMBS_DOWN" | "LAUGH" | "HOORAY" | "CONFUSED" | "HEART" | "ROCKET" | "EYES";
+  accessToken: string;
+}): Promise<{ totalCount: number }> {
+  const data = await graphqlRequest(
+    ADD_DISCUSSION_REACTION_MUTATION,
+    { subjectId, content },
+    accessToken
+  );
+
+  const subject = data.data?.addReaction?.subject;
+
+  if (!subject) {
+    throw new Error("Failed to add reaction");
+  }
+
+  return {
+    totalCount: subject.reactions.totalCount
+  };
+}
+
+export async function removeDiscussionReaction({
+  subjectId,
+  content = "THUMBS_UP",
+  accessToken
+}: {
+  subjectId: string;
+  content?: "THUMBS_UP" | "THUMBS_DOWN" | "LAUGH" | "HOORAY" | "CONFUSED" | "HEART" | "ROCKET" | "EYES";
+  accessToken: string;
+}): Promise<{ totalCount: number }> {
+  const data = await graphqlRequest(
+    REMOVE_DISCUSSION_REACTION_MUTATION,
+    { subjectId, content },
+    accessToken
+  );
+
+  const subject = data.data?.removeReaction?.subject;
+
+  if (!subject) {
+    throw new Error("Failed to remove reaction");
+  }
+
+  return {
+    totalCount: subject.reactions.totalCount
+  };
 }

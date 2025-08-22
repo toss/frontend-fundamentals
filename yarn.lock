@@ -217,29 +217,29 @@ __metadata:
   linkType: hard
 
 "@amplitude/analytics-browser@npm:^2.11.11":
-  version: 2.22.2
-  resolution: "@amplitude/analytics-browser@npm:2.22.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-browser%2F-%2Fanalytics-browser-2.22.2.tgz"
+  version: 2.23.0
+  resolution: "@amplitude/analytics-browser@npm:2.23.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-browser%2F-%2Fanalytics-browser-2.23.0.tgz"
   dependencies:
-    "@amplitude/analytics-core": "npm:^2.20.2"
+    "@amplitude/analytics-core": "npm:^2.21.0"
     "@amplitude/analytics-remote-config": "npm:^0.4.0"
-    "@amplitude/plugin-autocapture-browser": "npm:^1.9.0"
-    "@amplitude/plugin-network-capture-browser": "npm:^1.4.5"
-    "@amplitude/plugin-page-view-tracking-browser": "npm:^2.3.40"
-    "@amplitude/plugin-web-vitals-browser": "npm:^0.1.0-beta.15"
+    "@amplitude/plugin-autocapture-browser": "npm:^1.10.0"
+    "@amplitude/plugin-network-capture-browser": "npm:^1.5.0"
+    "@amplitude/plugin-page-view-tracking-browser": "npm:^2.3.41"
+    "@amplitude/plugin-web-vitals-browser": "npm:^0.1.0-beta.16"
     tslib: "npm:^2.4.1"
-  checksum: 10/57a6952b26d6b5f2186a038abfb6747b34366541d9a67bd4b1ff25b5e93a8e1a2f6b85a78aa71bfe5fb50060816199721c10d69a727e29c5226966e165f8a1d5
+  checksum: 10/82e9da9cf64fa0d7c1b01fa59874d94005613ea85b8560ab23ad00bd90e658fedc1ec2f0f89fdebf14df167aa5e83174c31b5f20565386bdbf00841895d99ddc
   languageName: node
   linkType: hard
 
-"@amplitude/analytics-client-common@npm:>=1 <3, @amplitude/analytics-client-common@npm:^2.3.34":
-  version: 2.3.34
-  resolution: "@amplitude/analytics-client-common@npm:2.3.34::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-client-common%2F-%2Fanalytics-client-common-2.3.34.tgz"
+"@amplitude/analytics-client-common@npm:>=1 <3, @amplitude/analytics-client-common@npm:^2.3.35":
+  version: 2.3.35
+  resolution: "@amplitude/analytics-client-common@npm:2.3.35::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-client-common%2F-%2Fanalytics-client-common-2.3.35.tgz"
   dependencies:
     "@amplitude/analytics-connector": "npm:^1.4.8"
-    "@amplitude/analytics-core": "npm:^2.20.2"
+    "@amplitude/analytics-core": "npm:^2.21.0"
     "@amplitude/analytics-types": "npm:^2.9.2"
     tslib: "npm:^2.4.1"
-  checksum: 10/d0c71f86ecbeb1930cb0d3926ee7b8480d5af5adfe7bcac564e939b5d5469d33288509adf20c734d6f4285e3582e50a8c7d8c03e7ca545f9cc292639b5d11d2e
+  checksum: 10/0181de8e4e9486345b1eb88093232a26a184b5638a3ad901f876001bb5b5f410f5ec6a49705e8473339b4f771d3f0d06750d7fbef1caed4c2b701adabacb0612
   languageName: node
   linkType: hard
 
@@ -260,13 +260,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@amplitude/analytics-core@npm:>=1 <3, @amplitude/analytics-core@npm:^2.14.0-frustrationanalytics.0, @amplitude/analytics-core@npm:^2.20.2":
-  version: 2.20.2
-  resolution: "@amplitude/analytics-core@npm:2.20.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-core%2F-%2Fanalytics-core-2.20.2.tgz"
+"@amplitude/analytics-core@npm:>=1 <3, @amplitude/analytics-core@npm:^2.14.0-frustrationanalytics.0, @amplitude/analytics-core@npm:^2.21.0":
+  version: 2.21.0
+  resolution: "@amplitude/analytics-core@npm:2.21.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-core%2F-%2Fanalytics-core-2.21.0.tgz"
   dependencies:
     "@amplitude/analytics-connector": "npm:^1.6.4"
     tslib: "npm:^2.4.1"
-  checksum: 10/ea639b3e654b93eaa73e19454f8ad3829071ea8a2b095be42515f2aa52e128e5479d89923ebb79230655385a5aef88528ddececd0f7701daf7b45b500abbc68a
+  checksum: 10/725fdb0b85b4de6cd717110c413e7ed0e70a7ac8064396ae623ba63ec8cc8bfe7d8f1707b003145419fc9ac48fe08e19fef696ea5c861b1db9825366fcb9dfd2
   languageName: node
   linkType: hard
 
@@ -307,41 +307,41 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@amplitude/plugin-autocapture-browser@npm:^1.9.0":
-  version: 1.9.0
-  resolution: "@amplitude/plugin-autocapture-browser@npm:1.9.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-autocapture-browser%2F-%2Fplugin-autocapture-browser-1.9.0.tgz"
+"@amplitude/plugin-autocapture-browser@npm:^1.10.0":
+  version: 1.10.0
+  resolution: "@amplitude/plugin-autocapture-browser@npm:1.10.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-autocapture-browser%2F-%2Fplugin-autocapture-browser-1.10.0.tgz"
   dependencies:
-    "@amplitude/analytics-core": "npm:^2.20.2"
+    "@amplitude/analytics-core": "npm:^2.21.0"
     "@amplitude/analytics-remote-config": "npm:^0.6.3"
     rxjs: "npm:^7.8.1"
     tslib: "npm:^2.4.1"
-  checksum: 10/5c7b26c402e08f39f3c12f68e748a289b022666f9bb2cc883367d064fdbd85ad1e729d52f4f3b66be3ee3ce32438e0c9a6b868b9b655d413fb053531a8c57365
+  checksum: 10/207c0fd3a06fe1af5923f0b9e35acc5cdf30683ad05a07c28021d604de38138f31c3a3ae01f797ea53194c57e51571c8751ce9dec9cd50771cb477e45a9236c8
   languageName: node
   linkType: hard
 
-"@amplitude/plugin-network-capture-browser@npm:^1.4.5":
-  version: 1.4.5
-  resolution: "@amplitude/plugin-network-capture-browser@npm:1.4.5::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-network-capture-browser%2F-%2Fplugin-network-capture-browser-1.4.5.tgz"
+"@amplitude/plugin-network-capture-browser@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "@amplitude/plugin-network-capture-browser@npm:1.5.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-network-capture-browser%2F-%2Fplugin-network-capture-browser-1.5.0.tgz"
   dependencies:
-    "@amplitude/analytics-core": "npm:^2.20.2"
+    "@amplitude/analytics-core": "npm:^2.21.0"
     rxjs: "npm:^7.8.1"
     tslib: "npm:^2.4.1"
-  checksum: 10/9d24d5622b40011255ac5e83ed812e798239b2bdce1bd2caef90c65ce8ebc578599afeebc56f9c5e7e7b976af5a557579fbfed5a190cd5b673fe0dc6827a02c3
+  checksum: 10/c3a5c05dd9da9193e492a0df39f6e96e90b58647afbac72522796178411f8bb4078980ec1655909566341a9c8ee82d4d1aca749da0e5f8ebe99544376fd5f599
   languageName: node
   linkType: hard
 
-"@amplitude/plugin-page-view-tracking-browser@npm:^2.3.40":
-  version: 2.3.40
-  resolution: "@amplitude/plugin-page-view-tracking-browser@npm:2.3.40::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-page-view-tracking-browser%2F-%2Fplugin-page-view-tracking-browser-2.3.40.tgz"
+"@amplitude/plugin-page-view-tracking-browser@npm:^2.3.41":
+  version: 2.3.41
+  resolution: "@amplitude/plugin-page-view-tracking-browser@npm:2.3.41::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-page-view-tracking-browser%2F-%2Fplugin-page-view-tracking-browser-2.3.41.tgz"
   dependencies:
-    "@amplitude/analytics-client-common": "npm:^2.3.34"
+    "@amplitude/analytics-client-common": "npm:^2.3.35"
     "@amplitude/analytics-types": "npm:^2.9.2"
     tslib: "npm:^2.4.1"
-  checksum: 10/f953102adfeffb9bdd32779498ca3124683098637eb96f76c05716e73aec39fab100900848feda5feb99a9493b415b892b2c6dc451bea2c340e2a50621723e58
+  checksum: 10/6197af45a1f7eae1e9ce2ae731fed513071e29855cee7ba3016b73a82ffbbc4c16259b74702be8606c75490cef4605d03d418346cb024bc7bcc45225f1232b72
   languageName: node
   linkType: hard
 
-"@amplitude/plugin-web-vitals-browser@npm:^0.1.0-beta.15":
+"@amplitude/plugin-web-vitals-browser@npm:^0.1.0-beta.16":
   version: 0.1.0-frustrationanalytics.0
   resolution: "@amplitude/plugin-web-vitals-browser@npm:0.1.0-frustrationanalytics.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-web-vitals-browser%2F-%2Fplugin-web-vitals-browser-0.1.0-frustrationanalytics.0.tgz"
   dependencies:
@@ -511,7 +511,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/parser@npm:^7.1.0, @babel/parser@npm:^7.20.7, @babel/parser@npm:^7.23.9, @babel/parser@npm:^7.27.2, @babel/parser@npm:^7.28.0, @babel/parser@npm:^7.28.3":
+"@babel/parser@npm:^7.1.0, @babel/parser@npm:^7.20.7, @babel/parser@npm:^7.23.9, @babel/parser@npm:^7.27.2, @babel/parser@npm:^7.28.3":
   version: 7.28.3
   resolution: "@babel/parser@npm:7.28.3::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40babel%2Fparser%2F-%2Fparser-7.28.3.tgz"
   dependencies:
@@ -1532,7 +1532,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jridgewell/sourcemap-codec@npm:^1.4.10, @jridgewell/sourcemap-codec@npm:^1.4.14, @jridgewell/sourcemap-codec@npm:^1.5.0":
+"@jridgewell/sourcemap-codec@npm:^1.4.10, @jridgewell/sourcemap-codec@npm:^1.4.14, @jridgewell/sourcemap-codec@npm:^1.5.0, @jridgewell/sourcemap-codec@npm:^1.5.5":
   version: 1.5.5
   resolution: "@jridgewell/sourcemap-codec@npm:1.5.5::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40jridgewell%2Fsourcemap-codec%2F-%2Fsourcemap-codec-1.5.5.tgz"
   checksum: 10/5d9d207b462c11e322d71911e55e21a4e2772f71ffe8d6f1221b8eb5ae6774458c1d242f897fb0814e8714ca9a6b498abfa74dfe4f434493342902b1a48b33a5
@@ -2501,53 +2501,53 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/compiler-core@npm:3.5.18":
-  version: 3.5.18
-  resolution: "@vue/compiler-core@npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-core%2F-%2Fcompiler-core-3.5.18.tgz"
+"@vue/compiler-core@npm:3.5.19":
+  version: 3.5.19
+  resolution: "@vue/compiler-core@npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-core%2F-%2Fcompiler-core-3.5.19.tgz"
   dependencies:
-    "@babel/parser": "npm:^7.28.0"
-    "@vue/shared": "npm:3.5.18"
+    "@babel/parser": "npm:^7.28.3"
+    "@vue/shared": "npm:3.5.19"
     entities: "npm:^4.5.0"
     estree-walker: "npm:^2.0.2"
     source-map-js: "npm:^1.2.1"
-  checksum: 10/b94dd25722b8cf4cf4adc89b3a49bb61f2eaea8f09a6e7076dc7d9178614560e0655dbe020ed7c9659d04147a60f6a50c38633f3e0742131918badb5d188f01e
+  checksum: 10/61c3d285c30e0c1da7dfa7b46b116b87727d0f93af7653ca527c68344a9861b61a0c51cb61fb3bb6e00851fdb1f40b68d0053b7a6796ea433b686cac9ba2ed10
   languageName: node
   linkType: hard
 
-"@vue/compiler-dom@npm:3.5.18":
-  version: 3.5.18
-  resolution: "@vue/compiler-dom@npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-dom%2F-%2Fcompiler-dom-3.5.18.tgz"
+"@vue/compiler-dom@npm:3.5.19":
+  version: 3.5.19
+  resolution: "@vue/compiler-dom@npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-dom%2F-%2Fcompiler-dom-3.5.19.tgz"
   dependencies:
-    "@vue/compiler-core": "npm:3.5.18"
-    "@vue/shared": "npm:3.5.18"
-  checksum: 10/5156bf632ffb6cd952323eede896852b4223f2263980d7a4a6cb740e94c6b621d4a0944f163f0f7aee48ab03d0264995c83ecbc53151f1c654261f54188bc68a
+    "@vue/compiler-core": "npm:3.5.19"
+    "@vue/shared": "npm:3.5.19"
+  checksum: 10/aba06d1df6b7b746ba5791c4eb15d72914b56d8b0cb9bff3e77b07a3ef60f0809233cc3750dc7ac80d4f4a11967b7044e37513cf2588ff2071442140f9ce041f
   languageName: node
   linkType: hard
 
-"@vue/compiler-sfc@npm:3.5.18":
-  version: 3.5.18
-  resolution: "@vue/compiler-sfc@npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-sfc%2F-%2Fcompiler-sfc-3.5.18.tgz"
+"@vue/compiler-sfc@npm:3.5.19":
+  version: 3.5.19
+  resolution: "@vue/compiler-sfc@npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-sfc%2F-%2Fcompiler-sfc-3.5.19.tgz"
   dependencies:
-    "@babel/parser": "npm:^7.28.0"
-    "@vue/compiler-core": "npm:3.5.18"
-    "@vue/compiler-dom": "npm:3.5.18"
-    "@vue/compiler-ssr": "npm:3.5.18"
-    "@vue/shared": "npm:3.5.18"
+    "@babel/parser": "npm:^7.28.3"
+    "@vue/compiler-core": "npm:3.5.19"
+    "@vue/compiler-dom": "npm:3.5.19"
+    "@vue/compiler-ssr": "npm:3.5.19"
+    "@vue/shared": "npm:3.5.19"
     estree-walker: "npm:^2.0.2"
     magic-string: "npm:^0.30.17"
     postcss: "npm:^8.5.6"
     source-map-js: "npm:^1.2.1"
-  checksum: 10/2c628fbd3e431a4997fbdd88796442c8d9bbe7c253a3482abfb40c173891887ee3b8231a72e71779e63c16c5792598b10eea5419b30d1189bf12118c7c5ca316
+  checksum: 10/06cda37a4f0113e84a7abca7c67b636274230fef2249edf4c3368b2bc9cbbc45162eb8bf2f2ce30ea94acc1f6a5128454523e9cdba581f66afdee6ac02bfac15
   languageName: node
   linkType: hard
 
-"@vue/compiler-ssr@npm:3.5.18":
-  version: 3.5.18
-  resolution: "@vue/compiler-ssr@npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-ssr%2F-%2Fcompiler-ssr-3.5.18.tgz"
+"@vue/compiler-ssr@npm:3.5.19":
+  version: 3.5.19
+  resolution: "@vue/compiler-ssr@npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-ssr%2F-%2Fcompiler-ssr-3.5.19.tgz"
   dependencies:
-    "@vue/compiler-dom": "npm:3.5.18"
-    "@vue/shared": "npm:3.5.18"
-  checksum: 10/de36545cf0945e96e1e802f0b902d48376184eca8909bf85e1abd372f9e7f9deb63d37cc8b73bb508f17f12542e4b6cc1f1388f411a9ef4729b3eac84e9f3090
+    "@vue/compiler-dom": "npm:3.5.19"
+    "@vue/shared": "npm:3.5.19"
+  checksum: 10/9a9bda29e51efaf1cf1658406a71358691226c756c29957f1d20a8b42cbd1e3932ff9d99ae0d7f29a43b39db3ed2d4fb273291bfe7755ae24a6ba4f5879b1dd1
   languageName: node
   linkType: hard
 
@@ -2584,53 +2584,53 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/reactivity@npm:3.5.18":
-  version: 3.5.18
-  resolution: "@vue/reactivity@npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Freactivity%2F-%2Freactivity-3.5.18.tgz"
+"@vue/reactivity@npm:3.5.19":
+  version: 3.5.19
+  resolution: "@vue/reactivity@npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Freactivity%2F-%2Freactivity-3.5.19.tgz"
   dependencies:
-    "@vue/shared": "npm:3.5.18"
-  checksum: 10/c47a28767b1a2794d649c895d10a34b5fd4d67394117d5777c2ff7bee90e8a9f393e5a736dadea2481b978b39f3ec61d948bb5c83ef374494c668143e22ccf57
+    "@vue/shared": "npm:3.5.19"
+  checksum: 10/5e204e541c96537058dc047570b1bc154269fd3490ad28e467f293e95da30789bb8b8a982aedc419f13101cec39f90450a06c3abcf64fd2989641a02f120e096
   languageName: node
   linkType: hard
 
-"@vue/runtime-core@npm:3.5.18":
-  version: 3.5.18
-  resolution: "@vue/runtime-core@npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fruntime-core%2F-%2Fruntime-core-3.5.18.tgz"
+"@vue/runtime-core@npm:3.5.19":
+  version: 3.5.19
+  resolution: "@vue/runtime-core@npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fruntime-core%2F-%2Fruntime-core-3.5.19.tgz"
   dependencies:
-    "@vue/reactivity": "npm:3.5.18"
-    "@vue/shared": "npm:3.5.18"
-  checksum: 10/75670ec6bfff08923b172cd807e513f757cfb638713f0d6831537eb34dd69a1af9b8f9d3e662d53182660ed5753b9790f4289e08e361bb4641a5692b03148f00
+    "@vue/reactivity": "npm:3.5.19"
+    "@vue/shared": "npm:3.5.19"
+  checksum: 10/a6935d04b2b656a94fea92b7ea275f2602cfb2597ed888a7500d81e6c7437f6ff0adb4ae06fe7f1c36b740172d93fac333d47706475f40ce2e39f03fbe55c3af
   languageName: node
   linkType: hard
 
-"@vue/runtime-dom@npm:3.5.18":
-  version: 3.5.18
-  resolution: "@vue/runtime-dom@npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fruntime-dom%2F-%2Fruntime-dom-3.5.18.tgz"
+"@vue/runtime-dom@npm:3.5.19":
+  version: 3.5.19
+  resolution: "@vue/runtime-dom@npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fruntime-dom%2F-%2Fruntime-dom-3.5.19.tgz"
   dependencies:
-    "@vue/reactivity": "npm:3.5.18"
-    "@vue/runtime-core": "npm:3.5.18"
-    "@vue/shared": "npm:3.5.18"
+    "@vue/reactivity": "npm:3.5.19"
+    "@vue/runtime-core": "npm:3.5.19"
+    "@vue/shared": "npm:3.5.19"
     csstype: "npm:^3.1.3"
-  checksum: 10/d890f45a7f0f7bffda17d60a049db23d7d592ac036dae58e831f15045664294d6c340c8deb19061648b6b6c628c697dd9018dcdd50bb9dff5b9b4f29a1bffe21
+  checksum: 10/7b9c01c9bdc25414b32798e682b1f030f8812662739d40a904f8ed65e87ec5583264c9ddb17ff40f9f442635b6260f031e89716c376c80179fa1c31dc2e115d7
   languageName: node
   linkType: hard
 
-"@vue/server-renderer@npm:3.5.18":
-  version: 3.5.18
-  resolution: "@vue/server-renderer@npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fserver-renderer%2F-%2Fserver-renderer-3.5.18.tgz"
+"@vue/server-renderer@npm:3.5.19":
+  version: 3.5.19
+  resolution: "@vue/server-renderer@npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fserver-renderer%2F-%2Fserver-renderer-3.5.19.tgz"
   dependencies:
-    "@vue/compiler-ssr": "npm:3.5.18"
-    "@vue/shared": "npm:3.5.18"
+    "@vue/compiler-ssr": "npm:3.5.19"
+    "@vue/shared": "npm:3.5.19"
   peerDependencies:
-    vue: 3.5.18
-  checksum: 10/716c1b27161dddc90c51a1459791d16d65a6fcf87e2ece42ebcf6d5ffffa6d8a5f8bc3a86a365d54255926080b530f4eb06eed47074d55ef3b78dd2cb480a1ba
+    vue: 3.5.19
+  checksum: 10/abb570a341fe361303548165d2c7b49a43e170bc27106c144c5a04bab961da21aa51b6f7eb9c80e173564181f9ee952322ed374a2f2c3e4f5f61cb331799fe05
   languageName: node
   linkType: hard
 
-"@vue/shared@npm:3.5.18, @vue/shared@npm:^3.5.13":
-  version: 3.5.18
-  resolution: "@vue/shared@npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.18.tgz"
-  checksum: 10/62b83867ff3c3a9dfe775068aea692c29011ba82b9b702f24ad21d977bb5440bd82d8245fd7ad767753b5224428dba1ef6466fd71f645b2d9bd3b409c61de31a
+"@vue/shared@npm:3.5.19, @vue/shared@npm:^3.5.13":
+  version: 3.5.19
+  resolution: "@vue/shared@npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.19.tgz"
+  checksum: 10/070082dbb37237e415848263850cccdd5ba4dec7a926feae14caa2db8ba49c4cfddbeb176183b4933f5b09c9023ad8231d17d9d0486c92d826aea3487e299643
   languageName: node
   linkType: hard
 
@@ -4883,11 +4883,11 @@ __metadata:
   linkType: hard
 
 "magic-string@npm:^0.30.17":
-  version: 0.30.17
-  resolution: "magic-string@npm:0.30.17::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fmagic-string%2F-%2Fmagic-string-0.30.17.tgz"
+  version: 0.30.18
+  resolution: "magic-string@npm:0.30.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fmagic-string%2F-%2Fmagic-string-0.30.18.tgz"
   dependencies:
-    "@jridgewell/sourcemap-codec": "npm:^1.5.0"
-  checksum: 10/2f71af2b0afd78c2e9012a29b066d2c8ba45a9cd0c8070f7fd72de982fb1c403b4e3afdb1dae00691d56885ede66b772ef6bedf765e02e3a7066208fe2fec4aa
+    "@jridgewell/sourcemap-codec": "npm:^1.5.5"
+  checksum: 10/dd180f174cfe066f501dc700ec58815eae3cbde402308f3326574bad09a5ff9c9c5b6fc71502e9d1c663254614fe21679c6360cd39aaeedd2cee1b40e14669f2
   languageName: node
   linkType: hard
 
@@ -5228,8 +5228,8 @@ __metadata:
   linkType: hard
 
 "node-gyp@npm:latest":
-  version: 11.3.0
-  resolution: "node-gyp@npm:11.3.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fnode-gyp%2F-%2Fnode-gyp-11.3.0.tgz"
+  version: 11.4.1
+  resolution: "node-gyp@npm:11.4.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fnode-gyp%2F-%2Fnode-gyp-11.4.1.tgz"
   dependencies:
     env-paths: "npm:^2.2.0"
     exponential-backoff: "npm:^3.1.1"
@@ -5243,7 +5243,7 @@ __metadata:
     which: "npm:^5.0.0"
   bin:
     node-gyp: bin/node-gyp.js
-  checksum: 10/e7fb17ba72172d743ee791ea470cba1a579d1c37bcaa67a45d221d07df055baf1367d0684b3c7ee2b9b61f260cea77b2016aaac47027dbc0f43030c90b21527d
+  checksum: 10/78d388d37cf743baef1034e2210ae97a7618190696adcce609341626a6873af193d9cf5e71e5dab905dad3c13f21d4d3652ffb30bb87886fba385efaa4802f0e
   languageName: node
   linkType: hard
 
@@ -5653,9 +5653,9 @@ __metadata:
   linkType: hard
 
 "preact@npm:^10.0.0":
-  version: 10.27.0
-  resolution: "preact@npm:10.27.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fpreact%2F-%2Fpreact-10.27.0.tgz"
-  checksum: 10/440685d450349acb5802fbdba33b53b727e2aeb57a23bfa28b597a97b2e1f046f2e1abc0bd51662968ff3a45ebbcc33894b929fdc412b1644651669e2860dfac
+  version: 10.27.1
+  resolution: "preact@npm:10.27.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fpreact%2F-%2Fpreact-10.27.1.tgz"
+  checksum: 10/c667d7c96c7cd0104aa91282153052aaabc097d985185f19fef61028d859d7de2b6826caaabb32e2b20d543a219597fa86949527be882cb0a87662ded47ad8c2
   languageName: node
   linkType: hard
 
@@ -6970,20 +6970,20 @@ __metadata:
   linkType: hard
 
 "vue@npm:^3.4.0, vue@npm:^3.5.13":
-  version: 3.5.18
-  resolution: "vue@npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.18.tgz"
+  version: 3.5.19
+  resolution: "vue@npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.19.tgz"
   dependencies:
-    "@vue/compiler-dom": "npm:3.5.18"
-    "@vue/compiler-sfc": "npm:3.5.18"
-    "@vue/runtime-dom": "npm:3.5.18"
-    "@vue/server-renderer": "npm:3.5.18"
-    "@vue/shared": "npm:3.5.18"
+    "@vue/compiler-dom": "npm:3.5.19"
+    "@vue/compiler-sfc": "npm:3.5.19"
+    "@vue/runtime-dom": "npm:3.5.19"
+    "@vue/server-renderer": "npm:3.5.19"
+    "@vue/shared": "npm:3.5.19"
   peerDependencies:
     typescript: "*"
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10/21886357edb8bfb9197a7b8d349055714093fe0f2a6fc3b6e0d58a275c78c6f62295e0dc5589e03abc332746dcf91dab73fdf4de13bb995e07e5bea807d36b7b
+  checksum: 10/ab80b5c0efbdea4b39f2f22228260515755fb463e9e330d1034f0f4972d652433fda70faf4c83faed07baed7e8999b6d547b4047daefe0ca51e15109627fbd00
   languageName: node
   linkType: hard
 

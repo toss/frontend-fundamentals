@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useWeeklyTopDiscussions } from "@/api/hooks/useDiscussions";
 
 interface CardProps {
@@ -119,8 +120,17 @@ function PostDescription({ description }: { description: string }) {
 
 // 포스트 아이템
 function PostItem({ post }: PostItemProps) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/post/${post.id}`);
+  };
+
   return (
-    <div className="flex items-start gap-2">
+    <div 
+      className="flex items-start gap-2 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-1 rounded transition-colors"
+      onClick={handleClick}
+    >
       <RankBadge rank={post.rank} />
       <div className="flex-1 min-w-0">
         <UserInfo

@@ -8,7 +8,9 @@ const avatarVariants = cva(
     variants: {
       size: {
         "20": "h-5 w-5",
+        "32": "h-8 w-8",
         "40": "h-10 w-10",
+        "48": "h-12 w-12",
         "60": "h-15 w-15"
       }
     },
@@ -26,7 +28,9 @@ const avatarFallbackVariants = cva(
     variants: {
       size: {
         "20": "text-xs",
+        "32": "text-sm",
         "40": "text-base",
+        "48": "text-lg",
         "60": "text-2xl"
       }
     },

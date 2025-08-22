@@ -5,6 +5,7 @@ import {
   ChevronUp,
   MoreHorizontal
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Avatar, Button, Card } from "../ui";
 import type { Post } from "../utils/types";
 
@@ -39,9 +40,7 @@ function formatTimeAgo(dateString: string): string {
 }
 
 export function PostCardSkeleton() {
-  return (
-    <div className="w-full h-[322px] bg-black/[0.03] rounded-2xl" />
-  );
+  return <div className="w-full h-[322px] bg-black/[0.03] rounded-2xl" />;
 }
 
 export function PostCard({
@@ -51,6 +50,11 @@ export function PostCard({
   onShare,
   onUpvote
 }: PostCardProps) {
+  const navigate = useNavigate();
+
+  const handlePostClick = () => {
+    navigate(`/post/${post.id}`);
+  };
   return (
     <Card variant="bordered" padding="none" className="w-full">
       <div className="flex flex-col p-6 gap-6">
@@ -131,14 +135,17 @@ export function PostCard({
           </div>
 
           {/* 제목과 내용 */}
-          <div className="flex flex-col gap-5">
+          <div
+            className="flex flex-col gap-5 cursor-pointer"
+            onClick={handlePostClick}
+          >
             {/* 제목 */}
-            <h2 className="font-bold text-[22px] leading-[130%] tracking-[-0.4px] text-[#0F0F0F]">
+            <h2 className="font-bold text-[22px] leading-[130%] tracking-[-0.4px] text-[#0F0F0F] hover:text-gray-700 transition-colors">
               {post.title}
             </h2>
 
             {/* 내용 미리보기 */}
-            <p className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80 line-clamp-2">
+            <p className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80 line-clamp-2 hover:text-black/60 transition-colors">
               {post.content}
             </p>
           </div>

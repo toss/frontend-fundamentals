@@ -57,7 +57,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
-          ["@amplitude/analytics-browser", "npm:2.22.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-browser%2F-%2Fanalytics-browser-2.22.2.tgz"],\
+          ["@amplitude/analytics-browser", "npm:2.23.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-browser%2F-%2Fanalytics-browser-2.23.0.tgz"],\
           ["markdown-it-footnote", "npm:4.0.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fmarkdown-it-footnote%2F-%2Fmarkdown-it-footnote-4.0.0.tgz"],\
           ["prettier", "npm:3.6.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fprettier%2F-%2Fprettier-3.6.2.tgz"],\
           ["typescript", "patch:typescript@npm%3A5.9.2%3A%3A__archiveUrl=http%253A%252F%252Fnexus.toss.bz%252Frepository%252Fnpm-group%252Ftypescript%252F-%252Ftypescript-5.9.2.tgz#optional!builtin<compat/typescript>::version=5.9.2&hash=5786d5"],\
@@ -358,15 +358,15 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@amplitude/analytics-browser", [\
-      ["npm:2.22.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-browser%2F-%2Fanalytics-browser-2.22.2.tgz", {\
-        "packageLocation": "./.yarn/cache/@amplitude-analytics-browser-npm-2.22.2-bf7b60c429-57a6952b26.zip/node_modules/@amplitude/analytics-browser/",\
+      ["npm:2.23.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-browser%2F-%2Fanalytics-browser-2.23.0.tgz", {\
+        "packageLocation": "./.yarn/cache/@amplitude-analytics-browser-npm-2.23.0-b55605a21a-82e9da9cf6.zip/node_modules/@amplitude/analytics-browser/",\
         "packageDependencies": [\
-          ["@amplitude/analytics-browser", "npm:2.22.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-browser%2F-%2Fanalytics-browser-2.22.2.tgz"],\
-          ["@amplitude/analytics-core", "npm:2.20.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-core%2F-%2Fanalytics-core-2.20.2.tgz"],\
+          ["@amplitude/analytics-browser", "npm:2.23.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-browser%2F-%2Fanalytics-browser-2.23.0.tgz"],\
+          ["@amplitude/analytics-core", "npm:2.21.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-core%2F-%2Fanalytics-core-2.21.0.tgz"],\
           ["@amplitude/analytics-remote-config", "npm:0.4.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-remote-config%2F-%2Fanalytics-remote-config-0.4.1.tgz"],\
-          ["@amplitude/plugin-autocapture-browser", "npm:1.9.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-autocapture-browser%2F-%2Fplugin-autocapture-browser-1.9.0.tgz"],\
-          ["@amplitude/plugin-network-capture-browser", "npm:1.4.5::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-network-capture-browser%2F-%2Fplugin-network-capture-browser-1.4.5.tgz"],\
-          ["@amplitude/plugin-page-view-tracking-browser", "npm:2.3.40::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-page-view-tracking-browser%2F-%2Fplugin-page-view-tracking-browser-2.3.40.tgz"],\
+          ["@amplitude/plugin-autocapture-browser", "npm:1.10.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-autocapture-browser%2F-%2Fplugin-autocapture-browser-1.10.0.tgz"],\
+          ["@amplitude/plugin-network-capture-browser", "npm:1.5.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-network-capture-browser%2F-%2Fplugin-network-capture-browser-1.5.0.tgz"],\
+          ["@amplitude/plugin-page-view-tracking-browser", "npm:2.3.41::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-page-view-tracking-browser%2F-%2Fplugin-page-view-tracking-browser-2.3.41.tgz"],\
           ["@amplitude/plugin-web-vitals-browser", "npm:0.1.0-frustrationanalytics.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-web-vitals-browser%2F-%2Fplugin-web-vitals-browser-0.1.0-frustrationanalytics.0.tgz"],\
           ["tslib", "npm:2.8.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ftslib%2F-%2Ftslib-2.8.1.tgz"]\
         ],\
@@ -374,12 +374,12 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@amplitude/analytics-client-common", [\
-      ["npm:2.3.34::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-client-common%2F-%2Fanalytics-client-common-2.3.34.tgz", {\
-        "packageLocation": "./.yarn/cache/@amplitude-analytics-client-common-npm-2.3.34-01e9ce04dd-d0c71f86ec.zip/node_modules/@amplitude/analytics-client-common/",\
+      ["npm:2.3.35::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-client-common%2F-%2Fanalytics-client-common-2.3.35.tgz", {\
+        "packageLocation": "./.yarn/cache/@amplitude-analytics-client-common-npm-2.3.35-78faa31c0c-0181de8e4e.zip/node_modules/@amplitude/analytics-client-common/",\
         "packageDependencies": [\
-          ["@amplitude/analytics-client-common", "npm:2.3.34::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-client-common%2F-%2Fanalytics-client-common-2.3.34.tgz"],\
+          ["@amplitude/analytics-client-common", "npm:2.3.35::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-client-common%2F-%2Fanalytics-client-common-2.3.35.tgz"],\
           ["@amplitude/analytics-connector", "npm:1.6.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-connector%2F-%2Fanalytics-connector-1.6.4.tgz"],\
-          ["@amplitude/analytics-core", "npm:2.20.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-core%2F-%2Fanalytics-core-2.20.2.tgz"],\
+          ["@amplitude/analytics-core", "npm:2.21.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-core%2F-%2Fanalytics-core-2.21.0.tgz"],\
           ["@amplitude/analytics-types", "npm:2.9.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-types%2F-%2Fanalytics-types-2.9.2.tgz"],\
           ["tslib", "npm:2.8.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ftslib%2F-%2Ftslib-2.8.1.tgz"]\
         ],\
@@ -405,10 +405,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:2.20.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-core%2F-%2Fanalytics-core-2.20.2.tgz", {\
-        "packageLocation": "./.yarn/cache/@amplitude-analytics-core-npm-2.20.2-cf763a3349-ea639b3e65.zip/node_modules/@amplitude/analytics-core/",\
+      ["npm:2.21.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-core%2F-%2Fanalytics-core-2.21.0.tgz", {\
+        "packageLocation": "./.yarn/cache/@amplitude-analytics-core-npm-2.21.0-1c49c47437-725fdb0b85.zip/node_modules/@amplitude/analytics-core/",\
         "packageDependencies": [\
-          ["@amplitude/analytics-core", "npm:2.20.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-core%2F-%2Fanalytics-core-2.20.2.tgz"],\
+          ["@amplitude/analytics-core", "npm:2.21.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-core%2F-%2Fanalytics-core-2.21.0.tgz"],\
           ["@amplitude/analytics-connector", "npm:1.6.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-connector%2F-%2Fanalytics-connector-1.6.4.tgz"],\
           ["tslib", "npm:2.8.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ftslib%2F-%2Ftslib-2.8.1.tgz"]\
         ],\
@@ -420,8 +420,8 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@amplitude-analytics-remote-config-npm-0.4.1-c0e4393cff-b48564fe18.zip/node_modules/@amplitude/analytics-remote-config/",\
         "packageDependencies": [\
           ["@amplitude/analytics-remote-config", "npm:0.4.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-remote-config%2F-%2Fanalytics-remote-config-0.4.1.tgz"],\
-          ["@amplitude/analytics-client-common", "npm:2.3.34::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-client-common%2F-%2Fanalytics-client-common-2.3.34.tgz"],\
-          ["@amplitude/analytics-core", "npm:2.20.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-core%2F-%2Fanalytics-core-2.20.2.tgz"],\
+          ["@amplitude/analytics-client-common", "npm:2.3.35::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-client-common%2F-%2Fanalytics-client-common-2.3.35.tgz"],\
+          ["@amplitude/analytics-core", "npm:2.21.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-core%2F-%2Fanalytics-core-2.21.0.tgz"],\
           ["@amplitude/analytics-types", "npm:2.9.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-types%2F-%2Fanalytics-types-2.9.2.tgz"],\
           ["tslib", "npm:2.8.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ftslib%2F-%2Ftslib-2.8.1.tgz"]\
         ],\
@@ -455,11 +455,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@amplitude/plugin-autocapture-browser", [\
-      ["npm:1.9.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-autocapture-browser%2F-%2Fplugin-autocapture-browser-1.9.0.tgz", {\
-        "packageLocation": "./.yarn/cache/@amplitude-plugin-autocapture-browser-npm-1.9.0-f7f185129c-5c7b26c402.zip/node_modules/@amplitude/plugin-autocapture-browser/",\
+      ["npm:1.10.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-autocapture-browser%2F-%2Fplugin-autocapture-browser-1.10.0.tgz", {\
+        "packageLocation": "./.yarn/cache/@amplitude-plugin-autocapture-browser-npm-1.10.0-212696aba6-207c0fd3a0.zip/node_modules/@amplitude/plugin-autocapture-browser/",\
         "packageDependencies": [\
-          ["@amplitude/plugin-autocapture-browser", "npm:1.9.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-autocapture-browser%2F-%2Fplugin-autocapture-browser-1.9.0.tgz"],\
-          ["@amplitude/analytics-core", "npm:2.20.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-core%2F-%2Fanalytics-core-2.20.2.tgz"],\
+          ["@amplitude/plugin-autocapture-browser", "npm:1.10.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-autocapture-browser%2F-%2Fplugin-autocapture-browser-1.10.0.tgz"],\
+          ["@amplitude/analytics-core", "npm:2.21.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-core%2F-%2Fanalytics-core-2.21.0.tgz"],\
           ["@amplitude/analytics-remote-config", "npm:0.6.3::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-remote-config%2F-%2Fanalytics-remote-config-0.6.3.tgz"],\
           ["rxjs", "npm:7.8.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Frxjs%2F-%2Frxjs-7.8.2.tgz"],\
           ["tslib", "npm:2.8.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ftslib%2F-%2Ftslib-2.8.1.tgz"]\
@@ -468,11 +468,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@amplitude/plugin-network-capture-browser", [\
-      ["npm:1.4.5::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-network-capture-browser%2F-%2Fplugin-network-capture-browser-1.4.5.tgz", {\
-        "packageLocation": "./.yarn/cache/@amplitude-plugin-network-capture-browser-npm-1.4.5-0ed61fc807-9d24d5622b.zip/node_modules/@amplitude/plugin-network-capture-browser/",\
+      ["npm:1.5.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-network-capture-browser%2F-%2Fplugin-network-capture-browser-1.5.0.tgz", {\
+        "packageLocation": "./.yarn/cache/@amplitude-plugin-network-capture-browser-npm-1.5.0-a34c96b267-c3a5c05dd9.zip/node_modules/@amplitude/plugin-network-capture-browser/",\
         "packageDependencies": [\
-          ["@amplitude/plugin-network-capture-browser", "npm:1.4.5::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-network-capture-browser%2F-%2Fplugin-network-capture-browser-1.4.5.tgz"],\
-          ["@amplitude/analytics-core", "npm:2.20.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-core%2F-%2Fanalytics-core-2.20.2.tgz"],\
+          ["@amplitude/plugin-network-capture-browser", "npm:1.5.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-network-capture-browser%2F-%2Fplugin-network-capture-browser-1.5.0.tgz"],\
+          ["@amplitude/analytics-core", "npm:2.21.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-core%2F-%2Fanalytics-core-2.21.0.tgz"],\
           ["rxjs", "npm:7.8.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Frxjs%2F-%2Frxjs-7.8.2.tgz"],\
           ["tslib", "npm:2.8.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ftslib%2F-%2Ftslib-2.8.1.tgz"]\
         ],\
@@ -480,11 +480,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@amplitude/plugin-page-view-tracking-browser", [\
-      ["npm:2.3.40::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-page-view-tracking-browser%2F-%2Fplugin-page-view-tracking-browser-2.3.40.tgz", {\
-        "packageLocation": "./.yarn/cache/@amplitude-plugin-page-view-tracking-browser-npm-2.3.40-6d3884205d-f953102adf.zip/node_modules/@amplitude/plugin-page-view-tracking-browser/",\
+      ["npm:2.3.41::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-page-view-tracking-browser%2F-%2Fplugin-page-view-tracking-browser-2.3.41.tgz", {\
+        "packageLocation": "./.yarn/cache/@amplitude-plugin-page-view-tracking-browser-npm-2.3.41-0503c287b9-6197af45a1.zip/node_modules/@amplitude/plugin-page-view-tracking-browser/",\
         "packageDependencies": [\
-          ["@amplitude/plugin-page-view-tracking-browser", "npm:2.3.40::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-page-view-tracking-browser%2F-%2Fplugin-page-view-tracking-browser-2.3.40.tgz"],\
-          ["@amplitude/analytics-client-common", "npm:2.3.34::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-client-common%2F-%2Fanalytics-client-common-2.3.34.tgz"],\
+          ["@amplitude/plugin-page-view-tracking-browser", "npm:2.3.41::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-page-view-tracking-browser%2F-%2Fplugin-page-view-tracking-browser-2.3.41.tgz"],\
+          ["@amplitude/analytics-client-common", "npm:2.3.35::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-client-common%2F-%2Fanalytics-client-common-2.3.35.tgz"],\
           ["@amplitude/analytics-types", "npm:2.9.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-types%2F-%2Fanalytics-types-2.9.2.tgz"],\
           ["tslib", "npm:2.8.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ftslib%2F-%2Ftslib-2.8.1.tgz"]\
         ],\
@@ -496,7 +496,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@amplitude-plugin-web-vitals-browser-npm-0.1.0-frustrationanalytics.0-e4a5dc317e-6ee4e58320.zip/node_modules/@amplitude/plugin-web-vitals-browser/",\
         "packageDependencies": [\
           ["@amplitude/plugin-web-vitals-browser", "npm:0.1.0-frustrationanalytics.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fplugin-web-vitals-browser%2F-%2Fplugin-web-vitals-browser-0.1.0-frustrationanalytics.0.tgz"],\
-          ["@amplitude/analytics-core", "npm:2.20.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-core%2F-%2Fanalytics-core-2.20.2.tgz"],\
+          ["@amplitude/analytics-core", "npm:2.21.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-core%2F-%2Fanalytics-core-2.21.0.tgz"],\
           ["rxjs", "npm:7.8.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Frxjs%2F-%2Frxjs-7.8.2.tgz"],\
           ["tslib", "npm:2.8.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ftslib%2F-%2Ftslib-2.8.1.tgz"],\
           ["web-vitals", "npm:5.1.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fweb-vitals%2F-%2Fweb-vitals-5.1.0.tgz"]\
@@ -1527,7 +1527,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@docsearch/js", "npm:3.8.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40docsearch%2Fjs%2F-%2Fjs-3.8.2.tgz"],\
           ["@docsearch/react", "virtual:8b9fff86bb7476460f330032a71f891d107988340cbd54d064bf5045527258a850f01a24ebedff38cb47ec1163e3d8b9fa80da03516ee3e6b64df74a38fb946b#npm:3.8.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40docsearch%2Freact%2F-%2Freact-3.8.2.tgz"],\
-          ["preact", "npm:10.27.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fpreact%2F-%2Fpreact-10.27.0.tgz"]\
+          ["preact", "npm:10.27.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fpreact%2F-%2Fpreact-10.27.1.tgz"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -1809,7 +1809,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./fundamentals/a11y/",\
         "packageDependencies": [\
           ["@frontend-fundamentals/a11y", "workspace:fundamentals/a11y"],\
-          ["@amplitude/analytics-browser", "npm:2.22.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-browser%2F-%2Fanalytics-browser-2.22.2.tgz"],\
+          ["@amplitude/analytics-browser", "npm:2.23.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-browser%2F-%2Fanalytics-browser-2.23.0.tgz"],\
           ["markdown-it-footnote", "npm:4.0.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fmarkdown-it-footnote%2F-%2Fmarkdown-it-footnote-4.0.0.tgz"],\
           ["typescript", "patch:typescript@npm%3A5.9.2%3A%3A__archiveUrl=http%253A%252F%252Fnexus.toss.bz%252Frepository%252Fnpm-group%252Ftypescript%252F-%252Ftypescript-5.9.2.tgz#optional!builtin<compat/typescript>::version=5.9.2&hash=5786d5"],\
           ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.6.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvitepress%2F-%2Fvitepress-1.6.4.tgz"],\
@@ -1823,7 +1823,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./fundamentals/bundling/",\
         "packageDependencies": [\
           ["@frontend-fundamentals/bundling", "workspace:fundamentals/bundling"],\
-          ["@amplitude/analytics-browser", "npm:2.22.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-browser%2F-%2Fanalytics-browser-2.22.2.tgz"],\
+          ["@amplitude/analytics-browser", "npm:2.23.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-browser%2F-%2Fanalytics-browser-2.23.0.tgz"],\
           ["markdown-it-footnote", "npm:4.0.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fmarkdown-it-footnote%2F-%2Fmarkdown-it-footnote-4.0.0.tgz"],\
           ["typescript", "patch:typescript@npm%3A5.9.2%3A%3A__archiveUrl=http%253A%252F%252Fnexus.toss.bz%252Frepository%252Fnpm-group%252Ftypescript%252F-%252Ftypescript-5.9.2.tgz#optional!builtin<compat/typescript>::version=5.9.2&hash=5786d5"],\
           ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.6.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvitepress%2F-%2Fvitepress-1.6.4.tgz"],\
@@ -1837,7 +1837,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./fundamentals/code-quality/",\
         "packageDependencies": [\
           ["@frontend-fundamentals/code-quality", "workspace:fundamentals/code-quality"],\
-          ["@amplitude/analytics-browser", "npm:2.22.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-browser%2F-%2Fanalytics-browser-2.22.2.tgz"],\
+          ["@amplitude/analytics-browser", "npm:2.23.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-browser%2F-%2Fanalytics-browser-2.23.0.tgz"],\
           ["markdown-it-footnote", "npm:4.0.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fmarkdown-it-footnote%2F-%2Fmarkdown-it-footnote-4.0.0.tgz"],\
           ["typescript", "patch:typescript@npm%3A5.9.2%3A%3A__archiveUrl=http%253A%252F%252Fnexus.toss.bz%252Frepository%252Fnpm-group%252Ftypescript%252F-%252Ftypescript-5.9.2.tgz#optional!builtin<compat/typescript>::version=5.9.2&hash=5786d5"],\
           ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.6.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvitepress%2F-%2Fvitepress-1.6.4.tgz"]\
@@ -1850,7 +1850,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./fundamentals/debug/",\
         "packageDependencies": [\
           ["@frontend-fundamentals/debug", "workspace:fundamentals/debug"],\
-          ["@amplitude/analytics-browser", "npm:2.22.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-browser%2F-%2Fanalytics-browser-2.22.2.tgz"],\
+          ["@amplitude/analytics-browser", "npm:2.23.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-browser%2F-%2Fanalytics-browser-2.23.0.tgz"],\
           ["markdown-it-footnote", "npm:4.0.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fmarkdown-it-footnote%2F-%2Fmarkdown-it-footnote-4.0.0.tgz"],\
           ["typescript", "patch:typescript@npm%3A5.9.2%3A%3A__archiveUrl=http%253A%252F%252Fnexus.toss.bz%252Frepository%252Fnpm-group%252Ftypescript%252F-%252Ftypescript-5.9.2.tgz#optional!builtin<compat/typescript>::version=5.9.2&hash=5786d5"],\
           ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.6.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvitepress%2F-%2Fvitepress-1.6.4.tgz"],\
@@ -1868,7 +1868,7 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:18.3.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Freact%2F-%2Freact-18.3.1.tgz"],\
           ["typescript", "patch:typescript@npm%3A5.9.2%3A%3A__archiveUrl=http%253A%252F%252Fnexus.toss.bz%252Frepository%252Fnpm-group%252Ftypescript%252F-%252Ftypescript-5.9.2.tgz#optional!builtin<compat/typescript>::version=5.9.2&hash=5786d5"],\
           ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.6.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvitepress%2F-%2Fvitepress-1.6.4.tgz"],\
-          ["vue", "virtual:ac3ac2e864cf87dde84e333a6a60a9ceed6a4108c79d5eb83f85393bf816d0671fd46e878e2ebd1d30bc14f3a297412483449292ac48e5b6a939f8eeed0a3e1f#npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.18.tgz"]\
+          ["vue", "virtual:ac3ac2e864cf87dde84e333a6a60a9ceed6a4108c79d5eb83f85393bf816d0671fd46e878e2ebd1d30bc14f3a297412483449292ac48e5b6a939f8eeed0a3e1f#npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.19.tgz"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -3587,7 +3587,7 @@ const RAW_RUNTIME_STATE =
           ["@types/vite", null],\
           ["@types/vue", null],\
           ["vite", "virtual:87da98648534535596d6a55d1fb98012cf439fc737b12040d24671229e3afd39837320386353669a9c06f46e09c4c49343683763a8e152c7f43c076688395065#npm:5.4.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvite%2F-%2Fvite-5.4.19.tgz"],\
-          ["vue", "virtual:4f5f04c0adcd8a3aa19841d84a9955485beff2898d9f77db9fd11a229e63f197891cf09f3052f0924bc17130f88b66955fa8fa1dda67cab1930cd5e8f8b345c5#npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.18.tgz"]\
+          ["vue", "virtual:4f5f04c0adcd8a3aa19841d84a9955485beff2898d9f77db9fd11a229e63f197891cf09f3052f0924bc17130f88b66955fa8fa1dda67cab1930cd5e8f8b345c5#npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.19.tgz"]\
         ],\
         "packagePeers": [\
           "@types/vite",\
@@ -3599,12 +3599,12 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@vue/compiler-core", [\
-      ["npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-core%2F-%2Fcompiler-core-3.5.18.tgz", {\
-        "packageLocation": "./.yarn/cache/@vue-compiler-core-npm-3.5.18-c8829485a0-b94dd25722.zip/node_modules/@vue/compiler-core/",\
+      ["npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-core%2F-%2Fcompiler-core-3.5.19.tgz", {\
+        "packageLocation": "./.yarn/cache/@vue-compiler-core-npm-3.5.19-01ad5b7864-61c3d285c3.zip/node_modules/@vue/compiler-core/",\
         "packageDependencies": [\
-          ["@vue/compiler-core", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-core%2F-%2Fcompiler-core-3.5.18.tgz"],\
+          ["@vue/compiler-core", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-core%2F-%2Fcompiler-core-3.5.19.tgz"],\
           ["@babel/parser", "npm:7.28.3::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40babel%2Fparser%2F-%2Fparser-7.28.3.tgz"],\
-          ["@vue/shared", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.18.tgz"],\
+          ["@vue/shared", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.19.tgz"],\
           ["entities", "npm:4.5.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fentities%2F-%2Fentities-4.5.0.tgz"],\
           ["estree-walker", "npm:2.0.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Festree-walker%2F-%2Festree-walker-2.0.2.tgz"],\
           ["source-map-js", "npm:1.2.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fsource-map-js%2F-%2Fsource-map-js-1.2.1.tgz"]\
@@ -3613,28 +3613,28 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@vue/compiler-dom", [\
-      ["npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-dom%2F-%2Fcompiler-dom-3.5.18.tgz", {\
-        "packageLocation": "./.yarn/cache/@vue-compiler-dom-npm-3.5.18-4d774d5a6d-5156bf632f.zip/node_modules/@vue/compiler-dom/",\
+      ["npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-dom%2F-%2Fcompiler-dom-3.5.19.tgz", {\
+        "packageLocation": "./.yarn/cache/@vue-compiler-dom-npm-3.5.19-f18be58502-aba06d1df6.zip/node_modules/@vue/compiler-dom/",\
         "packageDependencies": [\
-          ["@vue/compiler-dom", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-dom%2F-%2Fcompiler-dom-3.5.18.tgz"],\
-          ["@vue/compiler-core", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-core%2F-%2Fcompiler-core-3.5.18.tgz"],\
-          ["@vue/shared", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.18.tgz"]\
+          ["@vue/compiler-dom", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-dom%2F-%2Fcompiler-dom-3.5.19.tgz"],\
+          ["@vue/compiler-core", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-core%2F-%2Fcompiler-core-3.5.19.tgz"],\
+          ["@vue/shared", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.19.tgz"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["@vue/compiler-sfc", [\
-      ["npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-sfc%2F-%2Fcompiler-sfc-3.5.18.tgz", {\
-        "packageLocation": "./.yarn/cache/@vue-compiler-sfc-npm-3.5.18-f4a375a381-2c628fbd3e.zip/node_modules/@vue/compiler-sfc/",\
+      ["npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-sfc%2F-%2Fcompiler-sfc-3.5.19.tgz", {\
+        "packageLocation": "./.yarn/cache/@vue-compiler-sfc-npm-3.5.19-af411d4ea9-06cda37a4f.zip/node_modules/@vue/compiler-sfc/",\
         "packageDependencies": [\
-          ["@vue/compiler-sfc", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-sfc%2F-%2Fcompiler-sfc-3.5.18.tgz"],\
+          ["@vue/compiler-sfc", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-sfc%2F-%2Fcompiler-sfc-3.5.19.tgz"],\
           ["@babel/parser", "npm:7.28.3::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40babel%2Fparser%2F-%2Fparser-7.28.3.tgz"],\
-          ["@vue/compiler-core", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-core%2F-%2Fcompiler-core-3.5.18.tgz"],\
-          ["@vue/compiler-dom", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-dom%2F-%2Fcompiler-dom-3.5.18.tgz"],\
-          ["@vue/compiler-ssr", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-ssr%2F-%2Fcompiler-ssr-3.5.18.tgz"],\
-          ["@vue/shared", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.18.tgz"],\
+          ["@vue/compiler-core", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-core%2F-%2Fcompiler-core-3.5.19.tgz"],\
+          ["@vue/compiler-dom", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-dom%2F-%2Fcompiler-dom-3.5.19.tgz"],\
+          ["@vue/compiler-ssr", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-ssr%2F-%2Fcompiler-ssr-3.5.19.tgz"],\
+          ["@vue/shared", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.19.tgz"],\
           ["estree-walker", "npm:2.0.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Festree-walker%2F-%2Festree-walker-2.0.2.tgz"],\
-          ["magic-string", "npm:0.30.17::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fmagic-string%2F-%2Fmagic-string-0.30.17.tgz"],\
+          ["magic-string", "npm:0.30.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fmagic-string%2F-%2Fmagic-string-0.30.18.tgz"],\
           ["postcss", "npm:8.5.6::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fpostcss%2F-%2Fpostcss-8.5.6.tgz"],\
           ["source-map-js", "npm:1.2.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fsource-map-js%2F-%2Fsource-map-js-1.2.1.tgz"]\
         ],\
@@ -3642,12 +3642,12 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@vue/compiler-ssr", [\
-      ["npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-ssr%2F-%2Fcompiler-ssr-3.5.18.tgz", {\
-        "packageLocation": "./.yarn/cache/@vue-compiler-ssr-npm-3.5.18-c117ee5faa-de36545cf0.zip/node_modules/@vue/compiler-ssr/",\
+      ["npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-ssr%2F-%2Fcompiler-ssr-3.5.19.tgz", {\
+        "packageLocation": "./.yarn/cache/@vue-compiler-ssr-npm-3.5.19-2824479590-9a9bda29e5.zip/node_modules/@vue/compiler-ssr/",\
         "packageDependencies": [\
-          ["@vue/compiler-ssr", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-ssr%2F-%2Fcompiler-ssr-3.5.18.tgz"],\
-          ["@vue/compiler-dom", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-dom%2F-%2Fcompiler-dom-3.5.18.tgz"],\
-          ["@vue/shared", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.18.tgz"]\
+          ["@vue/compiler-ssr", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-ssr%2F-%2Fcompiler-ssr-3.5.19.tgz"],\
+          ["@vue/compiler-dom", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-dom%2F-%2Fcompiler-dom-3.5.19.tgz"],\
+          ["@vue/shared", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.19.tgz"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3689,55 +3689,55 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@vue/reactivity", [\
-      ["npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Freactivity%2F-%2Freactivity-3.5.18.tgz", {\
-        "packageLocation": "./.yarn/cache/@vue-reactivity-npm-3.5.18-863b9102df-c47a28767b.zip/node_modules/@vue/reactivity/",\
+      ["npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Freactivity%2F-%2Freactivity-3.5.19.tgz", {\
+        "packageLocation": "./.yarn/cache/@vue-reactivity-npm-3.5.19-1702a58cf5-5e204e541c.zip/node_modules/@vue/reactivity/",\
         "packageDependencies": [\
-          ["@vue/reactivity", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Freactivity%2F-%2Freactivity-3.5.18.tgz"],\
-          ["@vue/shared", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.18.tgz"]\
+          ["@vue/reactivity", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Freactivity%2F-%2Freactivity-3.5.19.tgz"],\
+          ["@vue/shared", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.19.tgz"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["@vue/runtime-core", [\
-      ["npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fruntime-core%2F-%2Fruntime-core-3.5.18.tgz", {\
-        "packageLocation": "./.yarn/cache/@vue-runtime-core-npm-3.5.18-9b823cfc3f-75670ec6bf.zip/node_modules/@vue/runtime-core/",\
+      ["npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fruntime-core%2F-%2Fruntime-core-3.5.19.tgz", {\
+        "packageLocation": "./.yarn/cache/@vue-runtime-core-npm-3.5.19-ffed97d76b-a6935d04b2.zip/node_modules/@vue/runtime-core/",\
         "packageDependencies": [\
-          ["@vue/runtime-core", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fruntime-core%2F-%2Fruntime-core-3.5.18.tgz"],\
-          ["@vue/reactivity", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Freactivity%2F-%2Freactivity-3.5.18.tgz"],\
-          ["@vue/shared", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.18.tgz"]\
+          ["@vue/runtime-core", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fruntime-core%2F-%2Fruntime-core-3.5.19.tgz"],\
+          ["@vue/reactivity", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Freactivity%2F-%2Freactivity-3.5.19.tgz"],\
+          ["@vue/shared", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.19.tgz"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["@vue/runtime-dom", [\
-      ["npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fruntime-dom%2F-%2Fruntime-dom-3.5.18.tgz", {\
-        "packageLocation": "./.yarn/cache/@vue-runtime-dom-npm-3.5.18-239e3596b5-d890f45a7f.zip/node_modules/@vue/runtime-dom/",\
+      ["npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fruntime-dom%2F-%2Fruntime-dom-3.5.19.tgz", {\
+        "packageLocation": "./.yarn/cache/@vue-runtime-dom-npm-3.5.19-4fcbe8e96c-7b9c01c9bd.zip/node_modules/@vue/runtime-dom/",\
         "packageDependencies": [\
-          ["@vue/runtime-dom", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fruntime-dom%2F-%2Fruntime-dom-3.5.18.tgz"],\
-          ["@vue/reactivity", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Freactivity%2F-%2Freactivity-3.5.18.tgz"],\
-          ["@vue/runtime-core", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fruntime-core%2F-%2Fruntime-core-3.5.18.tgz"],\
-          ["@vue/shared", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.18.tgz"],\
+          ["@vue/runtime-dom", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fruntime-dom%2F-%2Fruntime-dom-3.5.19.tgz"],\
+          ["@vue/reactivity", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Freactivity%2F-%2Freactivity-3.5.19.tgz"],\
+          ["@vue/runtime-core", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fruntime-core%2F-%2Fruntime-core-3.5.19.tgz"],\
+          ["@vue/shared", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.19.tgz"],\
           ["csstype", "npm:3.1.3::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fcsstype%2F-%2Fcsstype-3.1.3.tgz"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["@vue/server-renderer", [\
-      ["npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fserver-renderer%2F-%2Fserver-renderer-3.5.18.tgz", {\
-        "packageLocation": "./.yarn/cache/@vue-server-renderer-npm-3.5.18-4dd8bfb35d-716c1b2716.zip/node_modules/@vue/server-renderer/",\
+      ["npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fserver-renderer%2F-%2Fserver-renderer-3.5.19.tgz", {\
+        "packageLocation": "./.yarn/cache/@vue-server-renderer-npm-3.5.19-53277932c7-abb570a341.zip/node_modules/@vue/server-renderer/",\
         "packageDependencies": [\
-          ["@vue/server-renderer", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fserver-renderer%2F-%2Fserver-renderer-3.5.18.tgz"]\
+          ["@vue/server-renderer", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fserver-renderer%2F-%2Fserver-renderer-3.5.19.tgz"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:0b2ed7b6b03acf5e33a09e9909a5d3536e1d35e765456f8f68a952ba8c59bbe41b02a19973413a422d0b8747262a4014412fb65ba132a910e450e81345f10437#npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fserver-renderer%2F-%2Fserver-renderer-3.5.18.tgz", {\
-        "packageLocation": "./.yarn/__virtual__/@vue-server-renderer-virtual-a35b5d9e57/0/cache/@vue-server-renderer-npm-3.5.18-4dd8bfb35d-716c1b2716.zip/node_modules/@vue/server-renderer/",\
+      ["virtual:0a79761b92cdbb415043a035bdb4337d147005f397dc98f2d1194c86a4d42e60e1b7439cbd40eb199ea180dc5ea3bdedff9999b302f977f91e0185672b002195#npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fserver-renderer%2F-%2Fserver-renderer-3.5.19.tgz", {\
+        "packageLocation": "./.yarn/__virtual__/@vue-server-renderer-virtual-fbceda28d0/0/cache/@vue-server-renderer-npm-3.5.19-53277932c7-abb570a341.zip/node_modules/@vue/server-renderer/",\
         "packageDependencies": [\
-          ["@vue/server-renderer", "virtual:0b2ed7b6b03acf5e33a09e9909a5d3536e1d35e765456f8f68a952ba8c59bbe41b02a19973413a422d0b8747262a4014412fb65ba132a910e450e81345f10437#npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fserver-renderer%2F-%2Fserver-renderer-3.5.18.tgz"],\
+          ["@vue/server-renderer", "virtual:0a79761b92cdbb415043a035bdb4337d147005f397dc98f2d1194c86a4d42e60e1b7439cbd40eb199ea180dc5ea3bdedff9999b302f977f91e0185672b002195#npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fserver-renderer%2F-%2Fserver-renderer-3.5.19.tgz"],\
           ["@types/vue", null],\
-          ["@vue/compiler-ssr", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-ssr%2F-%2Fcompiler-ssr-3.5.18.tgz"],\
-          ["@vue/shared", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.18.tgz"],\
-          ["vue", "virtual:4f5f04c0adcd8a3aa19841d84a9955485beff2898d9f77db9fd11a229e63f197891cf09f3052f0924bc17130f88b66955fa8fa1dda67cab1930cd5e8f8b345c5#npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.18.tgz"]\
+          ["@vue/compiler-ssr", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-ssr%2F-%2Fcompiler-ssr-3.5.19.tgz"],\
+          ["@vue/shared", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.19.tgz"],\
+          ["vue", "virtual:4f5f04c0adcd8a3aa19841d84a9955485beff2898d9f77db9fd11a229e63f197891cf09f3052f0924bc17130f88b66955fa8fa1dda67cab1930cd5e8f8b345c5#npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.19.tgz"]\
         ],\
         "packagePeers": [\
           "@types/vue",\
@@ -3745,14 +3745,14 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["virtual:2337a3cc4e3e9b0bb3d16f360f1cdfcbeb5e672ae8bc028295e5fba027854b00536cf9d763d651022ac4b23d2ebae2121b79ae491438c23f68320c9c6679aacd#npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fserver-renderer%2F-%2Fserver-renderer-3.5.18.tgz", {\
-        "packageLocation": "./.yarn/__virtual__/@vue-server-renderer-virtual-158a998ff0/0/cache/@vue-server-renderer-npm-3.5.18-4dd8bfb35d-716c1b2716.zip/node_modules/@vue/server-renderer/",\
+      ["virtual:8de4d96b17bc63693e6f6c76329ffd95f332483e8913922ecbc3487ca1dabbff374045f68fb9df5786b1c6792ab20db5b551b845ca32530d54be62aeed2a9388#npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fserver-renderer%2F-%2Fserver-renderer-3.5.19.tgz", {\
+        "packageLocation": "./.yarn/__virtual__/@vue-server-renderer-virtual-e74b531ff1/0/cache/@vue-server-renderer-npm-3.5.19-53277932c7-abb570a341.zip/node_modules/@vue/server-renderer/",\
         "packageDependencies": [\
-          ["@vue/server-renderer", "virtual:2337a3cc4e3e9b0bb3d16f360f1cdfcbeb5e672ae8bc028295e5fba027854b00536cf9d763d651022ac4b23d2ebae2121b79ae491438c23f68320c9c6679aacd#npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fserver-renderer%2F-%2Fserver-renderer-3.5.18.tgz"],\
+          ["@vue/server-renderer", "virtual:8de4d96b17bc63693e6f6c76329ffd95f332483e8913922ecbc3487ca1dabbff374045f68fb9df5786b1c6792ab20db5b551b845ca32530d54be62aeed2a9388#npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fserver-renderer%2F-%2Fserver-renderer-3.5.19.tgz"],\
           ["@types/vue", null],\
-          ["@vue/compiler-ssr", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-ssr%2F-%2Fcompiler-ssr-3.5.18.tgz"],\
-          ["@vue/shared", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.18.tgz"],\
-          ["vue", "virtual:ac3ac2e864cf87dde84e333a6a60a9ceed6a4108c79d5eb83f85393bf816d0671fd46e878e2ebd1d30bc14f3a297412483449292ac48e5b6a939f8eeed0a3e1f#npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.18.tgz"]\
+          ["@vue/compiler-ssr", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-ssr%2F-%2Fcompiler-ssr-3.5.19.tgz"],\
+          ["@vue/shared", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.19.tgz"],\
+          ["vue", "virtual:ac3ac2e864cf87dde84e333a6a60a9ceed6a4108c79d5eb83f85393bf816d0671fd46e878e2ebd1d30bc14f3a297412483449292ac48e5b6a939f8eeed0a3e1f#npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.19.tgz"]\
         ],\
         "packagePeers": [\
           "@types/vue",\
@@ -3762,10 +3762,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@vue/shared", [\
-      ["npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.18.tgz", {\
-        "packageLocation": "./.yarn/cache/@vue-shared-npm-3.5.18-2b1822bd6b-62b83867ff.zip/node_modules/@vue/shared/",\
+      ["npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.19.tgz", {\
+        "packageLocation": "./.yarn/cache/@vue-shared-npm-3.5.19-981a1389ef-070082dbb3.zip/node_modules/@vue/shared/",\
         "packageDependencies": [\
-          ["@vue/shared", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.18.tgz"]\
+          ["@vue/shared", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.19.tgz"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3778,7 +3778,7 @@ const RAW_RUNTIME_STATE =
           ["@types/web-bluetooth", "npm:0.0.21::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40types%2Fweb-bluetooth%2F-%2Fweb-bluetooth-0.0.21.tgz"],\
           ["@vueuse/metadata", "npm:12.8.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vueuse%2Fmetadata%2F-%2Fmetadata-12.8.2.tgz"],\
           ["@vueuse/shared", "npm:12.8.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vueuse%2Fshared%2F-%2Fshared-12.8.2.tgz"],\
-          ["vue", "virtual:4f5f04c0adcd8a3aa19841d84a9955485beff2898d9f77db9fd11a229e63f197891cf09f3052f0924bc17130f88b66955fa8fa1dda67cab1930cd5e8f8b345c5#npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.18.tgz"]\
+          ["vue", "virtual:4f5f04c0adcd8a3aa19841d84a9955485beff2898d9f77db9fd11a229e63f197891cf09f3052f0924bc17130f88b66955fa8fa1dda67cab1930cd5e8f8b345c5#npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.19.tgz"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3821,7 +3821,7 @@ const RAW_RUNTIME_STATE =
           ["qrcode", null],\
           ["sortablejs", null],\
           ["universal-cookie", null],\
-          ["vue", "virtual:4f5f04c0adcd8a3aa19841d84a9955485beff2898d9f77db9fd11a229e63f197891cf09f3052f0924bc17130f88b66955fa8fa1dda67cab1930cd5e8f8b345c5#npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.18.tgz"]\
+          ["vue", "virtual:4f5f04c0adcd8a3aa19841d84a9955485beff2898d9f77db9fd11a229e63f197891cf09f3052f0924bc17130f88b66955fa8fa1dda67cab1930cd5e8f8b345c5#npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.19.tgz"]\
         ],\
         "packagePeers": [\
           "@types/async-validator",\
@@ -3866,7 +3866,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@vueuse-shared-npm-12.8.2-4f5f04c0ad-2cbb24706e.zip/node_modules/@vueuse/shared/",\
         "packageDependencies": [\
           ["@vueuse/shared", "npm:12.8.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vueuse%2Fshared%2F-%2Fshared-12.8.2.tgz"],\
-          ["vue", "virtual:4f5f04c0adcd8a3aa19841d84a9955485beff2898d9f77db9fd11a229e63f197891cf09f3052f0924bc17130f88b66955fa8fa1dda67cab1930cd5e8f8b345c5#npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.18.tgz"]\
+          ["vue", "virtual:4f5f04c0adcd8a3aa19841d84a9955485beff2898d9f77db9fd11a229e63f197891cf09f3052f0924bc17130f88b66955fa8fa1dda67cab1930cd5e8f8b345c5#npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.19.tgz"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5126,7 +5126,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["frontend-fundamentals", "workspace:."],\
-          ["@amplitude/analytics-browser", "npm:2.22.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-browser%2F-%2Fanalytics-browser-2.22.2.tgz"],\
+          ["@amplitude/analytics-browser", "npm:2.23.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40amplitude%2Fanalytics-browser%2F-%2Fanalytics-browser-2.23.0.tgz"],\
           ["markdown-it-footnote", "npm:4.0.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fmarkdown-it-footnote%2F-%2Fmarkdown-it-footnote-4.0.0.tgz"],\
           ["prettier", "npm:3.6.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fprettier%2F-%2Fprettier-3.6.2.tgz"],\
           ["typescript", "patch:typescript@npm%3A5.9.2%3A%3A__archiveUrl=http%253A%252F%252Fnexus.toss.bz%252Frepository%252Fnpm-group%252Ftypescript%252F-%252Ftypescript-5.9.2.tgz#optional!builtin<compat/typescript>::version=5.9.2&hash=5786d5"],\
@@ -5159,7 +5159,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/unplugged/fsevents-patch-4e6359425f/node_modules/fsevents/",\
         "packageDependencies": [\
           ["fsevents", "patch:fsevents@npm%3A2.3.3%3A%3A__archiveUrl=http%253A%252F%252Fnexus.toss.bz%252Frepository%252Fnpm-group%252Ffsevents%252F-%252Ffsevents-2.3.3.tgz#optional!builtin<compat/fsevents>::version=2.3.3&hash=df0bf1"],\
-          ["node-gyp", "npm:11.3.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fnode-gyp%2F-%2Fnode-gyp-11.3.0.tgz"]\
+          ["node-gyp", "npm:11.4.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fnode-gyp%2F-%2Fnode-gyp-11.4.1.tgz"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -6432,10 +6432,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["magic-string", [\
-      ["npm:0.30.17::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fmagic-string%2F-%2Fmagic-string-0.30.17.tgz", {\
-        "packageLocation": "./.yarn/cache/magic-string-npm-0.30.17-36bf67ce81-2f71af2b0a.zip/node_modules/magic-string/",\
+      ["npm:0.30.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fmagic-string%2F-%2Fmagic-string-0.30.18.tgz", {\
+        "packageLocation": "./.yarn/cache/magic-string-npm-0.30.18-a4d69c52a6-dd180f174c.zip/node_modules/magic-string/",\
         "packageDependencies": [\
-          ["magic-string", "npm:0.30.17::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fmagic-string%2F-%2Fmagic-string-0.30.17.tgz"],\
+          ["magic-string", "npm:0.30.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fmagic-string%2F-%2Fmagic-string-0.30.18.tgz"],\
           ["@jridgewell/sourcemap-codec", "npm:1.5.5::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40jridgewell%2Fsourcemap-codec%2F-%2Fsourcemap-codec-1.5.5.tgz"]\
         ],\
         "linkType": "HARD"\
@@ -6824,10 +6824,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["node-gyp", [\
-      ["npm:11.3.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fnode-gyp%2F-%2Fnode-gyp-11.3.0.tgz", {\
-        "packageLocation": "./.yarn/unplugged/node-gyp-npm-11.3.0-9ed66159db/node_modules/node-gyp/",\
+      ["npm:11.4.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fnode-gyp%2F-%2Fnode-gyp-11.4.1.tgz", {\
+        "packageLocation": "./.yarn/unplugged/node-gyp-npm-11.4.1-871f34c3f8/node_modules/node-gyp/",\
         "packageDependencies": [\
-          ["node-gyp", "npm:11.3.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fnode-gyp%2F-%2Fnode-gyp-11.3.0.tgz"],\
+          ["node-gyp", "npm:11.4.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fnode-gyp%2F-%2Fnode-gyp-11.4.1.tgz"],\
           ["env-paths", "npm:2.2.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fenv-paths%2F-%2Fenv-paths-2.2.1.tgz"],\
           ["exponential-backoff", "npm:3.1.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fexponential-backoff%2F-%2Fexponential-backoff-3.1.2.tgz"],\
           ["graceful-fs", "npm:4.2.11::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fgraceful-fs%2F-%2Fgraceful-fs-4.2.11.tgz"],\
@@ -7309,10 +7309,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["preact", [\
-      ["npm:10.27.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fpreact%2F-%2Fpreact-10.27.0.tgz", {\
-        "packageLocation": "./.yarn/cache/preact-npm-10.27.0-5b1f925f0e-440685d450.zip/node_modules/preact/",\
+      ["npm:10.27.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fpreact%2F-%2Fpreact-10.27.1.tgz", {\
+        "packageLocation": "./.yarn/cache/preact-npm-10.27.1-48cc2e91f1-c667d7c96c.zip/node_modules/preact/",\
         "packageDependencies": [\
-          ["preact", "npm:10.27.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fpreact%2F-%2Fpreact-10.27.0.tgz"]\
+          ["preact", "npm:10.27.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fpreact%2F-%2Fpreact-10.27.1.tgz"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -8770,7 +8770,7 @@ const RAW_RUNTIME_STATE =
           ["@types/postcss", null],\
           ["@vitejs/plugin-vue", "virtual:87da98648534535596d6a55d1fb98012cf439fc737b12040d24671229e3afd39837320386353669a9c06f46e09c4c49343683763a8e152c7f43c076688395065#npm:5.2.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vitejs%2Fplugin-vue%2F-%2Fplugin-vue-5.2.4.tgz"],\
           ["@vue/devtools-api", "npm:7.7.7::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fdevtools-api%2F-%2Fdevtools-api-7.7.7.tgz"],\
-          ["@vue/shared", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.18.tgz"],\
+          ["@vue/shared", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.19.tgz"],\
           ["@vueuse/core", "npm:12.8.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vueuse%2Fcore%2F-%2Fcore-12.8.2.tgz"],\
           ["@vueuse/integrations", "virtual:87da98648534535596d6a55d1fb98012cf439fc737b12040d24671229e3afd39837320386353669a9c06f46e09c4c49343683763a8e152c7f43c076688395065#npm:12.8.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vueuse%2Fintegrations%2F-%2Fintegrations-12.8.2.tgz"],\
           ["focus-trap", "npm:7.6.5::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ffocus-trap%2F-%2Ffocus-trap-7.6.5.tgz"],\
@@ -8780,7 +8780,7 @@ const RAW_RUNTIME_STATE =
           ["postcss", null],\
           ["shiki", "npm:2.5.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fshiki%2F-%2Fshiki-2.5.0.tgz"],\
           ["vite", "virtual:87da98648534535596d6a55d1fb98012cf439fc737b12040d24671229e3afd39837320386353669a9c06f46e09c4c49343683763a8e152c7f43c076688395065#npm:5.4.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvite%2F-%2Fvite-5.4.19.tgz"],\
-          ["vue", "virtual:4f5f04c0adcd8a3aa19841d84a9955485beff2898d9f77db9fd11a229e63f197891cf09f3052f0924bc17130f88b66955fa8fa1dda67cab1930cd5e8f8b345c5#npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.18.tgz"]\
+          ["vue", "virtual:4f5f04c0adcd8a3aa19841d84a9955485beff2898d9f77db9fd11a229e63f197891cf09f3052f0924bc17130f88b66955fa8fa1dda67cab1930cd5e8f8b345c5#npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.19.tgz"]\
         ],\
         "packagePeers": [\
           "@types/markdown-it-mathjax3",\
@@ -8818,23 +8818,23 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["vue", [\
-      ["npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.18.tgz", {\
-        "packageLocation": "./.yarn/cache/vue-npm-3.5.18-17c353ee82-21886357ed.zip/node_modules/vue/",\
+      ["npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.19.tgz", {\
+        "packageLocation": "./.yarn/cache/vue-npm-3.5.19-12e65bb838-ab80b5c0ef.zip/node_modules/vue/",\
         "packageDependencies": [\
-          ["vue", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.18.tgz"]\
+          ["vue", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.19.tgz"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:4f5f04c0adcd8a3aa19841d84a9955485beff2898d9f77db9fd11a229e63f197891cf09f3052f0924bc17130f88b66955fa8fa1dda67cab1930cd5e8f8b345c5#npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.18.tgz", {\
-        "packageLocation": "./.yarn/__virtual__/vue-virtual-0b2ed7b6b0/0/cache/vue-npm-3.5.18-17c353ee82-21886357ed.zip/node_modules/vue/",\
+      ["virtual:4f5f04c0adcd8a3aa19841d84a9955485beff2898d9f77db9fd11a229e63f197891cf09f3052f0924bc17130f88b66955fa8fa1dda67cab1930cd5e8f8b345c5#npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.19.tgz", {\
+        "packageLocation": "./.yarn/__virtual__/vue-virtual-0a79761b92/0/cache/vue-npm-3.5.19-12e65bb838-ab80b5c0ef.zip/node_modules/vue/",\
         "packageDependencies": [\
-          ["vue", "virtual:4f5f04c0adcd8a3aa19841d84a9955485beff2898d9f77db9fd11a229e63f197891cf09f3052f0924bc17130f88b66955fa8fa1dda67cab1930cd5e8f8b345c5#npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.18.tgz"],\
+          ["vue", "virtual:4f5f04c0adcd8a3aa19841d84a9955485beff2898d9f77db9fd11a229e63f197891cf09f3052f0924bc17130f88b66955fa8fa1dda67cab1930cd5e8f8b345c5#npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.19.tgz"],\
           ["@types/typescript", null],\
-          ["@vue/compiler-dom", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-dom%2F-%2Fcompiler-dom-3.5.18.tgz"],\
-          ["@vue/compiler-sfc", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-sfc%2F-%2Fcompiler-sfc-3.5.18.tgz"],\
-          ["@vue/runtime-dom", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fruntime-dom%2F-%2Fruntime-dom-3.5.18.tgz"],\
-          ["@vue/server-renderer", "virtual:0b2ed7b6b03acf5e33a09e9909a5d3536e1d35e765456f8f68a952ba8c59bbe41b02a19973413a422d0b8747262a4014412fb65ba132a910e450e81345f10437#npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fserver-renderer%2F-%2Fserver-renderer-3.5.18.tgz"],\
-          ["@vue/shared", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.18.tgz"],\
+          ["@vue/compiler-dom", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-dom%2F-%2Fcompiler-dom-3.5.19.tgz"],\
+          ["@vue/compiler-sfc", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-sfc%2F-%2Fcompiler-sfc-3.5.19.tgz"],\
+          ["@vue/runtime-dom", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fruntime-dom%2F-%2Fruntime-dom-3.5.19.tgz"],\
+          ["@vue/server-renderer", "virtual:0a79761b92cdbb415043a035bdb4337d147005f397dc98f2d1194c86a4d42e60e1b7439cbd40eb199ea180dc5ea3bdedff9999b302f977f91e0185672b002195#npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fserver-renderer%2F-%2Fserver-renderer-3.5.19.tgz"],\
+          ["@vue/shared", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.19.tgz"],\
           ["typescript", null]\
         ],\
         "packagePeers": [\
@@ -8843,16 +8843,16 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["virtual:ac3ac2e864cf87dde84e333a6a60a9ceed6a4108c79d5eb83f85393bf816d0671fd46e878e2ebd1d30bc14f3a297412483449292ac48e5b6a939f8eeed0a3e1f#npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.18.tgz", {\
-        "packageLocation": "./.yarn/__virtual__/vue-virtual-2337a3cc4e/0/cache/vue-npm-3.5.18-17c353ee82-21886357ed.zip/node_modules/vue/",\
+      ["virtual:ac3ac2e864cf87dde84e333a6a60a9ceed6a4108c79d5eb83f85393bf816d0671fd46e878e2ebd1d30bc14f3a297412483449292ac48e5b6a939f8eeed0a3e1f#npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.19.tgz", {\
+        "packageLocation": "./.yarn/__virtual__/vue-virtual-8de4d96b17/0/cache/vue-npm-3.5.19-12e65bb838-ab80b5c0ef.zip/node_modules/vue/",\
         "packageDependencies": [\
-          ["vue", "virtual:ac3ac2e864cf87dde84e333a6a60a9ceed6a4108c79d5eb83f85393bf816d0671fd46e878e2ebd1d30bc14f3a297412483449292ac48e5b6a939f8eeed0a3e1f#npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.18.tgz"],\
+          ["vue", "virtual:ac3ac2e864cf87dde84e333a6a60a9ceed6a4108c79d5eb83f85393bf816d0671fd46e878e2ebd1d30bc14f3a297412483449292ac48e5b6a939f8eeed0a3e1f#npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvue%2F-%2Fvue-3.5.19.tgz"],\
           ["@types/typescript", null],\
-          ["@vue/compiler-dom", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-dom%2F-%2Fcompiler-dom-3.5.18.tgz"],\
-          ["@vue/compiler-sfc", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-sfc%2F-%2Fcompiler-sfc-3.5.18.tgz"],\
-          ["@vue/runtime-dom", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fruntime-dom%2F-%2Fruntime-dom-3.5.18.tgz"],\
-          ["@vue/server-renderer", "virtual:2337a3cc4e3e9b0bb3d16f360f1cdfcbeb5e672ae8bc028295e5fba027854b00536cf9d763d651022ac4b23d2ebae2121b79ae491438c23f68320c9c6679aacd#npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fserver-renderer%2F-%2Fserver-renderer-3.5.18.tgz"],\
-          ["@vue/shared", "npm:3.5.18::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.18.tgz"],\
+          ["@vue/compiler-dom", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-dom%2F-%2Fcompiler-dom-3.5.19.tgz"],\
+          ["@vue/compiler-sfc", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fcompiler-sfc%2F-%2Fcompiler-sfc-3.5.19.tgz"],\
+          ["@vue/runtime-dom", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fruntime-dom%2F-%2Fruntime-dom-3.5.19.tgz"],\
+          ["@vue/server-renderer", "virtual:8de4d96b17bc63693e6f6c76329ffd95f332483e8913922ecbc3487ca1dabbff374045f68fb9df5786b1c6792ab20db5b551b845ca32530d54be62aeed2a9388#npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fserver-renderer%2F-%2Fserver-renderer-3.5.19.tgz"],\
+          ["@vue/shared", "npm:3.5.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vue%2Fshared%2F-%2Fshared-3.5.19.tgz"],\
           ["typescript", "patch:typescript@npm%3A5.9.2%3A%3A__archiveUrl=http%253A%252F%252Fnexus.toss.bz%252Frepository%252Fnpm-group%252Ftypescript%252F-%252Ftypescript-5.9.2.tgz#optional!builtin<compat/typescript>::version=5.9.2&hash=5786d5"]\
         ],\
         "packagePeers": [\

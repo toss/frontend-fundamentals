@@ -195,3 +195,158 @@ export const GET_MY_CONTRIBUTIONS_QUERY = `
     }
   }
 `;
+
+// Discussion 상세 조회 쿼리 (댓글 포함)
+export const GET_DISCUSSION_DETAIL_QUERY = `
+  query GetDiscussionDetail($id: ID!) {
+    node(id: $id) {
+      ... on Discussion {
+        id
+        title
+        body
+        createdAt
+        updatedAt
+        author {
+          login
+          avatarUrl
+        }
+        reactions {
+          totalCount
+        }
+        category {
+          name
+        }
+        labels(first: 10) {
+          nodes {
+            name
+          }
+        }
+        comments(first: 100) {
+          totalCount
+          nodes {
+            id
+            body
+            createdAt
+            author {
+              login
+              avatarUrl
+            }
+            reactions {
+              totalCount
+            }
+            replies(first: 10) {
+              totalCount
+              nodes {
+                id
+                body
+                createdAt
+                author {
+                  login
+                  avatarUrl
+                }
+                reactions {
+                  totalCount
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const ADD_DISCUSSION_COMMENT_MUTATION = `
+  mutation AddDiscussionComment($discussionId: ID!, $body: String!) {
+    addDiscussionComment(input: {
+      discussionId: $discussionId
+      body: $body
+    }) {
+      comment {
+        id
+        body
+        createdAt
+        author {
+          login
+          avatarUrl
+        }
+        reactions {
+          totalCount
+        }
+        replies(first: 10) {
+          totalCount
+          nodes {
+            id
+            body
+            createdAt
+            author {
+              login
+              avatarUrl
+            }
+            reactions {
+              totalCount
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const ADD_DISCUSSION_REACTION_MUTATION = `
+  mutation AddDiscussionReaction($subjectId: ID!, $content: ReactionContent!) {
+    addReaction(input: {
+      subjectId: $subjectId
+      content: $content
+    }) {
+      reaction {
+        content
+        user {
+          login
+        }
+      }
+      subject {
+        id
+        ... on Discussion {
+          reactions {
+            totalCount
+          }
+        }
+        ... on DiscussionComment {
+          reactions {
+            totalCount
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const REMOVE_DISCUSSION_REACTION_MUTATION = `
+  mutation RemoveDiscussionReaction($subjectId: ID!, $content: ReactionContent!) {
+    removeReaction(input: {
+      subjectId: $subjectId
+      content: $content
+    }) {
+      reaction {
+        content
+        user {
+          login
+        }
+      }
+      subject {
+        id
+        ... on Discussion {
+          reactions {
+            totalCount
+          }
+        }
+        ... on DiscussionComment {
+          reactions {
+            totalCount
+          }
+        }
+      }
+    }
+  }
+`;
