@@ -23,8 +23,8 @@ export function PostHeader({ post }: PostHeaderProps) {
     <div className="flex items-center justify-between mb-6">
       <div className="flex items-center gap-3 min-w-0 flex-1">
         <Avatar
-          size="40"
-          src={post.author.avatar}
+          size="48"
+          src={post.author.avatar || "/api/placeholder/48/48"}
           alt={post.author.name}
           fallback={post.author.name}
           className="shrink-0"

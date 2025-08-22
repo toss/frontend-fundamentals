@@ -13,6 +13,7 @@ import {
   fetchRepositoryInfo,
   fetchWeeklyTopDiscussions,
   fetchMyContributions,
+  fetchDiscussionDetail,
   type DiscussionsApiParams
 } from "../remote/discussions";
 
@@ -28,7 +29,9 @@ export const DISCUSSIONS_QUERY_KEYS = {
   repository: (owner: string, repo: string) =>
     ["repository", owner, repo] as const,
   contributions: (authorLogin: string) =>
-    [...DISCUSSIONS_QUERY_KEYS.all, "contributions", authorLogin] as const
+    [...DISCUSSIONS_QUERY_KEYS.all, "contributions", authorLogin] as const,
+  detail: (id: string) =>
+    [...DISCUSSIONS_QUERY_KEYS.all, "detail", id] as const
 } as const;
 
 // 기본 파라미터 인터페이스
@@ -237,6 +240,23 @@ export function useMyContributions({
     },
     enabled: enabled && !!user?.accessToken && !!user?.login,
     staleTime: 1000 * 60 * 10, // 10분
+    gcTime: 1000 * 60 * 30, // 30분
+    retry: 2
+  });
+}
+
+// Discussion 상세 조회 Hook
+export function useDiscussionDetail(id: string) {
+  const { user } = useAuth();
+
+  return useQuery({
+    queryKey: DISCUSSIONS_QUERY_KEYS.detail(id),
+    queryFn: () => fetchDiscussionDetail({ 
+      id, 
+      accessToken: user?.accessToken 
+    }),
+    enabled: !!id,
+    staleTime: 1000 * 60 * 5, // 5분
     gcTime: 1000 * 60 * 30, // 30분
     retry: 2
   });

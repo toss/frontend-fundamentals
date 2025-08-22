@@ -1,17 +1,13 @@
 import { Search, Command, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useUserProfile } from "@/api/hooks/useUser";
 
 export function NewHomeHeader() {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
-  
-  // Mock data for user profile
-  const isLoading = false;
-  const userProfile = {
-    avatar_url: "https://avatars.githubusercontent.com/u/12345678?v=4",
-    name: "John Doe",
-    login: "johndoe"
-  };
+  const { user } = useAuth();
+  const { data: userProfile, isLoading } = useUserProfile();
 
   // Handle Command+K shortcut
   useEffect(() => {
@@ -91,6 +87,20 @@ export function NewHomeHeader() {
                 <div className="flex items-center space-x-2">
                   <span className="text-base font-bold text-gray-700 tracking-tight">
                     {userProfile.name || userProfile.login}
+                  </span>
+                  <ChevronDown className="w-5 h-5 text-gray-600" />
+                </div>
+              </>
+            ) : user ? (
+              <>
+                <img
+                  src={user.avatar_url}
+                  alt={user.login}
+                  className="w-10 h-10 rounded-full"
+                />
+                <div className="flex items-center space-x-2">
+                  <span className="text-base font-bold text-gray-700 tracking-tight">
+                    {user.login}
                   </span>
                   <ChevronDown className="w-5 h-5 text-gray-600" />
                 </div>

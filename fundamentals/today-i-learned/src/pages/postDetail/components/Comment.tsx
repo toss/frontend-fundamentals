@@ -41,7 +41,7 @@ export function Comment({ comment, onUpvote, onReply, depth = 0 }: CommentProps)
         <div className="flex items-center gap-3 mb-3">
           <Avatar
             size="32"
-            src={comment.author.avatar}
+            src={comment.author.avatar || "/api/placeholder/32/32"}
             alt={comment.author.name}
             fallback={comment.author.name}
             className="shrink-0"
