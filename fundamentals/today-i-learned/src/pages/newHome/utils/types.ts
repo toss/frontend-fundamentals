@@ -86,6 +86,7 @@ export interface MonthlyChallengeProps {
 export interface WeeklyTop5Props {
   posts: PopularPost[];
   weekInfo: string;
+  onPostClick: (postId: string) => void;
 }
 
 // Comment Types

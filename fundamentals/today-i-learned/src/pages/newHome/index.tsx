@@ -108,14 +108,8 @@ export function NewHomePage() {
           </div>
 
           {/* 오른쪽 컬럼: 사이드바 (1024px 이상에서만 표시) */}
-          <div className="hidden lg:block space-y-6">
-            {/* Monthly Challenge */}
-            <MonthlyChallenge
-              challenge={mockChallenge}
-              onDayClick={handleDayClick}
-            />
-
-            {/* Weekly Top 5 */}
+          <div className="hidden lg:block mt-[24px]">
+            {/* 주간 Top 5 */}
             <WeeklyTop5
               posts={mockPopularPosts}
               weekInfo="8월 첫째주 인기글"

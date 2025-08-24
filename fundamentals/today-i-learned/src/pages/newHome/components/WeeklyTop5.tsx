@@ -4,7 +4,14 @@ import { Avatar, Card } from "../ui";
 import { cn } from "../utils/cn";
 import type { WeeklyTop5Props, PopularPost } from "../utils/types";
 
-function PopularPostItem({ post, rank }: { post: PopularPost; rank: number }) {
+function PopularPostItem({
+  post,
+  rank
+}: {
+  post: PopularPost;
+  rank: number;
+  onPostClick: (postId: string) => void;
+}) {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -22,6 +29,7 @@ function PopularPostItem({ post, rank }: { post: PopularPost; rank: number }) {
 
       {/* 카드 콘텐츠 */}
       <button
+        type="button"
         onClick={handleClick}
         className="flex-1 flex flex-col justify-end py-5 px-6 bg-white border border-gray-300/50 rounded-2xl transition-all duration-200 text-left group min-h-[136px]"
       >
@@ -53,13 +61,13 @@ function PopularPostItem({ post, rank }: { post: PopularPost; rank: number }) {
   );
 }
 
-export function WeeklyTop5({ posts, weekInfo }: WeeklyTop5Props) {
+export function WeeklyTop5({ posts, weekInfo, onPostClick }: WeeklyTop5Props) {
   return (
     <div className="space-y-6">
       {/* 헤더 */}
       <div className="space-y-2">
         <h3 className="text-2xl font-extrabold text-black tracking-tight">
-          Weekly Top 5
+          주간 Top 5
         </h3>
         <p className="text-base font-semibold text-black/60 tracking-tight">
           {weekInfo}
@@ -69,7 +77,12 @@ export function WeeklyTop5({ posts, weekInfo }: WeeklyTop5Props) {
       {/* 포스트 리스트 */}
       <div className="space-y-4">
         {posts.map((post) => (
-          <PopularPostItem key={post.id} post={post} rank={post.rank} />
+          <PopularPostItem
+            key={post.id}
+            post={post}
+            rank={post.rank}
+            onPostClick={onPostClick}
+          />
         ))}
       </div>
     </div>
