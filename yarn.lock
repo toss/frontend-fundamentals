@@ -1153,6 +1153,7 @@ __metadata:
     jest: "npm:^30.0.5"
     jest-environment-jsdom: "npm:^30.0.5"
     lucide-react: "npm:^0.525.0"
+    overlay-kit: "npm:^1.8.4"
     oxlint: "npm:^1.2.0"
     postcss: "npm:^8.5.6"
     react: "npm:^18.2.0"
@@ -5342,6 +5343,16 @@ __metadata:
     regex: "npm:^6.0.1"
     regex-recursion: "npm:^6.0.2"
   checksum: 10/e832f72a79847230f80bb9c4cf4fe7717a5ae1394668c8d91e0d0ccba45a1ec4a9a88a39fcd0714adfc63fa8a40cbb404cc796ecf2a7824a6e1ccac3a56b581b
+  languageName: node
+  linkType: hard
+
+"overlay-kit@npm:^1.8.4":
+  version: 1.8.4
+  resolution: "overlay-kit@npm:1.8.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Foverlay-kit%2F-%2Foverlay-kit-1.8.4.tgz"
+  peerDependencies:
+    react: ^16.8 || ^17 || ^18 || ^19
+    react-dom: ^16.8 || ^17 || ^18 || ^19
+  checksum: 10/c7b3d727e48fc380c3235d50fd561dbfcb64474aae9db4ad33708c58dd9a366a0fcdbe14f2414ad72aa7fd7ecde2fa52affd74ebb9a1ce0c36e0a4be8dfdf5db
   languageName: node
   linkType: hard
 

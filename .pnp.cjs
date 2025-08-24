@@ -1896,6 +1896,7 @@ const RAW_RUNTIME_STATE =
           ["jest", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:30.0.5::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fjest%2F-%2Fjest-30.0.5.tgz"],\
           ["jest-environment-jsdom", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:30.0.5::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-30.0.5.tgz"],\
           ["lucide-react", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:0.525.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Flucide-react%2F-%2Flucide-react-0.525.0.tgz"],\
+          ["overlay-kit", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:1.8.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Foverlay-kit%2F-%2Foverlay-kit-1.8.4.tgz"],\
           ["oxlint", "npm:1.11.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Foxlint%2F-%2Foxlint-1.11.2.tgz"],\
           ["postcss", "npm:8.5.6::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fpostcss%2F-%2Fpostcss-8.5.6.tgz"],\
           ["react", "npm:18.3.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Freact%2F-%2Freact-18.3.1.tgz"],\
@@ -6953,6 +6954,32 @@ const RAW_RUNTIME_STATE =
           ["emoji-regex-xs", "npm:1.0.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Femoji-regex-xs%2F-%2Femoji-regex-xs-1.0.0.tgz"],\
           ["regex", "npm:6.0.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fregex%2F-%2Fregex-6.0.1.tgz"],\
           ["regex-recursion", "npm:6.0.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fregex-recursion%2F-%2Fregex-recursion-6.0.2.tgz"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["overlay-kit", [\
+      ["npm:1.8.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Foverlay-kit%2F-%2Foverlay-kit-1.8.4.tgz", {\
+        "packageLocation": "./.yarn/cache/overlay-kit-npm-1.8.4-724b32f3cf-c7b3d727e4.zip/node_modules/overlay-kit/",\
+        "packageDependencies": [\
+          ["overlay-kit", "npm:1.8.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Foverlay-kit%2F-%2Foverlay-kit-1.8.4.tgz"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:1.8.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Foverlay-kit%2F-%2Foverlay-kit-1.8.4.tgz", {\
+        "packageLocation": "./.yarn/__virtual__/overlay-kit-virtual-1d5f3ac4c5/0/cache/overlay-kit-npm-1.8.4-724b32f3cf-c7b3d727e4.zip/node_modules/overlay-kit/",\
+        "packageDependencies": [\
+          ["overlay-kit", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:1.8.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Foverlay-kit%2F-%2Foverlay-kit-1.8.4.tgz"],\
+          ["@types/react", "npm:18.3.23::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40types%2Freact%2F-%2Freact-18.3.23.tgz"],\
+          ["@types/react-dom", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:18.3.7::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40types%2Freact-dom%2F-%2Freact-dom-18.3.7.tgz"],\
+          ["react", "npm:18.3.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Freact%2F-%2Freact-18.3.1.tgz"],\
+          ["react-dom", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:18.3.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Freact-dom%2F-%2Freact-dom-18.3.1.tgz"]\
+        ],\
+        "packagePeers": [\
+          "@types/react-dom",\
+          "@types/react",\
+          "react-dom",\
+          "react"\
         ],\
         "linkType": "HARD"\
       }]\
