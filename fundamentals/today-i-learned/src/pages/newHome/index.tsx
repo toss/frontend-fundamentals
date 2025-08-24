@@ -8,7 +8,6 @@ import {
 } from "./components";
 import {
   mockPosts,
-  mockCategories,
   mockChallenge,
   mockPopularPosts,
   currentUser
@@ -17,7 +16,6 @@ import type { SortOption } from "./utils/types";
 
 export function NewHomePage() {
   const [posts] = React.useState(mockPosts);
-  const [categories, setCategories] = React.useState(mockCategories);
   const [sortOption, setSortOption] = React.useState<SortOption>("newest");
 
   // TODO: @tanstack/react-query로 변경 필요
@@ -27,15 +25,6 @@ export function NewHomePage() {
   const handlePostSubmit = (data: { title: string; content: string }) => {
     console.log("New post:", data);
     // Here you would typically make an API call
-  };
-
-  const handleCategoryChange = (categoryId: string) => {
-    setCategories((prevCategories) =>
-      prevCategories.map((cat) => ({
-        ...cat,
-        selected: cat.id === categoryId
-      }))
-    );
   };
 
   const handleSortChange = (option: SortOption) => {
@@ -87,9 +76,7 @@ export function NewHomePage() {
             {/* 필터 섹션 */}
             <div className="lg:px-6 pb-4">
               <FilterSection
-                categories={categories}
                 sortOption={sortOption}
-                onCategoryChange={handleCategoryChange}
                 onSortChange={handleSortChange}
               />
             </div>
