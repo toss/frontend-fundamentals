@@ -4,7 +4,8 @@ import {
   FilterSection,
   PostList,
   MonthlyChallenge,
-  WeeklyTop5
+  WeeklyTop5,
+  SprintChallenge
 } from "./components";
 import {
   mockPosts,
@@ -63,6 +64,16 @@ export function NewHomePage() {
         <div className="grid grid-cols-1 lg:grid-cols-[5fr_3fr] gap-8">
           {/* 왼쪽 컬럼: 메인 피드 */}
           <div className="flex flex-col lg:border-l lg:border-r border-[rgba(201,201,201,0.4)]">
+            {/* 3일 스프린트 챌린지 */}
+            <div className="pt-6 pb-0">
+              <SprintChallenge />
+            </div>
+
+            {/* 구분선 */}
+            <div className="flex flex-col items-start py-4 px-0">
+              <div className="w-full h-0 border-b border-[rgba(201,201,201,0.4)]" />
+            </div>
+
             {/* 포스트 입력 */}
             <div className="lg:px-6 pt-6 pb-0">
               <PostInput user={currentUser} onSubmit={handlePostSubmit} />
