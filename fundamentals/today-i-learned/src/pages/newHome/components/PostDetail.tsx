@@ -4,6 +4,7 @@ import {
   Share,
   ChevronUp
 } from "lucide-react";
+import { useState } from "react";
 import { Avatar } from "../ui";
 import { PostMoreMenu } from "./PostMoreMenu";
 import type { Post } from "../utils/types";
@@ -51,6 +52,16 @@ export function PostDetail({
   onEdit,
   showComments = true
 }: PostDetailProps) {
+  const [commentText, setCommentText] = useState("");
+
+  const handleCommentSubmit = () => {
+    if (commentText.trim()) {
+      console.log("댓글 작성:", commentText);
+      // 실제로는 API 호출
+      onComment(post.id);
+      setCommentText("");
+    }
+  };
   return (
     <div className="w-full flex flex-col gap-8">
       {/* 헤더: 사용자 정보 */}
@@ -192,12 +203,25 @@ export function PostDetail({
               fallback="U"
               className="shrink-0"
             />
-            <div className="flex-1 font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/20">
-              댓글을 작성해주세요
-            </div>
+            <textarea
+              value={commentText}
+              onChange={(e) => setCommentText(e.target.value)}
+              placeholder="댓글을 작성해주세요"
+              className="flex-1 font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80 placeholder:text-black/20 bg-transparent border-none outline-none resize-none min-h-[24px] max-h-[120px]"
+              rows={1}
+              onInput={(e) => {
+                const target = e.target as HTMLTextAreaElement;
+                target.style.height = 'auto';
+                target.style.height = `${Math.min(target.scrollHeight, 120)}px`;
+              }}
+            />
           </div>
           <div className="flex justify-end">
-            <button className="flex justify-center items-center px-6 py-[18px] gap-[10px] w-24 h-[46px] bg-black/20 rounded-[200px] font-bold text-[14px] leading-[130%] tracking-[-0.4px] text-[#FCFCFC]">
+            <button 
+              onClick={handleCommentSubmit}
+              disabled={!commentText.trim()}
+              className="flex justify-center items-center px-6 py-[18px] gap-[10px] w-24 h-[46px] bg-[#0F0F0F] hover:bg-[#333333] disabled:bg-black/20 disabled:cursor-not-allowed rounded-[200px] font-bold text-[14px] leading-[130%] tracking-[-0.4px] text-[#FCFCFC] transition-colors"
+            >
               작성하기
             </button>
           </div>
