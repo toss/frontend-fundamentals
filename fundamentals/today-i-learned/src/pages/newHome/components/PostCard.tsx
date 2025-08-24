@@ -106,44 +106,6 @@ export function PostCard({
 
         {/* 본문 */}
         <div className="flex flex-col gap-5">
-          {/* 태그들 */}
-          <div className="flex items-center gap-[6px] flex-wrap">
-            <div className="inline-flex items-center justify-center px-[14px] py-[10px] bg-black/5 rounded-[200px]">
-              <span className="font-bold text-[14px] leading-[160%] tracking-[-0.4px] text-black/40">
-                {post.category}
-              </span>
-            </div>
-            {post.tags.map((tag) => {
-              // 태그별 색상 매핑
-              const getTagStyle = (tagName: string) => {
-                if (tagName.includes("성지"))
-                  return "bg-[rgba(188,233,233,0.4)] text-[#58C7C7]";
-                if (tagName.includes("Ongoing"))
-                  return "bg-[rgba(237,204,248,0.4)] text-[#DA9BEF]";
-                if (tagName.includes("가독성"))
-                  return "bg-[rgba(255,212,214,0.4)] text-[#FB8890]";
-                if (tagName.includes("결합도"))
-                  return "bg-green-100 text-green-700";
-                if (tagName.includes("기여") || tagName.includes("설계"))
-                  return "bg-orange-100 text-orange-700";
-                if (tagName.includes("Changes"))
-                  return "bg-yellow-100 text-yellow-700";
-                return "bg-gray-100 text-gray-600";
-              };
-
-              return (
-                <div
-                  key={tag}
-                  className={`inline-flex items-center justify-center px-[10px] py-[10px] rounded-[8px] ${getTagStyle(tag)}`}
-                >
-                  <span className="font-bold text-[14px] leading-[130%] tracking-[-0.4px]">
-                    {tag}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-
           {/* 제목과 내용 */}
           <div
             className="flex flex-col gap-5 cursor-pointer"
