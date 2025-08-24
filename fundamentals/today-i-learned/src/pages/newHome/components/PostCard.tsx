@@ -4,10 +4,13 @@ import {
   Share,
   ChevronUp
 } from "lucide-react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Avatar, Card } from "../ui";
+import { AlertDialog } from "../ui/AlertDialog";
 import { useWritePostModal } from "../hooks/useWritePostModal";
 import { PostMoreMenu } from "./PostMoreMenu";
+import { PostDetail } from "./PostDetail";
 import type { Post } from "../utils/types";
 
 interface PostCardProps {
@@ -54,6 +57,7 @@ export function PostCard({
   onDelete
 }: PostCardProps) {
   const navigate = useNavigate();
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const { openModal, WritePostModal } = useWritePostModal({
     onSubmit: (content) => {
       console.log("Submitting post:", content);
@@ -62,10 +66,10 @@ export function PostCard({
   });
 
   const handlePostClick = () => {
-    navigate(`/post/${post.id}`);
+    setIsDetailModalOpen(true);
   };
   return (
-    <Card variant="bordered" padding="none" className="w-full">
+    <Card variant="bordered" padding="none" className="w-full cursor-pointer" onClick={handlePostClick}>
       <div className="flex flex-col p-6 gap-6">
         {/* 헤더: 사용자 정보 */}
         <div className="flex items-center justify-between h-10">
@@ -97,20 +101,19 @@ export function PostCard({
 
           {/* 더보기 메뉴 (본인 글인 경우만) */}
           {post.isOwn && (
-            <PostMoreMenu
-              onEdit={openModal}
-              onDelete={() => onDelete?.(post.id)}
-            />
+            <div onClick={(e) => e.stopPropagation()}>
+              <PostMoreMenu
+                onEdit={openModal}
+                onDelete={() => onDelete?.(post.id)}
+              />
+            </div>
           )}
         </div>
 
         {/* 본문 */}
         <div className="flex flex-col gap-5">
           {/* 제목과 내용 */}
-          <div
-            className="flex flex-col gap-5 cursor-pointer"
-            onClick={handlePostClick}
-          >
+          <div className="flex flex-col gap-5">
             {/* 제목 */}
             <h2 className="font-bold text-[22px] leading-[130%] tracking-[-0.4px] text-[#0F0F0F] hover:text-gray-700 transition-colors">
               {post.title}
@@ -126,7 +129,10 @@ export function PostCard({
         {/* 상호작용 버튼들 */}
         <div className="flex items-start gap-4 pt-2">
           <button
-            onClick={() => onUpvote(post.id)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onUpvote(post.id);
+            }}
             className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
           >
             <div className="w-5 h-5">
@@ -138,7 +144,10 @@ export function PostCard({
           </button>
 
           <button
-            onClick={() => onLike(post.id)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onLike(post.id);
+            }}
             className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
           >
             <div className="w-5 h-5">
@@ -150,7 +159,10 @@ export function PostCard({
           </button>
 
           <button
-            onClick={() => onComment(post.id)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onComment(post.id);
+            }}
             className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
           >
             <div className="w-5 h-5">
@@ -162,7 +174,10 @@ export function PostCard({
           </button>
 
           <button
-            onClick={() => onShare(post.id)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onShare(post.id);
+            }}
             className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
           >
             <div className="w-5 h-5">
@@ -175,6 +190,27 @@ export function PostCard({
         </div>
       </div>
       {WritePostModal}
+      
+      {/* 글 상세 모달 */}
+      <AlertDialog open={isDetailModalOpen} onOpenChange={setIsDetailModalOpen}>
+        <AlertDialog.Content 
+          showCloseButton
+          className="w-[800px] h-[1080px] bg-[#FCFCFC] rounded-[16px] flex flex-col items-center px-6 pb-6 pt-0 overflow-hidden"
+        >
+          <div className="w-full h-full overflow-y-auto py-6">
+            <PostDetail
+              post={post}
+              onLike={onLike}
+              onComment={onComment}
+              onShare={onShare}
+              onUpvote={onUpvote}
+              onDelete={onDelete}
+              onEdit={openModal}
+              showComments={true}
+            />
+          </div>
+        </AlertDialog.Content>
+      </AlertDialog>
     </Card>
   );
 }
