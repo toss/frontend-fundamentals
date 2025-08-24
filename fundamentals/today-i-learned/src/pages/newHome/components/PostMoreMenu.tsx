@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { MoreHorizontal } from "lucide-react";
 import { Button } from "../ui";
+import { AlertDialog } from "../ui/AlertDialog";
 
 interface PostMoreMenuProps {
   onEdit: () => void;
@@ -9,6 +10,7 @@ interface PostMoreMenuProps {
 
 export function PostMoreMenu({ onEdit, onDelete }: PostMoreMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -46,9 +48,18 @@ export function PostMoreMenu({ onEdit, onDelete }: PostMoreMenuProps) {
     setIsOpen(false);
   };
 
-  const handleDelete = () => {
-    onDelete();
+  const handleDeleteClick = () => {
+    setIsDeleteModalOpen(true);
     setIsOpen(false);
+  };
+
+  const handleConfirmDelete = () => {
+    onDelete();
+    setIsDeleteModalOpen(false);
+  };
+
+  const handleCancelDelete = () => {
+    setIsDeleteModalOpen(false);
   };
 
   return (
@@ -76,13 +87,37 @@ export function PostMoreMenu({ onEdit, onDelete }: PostMoreMenuProps) {
             수정하기
           </button>
           <button
-            onClick={handleDelete}
+            onClick={handleDeleteClick}
             className="w-full px-3 py-2 text-left font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black hover:bg-gray-50 transition-colors rounded-lg"
           >
             삭제하기
           </button>
         </div>
       )}
+
+      <AlertDialog open={isDeleteModalOpen} onOpenChange={setIsDeleteModalOpen}>
+        <AlertDialog.Content 
+          showCloseButton
+          className="w-[343px] h-[230px] bg-[#FCFCFC] rounded-[16px] flex flex-col items-center p-6 gap-8"
+        >
+          <div className="flex flex-col items-center gap-6 text-center">
+            <h2 className="font-bold text-[22px] leading-[130%] tracking-[-0.4px] text-[#0F0F0F]">
+              글을 삭제하시겠습니까?
+            </h2>
+            <p className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80 text-center">
+              댓글과 반응도 함께 삭제됩니다.<br />
+              삭제 후에는 복구할 수 없습니다.
+            </p>
+          </div>
+          
+          <button
+            onClick={handleConfirmDelete}
+            className="w-24 h-[46px] bg-[#0F0F0F] rounded-[200px] font-bold text-[14px] leading-[130%] tracking-[-0.4px] text-[#FCFCFC] hover:bg-black/90 transition-colors flex items-center justify-center"
+          >
+            삭제하기
+          </button>
+        </AlertDialog.Content>
+      </AlertDialog>
     </div>
   );
 }
