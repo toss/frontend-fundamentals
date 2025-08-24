@@ -3,10 +3,13 @@ import {
   MessageCircle,
   Share,
   ChevronUp,
-  MoreHorizontal
+  MoreHorizontal,
+  X
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { Avatar, Button, Card } from "../ui";
+import { AlertDialog } from "../ui/AlertDialog";
 import type { Post } from "../utils/types";
 
 interface PostCardProps {
@@ -51,9 +54,20 @@ export function PostCard({
   onUpvote
 }: PostCardProps) {
   const navigate = useNavigate();
+  const [isWriteModalOpen, setIsWriteModalOpen] = useState(false);
+  const [content, setContent] = useState("");
 
   const handlePostClick = () => {
     navigate(`/post/${post.id}`);
+  };
+
+  const handleSubmit = () => {
+    if (content.trim()) {
+      console.log("Submitting post:", content);
+      // 실제로는 API 호출
+      setContent("");
+      setIsWriteModalOpen(false);
+    }
   };
   return (
     <Card variant="bordered" padding="none" className="w-full">
@@ -88,9 +102,80 @@ export function PostCard({
 
           {/* 더보기 메뉴 (본인 글인 경우만) */}
           {post.isOwn && (
-            <Button variant="ghost" size="sm" className="shrink-0 p-2">
-              <MoreHorizontal className="h-5 w-5 text-gray-400" />
-            </Button>
+            <AlertDialog
+              open={isWriteModalOpen}
+              onOpenChange={setIsWriteModalOpen}
+            >
+              <AlertDialog.Trigger asChild>
+                <Button variant="ghost" size="sm" className="shrink-0 p-2">
+                  <MoreHorizontal className="h-5 w-5 text-gray-400" />
+                </Button>
+              </AlertDialog.Trigger>
+
+              <AlertDialog.Content className="flex flex-col max-w-[800px]">
+                {/* Header with close button */}
+                <div className="flex justify-end p-6 pb-0">
+                  <AlertDialog.Cancel asChild>
+                    <button className="w-5 h-5 flex items-center justify-center text-black/60 hover:text-black/80 transition-colors">
+                      <X className="w-[14.72px] h-[14.72px]" />
+                    </button>
+                  </AlertDialog.Cancel>
+                </div>
+
+                {/* Main content */}
+                <div className="flex px-6 pb-6 gap-6 flex-1 min-h-0">
+                  {/* Profile Avatar */}
+                  <div className="flex-shrink-0">
+                    <div
+                      className="w-[60px] h-[60px] rounded-full bg-cover bg-center bg-no-repeat"
+                      style={{
+                        backgroundImage:
+                          "url(https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=face)"
+                      }}
+                    />
+                  </div>
+
+                  {/* Content area */}
+                  <div className="flex-1 flex flex-col">
+                    {/* Title */}
+                    <div className="mb-6">
+                      <AlertDialog.Title className="text-[22px] font-bold leading-[130%] tracking-[-0.4px] text-[#0F0F0F]">
+                        오늘 배운 내용을 기록해 보세요
+                      </AlertDialog.Title>
+                    </div>
+
+                    {/* Text area */}
+                    <div className="flex-1 mb-6">
+                      <textarea
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
+                        placeholder="## 오늘 한 일&#10;- [X] 블로그 초안 쓰기&#10;- [ ] 커밋 푸시하기&#10;&#10;오늘 이만큼이나 했어요! 짱이죠?"
+                        className="w-full h-full resize-none border-none outline-none text-[16px] font-medium leading-[160%] tracking-[-0.4px] text-[#0F0F0F] placeholder:text-[#0F0F0F]/40 bg-transparent"
+                        style={{
+                          fontFamily:
+                            "'Toss Product Sans OTF', ui-sans-serif, system-ui, sans-serif"
+                        }}
+                      />
+                    </div>
+
+                    {/* Submit button */}
+                    <div className="flex justify-end">
+                      <AlertDialog.Action asChild>
+                        <button
+                          onClick={handleSubmit}
+                          disabled={!content.trim()}
+                          className="flex items-center justify-center px-6 py-[18px] bg-black/20 hover:bg-black/30 disabled:bg-black/10 disabled:cursor-not-allowed rounded-full transition-colors"
+                        >
+                          <span className="text-[14px] font-bold leading-[130%] tracking-[-0.4px] text-[#FCFCFC]">
+                            작성하기
+                          </span>
+                        </button>
+                      </AlertDialog.Action>
+                    </div>
+                  </div>
+                </div>
+              </AlertDialog.Content>
+            </AlertDialog>
           )}
         </div>
 

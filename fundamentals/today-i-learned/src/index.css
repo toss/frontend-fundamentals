@@ -80,6 +80,11 @@ table {
   white-space: nowrap;
   border: 0;
 }
+
+/* 3) Modal body scroll prevention */
+body.modal-open {
+  overflow: hidden;
+}
 @layer base {
   :root {
     /* VitePress 스타일 색상 변수 */
