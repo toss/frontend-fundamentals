@@ -2,10 +2,11 @@ import {
   Heart,
   MessageCircle,
   Share,
-  ChevronUp
+  ChevronUp,
+  X,
+  ExternalLink
 } from "lucide-react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Avatar, Card } from "../ui";
 import { AlertDialog } from "../ui/AlertDialog";
 import { useWritePostModal } from "../hooks/useWritePostModal";
@@ -56,7 +57,6 @@ export function PostCard({
   onUpvote,
   onDelete
 }: PostCardProps) {
-  const navigate = useNavigate();
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const { openModal, WritePostModal } = useWritePostModal({
     onSubmit: (content) => {
@@ -69,7 +69,12 @@ export function PostCard({
     setIsDetailModalOpen(true);
   };
   return (
-    <Card variant="bordered" padding="none" className="w-full cursor-pointer" onClick={handlePostClick}>
+    <Card
+      variant="bordered"
+      padding="none"
+      className="w-full cursor-pointer"
+      onClick={handlePostClick}
+    >
       <div className="flex flex-col p-6 gap-6">
         {/* 헤더: 사용자 정보 */}
         <div className="flex items-center justify-between h-10">
@@ -190,14 +195,38 @@ export function PostCard({
         </div>
       </div>
       {WritePostModal}
-      
+
       {/* 글 상세 모달 */}
       <AlertDialog open={isDetailModalOpen} onOpenChange={setIsDetailModalOpen}>
-        <AlertDialog.Content 
-          showCloseButton
-          className="w-[800px] h-[1080px] bg-[#FCFCFC] rounded-[16px] flex flex-col items-center px-6 pb-6 pt-0 overflow-hidden"
-        >
-          <div className="w-full h-full overflow-y-auto py-6">
+        <AlertDialog.Content className="w-[800px] h-[1080px] bg-[#FCFCFC] rounded-[16px] flex flex-col items-center pt-0 px-0 pb-6 overflow-hidden isolate">
+          {/* Header with buttons */}
+          <div className="flex flex-row justify-end items-start p-6 gap-4 w-[800px] h-[68px] bg-[#FCFCFC] flex-none">
+            {/* 상세 페이지로 이동 버튼 */}
+            <button
+              className="w-5 h-5 flex items-center justify-center text-black/60 hover:text-black/80 transition-colors"
+              onClick={(e) => {
+                e.stopPropagation();
+                // 상세 페이지로 이동 로직 (나중에 구현)
+                console.log("Navigate to detail page");
+              }}
+            >
+              <ExternalLink className="w-[14.72px] h-[14.72px]" />
+            </button>
+
+            {/* X 닫기 버튼 */}
+            <button
+              className="w-5 h-5 flex items-center justify-center text-black/60 hover:text-black/80 transition-colors"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsDetailModalOpen(false);
+              }}
+            >
+              <X size={16} />
+            </button>
+          </div>
+
+          {/* 본문 영역 */}
+          <div className="w-[800px] h-[696px] px-6 z-[1] overflow-y-auto">
             <PostDetail
               post={post}
               onLike={onLike}

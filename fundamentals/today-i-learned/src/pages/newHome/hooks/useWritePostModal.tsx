@@ -26,7 +26,7 @@ export function useWritePostModal(options: UseWritePostModalOptions = {}) {
         <div className="flex justify-end p-6 pb-0">
           <AlertDialog.Cancel asChild>
             <button className="w-5 h-5 flex items-center justify-center text-black/60 hover:text-black/80 transition-colors">
-              <X className="w-[14.72px] h-[14.72px]" />
+              <X size={16} />
             </button>
           </AlertDialog.Cancel>
         </div>
@@ -61,7 +61,8 @@ export function useWritePostModal(options: UseWritePostModalOptions = {}) {
                 placeholder="## 오늘 한 일&#10;- [X] 블로그 초안 쓰기&#10;- [ ] 커밋 푸시하기&#10;&#10;오늘 이만큼이나 했어요! 짱이죠?"
                 className="w-full h-full resize-none border-none outline-none text-[16px] font-medium leading-[160%] tracking-[-0.4px] text-[#0F0F0F] placeholder:text-[#0F0F0F]/40 bg-transparent"
                 style={{
-                  fontFamily: "'Toss Product Sans OTF', ui-sans-serif, system-ui, sans-serif"
+                  fontFamily:
+                    "'Toss Product Sans OTF', ui-sans-serif, system-ui, sans-serif"
                 }}
               />
             </div>
@@ -74,10 +75,11 @@ export function useWritePostModal(options: UseWritePostModalOptions = {}) {
                   disabled={!content.trim()}
                   className="flex flex-row justify-center items-center px-6 py-[18px] gap-[10px] w-24 h-[46px] bg-[#0F0F0F] hover:bg-[#333333] disabled:bg-black/10 disabled:cursor-not-allowed rounded-[200px] transition-colors flex-none"
                 >
-                  <span 
+                  <span
                     className="w-12 h-[10px] text-[14px] font-bold leading-[130%] tracking-[-0.4px] text-[#FCFCFC] flex items-center flex-none"
                     style={{
-                      fontFamily: "'Toss Product Sans OTF', ui-sans-serif, system-ui, sans-serif"
+                      fontFamily:
+                        "'Toss Product Sans OTF', ui-sans-serif, system-ui, sans-serif"
                     }}
                   >
                     작성하기
