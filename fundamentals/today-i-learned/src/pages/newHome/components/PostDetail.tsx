@@ -6,17 +6,21 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Avatar } from "../ui";
-import { PostMoreMenu } from "./PostMoreMenu";
 import type { Post } from "../utils/types";
+import { 
+  useDiscussionDetail,
+  useAddDiscussionComment,
+  useToggleDiscussionReaction 
+} from "@/api/hooks/useDiscussions";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface PostDetailProps {
   post: Post;
-  onLike: (postId: string) => void;
-  onComment: (postId: string) => void;
-  onShare: (postId: string) => void;
-  onUpvote: (postId: string) => void;
+  onLike?: (postId: string) => void;
+  onComment?: (postId: string) => void;
+  onShare?: (postId: string) => void;
+  onUpvote?: (postId: string) => void;
   onDelete?: (postId: string) => void;
-  onEdit?: () => void;
   showComments?: boolean;
 }
 
@@ -49,17 +53,75 @@ export function PostDetail({
   onShare,
   onUpvote,
   onDelete,
-  onEdit,
   showComments = true
 }: PostDetailProps) {
   const [commentText, setCommentText] = useState("");
+  const { user } = useAuth();
 
-  const handleCommentSubmit = () => {
-    if (commentText.trim()) {
-      console.log("댓글 작성:", commentText);
-      // 실제로는 API 호출
-      onComment(post.id);
-      setCommentText("");
+  // GitHub API 훅들
+  const { data: discussionDetail, isLoading: isDetailLoading } = useDiscussionDetail(post.id);
+  const addCommentMutation = useAddDiscussionComment();
+  const toggleReactionMutation = useToggleDiscussionReaction();
+
+  // 실제 포스트 데이터 (API에서 가져온 상세 데이터 우선 사용)
+  const actualPost = discussionDetail || post;
+  const comments = discussionDetail?.comments?.nodes || [];
+
+  // 안전한 방식으로 작성자 정보 추출
+  const getAuthorInfo = () => {
+    if (discussionDetail && 'author' in discussionDetail) {
+      return {
+        src: discussionDetail.author.avatarUrl,
+        alt: discussionDetail.author.login,
+        fallback: discussionDetail.author.login,
+        name: discussionDetail.author.login,
+        username: discussionDetail.author.login
+      };
+    }
+    return {
+      src: post.author.avatar,
+      alt: post.author.name,
+      fallback: post.author.name,
+      name: post.author.name,
+      username: post.author.username
+    };
+  };
+
+  const authorInfo = getAuthorInfo();
+
+  const handleCommentSubmit = async () => {
+    if (commentText.trim() && user?.accessToken) {
+      try {
+        await addCommentMutation.mutateAsync({
+          discussionId: post.id,
+          body: commentText
+        });
+        setCommentText("");
+      } catch (error) {
+        console.error("댓글 작성 실패:", error);
+      }
+    }
+  };
+
+  const handleReaction = async (type: 'like' | 'upvote') => {
+    if (!user?.accessToken) return;
+    
+    try {
+      const reactionContent = type === 'like' ? 'HEART' : 'THUMBS_UP';
+      // TODO: 현재 반응 상태를 확인하는 로직 필요
+      const isReacted = false; // 임시값
+      
+      await toggleReactionMutation.mutateAsync({
+        subjectId: post.id,
+        isReacted,
+        content: reactionContent as any
+      });
+      
+      // 기존 콜백도 호출 (UI 업데이트용)
+      if (type === 'like' && onLike) onLike(post.id);
+      if (type === 'upvote' && onUpvote) onUpvote(post.id);
+    } catch (error) {
+      console.error("반응 처리 실패:", error);
     }
   };
   return (
@@ -68,24 +130,24 @@ export function PostDetail({
       <div className="flex items-center gap-3">
         <Avatar
           size="40"
-          src={post.author.avatar}
-          alt={post.author.name}
-          fallback={post.author.name}
+          src={authorInfo.src}
+          alt={authorInfo.alt}
+          fallback={authorInfo.fallback}
           className="shrink-0"
         />
         <div className="flex flex-col gap-1">
           <h4 className="font-bold text-[20px] leading-[130%] tracking-[-0.4px] text-black/80">
-            {post.author.name}
+            {authorInfo.name}
           </h4>
           <div className="flex items-center gap-1">
             <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-              @{post.author.username}
+              @{authorInfo.username}
             </span>
             <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
               ·
             </span>
             <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-              {formatTimeAgo(post.createdAt)}
+              {formatTimeAgo(actualPost.createdAt || post.createdAt)}
             </span>
           </div>
         </div>
@@ -95,92 +157,66 @@ export function PostDetail({
       <div className="flex flex-col gap-8">
         {/* 제목 */}
         <h2 className="font-bold text-[22px] leading-[130%] tracking-[-0.4px] text-[#0F0F0F]">
-          {post.title}
+          {actualPost.title || post.title}
         </h2>
 
         {/* 내용 */}
         <div className="flex flex-col gap-6">
-          {/* 첫 번째 문단 */}
-          <div className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80">
-            {post.content.split('\n\n')[0]}
+          <div className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80 whitespace-pre-wrap">
+            {'body' in actualPost ? actualPost.body : post.content}
           </div>
-
-          {/* 코드 블록 (예시) */}
-          {post.content.includes('const') && (
-            <div className="bg-black/[0.03] rounded-[16px] p-6 flex justify-center items-center">
-              <pre className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80 whitespace-pre-wrap">
-                {post.content.split('\n\n').find(part => part.includes('const')) || 
-                `const Component = () => {
-  return (
-    /**
-     * 조건이 true일 경우 <A />를 렌더링합니다.
-     * 조건이 false일 경우 null을 반환합니다 (렌더링하지 않음).
-     */
-    <If condition={someCondition}>
-      <A />
-    </If>
-  );
-};`}
-              </pre>
-            </div>
-          )}
-
-          {/* 나머지 내용 */}
-          {post.content.split('\n\n').length > 1 && (
-            <div className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80">
-              {post.content.split('\n\n').slice(1).join('\n\n')}
-            </div>
-          )}
         </div>
       </div>
 
       {/* 상호작용 버튼들 */}
       <div className="flex items-start gap-4 py-2">
         <button
-          onClick={() => onUpvote(post.id)}
+          onClick={() => handleReaction('upvote')}
           className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
+          disabled={toggleReactionMutation.isPending}
         >
           <div className="w-5 h-5">
             <ChevronUp className="w-full h-full stroke-black/40 stroke-[1.67px]" />
           </div>
           <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-            {formatNumber(post.stats.upvotes)}
+            {formatNumber(('reactions' in actualPost ? actualPost.reactions?.totalCount : post.stats?.upvotes) || 0)}
           </span>
         </button>
 
         <button
-          onClick={() => onLike(post.id)}
+          onClick={() => handleReaction('like')}
           className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
+          disabled={toggleReactionMutation.isPending}
         >
           <div className="w-5 h-5">
             <Heart className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
           </div>
           <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-            {formatNumber(post.stats.hearts)}
+            {formatNumber(('reactions' in actualPost ? actualPost.reactions?.totalCount : post.stats?.hearts) || 0)}
           </span>
         </button>
 
         <button
-          onClick={() => onComment(post.id)}
+          onClick={() => onComment?.(post.id)}
           className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
         >
           <div className="w-5 h-5">
             <MessageCircle className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
           </div>
           <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-            {formatNumber(post.stats.comments)}
+            {formatNumber(('comments' in actualPost ? actualPost.comments?.totalCount : post.stats?.comments) || 0)}
           </span>
         </button>
 
         <button
-          onClick={() => onShare(post.id)}
+          onClick={() => onShare?.(post.id)}
           className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
         >
           <div className="w-5 h-5">
             <Share className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
           </div>
           <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-            {formatNumber(post.stats.shares)}
+            {formatNumber(post.stats?.shares || 0)}
           </span>
         </button>
       </div>
@@ -193,14 +229,14 @@ export function PostDetail({
       )}
 
       {/* 댓글 입력 */}
-      {showComments && (
+      {showComments && user && (
         <div className="px-8 pb-3 flex flex-col gap-3">
           <div className="flex items-center gap-4">
             <Avatar
               size="40"
-              src="/default-avatar.png"
-              alt="User"
-              fallback="U"
+              src={user.avatar_url}
+              alt={user.login}
+              fallback={user.login}
               className="shrink-0"
             />
             <textarea
@@ -219,10 +255,10 @@ export function PostDetail({
           <div className="flex justify-end">
             <button 
               onClick={handleCommentSubmit}
-              disabled={!commentText.trim()}
+              disabled={!commentText.trim() || addCommentMutation.isPending}
               className="flex justify-center items-center px-6 py-[18px] gap-[10px] w-24 h-[46px] bg-[#0F0F0F] hover:bg-[#333333] disabled:bg-black/20 disabled:cursor-not-allowed rounded-[200px] font-bold text-[14px] leading-[130%] tracking-[-0.4px] text-[#FCFCFC] transition-colors"
             >
-              작성하기
+              {addCommentMutation.isPending ? "작성중..." : "작성하기"}
             </button>
           </div>
         </div>
@@ -238,134 +274,88 @@ export function PostDetail({
       {/* 댓글들 */}
       {showComments && (
         <div className="flex flex-col">
-          {/* 첫 번째 댓글 */}
-          <div className="px-8">
-            <div className="flex items-center gap-3 mb-6">
-              <Avatar
-                size="40"
-                src="/default-avatar.png"
-                alt="User Han"
-                fallback="UH"
-                className="shrink-0"
-              />
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-[20px] leading-[130%] tracking-[-0.4px] text-black/80">
-                  User Han
-                </span>
-                <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-                  @user1234
-                </span>
-                <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-                  ·
-                </span>
-                <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-                  22시간 전
-                </span>
-              </div>
-            </div>
-            <div className="pb-6">
-              <p className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80 mb-6">
-                저는 사용성 관점에서 생각해봤어요. 사용성이 낮은 코드는 논리 연산자로 작성하는 게 더 적합하다고 봐요. 왜냐하면 이런 경우엔 어떤 조건으로 렌더링되는지 파악하기 간결하고, 논리 연산자가 일반적으로 많이 사용되기 때문에 가독성도 좋거든요. 반대로 사용성이 높은 코드에서는 선언적으로 상태를 넘겨주는 방식이 더 효과적일 것 같아요.
-
-이렇게 하면 컴포넌트를 사용할 때 선언 방식이 모두 일관되게 맞춰지고, condition을 빼먹으면 에러가 발생해서 실수도 줄어들겠죠 ㅋㅋㅋ! 그리고 마치 객체지향에서 인터페이스로 상속하는 구조와 비슷해서 추후 유지보수에도 더 유리할 것 같아요.
+          {isDetailLoading ? (
+            <div className="px-8 py-4">
+              <p className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/40">
+                댓글을 불러오는 중...
               </p>
-              {/* 댓글 상호작용 버튼들 */}
-              <div className="flex items-start gap-4 py-2">
-                <button className="flex items-center gap-[6px] hover:opacity-70 transition-opacity">
-                  <div className="w-5 h-5">
-                    <ChevronUp className="w-full h-full stroke-black/40 stroke-[1.67px]" />
-                  </div>
-                  <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-                    1.3K
-                  </span>
-                </button>
-                <button className="flex items-center gap-[6px] hover:opacity-70 transition-opacity">
-                  <div className="w-5 h-5">
-                    <Heart className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
-                  </div>
-                  <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-                    1M
-                  </span>
-                </button>
-                <button className="flex items-center gap-[6px] hover:opacity-70 transition-opacity">
-                  <div className="w-5 h-5">
-                    <MessageCircle className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
-                  </div>
-                  <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-                    22
-                  </span>
-                </button>
-              </div>
             </div>
-          </div>
-
-          {/* 구분선 */}
-          <div className="py-2">
-            <div className="w-full h-0 border-t border-[rgba(201,201,201,0.4)]" />
-          </div>
-
-          {/* 답글 (대댓글) */}
-          <div className="px-8">
-            <div className="flex gap-4">
-              <div className="w-0 flex items-center">
-                <div className="w-0 h-[119px] border-l border-[rgba(201,201,201,0.4)]" />
-              </div>
-              <div className="flex-1 py-6">
-                <div className="flex items-center gap-3 mb-6">
-                  <Avatar
-                    size="40"
-                    src="/default-avatar2.png"
-                    alt="User Kim"
-                    fallback="UK"
-                    className="shrink-0"
-                  />
-                  <div className="flex items-center gap-2">
-                    <span className="font-bold text-[20px] leading-[130%] tracking-[-0.4px] text-black/80">
-                      User Kim
-                    </span>
-                    <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-                      @user1234
-                    </span>
-                    <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-                      ·
-                    </span>
-                    <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-                      22시간 전
-                    </span>
+          ) : comments.length > 0 ? (
+            comments.map((comment, index) => (
+              <div key={comment.id}>
+                <div className="px-8">
+                  <div className="flex items-center gap-3 mb-6">
+                    <Avatar
+                      size="40"
+                      src={comment.author.avatarUrl}
+                      alt={comment.author.login}
+                      fallback={comment.author.login}
+                      className="shrink-0"
+                    />
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-[20px] leading-[130%] tracking-[-0.4px] text-black/80">
+                        {comment.author.login}
+                      </span>
+                      <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
+                        @{comment.author.login}
+                      </span>
+                      <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
+                        ·
+                      </span>
+                      <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
+                        {formatTimeAgo(comment.createdAt)}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="pb-6">
+                    <p className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80 mb-6 whitespace-pre-wrap">
+                      {comment.body}
+                    </p>
+                    {/* 댓글 상호작용 버튼들 */}
+                    <div className="flex items-start gap-4 py-2">
+                      <button className="flex items-center gap-[6px] hover:opacity-70 transition-opacity">
+                        <div className="w-5 h-5">
+                          <ChevronUp className="w-full h-full stroke-black/40 stroke-[1.67px]" />
+                        </div>
+                        <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
+                          {formatNumber(comment.reactions?.totalCount || 0)}
+                        </span>
+                      </button>
+                      <button className="flex items-center gap-[6px] hover:opacity-70 transition-opacity">
+                        <div className="w-5 h-5">
+                          <Heart className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
+                        </div>
+                        <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
+                          {formatNumber(comment.reactions?.totalCount || 0)}
+                        </span>
+                      </button>
+                      <button className="flex items-center gap-[6px] hover:opacity-70 transition-opacity">
+                        <div className="w-5 h-5">
+                          <MessageCircle className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
+                        </div>
+                        <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
+                          {formatNumber(comment.replies?.totalCount || 0)}
+                        </span>
+                      </button>
+                    </div>
                   </div>
                 </div>
-                <p className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80">
-                  좋은 관점이네요! 동감합니다.
-                </p>
-                <div className="flex items-start gap-4 py-2 mt-6">
-                  <button className="flex items-center gap-[6px] hover:opacity-70 transition-opacity">
-                    <div className="w-5 h-5">
-                      <ChevronUp className="w-full h-full stroke-black/40 stroke-[1.67px]" />
-                    </div>
-                    <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-                      1.3K
-                    </span>
-                  </button>
-                  <button className="flex items-center gap-[6px] hover:opacity-70 transition-opacity">
-                    <div className="w-5 h-5">
-                      <Heart className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
-                    </div>
-                    <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-                      1M
-                    </span>
-                  </button>
-                  <button className="flex items-center gap-[6px] hover:opacity-70 transition-opacity">
-                    <div className="w-5 h-5">
-                      <MessageCircle className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
-                    </div>
-                    <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-                      22
-                    </span>
-                  </button>
-                </div>
+
+                {/* 구분선 (마지막 댓글이 아닌 경우) */}
+                {index < comments.length - 1 && (
+                  <div className="py-2">
+                    <div className="w-full h-0 border-t border-[rgba(201,201,201,0.4)]" />
+                  </div>
+                )}
               </div>
+            ))
+          ) : (
+            <div className="px-8 py-4">
+              <p className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/40">
+                아직 댓글이 없습니다. 첫 번째 댓글을 작성해보세요!
+              </p>
             </div>
-          </div>
+          )}
         </div>
       )}
     </div>

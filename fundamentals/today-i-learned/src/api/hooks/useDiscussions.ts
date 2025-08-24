@@ -17,8 +17,7 @@ import {
   addDiscussionComment,
   addDiscussionReaction,
   removeDiscussionReaction,
-  type DiscussionsApiParams,
-  type GitHubComment
+  type DiscussionsApiParams
 } from "../remote/discussions";
 
 // Query Keys 중앙 관리
@@ -301,7 +300,7 @@ export function useAddDiscussionComment() {
             createdAt: new Date().toISOString(),
             author: {
               login: user.login,
-              avatarUrl: user.avatarUrl
+              avatarUrl: user.avatar_url
             },
             reactions: { totalCount: 0 },
             replies: { totalCount: 0, nodes: [] }

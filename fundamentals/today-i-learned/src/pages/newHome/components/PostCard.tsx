@@ -234,7 +234,6 @@ export function PostCard({
               onShare={onShare}
               onUpvote={onUpvote}
               onDelete={onDelete}
-              onEdit={openModal}
               showComments={true}
             />
           </div>

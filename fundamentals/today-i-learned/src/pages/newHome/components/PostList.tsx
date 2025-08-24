@@ -2,14 +2,53 @@ import * as React from "react";
 import { PostCard, PostCardSkeleton } from "./PostCard";
 import type { PostListProps } from "../utils/types";
 
+interface ExtendedPostListProps extends PostListProps {
+  isLoading?: boolean;
+  hasNextPage?: boolean;
+  fetchNextPage?: () => void;
+  isFetchingNextPage?: boolean;
+  onDelete?: (postId: string) => void;
+}
+
 export function PostList({
   posts,
   onLike,
   onComment,
   onShare,
   onUpvote,
-  isLoading = false
-}: PostListProps & { isLoading?: boolean }) {
+  isLoading = false,
+  hasNextPage = false,
+  fetchNextPage,
+  isFetchingNextPage = false,
+  onDelete
+}: ExtendedPostListProps) {
+  const loadMoreRef = React.useRef<HTMLDivElement>(null);
+
+  // Intersection Observer for infinite scroll
+  React.useEffect(() => {
+    if (!hasNextPage || !fetchNextPage || isFetchingNextPage) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const first = entries[0];
+        if (first.isIntersecting) {
+          fetchNextPage();
+        }
+      },
+      { threshold: 1.0 }
+    );
+
+    const currentRef = loadMoreRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, [hasNextPage, fetchNextPage, isFetchingNextPage]);
   if (isLoading) {
     return (
       <div className="w-full">
@@ -50,9 +89,21 @@ export function PostList({
             onComment={onComment}
             onShare={onShare}
             onUpvote={onUpvote}
+            onDelete={onDelete}
           />
         </div>
       ))}
+      
+      {/* Load more trigger */}
+      {hasNextPage && (
+        <div ref={loadMoreRef} className="w-full py-4 flex justify-center">
+          {isFetchingNextPage ? (
+            <PostCardSkeleton />
+          ) : (
+            <div className="text-gray-500 text-sm">더 보기</div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
