@@ -2,12 +2,12 @@ import {
   Heart,
   MessageCircle,
   Share,
-  ChevronUp,
-  MoreHorizontal
+  ChevronUp
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { Avatar, Button, Card } from "../ui";
+import { Avatar, Card } from "../ui";
 import { useWritePostModal } from "../hooks/useWritePostModal";
+import { PostMoreMenu } from "./PostMoreMenu";
 import type { Post } from "../utils/types";
 
 interface PostCardProps {
@@ -16,6 +16,7 @@ interface PostCardProps {
   onComment: (postId: string) => void;
   onShare: (postId: string) => void;
   onUpvote: (postId: string) => void;
+  onDelete?: (postId: string) => void;
 }
 
 function formatNumber(num: number): string {
@@ -49,7 +50,8 @@ export function PostCard({
   onLike,
   onComment,
   onShare,
-  onUpvote
+  onUpvote,
+  onDelete
 }: PostCardProps) {
   const navigate = useNavigate();
   const { openModal, WritePostModal } = useWritePostModal({
@@ -95,14 +97,10 @@ export function PostCard({
 
           {/* 더보기 메뉴 (본인 글인 경우만) */}
           {post.isOwn && (
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              className="shrink-0 p-2"
-              onClick={openModal}
-            >
-              <MoreHorizontal className="h-5 w-5 text-gray-400" />
-            </Button>
+            <PostMoreMenu
+              onEdit={openModal}
+              onDelete={() => onDelete?.(post.id)}
+            />
           )}
         </div>
 
