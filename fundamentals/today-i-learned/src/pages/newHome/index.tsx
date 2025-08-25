@@ -7,15 +7,12 @@ import {
   WeeklyTop5,
   SprintChallenge
 } from "./components";
-import {
-  mockChallenge,
-  currentUser
-} from "./utils/mockData";
+import { mockChallenge, currentUser } from "./utils/mockData";
 import type { SortOption, Post, PopularPost } from "./utils/types";
-import { 
-  useInfiniteDiscussions, 
-  useWeeklyTopDiscussions, 
-  useCreateDiscussion 
+import {
+  useInfiniteDiscussions,
+  useWeeklyTopDiscussions,
+  useCreateDiscussion
 } from "@/api/hooks/useDiscussions";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
 
@@ -44,11 +41,16 @@ function convertGitHubDiscussionToPost(discussion: GitHubDiscussion): Post {
 }
 
 // GitHub Discussion을 PopularPost 타입으로 변환하는 함수
-function convertGitHubDiscussionToPopularPost(discussion: GitHubDiscussion, rank: number): PopularPost {
+function convertGitHubDiscussionToPopularPost(
+  discussion: GitHubDiscussion,
+  rank: number
+): PopularPost {
   return {
     id: discussion.id,
     title: discussion.title,
-    excerpt: discussion.body.slice(0, 100) + (discussion.body.length > 100 ? "..." : ""),
+    excerpt:
+      discussion.body.slice(0, 100) +
+      (discussion.body.length > 100 ? "..." : ""),
     author: {
       id: discussion.author.login,
       name: discussion.author.login,
@@ -80,37 +82,37 @@ export function NewHomePage() {
   };
 
   // 실제 API 연동
-  const { 
-    data: postsData, 
-    fetchNextPage, 
-    hasNextPage, 
-    isLoading, 
-    isFetchingNextPage 
+  const {
+    data: postsData,
+    fetchNextPage,
+    hasNextPage,
+    isLoading,
+    isFetchingNextPage
   } = useInfiniteDiscussions({
     categoryName: "Today I Learned",
     ...getApiParams(),
     pageSize: 10
   });
 
-  const { 
-    data: weeklyTopPosts, 
-    isLoading: isLoadingWeeklyTop 
-  } = useWeeklyTopDiscussions({ limit: 5 });
+  const { data: weeklyTopPosts, isLoading: isLoadingWeeklyTop } =
+    useWeeklyTopDiscussions({ limit: 5 });
 
   const createPostMutation = useCreateDiscussion();
 
   // Flatten infinite pages into single array and convert to Post type
   const posts = React.useMemo(() => {
     if (!postsData) return [];
-    return postsData.pages.flatMap(page => 
-      page.discussions.map(discussion => convertGitHubDiscussionToPost(discussion))
+    return postsData.pages.flatMap((page) =>
+      page.discussions.map((discussion) =>
+        convertGitHubDiscussionToPost(discussion)
+      )
     );
   }, [postsData]);
 
   // Convert weekly top posts to PopularPost type
   const popularPosts = React.useMemo(() => {
     if (!weeklyTopPosts) return [];
-    return weeklyTopPosts.map((discussion, index) => 
+    return weeklyTopPosts.map((discussion, index) =>
       convertGitHubDiscussionToPopularPost(discussion, index + 1)
     );
   }, [weeklyTopPosts]);
@@ -160,7 +162,7 @@ export function NewHomePage() {
         {/* 메인 그리드 레이아웃 */}
         <div className="grid grid-cols-1 lg:grid-cols-[5fr_3fr] gap-8">
           {/* 왼쪽 컬럼: 메인 피드 */}
-          <div className="flex flex-col lg:border-l lg:border-r border-[rgba(201,201,201,0.4)]">
+          <div className="flex flex-col lg:border-l lg:border-r border-[rgba(201,201,201,0.4)] min-w-[820px]">
             {/* 3일 스프린트 챌린지 */}
             <div className="pt-6 pb-0">
               <SprintChallenge />
@@ -206,7 +208,7 @@ export function NewHomePage() {
           </div>
 
           {/* 오른쪽 컬럼: 사이드바 (1024px 이상에서만 표시) */}
-          <div className="hidden lg:block mt-[24px]">
+          <div className="hidden lg:block mt-[24px] min-w-[490px]">
             {/* 주간 Top 5 */}
             <WeeklyTop5
               posts={popularPosts}
