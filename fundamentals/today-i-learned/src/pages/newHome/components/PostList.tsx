@@ -93,15 +93,11 @@ export function PostList({
           />
         </div>
       ))}
-      
+
       {/* Load more trigger */}
       {hasNextPage && (
         <div ref={loadMoreRef} className="w-full py-4 flex justify-center">
-          {isFetchingNextPage ? (
-            <PostCardSkeleton />
-          ) : (
-            <div className="text-gray-500 text-sm">더 보기</div>
-          )}
+          {isFetchingNextPage ? <PostCardSkeleton /> : null}
         </div>
       )}
     </div>
