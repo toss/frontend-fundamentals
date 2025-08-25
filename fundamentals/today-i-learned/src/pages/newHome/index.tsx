@@ -162,7 +162,7 @@ export function NewHomePage() {
         {/* 메인 그리드 레이아웃 */}
         <div className="grid grid-cols-1 lg:grid-cols-[5fr_3fr] gap-8">
           {/* 왼쪽 컬럼: 메인 피드 */}
-          <div className="flex flex-col lg:border-l lg:border-r border-[rgba(201,201,201,0.4)] min-w-[820px]">
+          <div className="flex flex-col lg:border-l lg:border-r border-[rgba(201,201,201,0.4)] lg:min-w-[820px]">
             {/* 3일 스프린트 챌린지 */}
             <div className="pt-6 pb-0">
               <SprintChallenge />
@@ -208,7 +208,7 @@ export function NewHomePage() {
           </div>
 
           {/* 오른쪽 컬럼: 사이드바 (1024px 이상에서만 표시) */}
-          <div className="hidden lg:block mt-[24px] min-w-[490px]">
+          <div className="hidden lg:block mt-[24px] lg:min-w-[490px]">
             {/* 주간 Top 5 */}
             <WeeklyTop5
               posts={popularPosts}
