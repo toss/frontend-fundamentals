@@ -3,10 +3,15 @@ import {
   MessageCircle,
   Share,
   ChevronUp,
-  MoreHorizontal
+  X,
+  ExternalLink
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { Avatar, Button, Card } from "../ui";
+import { useState } from "react";
+import { Avatar, Card } from "../ui";
+import { AlertDialog } from "../ui/AlertDialog";
+import { useWritePostModal } from "../hooks/useWritePostModal";
+import { PostMoreMenu } from "./PostMoreMenu";
+import { PostDetail } from "./PostDetail";
 import type { Post } from "../utils/types";
 
 interface PostCardProps {
@@ -15,6 +20,7 @@ interface PostCardProps {
   onComment: (postId: string) => void;
   onShare: (postId: string) => void;
   onUpvote: (postId: string) => void;
+  onDelete?: (postId: string) => void;
 }
 
 function formatNumber(num: number): string {
@@ -48,15 +54,27 @@ export function PostCard({
   onLike,
   onComment,
   onShare,
-  onUpvote
+  onUpvote,
+  onDelete
 }: PostCardProps) {
-  const navigate = useNavigate();
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+  const { openModal, WritePostModal } = useWritePostModal({
+    onSubmit: (content) => {
+      console.log("Submitting post:", content);
+      // 실제로는 API 호출
+    }
+  });
 
   const handlePostClick = () => {
-    navigate(`/post/${post.id}`);
+    setIsDetailModalOpen(true);
   };
   return (
-    <Card variant="bordered" padding="none" className="w-full">
+    <Card
+      variant="bordered"
+      padding="none"
+      className="w-full cursor-pointer"
+      onClick={handlePostClick}
+    >
       <div className="flex flex-col p-6 gap-6">
         {/* 헤더: 사용자 정보 */}
         <div className="flex items-center justify-between h-10">
@@ -88,57 +106,19 @@ export function PostCard({
 
           {/* 더보기 메뉴 (본인 글인 경우만) */}
           {post.isOwn && (
-            <Button variant="ghost" size="sm" className="shrink-0 p-2">
-              <MoreHorizontal className="h-5 w-5 text-gray-400" />
-            </Button>
+            <div onClick={(e) => e.stopPropagation()}>
+              <PostMoreMenu
+                onEdit={openModal}
+                onDelete={() => onDelete?.(post.id)}
+              />
+            </div>
           )}
         </div>
 
         {/* 본문 */}
         <div className="flex flex-col gap-5">
-          {/* 태그들 */}
-          <div className="flex items-center gap-[6px] flex-wrap">
-            <div className="inline-flex items-center justify-center px-[14px] py-[10px] bg-black/5 rounded-[200px]">
-              <span className="font-bold text-[14px] leading-[160%] tracking-[-0.4px] text-black/40">
-                {post.category}
-              </span>
-            </div>
-            {post.tags.map((tag) => {
-              // 태그별 색상 매핑
-              const getTagStyle = (tagName: string) => {
-                if (tagName.includes("성지"))
-                  return "bg-[rgba(188,233,233,0.4)] text-[#58C7C7]";
-                if (tagName.includes("Ongoing"))
-                  return "bg-[rgba(237,204,248,0.4)] text-[#DA9BEF]";
-                if (tagName.includes("가독성"))
-                  return "bg-[rgba(255,212,214,0.4)] text-[#FB8890]";
-                if (tagName.includes("결합도"))
-                  return "bg-green-100 text-green-700";
-                if (tagName.includes("기여") || tagName.includes("설계"))
-                  return "bg-orange-100 text-orange-700";
-                if (tagName.includes("Changes"))
-                  return "bg-yellow-100 text-yellow-700";
-                return "bg-gray-100 text-gray-600";
-              };
-
-              return (
-                <div
-                  key={tag}
-                  className={`inline-flex items-center justify-center px-[10px] py-[10px] rounded-[8px] ${getTagStyle(tag)}`}
-                >
-                  <span className="font-bold text-[14px] leading-[130%] tracking-[-0.4px]">
-                    {tag}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-
           {/* 제목과 내용 */}
-          <div
-            className="flex flex-col gap-5 cursor-pointer"
-            onClick={handlePostClick}
-          >
+          <div className="flex flex-col gap-5">
             {/* 제목 */}
             <h2 className="font-bold text-[22px] leading-[130%] tracking-[-0.4px] text-[#0F0F0F] hover:text-gray-700 transition-colors">
               {post.title}
@@ -154,7 +134,10 @@ export function PostCard({
         {/* 상호작용 버튼들 */}
         <div className="flex items-start gap-4 pt-2">
           <button
-            onClick={() => onUpvote(post.id)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onUpvote(post.id);
+            }}
             className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
           >
             <div className="w-5 h-5">
@@ -166,7 +149,10 @@ export function PostCard({
           </button>
 
           <button
-            onClick={() => onLike(post.id)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onLike(post.id);
+            }}
             className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
           >
             <div className="w-5 h-5">
@@ -178,7 +164,10 @@ export function PostCard({
           </button>
 
           <button
-            onClick={() => onComment(post.id)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onComment(post.id);
+            }}
             className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
           >
             <div className="w-5 h-5">
@@ -190,7 +179,10 @@ export function PostCard({
           </button>
 
           <button
-            onClick={() => onShare(post.id)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onShare(post.id);
+            }}
             className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
           >
             <div className="w-5 h-5">
@@ -202,6 +194,51 @@ export function PostCard({
           </button>
         </div>
       </div>
+      {WritePostModal}
+
+      {/* 글 상세 모달 */}
+      <AlertDialog open={isDetailModalOpen} onOpenChange={setIsDetailModalOpen}>
+        <AlertDialog.Content className="w-[800px] h-[1080px] bg-[#FCFCFC] rounded-[16px] flex flex-col items-center pt-0 px-0 pb-6 overflow-hidden isolate">
+          {/* Header with buttons */}
+          <div className="flex flex-row justify-end items-start p-6 gap-4 w-[800px] h-[68px] bg-[#FCFCFC] flex-none">
+            {/* 상세 페이지로 이동 버튼 */}
+            <button
+              className="w-5 h-5 flex items-center justify-center text-black/60 hover:text-black/80 transition-colors"
+              onClick={(e) => {
+                e.stopPropagation();
+                // 상세 페이지로 이동 로직 (나중에 구현)
+                console.log("Navigate to detail page");
+              }}
+            >
+              <ExternalLink className="w-[14.72px] h-[14.72px]" />
+            </button>
+
+            {/* X 닫기 버튼 */}
+            <button
+              className="w-5 h-5 flex items-center justify-center text-black/60 hover:text-black/80 transition-colors"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsDetailModalOpen(false);
+              }}
+            >
+              <X size={16} />
+            </button>
+          </div>
+
+          {/* 본문 영역 */}
+          <div className="w-[800px] h-[696px] px-6 z-[1] overflow-y-auto">
+            <PostDetail
+              post={post}
+              onLike={onLike}
+              onComment={onComment}
+              onShare={onShare}
+              onUpvote={onUpvote}
+              onDelete={onDelete}
+              showComments={true}
+            />
+          </div>
+        </AlertDialog.Content>
+      </AlertDialog>
     </Card>
   );
 }

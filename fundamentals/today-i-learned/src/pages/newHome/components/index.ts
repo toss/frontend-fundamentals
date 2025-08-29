@@ -5,3 +5,4 @@ export { PostList } from "./PostList";
 export { MonthlyChallenge } from "./MonthlyChallenge";
 export { WeeklyTop5 } from "./WeeklyTop5";
 export { NewHomeHeader } from "./NewHomeHeader";
+export { SprintChallenge } from "./SprintChallenge";

@@ -66,13 +66,13 @@ export function PostInput({
           {/* 입력 영역 */}
           <div className="flex flex-col items-start py-3 gap-6 flex-grow">
             {/* 제목 입력 필드 */}
-            <div className="flex flex-row justify-center items-center gap-[10px] w-[256px]">
+            <div className="flex flex-row justify-center items-center gap-[10px] w-[260px]">
               <Input
                 value={title}
                 onChange={handleTitleChange}
                 onKeyDown={handleTitleKeyDown}
                 placeholder={placeholder}
-                className="text-[22px] font-bold leading-[130%] text-black tracking-[-0.4px] w-[256px] p-0 border-none outline-none focus:outline-none focus:ring-0 bg-transparent placeholder:text-black/20 shadow-none"
+                className="text-[22px] font-bold leading-[130%] text-black tracking-[-0.4px] w-[260px] p-0 border-none outline-none focus:outline-none focus:ring-0 bg-transparent placeholder:text-black/20 shadow-none"
               />
             </div>
 
@@ -92,14 +92,14 @@ export function PostInput({
           {/* 왼쪽 빈 공간 */}
           <div className="flex-grow h-[51px]" />
 
-          {/* 게시하기 버튼 */}
+          {/* 작성하기 버튼 */}
           <Button
             onClick={handleSubmit}
             disabled={!title.trim() || !content.trim()}
             className="flex flex-row justify-center items-center px-[30px] py-5 gap-[10px] w-[115px] h-[51px] bg-black disabled:bg-[#00000033] rounded-[200px] border-none outline-none focus:outline-none"
           >
             <span className="text-[16px] font-bold leading-[130%] tracking-[-0.4px] text-[#FCFCFC]">
-              게시하기
+              작성하기
             </span>
           </Button>
         </div>

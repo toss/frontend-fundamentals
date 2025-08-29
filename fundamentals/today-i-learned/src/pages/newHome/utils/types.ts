@@ -54,7 +54,7 @@ export interface Category {
   selected: boolean;
 }
 
-export type SortOption = "newest" | "popular" | "trending";
+export type SortOption = "newest" | "realtime" | "hall-of-fame";
 
 // Event Handlers
 export interface PostInputProps {
@@ -64,9 +64,7 @@ export interface PostInputProps {
 }
 
 export interface FilterSectionProps {
-  categories: Category[];
   sortOption: SortOption;
-  onCategoryChange: (categoryId: string) => void;
   onSortChange: (option: SortOption) => void;
 }
 
@@ -86,6 +84,7 @@ export interface MonthlyChallengeProps {
 export interface WeeklyTop5Props {
   posts: PopularPost[];
   weekInfo: string;
+  onPostClick: (postId: string) => void;
 }
 
 // Comment Types
