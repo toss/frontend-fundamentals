@@ -19,6 +19,9 @@ import {
 } from "./components/StyledWrappers";
 import { usePostDetail } from "./hooks/usePostDetail";
 
+/**
+ * NOTE: MVP에서는 제외 (모달만 남기기)
+ */
 export function PostDetailPage() {
   const { id } = useParams<{ id: string }>();
   const { isLoading, error, postData, comments, handlers } = usePostDetail(id);
@@ -47,7 +50,9 @@ export function PostDetailPage() {
         </MainColumn>
 
         <SidebarColumn>
-          <WeeklyTop5 />
+          <div className="sticky top-4">
+            <WeeklyTop5 />
+          </div>
         </SidebarColumn>
       </ContentWrapper>
     </PageContainer>

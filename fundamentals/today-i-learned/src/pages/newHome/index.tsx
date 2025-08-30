@@ -168,8 +168,9 @@ export function NewHomePage() {
 
           {/* 오른쪽 컬럼: 사이드바 (1024px 이상에서만 표시) */}
           <div className="hidden lg:block mt-[24px] lg:min-w-[490px]">
-            {/* 주간 Top 5 */}
-            <WeeklyTop5 />
+            <div className="sticky top-4">
+              <WeeklyTop5 />
+            </div>
           </div>
         </div>
       </div>
