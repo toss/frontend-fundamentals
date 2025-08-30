@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { OneNavigationReact } from "@shared/components";
-import { NewHomeHeader } from "@/pages/timeline/components/NewHomeHeader";
+import { NewHomeHeader } from "./NewHomeHeader";
 
 export const Layout: React.FC<{ children: React.ReactNode }> = ({
   children
