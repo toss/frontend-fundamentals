@@ -2,7 +2,14 @@ import { useState } from "react";
 import { ChevronUp, MessageCircle } from "lucide-react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { CommentInput } from "./CommentInput";
-import type { CommentProps } from "../../timeline/utils/types";
+import type { GitHubComment } from "@/api/remote/discussions";
+
+interface CommentProps {
+  comment: GitHubComment;
+  onUpvote: (commentId: string) => void;
+  onReply: (commentId: string, content: string) => void;
+  depth?: number;
+}
 import { formatTimeAgo, formatNumber } from "../utils/formatters";
 function CommentContainer({
   children,
@@ -28,17 +35,17 @@ function CommentHeader({ comment }: { comment: CommentProps["comment"] }) {
     <div className="flex items-center gap-3 mb-3">
       <Avatar
         size="32"
-        src={comment.author.avatar || "/api/placeholder/32/32"}
-        alt={comment.author.name}
-        fallback={comment.author.name}
+        src={comment.author.avatarUrl || "/api/placeholder/32/32"}
+        alt={comment.author.login}
+        fallback={comment.author.login}
         className="shrink-0"
       />
       <div className="flex items-center gap-2">
         <span className="font-bold text-base text-black/80">
-          {comment.author.name}
+          {comment.author.login}
         </span>
         <span className="font-medium text-sm text-black/40">
-          @{comment.author.username}
+          @{comment.author.login}
         </span>
         <span className="font-medium text-sm text-black/40">·</span>
         <span className="font-medium text-sm text-black/40">
@@ -116,7 +123,7 @@ function RepliesToggle({
   );
 }
 
-function useCommentInteraction(commentId: string) {
+function useCommentInteraction() {
   const [showReplyInput, setShowReplyInput] = useState(false);
   const [showReplies, setShowReplies] = useState(true);
 
@@ -145,7 +152,7 @@ export function Comment({
     toggleReplyInput,
     toggleReplies,
     hideReplyInput
-  } = useCommentInteraction(comment.id);
+  } = useCommentInteraction();
 
   const handleReplySubmit = (content: string) => {
     onReply(comment.id, content);
@@ -158,10 +165,10 @@ export function Comment({
     <>
       <CommentContainer depth={depth}>
         <CommentHeader comment={comment} />
-        <CommentBody content={comment.content} />
+        <CommentBody content={comment.body} />
         <CommentActions
-          upvotes={comment.stats.upvotes}
-          replies={comment.stats.replies}
+          upvotes={comment.reactions.totalCount}
+          replies={comment.replies?.totalCount || 0}
           onUpvote={handleUpvote}
           onReply={toggleReplyInput}
         />
@@ -178,9 +185,9 @@ export function Comment({
         )}
       </CommentContainer>
 
-      {comment.replies && comment.replies.length > 0 && showReplies && (
+      {comment.replies?.nodes && comment.replies.nodes.length > 0 && showReplies && (
         <div>
-          {comment.replies.map((reply) => (
+          {comment.replies.nodes.map((reply) => (
             <Comment
               key={reply.id}
               comment={reply}
@@ -194,7 +201,7 @@ export function Comment({
 
       <RepliesToggle
         show={showReplies}
-        count={comment.replies?.length || 0}
+        count={comment.replies?.nodes?.length || 0}
         onToggle={toggleReplies}
       />
     </>

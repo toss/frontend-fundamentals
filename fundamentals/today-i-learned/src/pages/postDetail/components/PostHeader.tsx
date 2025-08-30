@@ -2,10 +2,10 @@ import { MoreHorizontal } from "lucide-react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { Button } from "@/components/shared/ui/Button";
 import { formatTimeAgo } from "../utils/formatters";
-import type { Post } from "../../timeline/utils/types";
+import type { GitHubDiscussionDetail } from "@/api/remote/discussions";
 
 interface PostHeaderProps {
-  post: Post;
+  post: GitHubDiscussionDetail;
 }
 
 function HeaderContainer({ children }: { children: React.ReactNode }) {
@@ -58,26 +58,26 @@ function MoreMenu() {
 }
 
 export function PostHeader({ post }: PostHeaderProps) {
-  const { author, createdAt, isOwn } = post;
+  const { author, createdAt } = post;
 
   return (
     <HeaderContainer>
       <AuthorSection>
         <Avatar
           size="48"
-          src={author.avatar || "/api/placeholder/48/48"}
-          alt={author.name}
-          fallback={author.name}
+          src={author.avatarUrl || "/api/placeholder/48/48"}
+          alt={author.login}
+          fallback={author.login}
           className="shrink-0"
         />
         <AuthorInfo
-          name={author.name}
-          username={author.username}
+          name={author.login}
+          username={author.login}
           createdAt={createdAt}
         />
       </AuthorSection>
 
-      {isOwn && <MoreMenu />}
+      <MoreMenu />
     </HeaderContainer>
   );
 }

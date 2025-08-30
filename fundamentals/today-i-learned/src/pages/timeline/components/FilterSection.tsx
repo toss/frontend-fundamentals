@@ -1,4 +1,9 @@
-import type { FilterSectionProps, SortOption } from "../utils/types";
+import type { SortOption } from "@/types";
+
+interface FilterSectionProps {
+  sortOption: SortOption;
+  onSortChange: (option: SortOption) => void;
+}
 
 interface SortTab {
   value: SortOption;

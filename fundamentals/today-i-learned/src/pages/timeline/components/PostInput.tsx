@@ -2,7 +2,13 @@ import * as React from "react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { Button } from "@/components/shared/ui/Button";
 import { Input, Textarea } from "@/components/shared/ui/Input";
-import type { PostInputProps } from "../utils/types";
+import type { GitHubAuthor } from "@/api/remote/discussions";
+
+interface PostInputProps {
+  user: GitHubAuthor;
+  onSubmit: (data: { title: string; content: string }) => void;
+  placeholder?: string;
+}
 
 export function PostInput({
   user,
@@ -58,9 +64,9 @@ export function PostInput({
           <div className="flex flex-row items-start gap-[10px] w-[60px] self-stretch">
             <Avatar
               size="60"
-              src={user.avatar}
-              alt={user.name}
-              fallback={user.name}
+              src={user.avatarUrl}
+              alt={user.login}
+              fallback={user.login}
               className="shrink-0 w-[60px] h-[60px] rounded-[150px]"
             />
           </div>

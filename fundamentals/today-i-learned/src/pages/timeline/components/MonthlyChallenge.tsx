@@ -1,6 +1,11 @@
 import { Card } from "@/components/shared/ui/Card";
 import { cn } from "@/libs/cn";
-import type { MonthlyChallengeProps, ChallengeDay } from "../utils/types";
+import type { ChallengeDay, MonthlyChallenge } from "@/types";
+
+interface MonthlyChallengeProps {
+  challenge: MonthlyChallenge;
+  onDayClick?: (day: number) => void;
+}
 
 const MONTH_NAMES = [
   "1월",

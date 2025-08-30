@@ -90,6 +90,23 @@ export interface AppError {
 export type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 export type RequiredBy<T, K extends keyof T> = T & Required<Pick<T, K>>;
 
+// === Timeline & Sorting Types ===
+
+export type SortOption = "newest" | "realtime" | "hall-of-fame";
+
+export interface ChallengeDay {
+  day: number;
+  date: string;
+  status: "completed" | "today" | "pending";
+  streak?: number;
+}
+
+export interface MonthlyChallenge {
+  year: number;
+  month: number;
+  days: ChallengeDay[];
+}
+
 // === Constants Types ===
 
 export interface AppConstants {

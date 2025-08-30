@@ -1,7 +1,7 @@
-import type { Post } from "../../timeline/utils/types";
+import type { GitHubDiscussionDetail } from "@/api/remote/discussions";
 
 interface PostContentProps {
-  post: Post;
+  post: GitHubDiscussionDetail;
 }
 
 export function PostContent({ post }: PostContentProps) {
@@ -27,10 +27,10 @@ export function PostContent({ post }: PostContentProps) {
       <div className="flex items-center gap-2 flex-wrap mb-6">
         <div className="inline-flex items-center justify-center px-4 py-2 bg-black/5 rounded-full">
           <span className="font-bold text-sm leading-normal tracking-tight text-black/40">
-            {post.category}
+            {post.category.name}
           </span>
         </div>
-        {post.tags.map((tag) => (
+        {(post.labels?.nodes?.map((label) => label.name) || []).map((tag) => (
           <div
             key={tag}
             className={`inline-flex items-center justify-center px-3 py-2 rounded-lg ${getTagStyle(tag)}`}
@@ -50,7 +50,7 @@ export function PostContent({ post }: PostContentProps) {
       {/* 내용 */}
       <div className="prose prose-lg max-w-none">
         <p className="font-medium text-lg leading-relaxed tracking-tight text-black/80 whitespace-pre-wrap">
-          {post.content}
+          {post.body}
         </p>
       </div>
     </div>

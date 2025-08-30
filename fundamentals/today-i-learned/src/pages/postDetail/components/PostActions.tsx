@@ -1,8 +1,8 @@
 import { Heart, MessageCircle, Share, ChevronUp } from "lucide-react";
-import type { Post } from "../../timeline/utils/types";
+import type { GitHubDiscussionDetail } from "@/api/remote/discussions";
 
 interface PostActionsProps {
-  post: Post;
+  post: GitHubDiscussionDetail;
   onLike: (postId: string) => void;
   onComment: (postId: string) => void;
   onShare: (postId: string) => void;
@@ -36,7 +36,7 @@ export function PostActions({
           <ChevronUp className="w-full h-full stroke-black/40 stroke-2" />
         </div>
         <span className="font-semibold text-lg leading-tight tracking-tight text-black/40">
-          {formatNumber(post.stats.upvotes)}
+          {formatNumber(post.reactions.totalCount)}
         </span>
       </button>
 
@@ -48,7 +48,7 @@ export function PostActions({
           <Heart className="w-full h-full stroke-black/40 stroke-2 fill-none" />
         </div>
         <span className="font-semibold text-lg leading-tight tracking-tight text-black/40">
-          {formatNumber(post.stats.hearts)}
+          0
         </span>
       </button>
 
@@ -60,7 +60,7 @@ export function PostActions({
           <MessageCircle className="w-full h-full stroke-black/40 stroke-2 fill-none" />
         </div>
         <span className="font-semibold text-lg leading-tight tracking-tight text-black/40">
-          {formatNumber(post.stats.comments)}
+          {formatNumber(post.comments.totalCount)}
         </span>
       </button>
 
@@ -72,7 +72,7 @@ export function PostActions({
           <Share className="w-full h-full stroke-black/40 stroke-2 fill-none" />
         </div>
         <span className="font-semibold text-lg leading-tight tracking-tight text-black/40">
-          {formatNumber(post.stats.shares)}
+          0
         </span>
       </button>
     </div>

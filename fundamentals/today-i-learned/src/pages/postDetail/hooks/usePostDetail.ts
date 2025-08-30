@@ -5,72 +5,7 @@ import {
   useAddDiscussionComment,
   useToggleDiscussionReaction
 } from "@/api/hooks/useDiscussions";
-import type {
-  GitHubDiscussionDetail,
-  GitHubComment
-} from "@/api/remote/discussions";
-import type { Post, Comment, PopularPost } from "../../timeline/utils/types";
-
-function truncateText(text: string, maxLength: number): string {
-  if (text.length <= maxLength) return text;
-  return text.slice(0, maxLength) + "...";
-}
-
-function mapGitHubUserToAuthor(githubUser: {
-  login: string;
-  avatarUrl: string;
-}) {
-  return {
-    id: githubUser.login,
-    name: githubUser.login,
-    username: githubUser.login,
-    avatar: githubUser.avatarUrl
-  };
-}
-
-function mapGitHubCommentToComment(comment: GitHubComment): Comment {
-  return {
-    id: comment.id,
-    content: comment.body,
-    author: mapGitHubUserToAuthor(comment.author),
-    createdAt: comment.createdAt,
-    stats: {
-      upvotes: comment.reactions.totalCount,
-      replies: comment.replies?.totalCount || 0
-    },
-    replies:
-      comment.replies?.nodes?.map((reply) => ({
-        id: reply.id,
-        content: reply.body,
-        author: mapGitHubUserToAuthor(reply.author),
-        createdAt: reply.createdAt,
-        stats: {
-          upvotes: reply.reactions.totalCount,
-          replies: 0
-        },
-        parentId: comment.id
-      })) || []
-  };
-}
-
-function mapDiscussionToPost(discussion: GitHubDiscussionDetail): Post {
-  return {
-    id: discussion.id,
-    title: discussion.title,
-    content: discussion.body,
-    author: mapGitHubUserToAuthor(discussion.author),
-    createdAt: discussion.createdAt,
-    category: discussion.category.name,
-    tags: discussion.labels?.nodes?.map((label) => label.name) || [],
-    stats: {
-      upvotes: discussion.reactions.totalCount,
-      hearts: 0,
-      comments: discussion.comments.totalCount,
-      shares: 0
-    },
-    isOwn: false
-  };
-}
+import type { GitHubDiscussionDetail } from "@/api/remote/discussions";
 
 export function usePostDetail(postId: string | undefined) {
   const {
@@ -146,7 +81,7 @@ export function usePostDetail(postId: string | undefined) {
 
     const parentComment = comments.find((comment) => comment.id === commentId);
     const replyPrefix = parentComment
-      ? `> @${parentComment.author.name}: ${content}\n\n`
+      ? `> @${parentComment.author.login}: ${content}\n\n`
       : `> ${content}\n\n`;
 
     addComment.mutate({
@@ -164,21 +99,12 @@ export function usePostDetail(postId: string | undefined) {
     });
   };
 
-  const postData = discussion ? mapDiscussionToPost(discussion) : null;
+  const postData: GitHubDiscussionDetail | null = discussion || null;
 
-  const comments =
-    discussion?.comments.nodes.map(mapGitHubCommentToComment) || [];
+  const comments = discussion?.comments.nodes || [];
 
   const weeklyTop5Data = {
-    posts: (weeklyPosts || []).map(
-      (post, index): PopularPost => ({
-        id: post.id,
-        title: post.title,
-        author: mapGitHubUserToAuthor(post.author),
-        excerpt: truncateText(post.body.replace(/[#*`\n]/g, " ").trim(), 80),
-        rank: index + 1
-      })
-    ),
+    posts: weeklyPosts || [],
     weekInfo: "이번 주 인기글"
   };
 

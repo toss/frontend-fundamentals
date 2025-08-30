@@ -1,5 +1,11 @@
 import { Comment } from "./Comment";
-import type { CommentListProps } from "../../timeline/utils/types";
+import type { GitHubComment } from "@/api/remote/discussions";
+
+interface CommentListProps {
+  comments: GitHubComment[];
+  onUpvote: (commentId: string) => void;
+  onReply: (commentId: string, content: string) => void;
+}
 
 export function CommentList({ comments, onUpvote, onReply }: CommentListProps) {
   if (comments.length === 0) {

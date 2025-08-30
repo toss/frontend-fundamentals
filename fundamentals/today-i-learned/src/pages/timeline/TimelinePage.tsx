@@ -5,7 +5,7 @@ import { PostList } from "./components/PostList";
 import { WeeklyTop5 } from "@/components/features/discussions/WeeklyTop5";
 import { SprintChallenge } from "./components/SprintChallenge";
 import { useAuth } from "@/contexts/AuthContext";
-import type { SortOption } from "./utils/types";
+import type { SortOption } from "@/types";
 import {
   useCreateDiscussion,
   useToggleDiscussionReaction
@@ -124,10 +124,8 @@ export function TimelinePage() {
               {user ? (
                 <PostInput
                   user={{
-                    id: user.login,
-                    name: user.name || user.login,
-                    username: user.login,
-                    avatar: user.avatar_url
+                    login: user.login,
+                    avatarUrl: user.avatar_url
                   }}
                   onSubmit={handlePostSubmit}
                 />

@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { Button } from "@/components/shared/ui/Button";
-import type { CommentInputProps } from "../../timeline/utils/types";
+interface CommentInputProps {
+  onSubmit: (content: string) => void;
+  placeholder?: string;
+  isReply?: boolean;
+  parentId?: string;
+}
 
 export function CommentInput({
   onSubmit,
   placeholder = "댓글을 작성해보세요...",
-  isReply = false,
-  parentId
+  isReply = false
 }: CommentInputProps) {
   const [content, setContent] = useState("");
 
