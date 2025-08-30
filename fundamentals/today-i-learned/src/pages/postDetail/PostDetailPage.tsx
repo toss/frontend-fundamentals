@@ -48,7 +48,7 @@ export function PostDetailPage() {
         </MainColumn>
 
         <SidebarColumn>
-          <WeeklyTop5 {...weeklyTop5Data} />
+          <WeeklyTop5 posts={weeklyTop5Data.posts} onPostClick={() => {}} />
         </SidebarColumn>
       </ContentWrapper>
     </PageContainer>

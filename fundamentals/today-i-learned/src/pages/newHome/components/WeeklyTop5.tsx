@@ -1,8 +1,7 @@
-import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import { Avatar, Card } from "../ui";
-import { cn } from "../utils/cn";
-import type { WeeklyTop5Props, PopularPost } from "../utils/types";
+import { getCurrentWeekInfo } from "../../../libs/date";
+import { Avatar } from "../ui";
+import type { PopularPost, WeeklyTop5Props } from "../utils/types";
 
 function PopularPostItem({
   post,
@@ -61,7 +60,9 @@ function PopularPostItem({
   );
 }
 
-export function WeeklyTop5({ posts, weekInfo, onPostClick }: WeeklyTop5Props) {
+export function WeeklyTop5({ posts, onPostClick }: WeeklyTop5Props) {
+  const weekText = getCurrentWeekInfo();
+
   return (
     <div className="space-y-6">
       {/* 헤더 */}
@@ -70,7 +71,7 @@ export function WeeklyTop5({ posts, weekInfo, onPostClick }: WeeklyTop5Props) {
           주간 Top 5
         </h3>
         <p className="text-base font-semibold text-black/60 tracking-tight">
-          {weekInfo}
+          {weekText} 인기글
         </p>
       </div>
 
