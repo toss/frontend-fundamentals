@@ -1,5 +1,5 @@
 import { Card } from "@/components/shared/ui/Card";
-import { cn } from "@/lib/utils/cn";
+import { cn } from "@/libs/cn";
 import type { MonthlyChallengeProps, ChallengeDay } from "../utils/types";
 
 const MONTH_NAMES = [
@@ -17,12 +17,7 @@ const MONTH_NAMES = [
   "12월"
 ];
 
-function ChallengeDayItem({
-  day
-}: {
-  day: ChallengeDay;
-}) {
-
+function ChallengeDayItem({ day }: { day: ChallengeDay }) {
   const getDayStyle = () => {
     switch (day.status) {
       case "completed":
@@ -73,9 +68,7 @@ function ChallengeDayItem({
   );
 }
 
-export function MonthlyChallenge({
-  challenge
-}: MonthlyChallengeProps) {
+export function MonthlyChallenge({ challenge }: MonthlyChallengeProps) {
   const monthName = MONTH_NAMES[challenge.month - 1];
 
   // 7x5 그리드로 배치 (주단위)
@@ -104,10 +97,7 @@ export function MonthlyChallenge({
               className="grid grid-cols-7 gap-4 justify-items-center"
             >
               {week.map((day) => (
-                <ChallengeDayItem
-                  key={day.day}
-                  day={day}
-                />
+                <ChallengeDayItem key={day.day} day={day} />
               ))}
               {/* 빈 칸 채우기 (마지막 주가 7일 미만인 경우) */}
               {week.length < 7 &&

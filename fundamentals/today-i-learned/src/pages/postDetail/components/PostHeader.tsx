@@ -2,7 +2,7 @@ import { MoreHorizontal } from "lucide-react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { Button } from "@/components/shared/ui/Button";
 import { formatTimeAgo } from "../utils/formatters";
-import type { Post } from "../../newHome/utils/types";
+import type { Post } from "../../timeline/utils/types";
 
 interface PostHeaderProps {
   post: Post;
@@ -10,27 +10,23 @@ interface PostHeaderProps {
 
 function HeaderContainer({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex items-center justify-between mb-6">
-      {children}
-    </div>
+    <div className="flex items-center justify-between mb-6">{children}</div>
   );
 }
 
 function AuthorSection({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex items-center gap-3 min-w-0 flex-1">
-      {children}
-    </div>
+    <div className="flex items-center gap-3 min-w-0 flex-1">{children}</div>
   );
 }
 
-function AuthorInfo({ 
-  name, 
-  username, 
-  createdAt 
-}: { 
-  name: string; 
-  username: string; 
+function AuthorInfo({
+  name,
+  username,
+  createdAt
+}: {
+  name: string;
+  username: string;
   createdAt: string;
 }) {
   return (
@@ -74,7 +70,7 @@ export function PostHeader({ post }: PostHeaderProps) {
           fallback={author.name}
           className="shrink-0"
         />
-        <AuthorInfo 
+        <AuthorInfo
           name={author.name}
           username={author.username}
           createdAt={createdAt}

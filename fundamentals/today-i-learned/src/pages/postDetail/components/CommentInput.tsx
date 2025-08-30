@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Button } from "@/components/shared/ui/Button";
-import type { CommentInputProps } from "../../newHome/utils/types";
+import type { CommentInputProps } from "../../timeline/utils/types";
 
-export function CommentInput({ 
-  onSubmit, 
-  placeholder = "댓글을 작성해보세요...", 
+export function CommentInput({
+  onSubmit,
+  placeholder = "댓글을 작성해보세요...",
   isReply = false,
-  parentId 
+  parentId
 }: CommentInputProps) {
   const [content, setContent] = useState("");
 
@@ -36,7 +36,7 @@ export function CommentInput({
           rows={3}
         />
         <div className="flex justify-end mt-3">
-          <Button 
+          <Button
             onClick={handleSubmit}
             disabled={!content.trim()}
             size="sm"

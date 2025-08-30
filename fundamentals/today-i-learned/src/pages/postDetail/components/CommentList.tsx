@@ -1,5 +1,5 @@
 import { Comment } from "./Comment";
-import type { CommentListProps } from "../../newHome/utils/types";
+import type { CommentListProps } from "../../timeline/utils/types";
 
 export function CommentList({ comments, onUpvote, onReply }: CommentListProps) {
   if (comments.length === 0) {

@@ -2,18 +2,18 @@ import { useState } from "react";
 import { ChevronUp, MessageCircle } from "lucide-react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { CommentInput } from "./CommentInput";
-import type { CommentProps } from "../../newHome/utils/types";
+import type { CommentProps } from "../../timeline/utils/types";
 import { formatTimeAgo, formatNumber } from "../utils/formatters";
-function CommentContainer({ 
-  children, 
-  depth = 0 
-}: { 
-  children: React.ReactNode; 
+function CommentContainer({
+  children,
+  depth = 0
+}: {
+  children: React.ReactNode;
   depth?: number;
 }) {
   const indentLevel = Math.min(depth, 3);
   const marginLeft = indentLevel * 48;
-  
+
   return (
     <div style={{ marginLeft: `${marginLeft}px` }}>
       <div className="py-4 border-b border-gray-100 last:border-b-0">
@@ -23,7 +23,7 @@ function CommentContainer({
   );
 }
 
-function CommentHeader({ comment }: { comment: CommentProps['comment'] }) {
+function CommentHeader({ comment }: { comment: CommentProps["comment"] }) {
   return (
     <div className="flex items-center gap-3 mb-3">
       <Avatar
@@ -59,11 +59,11 @@ function CommentBody({ content }: { content: string }) {
   );
 }
 
-function CommentActions({ 
-  upvotes, 
-  replies, 
-  onUpvote, 
-  onReply 
+function CommentActions({
+  upvotes,
+  replies,
+  onUpvote,
+  onReply
 }: {
   upvotes: number;
   replies: number;
@@ -95,17 +95,17 @@ function CommentActions({
   );
 }
 
-function RepliesToggle({ 
-  show, 
-  count, 
-  onToggle 
+function RepliesToggle({
+  show,
+  count,
+  onToggle
 }: {
   show: boolean;
   count: number;
   onToggle: () => void;
 }) {
   if (count === 0) return null;
-  
+
   return (
     <button
       onClick={onToggle}
@@ -133,7 +133,12 @@ function useCommentInteraction(commentId: string) {
   };
 }
 
-export function Comment({ comment, onUpvote, onReply, depth = 0 }: CommentProps) {
+export function Comment({
+  comment,
+  onUpvote,
+  onReply,
+  depth = 0
+}: CommentProps) {
   const {
     showReplyInput,
     showReplies,
