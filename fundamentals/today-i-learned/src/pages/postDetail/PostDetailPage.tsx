@@ -1,28 +1,27 @@
-import { useParams } from "react-router-dom";
-import { LoadingSpinner } from "@/components/shared/ui/LoadingSpinner";
 import { WeeklyTop5 } from "@/components/features/discussions/WeeklyTop5";
-import { PostHeader } from "./components/PostHeader";
-import { PostContent } from "./components/PostContent";
-import { PostActions } from "./components/PostActions";
-import { CommentList } from "./components/CommentList";
+import { LoadingSpinner } from "@/components/shared/ui/LoadingSpinner";
+import { useParams } from "react-router-dom";
 import { CommentInput } from "./components/CommentInput";
-import { usePostDetail } from "./hooks/usePostDetail";
+import { CommentList } from "./components/CommentList";
+import { PostActions } from "./components/PostActions";
+import { PostContent } from "./components/PostContent";
+import { PostHeader } from "./components/PostHeader";
 import {
-  PageContainer,
-  ContentWrapper,
-  MainColumn,
-  SidebarColumn,
-  PostSection,
-  CommentSection,
   CommentHeader,
+  CommentSection,
+  ContentWrapper,
   ErrorContainer,
-  LoadingContainer
+  LoadingContainer,
+  MainColumn,
+  PageContainer,
+  PostSection,
+  SidebarColumn
 } from "./components/StyledWrappers";
+import { usePostDetail } from "./hooks/usePostDetail";
 
 export function PostDetailPage() {
   const { id } = useParams<{ id: string }>();
-  const { isLoading, error, postData, comments, weeklyTop5Data, handlers } =
-    usePostDetail(id);
+  const { isLoading, error, postData, comments, handlers } = usePostDetail(id);
 
   if (!id) {
     return <ErrorContainer message="게시글을 찾을 수 없습니다." />;
@@ -48,7 +47,7 @@ export function PostDetailPage() {
         </MainColumn>
 
         <SidebarColumn>
-          <WeeklyTop5 onPostClick={() => {}} />
+          <WeeklyTop5 />
         </SidebarColumn>
       </ContentWrapper>
     </PageContainer>

@@ -1,6 +1,6 @@
 import { X, ExternalLink } from "lucide-react";
 import { AlertDialog } from "@/components/shared/ui/AlertDialog";
-import { PostDetail } from "@/pages/newHome/components/PostDetail";
+import { PostDetail } from "@/components/features/discussions/PostDetail";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
 
 interface PostDetailModalProps {

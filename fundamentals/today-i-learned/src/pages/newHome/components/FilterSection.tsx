@@ -1,4 +1,3 @@
-import * as React from "react";
 import type { FilterSectionProps, SortOption } from "../utils/types";
 
 interface SortTab {

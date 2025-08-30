@@ -1,5 +1,8 @@
 import { useCallback } from "react";
-import { PostCard, PostCardSkeleton } from "./PostCard";
+import {
+  PostCard,
+  PostCardSkeleton
+} from "../../../components/features/discussions/PostCard";
 import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
@@ -34,12 +37,12 @@ export function PostList({
     hasNextPage,
     isFetchingNextPage,
     isLoading
-  } = useInfiniteDiscussions({ 
-    owner, 
-    repo, 
-    categoryName, 
-    sortBy, 
-    filterBy 
+  } = useInfiniteDiscussions({
+    owner,
+    repo,
+    categoryName,
+    sortBy,
+    filterBy
   });
 
   const handleLoadMore = useCallback(() => {
@@ -54,7 +57,8 @@ export function PostList({
     rootMargin: "300px"
   });
 
-  const discussions = postsData?.pages.flatMap((page) => page.discussions) || [];
+  const discussions =
+    postsData?.pages.flatMap((page) => page.discussions) || [];
   if (isLoading) {
     return (
       <div className="w-full">
@@ -88,7 +92,10 @@ export function PostList({
   return (
     <div className="w-full">
       {discussions.map((discussion, index) => (
-        <div key={discussion.id} className={index < discussions.length - 1 ? "mb-6" : ""}>
+        <div
+          key={discussion.id}
+          className={index < discussions.length - 1 ? "mb-6" : ""}
+        >
           <PostCard
             discussion={discussion}
             onLike={onLike}

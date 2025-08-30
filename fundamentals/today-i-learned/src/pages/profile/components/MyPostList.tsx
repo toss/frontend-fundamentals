@@ -3,7 +3,7 @@ import { cn } from "@/libs/utils";
 import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
 import { useUserProfile } from "@/api/hooks/useUser";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
-import { PostCard } from "@/components/features/discussions/PostCard";
+import { PostCard } from "@/components/features/discussions/LegacyPostCard";
 import { LoadingSpinner } from "@/components/shared/ui/LoadingSpinner";
 import { Button } from "@/components/shared/ui/Button";
 import { PAGE_SIZE } from "@/constants/github";

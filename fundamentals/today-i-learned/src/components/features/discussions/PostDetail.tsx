@@ -1,15 +1,11 @@
-import {
-  Heart,
-  MessageCircle,
-  ChevronUp
-} from "lucide-react";
+import { Heart, MessageCircle, ChevronUp } from "lucide-react";
 import { useState } from "react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
-import { 
+import {
   useDiscussionDetail,
   useAddDiscussionComment,
-  useToggleDiscussionReaction 
+  useToggleDiscussionReaction
 } from "@/api/hooks/useDiscussions";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -55,7 +51,8 @@ export function PostDetail({
   const { user } = useAuth();
 
   // GitHub API 훅들
-  const { data: discussionDetail, isLoading: isDetailLoading } = useDiscussionDetail(discussion.id);
+  const { data: discussionDetail, isLoading: isDetailLoading } =
+    useDiscussionDetail(discussion.id);
   const addCommentMutation = useAddDiscussionComment();
   const toggleReactionMutation = useToggleDiscussionReaction();
 
@@ -84,23 +81,23 @@ export function PostDetail({
     }
   };
 
-  const handleReaction = async (type: 'like' | 'upvote') => {
+  const handleReaction = async (type: "like" | "upvote") => {
     if (!user?.accessToken) return;
-    
+
     try {
-      const reactionContent = type === 'like' ? 'HEART' : 'THUMBS_UP';
+      const reactionContent = type === "like" ? "HEART" : "THUMBS_UP";
       // TODO: 현재 반응 상태를 확인하는 로직 필요
       const isReacted = false; // 임시값
-      
+
       await toggleReactionMutation.mutateAsync({
         subjectId: discussion.id,
         isReacted,
         content: reactionContent as any
       });
-      
+
       // 기존 콜백도 호출 (UI 업데이트용)
-      if (type === 'like' && onLike) onLike(discussion.id);
-      if (type === 'upvote' && onUpvote) onUpvote(discussion.id);
+      if (type === "like" && onLike) onLike(discussion.id);
+      if (type === "upvote" && onUpvote) onUpvote(discussion.id);
     } catch (error) {
       console.error("반응 처리 실패:", error);
     }
@@ -152,7 +149,7 @@ export function PostDetail({
       {/* 상호작용 버튼들 */}
       <div className="flex items-start gap-4 py-2">
         <button
-          onClick={() => handleReaction('upvote')}
+          onClick={() => handleReaction("upvote")}
           className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
           disabled={toggleReactionMutation.isPending}
         >
@@ -165,7 +162,7 @@ export function PostDetail({
         </button>
 
         <button
-          onClick={() => handleReaction('like')}
+          onClick={() => handleReaction("like")}
           className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
           disabled={toggleReactionMutation.isPending}
         >
@@ -216,13 +213,13 @@ export function PostDetail({
               rows={1}
               onInput={(e) => {
                 const target = e.target as HTMLTextAreaElement;
-                target.style.height = 'auto';
+                target.style.height = "auto";
                 target.style.height = `${Math.min(target.scrollHeight, 120)}px`;
               }}
             />
           </div>
           <div className="flex justify-end">
-            <button 
+            <button
               onClick={handleCommentSubmit}
               disabled={!commentText.trim() || addCommentMutation.isPending}
               className="flex justify-center items-center px-6 py-[18px] gap-[10px] w-24 h-[46px] bg-[#0F0F0F] hover:bg-[#333333] disabled:bg-black/20 disabled:cursor-not-allowed rounded-[200px] font-bold text-[14px] leading-[130%] tracking-[-0.4px] text-[#FCFCFC] transition-colors"
