@@ -6,13 +6,17 @@ import { WeeklyTop5 } from "@/components/features/discussions/WeeklyTop5";
 import { SprintChallenge } from "./components/SprintChallenge";
 import { useAuth } from "@/contexts/AuthContext";
 import type { SortOption } from "./utils/types";
-import { useCreateDiscussion } from "@/api/hooks/useDiscussions";
+import { useCreateDiscussion, useToggleDiscussionReaction } from "@/api/hooks/useDiscussions";
+import { useErrorHandler } from "@/hooks/useErrorHandler";
+import { useToast } from "@/components/shared/ui/Toast";
 
 export function NewHomePage() {
   const { user } = useAuth();
   const [sortOption, setSortOption] = React.useState<SortOption>("newest");
 
   const createPostMutation = useCreateDiscussion();
+  const { handleApiError } = useErrorHandler();
+  const { success: showSuccessToast } = useToast();
 
   // sortOption에 따른 API 파라미터 계산
   const getPostListProps = () => {
@@ -47,8 +51,9 @@ export function NewHomePage() {
         title: data.title,
         body: data.content
       });
+      showSuccessToast("포스트 작성 완료", "오늘 배운 내용이 성공적으로 게시되었습니다.");
     } catch (error) {
-      console.error("Failed to create post:", error);
+      handleApiError(error, "포스트 작성");
     }
   };
 
@@ -56,20 +61,40 @@ export function NewHomePage() {
     setSortOption(option);
   };
 
-  const handleLike = (postId: string) => {
-    console.log("Like post:", postId);
+  const toggleReactionMutation = useToggleDiscussionReaction();
+
+  const handleLike = async (postId: string) => {
+    if (!user?.accessToken) return;
+    
+    try {
+      await toggleReactionMutation.mutateAsync({
+        subjectId: postId,
+        isReacted: false, // TODO: 현재 반응 상태 확인 로직 필요
+        content: 'HEART'
+      });
+    } catch (error) {
+      handleApiError(error, "좋아요");
+    }
   };
 
   const handleComment = (postId: string) => {
+    // TODO: 댓글 모달 또는 댓글 입력 영역으로 이동
     console.log("Comment on post:", postId);
   };
 
-  const handleShare = (postId: string) => {
-    console.log("Share post:", postId);
-  };
 
-  const handleUpvote = (postId: string) => {
-    console.log("Upvote post:", postId);
+  const handleUpvote = async (postId: string) => {
+    if (!user?.accessToken) return;
+    
+    try {
+      await toggleReactionMutation.mutateAsync({
+        subjectId: postId,
+        isReacted: false, // TODO: 현재 반응 상태 확인 로직 필요
+        content: 'THUMBS_UP'
+      });
+    } catch (error) {
+      handleApiError(error, "업보트");
+    }
   };
 
   const handlePopularPostClick = (postId: string) => {
@@ -131,8 +156,11 @@ export function NewHomePage() {
                 {...getPostListProps()}
                 onLike={handleLike}
                 onComment={handleComment}
-                onShare={handleShare}
                 onUpvote={handleUpvote}
+                onDelete={(postId) => {
+                  // TODO: 삭제 기능 구현
+                  console.log("Delete post:", postId);
+                }}
               />
             </div>
           </div>

@@ -2,7 +2,6 @@ import { useCallback } from "react";
 import { PostCard, PostCardSkeleton } from "./PostCard";
 import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
-import type { GitHubDiscussion } from "@/api/remote/discussions";
 
 interface PostListProps {
   owner?: string;
@@ -14,33 +13,8 @@ interface PostListProps {
   };
   onLike: (postId: string) => void;
   onComment: (postId: string) => void;
-  onShare: (postId: string) => void;
   onUpvote: (postId: string) => void;
   onDelete?: (postId: string) => void;
-}
-
-// GitHub Discussion을 Post 타입으로 변환하는 함수
-function convertGitHubDiscussionToPost(discussion: GitHubDiscussion) {
-  return {
-    id: discussion.id,
-    title: discussion.title,
-    content: discussion.body,
-    author: {
-      id: discussion.author.login,
-      name: discussion.author.login,
-      username: discussion.author.login,
-      avatar: discussion.author.avatarUrl
-    },
-    createdAt: discussion.createdAt,
-    category: discussion.category?.name || "Today I Learned",
-    tags: [],
-    stats: {
-      hearts: discussion.reactions.totalCount,
-      comments: discussion.comments.totalCount,
-      shares: 0,
-      upvotes: discussion.reactions.totalCount
-    }
-  };
 }
 
 export function PostList({
@@ -51,7 +25,6 @@ export function PostList({
   filterBy,
   onLike,
   onComment,
-  onShare,
   onUpvote,
   onDelete
 }: PostListProps) {
@@ -81,11 +54,7 @@ export function PostList({
     rootMargin: "300px"
   });
 
-  const posts = postsData?.pages.flatMap((page) =>
-    page.discussions.map((discussion) =>
-      convertGitHubDiscussionToPost(discussion)
-    )
-  ) || [];
+  const discussions = postsData?.pages.flatMap((page) => page.discussions) || [];
   if (isLoading) {
     return (
       <div className="w-full">
@@ -98,7 +67,7 @@ export function PostList({
     );
   }
 
-  if (posts.length === 0) {
+  if (discussions.length === 0) {
     return (
       <div className="w-full flex flex-col items-center justify-center py-12 px-4">
         <div className="text-center space-y-3">
@@ -118,13 +87,12 @@ export function PostList({
 
   return (
     <div className="w-full">
-      {posts.map((post, index) => (
-        <div key={post.id} className={index < posts.length - 1 ? "mb-6" : ""}>
+      {discussions.map((discussion, index) => (
+        <div key={discussion.id} className={index < discussions.length - 1 ? "mb-6" : ""}>
           <PostCard
-            post={post}
+            discussion={discussion}
             onLike={onLike}
             onComment={onComment}
-            onShare={onShare}
             onUpvote={onUpvote}
             onDelete={onDelete}
           />

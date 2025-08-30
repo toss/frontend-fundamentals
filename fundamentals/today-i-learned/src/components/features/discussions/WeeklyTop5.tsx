@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { X, ExternalLink } from "lucide-react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { useWeeklyTopDiscussions } from "@/api/hooks/useDiscussions";
+import type { GitHubDiscussion } from "@/api/remote/discussions";
 import { PostDetail } from "@/pages/newHome/components/PostDetail";
 import { AlertDialog } from "@/components/shared/ui/AlertDialog";
-import type { Post } from "@/pages/newHome/utils/types";
 
 interface WeeklyTop5Props {
   onPostClick?: (postId: string) => void;
@@ -29,28 +29,6 @@ function truncateText(text: string, maxLength: number): string {
   return text.slice(0, maxLength) + "...";
 }
 
-function convertGitHubDiscussionToPost(discussion: any): Post {
-  return {
-    id: discussion.id,
-    title: discussion.title,
-    content: discussion.body,
-    author: {
-      id: discussion.author.login,
-      name: discussion.author.login,
-      username: discussion.author.login,
-      avatar: discussion.author.avatarUrl
-    },
-    createdAt: discussion.createdAt,
-    category: discussion.category?.name || "Today I Learned",
-    tags: [],
-    stats: {
-      hearts: discussion.reactions.totalCount,
-      comments: discussion.comments.totalCount,
-      shares: 0,
-      upvotes: discussion.reactions.totalCount
-    }
-  };
-}
 
 function PopularPostItem({
   post,
@@ -59,13 +37,12 @@ function PopularPostItem({
 }: {
   post: any;
   rank: number;
-  onPostClick: (postId: string, post: Post) => void;
+  onPostClick: (postId: string, discussion: GitHubDiscussion) => void;
 }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    const convertedPost = convertGitHubDiscussionToPost(post);
-    onPostClick(post.id, convertedPost);
+    onPostClick(post.id, post);
   };
 
   const handleExternalClick = (e: React.MouseEvent) => {
@@ -119,7 +96,7 @@ function PopularPostItem({
 }
 
 export function WeeklyTop5({ onPostClick }: WeeklyTop5Props) {
-  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+  const [selectedPost, setSelectedPost] = useState<GitHubDiscussion | null>(null);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
 
   const { data: discussions, isLoading } = useWeeklyTopDiscussions({
@@ -128,8 +105,8 @@ export function WeeklyTop5({ onPostClick }: WeeklyTop5Props) {
 
   const weekText = getWeekLabel();
 
-  const handlePostClick = (postId: string, post: Post) => {
-    setSelectedPost(post);
+  const handlePostClick = (postId: string, discussion: GitHubDiscussion) => {
+    setSelectedPost(discussion);
     setIsDetailModalOpen(true);
     onPostClick?.(postId);
   };
@@ -142,9 +119,6 @@ export function WeeklyTop5({ onPostClick }: WeeklyTop5Props) {
     console.log("Comment on post:", postId);
   };
 
-  const handleShare = (postId: string) => {
-    console.log("Share post:", postId);
-  };
 
   const handleUpvote = (postId: string) => {
     console.log("Upvote post:", postId);
@@ -250,10 +224,9 @@ export function WeeklyTop5({ onPostClick }: WeeklyTop5Props) {
             {/* 본문 영역 */}
             <div className="w-[800px] h-[696px] px-6 z-[1] overflow-y-auto">
               <PostDetail
-                post={selectedPost}
+                discussion={selectedPost}
                 onLike={handleLike}
                 onComment={handleComment}
-                onShare={handleShare}
                 onUpvote={handleUpvote}
                 showComments={true}
               />

@@ -1,12 +1,11 @@
 import {
   Heart,
   MessageCircle,
-  Share,
   ChevronUp
 } from "lucide-react";
 import { useState } from "react";
 import { Avatar } from "@/components/shared/ui/Avatar";
-import type { Post } from "../utils/types";
+import type { GitHubDiscussion } from "@/api/remote/discussions";
 import { 
   useDiscussionDetail,
   useAddDiscussionComment,
@@ -15,10 +14,9 @@ import {
 import { useAuth } from "@/contexts/AuthContext";
 
 interface PostDetailProps {
-  post: Post;
+  discussion: GitHubDiscussion;
   onLike?: (postId: string) => void;
   onComment?: (postId: string) => void;
-  onShare?: (postId: string) => void;
   onUpvote?: (postId: string) => void;
   onDelete?: (postId: string) => void;
   showComments?: boolean;
@@ -47,10 +45,9 @@ function formatTimeAgo(dateString: string): string {
 }
 
 export function PostDetail({
-  post,
+  discussion,
   onLike,
   onComment,
-  onShare,
   onUpvote,
   showComments = true
 }: PostDetailProps) {
@@ -58,41 +55,26 @@ export function PostDetail({
   const { user } = useAuth();
 
   // GitHub API 훅들
-  const { data: discussionDetail, isLoading: isDetailLoading } = useDiscussionDetail(post.id);
+  const { data: discussionDetail, isLoading: isDetailLoading } = useDiscussionDetail(discussion.id);
   const addCommentMutation = useAddDiscussionComment();
   const toggleReactionMutation = useToggleDiscussionReaction();
 
-  // 실제 포스트 데이터 (API에서 가져온 상세 데이터 우선 사용)
-  const actualPost = discussionDetail || post;
+  const actualDiscussion = discussionDetail || discussion;
   const comments = discussionDetail?.comments?.nodes || [];
 
-  // 안전한 방식으로 작성자 정보 추출
-  const getAuthorInfo = () => {
-    if (discussionDetail && 'author' in discussionDetail) {
-      return {
-        src: discussionDetail.author.avatarUrl,
-        alt: discussionDetail.author.login,
-        fallback: discussionDetail.author.login,
-        name: discussionDetail.author.login,
-        username: discussionDetail.author.login
-      };
-    }
-    return {
-      src: post.author.avatar,
-      alt: post.author.name,
-      fallback: post.author.name,
-      name: post.author.name,
-      username: post.author.username
-    };
+  const authorInfo = {
+    src: actualDiscussion.author.avatarUrl,
+    alt: actualDiscussion.author.login,
+    fallback: actualDiscussion.author.login,
+    name: actualDiscussion.author.login,
+    username: actualDiscussion.author.login
   };
-
-  const authorInfo = getAuthorInfo();
 
   const handleCommentSubmit = async () => {
     if (commentText.trim() && user?.accessToken) {
       try {
         await addCommentMutation.mutateAsync({
-          discussionId: post.id,
+          discussionId: discussion.id,
           body: commentText
         });
         setCommentText("");
@@ -111,14 +93,14 @@ export function PostDetail({
       const isReacted = false; // 임시값
       
       await toggleReactionMutation.mutateAsync({
-        subjectId: post.id,
+        subjectId: discussion.id,
         isReacted,
         content: reactionContent as any
       });
       
       // 기존 콜백도 호출 (UI 업데이트용)
-      if (type === 'like' && onLike) onLike(post.id);
-      if (type === 'upvote' && onUpvote) onUpvote(post.id);
+      if (type === 'like' && onLike) onLike(discussion.id);
+      if (type === 'upvote' && onUpvote) onUpvote(discussion.id);
     } catch (error) {
       console.error("반응 처리 실패:", error);
     }
@@ -146,7 +128,7 @@ export function PostDetail({
               ·
             </span>
             <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-              {formatTimeAgo(actualPost.createdAt || post.createdAt)}
+              {formatTimeAgo(actualDiscussion.createdAt)}
             </span>
           </div>
         </div>
@@ -156,13 +138,13 @@ export function PostDetail({
       <div className="flex flex-col gap-8">
         {/* 제목 */}
         <h2 className="font-bold text-[22px] leading-[130%] tracking-[-0.4px] text-[#0F0F0F]">
-          {actualPost.title || post.title}
+          {actualDiscussion.title}
         </h2>
 
         {/* 내용 */}
         <div className="flex flex-col gap-6">
           <div className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80 whitespace-pre-wrap">
-            {'body' in actualPost ? actualPost.body : post.content}
+            {actualDiscussion.body}
           </div>
         </div>
       </div>
@@ -178,7 +160,7 @@ export function PostDetail({
             <ChevronUp className="w-full h-full stroke-black/40 stroke-[1.67px]" />
           </div>
           <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-            {formatNumber(('reactions' in actualPost ? actualPost.reactions?.totalCount : post.stats?.upvotes) || 0)}
+            {formatNumber(actualDiscussion.reactions.totalCount)}
           </span>
         </button>
 
@@ -191,31 +173,19 @@ export function PostDetail({
             <Heart className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
           </div>
           <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-            {formatNumber(('reactions' in actualPost ? actualPost.reactions?.totalCount : post.stats?.hearts) || 0)}
+            {formatNumber(actualDiscussion.reactions.totalCount)}
           </span>
         </button>
 
         <button
-          onClick={() => onComment?.(post.id)}
+          onClick={() => onComment?.(discussion.id)}
           className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
         >
           <div className="w-5 h-5">
             <MessageCircle className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
           </div>
           <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-            {formatNumber(('comments' in actualPost ? actualPost.comments?.totalCount : post.stats?.comments) || 0)}
-          </span>
-        </button>
-
-        <button
-          onClick={() => onShare?.(post.id)}
-          className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
-        >
-          <div className="w-5 h-5">
-            <Share className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
-          </div>
-          <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-            {formatNumber(post.stats?.shares || 0)}
+            {formatNumber(actualDiscussion.comments.totalCount)}
           </span>
         </button>
       </div>

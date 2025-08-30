@@ -1,7 +1,6 @@
 import {
   Heart,
   MessageCircle,
-  Share,
   ChevronUp,
   X,
   ExternalLink
@@ -12,14 +11,13 @@ import { Card } from "@/components/shared/ui/Card";
 import { useWritePostModal } from "../hooks/useWritePostModal";
 import { PostMoreMenu } from "./PostMoreMenu";
 import { PostDetail } from "./PostDetail";
-import type { Post } from "../utils/types";
+import type { GitHubDiscussion } from "@/api/remote/discussions";
 import { AlertDialog } from "@/components/shared/ui/AlertDialog";
 
 interface PostCardProps {
-  post: Post;
+  discussion: GitHubDiscussion;
   onLike: (postId: string) => void;
   onComment: (postId: string) => void;
-  onShare: (postId: string) => void;
   onUpvote: (postId: string) => void;
   onDelete?: (postId: string) => void;
 }
@@ -51,10 +49,9 @@ export function PostCardSkeleton() {
 }
 
 export function PostCard({
-  post,
+  discussion,
   onLike,
   onComment,
-  onShare,
   onUpvote,
   onDelete
 }: PostCardProps) {
@@ -82,35 +79,35 @@ export function PostCard({
           <div className="flex items-center gap-3 min-w-0 flex-1">
             <Avatar
               size="40"
-              src={post.author.avatar}
-              alt={post.author.name}
-              fallback={post.author.name}
+              src={discussion.author.avatarUrl}
+              alt={discussion.author.login}
+              fallback={discussion.author.login}
               className="shrink-0"
             />
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2 flex-wrap">
                 <h4 className="font-bold text-[20px] leading-[130%] tracking-[-0.4px] text-black/80 truncate">
-                  {post.author.name}
+                  {discussion.author.login}
                 </h4>
                 <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-                  @{post.author.username}
+                  @{discussion.author.login}
                 </span>
                 <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
                   ·
                 </span>
                 <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-                  {formatTimeAgo(post.createdAt)}
+                  {formatTimeAgo(discussion.createdAt)}
                 </span>
               </div>
             </div>
           </div>
 
           {/* 더보기 메뉴 (본인 글인 경우만) */}
-          {post.isOwn && (
+          {discussion.author.login === 'currentUser' && (
             <div onClick={(e) => e.stopPropagation()}>
               <PostMoreMenu
                 onEdit={openModal}
-                onDelete={() => onDelete?.(post.id)}
+                onDelete={() => onDelete?.(discussion.id)}
               />
             </div>
           )}
@@ -122,12 +119,12 @@ export function PostCard({
           <div className="flex flex-col gap-5">
             {/* 제목 */}
             <h2 className="font-bold text-[22px] leading-[130%] tracking-[-0.4px] text-[#0F0F0F] hover:text-gray-700 transition-colors">
-              {post.title}
+              {discussion.title}
             </h2>
 
             {/* 내용 미리보기 */}
             <p className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80 line-clamp-2 hover:text-black/60 transition-colors">
-              {post.content}
+              {discussion.body}
             </p>
           </div>
         </div>
@@ -137,7 +134,7 @@ export function PostCard({
           <button
             onClick={(e) => {
               e.stopPropagation();
-              onUpvote(post.id);
+              onUpvote(discussion.id);
             }}
             className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
           >
@@ -145,14 +142,14 @@ export function PostCard({
               <ChevronUp className="w-full h-full stroke-black/40 stroke-[1.67px]" />
             </div>
             <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-              {formatNumber(post.stats.upvotes)}
+              {formatNumber(discussion.reactions.totalCount)}
             </span>
           </button>
 
           <button
             onClick={(e) => {
               e.stopPropagation();
-              onLike(post.id);
+              onLike(discussion.id);
             }}
             className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
           >
@@ -160,14 +157,14 @@ export function PostCard({
               <Heart className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
             </div>
             <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-              {formatNumber(post.stats.hearts)}
+              {formatNumber(discussion.reactions.totalCount)}
             </span>
           </button>
 
           <button
             onClick={(e) => {
               e.stopPropagation();
-              onComment(post.id);
+              onComment(discussion.id);
             }}
             className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
           >
@@ -175,24 +172,10 @@ export function PostCard({
               <MessageCircle className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
             </div>
             <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-              {formatNumber(post.stats.comments)}
+              {formatNumber(discussion.comments.totalCount)}
             </span>
           </button>
 
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onShare(post.id);
-            }}
-            className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
-          >
-            <div className="w-5 h-5">
-              <Share className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
-            </div>
-            <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-              {formatNumber(post.stats.shares)}
-            </span>
-          </button>
         </div>
       </div>
       {WritePostModal}
@@ -229,10 +212,9 @@ export function PostCard({
           {/* 본문 영역 */}
           <div className="w-[800px] h-[696px] px-6 z-[1] overflow-y-auto">
             <PostDetail
-              post={post}
+              discussion={discussion}
               onLike={onLike}
               onComment={onComment}
-              onShare={onShare}
               onUpvote={onUpvote}
               onDelete={onDelete}
               showComments={true}
