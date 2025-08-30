@@ -1,121 +1,52 @@
 import * as React from "react";
+import { PostInput } from "./components/PostInput";
+import { FilterSection } from "./components/FilterSection";
+import { PostList } from "./components/PostList";
+import { WeeklyTop5 } from "@/components/features/discussions/WeeklyTop5";
+import { SprintChallenge } from "./components/SprintChallenge";
+import { useAuth } from "@/contexts/AuthContext";
+import type { SortOption } from "./utils/types";
 import {
-  PostInput,
-  FilterSection,
-  PostList,
-  MonthlyChallenge,
-  WeeklyTop5,
-  SprintChallenge
-} from "./components";
-import { mockChallenge, currentUser } from "./utils/mockData";
-import type { SortOption, Post, PopularPost } from "./utils/types";
-import {
-  useInfiniteDiscussions,
-  useWeeklyTopDiscussions,
-  useCreateDiscussion
+  useCreateDiscussion,
+  useToggleDiscussionReaction
 } from "@/api/hooks/useDiscussions";
-import type { GitHubDiscussion } from "@/api/remote/discussions";
-
-// GitHub Discussion을 Post 타입으로 변환하는 함수
-function convertGitHubDiscussionToPost(discussion: GitHubDiscussion): Post {
-  return {
-    id: discussion.id,
-    title: discussion.title,
-    content: discussion.body,
-    author: {
-      id: discussion.author.login, // User 타입의 id 속성 추가
-      name: discussion.author.login,
-      username: discussion.author.login,
-      avatar: discussion.author.avatarUrl
-    },
-    createdAt: discussion.createdAt,
-    category: discussion.category?.name || "Today I Learned", // 카테고리 추가
-    tags: [], // GitHub Discussions에는 직접적인 태그 필드가 없음
-    stats: {
-      hearts: discussion.reactions.totalCount,
-      comments: discussion.comments.totalCount,
-      shares: 0, // GitHub Discussions에는 공유 기능이 없음
-      upvotes: discussion.reactions.totalCount
-    }
-  };
-}
-
-// GitHub Discussion을 PopularPost 타입으로 변환하는 함수
-function convertGitHubDiscussionToPopularPost(
-  discussion: GitHubDiscussion,
-  rank: number
-): PopularPost {
-  return {
-    id: discussion.id,
-    title: discussion.title,
-    excerpt:
-      discussion.body.slice(0, 100) +
-      (discussion.body.length > 100 ? "..." : ""),
-    author: {
-      id: discussion.author.login,
-      name: discussion.author.login,
-      username: discussion.author.login,
-      avatar: discussion.author.avatarUrl
-    },
-    rank
-  };
-}
+import { useErrorHandler } from "@/hooks/useErrorHandler";
+import { useToast } from "@/components/shared/ui/Toast";
 
 export function NewHomePage() {
+  const { user } = useAuth();
   const [sortOption, setSortOption] = React.useState<SortOption>("newest");
 
+  const createPostMutation = useCreateDiscussion();
+  const { handleApiError } = useErrorHandler();
+  const { success: showSuccessToast } = useToast();
+
   // sortOption에 따른 API 파라미터 계산
-  const getApiParams = () => {
+  const getPostListProps = () => {
     switch (sortOption) {
       case "newest":
-        return { sortBy: "latest" as const };
+        return {
+          categoryName: "Today I Learned",
+          sortBy: "latest" as const
+        };
       case "realtime":
-        return { sortBy: "lastActivity" as const };
+        return {
+          categoryName: "Today I Learned",
+          sortBy: "lastActivity" as const
+        };
       case "hall-of-fame":
         return {
+          categoryName: "Today I Learned",
           sortBy: "latest" as const,
           filterBy: { label: "성지 ⛲" }
         };
       default:
-        return { sortBy: "latest" as const };
+        return {
+          categoryName: "Today I Learned",
+          sortBy: "latest" as const
+        };
     }
   };
-
-  // 실제 API 연동
-  const {
-    data: postsData,
-    fetchNextPage,
-    hasNextPage,
-    isLoading,
-    isFetchingNextPage
-  } = useInfiniteDiscussions({
-    categoryName: "Today I Learned",
-    ...getApiParams(),
-    pageSize: 10
-  });
-
-  const { data: weeklyTopPosts, isLoading: isLoadingWeeklyTop } =
-    useWeeklyTopDiscussions({ limit: 5 });
-
-  const createPostMutation = useCreateDiscussion();
-
-  // Flatten infinite pages into single array and convert to Post type
-  const posts = React.useMemo(() => {
-    if (!postsData) return [];
-    return postsData.pages.flatMap((page) =>
-      page.discussions.map((discussion) =>
-        convertGitHubDiscussionToPost(discussion)
-      )
-    );
-  }, [postsData]);
-
-  // Convert weekly top posts to PopularPost type
-  const popularPosts = React.useMemo(() => {
-    if (!weeklyTopPosts) return [];
-    return weeklyTopPosts.map((discussion, index) =>
-      convertGitHubDiscussionToPopularPost(discussion, index + 1)
-    );
-  }, [weeklyTopPosts]);
 
   const handlePostSubmit = async (data: { title: string; content: string }) => {
     try {
@@ -123,8 +54,12 @@ export function NewHomePage() {
         title: data.title,
         body: data.content
       });
+      showSuccessToast(
+        "포스트 작성 완료",
+        "오늘 배운 내용이 성공적으로 게시되었습니다."
+      );
     } catch (error) {
-      console.error("Failed to create post:", error);
+      handleApiError(error, "포스트 작성");
     }
   };
 
@@ -132,28 +67,39 @@ export function NewHomePage() {
     setSortOption(option);
   };
 
-  const handleLike = (postId: string) => {
-    console.log("Like post:", postId);
+  const toggleReactionMutation = useToggleDiscussionReaction();
+
+  const handleLike = async (postId: string) => {
+    if (!user?.accessToken) return;
+
+    try {
+      await toggleReactionMutation.mutateAsync({
+        subjectId: postId,
+        isReacted: false, // TODO: 현재 반응 상태 확인 로직 필요
+        content: "HEART"
+      });
+    } catch (error) {
+      handleApiError(error, "좋아요");
+    }
   };
 
   const handleComment = (postId: string) => {
+    // TODO: 댓글 모달 또는 댓글 입력 영역으로 이동
     console.log("Comment on post:", postId);
   };
 
-  const handleShare = (postId: string) => {
-    console.log("Share post:", postId);
-  };
+  const handleUpvote = async (postId: string) => {
+    if (!user?.accessToken) return;
 
-  const handleUpvote = (postId: string) => {
-    console.log("Upvote post:", postId);
-  };
-
-  const handleDayClick = (day: number) => {
-    console.log("Challenge day clicked:", day);
-  };
-
-  const handlePopularPostClick = (postId: string) => {
-    console.log("Popular post clicked:", postId);
+    try {
+      await toggleReactionMutation.mutateAsync({
+        subjectId: postId,
+        isReacted: false, // TODO: 현재 반응 상태 확인 로직 필요
+        content: "THUMBS_UP"
+      });
+    } catch (error) {
+      handleApiError(error, "업보트");
+    }
   };
 
   return (
@@ -175,7 +121,21 @@ export function NewHomePage() {
 
             {/* 포스트 입력 */}
             <div className="lg:px-6 pt-6 pb-0">
-              <PostInput user={currentUser} onSubmit={handlePostSubmit} />
+              {user ? (
+                <PostInput
+                  user={{
+                    id: user.login,
+                    name: user.name || user.login,
+                    username: user.login,
+                    avatar: user.avatar_url
+                  }}
+                  onSubmit={handlePostSubmit}
+                />
+              ) : (
+                <div className="text-center py-8 text-gray-500">
+                  로그인이 필요합니다.
+                </div>
+              )}
             </div>
 
             {/* 구분선 */}
@@ -194,27 +154,23 @@ export function NewHomePage() {
             {/* 포스트 리스트 */}
             <div className="lg:px-6 pb-0">
               <PostList
-                posts={posts}
+                {...getPostListProps()}
                 onLike={handleLike}
                 onComment={handleComment}
-                onShare={handleShare}
                 onUpvote={handleUpvote}
-                isLoading={isLoading}
-                hasNextPage={hasNextPage}
-                fetchNextPage={fetchNextPage}
-                isFetchingNextPage={isFetchingNextPage}
+                onDelete={(postId) => {
+                  // TODO: 삭제 기능 구현
+                  console.log("Delete post:", postId);
+                }}
               />
             </div>
           </div>
 
           {/* 오른쪽 컬럼: 사이드바 (1024px 이상에서만 표시) */}
           <div className="hidden lg:block mt-[24px] lg:min-w-[490px]">
-            {/* 주간 Top 5 */}
-            <WeeklyTop5
-              posts={popularPosts}
-              weekInfo="8월 첫째주 인기글"
-              onPostClick={handlePopularPostClick}
-            />
+            <div className="sticky top-4">
+              <WeeklyTop5 />
+            </div>
           </div>
         </div>
       </div>

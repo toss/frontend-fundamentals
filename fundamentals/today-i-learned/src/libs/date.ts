@@ -53,3 +53,15 @@ export const formatDateTime = (dateString: string): string => {
     minute: "2-digit"
   });
 };
+
+export const getCurrentWeekInfo = (): string => {
+  const now = new Date();
+  const month = now.getMonth() + 1;
+  const date = now.getDate();
+  const weekNumber = Math.ceil(date / 7);
+
+  const weekNames = ["첫째", "둘째", "셋째", "넷째"];
+  const weekName = weekNames[weekNumber - 1] || "마지막";
+
+  return `${month}월 ${weekName}주`;
+};

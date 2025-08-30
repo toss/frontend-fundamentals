@@ -1,5 +1,5 @@
-import { Card } from "../ui";
-import { cn } from "../utils/cn";
+import { Card } from "@/components/shared/ui/Card";
+import { cn } from "@/lib/utils/cn";
 import type { MonthlyChallengeProps, ChallengeDay } from "../utils/types";
 
 const MONTH_NAMES = [
@@ -74,8 +74,7 @@ function ChallengeDayItem({
 }
 
 export function MonthlyChallenge({
-  challenge,
-  onDayClick
+  challenge
 }: MonthlyChallengeProps) {
   const monthName = MONTH_NAMES[challenge.month - 1];
 

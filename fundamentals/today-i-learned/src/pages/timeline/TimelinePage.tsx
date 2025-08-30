@@ -3,7 +3,7 @@ import { CreatePost } from "./components/CreatePost";
 import { PostList } from "./components/PostList";
 import { MyStreak } from "../profile/components/MyStreak";
 import { CategoryTabs, TabContent } from "./components/CategoryTabs";
-import { WeeklyTop5 } from "./components/WeeklyTop5";
+import { WeeklyTop5 } from "@/components/features/discussions/WeeklyTop5";
 import type { PostCategory } from "@/types";
 import { useCreateDiscussion } from "@/api/hooks/useDiscussions";
 

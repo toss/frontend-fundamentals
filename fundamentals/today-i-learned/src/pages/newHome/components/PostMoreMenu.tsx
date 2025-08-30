@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { MoreHorizontal } from "lucide-react";
-import { Button } from "../ui";
-import { AlertDialog } from "../ui/AlertDialog";
+import { Button } from "@/components/shared/ui/Button";
+import { AlertDialog } from "@/components/shared/ui/AlertDialog";
 
 interface PostMoreMenuProps {
   onEdit: () => void;
@@ -58,10 +58,6 @@ export function PostMoreMenu({ onEdit, onDelete }: PostMoreMenuProps) {
     setIsDeleteModalOpen(false);
   };
 
-  const handleCancelDelete = () => {
-    setIsDeleteModalOpen(false);
-  };
-
   return (
     <div className="relative">
       <Button
@@ -96,7 +92,7 @@ export function PostMoreMenu({ onEdit, onDelete }: PostMoreMenuProps) {
       )}
 
       <AlertDialog open={isDeleteModalOpen} onOpenChange={setIsDeleteModalOpen}>
-        <AlertDialog.Content 
+        <AlertDialog.Content
           showCloseButton
           className="w-[343px] h-[230px] bg-[#FCFCFC] rounded-[16px] flex flex-col items-center p-6 gap-8"
         >
@@ -105,11 +101,12 @@ export function PostMoreMenu({ onEdit, onDelete }: PostMoreMenuProps) {
               글을 삭제하시겠습니까?
             </h2>
             <p className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80 text-center">
-              댓글과 반응도 함께 삭제됩니다.<br />
+              댓글과 반응도 함께 삭제됩니다.
+              <br />
               삭제 후에는 복구할 수 없습니다.
             </p>
           </div>
-          
+
           <button
             onClick={handleConfirmDelete}
             className="w-24 h-[46px] bg-[#0F0F0F] rounded-[200px] font-bold text-[14px] leading-[130%] tracking-[-0.4px] text-[#FCFCFC] hover:bg-black/90 transition-colors flex items-center justify-center"

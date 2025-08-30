@@ -1,5 +1,7 @@
 import * as React from "react";
-import { Avatar, Button, Input, Textarea } from "../ui";
+import { Avatar } from "@/components/shared/ui/Avatar";
+import { Button } from "@/components/shared/ui/Button";
+import { Input, Textarea } from "@/components/shared/ui/Input";
 import type { PostInputProps } from "../utils/types";
 
 export function PostInput({

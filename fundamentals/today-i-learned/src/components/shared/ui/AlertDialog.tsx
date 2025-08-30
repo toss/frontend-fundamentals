@@ -101,9 +101,7 @@ AlertDialog.Content = function AlertDialogContent({
   return (
     <RadixAlertDialog.Portal>
       <RadixAlertDialog.Overlay className={styles.overlay} />
-      <RadixAlertDialog.Content
-        className={clsx(styles.content, className)}
-      >
+      <RadixAlertDialog.Content className={clsx(styles.content, className)}>
         {showCloseButton && (
           <RadixAlertDialog.Cancel asChild>
             <button className={styles.closeButton} aria-label="Close">

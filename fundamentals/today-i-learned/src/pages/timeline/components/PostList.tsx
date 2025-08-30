@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { PostCard } from "@/components/features/discussions/PostCard";
+import { PostCard } from "@/components/features/discussions/LegacyPostCard";
 import { Button } from "@/components/shared/ui/Button";
 import { LoadingSpinner } from "@/components/shared/ui/LoadingSpinner";
 import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";

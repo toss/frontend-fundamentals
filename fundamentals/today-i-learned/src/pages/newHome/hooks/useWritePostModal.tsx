@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { X } from "lucide-react";
-import { AlertDialog } from "../ui/AlertDialog";
+import { AlertDialog } from "@/components/shared/ui/AlertDialog";
 
 interface UseWritePostModalOptions {
   onSubmit?: (content: string) => void;

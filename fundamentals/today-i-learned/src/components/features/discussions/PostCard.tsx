@@ -1,199 +1,186 @@
-import { memo, useState } from "react";
-import { Heart, MessageCircle, Share, Calendar, User } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Heart, MessageCircle, ChevronUp } from "lucide-react";
+import { useState } from "react";
+import { Avatar } from "@/components/shared/ui/Avatar";
+import { Card } from "@/components/shared/ui/Card";
+import { useWritePostModal } from "../../../pages/newHome/hooks/useWritePostModal";
+import { PostMoreMenu } from "../../../pages/newHome/components/PostMoreMenu";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
-import { cn } from "@/libs/utils";
-import { Button } from "../../shared/ui/Button";
-import { useToggleReaction } from "@/api/hooks/useReactions";
+import { PostDetailModal } from "@/components/features/discussions/PostDetailModal";
 
 interface PostCardProps {
   discussion: GitHubDiscussion;
-  onLike?: (id: string) => void;
-  onComment?: (id: string) => void;
-  isLast?: boolean;
-  isLoading?: boolean;
+  onLike: (postId: string) => void;
+  onComment: (postId: string) => void;
+  onUpvote: (postId: string) => void;
+  onDelete?: (postId: string) => void;
 }
 
-function formatRelativeTime(dateString: string): string {
-  const date = new Date(dateString);
+function formatNumber(num: number): string {
+  if (num >= 1000000) {
+    return (num / 1000000).toFixed(1) + "M";
+  }
+  if (num >= 1000) {
+    return (num / 1000).toFixed(1) + "K";
+  }
+  return num.toString();
+}
+
+function formatTimeAgo(dateString: string): string {
   const now = new Date();
+  const date = new Date(dateString);
   const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
 
-  if (diffInSeconds < 60) {
-    return "방금";
-  }
-  if (diffInSeconds < 3600) {
-    return `${Math.floor(diffInSeconds / 60)}분`;
-  }
-  if (diffInSeconds < 86400) {
-    return `${Math.floor(diffInSeconds / 3600)}시간`;
-  }
-  if (diffInSeconds < 2592000) {
-    return `${Math.floor(diffInSeconds / 86400)}일`;
-  }
-
-  return date.toLocaleDateString("ko-KR", {
-    month: "numeric",
-    day: "numeric"
-  });
+  if (diffInSeconds < 60) return "방금 전";
+  if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)}분 전`;
+  if (diffInSeconds < 86400)
+    return `${Math.floor(diffInSeconds / 3600)}시간 전`;
+  return `${Math.floor(diffInSeconds / 86400)}일 전`;
 }
 
-function PostCardComponent({ discussion, onLike, onComment }: PostCardProps) {
-  const [likeCount, setLikeCount] = useState(discussion.reactions.totalCount);
-  const [isLiked, setIsLiked] = useState(false);
-  const { toggleLike, isLoading: isTogglingLike } = useToggleReaction();
-  const navigate = useNavigate();
+export function PostCardSkeleton() {
+  return <div className="w-full h-[322px] bg-black/[0.03] rounded-2xl" />;
+}
 
-  const handleLike = async () => {
-    // 현재 상태 저장 (롤백용)
-    const previousIsLiked = isLiked;
-    const previousLikeCount = likeCount;
-
-    try {
-      // 즉시 낙관적 업데이트
-      const newIsLiked = !isLiked;
-      setIsLiked(newIsLiked);
-      setLikeCount(newIsLiked ? previousLikeCount + 1 : previousLikeCount - 1);
-
-      // GitHub API 호출
-      await toggleLike(discussion.id, previousIsLiked);
-
-      // 기존 onLike 콜백도 호출 (호환성 유지)
-      onLike?.(discussion.id);
-    } catch (error) {
-      // 실패 시 이전 상태로 정확히 롤백
-      setIsLiked(previousIsLiked);
-      setLikeCount(previousLikeCount);
-      console.error("Failed to toggle like:", error);
+export function PostCard({
+  discussion,
+  onLike,
+  onComment,
+  onUpvote,
+  onDelete
+}: PostCardProps) {
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+  const { openModal, WritePostModal } = useWritePostModal({
+    onSubmit: (content) => {
+      console.log("Submitting post:", content);
+      // 실제로는 API 호출
     }
-  };
+  });
 
-  const handleComment = () => {
-    onComment?.(discussion.id);
+  const handlePostClick = () => {
+    setIsDetailModalOpen(true);
   };
-
-  const handleTitleClick = () => {
-    navigate(`/post/${discussion.id}`);
-  };
-
   return (
-    <article
-      className={cn(
-        "group relative rounded-2xl bg-white/60 backdrop-blur-sm border border-gray-100/50",
-        "p-6 shadow-[0_2px_15px_rgba(0,0,0,0.04)] transition-all duration-300",
-        "hover:shadow-[0_8px_30px_rgba(255,138,128,0.1)] hover:border-gray-200/60",
-        "hover:bg-white/80 hover:-translate-y-1"
-      )}
+    <Card
+      variant="bordered"
+      padding="none"
+      className="w-full cursor-pointer"
+      onClick={handlePostClick}
     >
-      <div className="flex items-start space-x-4">
-        {/* 프로필 이미지 */}
-        <div className="flex-shrink-0">
-          <img
-            src={discussion.author.avatarUrl}
-            alt={`${discussion.author.login}님의 프로필`}
-            className="h-10 w-10 rounded-full ring-2 ring-gray-200/30 shadow-sm"
-            loading="lazy"
-          />
+      <div className="flex flex-col p-6 gap-6">
+        {/* 헤더: 사용자 정보 */}
+        <div className="flex items-center justify-between h-10">
+          <div className="flex items-center gap-3 min-w-0 flex-1">
+            <Avatar
+              size="40"
+              src={discussion.author.avatarUrl}
+              alt={discussion.author.login}
+              fallback={discussion.author.login}
+              className="shrink-0"
+            />
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2 flex-wrap">
+                <h4 className="font-bold text-[20px] leading-[130%] tracking-[-0.4px] text-black/80 truncate">
+                  {discussion.author.login}
+                </h4>
+                <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
+                  @{discussion.author.login}
+                </span>
+                <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
+                  ·
+                </span>
+                <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
+                  {formatTimeAgo(discussion.createdAt)}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* 더보기 메뉴 (본인 글인 경우만) */}
+          {discussion.author.login === "currentUser" && (
+            <div onClick={(e) => e.stopPropagation()}>
+              <PostMoreMenu
+                onEdit={openModal}
+                onDelete={() => onDelete?.(discussion.id)}
+              />
+            </div>
+          )}
         </div>
 
-        {/* 메인 콘텐츠 */}
-        <div className="min-w-0 flex-1">
-          {/* 헤더 */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2 text-sm">
-              <span className="font-semibold text-gray-800">
-                {discussion.author.login}
-              </span>
-              <span className="text-gray-300">•</span>
-              <time
-                className="flex items-center space-x-1 text-gray-500"
-                dateTime={discussion.createdAt}
-              >
-                <Calendar className="h-3 w-3" />
-                <span>{formatRelativeTime(discussion.createdAt)}</span>
-              </time>
-            </div>
-            <div className="flex items-center space-x-1 rounded-full bg-gray-100/60 px-3 py-1 text-xs font-medium text-gray-600">
-              <span>{discussion.category.name}</span>
-            </div>
-          </div>
-
-          {/* 콘텐츠 */}
-          <div className="mt-4 space-y-3">
-            <h3 
-              onClick={handleTitleClick}
-              className="line-clamp-2 text-lg font-bold leading-6 text-gray-900 group-hover:text-gray-600 transition-colors duration-200 cursor-pointer hover:underline"
-            >
+        {/* 본문 */}
+        <div className="flex flex-col gap-5">
+          {/* 제목과 내용 */}
+          <div className="flex flex-col gap-5">
+            {/* 제목 */}
+            <h2 className="font-bold text-[22px] leading-[130%] tracking-[-0.4px] text-[#0F0F0F] hover:text-gray-700 transition-colors">
               {discussion.title}
-            </h3>
-            {discussion.body && (
-              <div 
-                onClick={handleTitleClick}
-                className="line-clamp-3 text-sm text-gray-600 leading-[1.7] cursor-pointer"
-              >
-                {discussion.body.length > 200
-                  ? `${discussion.body.slice(0, 200)}...`
-                  : discussion.body}
-              </div>
-            )}
+            </h2>
+
+            {/* 내용 미리보기 */}
+            <p className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80 line-clamp-2 hover:text-black/60 transition-colors">
+              {discussion.body}
+            </p>
           </div>
+        </div>
 
-          {/* 액션 버튼들 */}
-          <div className="mt-5 flex items-center justify-between border-t border-gray-100/40 pt-4">
-            <div className="flex items-center space-x-6">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={handleComment}
-                className="h-8 px-3 text-gray-500 hover:text-gray-700 hover:bg-gray-50/50 rounded-full transition-all duration-200"
-              >
-                <MessageCircle className="mr-1.5 h-4 w-4" />
-                <span className="text-xs font-medium">
-                  {discussion.comments.totalCount}
-                </span>
-              </Button>
-
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={handleLike}
-                disabled={isTogglingLike}
-                className={cn(
-                  "h-8 px-3 rounded-full transition-all duration-200",
-                  isLiked
-                    ? "text-red-500 hover:text-red-600 bg-red-50/50 hover:bg-red-50/80"
-                    : "text-gray-500 hover:text-red-500 hover:bg-red-50/50"
-                )}
-              >
-                <Heart
-                  className={cn(
-                    "mr-1.5 h-4 w-4 transition-all",
-                    isLiked && "fill-current"
-                  )}
-                />
-                <span className="text-xs font-medium">{likeCount}</span>
-              </Button>
-
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-8 px-3 text-gray-500 hover:text-gray-700 hover:bg-gray-50/50 rounded-full transition-all duration-200"
-              >
-                <Share className="h-4 w-4" />
-              </Button>
+        {/* 상호작용 버튼들 */}
+        <div className="flex items-start gap-4 pt-2">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onUpvote(discussion.id);
+            }}
+            className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
+          >
+            <div className="w-5 h-5">
+              <ChevronUp className="w-full h-full stroke-black/40 stroke-[1.67px]" />
             </div>
+            <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
+              {formatNumber(discussion.reactions.totalCount)}
+            </span>
+          </button>
 
-            <div className="text-xs text-gray-400">
-              <span className="flex items-center space-x-1">
-                <User className="h-3 w-3" />
-                <span>@{discussion.author.login}</span>
-              </span>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onLike(discussion.id);
+            }}
+            className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
+          >
+            <div className="w-5 h-5">
+              <Heart className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
             </div>
-          </div>
+            <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
+              {formatNumber(discussion.reactions.totalCount)}
+            </span>
+          </button>
+
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onComment(discussion.id);
+            }}
+            className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
+          >
+            <div className="w-5 h-5">
+              <MessageCircle className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
+            </div>
+            <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
+              {formatNumber(discussion.comments.totalCount)}
+            </span>
+          </button>
         </div>
       </div>
-    </article>
+      {WritePostModal}
+
+      <PostDetailModal
+        discussion={discussion}
+        isOpen={isDetailModalOpen}
+        onClose={() => setIsDetailModalOpen(false)}
+        onLike={onLike}
+        onComment={onComment}
+        onUpvote={onUpvote}
+        onDelete={onDelete}
+      />
+    </Card>
   );
 }
-
-export const PostCard = memo(PostCardComponent);

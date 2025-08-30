@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ChevronUp, MessageCircle } from "lucide-react";
-import { Avatar } from "../../newHome/ui";
+import { Avatar } from "@/components/shared/ui/Avatar";
 import { CommentInput } from "./CommentInput";
 import type { CommentProps } from "../../newHome/utils/types";
 import { formatTimeAgo, formatNumber } from "../utils/formatters";

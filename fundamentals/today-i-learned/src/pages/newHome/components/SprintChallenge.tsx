@@ -1,5 +1,3 @@
-import * as React from "react";
-
 interface SprintDay {
   day: number;
   label: string;
@@ -35,7 +33,10 @@ export function SprintChallenge() {
         <div className="flex flex-row justify-center items-start px-6 pb-2 gap-[10px] w-full">
           <div className="flex flex-row items-center gap-4">
             {sprintDays.map((day, index) => (
-              <div key={index} className="flex flex-col items-center pb-2 gap-3 w-[60px]">
+              <div
+                key={index}
+                className="flex flex-col items-center pb-2 gap-3 w-[60px]"
+              >
                 <div
                   className={`
                     flex flex-col justify-center items-center w-[60px] h-[60px] rounded-full

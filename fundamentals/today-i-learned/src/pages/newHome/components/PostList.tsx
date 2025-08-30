@@ -1,58 +1,68 @@
-import * as React from "react";
-import { PostCard, PostCardSkeleton } from "./PostCard";
-import type { PostListProps } from "../utils/types";
+import { useCallback } from "react";
+import {
+  PostCard,
+  PostCardSkeleton
+} from "../../../components/features/discussions/PostCard";
+import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
-interface ExtendedPostListProps extends PostListProps {
-  isLoading?: boolean;
-  hasNextPage?: boolean;
-  fetchNextPage?: () => void;
-  isFetchingNextPage?: boolean;
+interface PostListProps {
+  owner?: string;
+  repo?: string;
+  categoryName?: string;
+  sortBy?: "latest" | "lastActivity" | "created" | "popularity";
+  filterBy?: {
+    label?: string;
+  };
+  onLike: (postId: string) => void;
+  onComment: (postId: string) => void;
+  onUpvote: (postId: string) => void;
   onDelete?: (postId: string) => void;
 }
 
 export function PostList({
-  posts,
+  owner,
+  repo,
+  categoryName,
+  sortBy = "latest",
+  filterBy,
   onLike,
   onComment,
-  onShare,
   onUpvote,
-  isLoading = false,
-  hasNextPage = false,
-  fetchNextPage,
-  isFetchingNextPage = false,
   onDelete
-}: ExtendedPostListProps) {
-  const loadMoreRef = React.useRef<HTMLDivElement>(null);
+}: PostListProps) {
+  const {
+    data: postsData,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading
+  } = useInfiniteDiscussions({
+    owner,
+    repo,
+    categoryName,
+    sortBy,
+    filterBy
+  });
 
-  // Intersection Observer for infinite scroll
-  React.useEffect(() => {
-    if (!hasNextPage || !fetchNextPage || isFetchingNextPage) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const first = entries[0];
-        if (first.isIntersecting) {
-          fetchNextPage();
-        }
-      },
-      { threshold: 1.0 }
-    );
-
-    const currentRef = loadMoreRef.current;
-    if (currentRef) {
-      observer.observe(currentRef);
+  const handleLoadMore = useCallback(() => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
     }
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-    };
-  }, [hasNextPage, fetchNextPage, isFetchingNextPage]);
+  const { elementRef } = useIntersectionObserver({
+    enabled: hasNextPage && !isFetchingNextPage,
+    onIntersect: handleLoadMore,
+    rootMargin: "300px"
+  });
+
+  const discussions =
+    postsData?.pages.flatMap((page) => page.discussions) || [];
   if (isLoading) {
     return (
       <div className="w-full">
-        {[...Array(3)].map((_, index) => (
+        {[...new Array(3)].map((_, index) => (
           <div key={index} className={index < 2 ? "mb-6" : ""}>
             <PostCardSkeleton />
           </div>
@@ -61,7 +71,7 @@ export function PostList({
     );
   }
 
-  if (posts.length === 0) {
+  if (discussions.length === 0) {
     return (
       <div className="w-full flex flex-col items-center justify-center py-12 px-4">
         <div className="text-center space-y-3">
@@ -81,13 +91,15 @@ export function PostList({
 
   return (
     <div className="w-full">
-      {posts.map((post, index) => (
-        <div key={post.id} className={index < posts.length - 1 ? "mb-6" : ""}>
+      {discussions.map((discussion, index) => (
+        <div
+          key={discussion.id}
+          className={index < discussions.length - 1 ? "mb-6" : ""}
+        >
           <PostCard
-            post={post}
+            discussion={discussion}
             onLike={onLike}
             onComment={onComment}
-            onShare={onShare}
             onUpvote={onUpvote}
             onDelete={onDelete}
           />
@@ -96,7 +108,7 @@ export function PostList({
 
       {/* Load more trigger */}
       {hasNextPage && (
-        <div ref={loadMoreRef} className="w-full py-4 flex justify-center">
+        <div ref={elementRef} className="w-full py-4 flex justify-center">
           {isFetchingNextPage ? <PostCardSkeleton /> : null}
         </div>
       )}

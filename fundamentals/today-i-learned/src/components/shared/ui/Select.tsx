@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ChevronDown } from "lucide-react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "../utils/cn";
+import { cn } from "@/lib/utils/cn";
 
 const selectVariants = cva(
   "flex items-center justify-center gap-1.5 rounded-lg border border-black/8 bg-white text-sm font-bold transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 tracking-tight leading-[160%]",
