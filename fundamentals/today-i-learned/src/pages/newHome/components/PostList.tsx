@@ -1,56 +1,91 @@
-import * as React from "react";
+import { useCallback } from "react";
 import { PostCard, PostCardSkeleton } from "./PostCard";
-import type { PostListProps } from "../utils/types";
+import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import type { GitHubDiscussion } from "@/api/remote/discussions";
 
-interface ExtendedPostListProps extends PostListProps {
-  isLoading?: boolean;
-  hasNextPage?: boolean;
-  fetchNextPage?: () => void;
-  isFetchingNextPage?: boolean;
+interface PostListProps {
+  owner?: string;
+  repo?: string;
+  categoryName?: string;
+  sortBy?: "latest" | "lastActivity" | "created" | "popularity";
+  filterBy?: {
+    label?: string;
+  };
+  onLike: (postId: string) => void;
+  onComment: (postId: string) => void;
+  onShare: (postId: string) => void;
+  onUpvote: (postId: string) => void;
   onDelete?: (postId: string) => void;
 }
 
+// GitHub Discussion을 Post 타입으로 변환하는 함수
+function convertGitHubDiscussionToPost(discussion: GitHubDiscussion) {
+  return {
+    id: discussion.id,
+    title: discussion.title,
+    content: discussion.body,
+    author: {
+      id: discussion.author.login,
+      name: discussion.author.login,
+      username: discussion.author.login,
+      avatar: discussion.author.avatarUrl
+    },
+    createdAt: discussion.createdAt,
+    category: discussion.category?.name || "Today I Learned",
+    tags: [],
+    stats: {
+      hearts: discussion.reactions.totalCount,
+      comments: discussion.comments.totalCount,
+      shares: 0,
+      upvotes: discussion.reactions.totalCount
+    }
+  };
+}
+
 export function PostList({
-  posts,
+  owner,
+  repo,
+  categoryName,
+  sortBy = "latest",
+  filterBy,
   onLike,
   onComment,
   onShare,
   onUpvote,
-  isLoading = false,
-  hasNextPage = false,
-  fetchNextPage,
-  isFetchingNextPage = false,
   onDelete
-}: ExtendedPostListProps) {
-  const loadMoreRef = React.useRef<HTMLDivElement>(null);
+}: PostListProps) {
+  const {
+    data: postsData,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading
+  } = useInfiniteDiscussions({ 
+    owner, 
+    repo, 
+    categoryName, 
+    sortBy, 
+    filterBy 
+  });
 
-  // Intersection Observer for infinite scroll
-  React.useEffect(() => {
-    if (!hasNextPage || !fetchNextPage || isFetchingNextPage) {
-      return;
+  const handleLoadMore = useCallback(() => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
     }
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const first = entries[0];
-        if (first.isIntersecting) {
-          fetchNextPage();
-        }
-      },
-      { threshold: 1.0 }
-    );
+  const { elementRef } = useIntersectionObserver({
+    enabled: hasNextPage && !isFetchingNextPage,
+    onIntersect: handleLoadMore,
+    rootMargin: "300px"
+  });
 
-    const currentRef = loadMoreRef.current;
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-    };
-  }, [hasNextPage, fetchNextPage, isFetchingNextPage]);
+  const posts = postsData?.pages.flatMap((page) =>
+    page.discussions.map((discussion) =>
+      convertGitHubDiscussionToPost(discussion)
+    )
+  ) || [];
   if (isLoading) {
     return (
       <div className="w-full">
@@ -98,7 +133,7 @@ export function PostList({
 
       {/* Load more trigger */}
       {hasNextPage && (
-        <div ref={loadMoreRef} className="w-full py-4 flex justify-center">
+        <div ref={elementRef} className="w-full py-4 flex justify-center">
           {isFetchingNextPage ? <PostCardSkeleton /> : null}
         </div>
       )}

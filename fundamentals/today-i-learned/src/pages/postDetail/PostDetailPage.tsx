@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { LoadingSpinner } from "@/components/shared/ui/LoadingSpinner";
-import { WeeklyTop5 } from "../newHome/components/WeeklyTop5";
+import { WeeklyTop5 } from "@/components/features/discussions/WeeklyTop5";
 import { PostHeader } from "./components/PostHeader";
 import { PostContent } from "./components/PostContent";
 import { PostActions } from "./components/PostActions";
@@ -48,7 +48,7 @@ export function PostDetailPage() {
         </MainColumn>
 
         <SidebarColumn>
-          <WeeklyTop5 posts={weeklyTop5Data.posts} onPostClick={() => {}} />
+          <WeeklyTop5 onPostClick={() => {}} />
         </SidebarColumn>
       </ContentWrapper>
     </PageContainer>
