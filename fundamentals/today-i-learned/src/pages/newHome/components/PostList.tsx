@@ -26,7 +26,9 @@ export function PostList({
 
   // Intersection Observer for infinite scroll
   React.useEffect(() => {
-    if (!hasNextPage || !fetchNextPage || isFetchingNextPage) return;
+    if (!hasNextPage || !fetchNextPage || isFetchingNextPage) {
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -52,7 +54,7 @@ export function PostList({
   if (isLoading) {
     return (
       <div className="w-full">
-        {[...Array(3)].map((_, index) => (
+        {[...new Array(3)].map((_, index) => (
           <div key={index} className={index < 2 ? "mb-6" : ""}>
             <PostCardSkeleton />
           </div>

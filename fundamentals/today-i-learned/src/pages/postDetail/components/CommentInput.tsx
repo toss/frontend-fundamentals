@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "../../newHome/ui";
+import { Button } from "@/components/shared/ui/Button";
 import type { CommentInputProps } from "../../newHome/utils/types";
 
 export function CommentInput({ 

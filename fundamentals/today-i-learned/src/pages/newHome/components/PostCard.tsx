@@ -7,12 +7,13 @@ import {
   ExternalLink
 } from "lucide-react";
 import { useState } from "react";
-import { Avatar, Card } from "../ui";
-import { AlertDialog } from "../ui/AlertDialog";
+import { Avatar } from "@/components/shared/ui/Avatar";
+import { Card } from "@/components/shared/ui/Card";
 import { useWritePostModal } from "../hooks/useWritePostModal";
 import { PostMoreMenu } from "./PostMoreMenu";
 import { PostDetail } from "./PostDetail";
 import type { Post } from "../utils/types";
+import { AlertDialog } from "@/components/shared/ui/AlertDialog";
 
 interface PostCardProps {
   post: Post;

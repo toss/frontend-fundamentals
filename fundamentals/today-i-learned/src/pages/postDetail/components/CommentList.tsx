@@ -1,5 +1,4 @@
 import { Comment } from "./Comment";
-import { CommentInput } from "./CommentInput";
 import type { CommentListProps } from "../../newHome/utils/types";
 
 export function CommentList({ comments, onUpvote, onReply }: CommentListProps) {

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { getCurrentWeekInfo } from "../../../libs/date";
-import { Avatar } from "../ui";
+import { Avatar } from "@/components/shared/ui/Avatar";
 import type { PopularPost, WeeklyTop5Props } from "../utils/types";
 
 function PopularPostItem({

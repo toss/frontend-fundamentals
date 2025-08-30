@@ -5,7 +5,7 @@ import {
   ChevronUp
 } from "lucide-react";
 import { useState } from "react";
-import { Avatar } from "../ui";
+import { Avatar } from "@/components/shared/ui/Avatar";
 import type { Post } from "../utils/types";
 import { 
   useDiscussionDetail,
@@ -52,7 +52,6 @@ export function PostDetail({
   onComment,
   onShare,
   onUpvote,
-  onDelete,
   showComments = true
 }: PostDetailProps) {
   const [commentText, setCommentText] = useState("");

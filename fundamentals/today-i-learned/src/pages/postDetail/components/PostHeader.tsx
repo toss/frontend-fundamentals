@@ -1,5 +1,6 @@
 import { MoreHorizontal } from "lucide-react";
-import { Avatar, Button } from "../../newHome/ui";
+import { Avatar } from "@/components/shared/ui/Avatar";
+import { Button } from "@/components/shared/ui/Button";
 import { formatTimeAgo } from "../utils/formatters";
 import type { Post } from "../../newHome/utils/types";
 

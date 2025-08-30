@@ -47,7 +47,7 @@
     "tailwindcss": "^3.4.17",
     "ts-jest": "^29.4.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.2.2",
+    "typescript": "^5.9.2",
     "vite": "^5.0.8"
   }
 }

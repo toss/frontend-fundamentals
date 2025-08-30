@@ -1,13 +1,10 @@
 import * as React from "react";
-import {
-  PostInput,
-  FilterSection,
-  PostList,
-  MonthlyChallenge,
-  WeeklyTop5,
-  SprintChallenge
-} from "./components";
-import { mockChallenge, currentUser } from "./utils/mockData";
+import { PostInput } from "./components/PostInput";
+import { FilterSection } from "./components/FilterSection";
+import { PostList } from "./components/PostList";
+import { WeeklyTop5 } from "./components/WeeklyTop5";
+import { SprintChallenge } from "./components/SprintChallenge";
+import { currentUser } from "./utils/mockData";
 import type { SortOption, Post, PopularPost } from "./utils/types";
 import {
   useInfiniteDiscussions,
@@ -94,8 +91,7 @@ export function NewHomePage() {
     pageSize: 10
   });
 
-  const { data: weeklyTopPosts, isLoading: isLoadingWeeklyTop } =
-    useWeeklyTopDiscussions({ limit: 5 });
+  const { data: weeklyTopPosts } = useWeeklyTopDiscussions({ limit: 5 });
 
   const createPostMutation = useCreateDiscussion();
 
@@ -148,9 +144,6 @@ export function NewHomePage() {
     console.log("Upvote post:", postId);
   };
 
-  const handleDayClick = (day: number) => {
-    console.log("Challenge day clicked:", day);
-  };
 
   const handlePopularPostClick = (postId: string) => {
     console.log("Popular post clicked:", postId);
@@ -212,7 +205,6 @@ export function NewHomePage() {
             {/* 주간 Top 5 */}
             <WeeklyTop5
               posts={popularPosts}
-              weekInfo="8월 첫째주 인기글"
               onPostClick={handlePopularPostClick}
             />
           </div>
