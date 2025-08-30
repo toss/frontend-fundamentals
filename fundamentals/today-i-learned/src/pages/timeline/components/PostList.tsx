@@ -1,7 +1,8 @@
 import { useCallback } from "react";
-import { PostCard } from "@/components/features/discussions/LegacyPostCard";
-import { Button } from "@/components/shared/ui/Button";
-import { LoadingSpinner } from "@/components/shared/ui/LoadingSpinner";
+import {
+  PostCard,
+  PostCardSkeleton
+} from "../../../components/features/discussions/PostCard";
 import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
@@ -13,6 +14,10 @@ interface PostListProps {
   filterBy?: {
     label?: string;
   };
+  onLike: (postId: string) => void;
+  onComment: (postId: string) => void;
+  onUpvote: (postId: string) => void;
+  onDelete?: (postId: string) => void;
 }
 
 export function PostList({
@@ -20,17 +25,25 @@ export function PostList({
   repo,
   categoryName,
   sortBy = "latest",
-  filterBy
+  filterBy,
+  onLike,
+  onComment,
+  onUpvote,
+  onDelete
 }: PostListProps) {
   const {
-    data,
+    data: postsData,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-    isLoading,
-    error,
-    refetch
-  } = useInfiniteDiscussions({ owner, repo, categoryName, sortBy, filterBy });
+    isLoading
+  } = useInfiniteDiscussions({
+    owner,
+    repo,
+    categoryName,
+    sortBy,
+    filterBy
+  });
 
   const handleLoadMore = useCallback(() => {
     if (hasNextPage && !isFetchingNextPage) {
@@ -44,70 +57,59 @@ export function PostList({
     rootMargin: "300px"
   });
 
-  const handleComment = (id: string) => {
-    // TODO: 댓글 페이지로 이동
-  };
-
+  const discussions =
+    postsData?.pages.flatMap((page) => page.discussions) || [];
   if (isLoading) {
     return (
-      <div className="space-y-6">
-        <LoadingSpinner text="게시물을 불러오는 중..." variant="primary" />
+      <div className="w-full">
+        {[...new Array(3)].map((_, index) => (
+          <div key={index} className={index < 2 ? "mb-6" : ""}>
+            <PostCardSkeleton />
+          </div>
+        ))}
       </div>
     );
   }
 
-  if (error) {
+  if (discussions.length === 0) {
     return (
-      <div className="rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-6 text-center">
-        <h3 className="text-lg font-semibold text-red-800 dark:text-red-200 mb-2">
-          게시물을 불러올 수 없습니다
-        </h3>
-        <p className="text-red-600 dark:text-red-400 mb-4">{error.message}</p>
-        <Button onClick={() => refetch()} variant="default">
-          다시 시도
-        </Button>
-      </div>
-    );
-  }
-
-  const allDiscussions = data?.pages.flatMap((page) => page.discussions) ?? [];
-
-  if (allDiscussions.length === 0) {
-    return (
-      <div className="rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-8 text-center">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-          아직 게시물이 없습니다
-        </h3>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">
-          첫 번째 Today I Learned 게시물을 작성해보세요!
-        </p>
-        <Button variant="default">새 글 작성하기</Button>
+      <div className="w-full flex flex-col items-center justify-center py-12 px-4">
+        <div className="text-center space-y-3">
+          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto">
+            <span className="text-2xl">📝</span>
+          </div>
+          <h3 className="text-lg font-medium text-gray-900">
+            아직 포스트가 없습니다
+          </h3>
+          <p className="text-gray-500 text-sm max-w-md">
+            첫 번째 포스트를 작성해서 오늘 배운 내용을 공유해보세요!
+          </p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
-      <div className="space-y-4">
-        {allDiscussions.map((discussion, index) => (
+    <div className="w-full">
+      {discussions.map((discussion, index) => (
+        <div
+          key={discussion.id}
+          className={index < discussions.length - 1 ? "mb-6" : ""}
+        >
           <PostCard
-            key={discussion.id}
             discussion={discussion}
-            onComment={handleComment}
-            isLast={index === allDiscussions.length - 1}
-            isLoading={isFetchingNextPage}
+            onLike={onLike}
+            onComment={onComment}
+            onUpvote={onUpvote}
+            onDelete={onDelete}
           />
-        ))}
-      </div>
+        </div>
+      ))}
 
+      {/* Load more trigger */}
       {hasNextPage && (
-        <div ref={elementRef} className="flex justify-center py-8">
-          {isFetchingNextPage && (
-            <LoadingSpinner
-              text="더 많은 게시물 불러오는 중..."
-              variant="primary"
-            />
-          )}
+        <div ref={elementRef} className="w-full py-4 flex justify-center">
+          {isFetchingNextPage ? <PostCardSkeleton /> : null}
         </div>
       )}
     </div>

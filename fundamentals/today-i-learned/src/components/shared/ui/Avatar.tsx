@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/utils/cn";
+import { cn } from "@/libs/cn";
 
 const avatarVariants = cva(
   "relative inline-flex shrink-0 overflow-hidden rounded-full bg-gray-100",

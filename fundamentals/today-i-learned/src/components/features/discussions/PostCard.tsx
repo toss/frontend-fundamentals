@@ -2,8 +2,8 @@ import { Heart, MessageCircle, ChevronUp } from "lucide-react";
 import { useState } from "react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { Card } from "@/components/shared/ui/Card";
-import { useWritePostModal } from "../../../pages/newHome/hooks/useWritePostModal";
-import { PostMoreMenu } from "../../../pages/newHome/components/PostMoreMenu";
+import { useWritePostModal } from "../../../pages/timeline/hooks/useWritePostModal";
+import { PostMoreMenu } from "../../../pages/timeline/components/PostMoreMenu";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
 import { PostDetailModal } from "@/components/features/discussions/PostDetailModal";
 

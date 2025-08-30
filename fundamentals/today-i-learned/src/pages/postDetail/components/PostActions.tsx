@@ -1,5 +1,5 @@
 import { Heart, MessageCircle, Share, ChevronUp } from "lucide-react";
-import type { Post } from "../../newHome/utils/types";
+import type { Post } from "../../timeline/utils/types";
 
 interface PostActionsProps {
   post: Post;
@@ -19,7 +19,13 @@ function formatNumber(num: number): string {
   return num.toString();
 }
 
-export function PostActions({ post, onLike, onComment, onShare, onUpvote }: PostActionsProps) {
+export function PostActions({
+  post,
+  onLike,
+  onComment,
+  onShare,
+  onUpvote
+}: PostActionsProps) {
   return (
     <div className="flex items-center gap-6 py-4 border-t border-gray-100">
       <button
