@@ -1,18 +1,11 @@
-import {
-  Heart,
-  MessageCircle,
-  ChevronUp,
-  X,
-  ExternalLink
-} from "lucide-react";
+import { Heart, MessageCircle, ChevronUp } from "lucide-react";
 import { useState } from "react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { Card } from "@/components/shared/ui/Card";
 import { useWritePostModal } from "../hooks/useWritePostModal";
 import { PostMoreMenu } from "./PostMoreMenu";
-import { PostDetail } from "./PostDetail";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
-import { AlertDialog } from "@/components/shared/ui/AlertDialog";
+import { PostDetailModal } from "@/components/features/discussions/PostDetailModal";
 
 interface PostCardProps {
   discussion: GitHubDiscussion;
@@ -103,7 +96,7 @@ export function PostCard({
           </div>
 
           {/* 더보기 메뉴 (본인 글인 경우만) */}
-          {discussion.author.login === 'currentUser' && (
+          {discussion.author.login === "currentUser" && (
             <div onClick={(e) => e.stopPropagation()}>
               <PostMoreMenu
                 onEdit={openModal}
@@ -175,53 +168,19 @@ export function PostCard({
               {formatNumber(discussion.comments.totalCount)}
             </span>
           </button>
-
         </div>
       </div>
       {WritePostModal}
 
-      {/* 글 상세 모달 */}
-      <AlertDialog open={isDetailModalOpen} onOpenChange={setIsDetailModalOpen}>
-        <AlertDialog.Content className="w-[800px] h-[1080px] bg-[#FCFCFC] rounded-[16px] flex flex-col items-center pt-0 px-0 pb-6 overflow-hidden isolate">
-          {/* Header with buttons */}
-          <div className="flex flex-row justify-end items-start p-6 gap-4 w-[800px] h-[68px] bg-[#FCFCFC] flex-none">
-            {/* 상세 페이지로 이동 버튼 */}
-            <button
-              className="w-5 h-5 flex items-center justify-center text-black/60 hover:text-black/80 transition-colors"
-              onClick={(e) => {
-                e.stopPropagation();
-                // 상세 페이지로 이동 로직 (나중에 구현)
-                console.log("Navigate to detail page");
-              }}
-            >
-              <ExternalLink className="w-[14.72px] h-[14.72px]" />
-            </button>
-
-            {/* X 닫기 버튼 */}
-            <button
-              className="w-5 h-5 flex items-center justify-center text-black/60 hover:text-black/80 transition-colors"
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsDetailModalOpen(false);
-              }}
-            >
-              <X size={16} />
-            </button>
-          </div>
-
-          {/* 본문 영역 */}
-          <div className="w-[800px] h-[696px] px-6 z-[1] overflow-y-auto">
-            <PostDetail
-              discussion={discussion}
-              onLike={onLike}
-              onComment={onComment}
-              onUpvote={onUpvote}
-              onDelete={onDelete}
-              showComments={true}
-            />
-          </div>
-        </AlertDialog.Content>
-      </AlertDialog>
+      <PostDetailModal
+        discussion={discussion}
+        isOpen={isDetailModalOpen}
+        onClose={() => setIsDetailModalOpen(false)}
+        onLike={onLike}
+        onComment={onComment}
+        onUpvote={onUpvote}
+        onDelete={onDelete}
+      />
     </Card>
   );
 }

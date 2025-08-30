@@ -6,7 +6,10 @@ import { WeeklyTop5 } from "@/components/features/discussions/WeeklyTop5";
 import { SprintChallenge } from "./components/SprintChallenge";
 import { useAuth } from "@/contexts/AuthContext";
 import type { SortOption } from "./utils/types";
-import { useCreateDiscussion, useToggleDiscussionReaction } from "@/api/hooks/useDiscussions";
+import {
+  useCreateDiscussion,
+  useToggleDiscussionReaction
+} from "@/api/hooks/useDiscussions";
 import { useErrorHandler } from "@/hooks/useErrorHandler";
 import { useToast } from "@/components/shared/ui/Toast";
 
@@ -51,7 +54,10 @@ export function NewHomePage() {
         title: data.title,
         body: data.content
       });
-      showSuccessToast("포스트 작성 완료", "오늘 배운 내용이 성공적으로 게시되었습니다.");
+      showSuccessToast(
+        "포스트 작성 완료",
+        "오늘 배운 내용이 성공적으로 게시되었습니다."
+      );
     } catch (error) {
       handleApiError(error, "포스트 작성");
     }
@@ -65,12 +71,12 @@ export function NewHomePage() {
 
   const handleLike = async (postId: string) => {
     if (!user?.accessToken) return;
-    
+
     try {
       await toggleReactionMutation.mutateAsync({
         subjectId: postId,
         isReacted: false, // TODO: 현재 반응 상태 확인 로직 필요
-        content: 'HEART'
+        content: "HEART"
       });
     } catch (error) {
       handleApiError(error, "좋아요");
@@ -82,23 +88,18 @@ export function NewHomePage() {
     console.log("Comment on post:", postId);
   };
 
-
   const handleUpvote = async (postId: string) => {
     if (!user?.accessToken) return;
-    
+
     try {
       await toggleReactionMutation.mutateAsync({
         subjectId: postId,
         isReacted: false, // TODO: 현재 반응 상태 확인 로직 필요
-        content: 'THUMBS_UP'
+        content: "THUMBS_UP"
       });
     } catch (error) {
       handleApiError(error, "업보트");
     }
-  };
-
-  const handlePopularPostClick = (postId: string) => {
-    console.log("Popular post clicked:", postId);
   };
 
   return (
@@ -168,7 +169,7 @@ export function NewHomePage() {
           {/* 오른쪽 컬럼: 사이드바 (1024px 이상에서만 표시) */}
           <div className="hidden lg:block mt-[24px] lg:min-w-[490px]">
             {/* 주간 Top 5 */}
-            <WeeklyTop5 onPostClick={handlePopularPostClick} />
+            <WeeklyTop5 />
           </div>
         </div>
       </div>
