@@ -8,6 +8,7 @@ import {
 import { ChevronDown, ChevronUp } from "lucide-react";
 import type { BaseComponentProps } from "@/types";
 import { cn } from "@/libs/utils";
+import { mockHallOfFamePosts } from "./__mockdata__/HallOfFameMockData";
 
 interface HallOfFameSectionProps extends BaseComponentProps {}
 
@@ -24,14 +25,17 @@ export function HallOfFameSection({ className }: HallOfFameSectionProps) {
       enabled: !!user?.login
     });
 
-  // 로그인한 사용자의 글만 필터링
+  // 로그인한 사용자의 글만 필터링 (임시로 Mock 데이터 사용)
   const userHallOfFamePosts = useMemo(() => {
-    if (!data?.pages || !user?.login) return [];
+    // 임시로 Mock 데이터 사용
+    return mockHallOfFamePosts;
 
-    return data.pages
-      .flatMap((page) => page.discussions)
-      .filter((discussion) => discussion.author.login === user.login);
-  }, [data?.pages, user?.login]);
+    // 실제 API 사용 시 주석 해제
+    // if (!data?.pages || !user?.login) return [];
+    // return data.pages
+    //   .flatMap((page) => page.discussions)
+    //   .filter((discussion) => discussion.author.login === user.login);
+  }, []);
 
   const handleToggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -53,18 +57,14 @@ export function HallOfFameSection({ className }: HallOfFameSectionProps) {
 
   if (isLoading) {
     return (
-      <div className={cn("space-y-6", className)}>
+      <div className={cn("flex flex-col items-start px-6 gap-4", className)}>
         {/* 헤더 */}
-        <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <h2 className="font-bold text-[22px] leading-[130%] tracking-[-0.4px] text-[#0F0F0F]">
-              명예의 전당
-            </h2>
-          </div>
-        </div>
+        <h2 className="font-bold text-[22px] leading-[130%] tracking-[-0.4px] text-[#0F0F0F]">
+          명예의 전당
+        </h2>
 
         {/* 스켈레톤 그리드 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
           {Array.from({ length: 6 }).map((_, index) => (
             <PostCardSkeleton key={index} />
           ))}
@@ -74,18 +74,14 @@ export function HallOfFameSection({ className }: HallOfFameSectionProps) {
   }
 
   return (
-    <div className={cn("space-y-6", className)}>
+    <div className={cn("flex flex-col items-start gap-4", className)}>
       {/* 헤더 */}
-      <div className="space-y-2">
-        <div className="flex items-center gap-2">
-          <h2 className="font-bold text-[22px] leading-[130%] tracking-[-0.4px] text-[#0F0F0F]">
-            명예의 전당
-          </h2>
-        </div>
-      </div>
+      <h2 className="font-bold text-[22px] leading-[130%] tracking-[-0.4px] text-[#0F0F0F]">
+        명예의 전당
+      </h2>
 
       {userHallOfFamePosts.length === 0 ? (
-        <div className="text-center py-12">
+        <div className="text-center py-12 w-full">
           <p className="text-black/60 font-medium">
             아직 명예의 전당에 등록된 글이 없습니다.
           </p>
@@ -93,7 +89,7 @@ export function HallOfFameSection({ className }: HallOfFameSectionProps) {
       ) : (
         <>
           {/* 글 목록 그리드 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
             {displayedPosts.map((discussion) => (
               <PostCard
                 key={discussion.id}
@@ -108,35 +104,23 @@ export function HallOfFameSection({ className }: HallOfFameSectionProps) {
 
           {/* 더보기/접기 버튼 */}
           {showToggleButton && (
-            <div className="flex justify-center pt-2">
-              <button
-                onClick={handleToggleExpand}
-                disabled={isFetchingNextPage}
-                className="flex items-center gap-2 px-6 py-3 bg-black/5 hover:bg-black/10 rounded-full transition-colors disabled:opacity-50"
-              >
-                {isExpanded ? (
-                  <>
-                    <ChevronUp className="w-4 h-4 text-black/60" />
-                    <span className="font-semibold text-sm text-black/60">
-                      접기
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    <ChevronDown className="w-4 h-4 text-black/60" />
-                    <span className="font-semibold text-sm text-black/60">
-                      더보기 (
-                      {userHallOfFamePosts.length - INITIAL_DISPLAY_COUNT}개 더)
-                    </span>
-                  </>
-                )}
-              </button>
-            </div>
+            <button
+              onClick={handleToggleExpand}
+              disabled={isFetchingNextPage}
+              className="flex items-center justify-center px-4 py-[18px] w-full h-[60px] border border-[rgba(201,201,201,0.5)] rounded-xl hover:bg-black/5 transition-colors disabled:opacity-50"
+              style={{ 
+                boxSizing: 'border-box'
+              }}
+            >
+              <span className="font-bold text-[18px] leading-[22px] text-[#0F0F0F]">
+                {isExpanded ? "접기" : "더보기"}
+              </span>
+            </button>
           )}
 
           {/* 추가 로딩 */}
           {isFetchingNextPage && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 w-full">
               {Array.from({ length: 2 }).map((_, index) => (
                 <PostCardSkeleton key={`loading-${index}`} />
               ))}
