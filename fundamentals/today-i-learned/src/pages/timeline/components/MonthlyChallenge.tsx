@@ -87,7 +87,7 @@ export function MonthlyChallenge({ challenge }: MonthlyChallengeProps) {
       {/* 헤더 */}
       <div className="space-y-2 mt-5">
         <h3 className="text-2xl font-extrabold text-black tracking-tight">
-          Monthly Challenge
+          월간 기록
         </h3>
         <p className="text-base font-semibold text-black/60 tracking-tight">
           {challenge.year}년 {monthName} 한 달 기록
