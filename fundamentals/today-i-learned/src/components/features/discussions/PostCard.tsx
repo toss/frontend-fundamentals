@@ -2,7 +2,7 @@ import { Heart, MessageCircle, ChevronUp } from "lucide-react";
 import { useState } from "react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { Card } from "@/components/shared/ui/Card";
-import { useWritePostModal } from "../../../pages/timeline/hooks/useWritePostModal";
+import { useWritePostModal } from "@/pages/timeline/hooks/useWritePostModal";
 import { PostMoreMenu } from "./PostMoreMenu";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
 import { PostDetailModal } from "@/components/features/discussions/PostDetailModal";
@@ -30,7 +30,6 @@ export function PostCard({
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const { openModal, WritePostModal } = useWritePostModal({
     onSubmit: (content) => {
-      console.log("Submitting post:", content);
       // 실제로는 API 호출
     }
   });

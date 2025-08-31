@@ -86,7 +86,6 @@ export function TimelinePage() {
 
   const handleComment = (postId: string) => {
     // TODO: 댓글 모달 또는 댓글 입력 영역으로 이동
-    console.log("Comment on post:", postId);
   };
 
   const handleUpvote = async (postId: string) => {
@@ -169,7 +168,6 @@ export function TimelinePage() {
                 onUpvote={handleUpvote}
                 onDelete={(postId) => {
                   // TODO: 삭제 기능 구현
-                  console.log("Delete post:", postId);
                 }}
               />
             </div>

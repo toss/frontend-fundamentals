@@ -42,11 +42,11 @@ export function usePostDetail(postId: string | undefined) {
   };
 
   const handleComment = (postId: string) => {
-    console.log("Comment post:", postId);
+    // TODO: Implement comment functionality
   };
 
   const handleShare = (postId: string) => {
-    console.log("Share post:", postId);
+    // TODO: Implement share functionality
   };
 
   const handleUpvote = (postId: string) => {
