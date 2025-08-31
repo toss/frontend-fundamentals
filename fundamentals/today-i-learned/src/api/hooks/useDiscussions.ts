@@ -20,7 +20,7 @@ import {
   addDiscussionReaction,
   removeDiscussionReaction,
   type DiscussionsApiParams
-} from "../remote/discussions";
+} from "@/api/remote/discussions";
 
 // Query Keys 중앙 관리
 export const DISCUSSIONS_QUERY_KEYS = {

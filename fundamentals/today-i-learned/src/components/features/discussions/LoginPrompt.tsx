@@ -1,6 +1,6 @@
 import { User, LogIn } from "lucide-react";
 import { cn } from "@/libs/utils";
-import { Button } from "../../shared/ui/Button";
+import { Button } from "@/components/shared/ui/Button";
 import type { BaseComponentProps } from "@/types";
 
 interface LoginPromptProps extends BaseComponentProps {

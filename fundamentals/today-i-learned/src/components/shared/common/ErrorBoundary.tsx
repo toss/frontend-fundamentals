@@ -1,6 +1,6 @@
 import { AlertTriangle, RefreshCw } from "lucide-react";
 import { Component, type ErrorInfo, type ReactNode } from "react";
-import { Button } from "../ui/Button";
+import { Button } from "@/components/shared/ui/Button";
 
 interface Props {
   children: ReactNode;

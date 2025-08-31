@@ -1,7 +1,7 @@
 import { useMemo } from "react";
-import type { ActivityDay } from "../types";
-import type { ContributionData } from "../api/remote/discussions";
-import { useMyContributions } from "../api/hooks/useDiscussions";
+import type { ActivityDay } from "@/types";
+import type { ContributionData } from "@/api/remote/discussions";
+import { useMyContributions } from "@/api/hooks/useDiscussions";
 
 // 기여도 레벨 계산 상수
 const CONTRIBUTION_LEVELS = {

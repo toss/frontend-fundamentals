@@ -6,7 +6,7 @@ import {
   addReaction,
   removeReaction,
   type ReactionContent
-} from "../remote/reactions";
+} from "@/api/remote/reactions";
 import { DISCUSSIONS_QUERY_KEYS } from "./useDiscussions";
 
 interface ReactionMutationParams {

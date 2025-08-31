@@ -5,8 +5,8 @@ import {
   useEffect,
   type ReactNode,
 } from "react";
-import { AUTH_LOGIN_URL, getUserInfo } from "../api/client";
-import type { AuthenticatedUser } from "../api/remote/user";
+import { AUTH_LOGIN_URL, getUserInfo } from "@/api/client";
+import type { AuthenticatedUser } from "@/api/remote/user";
 
 export type User = AuthenticatedUser;
 
