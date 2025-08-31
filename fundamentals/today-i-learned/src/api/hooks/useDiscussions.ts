@@ -9,6 +9,7 @@ import {
 import {
   createDiscussion,
   updateDiscussion,
+  deleteDiscussion,
   fetchAllDiscussions,
   fetchInfiniteDiscussions,
   fetchRepositoryInfo,
@@ -19,7 +20,8 @@ import {
   addDiscussionReaction,
   removeDiscussionReaction,
   type DiscussionsApiParams,
-  type UpdateDiscussionParams
+  type UpdateDiscussionParams,
+  type DeleteDiscussionParams
 } from "../remote/discussions";
 
 // Query Keys 중앙 관리
@@ -464,6 +466,41 @@ export function useUpdateDiscussion() {
           };
         }
       );
+    }
+  });
+}
+
+// Discussion 삭제를 위한 간단한 인터페이스
+interface DeletePostParams {
+  discussionId: string;
+}
+
+// Discussion 삭제 Mutation
+export function useDeleteDiscussion() {
+  const queryClient = useQueryClient();
+  const { user } = useAuth();
+
+  return useMutation({
+    mutationFn: async (params: DeletePostParams) => {
+      if (!user?.accessToken) {
+        throw new Error("Authentication required");
+      }
+
+      return deleteDiscussion({
+        discussionId: params.discussionId,
+        accessToken: user.accessToken
+      });
+    },
+    onSuccess: (deletedDiscussion) => {
+      // 관련 쿼리들 무효화
+      queryClient.invalidateQueries({
+        queryKey: DISCUSSIONS_QUERY_KEYS.all
+      });
+      
+      // 상세 정보 캐시 제거
+      queryClient.removeQueries({
+        queryKey: DISCUSSIONS_QUERY_KEYS.detail(deletedDiscussion.id)
+      });
     }
   });
 }

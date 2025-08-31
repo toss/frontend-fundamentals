@@ -7,7 +7,7 @@ import { PostMoreMenu } from "./PostMoreMenu";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
 import { PostDetailModal } from "@/components/features/discussions/PostDetailModal";
 import { formatNumber, formatTimeAgo } from "@/pages/timeline/utils/formatters";
-import { useUpdateDiscussion } from "@/api/hooks/useDiscussions";
+import { useUpdateDiscussion, useDeleteDiscussion } from "@/api/hooks/useDiscussions";
 
 interface PostCardProps {
   discussion: GitHubDiscussion;
@@ -33,6 +33,8 @@ export function PostCard({
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const { mutate: updateDiscussion, isPending: isUpdating } =
     useUpdateDiscussion();
+  const { mutate: deleteDiscussion, isPending: isDeleting } =
+    useDeleteDiscussion();
 
   const { openModal, WritePostModal, isOpen } = useWritePostModal({
     onSubmit: (title, content) => {
@@ -96,7 +98,9 @@ export function PostCard({
             <div onClick={(e) => e.stopPropagation()}>
               <PostMoreMenu
                 onEdit={openModal}
-                onDelete={() => onDelete?.(discussion.id)}
+                onDelete={() => {
+                  deleteDiscussion({ discussionId: discussion.id });
+                }}
               />
             </div>
           )}

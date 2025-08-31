@@ -4,6 +4,7 @@ import {
   GET_DISCUSSIONS_QUERY,
   CREATE_DISCUSSION_MUTATION,
   UPDATE_DISCUSSION_MUTATION,
+  DELETE_DISCUSSION_MUTATION,
   GET_REPOSITORY_INFO_QUERY,
   GET_INFINITE_DISCUSSIONS_QUERY,
   SEARCH_DISCUSSIONS_QUERY,
@@ -70,6 +71,11 @@ export interface UpdateDiscussionParams {
   discussionId: string;
   title: string;
   body: string;
+  accessToken: string;
+}
+
+export interface DeleteDiscussionParams {
+  discussionId: string;
   accessToken: string;
 }
 
@@ -534,4 +540,23 @@ export async function updateDiscussion({
   }
 
   return discussion;
+}
+
+export async function deleteDiscussion({
+  discussionId,
+  accessToken
+}: DeleteDiscussionParams): Promise<{ id: string }> {
+  const data = await graphqlRequest(
+    DELETE_DISCUSSION_MUTATION,
+    { id: discussionId },
+    accessToken
+  );
+
+  const discussion = data.data?.deleteDiscussion?.discussion;
+
+  if (!discussion) {
+    throw new Error("Failed to delete discussion");
+  }
+
+  return { id: discussion.id };
 }

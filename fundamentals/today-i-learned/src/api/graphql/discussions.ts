@@ -100,6 +100,18 @@ export const UPDATE_DISCUSSION_MUTATION = `
   }
 `;
 
+export const DELETE_DISCUSSION_MUTATION = `
+  mutation DeleteDiscussion($id: ID!) {
+    deleteDiscussion(input: {
+      id: $id
+    }) {
+      discussion {
+        id
+      }
+    }
+  }
+`;
+
 export const GET_REPOSITORY_INFO_QUERY = `
   query GetRepositoryInfo($owner: String!, $repo: String!) {
     repository(owner: $owner, name: $repo) {
