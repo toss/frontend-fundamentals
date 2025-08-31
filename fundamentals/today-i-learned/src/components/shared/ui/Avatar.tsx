@@ -57,7 +57,9 @@ const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
     };
 
     const getInitials = (name?: string) => {
-      if (!name) return "U";
+      if (!name) {
+        return "U";
+      }
       return name
         .split(" ")
         .map((n) => n[0])

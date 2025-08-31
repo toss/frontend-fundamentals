@@ -17,7 +17,7 @@ export function MyStreak({ className }: MyStreakProps) {
   });
 
   const streakData = useMemo(() => {
-    if (isLoading || !contributions.length) {
+    if (isLoading || contributions.length === 0) {
       return {
         currentStreak: 0,
         longestStreak: 0,

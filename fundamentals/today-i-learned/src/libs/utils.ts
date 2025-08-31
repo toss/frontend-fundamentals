@@ -14,7 +14,7 @@ export const truncateText = (
   maxLength: number = APP_CONSTANTS.MAX_TITLE_LENGTH,
   suffix: string = APP_CONSTANTS.TITLE_SUFFIX
 ): string => {
-  if (text.length <= maxLength) return text;
+  if (text.length <= maxLength) {return text;}
 
   const truncateLength = maxLength - suffix.length;
   return text.substring(0, truncateLength) + suffix;
@@ -44,9 +44,9 @@ export const clamp = (value: number, min: number, max: number): number => {
 export const getStreakLevel = (
   streak: number
 ): keyof typeof STREAK_CONFIG.EMOJIS => {
-  if (streak >= STREAK_CONFIG.EMOJI_THRESHOLDS.LEGENDARY) return "LEGENDARY";
-  if (streak >= STREAK_CONFIG.EMOJI_THRESHOLDS.MASTER) return "MASTER";
-  if (streak >= STREAK_CONFIG.EMOJI_THRESHOLDS.APPRENTICE) return "APPRENTICE";
+  if (streak >= STREAK_CONFIG.EMOJI_THRESHOLDS.LEGENDARY) {return "LEGENDARY";}
+  if (streak >= STREAK_CONFIG.EMOJI_THRESHOLDS.MASTER) {return "MASTER";}
+  if (streak >= STREAK_CONFIG.EMOJI_THRESHOLDS.APPRENTICE) {return "APPRENTICE";}
   return "BEGINNER";
 };
 
@@ -196,7 +196,7 @@ export const debounce = <T extends (...args: any[]) => any>(
   let timeout: NodeJS.Timeout | null = null;
 
   return (...args: Parameters<T>) => {
-    if (timeout) clearTimeout(timeout);
+    if (timeout) {clearTimeout(timeout);}
     timeout = setTimeout(() => func(...args), wait);
   };
 };

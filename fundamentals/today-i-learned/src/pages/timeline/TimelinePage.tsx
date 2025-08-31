@@ -73,7 +73,9 @@ export function TimelinePage() {
   const deleteDiscussionMutation = useDeleteDiscussion();
 
   const handleLike = async (postId: string) => {
-    if (!user?.accessToken) return;
+    if (!user?.accessToken) {
+      return;
+    }
 
     try {
       await toggleReactionMutation.mutateAsync({
@@ -91,7 +93,9 @@ export function TimelinePage() {
   };
 
   const handleUpvote = async (postId: string) => {
-    if (!user?.accessToken) return;
+    if (!user?.accessToken) {
+      return;
+    }
 
     try {
       await toggleReactionMutation.mutateAsync({

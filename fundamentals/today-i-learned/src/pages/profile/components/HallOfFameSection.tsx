@@ -18,15 +18,24 @@ export function HallOfFameSection({ className }: HallOfFameSectionProps) {
   const { data: userProfile } = useUserProfile();
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage, error, refetch } =
-    useInfiniteDiscussions({
-      categoryName: "Today I Learned",
-      filterBy: { label: "성지 ⛲" },
-      pageSize: PAGE_SIZE.DEFAULT
-    });
+  const {
+    data,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    error,
+    refetch
+  } = useInfiniteDiscussions({
+    categoryName: "Today I Learned",
+    filterBy: { label: "성지 ⛲" },
+    pageSize: PAGE_SIZE.DEFAULT
+  });
 
   const userHallOfFamePosts = useMemo(() => {
-    if (!userProfile?.login || !data) return [];
+    if (!userProfile?.login || !data) {
+      return [];
+    }
 
     const allDiscussions = data.pages.flatMap((page) => page.discussions);
     return allDiscussions.filter(
@@ -38,7 +47,8 @@ export function HallOfFameSection({ className }: HallOfFameSectionProps) {
   console.log("HallOfFameSection Debug:", {
     userProfile: userProfile?.login,
     data: data?.pages?.length,
-    totalDiscussions: data?.pages?.reduce((acc, page) => acc + page.discussions.length, 0) || 0,
+    totalDiscussions:
+      data?.pages?.reduce((acc, page) => acc + page.discussions.length, 0) || 0,
     userHallOfFamePosts: userHallOfFamePosts.length,
     isLoading,
     error: error?.message
@@ -124,8 +134,8 @@ export function HallOfFameSection({ className }: HallOfFameSectionProps) {
               onClick={handleToggleExpand}
               disabled={isFetchingNextPage}
               className="flex items-center justify-center px-4 py-[18px] w-full h-[60px] border border-[rgba(201,201,201,0.5)] rounded-xl hover:bg-black/5 transition-colors disabled:opacity-50"
-              style={{ 
-                boxSizing: 'border-box'
+              style={{
+                boxSizing: "border-box"
               }}
             >
               <span className="font-bold text-[18px] leading-[22px] text-[#0F0F0F]">

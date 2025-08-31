@@ -19,9 +19,7 @@ import {
   addDiscussionComment,
   addDiscussionReaction,
   removeDiscussionReaction,
-  type DiscussionsApiParams,
-  type UpdateDiscussionParams,
-  type DeleteDiscussionParams
+  type DiscussionsApiParams
 } from "../remote/discussions";
 
 // Query Keys 중앙 관리
@@ -302,7 +300,9 @@ export function useAddDiscussionComment() {
       queryClient.setQueryData(
         DISCUSSIONS_QUERY_KEYS.detail(discussionId),
         (old: any) => {
-          if (!old || !user) return old;
+          if (!old || !user) {
+            return old;
+          }
 
           const optimisticComment = {
             id: `temp-${Date.now()}`,
@@ -392,7 +392,9 @@ export function useToggleDiscussionReaction() {
       const previousData = queryClient.getQueryData(detailQueryKey);
 
       queryClient.setQueryData(detailQueryKey, (old: any) => {
-        if (!old) return old;
+        if (!old) {
+          return old;
+        }
 
         const delta = isReacted ? -1 : 1;
         return {
@@ -452,12 +454,14 @@ export function useUpdateDiscussion() {
       queryClient.invalidateQueries({
         queryKey: DISCUSSIONS_QUERY_KEYS.all
       });
-      
+
       // 상세 정보도 업데이트
       queryClient.setQueryData(
         DISCUSSIONS_QUERY_KEYS.detail(updatedDiscussion.id),
         (oldData: any) => {
-          if (!oldData) return oldData;
+          if (!oldData) {
+            return oldData;
+          }
           return {
             ...oldData,
             title: updatedDiscussion.title,
@@ -496,7 +500,7 @@ export function useDeleteDiscussion() {
       queryClient.invalidateQueries({
         queryKey: DISCUSSIONS_QUERY_KEYS.all
       });
-      
+
       // 상세 정보 캐시 제거
       queryClient.removeQueries({
         queryKey: DISCUSSIONS_QUERY_KEYS.detail(deletedDiscussion.id)

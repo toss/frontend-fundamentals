@@ -22,7 +22,9 @@ export function PostDetailModal({
   onUpvote,
   onDelete
 }: PostDetailModalProps) {
-  if (!discussion) return null;
+  if (!discussion) {
+    return null;
+  }
 
   return (
     <AlertDialog open={isOpen} onOpenChange={onClose}>

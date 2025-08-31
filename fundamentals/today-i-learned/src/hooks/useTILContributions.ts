@@ -27,10 +27,18 @@ interface TILContributionsData {
 
 // 기여도 레벨 계산 함수
 const calculateContributionLevel = (count: number): 0 | 1 | 2 | 3 | 4 => {
-  if (count === 0) return CONTRIBUTION_LEVELS.NONE;
-  if (count === 1) return CONTRIBUTION_LEVELS.LOW;
-  if (count <= 3) return CONTRIBUTION_LEVELS.MEDIUM;
-  if (count <= 5) return CONTRIBUTION_LEVELS.HIGH;
+  if (count === 0) {
+    return CONTRIBUTION_LEVELS.NONE;
+  }
+  if (count === 1) {
+    return CONTRIBUTION_LEVELS.LOW;
+  }
+  if (count <= 3) {
+    return CONTRIBUTION_LEVELS.MEDIUM;
+  }
+  if (count <= 5) {
+    return CONTRIBUTION_LEVELS.HIGH;
+  }
   return CONTRIBUTION_LEVELS.VERY_HIGH;
 };
 
@@ -40,7 +48,7 @@ const generateYearDates = (endDate: Date = new Date()): string[] => {
   const startDate = new Date(endDate);
   startDate.setFullYear(startDate.getFullYear() - 1);
 
-const currentDate = new Date(startDate);
+  const currentDate = new Date(startDate);
   while (currentDate <= endDate) {
     dates.push(currentDate.toISOString().split("T")[0]);
     currentDate.setDate(currentDate.getDate() + 1);
@@ -114,7 +122,9 @@ export function useTILContributions(): TILContributionsData {
     // 각 날짜별로 작성된 포스트 개수 계산
     const contributionsByDate = allContributions.reduce(
       (acc, contribution: ContributionData) => {
-        const date = new Date(contribution.createdAt).toISOString().split("T")[0];
+        const date = new Date(contribution.createdAt)
+          .toISOString()
+          .split("T")[0];
         acc[date] = (acc[date] || 0) + 1;
         return acc;
       },

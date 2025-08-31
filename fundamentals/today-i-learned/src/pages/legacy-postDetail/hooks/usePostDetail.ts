@@ -77,7 +77,9 @@ export function usePostDetail(postId: string | undefined) {
   };
 
   const handleReply = (commentId: string, content: string) => {
-    if (!discussion?.id || !content.trim()) return;
+    if (!discussion?.id || !content.trim()) {
+      return;
+    }
 
     const parentComment = comments.find((comment) => comment.id === commentId);
     const replyPrefix = parentComment
@@ -91,7 +93,9 @@ export function usePostDetail(postId: string | undefined) {
   };
 
   const handleNewComment = (content: string) => {
-    if (!discussion?.id || !content.trim()) return;
+    if (!discussion?.id || !content.trim()) {
+      return;
+    }
 
     addComment.mutate({
       discussionId: discussion.id,

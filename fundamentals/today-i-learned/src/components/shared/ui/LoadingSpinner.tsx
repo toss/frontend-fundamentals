@@ -55,7 +55,9 @@ export function LoadingOverlay({
   text = "로딩 중...",
   className
 }: LoadingOverlayProps) {
-  if (!isVisible) return null;
+  if (!isVisible) {
+    return null;
+  }
 
   return (
     <div

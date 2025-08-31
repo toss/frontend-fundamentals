@@ -92,7 +92,9 @@ export function MonthlyChallenge({ challenge }: MonthlyChallengeProps) {
 
   // API 데이터를 기반으로 캘린더 생성
   const calendarData = useMemo(() => {
-    if (!contributions) return null;
+    if (!contributions) {
+      return null;
+    }
 
     // 현재 월의 일수 계산
     const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();
@@ -100,11 +102,17 @@ export function MonthlyChallenge({ challenge }: MonthlyChallengeProps) {
 
     // 기여도 데이터를 날짜별로 그룹화
     const contributionsByDate = new Map<string, number>();
-    contributions.forEach(contribution => {
+    contributions.forEach((contribution) => {
       const date = new Date(contribution.createdAt);
-      if (date.getFullYear() === currentYear && date.getMonth() + 1 === currentMonth) {
+      if (
+        date.getFullYear() === currentYear &&
+        date.getMonth() + 1 === currentMonth
+      ) {
         const dateKey = date.getDate().toString();
-        contributionsByDate.set(dateKey, (contributionsByDate.get(dateKey) || 0) + 1);
+        contributionsByDate.set(
+          dateKey,
+          (contributionsByDate.get(dateKey) || 0) + 1
+        );
       }
     });
 
@@ -112,20 +120,20 @@ export function MonthlyChallenge({ challenge }: MonthlyChallengeProps) {
     for (let day = 1; day <= daysInMonth; day++) {
       const today = now.getDate();
       const hasPost = contributionsByDate.has(day.toString());
-      
-      let status: ChallengeDay['status'] = 'pending';
+
+      let status: ChallengeDay["status"] = "pending";
       if (day === today && hasPost) {
         // 오늘이면서 글도 작성한 경우 - posted로 표시 (오늘 작성했다는 의미)
-        status = 'posted';
+        status = "posted";
       } else if (day === today) {
         // 오늘이지만 글 작성 안한 경우
-        status = 'today';
+        status = "today";
       } else if (hasPost) {
         // 오늘이 아니지만 글 작성한 경우
-        status = 'posted';
+        status = "posted";
       } else if (day < today) {
         // 지나간 날이지만 글 작성 안한 경우
-        status = 'pending';
+        status = "pending";
       }
 
       days.push({
@@ -160,7 +168,10 @@ export function MonthlyChallenge({ challenge }: MonthlyChallengeProps) {
           <div className="space-y-4">
             <div className="grid grid-cols-7 gap-4 justify-items-center">
               {Array.from({ length: 7 }).map((_, index) => (
-                <div key={index} className="w-14 h-14 bg-gray-100 rounded-full animate-pulse" />
+                <div
+                  key={index}
+                  className="w-14 h-14 bg-gray-100 rounded-full animate-pulse"
+                />
               ))}
             </div>
           </div>

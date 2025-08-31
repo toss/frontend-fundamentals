@@ -43,7 +43,9 @@ export function ActivitySection({ className }: ActivitySectionProps) {
   }, [isIntersecting, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   const userPosts = useMemo(() => {
-    if (!userProfile?.login || !data) return [];
+    if (!userProfile?.login || !data) {
+      return [];
+    }
 
     const allDiscussions = data.pages.flatMap((page) => page.discussions);
     const filteredPosts = allDiscussions.filter(
@@ -53,9 +55,13 @@ export function ActivitySection({ className }: ActivitySectionProps) {
     // 클라이언트에서 정렬 처리
     return filteredPosts.sort((a, b) => {
       if (sortFilter === "created") {
-        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        return (
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
       } else {
-        return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+        return (
+          new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+        );
       }
     });
   }, [data, userProfile?.login, sortFilter]);
@@ -64,7 +70,8 @@ export function ActivitySection({ className }: ActivitySectionProps) {
   console.log("ActivitySection Debug:", {
     userProfile: userProfile?.login,
     data: data?.pages?.length,
-    totalDiscussions: data?.pages?.reduce((acc, page) => acc + page.discussions.length, 0) || 0,
+    totalDiscussions:
+      data?.pages?.reduce((acc, page) => acc + page.discussions.length, 0) || 0,
     userPosts: userPosts.length,
     isLoading,
     error: error?.message
