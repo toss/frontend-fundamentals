@@ -35,21 +35,22 @@ export function ProfileHeader({ className }: ProfileHeaderProps) {
     return (
       <div
         className={cn(
-          "rounded-2xl bg-white p-6 shadow-sm border border-black/5",
+          "flex flex-col items-center py-6 px-6 gap-6",
           "animate-pulse",
           className
         )}
       >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="w-20 h-20 bg-gray-200 rounded-full"></div>
-            <div className="space-y-3">
-              <div className="h-7 bg-gray-200 rounded w-48"></div>
-              <div className="h-5 bg-gray-200 rounded w-32"></div>
-            </div>
+        {/* 스켈레톤 아바타와 프로필 정보 */}
+        <div className="flex flex-col items-center gap-6">
+          <div className="w-[100px] h-[100px] bg-gray-200 rounded-full"></div>
+          <div className="flex flex-col items-center gap-4">
+            <div className="h-8 bg-gray-200 rounded w-32"></div>
+            <div className="h-5 bg-gray-200 rounded w-24"></div>
           </div>
-          <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
         </div>
+
+        {/* 스켈레톤 공유하기 버튼 */}
+        <div className="w-[100px] h-10 bg-gray-200 rounded-lg"></div>
       </div>
     );
   }
@@ -57,53 +58,50 @@ export function ProfileHeader({ className }: ProfileHeaderProps) {
   return (
     <div
       className={cn(
-        "rounded-2xl bg-white p-6 shadow-sm border border-black/5",
+        "flex flex-col items-center py-6 px-6 gap-6 relative",
         className
       )}
     >
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          {/* Profile Avatar */}
-          <div className="relative">
-            {userProfile?.avatar_url ? (
-              <img
-                src={userProfile.avatar_url}
-                alt={`${userProfile.login} avatar`}
-                className="w-20 h-20 rounded-full shadow-sm object-cover"
-              />
-            ) : (
-              <div className="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center">
-                <User className="w-10 h-10 text-gray-400" />
-              </div>
-            )}
-          </div>
-
-          {/* Profile Info */}
-          <div>
-            <h1 className="font-bold text-[28px] leading-[130%] tracking-[-0.4px] text-[#0F0F0F] mb-1">
-              {userProfile?.name || userProfile?.login || "사용자"}
-            </h1>
-            <p className="font-semibold text-[18px] leading-[130%] tracking-[-0.4px] text-black/60">
-              @{userProfile?.login || "user"}
-            </p>
-          </div>
+      {/* Profile Avatar and Info */}
+      <div className="flex flex-col items-center gap-4">
+        {/* Profile Avatar */}
+        <div className="relative">
+          {userProfile?.avatar_url ? (
+            <img
+              src={userProfile.avatar_url}
+              alt={`${userProfile.login} avatar`}
+              className="w-[100px] h-[100px] rounded-full object-cover"
+            />
+          ) : (
+            <div className="w-[100px] h-[100px] bg-gray-200 rounded-full flex items-center justify-center">
+              <User className="w-16 h-16 text-gray-400" />
+            </div>
+          )}
         </div>
 
-        {/* Share Button */}
-        <button
-          onClick={handleShare}
-          disabled={isSharing}
-          className="w-10 h-10 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center transition-colors disabled:opacity-50"
-          aria-label="프로필 공유"
-        >
-          <Share className="w-5 h-5 text-black/60" />
-        </button>
+        {/* Profile Info */}
+        <div className="flex flex-col items-center gap-2">
+          <h1 className="font-extrabold text-[24px] leading-[130%] tracking-[-0.4px] text-[#0F0F0F] text-center">
+            {userProfile?.name || userProfile?.login || "사용자"}
+          </h1>
+          <p className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40 text-center">
+            @{userProfile?.login || "user"}
+          </p>
+        </div>
       </div>
 
-      {/* Share Button Label */}
-      <div className="flex justify-end mt-2">
-        <span className="text-xs text-black/40 font-medium">프로필공유하기</span>
-      </div>
+      <button
+        onClick={handleShare}
+        disabled={isSharing}
+        className="flex items-center justify-center gap-[6px] px-[18px] py-3 w-[140px] h-10 border border-black/8 rounded-lg hover:bg-black/5 transition-colors disabled:opacity-50"
+        style={{ paddingLeft: "15px", paddingRight: "18px" }}
+        aria-label="프로필 공유"
+      >
+        <Share className="w-4 h-4 text-black/40" />
+        <span className="font-bold text-[14px] leading-[160%] tracking-[-0.4px] text-black/60">
+          프로필공유하기
+        </span>
+      </button>
     </div>
   );
 }
