@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useUserProfile } from "@/api/hooks/useUser";
+import ffSymbol from "@/assets/ff-symbol2.svg";
 
 export function NewHomeHeader() {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -47,8 +48,13 @@ export function NewHomeHeader() {
       <div className="mx-auto flex h-[120px] items-center justify-between px-6 lg:px-[222px]">
         {/* Logo */}
         <div className="flex-shrink-0">
-          <Link to="/" className="flex items-center">
-            <span className="text-[28px] font-extrabold text-[#0F0F0F] tracking-tight leading-6">
+          <Link to="/" className="flex items-center gap-3">
+            <img
+              src={ffSymbol}
+              alt="Frontend Fundamentals Logo"
+              className="w-8 h-8"
+            />
+            <span className="text-[20px] font-extrabold text-[#0F0F0F] tracking-tight leading-6">
               Today I Learned
             </span>
           </Link>
