@@ -1,7 +1,10 @@
 import { useState, useMemo } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
-import { PostCard, PostCardSkeleton } from "@/components/features/discussions/PostCard";
+import {
+  PostCard,
+  PostCardSkeleton
+} from "@/components/features/discussions/PostCard";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import type { BaseComponentProps } from "@/types";
 import { cn } from "@/libs/utils";
@@ -14,37 +17,36 @@ export function HallOfFameSection({ className }: HallOfFameSectionProps) {
   const { user } = useAuth();
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const { 
-    data, 
-    isLoading, 
-    fetchNextPage, 
-    hasNextPage, 
-    isFetchingNextPage 
-  } = useInfiniteDiscussions({
-    filterBy: { label: "성지 ⛲" },
-    pageSize: 20,
-    enabled: !!user?.login
-  });
+  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useInfiniteDiscussions({
+      filterBy: { label: "성지 ⛲" },
+      pageSize: 20,
+      enabled: !!user?.login
+    });
 
   // 로그인한 사용자의 글만 필터링
   const userHallOfFamePosts = useMemo(() => {
     if (!data?.pages || !user?.login) return [];
-    
+
     return data.pages
-      .flatMap(page => page.discussions)
-      .filter(discussion => discussion.author.login === user.login);
+      .flatMap((page) => page.discussions)
+      .filter((discussion) => discussion.author.login === user.login);
   }, [data?.pages, user?.login]);
 
   const handleToggleExpand = () => {
     setIsExpanded(!isExpanded);
     // 더보기를 눌렀을 때 더 많은 데이터가 필요하면 추가 로드
-    if (!isExpanded && hasNextPage && userHallOfFamePosts.length <= INITIAL_DISPLAY_COUNT) {
+    if (
+      !isExpanded &&
+      hasNextPage &&
+      userHallOfFamePosts.length <= INITIAL_DISPLAY_COUNT
+    ) {
       fetchNextPage();
     }
   };
 
-  const displayedPosts = isExpanded 
-    ? userHallOfFamePosts 
+  const displayedPosts = isExpanded
+    ? userHallOfFamePosts
     : userHallOfFamePosts.slice(0, INITIAL_DISPLAY_COUNT);
 
   const showToggleButton = userHallOfFamePosts.length > INITIAL_DISPLAY_COUNT;
@@ -55,7 +57,6 @@ export function HallOfFameSection({ className }: HallOfFameSectionProps) {
         {/* 헤더 */}
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <span className="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-sm">2</span>
             <h2 className="font-bold text-[22px] leading-[130%] tracking-[-0.4px] text-[#0F0F0F]">
               명예의 전당
             </h2>
@@ -77,7 +78,6 @@ export function HallOfFameSection({ className }: HallOfFameSectionProps) {
       {/* 헤더 */}
       <div className="space-y-2">
         <div className="flex items-center gap-2">
-          <span className="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-sm">2</span>
           <h2 className="font-bold text-[22px] leading-[130%] tracking-[-0.4px] text-[#0F0F0F]">
             명예의 전당
           </h2>
@@ -117,13 +117,16 @@ export function HallOfFameSection({ className }: HallOfFameSectionProps) {
                 {isExpanded ? (
                   <>
                     <ChevronUp className="w-4 h-4 text-black/60" />
-                    <span className="font-semibold text-sm text-black/60">접기</span>
+                    <span className="font-semibold text-sm text-black/60">
+                      접기
+                    </span>
                   </>
                 ) : (
                   <>
                     <ChevronDown className="w-4 h-4 text-black/60" />
                     <span className="font-semibold text-sm text-black/60">
-                      더보기 ({userHallOfFamePosts.length - INITIAL_DISPLAY_COUNT}개 더)
+                      더보기 (
+                      {userHallOfFamePosts.length - INITIAL_DISPLAY_COUNT}개 더)
                     </span>
                   </>
                 )}

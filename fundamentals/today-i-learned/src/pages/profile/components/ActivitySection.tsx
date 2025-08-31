@@ -1,7 +1,10 @@
 import { useState, useMemo, useEffect, useRef } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
-import { PostCard, PostCardSkeleton } from "@/components/features/discussions/PostCard";
+import {
+  PostCard,
+  PostCardSkeleton
+} from "@/components/features/discussions/PostCard";
 import { ChevronDown } from "lucide-react";
 import type { BaseComponentProps } from "@/types";
 import { cn } from "@/libs/utils";
@@ -15,25 +18,20 @@ export function ActivitySection({ className }: ActivitySectionProps) {
   const [sortFilter, setSortFilter] = useState<SortFilter>("created");
   const observerRef = useRef<HTMLDivElement>(null);
 
-  const { 
-    data, 
-    isLoading, 
-    fetchNextPage, 
-    hasNextPage, 
-    isFetchingNextPage 
-  } = useInfiniteDiscussions({
-    pageSize: 10,
-    sortBy: sortFilter === "created" ? "created" : "lastActivity",
-    enabled: !!user?.login
-  });
+  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useInfiniteDiscussions({
+      pageSize: 10,
+      sortBy: sortFilter === "created" ? "created" : "lastActivity",
+      enabled: !!user?.login
+    });
 
   // 로그인한 사용자의 글만 필터링
   const userPosts = useMemo(() => {
     if (!data?.pages || !user?.login) return [];
-    
+
     return data.pages
-      .flatMap(page => page.discussions)
-      .filter(discussion => discussion.author.login === user.login);
+      .flatMap((page) => page.discussions)
+      .filter((discussion) => discussion.author.login === user.login);
   }, [data?.pages, user?.login]);
 
   // 무한스크롤 observer 설정
@@ -69,7 +67,9 @@ export function ActivitySection({ className }: ActivitySectionProps) {
         {/* 헤더 */}
         <div className="space-y-4">
           <div className="flex items-center gap-2">
-            <span className="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-sm">3</span>
+            <span className="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-sm">
+              3
+            </span>
             <h2 className="font-bold text-[22px] leading-[130%] tracking-[-0.4px] text-[#0F0F0F]">
               활동
             </h2>
@@ -92,7 +92,6 @@ export function ActivitySection({ className }: ActivitySectionProps) {
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-sm">3</span>
             <h2 className="font-bold text-[22px] leading-[130%] tracking-[-0.4px] text-[#0F0F0F]">
               활동
             </h2>
