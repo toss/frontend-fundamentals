@@ -8,6 +8,7 @@ import {
 import { ChevronDown } from "lucide-react";
 import type { BaseComponentProps } from "@/types";
 import { cn } from "@/libs/utils";
+import { mockActivityPosts } from "./__mockdata__/ActivityMockData";
 
 interface ActivitySectionProps extends BaseComponentProps {}
 
@@ -18,21 +19,46 @@ export function ActivitySection({ className }: ActivitySectionProps) {
   const [sortFilter, setSortFilter] = useState<SortFilter>("created");
   const observerRef = useRef<HTMLDivElement>(null);
 
-  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useInfiniteDiscussions({
-      pageSize: 10,
-      sortBy: sortFilter === "created" ? "created" : "lastActivity",
-      enabled: !!user?.login
-    });
+  // 임시로 Mock 데이터 사용을 위해 주석 처리
+  // const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  //   useInfiniteDiscussions({
+  //     pageSize: 10,
+  //     sortBy: sortFilter === "created" ? "created" : "lastActivity",
+  //     enabled: !!user?.login
+  //   });
 
-  // 로그인한 사용자의 글만 필터링
+  // Mock 데이터 사용을 위한 임시 값들
+  const isLoading = false;
+  const isFetchingNextPage = false;
+  const hasNextPage = mockActivityPosts.length > 10;
+  const fetchNextPage = () => {};
+
+  // 로그인한 사용자의 글만 필터링 (임시로 Mock 데이터 사용)
   const userPosts = useMemo(() => {
-    if (!data?.pages || !user?.login) return [];
-
-    return data.pages
-      .flatMap((page) => page.discussions)
-      .filter((discussion) => discussion.author.login === user.login);
-  }, [data?.pages, user?.login]);
+    // 정렬에 따라 Mock 데이터 정렬
+    const sortedPosts = [...mockActivityPosts].sort((a, b) => {
+      if (sortFilter === "created") {
+        const dateA = new Date(a.createdAt).getTime();
+        const dateB = new Date(b.createdAt).getTime();
+        console.log(`새로 추가됨 정렬: ${a.title.substring(0, 20)}... (${a.createdAt}) vs ${b.title.substring(0, 20)}... (${b.createdAt})`);
+        return dateB - dateA; // 최신순
+      } else {
+        const dateA = new Date(a.updatedAt).getTime();
+        const dateB = new Date(b.updatedAt).getTime();
+        console.log(`새로 업데이트됨 정렬: ${a.title.substring(0, 20)}... (${a.updatedAt}) vs ${b.title.substring(0, 20)}... (${b.updatedAt})`);
+        return dateB - dateA; // 최신순
+      }
+    });
+    
+    console.log(`정렬 결과 (${sortFilter}):`, sortedPosts.slice(0, 3).map(p => ({ title: p.title, date: sortFilter === "created" ? p.createdAt : p.updatedAt })));
+    return sortedPosts;
+    
+    // 실제 API 사용 시 주석 해제
+    // if (!data?.pages || !user?.login) return [];
+    // return data.pages
+    //   .flatMap((page) => page.discussions)
+    //   .filter((discussion) => discussion.author.login === user.login);
+  }, [sortFilter]);
 
   // 무한스크롤 observer 설정
   useEffect(() => {
@@ -57,8 +83,10 @@ export function ActivitySection({ className }: ActivitySectionProps) {
     };
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
-  const handleFilterChange = (filter: SortFilter) => {
-    setSortFilter(filter);
+  const handleFilterToggle = () => {
+    const newFilter = sortFilter === "created" ? "lastActivity" : "created";
+    console.log(`필터 변경: ${newFilter === "created" ? "새로 추가됨" : "새로 업데이트됨"}`);
+    setSortFilter(newFilter);
   };
 
   if (isLoading) {
@@ -97,33 +125,22 @@ export function ActivitySection({ className }: ActivitySectionProps) {
             </h2>
           </div>
 
-          {/* 필터 버튼들 */}
-          <div className="flex gap-2">
-            <button
-              onClick={() => handleFilterChange("created")}
-              className={cn(
-                "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-colors",
-                sortFilter === "created"
-                  ? "bg-black text-white"
-                  : "bg-black/5 text-black/60 hover:bg-black/10"
-              )}
-            >
-              <ChevronDown className="w-4 h-4" />
-              새로 추가됨
-            </button>
-            <button
-              onClick={() => handleFilterChange("lastActivity")}
-              className={cn(
-                "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-colors",
-                sortFilter === "lastActivity"
-                  ? "bg-black text-white"
-                  : "bg-black/5 text-black/60 hover:bg-black/10"
-              )}
-            >
-              <ChevronDown className="w-4 h-4" />
-              새로 업데이트됨
-            </button>
-          </div>
+          {/* 필터 버튼 */}
+          <button
+            onClick={handleFilterToggle}
+            className="flex items-center justify-center gap-[6px] h-10 border border-black/8 rounded-lg text-sm font-semibold transition-colors bg-white text-black/60 hover:bg-black/5"
+            style={{ 
+              boxSizing: 'border-box',
+              paddingLeft: '15px', 
+              paddingRight: '18px',
+              paddingTop: '12px',
+              paddingBottom: '12px',
+              minWidth: sortFilter === "created" ? '117px' : '140px'
+            }}
+          >
+            <ChevronDown className="w-4 h-4" />
+            {sortFilter === "created" ? "새로 올라온" : "새로 업데이트됨"}
+          </button>
         </div>
       </div>
 

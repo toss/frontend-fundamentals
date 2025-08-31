@@ -26,6 +26,11 @@ export function MyPage() {
               <HallOfFameSection />
             </div>
 
+            {/* 구분선 */}
+            <div className="flex flex-col items-start py-4 px-0">
+              <div className="w-full h-0 border-b border-[rgba(201,201,201,0.4)]" />
+            </div>
+
             {/* 활동 섹션 */}
             <div className="lg:px-6 pb-8">
               <ActivitySection />
