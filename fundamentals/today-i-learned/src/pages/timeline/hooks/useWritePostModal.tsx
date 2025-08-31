@@ -12,7 +12,6 @@ export function useWritePostModal(options: UseWritePostModalOptions = {}) {
 
   const handleSubmit = () => {
     if (content.trim()) {
-      console.log("Submitting post:", content);
       options.onSubmit?.(content);
       setContent("");
       setIsOpen(false);

@@ -19,14 +19,18 @@ export function CommentList({ comments, onUpvote, onReply }: CommentListProps) {
   }
 
   return (
-    <div className="space-y-0">
-      {comments.map((comment) => (
-        <Comment
-          key={comment.id}
-          comment={comment}
-          onUpvote={onUpvote}
-          onReply={onReply}
-        />
+    <div className="flex flex-col items-center p-0 gap-6 w-full max-w-[800px]">
+      {comments.map((comment, index) => (
+        <div key={comment.id} className="w-full">
+          <Comment comment={comment} onUpvote={onUpvote} onReply={onReply} />
+
+          {/* Border - 댓글 사이 경계선 */}
+          {index < comments.length - 1 && (
+            <div className="flex flex-col items-start py-2 gap-2.5 w-full h-4">
+              <div className="w-full h-0 border-b border-[rgba(201,201,201,0.4)]" />
+            </div>
+          )}
+        </div>
       ))}
     </div>
   );

@@ -2,10 +2,11 @@ import { Heart, MessageCircle, ChevronUp } from "lucide-react";
 import { useState } from "react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { Card } from "@/components/shared/ui/Card";
-import { useWritePostModal } from "../../../pages/timeline/hooks/useWritePostModal";
+import { useWritePostModal } from "@/pages/timeline/hooks/useWritePostModal";
 import { PostMoreMenu } from "./PostMoreMenu";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
 import { PostDetailModal } from "@/components/features/discussions/PostDetailModal";
+import { formatNumber, formatTimeAgo } from "@/pages/timeline/utils/formatters";
 
 interface PostCardProps {
   discussion: GitHubDiscussion;
@@ -13,28 +14,6 @@ interface PostCardProps {
   onComment: (postId: string) => void;
   onUpvote: (postId: string) => void;
   onDelete?: (postId: string) => void;
-}
-
-function formatNumber(num: number): string {
-  if (num >= 1000000) {
-    return (num / 1000000).toFixed(1) + "M";
-  }
-  if (num >= 1000) {
-    return (num / 1000).toFixed(1) + "K";
-  }
-  return num.toString();
-}
-
-function formatTimeAgo(dateString: string): string {
-  const now = new Date();
-  const date = new Date(dateString);
-  const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
-
-  if (diffInSeconds < 60) return "방금 전";
-  if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)}분 전`;
-  if (diffInSeconds < 86400)
-    return `${Math.floor(diffInSeconds / 3600)}시간 전`;
-  return `${Math.floor(diffInSeconds / 86400)}일 전`;
 }
 
 export function PostCardSkeleton() {
@@ -51,7 +30,6 @@ export function PostCard({
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const { openModal, WritePostModal } = useWritePostModal({
     onSubmit: (content) => {
-      console.log("Submitting post:", content);
       // 실제로는 API 호출
     }
   });

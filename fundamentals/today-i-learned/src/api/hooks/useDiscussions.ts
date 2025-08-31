@@ -33,8 +33,7 @@ export const DISCUSSIONS_QUERY_KEYS = {
     ["repository", owner, repo] as const,
   contributions: (authorLogin: string) =>
     [...DISCUSSIONS_QUERY_KEYS.all, "contributions", authorLogin] as const,
-  detail: (id: string) =>
-    [...DISCUSSIONS_QUERY_KEYS.all, "detail", id] as const
+  detail: (id: string) => [...DISCUSSIONS_QUERY_KEYS.all, "detail", id] as const
 } as const;
 
 // 기본 파라미터 인터페이스
@@ -254,10 +253,11 @@ export function useDiscussionDetail(id: string) {
 
   return useQuery({
     queryKey: DISCUSSIONS_QUERY_KEYS.detail(id),
-    queryFn: () => fetchDiscussionDetail({ 
-      id, 
-      accessToken: user?.accessToken 
-    }),
+    queryFn: () =>
+      fetchDiscussionDetail({
+        id,
+        accessToken: user?.accessToken
+      }),
     enabled: !!id,
     staleTime: 1000 * 60 * 5, // 5분
     gcTime: 1000 * 60 * 30, // 30분
@@ -270,7 +270,13 @@ export function useAddDiscussionComment() {
   const { user } = useAuth();
 
   return useMutation({
-    mutationFn: async ({ discussionId, body }: { discussionId: string; body: string }) => {
+    mutationFn: async ({
+      discussionId,
+      body
+    }: {
+      discussionId: string;
+      body: string;
+    }) => {
       if (!user?.accessToken) {
         throw new Error("Authentication required");
       }
@@ -281,8 +287,8 @@ export function useAddDiscussionComment() {
       });
     },
     onMutate: async ({ discussionId, body }) => {
-      await queryClient.cancelQueries({ 
-        queryKey: DISCUSSIONS_QUERY_KEYS.detail(discussionId) 
+      await queryClient.cancelQueries({
+        queryKey: DISCUSSIONS_QUERY_KEYS.detail(discussionId)
       });
 
       const previousData = queryClient.getQueryData(
@@ -340,14 +346,22 @@ export function useToggleDiscussionReaction() {
   const { user } = useAuth();
 
   return useMutation({
-    mutationFn: async ({ 
-      subjectId, 
-      isReacted, 
-      content = "THUMBS_UP" 
-    }: { 
-      subjectId: string; 
+    mutationFn: async ({
+      subjectId,
+      isReacted,
+      content = "THUMBS_UP"
+    }: {
+      subjectId: string;
       isReacted: boolean;
-      content?: "THUMBS_UP" | "THUMBS_DOWN" | "LAUGH" | "HOORAY" | "CONFUSED" | "HEART" | "ROCKET" | "EYES";
+      content?:
+        | "THUMBS_UP"
+        | "THUMBS_DOWN"
+        | "LAUGH"
+        | "HOORAY"
+        | "CONFUSED"
+        | "HEART"
+        | "ROCKET"
+        | "EYES";
     }) => {
       if (!user?.accessToken) {
         throw new Error("Authentication required");

@@ -8,6 +8,7 @@ import {
   useToggleDiscussionReaction
 } from "@/api/hooks/useDiscussions";
 import { useAuth } from "@/contexts/AuthContext";
+import { CommentList } from "@/pages/timeline/components/CommentList";
 
 interface PostDetailProps {
   discussion: GitHubDiscussion;
@@ -100,6 +101,33 @@ export function PostDetail({
       if (type === "upvote" && onUpvote) onUpvote(discussion.id);
     } catch (error) {
       console.error("반응 처리 실패:", error);
+    }
+  };
+
+  const handleCommentUpvote = async (commentId: string) => {
+    if (!user?.accessToken) return;
+
+    try {
+      await toggleReactionMutation.mutateAsync({
+        subjectId: commentId,
+        isReacted: false, // TODO: 현재 반응 상태 확인
+        content: "THUMBS_UP" as any
+      });
+    } catch (error) {
+      console.error("댓글 업보트 실패:", error);
+    }
+  };
+
+  const handleCommentReply = async (commentId: string, content: string) => {
+    if (!user?.accessToken) return;
+
+    try {
+      await addCommentMutation.mutateAsync({
+        discussionId: discussion.id,
+        body: content
+      });
+    } catch (error) {
+      console.error("댓글 답글 실패:", error);
     }
   };
   return (
@@ -246,81 +274,12 @@ export function PostDetail({
                 댓글을 불러오는 중...
               </p>
             </div>
-          ) : comments.length > 0 ? (
-            comments.map((comment, index) => (
-              <div key={comment.id}>
-                <div className="px-8">
-                  <div className="flex items-center gap-3 mb-6">
-                    <Avatar
-                      size="40"
-                      src={comment.author.avatarUrl}
-                      alt={comment.author.login}
-                      fallback={comment.author.login}
-                      className="shrink-0"
-                    />
-                    <div className="flex items-center gap-2">
-                      <span className="font-bold text-[20px] leading-[130%] tracking-[-0.4px] text-black/80">
-                        {comment.author.login}
-                      </span>
-                      <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-                        @{comment.author.login}
-                      </span>
-                      <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-                        ·
-                      </span>
-                      <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-                        {formatTimeAgo(comment.createdAt)}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="pb-6">
-                    <p className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80 mb-6 whitespace-pre-wrap">
-                      {comment.body}
-                    </p>
-                    {/* 댓글 상호작용 버튼들 */}
-                    <div className="flex items-start gap-4 py-2">
-                      <button className="flex items-center gap-[6px] hover:opacity-70 transition-opacity">
-                        <div className="w-5 h-5">
-                          <ChevronUp className="w-full h-full stroke-black/40 stroke-[1.67px]" />
-                        </div>
-                        <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-                          {formatNumber(comment.reactions?.totalCount || 0)}
-                        </span>
-                      </button>
-                      <button className="flex items-center gap-[6px] hover:opacity-70 transition-opacity">
-                        <div className="w-5 h-5">
-                          <Heart className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
-                        </div>
-                        <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-                          {formatNumber(comment.reactions?.totalCount || 0)}
-                        </span>
-                      </button>
-                      <button className="flex items-center gap-[6px] hover:opacity-70 transition-opacity">
-                        <div className="w-5 h-5">
-                          <MessageCircle className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
-                        </div>
-                        <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-                          {formatNumber(comment.replies?.totalCount || 0)}
-                        </span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                {/* 구분선 (마지막 댓글이 아닌 경우) */}
-                {index < comments.length - 1 && (
-                  <div className="py-2">
-                    <div className="w-full h-0 border-t border-[rgba(201,201,201,0.4)]" />
-                  </div>
-                )}
-              </div>
-            ))
           ) : (
-            <div className="px-8 py-4">
-              <p className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/40">
-                아직 댓글이 없습니다. 첫 번째 댓글을 작성해보세요!
-              </p>
-            </div>
+            <CommentList
+              comments={comments}
+              onUpvote={handleCommentUpvote}
+              onReply={handleCommentReply}
+            />
           )}
         </div>
       )}

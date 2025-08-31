@@ -90,7 +90,7 @@ export function MyPostList({ className }: MyPostListProps) {
             글을 불러올 수 없습니다
           </h3>
           <p className="text-red-600 dark:text-red-400 mb-4">{error.message}</p>
-          <Button onClick={() => refetch()} variant="default">
+          <Button onClick={() => refetch()} variant="primary">
             다시 시도
           </Button>
         </div>
@@ -106,7 +106,7 @@ export function MyPostList({ className }: MyPostListProps) {
           <p className="text-gray-600 dark:text-gray-400 mb-4">
             첫 번째 Today I Learned 게시물을 작성해보세요!
           </p>
-          <Button variant="default">새 글 작성하기</Button>
+          <Button variant="primary">새 글 작성하기</Button>
         </div>
       );
     }

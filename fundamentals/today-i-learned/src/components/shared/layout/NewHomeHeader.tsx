@@ -1,13 +1,16 @@
 import { Search, Command, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useUserProfile } from "@/api/hooks/useUser";
+import ffSymbol from "@/assets/ff-symbol2.svg";
 
 export function NewHomeHeader() {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const { user } = useAuth();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { user, login, logout } = useAuth();
   const { data: userProfile, isLoading } = useUserProfile();
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Handle Command+K shortcut
   useEffect(() => {
@@ -25,13 +28,33 @@ export function NewHomeHeader() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  // Handle clicking outside dropdown
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
     <header className="fixed top-0 left-0 right-0 border-b border-gray-200/50 bg-white z-30">
       <div className="mx-auto flex h-[120px] items-center justify-between px-6 lg:px-[222px]">
         {/* Logo */}
         <div className="flex-shrink-0">
-          <Link to="/" className="flex items-center">
-            <span className="text-[28px] font-extrabold text-[#0F0F0F] tracking-tight leading-6">
+          <Link to="/" className="flex items-center gap-3">
+            <img
+              src={ffSymbol}
+              alt="Frontend Fundamentals Logo"
+              className="w-8 h-8"
+            />
+            <span className="text-[20px] font-extrabold text-[#0F0F0F] tracking-tight leading-6">
               Today I Learned
             </span>
           </Link>
@@ -64,9 +87,10 @@ export function NewHomeHeader() {
         </div>
 
         {/* User Profile Area */}
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 relative" ref={dropdownRef}>
           <button
             type="button"
+            onClick={!user ? login : () => setIsDropdownOpen(!isDropdownOpen)}
             className="flex items-center space-x-3 px-6 py-4 border border-gray-200/50 rounded-2xl hover:bg-gray-50 transition-colors shadow-sm"
           >
             {isLoading ? (
@@ -107,16 +131,34 @@ export function NewHomeHeader() {
               </>
             ) : (
               <>
-                <div className="w-10 h-10 bg-gray-300 rounded-full" />
-                <div className="flex items-center space-x-2">
-                  <span className="text-base font-bold text-gray-700 tracking-tight">
-                    Guest User
-                  </span>
-                  <ChevronDown className="w-5 h-5 text-gray-600" />
-                </div>
+                <span className="text-base font-bold text-gray-700 tracking-tight">
+                  Log in
+                </span>
               </>
             )}
           </button>
+
+          {/* Dropdown Menu */}
+          {isDropdownOpen && (user || userProfile) && (
+            <div className="absolute right-0 top-full mt-2 w-40 bg-white rounded-2xl shadow-[0px_0px_10px_rgba(0,0,0,0.08)] py-2 z-50">
+              <Link
+                to="/profile"
+                className="flex items-center px-4 py-2.5 text-base font-semibold text-black/80 hover:bg-gray-100 rounded-lg transition-colors"
+                onClick={() => setIsDropdownOpen(false)}
+              >
+                내 프로필
+              </Link>
+              <button
+                onClick={() => {
+                  logout();
+                  setIsDropdownOpen(false);
+                }}
+                className="flex items-center px-4 py-2.5 text-base font-semibold text-black/80 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                로그아웃
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </header>

@@ -66,7 +66,6 @@ export function Header() {
           {/* Theme toggle */}
           <Button
             variant="ghost"
-            size="icon"
             onClick={toggleTheme}
             className="h-9 w-9 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
             aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
@@ -92,7 +91,6 @@ export function Header() {
                 </span>
                 <Button
                   variant="ghost"
-                  size="icon"
                   onClick={logout}
                   className="h-8 w-8 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
                   aria-label="로그아웃"
@@ -116,7 +114,6 @@ export function Header() {
           {/* Mobile menu button */}
           <Button
             variant="ghost"
-            size="icon"
             className="md:hidden h-9 w-9 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
             aria-label="Open menu"
           >

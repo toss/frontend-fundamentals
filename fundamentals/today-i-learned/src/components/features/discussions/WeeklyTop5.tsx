@@ -107,15 +107,15 @@ export function WeeklyTop5() {
   };
 
   const handleLike = (postId: string) => {
-    console.log("Like post:", postId);
+    // TODO: Implement like functionality
   };
 
   const handleComment = (postId: string) => {
-    console.log("Comment on post:", postId);
+    // TODO: Implement comment functionality
   };
 
   const handleUpvote = (postId: string) => {
-    console.log("Upvote post:", postId);
+    // TODO: Implement upvote functionality
   };
 
   if (isLoading) {
