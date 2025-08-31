@@ -1,8 +1,8 @@
-import { useState } from "react";
 import { ChevronUp, MessageCircle } from "lucide-react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { CommentInput } from "./CommentInput";
 import type { GitHubComment } from "@/api/remote/discussions";
+import { formatTimeAgo, formatNumber } from "../utils/formatters";
 
 interface CommentProps {
   comment: GitHubComment;
@@ -10,21 +10,58 @@ interface CommentProps {
   onReply: (commentId: string, content: string) => void;
   depth?: number;
 }
-import { formatTimeAgo, formatNumber } from "../utils/formatters";
 function CommentContainer({
   children,
-  depth = 0
+  depth = 0,
+  hasReplies = false
 }: {
   children: React.ReactNode;
   depth?: number;
+  hasReplies?: boolean;
 }) {
-  const indentLevel = Math.min(depth, 3);
-  const marginLeft = indentLevel * 48;
+  if (depth === 0) {
+    // 최상위 댓글 - 답글이 있으면 세로선 추가
+    if (hasReplies) {
+      return (
+        <div className="flex flex-col items-start px-8 w-full">
+          <div className="flex flex-row justify-center items-start p-0 gap-4 w-full max-w-[736px]">
+            <div className="flex flex-row items-start pt-4 gap-2.5 w-0 self-stretch min-h-full">
+              <div
+                className="w-px h-full border-l border-[rgba(201,201,201,0.4)]"
+                style={{
+                  minHeight: "160px"
+                }}
+              />
+            </div>
+            <div className="flex flex-col items-start py-6 gap-6 flex-1 w-full max-w-[720px]">
+              {children}
+            </div>
+          </div>
+        </div>
+      );
+    }
+    
+    // 답글이 없는 최상위 댓글
+    return (
+      <div className="flex flex-col items-start px-8 w-full">{children}</div>
+    );
+  }
 
+  // 대댓글 - Comment with nested structure
   return (
-    <div style={{ marginLeft: `${marginLeft}px` }}>
-      <div className="py-4 border-b border-gray-100 last:border-b-0">
-        {children}
+    <div className="flex flex-col items-start px-8 w-full">
+      <div className="flex flex-row justify-center items-start p-0 gap-4 w-full max-w-[736px]">
+        <div className="flex flex-row items-start pt-4 gap-2.5 w-0 self-stretch min-h-full">
+          <div
+            className="w-px h-full border-l border-[rgba(201,201,201,0.4)]"
+            style={{
+              minHeight: "160px"
+            }}
+          />
+        </div>
+        <div className="flex flex-col items-start py-6 gap-6 flex-1 w-full max-w-[720px]">
+          {children}
+        </div>
       </div>
     </div>
   );
@@ -32,25 +69,32 @@ function CommentContainer({
 
 function CommentHeader({ comment }: { comment: CommentProps["comment"] }) {
   return (
-    <div className="flex items-center gap-3 mb-3">
-      <Avatar
-        size="32"
-        src={comment.author.avatarUrl || "/api/placeholder/32/32"}
-        alt={comment.author.login}
-        fallback={comment.author.login}
-        className="shrink-0"
-      />
-      <div className="flex items-center gap-2">
-        <span className="font-bold text-base text-black/80">
-          {comment.author.login}
-        </span>
-        <span className="font-medium text-sm text-black/40">
-          @{comment.author.login}
-        </span>
-        <span className="font-medium text-sm text-black/40">·</span>
-        <span className="font-medium text-sm text-black/40">
-          {formatTimeAgo(comment.createdAt)}
-        </span>
+    <div className="flex flex-row items-center gap-4 w-full h-10">
+      {/* Profile Info */}
+      <div className="flex flex-row items-center gap-3">
+        <Avatar
+          size="40"
+          src={comment.author.avatarUrl || "/api/placeholder/40/40"}
+          alt={comment.author.login}
+          fallback={comment.author.login}
+          className="w-10 h-10 rounded-full flex-shrink-0"
+        />
+        <div className="flex flex-row items-center gap-2">
+          <span className="font-bold text-xl leading-[130%] tracking-tight text-black/80">
+            {comment.author.login}
+          </span>
+          <div className="flex flex-row items-start gap-1">
+            <span className="font-semibold text-base leading-[130%] tracking-tight text-black/40">
+              @{comment.author.login}
+            </span>
+            <span className="font-semibold text-base leading-[130%] tracking-tight text-black/40">
+              ·
+            </span>
+            <span className="font-semibold text-base leading-[130%] tracking-tight text-black/40">
+              {formatTimeAgo(comment.createdAt)}
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -58,8 +102,8 @@ function CommentHeader({ comment }: { comment: CommentProps["comment"] }) {
 
 function CommentBody({ content }: { content: string }) {
   return (
-    <div className="mb-3 ml-11">
-      <p className="text-base leading-relaxed text-black/80 whitespace-pre-wrap">
+    <div className="w-full">
+      <p className="font-medium text-base leading-[160%] tracking-tight text-black/80 whitespace-pre-wrap">
         {content}
       </p>
     </div>
@@ -78,64 +122,38 @@ function CommentActions({
   onReply: () => void;
 }) {
   return (
-    <div className="flex items-center gap-4 ml-11">
+    <div className="flex flex-row items-start py-2 gap-4 w-[180px] h-9">
       <button
         onClick={onUpvote}
-        className="flex items-center gap-1 hover:opacity-70 transition-opacity"
+        className="flex flex-row items-center gap-1.5 hover:opacity-70 transition-opacity"
       >
-        <ChevronUp className="w-4 h-4 stroke-black/40 stroke-2" />
-        <span className="text-sm font-medium text-black/40">
+        <div className="w-5 h-5">
+          <ChevronUp className="w-3 h-3 stroke-black/40 stroke-2" />
+        </div>
+        <span className="font-semibold text-base leading-[130%] tracking-tight text-black/40">
           {formatNumber(upvotes)}
         </span>
       </button>
 
       <button
         onClick={onReply}
-        className="flex items-center gap-1 hover:opacity-70 transition-opacity"
+        className="flex flex-row items-center gap-1.5 hover:opacity-70 transition-opacity"
       >
-        <MessageCircle className="w-4 h-4 stroke-black/40 stroke-2" />
-        <span className="text-sm font-medium text-black/40">
-          {replies > 0 ? formatNumber(replies) : "답글"}
+        <div className="w-5 h-5">
+          <MessageCircle className="w-4 h-4 stroke-black/40 stroke-2" />
+        </div>
+        <span className="font-semibold text-base leading-[130%] tracking-tight text-black/40">
+          {replies > 0 ? formatNumber(replies) : 0}
         </span>
       </button>
     </div>
   );
 }
 
-function RepliesToggle({
-  show,
-  count,
-  onToggle
-}: {
-  show: boolean;
-  count: number;
-  onToggle: () => void;
-}) {
-  if (count === 0) return null;
-
-  return (
-    <button
-      onClick={onToggle}
-      className="ml-11 mt-2 text-sm font-medium text-blue-600 hover:text-blue-700"
-    >
-      {show ? `답글 ${count}개 숨기기` : `답글 ${count}개 보기`}
-    </button>
-  );
-}
-
 function useCommentInteraction() {
-  const [showReplyInput, setShowReplyInput] = useState(false);
-  const [showReplies, setShowReplies] = useState(true);
-
-  const toggleReplyInput = () => setShowReplyInput(!showReplyInput);
-  const toggleReplies = () => setShowReplies(!showReplies);
-  const hideReplyInput = () => setShowReplyInput(false);
+  const hideReplyInput = () => {};
 
   return {
-    showReplyInput,
-    showReplies,
-    toggleReplyInput,
-    toggleReplies,
     hideReplyInput
   };
 }
@@ -146,13 +164,7 @@ export function Comment({
   onReply,
   depth = 0
 }: CommentProps) {
-  const {
-    showReplyInput,
-    showReplies,
-    toggleReplyInput,
-    toggleReplies,
-    hideReplyInput
-  } = useCommentInteraction();
+  const { hideReplyInput } = useCommentInteraction();
 
   const handleReplySubmit = (content: string) => {
     onReply(comment.id, content);
@@ -161,6 +173,45 @@ export function Comment({
 
   const handleUpvote = () => onUpvote(comment.id);
 
+  if (depth === 0) {
+    return (
+      <>
+        <CommentContainer 
+          depth={depth} 
+          hasReplies={!!(comment.replies?.nodes && comment.replies.nodes.length > 0)}
+        >
+          <div className="flex flex-row items-center p-0 gap-4 w-full h-10">
+            <CommentHeader comment={comment} />
+          </div>
+
+          <div className="flex flex-col items-start py-6 gap-6 w-full">
+            <CommentBody content={comment.body} />
+            <CommentActions
+              upvotes={comment.reactions.totalCount}
+              replies={comment.replies?.totalCount || 0}
+              onUpvote={handleUpvote}
+              onReply={() => {}}
+            />
+          </div>
+        </CommentContainer>
+        {comment.replies?.nodes && comment.replies.nodes.length > 0 && (
+          <div>
+            {comment.replies.nodes.map((reply) => (
+              <Comment
+                key={reply.id}
+                comment={reply}
+                onUpvote={onUpvote}
+                onReply={onReply}
+                depth={depth + 1}
+              />
+            ))}
+          </div>
+        )}
+      </>
+    );
+  }
+
+  // 대댓글
   return (
     <>
       <CommentContainer depth={depth}>
@@ -170,22 +221,11 @@ export function Comment({
           upvotes={comment.reactions.totalCount}
           replies={comment.replies?.totalCount || 0}
           onUpvote={handleUpvote}
-          onReply={toggleReplyInput}
+          onReply={() => {}}
         />
-
-        {showReplyInput && (
-          <div className="mt-4 ml-11">
-            <CommentInput
-              onSubmit={handleReplySubmit}
-              placeholder="답글을 작성해보세요..."
-              isReply={true}
-              parentId={comment.id}
-            />
-          </div>
-        )}
       </CommentContainer>
 
-      {comment.replies?.nodes && comment.replies.nodes.length > 0 && showReplies && (
+      {comment.replies?.nodes && comment.replies.nodes.length > 0 && (
         <div>
           {comment.replies.nodes.map((reply) => (
             <Comment
@@ -199,11 +239,14 @@ export function Comment({
         </div>
       )}
 
-      <RepliesToggle
-        show={showReplies}
-        count={comment.replies?.nodes?.length || 0}
-        onToggle={toggleReplies}
-      />
+      <div className="mt-4">
+        <CommentInput
+          onSubmit={handleReplySubmit}
+          placeholder="댓글을 작성해보세요..."
+          isReply={true}
+          parentId={comment.id}
+        />
+      </div>
     </>
   );
 }

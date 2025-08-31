@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { Button } from "@/components/shared/ui/Button";
+import { Avatar } from "@/components/shared/ui/Avatar";
+import { useAuth } from "@/contexts/AuthContext";
+
 interface CommentInputProps {
   onSubmit: (content: string) => void;
   placeholder?: string;
@@ -9,46 +11,58 @@ interface CommentInputProps {
 
 export function CommentInput({
   onSubmit,
-  placeholder = "댓글을 작성해보세요...",
+  placeholder = "댓글을 작성해보세요",
   isReply = false
 }: CommentInputProps) {
-  const [content, setContent] = useState("");
+  const [commentText, setCommentText] = useState("");
+  const [isPending, setIsPending] = useState(false);
+  const { user } = useAuth();
 
-  const handleSubmit = () => {
-    if (content.trim()) {
-      onSubmit(content.trim());
-      setContent("");
+  const handleCommentSubmit = async () => {
+    if (commentText.trim()) {
+      setIsPending(true);
+      try {
+        await onSubmit(commentText.trim());
+        setCommentText("");
+      } finally {
+        setIsPending(false);
+      }
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handleSubmit();
-    }
-  };
+  if (!user) return null;
 
   return (
-    <div className={`${isReply ? "ml-12" : ""}`}>
-      <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          onKeyPress={handleKeyPress}
-          placeholder={placeholder}
-          className="w-full bg-transparent border-none resize-none focus:outline-none text-base placeholder-gray-500 min-h-[80px]"
-          rows={3}
+    <div className="px-8 pb-3 flex flex-col gap-3">
+      <div className="flex items-center gap-4">
+        <Avatar
+          size="40"
+          src={user.avatar_url}
+          alt={user.login}
+          fallback={user.login}
+          className="shrink-0"
         />
-        <div className="flex justify-end mt-3">
-          <Button
-            onClick={handleSubmit}
-            disabled={!content.trim()}
-            size="sm"
-            className="bg-blue-500 text-white hover:bg-blue-600 disabled:bg-gray-300 disabled:text-gray-500"
-          >
-            {isReply ? "답글달기" : "댓글달기"}
-          </Button>
-        </div>
+        <textarea
+          value={commentText}
+          onChange={(e) => setCommentText(e.target.value)}
+          placeholder={placeholder}
+          className="flex-1 font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80 placeholder:text-black/20 bg-transparent border-none outline-none resize-none min-h-[24px] max-h-[120px]"
+          rows={1}
+          onInput={(e) => {
+            const target = e.target as HTMLTextAreaElement;
+            target.style.height = "auto";
+            target.style.height = `${Math.min(target.scrollHeight, 120)}px`;
+          }}
+        />
+      </div>
+      <div className="flex justify-end">
+        <button
+          onClick={handleCommentSubmit}
+          disabled={!commentText.trim() || isPending}
+          className="flex justify-center items-center px-6 py-[18px] gap-[10px] w-24 h-[46px] bg-[#0F0F0F] hover:bg-[#333333] disabled:bg-black/20 disabled:cursor-not-allowed rounded-[200px] font-bold text-[14px] leading-[130%] tracking-[-0.4px] text-[#FCFCFC] transition-colors"
+        >
+          {isPending ? "작성중..." : "작성하기"}
+        </button>
       </div>
     </div>
   );
