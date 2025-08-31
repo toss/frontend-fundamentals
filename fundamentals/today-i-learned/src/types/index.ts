@@ -96,8 +96,8 @@ export type SortOption = "newest" | "realtime" | "hall-of-fame";
 
 export interface ChallengeDay {
   day: number;
-  date: string;
-  status: "completed" | "today" | "pending";
+  date?: string;
+  status: "completed" | "today" | "pending" | "posted";
   streak?: number;
 }
 
