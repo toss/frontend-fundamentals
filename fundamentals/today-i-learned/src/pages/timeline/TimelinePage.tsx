@@ -4,6 +4,7 @@ import { FilterSection } from "./components/FilterSection";
 import { PostList } from "./components/PostList";
 import { WeeklyTop5 } from "@/components/features/discussions/WeeklyTop5";
 import { SprintChallenge } from "./components/SprintChallenge";
+import { UnauthenticatedState } from "@/components/features/auth/UnauthenticatedState";
 import { useAuth } from "@/contexts/AuthContext";
 import type { SortOption } from "@/types";
 import {
@@ -109,37 +110,47 @@ export function TimelinePage() {
         <div className="grid grid-cols-1 lg:grid-cols-[5fr_3fr] gap-8">
           {/* 왼쪽 컬럼: 메인 피드 */}
           <div className="flex flex-col lg:border-l lg:border-r border-[rgba(201,201,201,0.4)] lg:min-w-[820px]">
-            {/* 3일 스프린트 챌린지 */}
-            <div className="pt-6 pb-0">
-              <SprintChallenge />
-            </div>
-
-            {/* 구분선 */}
-            <div className="flex flex-col items-start py-4 px-0">
-              <div className="w-full h-0 border-b border-[rgba(201,201,201,0.4)]" />
-            </div>
-
-            {/* 포스트 입력 */}
-            <div className="lg:px-6 pt-6 pb-0">
-              {user ? (
-                <PostInput
-                  user={{
-                    login: user.login,
-                    avatarUrl: user.avatar_url
-                  }}
-                  onSubmit={handlePostSubmit}
-                />
-              ) : (
-                <div className="text-center py-8 text-gray-500">
-                  로그인이 필요합니다.
+            {user ? (
+              <>
+                {/* 3일 스프린트 챌린지 */}
+                <div className="pt-6 pb-0">
+                  <SprintChallenge />
                 </div>
-              )}
-            </div>
 
-            {/* 구분선 */}
-            <div className="flex flex-col items-start py-4 px-0">
-              <div className="w-full h-0 border-b border-[rgba(201,201,201,0.4)]" />
-            </div>
+                {/* 구분선 */}
+                <div className="flex flex-col items-start py-4 px-0">
+                  <div className="w-full h-0 border-b border-[rgba(201,201,201,0.4)]" />
+                </div>
+
+                {/* 포스트 입력 */}
+                <div className="lg:px-6 pt-6 pb-0">
+                  <PostInput
+                    user={{
+                      login: user.login,
+                      avatarUrl: user.avatar_url
+                    }}
+                    onSubmit={handlePostSubmit}
+                  />
+                </div>
+
+                {/* 구분선 */}
+                <div className="flex flex-col items-start py-4 px-0">
+                  <div className="w-full h-0 border-b border-[rgba(201,201,201,0.4)]" />
+                </div>
+              </>
+            ) : (
+              <>
+                {/* 로그인 안된 상태 */}
+                <div className="pt-6 pb-4 px-6">
+                  <UnauthenticatedState />
+                </div>
+
+                {/* 구분선 */}
+                <div className="flex flex-col items-start py-4 px-0">
+                  <div className="w-full h-0 border-b border-[rgba(201,201,201,0.4)]" />
+                </div>
+              </>
+            )}
 
             {/* 필터 섹션 */}
             <div className="lg:px-6 pb-4">
