@@ -14,6 +14,7 @@ interface PostCardProps {
   onComment: (postId: string) => void;
   onUpvote: (postId: string) => void;
   onDelete?: (postId: string) => void;
+  currentUserLogin?: string;
 }
 
 export function PostCardSkeleton() {
@@ -25,7 +26,8 @@ export function PostCard({
   onLike,
   onComment,
   onUpvote,
-  onDelete
+  onDelete,
+  currentUserLogin
 }: PostCardProps) {
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const { openModal, WritePostModal } = useWritePostModal({
@@ -74,7 +76,7 @@ export function PostCard({
           </div>
 
           {/* 더보기 메뉴 (본인 글인 경우만) */}
-          {discussion.author.login === "currentUser" && (
+          {currentUserLogin && discussion.author.login === currentUserLogin && (
             <div onClick={(e) => e.stopPropagation()}>
               <PostMoreMenu
                 onEdit={openModal}

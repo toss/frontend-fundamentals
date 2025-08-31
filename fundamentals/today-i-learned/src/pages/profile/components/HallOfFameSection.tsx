@@ -113,6 +113,7 @@ export function HallOfFameSection({ className }: HallOfFameSectionProps) {
                 onComment={(postId) => console.log("Comment:", postId)}
                 onUpvote={(postId) => console.log("Upvote:", postId)}
                 onDelete={(postId) => console.log("Delete:", postId)}
+                currentUserLogin={userProfile?.login}
               />
             ))}
           </div>

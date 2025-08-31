@@ -129,6 +129,7 @@ export function ActivitySection({ className }: ActivitySectionProps) {
                 onComment={handleComment}
                 onUpvote={(postId) => console.log("Upvote:", postId)}
                 onDelete={(postId) => console.log("Delete:", postId)}
+                currentUserLogin={userProfile?.login}
               />
             ))}
           </div>
