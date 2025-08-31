@@ -70,6 +70,36 @@ export const CREATE_DISCUSSION_MUTATION = `
   }
 `;
 
+export const UPDATE_DISCUSSION_MUTATION = `
+  mutation UpdateDiscussion($discussionId: ID!, $title: String!, $body: String!) {
+    updateDiscussion(input: {
+      discussionId: $discussionId
+      title: $title
+      body: $body
+    }) {
+      discussion {
+        id
+        title
+        body
+        updatedAt
+        author {
+          login
+          avatarUrl
+        }
+        reactions {
+          totalCount
+        }
+        comments {
+          totalCount
+        }
+        category {
+          name
+        }
+      }
+    }
+  }
+`;
+
 export const GET_REPOSITORY_INFO_QUERY = `
   query GetRepositoryInfo($owner: String!, $repo: String!) {
     repository(owner: $owner, name: $repo) {

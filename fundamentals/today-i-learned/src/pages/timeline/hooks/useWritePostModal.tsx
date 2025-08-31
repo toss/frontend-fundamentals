@@ -1,19 +1,35 @@
 import { useState } from "react";
 import { X } from "lucide-react";
 import { AlertDialog } from "@/components/shared/ui/AlertDialog";
+import { useUserProfile } from "@/api/hooks/useUser";
 
 interface UseWritePostModalOptions {
-  onSubmit?: (content: string) => void;
+  onSubmit?: (title: string, content: string) => void;
+  isEdit?: boolean;
+  initialTitle?: string;
+  initialContent?: string;
 }
 
 export function useWritePostModal(options: UseWritePostModalOptions = {}) {
   const [isOpen, setIsOpen] = useState(false);
-  const [content, setContent] = useState("");
+  const [title, setTitle] = useState(options.initialTitle || "");
+  const [content, setContent] = useState(options.initialContent || "");
+  const { data: userProfile } = useUserProfile();
+
+  const openModal = () => {
+    // 모달을 열 때 초기값 설정
+    setTitle(options.initialTitle || "");
+    setContent(options.initialContent || "");
+    setIsOpen(true);
+  };
 
   const handleSubmit = () => {
-    if (content.trim()) {
-      options.onSubmit?.(content);
-      setContent("");
+    if (title.trim() && content.trim()) {
+      options.onSubmit?.(title.trim(), content.trim());
+      if (!options.isEdit) {
+        setTitle("");
+        setContent("");
+      }
       setIsOpen(false);
     }
   };
@@ -37,8 +53,9 @@ export function useWritePostModal(options: UseWritePostModalOptions = {}) {
             <div
               className="w-[60px] h-[60px] rounded-full bg-cover bg-center bg-no-repeat"
               style={{
-                backgroundImage:
-                  "url(https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=face)"
+                backgroundImage: userProfile?.avatar_url 
+                  ? `url(${userProfile.avatar_url})`
+                  : "url(https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=face)"
               }}
             />
           </div>
@@ -47,12 +64,25 @@ export function useWritePostModal(options: UseWritePostModalOptions = {}) {
           <div className="flex-1 flex flex-col">
             {/* Title */}
             <div className="mb-6">
-              <AlertDialog.Title className="text-[22px] font-bold leading-[130%] tracking-[-0.4px] text-[#0F0F0F]">
-                오늘 배운 내용을 기록해 보세요
-              </AlertDialog.Title>
+              {options.isEdit ? (
+                <input
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  placeholder="제목을 입력하세요"
+                  className="w-full text-[22px] font-bold leading-[130%] tracking-[-0.4px] text-[#0F0F0F] placeholder:text-[#0F0F0F]/40 bg-transparent border-none outline-none p-0"
+                  style={{
+                    fontFamily: "'Toss Product Sans OTF', ui-sans-serif, system-ui, sans-serif"
+                  }}
+                />
+              ) : (
+                <AlertDialog.Title className="text-[22px] font-bold leading-[130%] tracking-[-0.4px] text-[#0F0F0F]">
+                  오늘 배운 내용을 기록해 보세요
+                </AlertDialog.Title>
+              )}
             </div>
 
-            {/* Text area */}
+            {/* Text area - 본문만 입력 */}
             <div className="flex-1 mb-6">
               <textarea
                 value={content}
@@ -71,7 +101,7 @@ export function useWritePostModal(options: UseWritePostModalOptions = {}) {
               <AlertDialog.Action asChild>
                 <button
                   onClick={handleSubmit}
-                  disabled={!content.trim()}
+                  disabled={options.isEdit ? (!title.trim() || !content.trim()) : !content.trim()}
                   className="flex flex-row justify-center items-center px-6 py-[18px] gap-[10px] w-24 h-[46px] bg-[#0F0F0F] hover:bg-[#333333] disabled:bg-black/10 disabled:cursor-not-allowed rounded-[200px] transition-colors flex-none"
                 >
                   <span
@@ -94,10 +124,12 @@ export function useWritePostModal(options: UseWritePostModalOptions = {}) {
 
   return {
     isOpen,
-    openModal: () => setIsOpen(true),
+    openModal,
     closeModal: () => setIsOpen(false),
     WritePostModal,
+    title,
     content,
+    setTitle,
     setContent
   };
 }

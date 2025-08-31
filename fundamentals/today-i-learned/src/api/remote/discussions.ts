@@ -3,6 +3,7 @@ import { PAGE_SIZE } from "@/constants/github";
 import {
   GET_DISCUSSIONS_QUERY,
   CREATE_DISCUSSION_MUTATION,
+  UPDATE_DISCUSSION_MUTATION,
   GET_REPOSITORY_INFO_QUERY,
   GET_INFINITE_DISCUSSIONS_QUERY,
   SEARCH_DISCUSSIONS_QUERY,
@@ -62,6 +63,13 @@ export interface CreateDiscussionParams {
   title: string;
   body: string;
   categoryId: string;
+  accessToken: string;
+}
+
+export interface UpdateDiscussionParams {
+  discussionId: string;
+  title: string;
+  body: string;
   accessToken: string;
 }
 
@@ -505,4 +513,25 @@ export async function removeDiscussionReaction({
   return {
     totalCount: subject.reactions.totalCount
   };
+}
+
+export async function updateDiscussion({
+  discussionId,
+  title,
+  body,
+  accessToken
+}: UpdateDiscussionParams): Promise<GitHubDiscussion> {
+  const data = await graphqlRequest(
+    UPDATE_DISCUSSION_MUTATION,
+    { discussionId, title, body },
+    accessToken
+  );
+
+  const discussion = data.data?.updateDiscussion?.discussion;
+
+  if (!discussion) {
+    throw new Error("Failed to update discussion");
+  }
+
+  return discussion;
 }

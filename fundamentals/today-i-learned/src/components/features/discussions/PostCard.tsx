@@ -7,6 +7,7 @@ import { PostMoreMenu } from "./PostMoreMenu";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
 import { PostDetailModal } from "@/components/features/discussions/PostDetailModal";
 import { formatNumber, formatTimeAgo } from "@/pages/timeline/utils/formatters";
+import { useUpdateDiscussion } from "@/api/hooks/useDiscussions";
 
 interface PostCardProps {
   discussion: GitHubDiscussion;
@@ -30,14 +31,29 @@ export function PostCard({
   currentUserLogin
 }: PostCardProps) {
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
-  const { openModal, WritePostModal } = useWritePostModal({
-    onSubmit: (content) => {
-      // 실제로는 API 호출
-    }
+  const { mutate: updateDiscussion, isPending: isUpdating } =
+    useUpdateDiscussion();
+
+  const { openModal, WritePostModal, isOpen } = useWritePostModal({
+    onSubmit: (title, content) => {
+      updateDiscussion({
+        discussionId: discussion.id,
+        title,
+        body: content
+      });
+    },
+    isEdit: true,
+    initialTitle: discussion.title,
+    initialContent: discussion.body
   });
 
-  const handlePostClick = () => {
-    setIsDetailModalOpen(true);
+  const handlePostClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    // 수정 모달이 열려있으면 상세 모달을 열지 않음
+    if (!isOpen) {
+      setIsDetailModalOpen(true);
+    }
   };
   return (
     <Card

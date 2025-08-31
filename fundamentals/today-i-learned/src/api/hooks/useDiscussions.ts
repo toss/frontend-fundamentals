@@ -8,6 +8,7 @@ import {
 } from "@tanstack/react-query";
 import {
   createDiscussion,
+  updateDiscussion,
   fetchAllDiscussions,
   fetchInfiniteDiscussions,
   fetchRepositoryInfo,
@@ -17,7 +18,8 @@ import {
   addDiscussionComment,
   addDiscussionReaction,
   removeDiscussionReaction,
-  type DiscussionsApiParams
+  type DiscussionsApiParams,
+  type UpdateDiscussionParams
 } from "../remote/discussions";
 
 // Query Keys 중앙 관리
@@ -414,6 +416,54 @@ export function useToggleDiscussionReaction() {
       queryClient.invalidateQueries({
         queryKey: DISCUSSIONS_QUERY_KEYS.all
       });
+    }
+  });
+}
+
+// Discussion 수정을 위한 간단한 인터페이스
+interface UpdatePostParams {
+  discussionId: string;
+  title: string;
+  body: string;
+}
+
+// Discussion 수정 Mutation
+export function useUpdateDiscussion() {
+  const queryClient = useQueryClient();
+  const { user } = useAuth();
+
+  return useMutation({
+    mutationFn: async (params: UpdatePostParams) => {
+      if (!user?.accessToken) {
+        throw new Error("Authentication required");
+      }
+
+      return updateDiscussion({
+        discussionId: params.discussionId,
+        title: params.title,
+        body: params.body,
+        accessToken: user.accessToken
+      });
+    },
+    onSuccess: (updatedDiscussion) => {
+      // 관련 쿼리들 무효화
+      queryClient.invalidateQueries({
+        queryKey: DISCUSSIONS_QUERY_KEYS.all
+      });
+      
+      // 상세 정보도 업데이트
+      queryClient.setQueryData(
+        DISCUSSIONS_QUERY_KEYS.detail(updatedDiscussion.id),
+        (oldData: any) => {
+          if (!oldData) return oldData;
+          return {
+            ...oldData,
+            title: updatedDiscussion.title,
+            body: updatedDiscussion.body,
+            updatedAt: updatedDiscussion.updatedAt
+          };
+        }
+      );
     }
   });
 }
