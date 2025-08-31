@@ -9,7 +9,8 @@ import { useAuth } from "@/contexts/AuthContext";
 import type { SortOption } from "@/types";
 import {
   useCreateDiscussion,
-  useToggleDiscussionReaction
+  useToggleDiscussionReaction,
+  useDeleteDiscussion
 } from "@/api/hooks/useDiscussions";
 import { useErrorHandler } from "@/hooks/useErrorHandler";
 import { useToast } from "@/components/shared/ui/Toast";
@@ -69,6 +70,7 @@ export function TimelinePage() {
   };
 
   const toggleReactionMutation = useToggleDiscussionReaction();
+  const deleteDiscussionMutation = useDeleteDiscussion();
 
   const handleLike = async (postId: string) => {
     if (!user?.accessToken) return;
@@ -99,6 +101,17 @@ export function TimelinePage() {
       });
     } catch (error) {
       handleApiError(error, "업보트");
+    }
+  };
+
+  const handleDelete = async (postId: string) => {
+    try {
+      await deleteDiscussionMutation.mutateAsync({
+        discussionId: postId
+      });
+      showSuccessToast("삭제 완료", "포스트가 성공적으로 삭제되었습니다.");
+    } catch (error) {
+      handleApiError(error, "포스트 삭제");
     }
   };
 
@@ -166,9 +179,7 @@ export function TimelinePage() {
                 onLike={handleLike}
                 onComment={handleComment}
                 onUpvote={handleUpvote}
-                onDelete={(postId) => {
-                  // TODO: 삭제 기능 구현
-                }}
+                onDelete={handleDelete}
               />
             </div>
           </div>
