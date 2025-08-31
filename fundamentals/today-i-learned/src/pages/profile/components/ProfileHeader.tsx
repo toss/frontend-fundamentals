@@ -58,7 +58,7 @@ export function ProfileHeader({ className }: ProfileHeaderProps) {
   return (
     <div
       className={cn(
-        "flex flex-col items-center py-6 px-6 gap-6 relative",
+        "flex flex-col items-center py-4 px-4 gap-6 relative",
         className
       )}
     >
