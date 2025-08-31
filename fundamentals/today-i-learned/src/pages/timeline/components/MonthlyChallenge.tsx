@@ -1,9 +1,12 @@
 import { Card } from "@/components/shared/ui/Card";
 import { cn } from "@/libs/cn";
 import type { ChallengeDay, MonthlyChallenge } from "@/types";
+import { useMyContributions } from "@/api/hooks/useDiscussions";
+import { useMemo } from "react";
+import { Check } from "lucide-react";
 
 interface MonthlyChallengeProps {
-  challenge: MonthlyChallenge;
+  challenge?: MonthlyChallenge;
   onDayClick?: (day: number) => void;
 }
 
@@ -41,6 +44,9 @@ function ChallengeDayItem({ day }: { day: ChallengeDay }) {
         ];
         const colorIndex = (day.day - 1) % colors.length;
         return colors[colorIndex];
+      case "posted":
+        // 글을 작성한 날 - 파란색 체크마크
+        return "bg-[rgba(198,218,255,0.6)] text-[#6B9AFF]";
       case "today":
         return "bg-black/70 text-[#FCFCFC]";
       default:
@@ -51,6 +57,9 @@ function ChallengeDayItem({ day }: { day: ChallengeDay }) {
   const getStreakLabel = () => {
     if (day.status === "completed" && day.streak) {
       return `${day.streak}일차`;
+    }
+    if (day.status === "posted") {
+      return <Check size={20} strokeWidth={3} />;
     }
     if (day.status === "today") {
       return "오늘";
@@ -74,12 +83,107 @@ function ChallengeDayItem({ day }: { day: ChallengeDay }) {
 }
 
 export function MonthlyChallenge({ challenge }: MonthlyChallengeProps) {
-  const monthName = MONTH_NAMES[challenge.month - 1];
+  const { data: contributions, isLoading } = useMyContributions();
+
+  // 현재 년월 계산
+  const now = new Date();
+  const currentYear = now.getFullYear();
+  const currentMonth = now.getMonth() + 1;
+
+  // API 데이터를 기반으로 캘린더 생성
+  const calendarData = useMemo(() => {
+    if (!contributions) {
+      return null;
+    }
+
+    // 현재 월의 일수 계산
+    const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();
+    const days: ChallengeDay[] = [];
+
+    // 기여도 데이터를 날짜별로 그룹화
+    const contributionsByDate = new Map<string, number>();
+    contributions.forEach((contribution) => {
+      const date = new Date(contribution.createdAt);
+      if (
+        date.getFullYear() === currentYear &&
+        date.getMonth() + 1 === currentMonth
+      ) {
+        const dateKey = date.getDate().toString();
+        contributionsByDate.set(
+          dateKey,
+          (contributionsByDate.get(dateKey) || 0) + 1
+        );
+      }
+    });
+
+    // 각 날짜에 대한 상태 결정
+    for (let day = 1; day <= daysInMonth; day++) {
+      const today = now.getDate();
+      const hasPost = contributionsByDate.has(day.toString());
+
+      let status: ChallengeDay["status"] = "pending";
+      if (day === today && hasPost) {
+        // 오늘이면서 글도 작성한 경우 - posted로 표시 (오늘 작성했다는 의미)
+        status = "posted";
+      } else if (day === today) {
+        // 오늘이지만 글 작성 안한 경우
+        status = "today";
+      } else if (hasPost) {
+        // 오늘이 아니지만 글 작성한 경우
+        status = "posted";
+      } else if (day < today) {
+        // 지나간 날이지만 글 작성 안한 경우
+        status = "pending";
+      }
+
+      days.push({
+        day,
+        status,
+        streak: hasPost ? contributionsByDate.get(day.toString()) : undefined
+      });
+    }
+
+    return {
+      year: currentYear,
+      month: currentMonth,
+      days
+    };
+  }, [contributions, currentYear, currentMonth]);
+
+  const monthName = MONTH_NAMES[currentMonth - 1];
+  const displayData = calendarData || challenge;
+
+  if (isLoading || !displayData) {
+    return (
+      <div className="space-y-6">
+        <div className="space-y-2 mt-5">
+          <h3 className="text-2xl font-extrabold text-black tracking-tight">
+            월간 기록
+          </h3>
+          <p className="text-base font-semibold text-black/60 tracking-tight">
+            {currentYear}년 {monthName} 한 달 기록
+          </p>
+        </div>
+        <Card variant="bordered" padding="md" className="w-full">
+          <div className="space-y-4">
+            <div className="grid grid-cols-7 gap-4 justify-items-center">
+              {Array.from({ length: 7 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="w-14 h-14 bg-gray-100 rounded-full animate-pulse"
+                />
+              ))}
+            </div>
+          </div>
+        </Card>
+      </div>
+    );
+  }
 
   // 7x5 그리드로 배치 (주단위)
   const weeks = [];
-  for (let i = 0; i < challenge.days.length; i += 7) {
-    weeks.push(challenge.days.slice(i, i + 7));
+  for (let i = 0; i < displayData.days.length; i += 7) {
+    weeks.push(displayData.days.slice(i, i + 7));
   }
 
   return (
@@ -87,10 +191,10 @@ export function MonthlyChallenge({ challenge }: MonthlyChallengeProps) {
       {/* 헤더 */}
       <div className="space-y-2 mt-5">
         <h3 className="text-2xl font-extrabold text-black tracking-tight">
-          Monthly Challenge
+          월간 기록
         </h3>
         <p className="text-base font-semibold text-black/60 tracking-tight">
-          {challenge.year}년 {monthName} 한 달 기록
+          {displayData.year}년 {monthName} 한 달 기록
         </p>
       </div>
       <Card variant="bordered" padding="md" className="w-full">

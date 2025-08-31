@@ -22,7 +22,7 @@ export const OneNavigationReact = ({
   const navigationItems = ONE_NAVIGATION_ITEMS.map((item) => ({
     ...item,
     href: item.href
-      .replace("/{lang}", `/${lang.split("-").at(0)}`)
+      .replace("/{lang}", `/${lang.split("-")[0]}`)
       .replace("/ko", "")
   }));
 

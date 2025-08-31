@@ -5,6 +5,7 @@ import {
 } from "../../../components/features/discussions/PostCard";
 import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { useUserProfile } from "@/api/hooks/useUser";
 
 interface PostListProps {
   owner?: string;
@@ -31,6 +32,7 @@ export function PostList({
   onUpvote,
   onDelete
 }: PostListProps) {
+  const { data: userProfile } = useUserProfile();
   const {
     data: postsData,
     fetchNextPage,
@@ -102,6 +104,7 @@ export function PostList({
             onComment={onComment}
             onUpvote={onUpvote}
             onDelete={onDelete}
+            currentUserLogin={userProfile?.login}
           />
         </div>
       ))}

@@ -131,7 +131,9 @@ export function ContributionGraph({ className }: ContributionGraphProps) {
   }, [weeklyContributions]);
 
   const handleMouseEnter = (day: ContributionDay, event: React.MouseEvent) => {
-    if (!day.date) return;
+    if (!day.date) {
+      return;
+    }
 
     const rect = event.currentTarget.getBoundingClientRect();
     const formatDate = new Date(day.date).toLocaleDateString("ko-KR", {

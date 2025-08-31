@@ -8,6 +8,8 @@ import {
 } from "@tanstack/react-query";
 import {
   createDiscussion,
+  updateDiscussion,
+  deleteDiscussion,
   fetchAllDiscussions,
   fetchInfiniteDiscussions,
   fetchRepositoryInfo,
@@ -18,7 +20,7 @@ import {
   addDiscussionReaction,
   removeDiscussionReaction,
   type DiscussionsApiParams
-} from "../remote/discussions";
+} from "@/api/remote/discussions";
 
 // Query Keys 중앙 관리
 export const DISCUSSIONS_QUERY_KEYS = {
@@ -298,7 +300,9 @@ export function useAddDiscussionComment() {
       queryClient.setQueryData(
         DISCUSSIONS_QUERY_KEYS.detail(discussionId),
         (old: any) => {
-          if (!old || !user) return old;
+          if (!old || !user) {
+            return old;
+          }
 
           const optimisticComment = {
             id: `temp-${Date.now()}`,
@@ -388,7 +392,9 @@ export function useToggleDiscussionReaction() {
       const previousData = queryClient.getQueryData(detailQueryKey);
 
       queryClient.setQueryData(detailQueryKey, (old: any) => {
-        if (!old) return old;
+        if (!old) {
+          return old;
+        }
 
         const delta = isReacted ? -1 : 1;
         return {
@@ -413,6 +419,91 @@ export function useToggleDiscussionReaction() {
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
         queryKey: DISCUSSIONS_QUERY_KEYS.all
+      });
+    }
+  });
+}
+
+// Discussion 수정을 위한 간단한 인터페이스
+interface UpdatePostParams {
+  discussionId: string;
+  title: string;
+  body: string;
+}
+
+// Discussion 수정 Mutation
+export function useUpdateDiscussion() {
+  const queryClient = useQueryClient();
+  const { user } = useAuth();
+
+  return useMutation({
+    mutationFn: async (params: UpdatePostParams) => {
+      if (!user?.accessToken) {
+        throw new Error("Authentication required");
+      }
+
+      return updateDiscussion({
+        discussionId: params.discussionId,
+        title: params.title,
+        body: params.body,
+        accessToken: user.accessToken
+      });
+    },
+    onSuccess: (updatedDiscussion) => {
+      // 관련 쿼리들 무효화
+      queryClient.invalidateQueries({
+        queryKey: DISCUSSIONS_QUERY_KEYS.all
+      });
+
+      // 상세 정보도 업데이트
+      queryClient.setQueryData(
+        DISCUSSIONS_QUERY_KEYS.detail(updatedDiscussion.id),
+        (oldData: any) => {
+          if (!oldData) {
+            return oldData;
+          }
+          return {
+            ...oldData,
+            title: updatedDiscussion.title,
+            body: updatedDiscussion.body,
+            updatedAt: updatedDiscussion.updatedAt
+          };
+        }
+      );
+    }
+  });
+}
+
+// Discussion 삭제를 위한 간단한 인터페이스
+interface DeletePostParams {
+  discussionId: string;
+}
+
+// Discussion 삭제 Mutation
+export function useDeleteDiscussion() {
+  const queryClient = useQueryClient();
+  const { user } = useAuth();
+
+  return useMutation({
+    mutationFn: async (params: DeletePostParams) => {
+      if (!user?.accessToken) {
+        throw new Error("Authentication required");
+      }
+
+      return deleteDiscussion({
+        discussionId: params.discussionId,
+        accessToken: user.accessToken
+      });
+    },
+    onSuccess: (deletedDiscussion) => {
+      // 관련 쿼리들 무효화
+      queryClient.invalidateQueries({
+        queryKey: DISCUSSIONS_QUERY_KEYS.all
+      });
+
+      // 상세 정보 캐시 제거
+      queryClient.removeQueries({
+        queryKey: DISCUSSIONS_QUERY_KEYS.detail(deletedDiscussion.id)
       });
     }
   });

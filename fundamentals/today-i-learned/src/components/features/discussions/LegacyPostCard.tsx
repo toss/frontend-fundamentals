@@ -3,7 +3,7 @@ import { Heart, MessageCircle, Share, Calendar, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
 import { cn } from "@/libs/utils";
-import { Button } from "../../shared/ui/Button";
+import { Button } from "@/components/shared/ui/Button";
 import { useToggleReaction } from "@/api/hooks/useReactions";
 
 interface PostCardProps {

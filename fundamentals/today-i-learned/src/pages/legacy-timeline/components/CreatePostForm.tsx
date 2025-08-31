@@ -242,10 +242,14 @@ export function CreatePostForm({
       const trimmedTitle = data.title.trim();
       const trimmedContent = data.content.trim();
 
-      if (!trimmedTitle || !trimmedContent) return;
+      if (!trimmedTitle || !trimmedContent) {
+        return;
+      }
 
       const validation = validateContent(trimmedContent);
-      if (!validation.isValid) return;
+      if (!validation.isValid) {
+        return;
+      }
 
       try {
         setIsSubmitting(true);

@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import ffSymbolUrl from "@/assets/ff-symbol.svg";
 import { useAuth } from "@/contexts/AuthContext";
 import { useTheme } from "@/contexts/ThemeContext";
-import { Button } from "../ui/Button";
+import { Button } from "@/components/shared/ui/Button";
 
 export function Header() {
   const { theme, toggleTheme } = useTheme();

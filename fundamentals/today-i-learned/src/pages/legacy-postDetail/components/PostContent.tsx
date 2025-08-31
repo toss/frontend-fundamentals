@@ -6,18 +6,27 @@ interface PostContentProps {
 
 export function PostContent({ post }: PostContentProps) {
   const getTagStyle = (tagName: string) => {
-    if (tagName.includes("성지"))
+    if (tagName.includes("성지")) {
       return "bg-[rgba(188,233,233,0.4)] text-[#58C7C7]";
-    if (tagName.includes("Ongoing"))
+    }
+    if (tagName.includes("Ongoing")) {
       return "bg-[rgba(237,204,248,0.4)] text-[#DA9BEF]";
-    if (tagName.includes("가독성"))
+    }
+    if (tagName.includes("가독성")) {
       return "bg-[rgba(255,212,214,0.4)] text-[#FB8890]";
-    if (tagName.includes("결합도")) return "bg-green-100 text-green-700";
-    if (tagName.includes("기여") || tagName.includes("설계"))
+    }
+    if (tagName.includes("결합도")) {
+      return "bg-green-100 text-green-700";
+    }
+    if (tagName.includes("기여") || tagName.includes("설계")) {
       return "bg-orange-100 text-orange-700";
-    if (tagName.includes("Changes")) return "bg-yellow-100 text-yellow-700";
-    if (tagName.includes("조건부") || tagName.includes("렌더링"))
+    }
+    if (tagName.includes("Changes")) {
+      return "bg-yellow-100 text-yellow-700";
+    }
+    if (tagName.includes("조건부") || tagName.includes("렌더링")) {
       return "bg-blue-100 text-blue-700";
+    }
     return "bg-gray-100 text-gray-600";
   };
 

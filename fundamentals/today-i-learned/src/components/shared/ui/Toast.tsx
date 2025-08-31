@@ -79,7 +79,9 @@ export function Toast({
     setTimeout(onClose, UI_CONFIG.ANIMATION_DURATION.NORMAL);
   };
 
-  if (!isVisible) return null;
+  if (!isVisible) {
+    return null;
+  }
 
   const config = typeConfig[type];
   const IconComponent = config.icon;

@@ -43,17 +43,24 @@ export function PostMoreMenu({ onEdit, onDelete }: PostMoreMenuProps) {
     };
   }, [isOpen]);
 
-  const handleEdit = () => {
+  const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+
     onEdit();
     setIsOpen(false);
   };
 
-  const handleDeleteClick = () => {
+  const handleDeleteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+
     setIsDeleteModalOpen(true);
     setIsOpen(false);
   };
 
-  const handleConfirmDelete = () => {
+  const handleConfirmDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+
     onDelete();
     setIsDeleteModalOpen(false);
   };
@@ -65,7 +72,11 @@ export function PostMoreMenu({ onEdit, onDelete }: PostMoreMenuProps) {
         variant="ghost"
         size="sm"
         className="shrink-0 p-2"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          setIsOpen(!isOpen);
+        }}
       >
         <MoreHorizontal className="h-5 w-5 text-gray-400" />
       </Button>

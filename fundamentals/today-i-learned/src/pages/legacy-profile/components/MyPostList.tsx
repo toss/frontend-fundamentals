@@ -37,7 +37,9 @@ export function MyPostList({ className }: MyPostListProps) {
   }, [isIntersecting, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   const myPosts = useMemo(() => {
-    if (!userProfile?.login || !data) return [];
+    if (!userProfile?.login || !data) {
+      return [];
+    }
 
     const allDiscussions = data.pages.flatMap((page) => page.discussions);
     return allDiscussions.filter(

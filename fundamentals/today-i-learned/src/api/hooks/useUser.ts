@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/contexts/AuthContext";
-import { fetchUserProfile } from "../remote/user";
+import { fetchUserProfile } from "@/api/remote/user";
 
 // Query Keys
 export const USER_QUERY_KEYS = {

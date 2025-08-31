@@ -30,7 +30,9 @@ export function CommentInput({
     }
   };
 
-  if (!user) return null;
+  if (!user) {
+    return null;
+  }
 
   return (
     <div className="px-8 pb-3 flex flex-col gap-3">
