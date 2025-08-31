@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { CreatePost } from "./components/CreatePost";
 import { PostList } from "./components/PostList";
-import { MyStreak } from "../profile/components/MyStreak";
+import { MyStreak } from "../legacy-profile/components/MyStreak";
 import { CategoryTabs, TabContent } from "./components/CategoryTabs";
 import { WeeklyTop5 } from "@/components/features/discussions/WeeklyTop5";
 import type { PostCategory } from "@/types";
