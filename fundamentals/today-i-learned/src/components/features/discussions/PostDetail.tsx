@@ -8,7 +8,7 @@ import {
   useToggleDiscussionReaction
 } from "@/api/hooks/useDiscussions";
 import { useAuth } from "@/contexts/AuthContext";
-import { CommentList } from "@/pages/postDetail/components/CommentList";
+import { CommentList } from "@/pages/timeline/components/CommentList";
 
 interface PostDetailProps {
   discussion: GitHubDiscussion;
@@ -106,7 +106,7 @@ export function PostDetail({
 
   const handleCommentUpvote = async (commentId: string) => {
     if (!user?.accessToken) return;
-    
+
     try {
       await toggleReactionMutation.mutateAsync({
         subjectId: commentId,
@@ -120,7 +120,7 @@ export function PostDetail({
 
   const handleCommentReply = async (commentId: string, content: string) => {
     if (!user?.accessToken) return;
-    
+
     try {
       await addCommentMutation.mutateAsync({
         discussionId: discussion.id,

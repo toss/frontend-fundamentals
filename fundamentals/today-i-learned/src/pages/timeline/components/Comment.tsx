@@ -2,7 +2,7 @@ import { ChevronUp, MessageCircle } from "lucide-react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { CommentInput } from "./CommentInput";
 import type { GitHubComment } from "@/api/remote/discussions";
-import { formatTimeAgo, formatNumber } from "../utils/formatters";
+import { formatNumber, formatTimeAgo } from "../utils/formatters";
 
 interface CommentProps {
   comment: GitHubComment;
@@ -40,7 +40,7 @@ function CommentContainer({
         </div>
       );
     }
-    
+
     // 답글이 없는 최상위 댓글
     return (
       <div className="flex flex-col items-start px-8 w-full">{children}</div>
@@ -176,9 +176,11 @@ export function Comment({
   if (depth === 0) {
     return (
       <>
-        <CommentContainer 
-          depth={depth} 
-          hasReplies={!!(comment.replies?.nodes && comment.replies.nodes.length > 0)}
+        <CommentContainer
+          depth={depth}
+          hasReplies={
+            !!(comment.replies?.nodes && comment.replies.nodes.length > 0)
+          }
         >
           <div className="flex flex-row items-center p-0 gap-4 w-full h-10">
             <CommentHeader comment={comment} />

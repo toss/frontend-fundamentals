@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ONE_NAVIGATION_ITEMS } from "../../config/OneNavigationItems";
 import "../styles/OneNavigation.css";
 

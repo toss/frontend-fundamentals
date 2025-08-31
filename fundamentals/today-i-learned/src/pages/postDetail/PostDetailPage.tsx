@@ -1,8 +1,6 @@
 import { WeeklyTop5 } from "@/components/features/discussions/WeeklyTop5";
 import { LoadingSpinner } from "@/components/shared/ui/LoadingSpinner";
 import { useParams } from "react-router-dom";
-import { CommentInput } from "./components/CommentInput";
-import { CommentList } from "./components/CommentList";
 import { PostActions } from "./components/PostActions";
 import { PostContent } from "./components/PostContent";
 import { PostHeader } from "./components/PostHeader";
@@ -78,10 +76,10 @@ function PostDetail({ post, comments, handlers }: PostDetailProps) {
     handleLike,
     handleComment,
     handleShare,
-    handleUpvote,
-    handleCommentUpvote,
-    handleReply,
-    handleNewComment
+    handleUpvote
+    // handleCommentUpvote,
+    // handleReply,
+    // handleNewComment
   } = handlers;
 
   return (
@@ -101,17 +99,17 @@ function PostDetail({ post, comments, handlers }: PostDetailProps) {
       <CommentSection>
         <div className="mb-6">
           <CommentHeader count={comments.length} />
-          <CommentInput
+          {/* <CommentInput
             onSubmit={handleNewComment}
             placeholder="댓글을 작성해보세요..."
-          />
+          /> */}
         </div>
 
-        <CommentList
+        {/* <CommentList
           comments={comments}
           onUpvote={handleCommentUpvote}
           onReply={handleReply}
-        />
+        /> */}
       </CommentSection>
     </>
   );
