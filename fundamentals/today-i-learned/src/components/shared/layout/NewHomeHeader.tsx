@@ -6,7 +6,7 @@ import { useUserProfile } from "@/api/hooks/useUser";
 
 export function NewHomeHeader() {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const { user } = useAuth();
+  const { user, login } = useAuth();
   const { data: userProfile, isLoading } = useUserProfile();
 
   // Handle Command+K shortcut
@@ -67,6 +67,7 @@ export function NewHomeHeader() {
         <div className="flex-shrink-0">
           <button
             type="button"
+            onClick={!user ? login : undefined}
             className="flex items-center space-x-3 px-6 py-4 border border-gray-200/50 rounded-2xl hover:bg-gray-50 transition-colors shadow-sm"
           >
             {isLoading ? (
@@ -107,13 +108,9 @@ export function NewHomeHeader() {
               </>
             ) : (
               <>
-                <div className="w-10 h-10 bg-gray-300 rounded-full" />
-                <div className="flex items-center space-x-2">
-                  <span className="text-base font-bold text-gray-700 tracking-tight">
-                    Guest User
-                  </span>
-                  <ChevronDown className="w-5 h-5 text-gray-600" />
-                </div>
+                <span className="text-base font-bold text-gray-700 tracking-tight">
+                  Log in
+                </span>
               </>
             )}
           </button>
