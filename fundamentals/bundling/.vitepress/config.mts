@@ -1,9 +1,9 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig } from "vitepress";
 import footnote from "markdown-it-footnote";
 import path from "node:path";
 import { createRequire } from "node:module";
-import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
-import { shared } from './shared.mjs';
+import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
+import { shared } from "./shared.mjs";
 
 const require = createRequire(import.meta.url);
 
@@ -33,7 +33,8 @@ export default defineConfig({
     },
     root: {
       label: "한국어",
-      lang: "ko", themeConfig: {
+      lang: "ko",
+      themeConfig: {
         // https://vitepress.dev/reference/default-theme-config
         ...shared.themeConfig,
         nav: [{ text: "홈", link: "/" }],
@@ -43,16 +44,16 @@ export default defineConfig({
             items: [
               {
                 text: "시작하기",
-                link: "/get-started",
+                link: "/get-started"
               },
               {
                 text: "번들링이란",
-                link: "/overview",
+                link: "/overview"
               },
               {
                 text: "번들러란",
-                link: "/bundler",
-              },
+                link: "/bundler"
+              }
             ]
           },
           {
@@ -63,40 +64,40 @@ export default defineConfig({
                 items: [
                   {
                     text: "1. 소개",
-                    link: "/webpack-tutorial/intro",
+                    link: "/webpack-tutorial/intro"
                   },
                   {
                     text: "2. 웹팩 도입하고 첫 번들 만들기",
-                    link: "/webpack-tutorial/make-first-bundle",
+                    link: "/webpack-tutorial/make-first-bundle"
                   },
                   {
                     text: "3. 모듈로 코드 구조화하기",
-                    link: "/webpack-tutorial/module-system",
+                    link: "/webpack-tutorial/module-system"
                   },
                   {
                     text: "4. TypeScript 적용하기",
-                    link: "/webpack-tutorial/typescript",
+                    link: "/webpack-tutorial/typescript"
                   },
                   {
                     text: "5. React 적용하기",
-                    link: "/webpack-tutorial/react",
+                    link: "/webpack-tutorial/react"
                   },
                   {
                     text: "6. 스타일 관리하기",
-                    link: "/webpack-tutorial/style",
+                    link: "/webpack-tutorial/style"
                   },
                   {
                     text: "7. 이미지 등 정적 자원 다루기",
-                    link: "/webpack-tutorial/assets",
+                    link: "/webpack-tutorial/assets"
                   },
                   {
                     text: "8. 플러그인으로 빌드 확장하기",
-                    link: "/webpack-tutorial/plugin",
+                    link: "/webpack-tutorial/plugin"
                   },
                   {
                     text: "9. 개발 서버로 생산성 높이기",
-                    link: "/webpack-tutorial/dev-server",
-                  },
+                    link: "/webpack-tutorial/dev-server"
+                  }
                 ]
               },
               {
@@ -104,30 +105,39 @@ export default defineConfig({
                 items: [
                   {
                     text: "🚧 준비중",
-                    link: "/rollup-tutorial/intro",
-                  },
-                ]  
-                }
-            ],
+                    link: "/rollup-tutorial/intro"
+                  }
+                ]
+              }
+            ]
           },
           {
             text: "심화 학습",
             items: [
               {
                 text: "소개",
-                link: "/deep-dive/overview",
+                link: "/deep-dive/overview"
               },
               {
                 text: "번들링 동작 이해하기",
                 collapsed: true,
                 items: [
-                  { text: "번들링, 꼭 필요할까요?", link: "/deep-dive/bundling-process/overview" },
+                  {
+                    text: "번들링, 꼭 필요할까요?",
+                    link: "/deep-dive/bundling-process/overview"
+                  },
                   { text: "진입점", link: "/deep-dive/bundling-process/entry" },
-                  { text: "경로 탐색", link: "/deep-dive/bundling-process/resolution" },
+                  {
+                    text: "경로 탐색",
+                    link: "/deep-dive/bundling-process/resolution"
+                  },
                   { text: "로더", link: "/deep-dive/bundling-process/loader" },
-                  { text: "플러그인", link: "/deep-dive/bundling-process/plugin" },
-                  { text: "출력", link: "/deep-dive/bundling-process/output" },
-                ],
+                  {
+                    text: "플러그인",
+                    link: "/deep-dive/bundling-process/plugin"
+                  },
+                  { text: "출력", link: "/deep-dive/bundling-process/output" }
+                ]
               },
               {
                 text: "개발 환경",
@@ -135,23 +145,33 @@ export default defineConfig({
                 items: [
                   { text: "개발 서버", link: "/deep-dive/dev/dev-server" },
                   { text: "HMR", link: "/deep-dive/dev/hmr" },
-                  { text: "소스맵", link: "/deep-dive/dev/source-map" },
-                ],
+                  { text: "소스맵", link: "/deep-dive/dev/source-map" }
+                ]
               },
               {
                 text: "번들 최적화",
                 collapsed: true,
                 items: [
-                  { text: "코드 스플리팅", link: "/deep-dive/optimization/code-splitting" },
-                  { text: "트리 셰이킹", link: "/deep-dive/optimization/tree-shaking" },
-                  { text: "번들 분석", link: "/deep-dive/optimization/bundle-analyzer" },
-                ],
-              },
-            ],
-          },
+                  {
+                    text: "코드 스플리팅",
+                    link: "/deep-dive/optimization/code-splitting"
+                  },
+                  {
+                    text: "트리 셰이킹",
+                    link: "/deep-dive/optimization/tree-shaking"
+                  },
+                  {
+                    text: "번들 분석",
+                    link: "/deep-dive/optimization/bundle-analyzer"
+                  }
+                ]
+              }
+            ]
+          }
         ],
         editLink: {
-          pattern: "https://github.com/toss/frontend-fundamentals/edit/main/fundamentals/bundling/:path",
+          pattern:
+            "https://github.com/toss/frontend-fundamentals/edit/main/fundamentals/bundling/:path",
           text: "GitHub에서 수정하기"
         },
         outline: {
@@ -161,15 +181,15 @@ export default defineConfig({
           prev: "이전 페이지",
           next: "다음 페이지"
         },
-        lastUpdated: {text:'마지막 업데이트'},
-      },
+        lastUpdated: { text: "마지막 업데이트" }
+      }
     }
   },
   markdown: {
     config: (md) => {
       md.use(footnote);
       md.use(tabsMarkdownPlugin);
-    },
+    }
   },
   vite: {
     resolve: {
@@ -192,9 +212,9 @@ export default defineConfig({
         },
         {
           find: /^@shared/,
-          replacement: path.resolve(__dirname, '../../shared'),
+          replacement: path.resolve(__dirname, "../../shared")
         }
       ]
     }
-  },
-})
+  }
+});

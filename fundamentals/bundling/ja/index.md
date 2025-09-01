@@ -30,4 +30,4 @@ comments: false
 .coming-soon p {
   font-size: 1.2rem;
 }
-</style> 
+</style>

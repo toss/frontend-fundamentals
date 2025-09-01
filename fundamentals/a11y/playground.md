@@ -1,9 +1,22 @@
 ---
 head:
-  - [meta, { property: 'og:image', content: 'https://static.toss.im/illusts/a11y-use-meta.jpg' }]
-  - [meta, { name: 'twitter:image', content: 'https://static.toss.im/illusts/a11y-use-meta.jpg' }]
-  - [meta, { name: 'twitter:card', content: 'summary_large_image' }]
+  - [
+      meta,
+      {
+        property: "og:image",
+        content: "https://static.toss.im/illusts/a11y-use-meta.jpg"
+      }
+    ]
+  - [
+      meta,
+      {
+        name: "twitter:image",
+        content: "https://static.toss.im/illusts/a11y-use-meta.jpg"
+      }
+    ]
+  - [meta, { name: "twitter:card", content: "summary_large_image" }]
 ---
+
 <script setup>
 import ScreenReaderExperience from './components/ScreenReaderExperience.vue';
 </script>
@@ -29,8 +42,8 @@ PC에서는 마우스 클릭과 드래그로 터치 동작을 대신할 수 있�
 
 🎁 당첨 안내는 GitHub에 등록된 이메일을 통해 개별로 안내를 보내드려요.
 
-* 관련 개별 메시지를 받는 경우 반드시 정식 계정 여부를 확인 부탁드려요. (본 이벤트는 카드 등록 및 결제 관련 정보 등을 절대로 요구하지 않아요.)
+- 관련 개별 메시지를 받는 경우 반드시 정식 계정 여부를 확인 부탁드려요. (본 이벤트는 카드 등록 및 결제 관련 정보 등을 절대로 요구하지 않아요.)
 
-* 당첨 안내 시 사용되는 이메일은 안내 목적으로만 이용되며, 별도로 저장하지 않아요.
+- 당첨 안내 시 사용되는 이메일은 안내 목적으로만 이용되며, 별도로 저장하지 않아요.
 
 체험을 마치셨다면, [접근성 문서](./overview)로 이동해서 구체적인 가이드라인과 예시 코드를 참고하며 여러분의 서비스에도 접근성을 적용해 보세요.

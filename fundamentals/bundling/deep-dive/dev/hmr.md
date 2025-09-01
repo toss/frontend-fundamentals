@@ -1,6 +1,6 @@
 # HMR
 
-HMR(Hot Module Replacement)은 프론트엔드 개발에서 변경된 코드 조각만 런타임에서 동적으로 교체하는 기능이에요. HMR이 적용되어 있다면 페이지를 새로고침하지 않고도 코드 수정 사항이 즉시 반영돼요. 
+HMR(Hot Module Replacement)은 프론트엔드 개발에서 변경된 코드 조각만 런타임에서 동적으로 교체하는 기능이에요. HMR이 적용되어 있다면 페이지를 새로고침하지 않고도 코드 수정 사항이 즉시 반영돼요.
 
 번들러는 코드의 수정 사항을 탐지해 변경된 모듈만 다시 번들링하고, 이를 브라우저에 알려요. 브라우저는 런타임에서 새로운 모듈을 요청해서 교체하고 화면을 업데이트할 수 있어요.
 
@@ -58,10 +58,10 @@ export const getContent = () => "Hello World";
 
 별도의 복잡한 설정 없이 두 번들러 모두 간단하게 HMR을 적용할 수 있습니다.
 
-* **Webpack**
-  * `webpack-dev-server`를 사용할 때 `devServer.hot` 옵션을 `true`로 설정하면 HMR을 사용할 수 있어요.
-* **Vite**
-  * 기본적으로 HMR이 활성화되어 있으며, `server.hmr` 옵션을 통해 명시적으로 설정할 수도 있어요.
+- **Webpack**
+  - `webpack-dev-server`를 사용할 때 `devServer.hot` 옵션을 `true`로 설정하면 HMR을 사용할 수 있어요.
+- **Vite**
+  - 기본적으로 HMR이 활성화되어 있으며, `server.hmr` 옵션을 통해 명시적으로 설정할 수도 있어요.
 
 :::tabs key:hmr-setting-setup
 
@@ -71,8 +71,8 @@ export const getContent = () => "Hello World";
 // webpack.config.js
 module.exports = {
   devServer: {
-    hot: true, // HMR 활성화
-  },
+    hot: true // HMR 활성화
+  }
 };
 ```
 
@@ -80,17 +80,16 @@ module.exports = {
 
 ```javascript
 // vite.config.js
-import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
 
 export default defineConfig({
   server: {
-    hmr: true, // HMR 활성화, default: true
-  },
+    hmr: true // HMR 활성화, default: true
+  }
 });
 ```
 
 :::
-
 
 ### 수동으로 HMR 적용하기
 

@@ -60,23 +60,23 @@ export const emojis = [
 
 ```javascript
 // emoji.js에서 필요한 것만 가져와요
-import { emojis } from './emoji.js';
+import { emojis } from "./emoji.js";
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
   const today = new Date();
   // date-fns는 아직  CDN을 통해 불러오고 있어서 여기서는 직접 import하지 않아요. 곧 이 부분도 수정할 거예요!
-  const formattedDate = dateFns.format(today, 'MMMM d, yyyy');
-  document.getElementById('dateDisplay').textContent = formattedDate;
-  
+  const formattedDate = dateFns.format(today, "MMMM d, yyyy");
+  document.getElementById("dateDisplay").textContent = formattedDate;
+
   showRandomEmoji();
 });
 
 function showRandomEmoji() {
   const randomIndex = Math.floor(Math.random() * emojis.length);
   const selectedEmoji = emojis[randomIndex];
-  
-  document.getElementById('emojiDisplay').textContent = selectedEmoji.icon;
-  document.getElementById('emojiName').textContent = selectedEmoji.name;
+
+  document.getElementById("emojiDisplay").textContent = selectedEmoji.icon;
+  document.getElementById("emojiName").textContent = selectedEmoji.name;
 }
 ```
 
@@ -115,7 +115,7 @@ $ npm run build
   <!-- 개별 스크립트는 더 이상 필요 없어요 -->
   <!-- <script src="./emoji.js"></script> -->
   <!-- <script src="./main.js"></script> -->
-  
+
   <!-- 번들링된 스크립트만 사용해요 -->
   <script src="./dist/bundle.js"></script>
 </body>
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // date-fns 모듈에서 가져온 format 함수를 호출해요
   const formattedDate = format(today, 'MMMM d, yyyy');
   document.getElementById('dateDisplay').textContent = formattedDate;
-  
+
   showRandomEmoji();
 });
 // ...기존과 동일

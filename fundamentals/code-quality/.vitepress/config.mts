@@ -40,7 +40,7 @@ export default defineConfig({
         },
         {
           find: /^@shared/,
-          replacement: path.resolve(__dirname, '../../shared'),
+          replacement: path.resolve(__dirname, "../../shared")
         }
       ]
     }
@@ -50,5 +50,5 @@ export default defineConfig({
       md.use(footnote);
     }
   },
-  titleTemplate: ':title'
+  titleTemplate: ":title"
 });
