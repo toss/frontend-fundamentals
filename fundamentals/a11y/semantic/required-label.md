@@ -59,8 +59,7 @@
 HTML에서 가장 좋은 방법은 `<label>` 요소를 사용해 입력 필드와 연결하는 것이에요.
 
 ```html
-<label for="user-name">이름</label>
-<input id="user-name" type="text" />
+<label for="user-name">이름</label> <input id="user-name" type="text" />
 ```
 
 레이블의 장점은 여러가지가 있어요.
@@ -72,11 +71,7 @@ HTML에서 가장 좋은 방법은 `<label>` 요소를 사용해 입력 필드�
 디자인 제약으로 인해 시각적 레이블을 표시할 수 없다면 다음과 같이 `aria-label` 속성을 사용할 수 있어요.
 
 ```html
-<input 
-  type="text" 
-  aria-label="이름" 
-  placeholder="이름을 입력하세요" 
-/>
+<input type="text" aria-label="이름" placeholder="이름을 입력하세요" />
 ```
 
 `aria-label`은 시각적으로 보이지는 않지만 스크린 리더에서 요소의 이름으로 읽히게 됩니다. **디자인 상 레이블을 표시할 수 없을 때만 차선책으로 사용하세요.**
@@ -88,10 +83,10 @@ HTML에서 가장 좋은 방법은 `<label>` 요소를 사용해 입력 필드�
 ```html
 <h2 id="address-heading">배송 주소</h2>
 
-<input 
-  type="text" 
-  aria-labelledby="address-heading" 
-  placeholder="예: 서울시 강남구" 
+<input
+  type="text"
+  aria-labelledby="address-heading"
+  placeholder="예: 서울시 강남구"
 />
 ```
 
@@ -137,24 +132,17 @@ HTML에서 가장 좋은 방법은 `<label>` 요소를 사용해 입력 필드�
 
 ### 플레이스 홀더의 올바른 사용법
 
-플레이스 홀더만으로는 접근성을 보장할 수 없어요. 플레이스 홀더를 사용할 때는 레이블의 대체재가 아니라 보조 수단이라는 점을 기억해 주세요. 입력 형식에 대한 힌트를 제공하는 용도로 사용하는 것이 좋아요. 
+플레이스 홀더만으로는 접근성을 보장할 수 없어요. 플레이스 홀더를 사용할 때는 레이블의 대체재가 아니라 보조 수단이라는 점을 기억해 주세요. 입력 형식에 대한 힌트를 제공하는 용도로 사용하는 것이 좋아요.
 
 #### ❌ 잘못된 예시: 플레이스 홀더만 사용
 
 ```html
-<input 
-  type="email" 
-  placeholder="이메일" 
-/>
+<input type="email" placeholder="이메일" />
 ```
 
 #### ✅ 올바른 예시: 레이블과 플레이스 홀더 함께 사용
 
 ```html
 <label for="email">이메일</label>
-<input 
-  id="email" 
-  type="email" 
-  placeholder="example@email.com" 
-/>
+<input id="email" type="email" placeholder="example@email.com" />
 ```

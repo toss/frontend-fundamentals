@@ -16,32 +16,33 @@ yarn add -D eslint-plugin-jsx-a11y
 
 :::tabs key:bundler-object-entry
 == flat config
+
 ```js
-import jsxA11y from 'eslint-plugin-jsx-a11y';
+import jsxA11y from "eslint-plugin-jsx-a11y";
 
 export default [
   jsxA11y.flatConfigs.recommended,
   {
     rules: {
-      'jsx-a11y/control-has-associated-label': 'error',
+      "jsx-a11y/control-has-associated-label": "error"
     }
   }
 ];
 ```
+
 == legacy config
+
 ```json
 {
   "plugins": ["jsx-a11y"],
-  "extends": [
-    "plugin:jsx-a11y/recommended"
-  ],
+  "extends": ["plugin:jsx-a11y/recommended"],
   "rules": {
     "jsx-a11y/control-has-associated-label": "error"
   }
 }
 ```
-:::
 
+:::
 
 ## 2. 주요 규칙 소개 및 해결 방법
 
@@ -52,6 +53,7 @@ export default [
 #### 링크에 이미지만 있을 때
 
 **❌ 잘못된 예시**
+
 ```jsx
 <a href="/home">
   <img src="home.svg" />
@@ -59,6 +61,7 @@ export default [
 ```
 
 **✅ 올바른 예시**
+
 ```jsx
 <a href="/home">
   <img src="home.svg" alt="홈" />
@@ -68,11 +71,13 @@ export default [
 #### 정보를 전달하지 않는 이미지
 
 **❌ 잘못된 예시**
+
 ```jsx
 <img src="divider.png" alt="구분선" />
 ```
 
 **✅ 올바른 예시**
+
 ```jsx
 <img src="divider.png" alt="" />
 ```
@@ -80,6 +85,7 @@ export default [
 #### 텍스트와 함께 있는 아이콘
 
 **❌ 잘못된 예시**
+
 ```jsx
 <button>
   <img src="trash-icon.svg" alt="삭제 아이콘" />
@@ -88,6 +94,7 @@ export default [
 ```
 
 **✅ 올바른 예시**
+
 ```jsx
 <button>
   <img src="trash-icon.svg" alt="" />
@@ -103,6 +110,7 @@ export default [
 
 :::tabs key:bundler-object-entry
 == flat config
+
 ```js{7}
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 
@@ -115,7 +123,9 @@ export default [
   }
 ];
 ```
+
 == legacy config
+
 ```js{7}
 {
   "plugins": ["jsx-a11y"],
@@ -127,11 +137,13 @@ export default [
   }
 }
 ```
+
 :::
 
 #### 아이콘 버튼에 레이블이 없는 경우
 
 **❌ 잘못된 예시**
+
 ```jsx
 <button>
   <img src="close.svg" alt="" />
@@ -139,6 +151,7 @@ export default [
 ```
 
 **✅ 올바른 예시**
+
 ```jsx
 <button aria-label="닫기">
   <img src="close.svg" alt="" />
@@ -178,19 +191,25 @@ export default [
 :::
 
 **❌ 잘못된 예시**
+
 ```jsx
 <div onClick={handleClick}>클릭</div>
 ```
 
 **✅ 올바른 예시**
+
 ```jsx
-<div role="button" tabIndex={0} onClick={handleClick}>클릭</div>
+<div role="button" tabIndex={0} onClick={handleClick}>
+  클릭
+</div>
 ```
 
 ### no-noninteractive-element-to-interactive-role
+
 `<main>`, `<area>`, `<h1>`, `<h2>`, `<img>`, `<li>`, `<ul>`, `<ol>` 등 의미 있는 컨테이너 요소에는 `button`, `link` 와 같은 상호작용 역할(interactive role)을 부여하면 안 돼요. 의미에 맞는 태그를 사용해야 해요.
 
 **❌ 잘못된 예시**
+
 ```jsx
 <main role="button" onClick={handleClick}>저장</main>
 <ul role="button" onClick={handleClick}>리스트</ul>
@@ -198,12 +217,14 @@ export default [
 ```
 
 **✅ 올바른 예시**
+
 ```jsx
 <button onClick={handleClick}>저장</button>
 <a href="/list">리스트</a>
 ```
 
 ### no-noninteractive-tabindex
+
 비상호작용 요소에 `tabIndex` 를 부여하면 경고가 발생해요. `tabIndex` 는 상호작용 요소에만 사용해야 해요. 불필요하면 제거하거나 적절한 상호작용 이벤트를 추가해 줘야 해요.
 
 ::: info 상호작용 요소에만 tabIndex를 부여해야하는 이유
@@ -218,11 +239,13 @@ export default [
 :::
 
 **❌ 잘못된 예시**
+
 ```jsx
 <div tabIndex={0}>텍스트</div>
 ```
 
 **✅ 올바른 예시**
+
 ```jsx
 <span>텍스트</span>
 // 또는
@@ -234,11 +257,13 @@ export default [
 `tabIndex`에 1 이상의 값을 쓰면 DOM 순서와 다르게 포커스가 이동해서 동작을 예측하기 어려워져요. `0` 이나 `-1` 만 사용해야 해요.
 
 **❌ 잘못된 예시**
+
 ```jsx
 <button tabIndex={2}>확인</button>
 ```
 
 **✅ 올바른 예시**
+
 ```jsx
 <button tabIndex={0}>확인</button>
 ```

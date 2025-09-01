@@ -162,7 +162,7 @@ function ItemEditList({ children, onClose }) {
 ContextAPIを使用すると、Props Drillingを非常に簡単に解決できますが、すべての値をContextAPIで管理する必要はありません。
 
 1. コンポーネントはpropsを通じて、どのデータを使用するかを明確に表現します。
-コンポーネントの役割や意図を反映したpropsであれば、問題にならないこともあります。
+   コンポーネントの役割や意図を反映したpropsであれば、問題にならないこともあります。
 
 2. ContextAPIを使用する前に、`children`propを利用してコンポーネントを渡すことで深さを減らすことができます。
 

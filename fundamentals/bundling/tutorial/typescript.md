@@ -24,13 +24,13 @@ export function subtract(a, b) {
 
 ```javascript
 // src/utils/index.ts
-export { add } from './add.ts';
-export { subtract } from './subtract.ts';
+export { add } from "./add.ts";
+export { subtract } from "./subtract.ts";
 ```
 
 ```javascript
 // src/index.ts
-import { add } from './utils/index.ts';
+import { add } from "./utils/index.ts";
 
 console.log(add(1, 2));
 ```
@@ -53,8 +53,8 @@ npm install typescript --save-dev
     "noEmit": true,
     "strict": true
   },
-  "include": ["src/**/*"],             
-  "exclude": ["node_modules", "dist"]  
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
 ```
 
@@ -110,39 +110,39 @@ function add(x, y) {
 }
 ```
 
-Babel의 핵심 로직은 `@babel/core` 패키지에 포함되어 있고, Babel이 TypeScript를 이해하고 변환하기 위해서는 `@babel/preset-typescript` 패키지가 필요해요. 
+Babel의 핵심 로직은 `@babel/core` 패키지에 포함되어 있고, Babel이 TypeScript를 이해하고 변환하기 위해서는 `@babel/preset-typescript` 패키지가 필요해요.
 
 ### 웹팩 설정에 로더 추가하기
 
-이제 `webpack.config.js` 파일을 열고 TypeScript를 처리할 수 있도록 `module.rules`를 추가해요. 
+이제 `webpack.config.js` 파일을 열고 TypeScript를 처리할 수 있도록 `module.rules`를 추가해요.
 
 ```js 11-26
 // webpack.config.js
-const path = require('path');
+const path = require("path");
 
 module.exports = {
-  entry: './src/index.ts',
+  entry: "./src/index.ts",
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist")
   },
-  mode: 'production',
+  mode: "production",
   module: {
     rules: [
       {
-        test: /\.ts$/,  // .ts 확장자를 가진 파일에만 이 규칙을 적용해요
+        test: /\.ts$/, // .ts 확장자를 가진 파일에만 이 규칙을 적용해요
         use: [
           // Babel로 TypeScript 파일을 JavaScript로 변환해요
-          { 
-            loader: 'babel-loader',
+          {
+            loader: "babel-loader",
             options: {
-              presets: ['@babel/preset-typescript'],
-            },
-          },
-        ],
-      },
-    ],
-  },
+              presets: ["@babel/preset-typescript"]
+            }
+          }
+        ]
+      }
+    ]
+  }
 };
 ```
 
@@ -157,7 +157,10 @@ npm run build
 다시 `dist/bundle.js` 파일을 열어보면, TypeScript 코드가 JavaScript로 변환된 것을 확인할 수 있어요. 기존과 동일하게 하나의 JavaScript 파일로 묶여서 최적화되었어요.
 
 ```javascript
-(()=>{"use strict";console.log(3)})();
+(() => {
+  "use strict";
+  console.log(3);
+})();
 ```
 
-🎉 축하해요! 웹팩으로 TypeScript 설정을 잘 완료했어요. 
+🎉 축하해요! 웹팩으로 TypeScript 설정을 잘 완료했어요.

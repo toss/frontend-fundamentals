@@ -2,7 +2,7 @@
 
 이번에는 CSS 파일을 웹팩으로 어떻게 처리하는지 배워볼게요.
 
-웹팩의 강력한 기능 중 하나는 JavaScript뿐 아니라 CSS, 이미지, 폰트 등 다양한 자원도 하나의 JavaScript 모듈처럼 다룰 수 있다는 점이에요. 
+웹팩의 강력한 기능 중 하나는 JavaScript뿐 아니라 CSS, 이미지, 폰트 등 다양한 자원도 하나의 JavaScript 모듈처럼 다룰 수 있다는 점이에요.
 
 ## CSS를 JavaScript 모듈처럼 다루기
 
@@ -10,18 +10,14 @@ CSS 파일을 JavaScript 모듈처럼 다룰 수 있다는 것은 JavaScript 코
 
 CSS 클래스 이름을 겹치지 않게 컴포넌트 단위로 사용할 수 있도록 도와주는 [CSS Modules](https://css-tricks.com/css-modules-part-1-need/)를 사용하는 React 앱을 살펴볼게요.
 
-`Component.js` 파일에서 `Component.module.css`를 import하고 있어요. 
+`Component.js` 파일에서 `Component.module.css`를 import하고 있어요.
 
 ```javascript 2,6
 // src/Component.js
-import css from './Component.module.css';
+import css from "./Component.module.css";
 
 export function Component() {
-  return (
-    <h1 className={css.title}>
-      Hello, world!
-    </h1>
-  )
+  return <h1 className={css.title}>Hello, world!</h1>;
 }
 ```
 
@@ -39,7 +35,7 @@ export function Component() {
 ```javascript
 // 변환된 Component.module.css
 export default {
-  title: '_styles__title_309571057',
+  title: "_styles__title_309571057"
 };
 ```
 
@@ -85,8 +81,8 @@ npm install babel-loader @babel/core @babel/preset-react @babel/preset-typescrip
     "strict": true,
     "jsx": "react"
   },
-  "include": ["src/**/*"],             
-  "exclude": ["node_modules", "dist"]  
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
 ```
 
@@ -136,13 +132,13 @@ root.render(<App />);
 <!-- src/template.html -->
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
-<body>
-  <div id="root"></div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
 </html>
 ```
 
@@ -197,24 +193,24 @@ module.exports = {
       // CSS를 사용하기 위한 웹팩 설정이에요
       {
         // .css 확장자를 가진 파일에만 이 규칙을 적용해요
-        test: /\.css$/,           
+        test: /\.css$/,
         // 오른쪽 또는 아래부터 순서대로 적용돼요
         use: [
-          'style-loader', 
+          'style-loader',
           {
             loader: 'css-loader',
             options: {
               modules: true
             }
-          }  
-        ],  
+          }
+        ],
       },
 
       // React를 사용하기 위한 웹팩 설정이에요
       {
-        test: /\.(ts|tsx)$/,  
+        test: /\.(ts|tsx)$/,
         use: [
-          { 
+          {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-react', '@babel/preset-typescript'],
@@ -228,7 +224,7 @@ module.exports = {
   // 빌드할 때마다 HTML 파일을 만들기 위한 설정이에요
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/template.html' 
+      template: './src/template.html'
     })
   ],
 

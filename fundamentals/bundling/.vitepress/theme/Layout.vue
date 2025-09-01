@@ -32,7 +32,10 @@ html {
   .layout-wrapper {
     padding-left: var(--one-navi-width);
   }
-  .VPSidebar, .divider, .container > .title, .VPNavBar.has-sidebar .content {
+  .VPSidebar,
+  .divider,
+  .container > .title,
+  .VPNavBar.has-sidebar .content {
     margin-left: var(--one-navi-width);
   }
   .VPNavBar.has-sidebar > .title {
