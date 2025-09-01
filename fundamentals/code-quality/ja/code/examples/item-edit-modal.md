@@ -89,7 +89,11 @@ function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
 
   return (
     <Modal open={open} onClose={onClose}>
-      <ItemEditBody onClose={onClose}>
+      <ItemEditBody
+        keyword={keyword}
+        onKeywordChange={setKeyword}
+        onClose={onClose}
+      >
         <ItemEditList
           keyword={keyword}
           items={items}
@@ -101,10 +105,10 @@ function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
   );
 }
 
-function ItemEditBody({ children, onClose }) {
+function ItemEditBody({ children, keyword, onKeywordChange, onClose }) {
   return (
     <>
-      <div style="display: flex; justify-content: space-between;">
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Input
           value={keyword}
           onChange={(e) => onKeywordChange(e.target.value)}
@@ -133,26 +137,23 @@ function ItemEditModal({ open, onConfirm, onClose }) {
 
   return (
     <Modal open={open} onClose={onClose}>
-      <ItemEditBody onClose={onClose}>
+      <ItemEditBody
+        keyword={keyword}
+        onKeywordChange={setKeyword}
+        onClose={onClose}
+      >
         <ItemEditList keyword={keyword} onConfirm={onConfirm} />
       </ItemEditBody>
     </Modal>
   );
 }
 
-function ItemEditList({ children, onClose }) {
+function ItemEditList({ keyword, onConfirm }) {
   const { items, recommendedItems } = useItemEditModalContext();
 
   return (
     <>
-      <div style="display: flex; justify-content: space-between;">
-        <Input
-          value={keyword}
-          onChange={(e) => onKeywordChange(e.target.value)}
-        />
-        <Button onClick={onClose}>閉じる</Button>
-      </div>
-      {children}
+      {/* items, recommendedItems レンダリングロジック */}
     </>
   );
 }
