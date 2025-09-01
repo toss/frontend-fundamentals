@@ -92,7 +92,7 @@ function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
 
   return (
     <Modal open={open} onClose={onClose}>
-      <ItemEditBody 
+      <ItemEditBody
         keyword={keyword}
         onKeywordChange={setKeyword}
         onClose={onClose}
@@ -111,7 +111,7 @@ function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
 function ItemEditBody({ children, keyword, onKeywordChange, onClose }) {
   return (
     <>
-      <div style="display: flex; justify-content: space-between;">
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Input
           value={keyword}
           onChange={(e) => onKeywordChange(e.target.value)}
@@ -135,34 +135,27 @@ Context API를 활용하면, 데이터의 흐름을 간소화하고 계층 구�
 
 조합 패턴을 사용해도, 컴포넌트가 복잡하고 깊다면, ContextAPI를 사용함으로써 불필요한 Props Drilling을 제거할 수 있어요.
 
-```tsx 1,7,14
+```tsx 1,11,18
 function ItemEditModal({ open, onConfirm, onClose }) {
   const [keyword, setKeyword] = useState("");
 
   return (
     <Modal open={open} onClose={onClose}>
-      <ItemEditBody onClose={onClose}>
+      <ItemEditBody
+        keyword={keyword}
+        onKeywordChange={setKeyword}
+        onClose={onClose}
+      >
         <ItemEditList keyword={keyword} onConfirm={onConfirm} />
       </ItemEditBody>
     </Modal>
   );
 }
 
-function ItemEditList({ children, onClose }) {
+function ItemEditList({ keyword, onConfirm }) {
   const { items, recommendedItems } = useItemEditModalContext();
 
-  return (
-    <>
-      <div style="display: flex; justify-content: space-between;">
-        <Input
-          value={keyword}
-          onChange={(e) => onKeywordChange(e.target.value)}
-        />
-        <Button onClick={onClose}>닫기</Button>
-      </div>
-      {children}
-    </>
-  );
+  return <>{/* items, recommendedItems 렌더링 로직 */}</>;
 }
 ```
 
