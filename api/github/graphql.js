@@ -1,8 +1,8 @@
 export default async function handler(req, res) {
   const { method } = req;
 
-  if (method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+  if (method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
   const { query, variables } = req.body;
@@ -10,13 +10,15 @@ export default async function handler(req, res) {
   const authHeader = req.headers.authorization;
   let token;
 
-  if (authHeader && authHeader.startsWith('Bearer ')) {
-    token = authHeader.replace('Bearer ', '');
+  if (authHeader && authHeader.startsWith("Bearer ")) {
+    token = authHeader.replace("Bearer ", "");
   } else {
     token = process.env.READ_GITHUB_DISCUSSION_ACCESS_TOKEN;
-    
+
     if (!token) {
-      return res.status(500).json({ error: "GitHub server token is not configured" });
+      return res
+        .status(500)
+        .json({ error: "GitHub server token is not configured" });
     }
   }
 
@@ -38,7 +40,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json(data);
   } catch (error) {
-    console.error('GraphQL request error:', error);
-    return res.status(500).json({ error: 'Failed to execute GraphQL query' });
+    console.error("GraphQL request error:", error);
+    return res.status(500).json({ error: "Failed to execute GraphQL query" });
   }
 }

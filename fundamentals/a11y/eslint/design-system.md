@@ -8,6 +8,7 @@
 
 :::tabs key:bundler-object-entry
 == flat config
+
 ```js{9-16}
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 
@@ -28,7 +29,9 @@ export default [
   }
 ];
 ```
+
 == legacy config
+
 ```js{9-16}
 {
   "plugins": ["jsx-a11y"],
@@ -48,6 +51,7 @@ export default [
   }
 }
 ```
+
 :::
 
 이렇게 하면 `<MyButton>`, `<MyTxt>` 에도 button, span에 적용되는 접근성 규칙이 동일하게 적용돼요.
@@ -59,13 +63,16 @@ export default [
 예를 들어, 버튼 컴포넌트를 `<button>` 태그뿐 아니라 `<a>`, `<div>` 등 다른 태그로도 렌더링하고 싶을 때 아래처럼 as 속성을 사용할 수 있어요.
 
 ```jsx
-<MyButton as="a" href="/home">홈으로</MyButton>
+<MyButton as="a" href="/home">
+  홈으로
+</MyButton>
 ```
 
 이처럼 as나 비슷한 이름의 prop으로 다형 렌더링을 지원하는 컴포넌트를 문서화할 때에는, 해당 prop의 이름을 `polymorphicPropName` 옵션으로 명시해 주세요. 그래야 접근성 eslint 규칙이 디자인 시스템 컴포넌트에 올바르게 동작하게 돼요.
 
 :::tabs key:bundler-object-entry
 == flat config
+
 ```js{11}
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 
@@ -87,7 +94,9 @@ export default [
   }
 ];
 ```
+
 == legacy config
+
 ```js{11}
 {
   "plugins": ["jsx-a11y"],
@@ -108,6 +117,7 @@ export default [
   }
 }
 ```
+
 :::
 
 ## 3. control-has-associated-label 커스텀
@@ -124,6 +134,7 @@ export default [
 
 :::tabs key:bundler-object-entry
 == flat config
+
 ```js{7-9}
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 
@@ -148,7 +159,9 @@ export default [
   }
 ];
 ```
+
 == legacy config
+
 ```js{7-9}
 {
   "plugins": ["jsx-a11y"],
@@ -172,6 +185,7 @@ export default [
   }
 }
 ```
+
 :::
 
 이렇게 설정하면 `<MyCard contents="카드 내용" />` 에서 `contents` 가 레이블로 인식되어 접근성 오류 없이 사용할 수 있어요.
@@ -179,4 +193,3 @@ export default [
 ---
 
 이 외에도 디자인 시스템에서 다양한 컴포넌트와 prop 패턴이 있다면, [eslint-plugin-jsx-a11y 공식 문서](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)에서 settings와 rules 옵션을 참고해 맞춤 설정을 적용해 주세요.
-

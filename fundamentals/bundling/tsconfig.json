@@ -5,10 +5,5 @@
     "outDir": "dist",
     "composite": true
   },
-  "include": [
-    ".vitepress/**/*",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.vue"
-  ]
-} 
+  "include": [".vitepress/**/*", "**/*.ts", "**/*.tsx", "**/*.vue"]
+}

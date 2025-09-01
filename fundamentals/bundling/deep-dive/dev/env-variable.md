@@ -24,8 +24,8 @@ require("dotenv").config();
 module.exports = {
   mode: process.env.APP_ENV,
   output: {
-    publicPath: process.env.API_URL,
-  },
+    publicPath: process.env.API_URL
+  }
 };
 ```
 
@@ -87,7 +87,7 @@ console.log(`current env: ${"production"}`);
 ```js
 new webpack.DefinePlugin({
   PRODUCTION: JSON.stringify(true),
-  "process.env.APP_ENV": JSON.stringify("production"),
+  "process.env.APP_ENV": JSON.stringify("production")
 });
 ```
 
@@ -96,7 +96,7 @@ new webpack.DefinePlugin({
 ```js
 new webpack.DefinePlugin({
   PRODUCTION: JSON.stringify(true),
-  "process.env.APP_ENV": "production", // 문자열 리터럴이 아니므로 오류 발생
+  "process.env.APP_ENV": "production" // 문자열 리터럴이 아니므로 오류 발생
 });
 ```
 

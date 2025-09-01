@@ -6,7 +6,7 @@
 
 ::: tip 링크에도 똑같이 적용돼요
 
-`<a>` 태그를 사용하지 않고 하이퍼링크를 구현할 때도 같은 문제가 발생해요.  
+`<a>` 태그를 사용하지 않고 하이퍼링크를 구현할 때도 같은 문제가 발생해요.
 
 링크가 가능한 요소는 반드시 `<a>` 태그를 사용해야 하며, `<button>` 과 달리 block 요소를 자식으로 포함할 수 있으니 대체하여 사용하지 말아주세요.
 
@@ -17,11 +17,7 @@
 다음과 같은 코드는 위에서 설명한 모든 접근성 문제를 발생시켜요.
 
 ```jsx
-<div
-  class="button-style"
-  style="cursor: pointer"
-  onclick="handleAnything()"
->
+<div class="button-style" style="cursor: pointer" onclick="handleAnything()">
   문의하기
 </div>
 ```
@@ -38,14 +34,12 @@
 - 적절한 ARIA 속성 자동 제공
 
 ```jsx
-<button onClick={handleClick}>
-  문의하기
-</button>
+<button onClick={handleClick}>문의하기</button>
 ```
 
 ### 2. `<button>`을 사용할 수 없을 때
 
-내부에 block 요소가 있어서 `<button>`을 사용할 수 없다면  다음처럼 직접 접근성 속성을 명시해줘야 해요.
+내부에 block 요소가 있어서 `<button>`을 사용할 수 없다면 다음처럼 직접 접근성 속성을 명시해줘야 해요.
 
 ```jsx
 <div
@@ -53,7 +47,7 @@
   tabIndex={0}
   onClick={handleClick}
   onKeyDown={(e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
+    if (e.key === "Enter" || e.key === " ") {
       handleClick();
     }
   }}
@@ -71,21 +65,18 @@
 [React-Aria](https://react-spectrum.adobe.com/react-aria/index.html) 라이브러리의 [`useButton`](https://react-spectrum.adobe.com/react-aria/useButton.html) 훅을 사용하면 접근성 있는 버튼을 더 쉽게 구현할 수 있어요. 이 훅은 `role`, `tabIndex`, `onKeyDown` 등의 필수 접근성 설정들을 같이 제공해서 접근성 속성을 직접 처리하지 않아도 돼요.
 
 ```jsx
-import { useButton } from 'react-aria';
+import { useButton } from "react-aria";
 
-const buttonRef = useRef<HTMLDivElement>(null);
+const buttonRef = useRef < HTMLDivElement > null;
 const { buttonProps } = useButton(
   {
-    elementType: 'div',
+    elementType: "div",
     onPress: handleClick
   },
   buttonRef
 );
 
-<div
-  ref={buttonRef}
-  {...buttonProps}
->
+<div ref={buttonRef} {...buttonProps}>
   <div>내부 block 요소</div>
-</div>
+</div>;
 ```

@@ -141,7 +141,7 @@ if (process.env.ENV === "production") {
               t.next = 8;
               break;
             }
-            return (t.next = 6), n++;
+            return ((t.next = 6), n++);
           case 6:
             t.next = 3;
             break;
@@ -185,6 +185,7 @@ if (process.env.ENV === "production") {
 소스맵의 작동 방식에 대해 더 알고 싶다면 [구글의 소스 맵 문서](https://web.dev/articles/source-maps?hl=ko)를 참고하세요.
 
 ## 소스맵 설정
+
 디버깅과 오류 추적을 위해 개발(Dev) 환경과 배포(Prod) 환경별로 적절한 소스맵 옵션을 설정해 보세요.
 
 :::tabs key\:bundler-sourcemap
@@ -194,30 +195,28 @@ if (process.env.ENV === "production") {
 **개발 환경**
 
 - `devtool: 'eval-cheap-module-source-map'`
-
   - 빠른 빌드를 지원하고, 기본 매핑 정보를 inline으로 포함해요.
-- `devtool: 'eval-source-map'`
 
+- `devtool: 'eval-source-map'`
   - 열 단위 매핑까지 지원하지만, 초기 빌드 속도가 느려질 수 있어요.
 
 **배포 환경**
 
 - `devtool: 'source-map'`
-
   - 별도의 `.map` 파일을 생성해 오류 추적에 도움이 돼요.
   - 배포 시 `.map` 파일을 함께 업로드하지 않도록 주의해야 해요.
 
 ```js
 // webpack.dev.config.js
 module.exports = {
-  mode: 'development',
-  devtool: 'eval-cheap-module-source-map',
+  mode: "development",
+  devtool: "eval-cheap-module-source-map"
 };
 
 // webpack.prod.config.js
 module.exports = {
-  mode: 'production',
-  devtool: 'source-map',
+  mode: "production",
+  devtool: "source-map"
 };
 ```
 
@@ -225,20 +224,21 @@ module.exports = {
 
 **개발 환경**
 
-* 기본적으로 ESM 소스맵을 inline으로 제공해 빠른 디버깅을 지원해요.
+- 기본적으로 ESM 소스맵을 inline으로 제공해 빠른 디버깅을 지원해요.
 
 **배포 환경**
 
-* `build.sourcemap: true` 설정으로 별도의 `.map` 파일을 생성할 수 있어요.
+- `build.sourcemap: true` 설정으로 별도의 `.map` 파일을 생성할 수 있어요.
 
 ```js
 // vite.config.js
-import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
 
 export default defineConfig({
   build: {
-    sourcemap: true,
-  },
+    sourcemap: true
+  }
 });
 ```
+
 :::
