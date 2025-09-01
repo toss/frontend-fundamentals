@@ -1,4 +1,5 @@
 import { useUserProfile } from "@/api/hooks/useUser";
+import { useErrorHandler } from "@/hooks/useErrorHandler";
 import { cn } from "@/libs/utils";
 import type { BaseComponentProps } from "@/types";
 import { User, Share } from "lucide-react";
@@ -8,6 +9,7 @@ interface ProfileHeaderProps extends BaseComponentProps {}
 
 export function ProfileHeader({ className }: ProfileHeaderProps) {
   const { data: userProfile, isLoading } = useUserProfile();
+  const { handleApiError } = useErrorHandler();
   const [isSharing, setIsSharing] = useState(false);
 
   const handleShare = async () => {
@@ -25,7 +27,7 @@ export function ProfileHeader({ className }: ProfileHeaderProps) {
         alert("프로필 링크가 복사되었습니다!");
       }
     } catch (error) {
-      console.error("공유 실패:", error);
+      handleApiError(error, "프로필 공유");
     } finally {
       setIsSharing(false);
     }

@@ -1,7 +1,5 @@
-import { useState, useMemo, useEffect } from "react";
-import { useUserProfile } from "@/api/hooks/useUser";
-import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
-import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { useErrorHandler } from "@/hooks/useErrorHandler";
+import { useUserActivity } from "../hooks/useUserActivity";
 import {
   PostCard,
   PostCardSkeleton
@@ -9,82 +7,25 @@ import {
 import { ChevronDown } from "lucide-react";
 import type { BaseComponentProps } from "@/types";
 import { cn } from "@/libs/utils";
-import { PAGE_SIZE } from "@/constants/github";
 
 interface ActivitySectionProps extends BaseComponentProps {}
 
-type SortFilter = "created" | "lastActivity";
-
 export function ActivitySection({ className }: ActivitySectionProps) {
-  const { data: userProfile } = useUserProfile();
-  const [sortFilter, setSortFilter] = useState<SortFilter>("created");
+  const { handleApiError } = useErrorHandler();
 
   const {
-    data,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
+    userProfile,
+    userPosts,
     isLoading,
     error,
+    sortFilter,
+    hasNextPage,
+    isFetchingNextPage,
+    elementRef,
+    handleFilterToggle,
+    handleComment,
     refetch
-  } = useInfiniteDiscussions({
-    categoryName: "Today I Learned",
-    pageSize: PAGE_SIZE.DEFAULT
-  });
-
-  const { elementRef, isIntersecting } = useIntersectionObserver({
-    enabled: hasNextPage && !isFetchingNextPage
-  });
-
-  useEffect(() => {
-    if (isIntersecting && hasNextPage && !isFetchingNextPage) {
-      fetchNextPage();
-    }
-  }, [isIntersecting, hasNextPage, isFetchingNextPage, fetchNextPage]);
-
-  const userPosts = useMemo(() => {
-    if (!userProfile?.login || !data) {
-      return [];
-    }
-
-    const allDiscussions = data.pages.flatMap((page) => page.discussions);
-    const filteredPosts = allDiscussions.filter(
-      (discussion) => discussion.author.login === userProfile.login
-    );
-
-    // 클라이언트에서 정렬 처리
-    return filteredPosts.sort((a, b) => {
-      if (sortFilter === "created") {
-        return (
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-        );
-      } else {
-        return (
-          new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
-        );
-      }
-    });
-  }, [data, userProfile?.login, sortFilter]);
-
-  // 디버깅을 위한 콘솔 로그
-  console.log("ActivitySection Debug:", {
-    userProfile: userProfile?.login,
-    data: data?.pages?.length,
-    totalDiscussions:
-      data?.pages?.reduce((acc, page) => acc + page.discussions.length, 0) || 0,
-    userPosts: userPosts.length,
-    isLoading,
-    error: error?.message
-  });
-
-  const handleFilterToggle = () => {
-    const newFilter = sortFilter === "created" ? "lastActivity" : "created";
-    setSortFilter(newFilter);
-  };
-
-  const handleComment = () => {
-    // TODO: 댓글 페이지로 이동 또는 댓글 모달 열기
-  };
+  } = useUserActivity();
 
   const renderContent = () => {
     if (isLoading) {
@@ -105,7 +46,11 @@ export function ActivitySection({ className }: ActivitySectionProps) {
           </h3>
           <p className="text-red-600 dark:text-red-400 mb-4">{error.message}</p>
           <button
-            onClick={() => refetch()}
+            onClick={() => {
+              refetch().catch((error) =>
+                handleApiError(error, "활동 목록 재시도")
+              );
+            }}
             className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
           >
             다시 시도
@@ -114,7 +59,7 @@ export function ActivitySection({ className }: ActivitySectionProps) {
       );
     }
 
-    if (!isLoading && data && userProfile && userPosts.length === 0) {
+    if (!isLoading && userProfile && userPosts.length === 0) {
       return (
         <div className="text-center py-12">
           <p className="text-black/60 font-medium">
