@@ -15,7 +15,6 @@ interface PostDetailProps {
   onLike?: (postId: string) => void;
   onComment?: (postId: string) => void;
   onUpvote?: (postId: string) => void;
-  onDelete?: (postId: string) => void;
   showComments?: boolean;
 }
 
@@ -131,7 +130,7 @@ export function PostDetail({
     }
   };
 
-  const handleCommentReply = async (commentId: string, content: string) => {
+  const handleCommentReply = async (_commentId: string, content: string) => {
     if (!user?.accessToken) {
       return;
     }

@@ -6,9 +6,14 @@ import { AlertDialog } from "@/components/shared/ui/AlertDialog";
 interface PostMoreMenuProps {
   onEdit: () => void;
   onDelete: () => void;
+  isLoading?: boolean;
 }
 
-export function PostMoreMenu({ onEdit, onDelete }: PostMoreMenuProps) {
+export function PostMoreMenu({
+  onEdit,
+  onDelete,
+  isLoading = false
+}: PostMoreMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -89,13 +94,15 @@ export function PostMoreMenu({ onEdit, onDelete }: PostMoreMenuProps) {
         >
           <button
             onClick={handleEdit}
-            className="w-full px-3 py-2 text-left font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black hover:bg-gray-50 transition-colors rounded-lg"
+            disabled={isLoading}
+            className="w-full px-3 py-2 text-left font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black hover:bg-gray-50 transition-colors rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
           >
             수정하기
           </button>
           <button
             onClick={handleDeleteClick}
-            className="w-full px-3 py-2 text-left font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black hover:bg-gray-50 transition-colors rounded-lg"
+            disabled={isLoading}
+            className="w-full px-3 py-2 text-left font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black hover:bg-gray-50 transition-colors rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
           >
             삭제하기
           </button>
@@ -120,9 +127,10 @@ export function PostMoreMenu({ onEdit, onDelete }: PostMoreMenuProps) {
 
           <button
             onClick={handleConfirmDelete}
-            className="w-24 h-[46px] bg-[#0F0F0F] rounded-[200px] font-bold text-[14px] leading-[130%] tracking-[-0.4px] text-[#FCFCFC] hover:bg-black/90 transition-colors flex items-center justify-center"
+            disabled={isLoading}
+            className="w-24 h-[46px] bg-[#0F0F0F] rounded-[200px] font-bold text-[14px] leading-[130%] tracking-[-0.4px] text-[#FCFCFC] hover:bg-black/90 transition-colors flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            삭제하기
+            {isLoading ? "삭제중..." : "삭제하기"}
           </button>
         </AlertDialog.Content>
       </AlertDialog>

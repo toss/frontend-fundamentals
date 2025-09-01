@@ -82,7 +82,6 @@ export function ActivityContent({
               onLike={(postId) => console.log("Like:", postId)}
               onComment={handleComment}
               onUpvote={(postId) => console.log("Upvote:", postId)}
-              onDelete={(postId) => console.log("Delete:", postId)}
               currentUserLogin={userProfile?.login}
             />
           ))}
