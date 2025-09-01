@@ -32,7 +32,7 @@ export const sharedConfig = defineConfig({
   head: [
     [
       "link",
-      { rel: "icon", type: "image/x-icon", href: "/images/favicon.ico" }
+      { rel: "icon", type: "image/x-icon", href: "/a11y/images/favicon.ico" }
     ],
     [
       "meta",
@@ -59,11 +59,11 @@ export const sharedConfig = defineConfig({
   transformHead: ({ pageData }) => {
     const head: HeadConfig[] = [];
     const title =
-      pageData.frontmatter.title || pageData.title || "Bundling Fundamentals";
+      pageData.frontmatter.title || pageData.title || "A11y Fundamentals";
     const description =
       pageData.frontmatter.description ||
       pageData.description ||
-      "Practical Guide to Efficient Frontend Bundling";
+      "Complete Guide to Frontend Accessibility";
 
     head.push(["meta", { property: "og:title", content: title }]);
     head.push(["meta", { property: "og:description", content: description }]);
