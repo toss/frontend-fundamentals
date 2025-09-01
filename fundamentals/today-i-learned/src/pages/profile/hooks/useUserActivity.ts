@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect } from "react";
 import { useUserProfile } from "@/api/hooks/useUser";
 import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { processUserPosts } from "@/libs/postFilters";
 import { PAGE_SIZE } from "@/constants/github";
 
 type SortFilter = "created" | "lastActivity";
@@ -38,23 +39,7 @@ export function useUserActivity() {
       return [];
     }
 
-    const allDiscussions = data.pages.flatMap((page) => page.discussions);
-    const filteredPosts = allDiscussions.filter(
-      (discussion) => discussion.author.login === userProfile.login
-    );
-
-    // 클라이언트에서 정렬 처리
-    return filteredPosts.sort((a, b) => {
-      if (sortFilter === "created") {
-        return (
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-        );
-      } else {
-        return (
-          new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
-        );
-      }
-    });
+    return processUserPosts(data.pages, userProfile.login, sortFilter);
   }, [data, userProfile?.login, sortFilter]);
 
   const handleFilterToggle = () => {
@@ -63,7 +48,7 @@ export function useUserActivity() {
   };
 
   const handleComment = () => {
-    // TODO: 댓글 페이지로 이동 또는 댓글 모달 열기
+    console.log("Comment action not implemented yet");
   };
 
   return {

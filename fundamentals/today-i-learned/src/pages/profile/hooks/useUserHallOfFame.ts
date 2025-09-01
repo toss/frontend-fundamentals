@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { useUserProfile } from "@/api/hooks/useUser";
 import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
+import { filterUserPosts } from "@/libs/postFilters";
 import { PAGE_SIZE } from "@/constants/github";
 
 const INITIAL_DISPLAY_COUNT = 6;
@@ -29,9 +30,7 @@ export function useUserHallOfFame() {
     }
 
     const allDiscussions = data.pages.flatMap((page) => page.discussions);
-    return allDiscussions.filter(
-      (discussion) => discussion.author.login === userProfile.login
-    );
+    return filterUserPosts(allDiscussions, userProfile.login);
   }, [data, userProfile?.login]);
 
   const handleToggleExpand = () => {

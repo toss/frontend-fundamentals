@@ -1,5 +1,5 @@
 import { useErrorHandler } from "@/hooks/useErrorHandler";
-import { useUserHallOfFame } from "../hooks/useUserHallOfFame";
+import { useUserHallOfFame } from "@/pages/profile/hooks/useUserHallOfFame";
 import {
   PostCard,
   PostCardSkeleton
