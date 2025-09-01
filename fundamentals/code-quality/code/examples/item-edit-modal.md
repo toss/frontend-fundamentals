@@ -92,7 +92,11 @@ function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
 
   return (
     <Modal open={open} onClose={onClose}>
-      <ItemEditBody onClose={onClose}>
+      <ItemEditBody 
+        keyword={keyword}
+        onKeywordChange={setKeyword}
+        onClose={onClose}
+      >
         <ItemEditList
           keyword={keyword}
           items={items}
@@ -104,7 +108,7 @@ function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
   );
 }
 
-function ItemEditBody({ children, onClose }) {
+function ItemEditBody({ children, keyword, onKeywordChange, onClose }) {
   return (
     <>
       <div style="display: flex; justify-content: space-between;">
