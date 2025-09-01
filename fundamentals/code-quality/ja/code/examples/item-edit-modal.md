@@ -131,7 +131,7 @@ function ItemEditBody({ children, keyword, onKeywordChange, onClose }) {
 Context APIを活用することで、データの流れを簡素化し、階層構造全体に簡単に共有することができます。
 コンポジションパターンを使用しても、コンポーネントが複雑で深い場合には、ContextAPIを使用することで不必要なProps Drillingを取り除くことができます。
 
-```tsx 1,7,14
+```tsx 1,11,18
 function ItemEditModal({ open, onConfirm, onClose }) {
   const [keyword, setKeyword] = useState("");
 
@@ -151,11 +151,7 @@ function ItemEditModal({ open, onConfirm, onClose }) {
 function ItemEditList({ keyword, onConfirm }) {
   const { items, recommendedItems } = useItemEditModalContext();
 
-  return (
-    <>
-      {/* items, recommendedItems レンダリングロジック */}
-    </>
-  );
+  return <>{/* items, recommendedItems レンダリングロジック */}</>;
 }
 ```
 
