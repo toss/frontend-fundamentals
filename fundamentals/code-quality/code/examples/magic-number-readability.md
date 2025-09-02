@@ -1,4 +1,4 @@
-훅# 매직 넘버에 이름 붙이기
+# 매직 넘버에 이름 붙이기
 
 <div style="margin-top: 16px">
 <Badge type="info" text="가독성" />
