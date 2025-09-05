@@ -1,7 +1,7 @@
 import { ProfileHeader } from "./components/ProfileHeader";
-import { MonthlyActivitySection } from "./components/MonthlyActivitySection";
 import { HallOfFameSection } from "./components/HallOfFameSection";
 import { ActivitySection } from "./components/ActivitySection";
+import { MonthlyChallenge } from "@/pages/timeline/components/MonthlyChallenge";
 
 export function MyPage() {
   return (
@@ -40,7 +40,7 @@ export function MyPage() {
           {/* 오른쪽 컬럼: 사이드바 (1024px 이상에서만 표시) */}
           <div className="hidden lg:block mt-[24px] lg:min-w-[490px]">
             <div className="sticky top-4">
-              <MonthlyActivitySection />
+              <MonthlyChallenge />
             </div>
           </div>
         </div>

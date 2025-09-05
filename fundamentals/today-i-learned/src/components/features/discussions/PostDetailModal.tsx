@@ -1,4 +1,4 @@
-import { X, ExternalLink } from "lucide-react";
+import { X } from "lucide-react";
 import { AlertDialog } from "@/components/shared/ui/AlertDialog";
 import { PostDetail } from "@/components/features/discussions/PostDetail";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
@@ -10,7 +10,6 @@ interface PostDetailModalProps {
   onLike: (postId: string) => void;
   onComment: (postId: string) => void;
   onUpvote: (postId: string) => void;
-  onDelete?: (postId: string) => void;
 }
 
 export function PostDetailModal({
@@ -19,8 +18,7 @@ export function PostDetailModal({
   onClose,
   onLike,
   onComment,
-  onUpvote,
-  onDelete
+  onUpvote
 }: PostDetailModalProps) {
   if (!discussion) {
     return null;
@@ -50,7 +48,6 @@ export function PostDetailModal({
             onLike={onLike}
             onComment={onComment}
             onUpvote={onUpvote}
-            onDelete={onDelete}
             showComments={true}
           />
         </div>

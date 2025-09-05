@@ -1,76 +1,29 @@
-import { useState, useMemo } from "react";
-import { useUserProfile } from "@/api/hooks/useUser";
-import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
+import { useErrorHandler } from "@/hooks/useErrorHandler";
+import { useUserHallOfFame } from "@/pages/profile/hooks/useUserHallOfFame";
 import {
   PostCard,
   PostCardSkeleton
 } from "@/components/features/discussions/PostCard";
-import { ChevronDown, ChevronUp } from "lucide-react";
+
 import type { BaseComponentProps } from "@/types";
 import { cn } from "@/libs/utils";
-import { PAGE_SIZE } from "@/constants/github";
 
 interface HallOfFameSectionProps extends BaseComponentProps {}
 
-const INITIAL_DISPLAY_COUNT = 6;
-
 export function HallOfFameSection({ className }: HallOfFameSectionProps) {
-  const { data: userProfile } = useUserProfile();
-  const [isExpanded, setIsExpanded] = useState(false);
+  const { handleApiError } = useErrorHandler();
 
   const {
-    data,
+    userProfile,
+    displayedPosts,
     isLoading,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
     error,
+    isExpanded,
+    showToggleButton,
+    isFetchingNextPage,
+    handleToggleExpand,
     refetch
-  } = useInfiniteDiscussions({
-    categoryName: "Today I Learned",
-    filterBy: { label: "성지 ⛲" },
-    pageSize: PAGE_SIZE.DEFAULT
-  });
-
-  const userHallOfFamePosts = useMemo(() => {
-    if (!userProfile?.login || !data) {
-      return [];
-    }
-
-    const allDiscussions = data.pages.flatMap((page) => page.discussions);
-    return allDiscussions.filter(
-      (discussion) => discussion.author.login === userProfile.login
-    );
-  }, [data, userProfile?.login]);
-
-  // 디버깅을 위한 콘솔 로그
-  console.log("HallOfFameSection Debug:", {
-    userProfile: userProfile?.login,
-    data: data?.pages?.length,
-    totalDiscussions:
-      data?.pages?.reduce((acc, page) => acc + page.discussions.length, 0) || 0,
-    userHallOfFamePosts: userHallOfFamePosts.length,
-    isLoading,
-    error: error?.message
-  });
-
-  const handleToggleExpand = () => {
-    setIsExpanded(!isExpanded);
-    // 더보기를 눌렀을 때 더 많은 데이터가 필요하면 추가 로드
-    if (
-      !isExpanded &&
-      hasNextPage &&
-      userHallOfFamePosts.length <= INITIAL_DISPLAY_COUNT
-    ) {
-      fetchNextPage();
-    }
-  };
-
-  const displayedPosts = isExpanded
-    ? userHallOfFamePosts
-    : userHallOfFamePosts.slice(0, INITIAL_DISPLAY_COUNT);
-
-  const showToggleButton = userHallOfFamePosts.length > INITIAL_DISPLAY_COUNT;
+  } = useUserHallOfFame();
 
   const renderContent = () => {
     if (isLoading) {
@@ -91,7 +44,11 @@ export function HallOfFameSection({ className }: HallOfFameSectionProps) {
           </h3>
           <p className="text-red-600 dark:text-red-400 mb-4">{error.message}</p>
           <button
-            onClick={() => refetch()}
+            onClick={() => {
+              refetch().catch((error) =>
+                handleApiError(error, "명예의 전당 재시도")
+              );
+            }}
             className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
           >
             다시 시도
@@ -100,7 +57,7 @@ export function HallOfFameSection({ className }: HallOfFameSectionProps) {
       );
     }
 
-    if (!isLoading && data && userProfile && userHallOfFamePosts.length === 0) {
+    if (!isLoading && userProfile && displayedPosts.length === 0) {
       return (
         <div className="text-center py-12 w-full">
           <p className="text-black/60 font-medium">
@@ -110,7 +67,7 @@ export function HallOfFameSection({ className }: HallOfFameSectionProps) {
       );
     }
 
-    if (userHallOfFamePosts.length > 0) {
+    if (displayedPosts.length > 0) {
       return (
         <>
           {/* 글 목록 그리드 */}
@@ -122,7 +79,6 @@ export function HallOfFameSection({ className }: HallOfFameSectionProps) {
                 onLike={(postId) => console.log("Like:", postId)}
                 onComment={(postId) => console.log("Comment:", postId)}
                 onUpvote={(postId) => console.log("Upvote:", postId)}
-                onDelete={(postId) => console.log("Delete:", postId)}
                 currentUserLogin={userProfile?.login}
               />
             ))}

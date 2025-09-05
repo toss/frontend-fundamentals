@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react";
 import { CreatePost } from "./components/CreatePost";
 import { PostList } from "./components/PostList";
-import { MyStreak } from "../legacy-profile/components/MyStreak";
 import { CategoryTabs, TabContent } from "./components/CategoryTabs";
 import { WeeklyTop5 } from "@/components/features/discussions/WeeklyTop5";
 import type { PostCategory } from "@/types";
@@ -45,7 +44,6 @@ export function LegacyTimelinePage() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <div className="lg:col-span-2 space-y-10">
-        <MyStreak />
         <CreatePost
           onSubmit={handleCreatePost}
           isLoading={createDiscussionMutation.isPending}

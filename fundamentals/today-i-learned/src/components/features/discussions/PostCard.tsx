@@ -7,14 +7,13 @@ import { PostMoreMenu } from "./PostMoreMenu";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
 import { PostDetailModal } from "@/components/features/discussions/PostDetailModal";
 import { formatNumber, formatTimeAgo } from "@/pages/timeline/utils/formatters";
-import { useUpdateDiscussion, useDeleteDiscussion } from "@/api/hooks/useDiscussions";
+import { usePostActions } from "@/hooks/usePostActions";
 
 interface PostCardProps {
   discussion: GitHubDiscussion;
   onLike: (postId: string) => void;
   onComment: (postId: string) => void;
   onUpvote: (postId: string) => void;
-  onDelete?: (postId: string) => void;
   currentUserLogin?: string;
 }
 
@@ -27,22 +26,17 @@ export function PostCard({
   onLike,
   onComment,
   onUpvote,
-  onDelete,
   currentUserLogin
 }: PostCardProps) {
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
-  const { mutate: updateDiscussion, isPending: isUpdating } =
-    useUpdateDiscussion();
-  const { mutate: deleteDiscussion, isPending: isDeleting } =
-    useDeleteDiscussion();
+
+  // 새로운 usePostActions 훅 사용
+  const { handleEdit, handleDelete, canEditPost, isUpdating, isDeleting } =
+    usePostActions({ currentUserLogin });
 
   const { openModal, WritePostModal, isOpen } = useWritePostModal({
-    onSubmit: (title, content) => {
-      updateDiscussion({
-        discussionId: discussion.id,
-        title,
-        body: content
-      });
+    onSubmit: async (title, content) => {
+      await handleEdit(discussion, { title, body: content });
     },
     isEdit: true,
     initialTitle: discussion.title,
@@ -94,13 +88,12 @@ export function PostCard({
           </div>
 
           {/* 더보기 메뉴 (본인 글인 경우만) */}
-          {currentUserLogin && discussion.author.login === currentUserLogin && (
+          {canEditPost(discussion) && (
             <div onClick={(e) => e.stopPropagation()}>
               <PostMoreMenu
                 onEdit={openModal}
-                onDelete={() => {
-                  deleteDiscussion({ discussionId: discussion.id });
-                }}
+                onDelete={() => handleDelete(discussion)}
+                isLoading={isUpdating || isDeleting}
               />
             </div>
           )}
@@ -179,7 +172,6 @@ export function PostCard({
         onLike={onLike}
         onComment={onComment}
         onUpvote={onUpvote}
-        onDelete={onDelete}
       />
     </Card>
   );

@@ -18,7 +18,6 @@ interface PostListProps {
   onLike: (postId: string) => void;
   onComment: (postId: string) => void;
   onUpvote: (postId: string) => void;
-  onDelete?: (postId: string) => void;
 }
 
 export function PostList({
@@ -29,8 +28,7 @@ export function PostList({
   filterBy,
   onLike,
   onComment,
-  onUpvote,
-  onDelete
+  onUpvote
 }: PostListProps) {
   const { data: userProfile } = useUserProfile();
   const {
@@ -103,7 +101,6 @@ export function PostList({
             onLike={onLike}
             onComment={onComment}
             onUpvote={onUpvote}
-            onDelete={onDelete}
             currentUserLogin={userProfile?.login}
           />
         </div>
