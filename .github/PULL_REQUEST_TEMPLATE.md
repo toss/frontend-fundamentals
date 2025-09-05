@@ -6,6 +6,6 @@
 
 <!-- Attach screenshots or a GIF showing the before and after changes. -->
 
-| | |
-|:—:|:—:|
 |**Before**|**After**|
+|:-:|:-:|
+| | |
