@@ -169,6 +169,46 @@ export const GET_INFINITE_DISCUSSIONS_QUERY = `
   }
 `;
 
+export interface SearchDiscussionsVariables {
+  query: string;
+  first: number;
+  after?: string;
+}
+
+export interface SearchDiscussionsResponse {
+  search: {
+    pageInfo: {
+      hasNextPage: boolean;
+      endCursor: string | null;
+    };
+    nodes: Array<{
+      id: string;
+      title: string;
+      body: string;
+      createdAt: string;
+      updatedAt: string;
+      author: {
+        login: string;
+        avatarUrl: string;
+      };
+      reactions: {
+        totalCount: number;
+      };
+      comments: {
+        totalCount: number;
+      };
+      category: {
+        name: string;
+      };
+      labels: {
+        nodes: Array<{
+          name: string;
+        }>;
+      };
+    }>;
+  };
+}
+
 export const SEARCH_DISCUSSIONS_QUERY = `
   query SearchDiscussions($query: String!, $first: Int!, $after: String) {
     search(

@@ -1,15 +1,20 @@
 import { Search, Command } from "lucide-react";
 import { useState, useRef, useCallback, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface SearchBarProps {
   placeholder?: string;
   onSearch?: (value: string) => void;
 }
 
-export function SearchBar({ placeholder = "Search", onSearch }: SearchBarProps) {
+export function SearchBar({
+  placeholder = "Search",
+  onSearch
+}: SearchBarProps) {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   const focusSearch = useCallback(() => {
     searchInputRef.current?.focus();
@@ -34,9 +39,19 @@ export function SearchBar({ placeholder = "Search", onSearch }: SearchBarProps) 
     onSearch?.(value);
   };
 
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchValue.trim()) {
+      navigate(`/search?query=${encodeURIComponent(searchValue.trim())}`);
+    }
+  };
+
   return (
     <div className="hidden lg:flex flex-1 ml-8">
-      <div className="relative w-full max-w-[260px]">
+      <form
+        onSubmit={handleSearchSubmit}
+        className="relative w-full max-w-[260px]"
+      >
         <div
           className={`flex items-center bg-[#F6F6F7] rounded-lg h-10 px-3 transition-all ${
             isSearchFocused ? "ring-2 ring-blue-500 ring-opacity-50" : ""
@@ -60,7 +75,7 @@ export function SearchBar({ placeholder = "Search", onSearch }: SearchBarProps) 
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
