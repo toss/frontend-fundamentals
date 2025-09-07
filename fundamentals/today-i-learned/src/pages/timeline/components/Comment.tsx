@@ -21,49 +21,18 @@ function CommentContainer({
   hasReplies?: boolean;
 }) {
   if (depth === 0) {
-    // 최상위 댓글 - 답글이 있으면 세로선 추가
-    if (hasReplies) {
-      return (
-        <div className="flex flex-col items-start px-8 w-full">
-          <div className="flex flex-row justify-center items-start p-0 gap-4 w-full max-w-[736px]">
-            <div className="flex flex-row items-start pt-4 gap-2.5 w-0 self-stretch min-h-full">
-              <div
-                className="w-px h-full border-l border-[rgba(201,201,201,0.4)]"
-                style={{
-                  minHeight: "160px"
-                }}
-              />
-            </div>
-            <div className="flex flex-col items-start py-6 gap-6 flex-1 w-full max-w-[720px]">
-              {children}
-            </div>
-          </div>
-        </div>
-      );
-    }
-
-    // 답글이 없는 최상위 댓글
+    // 최상위 댓글
     return (
-      <div className="flex flex-col items-start px-8 w-full">{children}</div>
+      <div className="flex flex-col items-start px-8 py-6 w-full">
+        {children}
+      </div>
     );
   }
 
-  // 대댓글 - Comment with nested structure
+  // 대댓글 - 동일한 패딩에 border만 추가
   return (
-    <div className="flex flex-col items-start px-8 w-full">
-      <div className="flex flex-row justify-center items-start p-0 gap-4 w-full max-w-[736px]">
-        <div className="flex flex-row items-start pt-4 gap-2.5 w-0 self-stretch min-h-full">
-          <div
-            className="w-px h-full border-l border-[rgba(201,201,201,0.4)]"
-            style={{
-              minHeight: "160px"
-            }}
-          />
-        </div>
-        <div className="flex flex-col items-start py-6 gap-6 flex-1 w-full max-w-[720px]">
-          {children}
-        </div>
-      </div>
+    <div className="flex flex-col items-start px-8 py-6 w-full ml-8 pl-4 border-l-2 border-gray-200">
+      {children}
     </div>
   );
 }
@@ -230,13 +199,15 @@ export function Comment({
     <>
       <CommentContainer depth={depth}>
         <CommentHeader comment={comment} />
-        <CommentBody content={comment.body} />
-        <CommentActions
-          upvotes={comment.reactions.totalCount}
-          replies={comment.replies?.totalCount || 0}
-          onUpvote={handleUpvote}
-          onReply={() => {}}
-        />
+        <div className="flex flex-col items-start py-6 gap-6 w-full">
+          <CommentBody content={comment.body} />
+          <CommentActions
+            upvotes={comment.reactions.totalCount}
+            replies={comment.replies?.totalCount || 0}
+            onUpvote={handleUpvote}
+            onReply={() => {}}
+          />
+        </div>
       </CommentContainer>
 
       {comment.replies?.nodes && comment.replies.nodes.length > 0 && (
@@ -252,7 +223,6 @@ export function Comment({
           ))}
         </div>
       )}
-
     </>
   );
 }
