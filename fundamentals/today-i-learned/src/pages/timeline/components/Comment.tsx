@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ChevronUp, MessageCircle } from "lucide-react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { CommentInput } from "./CommentInput";
@@ -10,6 +11,7 @@ interface CommentProps {
   onReply: (commentId: string, content: string) => void;
   depth?: number;
 }
+
 function CommentContainer({
   children,
   depth = 0,
@@ -209,6 +211,17 @@ export function Comment({
             ))}
           </div>
         )}
+
+        {depth === 0 && (
+          <div className="mt-4">
+            <CommentInput
+              onSubmit={handleReplySubmit}
+              placeholder="답글을 작성해보세요..."
+              isReply={true}
+              parentId={comment.id}
+            />
+          </div>
+        )}
       </>
     );
   }
@@ -241,14 +254,6 @@ export function Comment({
         </div>
       )}
 
-      <div className="mt-4">
-        <CommentInput
-          onSubmit={handleReplySubmit}
-          placeholder="댓글을 작성해보세요..."
-          isReply={true}
-          parentId={comment.id}
-        />
-      </div>
     </>
   );
 }
