@@ -560,3 +560,43 @@ export async function deleteDiscussion({
 
   return { id: discussion.id };
 }
+
+export interface SearchDiscussionsParams {
+  query: string;
+  owner: string;
+  repo: string;
+  first?: number;
+  after?: string | null;
+  accessToken?: string;
+}
+
+export async function searchDiscussions({
+  query,
+  owner,
+  repo,
+  first = PAGE_SIZE.DEFAULT,
+  after,
+  accessToken
+}: SearchDiscussionsParams): Promise<DiscussionsResponse> {
+  const searchQuery = `repo:${owner}/${repo} is:discussion ${query}`;
+
+  const data = await graphqlRequest(
+    SEARCH_DISCUSSIONS_QUERY,
+    {
+      query: searchQuery,
+      first,
+      after: after || null
+    },
+    accessToken
+  );
+
+  const searchData = data.data?.search;
+
+  return {
+    discussions: searchData?.nodes || [],
+    pageInfo: {
+      hasNextPage: searchData?.pageInfo?.hasNextPage || false,
+      endCursor: searchData?.pageInfo?.endCursor || null
+    }
+  };
+}

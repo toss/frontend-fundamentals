@@ -7,10 +7,7 @@ import { SprintChallenge } from "./components/SprintChallenge";
 import { UnauthenticatedState } from "@/components/features/auth/UnauthenticatedState";
 import { useAuth } from "@/contexts/AuthContext";
 import type { SortOption } from "@/types";
-import {
-  useCreateDiscussion,
-  useToggleDiscussionReaction
-} from "@/api/hooks/useDiscussions";
+import { useCreateDiscussion } from "@/api/hooks/useDiscussions";
 import { useErrorHandler } from "@/hooks/useErrorHandler";
 import { useToast } from "@/components/shared/ui/Toast";
 
@@ -66,44 +63,6 @@ export function TimelinePage() {
 
   const handleSortChange = (option: SortOption) => {
     setSortOption(option);
-  };
-
-  const toggleReactionMutation = useToggleDiscussionReaction();
-
-  const handleLike = async (postId: string) => {
-    if (!user?.accessToken) {
-      return;
-    }
-
-    try {
-      await toggleReactionMutation.mutateAsync({
-        subjectId: postId,
-        isReacted: false, // TODO: 현재 반응 상태 확인 로직 필요
-        content: "HEART"
-      });
-    } catch (error) {
-      handleApiError(error, "좋아요");
-    }
-  };
-
-  const handleComment = (_postId: string) => {
-    // TODO: 댓글 모달 또는 댓글 입력 영역으로 이동
-  };
-
-  const handleUpvote = async (postId: string) => {
-    if (!user?.accessToken) {
-      return;
-    }
-
-    try {
-      await toggleReactionMutation.mutateAsync({
-        subjectId: postId,
-        isReacted: false, // TODO: 현재 반응 상태 확인 로직 필요
-        content: "THUMBS_UP"
-      });
-    } catch (error) {
-      handleApiError(error, "업보트");
-    }
   };
 
   return (
@@ -165,12 +124,7 @@ export function TimelinePage() {
 
             {/* 포스트 리스트 */}
             <div className="lg:px-6 pb-0">
-              <PostList
-                {...getPostListProps()}
-                onLike={handleLike}
-                onComment={handleComment}
-                onUpvote={handleUpvote}
-              />
+              <PostList {...getPostListProps()} />
             </div>
           </div>
 

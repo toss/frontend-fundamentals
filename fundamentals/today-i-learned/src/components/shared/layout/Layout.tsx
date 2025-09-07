@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { OneNavigationReact } from "@shared/components";
-import { NewHomeHeader } from "./NewHomeHeader";
+import { NavigationBar } from "./NavigationBar";
 
 export const Layout: React.FC<{ children: React.ReactNode }> = ({
   children
@@ -20,7 +20,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
       />
 
       <div className="relative flex min-h-screen flex-col mt-[120px]">
-        <NewHomeHeader />
+        <NavigationBar />
         <main className="flex-1">
           <div className="mx-auto min-w-3xl px-4 max-w-[1440px]">
             {children}

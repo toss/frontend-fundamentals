@@ -15,9 +15,6 @@ interface PostListProps {
   filterBy?: {
     label?: string;
   };
-  onLike: (postId: string) => void;
-  onComment: (postId: string) => void;
-  onUpvote: (postId: string) => void;
 }
 
 export function PostList({
@@ -25,10 +22,7 @@ export function PostList({
   repo,
   categoryName,
   sortBy = "latest",
-  filterBy,
-  onLike,
-  onComment,
-  onUpvote
+  filterBy
 }: PostListProps) {
   const { data: userProfile } = useUserProfile();
   const {
@@ -98,9 +92,6 @@ export function PostList({
         >
           <PostCard
             discussion={discussion}
-            onLike={onLike}
-            onComment={onComment}
-            onUpvote={onUpvote}
             currentUserLogin={userProfile?.login}
           />
         </div>

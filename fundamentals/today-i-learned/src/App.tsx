@@ -3,12 +3,14 @@ import { Layout } from "./components/shared/layout/Layout";
 import { LegacyTimelinePage } from "./pages/legacy-timeline/TimelinePage";
 import { MyPage } from "./pages/profile/MyPage";
 import { TimelinePage } from "./pages/timeline/TimelinePage";
+import SearchPage from "./app/search/page";
 
 function App() {
   return (
     <Layout>
       <Routes>
         <Route path="/" element={<TimelinePage />} />
+        <Route path="/search" element={<SearchPage />} />
         <Route path="/profile" element={<MyPage />} />
         <Route path="/legacy-timeline" element={<LegacyTimelinePage />} />
         {/* NOTE: MVP에서는 제외 (모달만 제공) */}

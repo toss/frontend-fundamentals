@@ -8,12 +8,13 @@ import type { GitHubDiscussion } from "@/api/remote/discussions";
 import { PostDetailModal } from "@/components/features/discussions/PostDetailModal";
 import { formatNumber, formatTimeAgo } from "@/pages/timeline/utils/formatters";
 import { usePostActions } from "@/hooks/usePostActions";
+import { usePostReactions } from "@/hooks/usePostReactions";
 
 interface PostCardProps {
   discussion: GitHubDiscussion;
-  onLike: (postId: string) => void;
-  onComment: (postId: string) => void;
-  onUpvote: (postId: string) => void;
+  onLike?: (postId: string) => void;
+  onComment?: (postId: string) => void;
+  onUpvote?: (postId: string) => void;
   currentUserLogin?: string;
 }
 
@@ -30,9 +31,16 @@ export function PostCard({
 }: PostCardProps) {
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
 
-  // 새로운 usePostActions 훅 사용
+  // Post actions 훅 사용
   const { handleEdit, handleDelete, canEditPost, isUpdating, isDeleting } =
     usePostActions({ currentUserLogin });
+
+  // Post reactions 훅 사용
+  const {
+    handleLike: defaultHandleLike,
+    handleComment: defaultHandleComment,
+    handleUpvote: defaultHandleUpvote
+  } = usePostReactions({ discussion });
 
   const { openModal, WritePostModal, isOpen } = useWritePostModal({
     onSubmit: async (title, content) => {
@@ -120,7 +128,11 @@ export function PostCard({
           <button
             onClick={(e) => {
               e.stopPropagation();
-              onUpvote(discussion.id);
+              if (onUpvote) {
+                onUpvote(discussion.id);
+              } else {
+                defaultHandleUpvote();
+              }
             }}
             className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
           >
@@ -135,7 +147,11 @@ export function PostCard({
           <button
             onClick={(e) => {
               e.stopPropagation();
-              onLike(discussion.id);
+              if (onLike) {
+                onLike(discussion.id);
+              } else {
+                defaultHandleLike();
+              }
             }}
             className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
           >
@@ -150,7 +166,11 @@ export function PostCard({
           <button
             onClick={(e) => {
               e.stopPropagation();
-              onComment(discussion.id);
+              if (onComment) {
+                onComment(discussion.id);
+              } else {
+                defaultHandleComment();
+              }
             }}
             className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
           >
@@ -169,9 +189,9 @@ export function PostCard({
         discussion={discussion}
         isOpen={isDetailModalOpen}
         onClose={() => setIsDetailModalOpen(false)}
-        onLike={onLike}
-        onComment={onComment}
-        onUpvote={onUpvote}
+        onLike={onLike || (() => defaultHandleLike())}
+        onComment={onComment || (() => defaultHandleComment())}
+        onUpvote={onUpvote || (() => defaultHandleUpvote())}
       />
     </Card>
   );
