@@ -91,7 +91,7 @@ export function PostInput({
               value={content}
               onChange={handleContentChange}
               onKeyDown={handleKeyDown}
-              placeholder="## 오늘 한 일&#10;- [X] 블로그 초안 쓰기&#10;- [ ] 커밋 푸시하기"
+              placeholder="여러분의 TIL, 의미 있는 기록으로 남아요! TIL은 별도의 서버 없이 운영되어 작성한 글은 프론트엔드 디스커션에도 기록되는 점을 확인해주세요. 하루에 한 줄씩, 함께 성장해봐요."
               className="w-full h-[63px] resize-none border-none outline-none focus:outline-none focus:ring-0 p-0 text-base font-medium text-black leading-[160%] tracking-[-0.4px] bg-transparent placeholder:text-black/20 shadow-none self-stretch"
             />
           </div>
