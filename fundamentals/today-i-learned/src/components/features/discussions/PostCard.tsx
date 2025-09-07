@@ -1,4 +1,4 @@
-import { Heart, MessageCircle, ChevronUp } from "lucide-react";
+import { Heart, MessageCircle, ChevronUp, Share } from "lucide-react";
 import { useState } from "react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { Card } from "@/components/shared/ui/Card";
@@ -9,6 +9,7 @@ import { PostDetailModal } from "@/components/features/discussions/PostDetailMod
 import { formatNumber, formatTimeAgo } from "@/pages/timeline/utils/formatters";
 import { usePostActions } from "@/hooks/usePostActions";
 import { usePostReactions } from "@/hooks/usePostReactions";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface PostCardProps {
   discussion: GitHubDiscussion;
@@ -30,6 +31,30 @@ export function PostCard({
   currentUserLogin
 }: PostCardProps) {
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+  const { user } = useAuth();
+
+  // Check if current user has reacted
+  const hasUserLiked =
+    user?.login &&
+    discussion.reactions.nodes?.some(
+      (reaction) =>
+        reaction.user.login === user.login && reaction.content === "HEART"
+    );
+
+  const hasUserUpvoted =
+    user?.login &&
+    discussion.reactions.nodes?.some(
+      (reaction) =>
+        reaction.user.login === user.login && reaction.content === "THUMBS_UP"
+    );
+
+  // Calculate individual reaction counts
+  const getReactionCount = (content: string) => {
+    return discussion.reactions.nodes?.filter(reaction => reaction.content === content).length || 0;
+  };
+
+  const heartCount = getReactionCount("HEART");
+  const upvoteCount = getReactionCount("THUMBS_UP");
 
   // Post actions 훅 사용
   const {
@@ -141,13 +166,25 @@ export function PostCard({
                 defaultHandleUpvote();
               }
             }}
-            className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
+            className={`flex items-center gap-[6px] hover:opacity-70 transition-all ${
+              hasUserUpvoted ? "text-gray-600" : ""
+            }`}
           >
             <div className="w-5 h-5">
-              <ChevronUp className="w-full h-full stroke-black/40 stroke-[1.67px]" />
+              <ChevronUp
+                className={`w-full h-full stroke-[1.67px] ${
+                  hasUserUpvoted ? "stroke-gray-600" : "stroke-black/40"
+                }`}
+              />
             </div>
-            <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-              {formatNumber(discussion.reactions.totalCount)}
+            <span
+              className={`text-[16px] leading-[130%] tracking-[-0.4px] ${
+                hasUserUpvoted
+                  ? "font-bold text-gray-600"
+                  : "font-semibold text-black/40"
+              }`}
+            >
+              {formatNumber(upvoteCount)}
             </span>
           </button>
 
@@ -160,13 +197,25 @@ export function PostCard({
                 defaultHandleLike();
               }
             }}
-            className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
+            className={`flex items-center gap-[6px] hover:opacity-70 transition-all ${
+              hasUserLiked ? "text-gray-600" : ""
+            }`}
           >
             <div className="w-5 h-5">
-              <Heart className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
+              <Heart
+                className={`w-full h-full stroke-[1.67px] ${
+                  hasUserLiked
+                    ? "stroke-gray-600 fill-gray-600"
+                    : "stroke-black/40 fill-none"
+                }`}
+              />
             </div>
-            <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-              {formatNumber(discussion.reactions.totalCount)}
+            <span
+              className={`font-semibold text-[16px] leading-[130%] tracking-[-0.4px] ${
+                hasUserLiked ? "text-gray-600" : "text-black/40"
+              }`}
+            >
+              {formatNumber(heartCount)}
             </span>
           </button>
 
@@ -187,6 +236,31 @@ export function PostCard({
             <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
               {formatNumber(discussion.comments.totalCount)}
             </span>
+          </button>
+
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              // 공유하기 기능 구현
+              const shareData = {
+                title: discussion.title,
+                text: discussion.body.slice(0, 100) + "...",
+                url: `${window.location.origin}/discussion/${discussion.id}`
+              };
+
+              if (navigator.share) {
+                navigator.share(shareData);
+              } else {
+                // 웹 공유 API가 지원되지 않는 경우 클립보드에 복사
+                navigator.clipboard.writeText(shareData.url);
+                // TODO: 토스트 알림 추가
+              }
+            }}
+            className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
+          >
+            <div className="w-5 h-5">
+              <Share className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
+            </div>
           </button>
         </div>
       </div>

@@ -1,7 +1,8 @@
 import { useCallback } from "react";
-import { useToggleDiscussionReaction } from "@/api/hooks/useDiscussions";
+import { useToggleDiscussionReaction, DISCUSSIONS_QUERY_KEYS } from "@/api/hooks/useDiscussions";
 import { useErrorHandler } from "@/hooks/useErrorHandler";
 import { useAuth } from "@/contexts/AuthContext";
+import { useQueryClient } from "@tanstack/react-query";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
 
 interface UsePostReactionsParams {
@@ -14,12 +15,19 @@ interface PostReactionCallbacks {
   onUpvoteSuccess?: (discussion: GitHubDiscussion) => void;
 }
 
-export function usePostReactions({
-  discussion
-}: UsePostReactionsParams = {}) {
+export function usePostReactions({ discussion }: UsePostReactionsParams = {}) {
   const { user } = useAuth();
   const { mutate: toggleReaction } = useToggleDiscussionReaction();
   const { handleApiError } = useErrorHandler();
+  const queryClient = useQueryClient();
+
+  // Helper function to check if user has reacted
+  const hasUserReacted = useCallback((discussionData: GitHubDiscussion, content: string) => {
+    if (!user?.login) return false;
+    return discussionData.reactions.nodes.some(
+      reaction => reaction.user.login === user.login && reaction.content === content
+    );
+  }, [user?.login]);
 
   /**
    * 좋아요 액션
@@ -27,17 +35,26 @@ export function usePostReactions({
   const handleLike = useCallback(
     async (postId?: string, callbacks?: PostReactionCallbacks) => {
       const targetId = postId || discussion?.id;
-      
+
       if (!user?.accessToken || !targetId) {
         return;
       }
+
+      // Get current discussion data from query cache or props
+      const currentData = discussion || queryClient.getQueryData<GitHubDiscussion>(
+        DISCUSSIONS_QUERY_KEYS.detail(targetId)
+      );
+
+      if (!currentData) return;
+
+      const isCurrentlyReacted = hasUserReacted(currentData, "HEART");
 
       try {
         await new Promise<void>((resolve, reject) => {
           toggleReaction(
             {
               subjectId: targetId,
-              isReacted: false, // TODO: 현재 반응 상태 확인 로직 필요
+              isReacted: isCurrentlyReacted,
               content: "HEART"
             },
             {
@@ -58,7 +75,7 @@ export function usePostReactions({
         // 에러는 이미 handleApiError에서 처리됨
       }
     },
-    [user?.accessToken, discussion, toggleReaction, handleApiError]
+    [user?.accessToken, discussion, toggleReaction, handleApiError, queryClient, hasUserReacted]
   );
 
   /**
@@ -67,14 +84,14 @@ export function usePostReactions({
   const handleComment = useCallback(
     async (postId?: string, callbacks?: PostReactionCallbacks) => {
       const targetId = postId || discussion?.id;
-      
+
       if (!targetId) {
         return;
       }
 
       // TODO: 댓글 모달 또는 댓글 입력 영역으로 이동
       console.log("Comment:", targetId);
-      
+
       if (discussion) {
         callbacks?.onCommentSuccess?.(discussion);
       }
@@ -88,17 +105,26 @@ export function usePostReactions({
   const handleUpvote = useCallback(
     async (postId?: string, callbacks?: PostReactionCallbacks) => {
       const targetId = postId || discussion?.id;
-      
+
       if (!user?.accessToken || !targetId) {
         return;
       }
+
+      // Get current discussion data from query cache or props
+      const currentData = discussion || queryClient.getQueryData<GitHubDiscussion>(
+        DISCUSSIONS_QUERY_KEYS.detail(targetId)
+      );
+
+      if (!currentData) return;
+
+      const isCurrentlyReacted = hasUserReacted(currentData, "THUMBS_UP");
 
       try {
         await new Promise<void>((resolve, reject) => {
           toggleReaction(
             {
               subjectId: targetId,
-              isReacted: false, // TODO: 현재 반응 상태 확인 로직 필요
+              isReacted: isCurrentlyReacted,
               content: "THUMBS_UP"
             },
             {
@@ -119,7 +145,7 @@ export function usePostReactions({
         // 에러는 이미 handleApiError에서 처리됨
       }
     },
-    [user?.accessToken, discussion, toggleReaction, handleApiError]
+    [user?.accessToken, discussion, toggleReaction, handleApiError, queryClient, hasUserReacted]
   );
 
   return {

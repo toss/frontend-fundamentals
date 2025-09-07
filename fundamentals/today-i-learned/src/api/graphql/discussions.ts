@@ -22,8 +22,14 @@ export const GET_DISCUSSIONS_QUERY = `
             login
             avatarUrl
           }
-          reactions {
+          reactions(first: 50) {
             totalCount
+            nodes {
+              content
+              user {
+                login
+              }
+            }
           }
           comments {
             totalCount
@@ -56,8 +62,14 @@ export const CREATE_DISCUSSION_MUTATION = `
           login
           avatarUrl
         }
-        reactions {
+        reactions(first: 50) {
           totalCount
+          nodes {
+            content
+            user {
+              login
+            }
+          }
         }
         comments {
           totalCount
@@ -86,8 +98,14 @@ export const UPDATE_DISCUSSION_MUTATION = `
           login
           avatarUrl
         }
-        reactions {
+        reactions(first: 50) {
           totalCount
+          nodes {
+            content
+            user {
+              login
+            }
+          }
         }
         comments {
           totalCount
@@ -149,8 +167,14 @@ export const GET_INFINITE_DISCUSSIONS_QUERY = `
             login
             avatarUrl
           }
-          reactions {
+          reactions(first: 50) {
             totalCount
+            nodes {
+              content
+              user {
+                login
+              }
+            }
           }
           comments {
             totalCount
@@ -232,8 +256,14 @@ export const SEARCH_DISCUSSIONS_QUERY = `
             login
             avatarUrl
           }
-          reactions {
+          reactions(first: 50) {
             totalCount
+            nodes {
+              content
+              user {
+                login
+              }
+            }
           }
           comments {
             totalCount
@@ -292,8 +322,14 @@ export const GET_DISCUSSION_DETAIL_QUERY = `
           login
           avatarUrl
         }
-        reactions {
+        reactions(first: 50) {
           totalCount
+          nodes {
+            content
+            user {
+              login
+            }
+          }
         }
         category {
           name
@@ -352,8 +388,14 @@ export const ADD_DISCUSSION_COMMENT_MUTATION = `
           login
           avatarUrl
         }
-        reactions {
+        reactions(first: 50) {
           totalCount
+          nodes {
+            content
+            user {
+              login
+            }
+          }
         }
         replies(first: 10) {
           totalCount

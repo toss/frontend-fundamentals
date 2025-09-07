@@ -30,6 +30,12 @@ export interface GitHubDiscussion {
   updatedAt: string;
   reactions: {
     totalCount: number;
+    nodes: Array<{
+      content: string;
+      user: {
+        login: string;
+      };
+    }>;
   };
   comments: {
     totalCount: number;
