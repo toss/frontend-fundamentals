@@ -1,12 +1,14 @@
-import { ChevronUp, MessageCircle } from "lucide-react";
+import { ChevronUp, MessageCircle, Heart } from "lucide-react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { CommentInput } from "./CommentInput";
 import type { GitHubComment } from "@/api/remote/discussions";
 import { formatNumber, formatTimeAgo } from "../utils/formatters";
+import { getHeartAndUpvoteCounts } from "@/utils/reactions";
 
 interface CommentProps {
   comment: GitHubComment;
   onUpvote: (commentId: string) => void;
+  onLike: (commentId: string) => void;
   onReply: (commentId: string, content: string) => void;
   depth?: number;
 }
@@ -82,26 +84,42 @@ function CommentBody({ content }: { content: string }) {
 
 function CommentActions({
   upvotes,
+  likes,
   replies,
   onUpvote,
+  onLike,
   onReply
 }: {
   upvotes: number;
+  likes: number;
   replies: number;
   onUpvote: () => void;
+  onLike: () => void;
   onReply: () => void;
 }) {
   return (
-    <div className="flex flex-row items-start py-2 gap-4 w-[180px] h-9">
+    <div className="flex flex-row items-start py-2 gap-4 w-[250px] h-9">
       <button
         onClick={onUpvote}
         className="flex flex-row items-center gap-1.5 hover:opacity-70 transition-opacity"
       >
         <div className="w-5 h-5">
-          <ChevronUp className="w-3 h-3 stroke-black/40 stroke-2" />
+          <ChevronUp className="w-full h-full stroke-black/40 stroke-[1.67px]" />
         </div>
         <span className="font-semibold text-base leading-[130%] tracking-tight text-black/40">
           {formatNumber(upvotes)}
+        </span>
+      </button>
+
+      <button
+        onClick={onLike}
+        className="flex flex-row items-center gap-1.5 hover:opacity-70 transition-opacity"
+      >
+        <div className="w-5 h-5">
+          <Heart className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
+        </div>
+        <span className="font-semibold text-base leading-[130%] tracking-tight text-black/40">
+          {formatNumber(likes)}
         </span>
       </button>
 
@@ -110,7 +128,7 @@ function CommentActions({
         className="flex flex-row items-center gap-1.5 hover:opacity-70 transition-opacity"
       >
         <div className="w-5 h-5">
-          <MessageCircle className="w-4 h-4 stroke-black/40 stroke-2" />
+          <MessageCircle className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
         </div>
         <span className="font-semibold text-base leading-[130%] tracking-tight text-black/40">
           {replies > 0 ? formatNumber(replies) : 0}
@@ -131,6 +149,7 @@ function useCommentInteraction() {
 export function Comment({
   comment,
   onUpvote,
+  onLike,
   onReply,
   depth = 0
 }: CommentProps) {
@@ -142,6 +161,10 @@ export function Comment({
   };
 
   const handleUpvote = () => onUpvote(comment.id);
+  const handleLike = () => onLike(comment.id);
+
+  // Use utility function to get reaction counts
+  const { heartCount, upvoteCount } = getHeartAndUpvoteCounts(comment.reactions);
 
   if (depth === 0) {
     return (
@@ -159,9 +182,11 @@ export function Comment({
           <div className="flex flex-col items-start py-6 gap-6 w-full">
             <CommentBody content={comment.body} />
             <CommentActions
-              upvotes={comment.reactions.totalCount}
+              upvotes={upvoteCount}
+              likes={heartCount}
               replies={comment.replies?.totalCount || 0}
               onUpvote={handleUpvote}
+              onLike={handleLike}
               onReply={() => {}}
             />
           </div>
@@ -173,6 +198,7 @@ export function Comment({
                 key={reply.id}
                 comment={reply}
                 onUpvote={onUpvote}
+                onLike={onLike}
                 onReply={onReply}
                 depth={depth + 1}
               />
@@ -202,9 +228,11 @@ export function Comment({
         <div className="flex flex-col items-start py-6 gap-6 w-full">
           <CommentBody content={comment.body} />
           <CommentActions
-            upvotes={comment.reactions.totalCount}
+            upvotes={upvoteCount}
+            likes={heartCount}
             replies={comment.replies?.totalCount || 0}
             onUpvote={handleUpvote}
+            onLike={handleLike}
             onReply={() => {}}
           />
         </div>
@@ -217,6 +245,7 @@ export function Comment({
               key={reply.id}
               comment={reply}
               onUpvote={onUpvote}
+              onLike={onLike}
               onReply={onReply}
               depth={depth + 1}
             />

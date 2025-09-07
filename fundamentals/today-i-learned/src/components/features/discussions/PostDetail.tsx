@@ -147,6 +147,22 @@ export function PostDetail({
       console.error("댓글 답글 실패:", error);
     }
   };
+
+  const handleCommentLike = async (commentId: string) => {
+    if (!user?.accessToken) {
+      return;
+    }
+
+    try {
+      await toggleReactionMutation.mutateAsync({
+        subjectId: commentId,
+        isReacted: false, // TODO: 현재 반응 상태 확인
+        content: "HEART" as any
+      });
+    } catch (error) {
+      console.error("댓글 좋아요 실패:", error);
+    }
+  };
   return (
     <div className="w-full flex flex-col gap-8">
       {/* 헤더: 사용자 정보 */}
@@ -302,6 +318,7 @@ export function PostDetail({
             <CommentList
               comments={comments}
               onUpvote={handleCommentUpvote}
+              onLike={handleCommentLike}
               onReply={handleCommentReply}
             />
           )}

@@ -417,6 +417,12 @@ export interface GitHubComment {
   author: GitHubAuthor;
   reactions: {
     totalCount: number;
+    nodes?: Array<{
+      content: string;
+      user: {
+        login: string;
+      };
+    }>;
   };
   replies?: {
     totalCount: number;

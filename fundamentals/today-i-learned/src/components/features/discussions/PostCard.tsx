@@ -20,6 +20,7 @@ import { formatNumber, formatTimeAgo } from "@/pages/timeline/utils/formatters";
 import { usePostActions } from "@/hooks/usePostActions";
 import { usePostReactions } from "@/hooks/usePostReactions";
 import { useAuth } from "@/contexts/AuthContext";
+import { getHeartAndUpvoteCounts, getUserReactionStates, getUsersWhoReacted } from "@/utils/reactions";
 
 interface PostCardProps {
   discussion: GitHubDiscussion;
@@ -47,44 +48,14 @@ export function PostCard({
   const [isCommentHovered, setIsCommentHovered] = useState(false);
   const { user } = useAuth();
 
-  // Check if current user has reacted
-  const hasUserLiked =
-    user?.login &&
-    discussion.reactions.nodes?.some(
-      (reaction) =>
-        reaction.user.login === user.login && reaction.content === "HEART"
-    );
+  // Use utility functions to get reaction counts and user states
+  const { heartCount, upvoteCount } = getHeartAndUpvoteCounts(discussion.reactions);
+  const { hasLiked: hasUserLiked, hasUpvoted: hasUserUpvoted } = getUserReactionStates(discussion.reactions, user?.login);
 
-  const hasUserUpvoted =
-    user?.login &&
-    discussion.reactions.nodes?.some(
-      (reaction) =>
-        reaction.user.login === user.login && reaction.content === "THUMBS_UP"
-    );
+  // Use utility function to get users who reacted
 
-  // Calculate individual reaction counts
-  const getReactionCount = (content: string) => {
-    return (
-      discussion.reactions.nodes?.filter(
-        (reaction) => reaction.content === content
-      ).length || 0
-    );
-  };
-
-  const heartCount = getReactionCount("HEART");
-  const upvoteCount = getReactionCount("THUMBS_UP");
-
-  // Get users who reacted with specific emoji
-  const getUsersWhoReacted = (content: string) => {
-    return (
-      discussion.reactions.nodes?.filter(
-        (reaction) => reaction.content === content
-      ) || []
-    );
-  };
-
-  const heartUsers = getUsersWhoReacted("HEART");
-  const upvoteUsers = getUsersWhoReacted("THUMBS_UP");
+  const heartUsers = getUsersWhoReacted(discussion.reactions, "HEART");
+  const upvoteUsers = getUsersWhoReacted(discussion.reactions, "THUMBS_UP");
 
   // Post actions 훅 사용
   const {

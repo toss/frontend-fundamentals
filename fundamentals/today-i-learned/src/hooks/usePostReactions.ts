@@ -4,6 +4,7 @@ import { useErrorHandler } from "@/hooks/useErrorHandler";
 import { useAuth } from "@/contexts/AuthContext";
 import { useQueryClient } from "@tanstack/react-query";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
+import { hasUserReacted as hasUserReactedUtil } from "@/utils/reactions";
 
 interface UsePostReactionsParams {
   discussion?: GitHubDiscussion;
@@ -22,11 +23,8 @@ export function usePostReactions({ discussion }: UsePostReactionsParams = {}) {
   const queryClient = useQueryClient();
 
   // Helper function to check if user has reacted
-  const hasUserReacted = useCallback((discussionData: GitHubDiscussion, content: string) => {
-    if (!user?.login) return false;
-    return discussionData.reactions.nodes.some(
-      reaction => reaction.user.login === user.login && reaction.content === content
-    );
+  const hasUserReacted = useCallback((discussionData: GitHubDiscussion, content: "HEART" | "THUMBS_UP") => {
+    return hasUserReactedUtil(discussionData.reactions, user?.login || "", content);
   }, [user?.login]);
 
   /**
