@@ -7,12 +7,13 @@ interface CommentInputProps {
   placeholder?: string;
   isReply?: boolean;
   parentId?: string;
+  isError?: boolean;
 }
 
 export function CommentInput({
   onSubmit,
   placeholder = "댓글을 작성해보세요",
-  isReply = false
+  isError
 }: CommentInputProps) {
   const [commentText, setCommentText] = useState("");
   const [isPending, setIsPending] = useState(false);
@@ -57,7 +58,7 @@ export function CommentInput({
           }}
         />
       </div>
-      <div className="flex justify-end">
+      <div className="flex flex-col items-end gap-2">
         <button
           onClick={handleCommentSubmit}
           disabled={!commentText.trim() || isPending}
@@ -65,6 +66,13 @@ export function CommentInput({
         >
           {isPending ? "작성중..." : "작성하기"}
         </button>
+        
+        {/* 에러 메시지 */}
+        {isError && (
+          <p className="text-red-500 text-sm">
+            댓글 작성에 실패했습니다. 네트워크 상태를 확인해주세요.
+          </p>
+        )}
       </div>
     </div>
   );

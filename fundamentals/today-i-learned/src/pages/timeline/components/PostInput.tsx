@@ -8,12 +8,14 @@ interface PostInputProps {
   user: GitHubAuthor;
   onSubmit: (data: { title: string; content: string }) => void;
   placeholder?: string;
+  isError?: boolean;
 }
 
 export function PostInput({
   user,
   onSubmit,
-  placeholder = "오늘 배운 내용을 기록해 보세요"
+  placeholder = "오늘 배운 내용을 기록해 보세요",
+  isError
 }: PostInputProps) {
   const [title, setTitle] = React.useState("");
   const [content, setContent] = React.useState("");
@@ -111,6 +113,15 @@ export function PostInput({
             </span>
           </Button>
         </div>
+
+        {/* 에러 메시지 */}
+        {isError && (
+          <div className="flex justify-end self-stretch mb-6">
+            <p className="text-red-500 text-sm font-medium">
+              게시에 실패했습니다. 네트워크 상태를 확인해주세요.
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

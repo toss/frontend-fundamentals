@@ -32,8 +32,14 @@ export function PostCard({
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
 
   // Post actions 훅 사용
-  const { handleEdit, handleDelete, canEditPost, isUpdating, isDeleting } =
-    usePostActions({ currentUserLogin });
+  const {
+    handleEdit,
+    handleDelete,
+    canEditPost,
+    isUpdating,
+    isDeleting,
+    isDeleteError
+  } = usePostActions({ currentUserLogin });
 
   // Post reactions 훅 사용
   const {
@@ -102,6 +108,7 @@ export function PostCard({
                 onEdit={openModal}
                 onDelete={() => handleDelete(discussion)}
                 isLoading={isUpdating || isDeleting}
+                isDeleteError={isDeleteError}
               />
             </div>
           )}

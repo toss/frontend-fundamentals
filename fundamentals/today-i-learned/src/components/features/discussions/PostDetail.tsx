@@ -260,7 +260,7 @@ export function PostDetail({
               }}
             />
           </div>
-          <div className="flex justify-end">
+          <div className="flex flex-col items-end gap-2">
             <button
               onClick={handleCommentSubmit}
               disabled={!commentText.trim() || addCommentMutation.isPending}
@@ -268,6 +268,13 @@ export function PostDetail({
             >
               {addCommentMutation.isPending ? "작성중..." : "작성하기"}
             </button>
+
+            {/* 에러 메시지 */}
+            {addCommentMutation.isError && (
+              <p className="text-red-500 text-sm font-medium">
+                댓글 작성에 실패했습니다. 네트워크 상태를 확인해주세요.
+              </p>
+            )}
           </div>
         </div>
       )}

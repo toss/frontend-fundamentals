@@ -2,6 +2,7 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import { AlertDialog } from "@/components/shared/ui/AlertDialog";
 import { useUserProfile } from "@/api/hooks/useUser";
+import { useMutation } from "@tanstack/react-query";
 
 interface UseWritePostModalOptions {
   onSubmit?: (title: string, content: string) => void;
@@ -23,16 +24,19 @@ export function useWritePostModal(options: UseWritePostModalOptions = {}) {
     setIsOpen(true);
   };
 
-  const handleSubmit = () => {
-    if (title.trim() && content.trim()) {
-      options.onSubmit?.(title.trim(), content.trim());
-      if (!options.isEdit) {
-        setTitle("");
-        setContent("");
+  const handleSubmit = useMutation({
+    mutationFn: async () => {
+      if (title.trim() && content.trim()) {
+        options.onSubmit?.(title.trim(), content.trim());
+
+        if (!options.isEdit) {
+          setTitle("");
+          setContent("");
+        }
+        setIsOpen(false);
       }
-      setIsOpen(false);
     }
-  };
+  });
 
   const WritePostModal = (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
@@ -53,7 +57,7 @@ export function useWritePostModal(options: UseWritePostModalOptions = {}) {
             <div
               className="w-[60px] h-[60px] rounded-full bg-cover bg-center bg-no-repeat"
               style={{
-                backgroundImage: userProfile?.avatar_url 
+                backgroundImage: userProfile?.avatar_url
                   ? `url(${userProfile.avatar_url})`
                   : "url(https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=face)"
               }}
@@ -72,7 +76,8 @@ export function useWritePostModal(options: UseWritePostModalOptions = {}) {
                   placeholder="제목을 입력하세요"
                   className="w-full text-[22px] font-bold leading-[130%] tracking-[-0.4px] text-[#0F0F0F] placeholder:text-[#0F0F0F]/40 bg-transparent border-none outline-none p-0"
                   style={{
-                    fontFamily: "'Toss Product Sans OTF', ui-sans-serif, system-ui, sans-serif"
+                    fontFamily:
+                      "'Toss Product Sans OTF', ui-sans-serif, system-ui, sans-serif"
                   }}
                 />
               ) : (
@@ -97,11 +102,15 @@ export function useWritePostModal(options: UseWritePostModalOptions = {}) {
             </div>
 
             {/* Submit button */}
-            <div className="flex justify-end">
+            <div className="flex justify-end flex-col items-end gap-2">
               <AlertDialog.Action asChild>
                 <button
-                  onClick={handleSubmit}
-                  disabled={options.isEdit ? (!title.trim() || !content.trim()) : !content.trim()}
+                  onClick={() => handleSubmit.mutate()}
+                  disabled={
+                    options.isEdit
+                      ? !title.trim() || !content.trim()
+                      : !content.trim()
+                  }
                   className="flex flex-row justify-center items-center px-6 py-[18px] gap-[10px] w-24 h-[46px] bg-[#0F0F0F] hover:bg-[#333333] disabled:bg-black/10 disabled:cursor-not-allowed rounded-[200px] transition-colors flex-none"
                 >
                   <span
@@ -115,6 +124,13 @@ export function useWritePostModal(options: UseWritePostModalOptions = {}) {
                   </span>
                 </button>
               </AlertDialog.Action>
+              {handleSubmit.isError && (
+                <div className="flex justify-end self-stretch mt-2">
+                  <p className="text-red-500 text-sm font-medium">
+                    저장에 실패했습니다. 네트워크 상태를 확인해주세요.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>
