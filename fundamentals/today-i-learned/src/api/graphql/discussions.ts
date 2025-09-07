@@ -176,8 +176,17 @@ export const GET_INFINITE_DISCUSSIONS_QUERY = `
               }
             }
           }
-          comments {
+          comments(first: 1) {
             totalCount
+            nodes {
+              id
+              body
+              createdAt
+              author {
+                login
+                avatarUrl
+              }
+            }
           }
           category {
             name
@@ -265,8 +274,17 @@ export const SEARCH_DISCUSSIONS_QUERY = `
               }
             }
           }
-          comments {
+          comments(first: 1) {
             totalCount
+            nodes {
+              id
+              body
+              createdAt
+              author {
+                login
+                avatarUrl
+              }
+            }
           }
           category {
             name

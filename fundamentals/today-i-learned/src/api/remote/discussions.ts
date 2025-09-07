@@ -39,6 +39,12 @@ export interface GitHubDiscussion {
   };
   comments: {
     totalCount: number;
+    nodes?: Array<{
+      id: string;
+      body: string;
+      createdAt: string;
+      author: GitHubAuthor;
+    }>;
   };
   category: {
     name: string;
