@@ -17,6 +17,7 @@ import {
   fetchMyContributions,
   fetchDiscussionDetail,
   addDiscussionComment,
+  addDiscussionCommentReply,
   addDiscussionReaction,
   removeDiscussionReaction,
   type DiscussionsApiParams
@@ -340,6 +341,39 @@ export function useAddDiscussionComment() {
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
         queryKey: DISCUSSIONS_QUERY_KEYS.detail(variables.discussionId)
+      });
+    }
+  });
+}
+
+export function useAddDiscussionCommentReply() {
+  const queryClient = useQueryClient();
+  const { user } = useAuth();
+
+  return useMutation({
+    mutationFn: async ({
+      discussionId,
+      replyToId,
+      body
+    }: {
+      discussionId: string;
+      replyToId: string;
+      body: string;
+    }) => {
+      if (!user?.accessToken) {
+        throw new Error("Authentication required");
+      }
+      return addDiscussionCommentReply({
+        discussionId,
+        replyToId,
+        body,
+        accessToken: user.accessToken
+      });
+    },
+    onSuccess: (_, variables) => {
+      // 댓글이 포함된 모든 discussion detail 쿼리를 무효화
+      queryClient.invalidateQueries({
+        queryKey: DISCUSSIONS_QUERY_KEYS.all
       });
     }
   });

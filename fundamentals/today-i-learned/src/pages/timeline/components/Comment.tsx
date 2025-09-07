@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { ChevronUp, MessageCircle } from "lucide-react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { CommentInput } from "./CommentInput";

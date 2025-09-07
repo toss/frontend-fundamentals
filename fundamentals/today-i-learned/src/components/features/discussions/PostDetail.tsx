@@ -5,6 +5,7 @@ import type { GitHubDiscussion } from "@/api/remote/discussions";
 import {
   useDiscussionDetail,
   useAddDiscussionComment,
+  useAddDiscussionCommentReply,
   useToggleDiscussionReaction
 } from "@/api/hooks/useDiscussions";
 import { useAuth } from "@/contexts/AuthContext";
@@ -59,6 +60,7 @@ export function PostDetail({
   const { data: discussionDetail, isLoading: isDetailLoading } =
     useDiscussionDetail(discussion.id);
   const addCommentMutation = useAddDiscussionComment();
+  const addCommentReplyMutation = useAddDiscussionCommentReply();
   const toggleReactionMutation = useToggleDiscussionReaction();
 
   const actualDiscussion = discussionDetail || discussion;
@@ -130,14 +132,15 @@ export function PostDetail({
     }
   };
 
-  const handleCommentReply = async (_commentId: string, content: string) => {
+  const handleCommentReply = async (commentId: string, content: string) => {
     if (!user?.accessToken) {
       return;
     }
 
     try {
-      await addCommentMutation.mutateAsync({
+      await addCommentReplyMutation.mutateAsync({
         discussionId: discussion.id,
+        replyToId: commentId,
         body: content
       });
     } catch (error) {

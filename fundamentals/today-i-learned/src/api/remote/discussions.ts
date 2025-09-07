@@ -11,6 +11,7 @@ import {
   GET_MY_CONTRIBUTIONS_QUERY,
   GET_DISCUSSION_DETAIL_QUERY,
   ADD_DISCUSSION_COMMENT_MUTATION,
+  ADD_DISCUSSION_COMMENT_REPLY_MUTATION,
   ADD_DISCUSSION_REACTION_MUTATION,
   REMOVE_DISCUSSION_REACTION_MUTATION
 } from "../graphql/discussions";
@@ -476,6 +477,32 @@ export async function addDiscussionComment({
 
   if (!comment) {
     throw new Error("Failed to add comment");
+  }
+
+  return comment;
+}
+
+export async function addDiscussionCommentReply({
+  discussionId,
+  replyToId,
+  body,
+  accessToken
+}: {
+  discussionId: string;
+  replyToId: string;
+  body: string;
+  accessToken: string;
+}): Promise<GitHubComment> {
+  const data = await graphqlRequest(
+    ADD_DISCUSSION_COMMENT_REPLY_MUTATION,
+    { discussionId, replyToId, body },
+    accessToken
+  );
+
+  const comment = data.data?.addDiscussionComment?.comment;
+
+  if (!comment) {
+    throw new Error("Failed to add comment reply");
   }
 
   return comment;

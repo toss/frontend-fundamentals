@@ -435,6 +435,50 @@ export const ADD_DISCUSSION_COMMENT_MUTATION = `
   }
 `;
 
+export const ADD_DISCUSSION_COMMENT_REPLY_MUTATION = `
+  mutation AddDiscussionCommentReply($discussionId: ID!, $replyToId: ID!, $body: String!) {
+    addDiscussionComment(input: {
+      discussionId: $discussionId
+      replyToId: $replyToId
+      body: $body
+    }) {
+      comment {
+        id
+        body
+        createdAt
+        author {
+          login
+          avatarUrl
+        }
+        reactions(first: 50) {
+          totalCount
+          nodes {
+            content
+            user {
+              login
+            }
+          }
+        }
+        replies(first: 10) {
+          totalCount
+          nodes {
+            id
+            body
+            createdAt
+            author {
+              login
+              avatarUrl
+            }
+            reactions {
+              totalCount
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const ADD_DISCUSSION_REACTION_MUTATION = `
   mutation AddDiscussionReaction($subjectId: ID!, $content: ReactionContent!) {
     addReaction(input: {
