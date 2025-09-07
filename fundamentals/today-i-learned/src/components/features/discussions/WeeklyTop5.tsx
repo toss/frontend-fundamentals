@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ExternalLink } from "lucide-react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { useWeeklyTopDiscussions } from "@/api/hooks/useDiscussions";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
@@ -37,11 +36,6 @@ function PopularPostItem({
 
   const handleClick = () => {
     onPostClick(post.id, post);
-  };
-
-  const handleExternalClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    navigate(`/post/${post.id}`);
   };
 
   return (

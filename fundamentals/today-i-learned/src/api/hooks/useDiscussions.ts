@@ -330,7 +330,7 @@ export function useAddDiscussionComment() {
 
       return { previousData };
     },
-    onError: (err, variables, context) => {
+    onError: (_err, variables, context) => {
       if (context?.previousData) {
         queryClient.setQueryData(
           DISCUSSIONS_QUERY_KEYS.detail(variables.discussionId),
@@ -370,7 +370,7 @@ export function useAddDiscussionCommentReply() {
         accessToken: user.accessToken
       });
     },
-    onSuccess: (_, variables) => {
+    onSuccess: () => {
       // 댓글이 포함된 모든 discussion detail 쿼리를 무효화
       queryClient.invalidateQueries({
         queryKey: DISCUSSIONS_QUERY_KEYS.all
@@ -391,15 +391,7 @@ export function useToggleDiscussionReaction() {
     }: {
       subjectId: string;
       isReacted: boolean;
-      content?:
-        | "THUMBS_UP"
-        | "THUMBS_DOWN"
-        | "LAUGH"
-        | "HOORAY"
-        | "CONFUSED"
-        | "HEART"
-        | "ROCKET"
-        | "EYES";
+      content?: string;
     }) => {
       if (!user?.accessToken) {
         throw new Error("Authentication required");
@@ -419,38 +411,19 @@ export function useToggleDiscussionReaction() {
         });
       }
     },
-    onMutate: async ({ subjectId, isReacted, content }) => {
-      const detailQueryKey = DISCUSSIONS_QUERY_KEYS.detail(subjectId);
-      await queryClient.cancelQueries({ queryKey: detailQueryKey });
-
-      const previousData = queryClient.getQueryData(detailQueryKey);
-
-      queryClient.setQueryData(detailQueryKey, (old: any) => {
-        if (!old) {
-          return old;
-        }
-
-        const delta = isReacted ? -1 : 1;
-        return {
-          ...old,
-          reactions: {
-            ...old.reactions,
-            totalCount: Math.max(0, old.reactions.totalCount + delta)
-          }
-        };
+    // optimistic update 제거하고 단순하게 처리
+    onMutate: async () => {
+      // 관련 쿼리들을 취소하여 race condition 방지
+      await queryClient.cancelQueries({ queryKey: DISCUSSIONS_QUERY_KEYS.all });
+    },
+    onError: () => {
+      // 에러 시 전체 쿼리 무효화
+      queryClient.invalidateQueries({
+        queryKey: DISCUSSIONS_QUERY_KEYS.all
       });
-
-      return { previousData };
     },
-    onError: (err, variables, context) => {
-      if (context?.previousData) {
-        queryClient.setQueryData(
-          DISCUSSIONS_QUERY_KEYS.detail(variables.subjectId),
-          context.previousData
-        );
-      }
-    },
-    onSuccess: (_, variables) => {
+    onSuccess: () => {
+      // 성공 시 관련 쿼리들 무효화하여 서버 데이터로 업데이트
       queryClient.invalidateQueries({
         queryKey: DISCUSSIONS_QUERY_KEYS.all
       });

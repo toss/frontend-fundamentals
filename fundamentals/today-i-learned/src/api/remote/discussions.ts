@@ -520,7 +520,7 @@ export async function addDiscussionReaction({
   accessToken
 }: {
   subjectId: string;
-  content?: "THUMBS_UP" | "THUMBS_DOWN" | "LAUGH" | "HOORAY" | "CONFUSED" | "HEART" | "ROCKET" | "EYES";
+  content?: string;
   accessToken: string;
 }): Promise<{ totalCount: number }> {
   const data = await graphqlRequest(
@@ -546,7 +546,7 @@ export async function removeDiscussionReaction({
   accessToken
 }: {
   subjectId: string;
-  content?: "THUMBS_UP" | "THUMBS_DOWN" | "LAUGH" | "HOORAY" | "CONFUSED" | "HEART" | "ROCKET" | "EYES";
+  content?: string;
   accessToken: string;
 }): Promise<{ totalCount: number }> {
   const data = await graphqlRequest(

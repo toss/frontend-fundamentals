@@ -3,7 +3,8 @@ import { Avatar } from "@/components/shared/ui/Avatar";
 import { CommentInput } from "./CommentInput";
 import type { GitHubComment } from "@/api/remote/discussions";
 import { formatNumber, formatTimeAgo } from "../utils/formatters";
-import { getHeartAndUpvoteCounts } from "@/utils/reactions";
+import { getHeartAndUpvoteCounts, getUserReactionStates } from "@/utils/reactions";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface CommentProps {
   comment: GitHubComment;
@@ -15,12 +16,10 @@ interface CommentProps {
 
 function CommentContainer({
   children,
-  depth = 0,
-  hasReplies = false
+  depth = 0
 }: {
   children: React.ReactNode;
   depth?: number;
-  hasReplies?: boolean;
 }) {
   if (depth === 0) {
     // 최상위 댓글
@@ -88,7 +87,10 @@ function CommentActions({
   replies,
   onUpvote,
   onLike,
-  onReply
+  onReply,
+  hasUserUpvoted,
+  hasUserLiked,
+  depth = 0
 }: {
   upvotes: number;
   likes: number;
@@ -96,29 +98,56 @@ function CommentActions({
   onUpvote: () => void;
   onLike: () => void;
   onReply: () => void;
+  hasUserUpvoted?: boolean;
+  hasUserLiked?: boolean;
+  depth?: number;
 }) {
   return (
-    <div className="flex flex-row items-start py-2 gap-4 w-[250px] h-9">
-      <button
-        onClick={onUpvote}
-        className="flex flex-row items-center gap-1.5 hover:opacity-70 transition-opacity"
-      >
-        <div className="w-5 h-5">
-          <ChevronUp className="w-full h-full stroke-black/40 stroke-[1.67px]" />
-        </div>
-        <span className="font-semibold text-base leading-[130%] tracking-tight text-black/40">
-          {formatNumber(upvotes)}
-        </span>
-      </button>
+    <div className={`flex flex-row items-start py-2 gap-4 h-9 ${depth === 0 ? 'w-[250px]' : 'w-[180px]'}`}>
+      {depth === 0 && (
+        <button
+          onClick={onUpvote}
+          className={`flex flex-row items-center gap-1.5 hover:opacity-70 transition-all ${
+            hasUserUpvoted ? "text-gray-600" : ""
+          }`}
+        >
+          <div className="w-5 h-5">
+            <ChevronUp 
+              className={`w-full h-full stroke-[1.67px] ${
+                hasUserUpvoted ? "stroke-[#979797]" : "stroke-black/40"
+              }`} 
+            />
+          </div>
+          <span 
+            className={`font-semibold text-base leading-[130%] tracking-tight ${
+              hasUserUpvoted ? "text-[#979797]" : "text-black/40"
+            }`}
+          >
+            {formatNumber(upvotes)}
+          </span>
+        </button>
+      )}
 
       <button
         onClick={onLike}
-        className="flex flex-row items-center gap-1.5 hover:opacity-70 transition-opacity"
+        className={`flex flex-row items-center gap-1.5 hover:opacity-70 transition-all ${
+          hasUserLiked ? "text-gray-600" : ""
+        }`}
       >
         <div className="w-5 h-5">
-          <Heart className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
+          <Heart 
+            className={`w-full h-full stroke-[1.67px] ${
+              hasUserLiked
+                ? "stroke-[#979797] fill-[#656565]"
+                : "stroke-black/40 fill-none"
+            }`} 
+          />
         </div>
-        <span className="font-semibold text-base leading-[130%] tracking-tight text-black/40">
+        <span 
+          className={`font-semibold text-base leading-[130%] tracking-tight ${
+            hasUserLiked ? "text-[#979797]" : "text-black/40"
+          }`}
+        >
           {formatNumber(likes)}
         </span>
       </button>
@@ -154,6 +183,7 @@ export function Comment({
   depth = 0
 }: CommentProps) {
   const { hideReplyInput } = useCommentInteraction();
+  const { user } = useAuth();
 
   const handleReplySubmit = (content: string) => {
     onReply(comment.id, content);
@@ -163,17 +193,15 @@ export function Comment({
   const handleUpvote = () => onUpvote(comment.id);
   const handleLike = () => onLike(comment.id);
 
-  // Use utility function to get reaction counts
+  // Use utility functions to get reaction counts and user states
   const { heartCount, upvoteCount } = getHeartAndUpvoteCounts(comment.reactions);
+  const { hasLiked: hasUserLiked, hasUpvoted: hasUserUpvoted } = getUserReactionStates(comment.reactions, user?.login);
 
   if (depth === 0) {
     return (
       <>
         <CommentContainer
           depth={depth}
-          hasReplies={
-            !!(comment.replies?.nodes && comment.replies.nodes.length > 0)
-          }
         >
           <div className="flex flex-row items-center p-0 gap-4 w-full h-10">
             <CommentHeader comment={comment} />
@@ -188,6 +216,9 @@ export function Comment({
               onUpvote={handleUpvote}
               onLike={handleLike}
               onReply={() => {}}
+              hasUserUpvoted={hasUserUpvoted}
+              hasUserLiked={hasUserLiked}
+              depth={depth}
             />
           </div>
         </CommentContainer>
@@ -234,6 +265,9 @@ export function Comment({
             onUpvote={handleUpvote}
             onLike={handleLike}
             onReply={() => {}}
+            hasUserUpvoted={hasUserUpvoted}
+            hasUserLiked={hasUserLiked}
+            depth={depth}
           />
         </div>
       </CommentContainer>
