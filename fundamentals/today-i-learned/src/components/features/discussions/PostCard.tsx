@@ -1,4 +1,13 @@
-import { Heart, MessageCircle, ChevronUp, Share } from "lucide-react";
+import {
+  Heart,
+  MessageCircle,
+  ChevronUp,
+  Share,
+  Link,
+  Linkedin,
+  Instagram,
+  Facebook
+} from "lucide-react";
 import { useState } from "react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { Card } from "@/components/shared/ui/Card";
@@ -31,6 +40,7 @@ export function PostCard({
   currentUserLogin
 }: PostCardProps) {
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+  const [isShareMenuOpen, setIsShareMenuOpen] = useState(false);
   const { user } = useAuth();
 
   // Check if current user has reacted
@@ -50,7 +60,11 @@ export function PostCard({
 
   // Calculate individual reaction counts
   const getReactionCount = (content: string) => {
-    return discussion.reactions.nodes?.filter(reaction => reaction.content === content).length || 0;
+    return (
+      discussion.reactions.nodes?.filter(
+        (reaction) => reaction.content === content
+      ).length || 0
+    );
   };
 
   const heartCount = getReactionCount("HEART");
@@ -113,13 +127,13 @@ export function PostCard({
                 <h4 className="font-bold text-[20px] leading-[130%] tracking-[-0.4px] text-black/80 truncate">
                   {discussion.author.login}
                 </h4>
-                <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
+                <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-[#979797]">
                   @{discussion.author.login}
                 </span>
-                <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
+                <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-[#979797]">
                   ·
                 </span>
-                <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
+                <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-[#979797]">
                   {formatTimeAgo(discussion.createdAt)}
                 </span>
               </div>
@@ -173,15 +187,13 @@ export function PostCard({
             <div className="w-5 h-5">
               <ChevronUp
                 className={`w-full h-full stroke-[1.67px] ${
-                  hasUserUpvoted ? "stroke-gray-600" : "stroke-black/40"
+                  hasUserUpvoted ? "stroke-[#979797]" : "stroke-[#979797]"
                 }`}
               />
             </div>
             <span
-              className={`text-[16px] leading-[130%] tracking-[-0.4px] ${
-                hasUserUpvoted
-                  ? "font-bold text-gray-600"
-                  : "font-semibold text-black/40"
+              className={`text-[16px] leading-[130%] tracking-[-0.4px] font-bold ${
+                hasUserUpvoted ? "text-[#979797]" : "text-[#979797]"
               }`}
             >
               {formatNumber(upvoteCount)}
@@ -205,14 +217,14 @@ export function PostCard({
               <Heart
                 className={`w-full h-full stroke-[1.67px] ${
                   hasUserLiked
-                    ? "stroke-gray-600 fill-gray-600"
-                    : "stroke-black/40 fill-none"
+                    ? "stroke-[#979797] fill-[#656565]"
+                    : "stroke-[#979797] fill-none"
                 }`}
               />
             </div>
             <span
-              className={`font-semibold text-[16px] leading-[130%] tracking-[-0.4px] ${
-                hasUserLiked ? "text-gray-600" : "text-black/40"
+              className={`text-[16px] leading-[130%] tracking-[-0.4px] font-semibold ${
+                hasUserLiked ? "text-[#979797]" : "text-[#979797]"
               }`}
             >
               {formatNumber(heartCount)}
@@ -231,37 +243,99 @@ export function PostCard({
             className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
           >
             <div className="w-5 h-5">
-              <MessageCircle className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
+              <MessageCircle className="w-full h-full stroke-[#979797] stroke-[1.67px] fill-none" />
             </div>
-            <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
+            <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-[#979797]">
               {formatNumber(discussion.comments.totalCount)}
             </span>
           </button>
 
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              // 공유하기 기능 구현
-              const shareData = {
-                title: discussion.title,
-                text: discussion.body.slice(0, 100) + "...",
-                url: `${window.location.origin}/discussion/${discussion.id}`
-              };
-
-              if (navigator.share) {
-                navigator.share(shareData);
-              } else {
-                // 웹 공유 API가 지원되지 않는 경우 클립보드에 복사
-                navigator.clipboard.writeText(shareData.url);
-                // TODO: 토스트 알림 추가
-              }
-            }}
-            className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
+          <div
+            className="relative"
+            onMouseEnter={() => setIsShareMenuOpen(true)}
+            onMouseLeave={() => setIsShareMenuOpen(false)}
           >
-            <div className="w-5 h-5">
-              <Share className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
-            </div>
-          </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsShareMenuOpen(!isShareMenuOpen);
+              }}
+              className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
+            >
+              <div className="w-5 h-5">
+                <Share className="w-full h-full stroke-[#979797] stroke-[1.67px] fill-none" />
+              </div>
+            </button>
+
+            {/* 공유 드롭다운 메뉴 */}
+            {isShareMenuOpen && (
+              <div
+                className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 flex flex-row items-start p-4 gap-2 w-[364px] h-[106px] bg-white rounded-2xl z-50"
+                style={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.08)" }}
+              >
+                {/* 링크 복사 */}
+                <div
+                  className="flex flex-col items-center p-2 gap-[10px] w-[64px] h-[74px] rounded-xl cursor-pointer hover:bg-gray-50"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigator.clipboard.writeText(
+                      `${window.location.origin}/discussion/${discussion.id}`
+                    );
+                    setIsShareMenuOpen(false);
+                  }}
+                >
+                  <div className="flex items-center justify-center w-8 h-8 bg-[#0F0F0F] rounded-full">
+                    <Link className="w-5 h-5 stroke-white stroke-[1.67px]" />
+                  </div>
+                  <span className="font-semibold text-[12px] leading-[130%] tracking-[-0.004em] text-black/80 text-center whitespace-nowrap">
+                    링크 복사
+                  </span>
+                </div>
+
+                {/* 링크드인 */}
+                <div className="flex flex-col items-center p-2 gap-[10px] w-[64px] h-[74px] rounded-xl cursor-pointer hover:bg-gray-50">
+                  <div className="flex items-center justify-center w-8 h-8 bg-[#2867B2] rounded-full">
+                    <Linkedin className="w-5 h-5 fill-white stroke-none" />
+                  </div>
+                  <span className="font-semibold text-[12px] leading-[130%] tracking-[-0.004em] text-black/80 text-center whitespace-nowrap">
+                    링크드인
+                  </span>
+                </div>
+
+                {/* 카카오톡 */}
+                <div className="flex flex-col items-center p-2 gap-[10px] w-[64px] h-[74px] rounded-xl cursor-pointer hover:bg-gray-50">
+                  <div className="flex items-center justify-center w-8 h-8 bg-[#FAE100] rounded-full">
+                    <div className="w-5 h-5 bg-[#3C1E1E] rounded-sm flex items-center justify-center text-[#FAE100] font-bold text-xs">
+                      톡
+                    </div>
+                  </div>
+                  <span className="font-semibold text-[12px] leading-[130%] tracking-[-0.004em] text-black/80 text-center whitespace-nowrap">
+                    카카오톡
+                  </span>
+                </div>
+
+                {/* 인스타그램 */}
+                <div className="flex flex-col items-center p-2 gap-[10px] w-[72px] h-[74px] rounded-xl cursor-pointer hover:bg-gray-50">
+                  <div className="flex items-center justify-center w-8 h-8 bg-gradient-to-tr from-[#E4405F] via-[#F77737] to-[#FFDC80] rounded-full">
+                    <Instagram className="w-5 h-5 stroke-white stroke-[1.67px] fill-none" />
+                  </div>
+                  <span className="font-semibold text-[12px] leading-[130%] tracking-[-0.004em] text-black/80 text-center whitespace-nowrap">
+                    인스타그램
+                  </span>
+                </div>
+
+                {/* 페이스북 */}
+                <div className="flex flex-col items-center p-2 gap-[10px] w-[64px] h-[74px] rounded-xl cursor-pointer hover:bg-gray-50">
+                  <div className="flex items-center justify-center w-8 h-8 bg-[#1877F2] rounded-full">
+                    <Facebook className="w-5 h-5 fill-white stroke-none" />
+                  </div>
+                  <span className="font-semibold text-[12px] leading-[130%] tracking-[-0.004em] text-black/80 text-center whitespace-nowrap">
+                    페이스북
+                  </span>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
       {WritePostModal}
