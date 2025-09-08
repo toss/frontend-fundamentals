@@ -22,7 +22,7 @@ module.exports = {
       // ... 기존 rules 유지
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i, // 이미지 파일 확장자
-        type: 'asset', // Asset Modules 사용
+        type: "asset" // Asset Modules 사용
       }
     ]
   }
@@ -30,11 +30,12 @@ module.exports = {
 ```
 
 ::: details Q: Asset Modules의 `type` 옵션은 뭔가요?
+
 - `asset/resource`: 파일을 별도 파일로 내보내고 URL을 반환해요.
 - `asset/inline`: 파일을 base64로 인코딩된 data URL로 변환해요.
 - `asset/source`: 파일의 내용을 문자열로 변환해요.
 - `asset`: 파일 크기에 따라 자동으로 `asset/resource`와 `asset/inline` 중 하나를 선택해요.
-:::
+  :::
 
 ## 이미지 파일 JS에서 import하기
 
@@ -42,10 +43,10 @@ module.exports = {
 
 ```tsx
 // logo.svg 를 import로 가져옴 (타입에러는 일단 무시해주세요)
-import logo from './assets/logo.svg';
+import logo from "./assets/logo.svg";
 
 // 가져온 logo 모듈을 src에 넣어줌
-<img src={logo} alt="Logo" className="logo"></img>
+<img src={logo} alt="Logo" className="logo"></img>;
 ```
 
 코드를 빌드하고 브라우저에서 로고 이미지가 잘 보이는지 확인해 주세요.
@@ -76,15 +77,16 @@ npm run build
 ```
 
 `webpack.config.js`에 폰트 파일 처리를 추가할게요.
+
 ```js
 module.exports = {
   module: {
     rules: [
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i, // 폰트 파일 확장자
-        type: 'asset/resource', // 폰트는 항상 별도 파일로 내보내요
+        type: "asset/resource", // 폰트는 항상 별도 파일로 내보내요
         generator: {
-          filename: 'assets/[name][ext]' // 원하는 폴더와 이름 형태로 설정
+          filename: "assets/[name][ext]" // 원하는 폴더와 이름 형태로 설정
         }
       }
     ]
@@ -97,14 +99,15 @@ module.exports = {
 ```css
 /* style.css */
 @font-face {
-  font-family: 'Inter';
-  src: url('./assets/Inter-Regular.woff2') format('woff2');
+  font-family: "Inter";
+  src: url("./assets/Inter-Regular.woff2") format("woff2");
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 ```
+
 :::details Q. 왜 폰트는 별도 파일로 내보내는게 좋나요?
 
 폰트는 이미지보다 훨씬 용량이 크고, 자주 바뀌지 않는 정적 자원이에요. 그래서 다음과 같은 이유로 항상 `asset/resource`처럼 별도 파일로 내보내는 것이 좋아요.
@@ -112,7 +115,7 @@ body {
 - **성능**: JavaScript에 inline하면 번들 크기가 커져서 초기 로딩 속도가 느려져요.
 - **렌더링 시점 제어**: 브라우저는 외부 폰트를 병렬로 다운로드하고 캐시할 수 있지만, 폰트를 JavaScript 코드 안에 base64로 포함하면, HTML이 파싱되고 JavaScript가 실행된 뒤에야 폰트를 사용할 수 있어요.
 - **캐싱 효율**: 번들에 포함되면 JS가 바뀔 때마다 다시 다운로드되지만, 외부 폰트 파일은 변경되지 않으면 브라우저가 캐시를 재사용할 수 있어요.
-:::
+  :::
 
 ## 다음 단계
 

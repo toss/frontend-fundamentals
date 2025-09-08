@@ -61,9 +61,9 @@ module.exports = {
     filename: "bundle.js", // 번들 결과물 파일 이름
     library: "MathUtils", // 전역에서 접근할 라이브러리 이름
     libraryTarget: "umd", // UMD 형식으로 번들링
-    globalObject: "this", // Node.js 환경과 브라우저 환경에서 모두 동작하도록 설정
+    globalObject: "this" // Node.js 환경과 브라우저 환경에서 모두 동작하도록 설정
   },
-  mode: "production", // 웹팩 최적화 기능 활성화
+  mode: "production" // 웹팩 최적화 기능 활성화
 };
 ```
 
@@ -124,7 +124,6 @@ HTML 파일에서 `<script>` 태그로 번들 파일을 추가하면 전역 객�
 
 이러한 최적화의 대표적인 방법으로 트리 셰이킹과 코드 스플리팅이 있어요.
 
-
 ### `webpack.config.js`의 `mode` 설정하기
 
 앞에서 설정했던 `webpack.config.js` 파일이에요. 여기서는 `production` 값을 넣어서 최적화 해볼게요.
@@ -135,7 +134,7 @@ const path = require("path");
 module.exports = {
   // ... webpack.config.js 설정들
 
-  mode: "production", // 웹팩 최적화 기능 활성화
+  mode: "production" // 웹팩 최적화 기능 활성화
 };
 ```
 
@@ -153,7 +152,7 @@ const path = require("path");
 module.exports = {
   // ... webpack.config.js 설정들
 
-  mode: "development", // 웹팩 최적화 기능 비활성화
+  mode: "development" // 웹팩 최적화 기능 비활성화
 };
 ```
 

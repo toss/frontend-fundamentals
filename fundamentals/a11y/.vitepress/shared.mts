@@ -1,4 +1,4 @@
-import { defineConfig, HeadConfig } from 'vitepress'
+import { defineConfig, HeadConfig } from "vitepress";
 import { DefaultTheme } from "vitepress";
 
 const search: DefaultTheme.LocalSearchOptions["locales"] = {
@@ -27,7 +27,6 @@ const search: DefaultTheme.LocalSearchOptions["locales"] = {
   }
 };
 
-
 export const sharedConfig = defineConfig({
   lastUpdated: true,
   head: [
@@ -55,7 +54,7 @@ export const sharedConfig = defineConfig({
         name: "twitter:card",
         content: "summary"
       }
-    ],
+    ]
   ],
   transformHead: ({ pageData }) => {
     const head: HeadConfig[] = [];
@@ -73,16 +72,17 @@ export const sharedConfig = defineConfig({
   },
 
   themeConfig: {
+    logo: "/images/ff-symbol.svg",
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/toss/frontend-fundamentals' }
+      { icon: "github", link: "https://github.com/toss/frontend-fundamentals" }
     ],
     search: {
       provider: "local",
       options: {
         locales: {
-          ...search,
+          ...search
         }
       }
-    },
+    }
   }
-})
+});

@@ -71,6 +71,7 @@ function App() {
   );
 }
 ```
+
 ## 빌드 도구별 코드 스플리팅 설정
 
 코드 스플리팅은 애플리케이션의 초기 로딩 속도를 개선하고, 필요한 파일만 로드하여 성능을 최적화하는 중요한 기술이에요.
@@ -105,15 +106,11 @@ Webpack 5부터 name 값을 `false` | `string` | `function` 만 받을 수 있�
 module.exports = {
   entry: "./main.tsx",
   output: {
-    filename: '[name].bundle.js', // name 플레이스홀더 이용
-    path: path.resolve(__dirname, 'dist'),
-  },
+    filename: "[name].bundle.js", // name 플레이스홀더 이용
+    path: path.resolve(__dirname, "dist")
+  }
 };
 ```
-
-:::
-
-
 
 - `false`: 청크 이름을 자동으로 생성하지 않고, Webpack이 내부적으로 관리해요. `production` 환경일 때 권장하는 값이에요.
 
@@ -128,9 +125,9 @@ module.exports = {
       maxAsyncRequests: 30,
       maxInitialRequests: 30,
       automaticNameDelimiter: "~", // 자동으로 생성된 청크 이름을 구분할 때 사용하는 문자열
-      name: false, // ex) 1234.bundle.js
-    },
-  },
+      name: false // ex) 1234.bundle.js
+    }
+  }
 };
 ```
 
@@ -147,14 +144,13 @@ module.exports = {
       maxAsyncRequests: 30,
       maxInitialRequests: 30,
       automaticNameDelimiter: "~",
-      name: 'chunk', // ex) chunk~abcd1234.bundle.js
+      name: "chunk" // ex) chunk~abcd1234.bundle.js
     }
   }
 };
 ```
 
-- `function`: 청크 이름을 동적으로 생성할 수 있어요. 그룹 이름, 청크 이름, 모듈명 등을 포함해서 가독성 있게 만들고 싶을 때 권장해요. 
-
+- `function`: 청크 이름을 동적으로 생성할 수 있어요. 그룹 이름, 청크 이름, 모듈명 등을 포함해서 가독성 있게 만들고 싶을 때 권장해요.
 
 ```javascript
 module.exports = {
@@ -173,17 +169,17 @@ module.exports = {
           .split("/")
           .reduceRight((item) => item);
         const allChunksNames = chunks.map((item) => item.name).join("~");
-        return `${cacheGroupKey}-${allChunksNames}-${moduleFileName}`; 
+        return `${cacheGroupKey}-${allChunksNames}-${moduleFileName}`;
         // ex) defaultVendors-main-formatters.js.bundle.js
-      },
-    },
-  },
+      }
+    }
+  }
 };
 ```
 
 == Vite
 
-기본적으로 Rollup을 내부적으로 사용하기 때문에 코드 스플리팅이 자동으로 적용돼요. 
+기본적으로 Rollup을 내부적으로 사용하기 때문에 코드 스플리팅이 자동으로 적용돼요.
 다만, 외부 라이브러리를 별도로 분리하거나 청크 전략을 직접 정의하고 싶다면 `build.rollupOptions.output.manualChunks` 옵션을 설정할 수 있어요.
 
 변경 가능성이 적은 외부 라이브러리를 vendor.js로 분리하면 브라우저 캐시를 효율적으로 사용할 수 있어 초기 로딩 속도가 개선돼요.
@@ -199,10 +195,10 @@ export default defineConfig({
           if (id.includes("node_modules")) {
             return "vendor";
           }
-        },
-      },
-    },
-  },
+        }
+      }
+    }
+  }
 });
 ```
 

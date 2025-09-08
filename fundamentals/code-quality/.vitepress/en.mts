@@ -8,7 +8,8 @@ export const en = defineConfig({
   themeConfig: {
     nav: nav(),
     editLink: {
-      pattern: "https://github.com/toss/frontend-fundamentals/edit/main/fundamentals/code-quality/:path",
+      pattern:
+        "https://github.com/toss/frontend-fundamentals/edit/main/fundamentals/code-quality/:path"
     },
     sidebar: sidebar()
   }
@@ -143,6 +144,6 @@ function sidebar(): DefaultTheme.Sidebar {
           ]
         }
       ]
-    },
+    }
   ];
 }

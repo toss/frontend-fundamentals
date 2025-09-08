@@ -40,14 +40,14 @@
 
 ```tsx
 // webpack.config.js
-const path = require('path');
+const path = require("path");
 
 module.exports = {
-  entry: './src/index.tsx',
+  entry: "./src/index.tsx",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
-  },
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js"
+  }
 };
 ```
 
@@ -55,17 +55,17 @@ module.exports = {
 
 ```ts
 // vite.config.js
-import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
 
 export default defineConfig({
   build: {
     rollupOptions: {
-      input: './src/index.tsx',
+      input: "./src/index.tsx",
       output: {
-        entryFileNames: 'bundle.js',
-      },
-    },
-  },
+        entryFileNames: "bundle.js"
+      }
+    }
+  }
 });
 ```
 
@@ -80,7 +80,7 @@ export default defineConfig({
 │   ├─ index.tsx
 │   ├─ log.js
 │   └─ utils
-│       └─ helper.js 
+│       └─ helper.js
 ├─ public
 │   └─ index.html
 ```
@@ -98,14 +98,14 @@ export default defineConfig({
 
 ```tsx
 // webpack.config.js
-const path = require('path');
+const path = require("path");
 
 module.exports = {
-  entry: ['./src/index1.tsx', './src/index2.tsx'],
+  entry: ["./src/index1.tsx", "./src/index2.tsx"],
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
-  },
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js"
+  }
 };
 ```
 
@@ -113,17 +113,17 @@ module.exports = {
 
 ```ts
 // vite.config.js
-import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
 
 export default defineConfig({
   build: {
     rollupOptions: {
-      input: ['./src/index1.tsx', './src/index2.tsx'],
+      input: ["./src/index1.tsx", "./src/index2.tsx"],
       output: {
-        entryFileNames: 'bundle.js',
-      },
-    },
-  },
+        entryFileNames: "bundle.js"
+      }
+    }
+  }
 });
 ```
 
@@ -142,7 +142,6 @@ export default defineConfig({
 ```
 
 ![](/images/bundling/array-entry.png)
-
 
 ## 객체 구문
 
@@ -169,12 +168,12 @@ export default defineConfig({
 module.exports = {
   entry: {
     app: {
-      import: './src/index.tsx',
+      import: "./src/index.tsx"
     },
     adminApp: {
-      import: './src/admin.tsx',
-    },
-  },
+      import: "./src/admin.tsx"
+    }
+  }
 };
 ```
 
@@ -182,22 +181,21 @@ module.exports = {
 
 ```ts
 // vite.config.js
-import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
 
 export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        app: './src/index.tsx',
-        adminApp: './src/admin.tsx',
-      },
-    },
-  },
+        app: "./src/index.tsx",
+        adminApp: "./src/admin.tsx"
+      }
+    }
+  }
 });
 ```
 
 :::
-
 
 `yarn build` 명령을 실행하면, output 경로인 dist 폴더에 설정한 이름으로 두 개의 번들 파일이 생성돼요.
 
@@ -225,40 +223,40 @@ export default defineConfig({
 === Webpack
 
 ```js
-const path = require('path');
+const path = require("path");
 
 module.exports = {
   entry: {
     app: {
-      import: './src/index.tsx',
-      dependOn: 'shared',
+      import: "./src/index.tsx",
+      dependOn: "shared"
     },
     shared: {
-      import: './src/shared.js',
-    },
-  },
+      import: "./src/shared.js"
+    }
+  }
 };
 ```
 
 === Vite
 
 ```ts
-import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
 
 export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        app: './src/index.tsx',
-        shared: './src/shared.js',
+        app: "./src/index.tsx",
+        shared: "./src/shared.js"
       },
       output: {
         manualChunks: {
-          shared: ['./src/shared.js'],
-        },
-      },
-    },
-  },
+          shared: ["./src/shared.js"]
+        }
+      }
+    }
+  }
 });
 ```
 

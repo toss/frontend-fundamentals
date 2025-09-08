@@ -51,7 +51,7 @@ npm install --save-dev typescript ts-loader
 - `strict`: 엄격한 타입 체크를 켜서 실수를 줄여줘요.
 - `include`: 컴파일러가 처리할 파일을 지정해요. `["./**/*.ts"]`로 지정하면 모든 TypeScript 파일을 포함해요.
 - `exclude`: 컴파일러가 무시할 파일을 지정해요. `["node_modules", "dist"]`는 외부 모듈과 빌드 결과물을 제외한다는 뜻이에요.
-:::
+  :::
 
 ## 웹팩에 로더 설정 추가하기
 
@@ -109,7 +109,6 @@ export const emojis: Emoji[] = [
 `interface Emoji`를 선언해서 이모지 데이터 구조를 명확하게 만들었어요.  
 이렇게 해두면 실수로 잘못된 형태의 데이터를 넣는 걸 막을 수 있어요.
 
-
 ### `main.ts`로 바꾸기
 
 ```ts{1-1,7-7,16-17}
@@ -120,14 +119,14 @@ document.addEventListener('DOMContentLoaded', function() {
   const today = new Date();
   const formattedDate = format(today, 'MMMM d, yyyy');
   document.getElementById('dateDisplay')!.textContent = formattedDate; // 타입 문제를 임시로 해결해요
-  
+
   showRandomEmoji();
 });
 
 function showRandomEmoji() {
   const randomIndex = Math.floor(Math.random() * emojis.length);
   const selectedEmoji = emojis[randomIndex];
-  
+
   document.getElementById('emojiDisplay')!.textContent = selectedEmoji.icon; // 타입 문제를 임시로 해결해요
   document.getElementById('emojiName')!.textContent = selectedEmoji.name; // 타입 문제를 임시로 해결해요
 }
@@ -142,7 +141,6 @@ npm run build
 ```
 
 `index.html` 파일을 브라우저에서 열어보세요. 우리가 코드를 TypeScript로 변환했지만, 브라우저에서 정상적으로 작동하는 것을 확인할 수 있어요 👏
-
 
 ## 다음 단계
 

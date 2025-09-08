@@ -1,4 +1,4 @@
-import { defineConfig, HeadConfig } from 'vitepress'
+import { defineConfig, HeadConfig } from "vitepress";
 import { DefaultTheme } from "vitepress";
 
 const search: DefaultTheme.LocalSearchOptions["locales"] = {
@@ -26,7 +26,6 @@ const search: DefaultTheme.LocalSearchOptions["locales"] = {
     }
   }
 };
-
 
 export const shared = defineConfig({
   lastUpdated: true,
@@ -63,7 +62,11 @@ export const shared = defineConfig({
     ],
     [
       "link",
-      { rel: "icon", type: "image/x-icon", href: "/bundling/images/favicon.ico" }
+      {
+        rel: "icon",
+        type: "image/x-icon",
+        href: "/bundling/images/favicon.ico"
+      }
     ],
     [
       "meta",
@@ -85,7 +88,7 @@ export const shared = defineConfig({
         name: "twitter:card",
         content: "summary"
       }
-    ],
+    ]
   ],
   transformHead: ({ pageData }) => {
     const head: HeadConfig[] = [];
@@ -104,15 +107,15 @@ export const shared = defineConfig({
 
   themeConfig: {
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/toss/frontend-fundamentals' }
+      { icon: "github", link: "https://github.com/toss/frontend-fundamentals" }
     ],
     search: {
       provider: "local",
       options: {
         locales: {
-          ...search,
+          ...search
         }
       }
-    },
+    }
   }
-})
+});

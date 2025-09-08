@@ -40,13 +40,13 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
     library: "ArithmeticLibrary",
-    libraryTarget: "umd",
+    libraryTarget: "umd"
   },
   mode: "production",
   optimization: {
     minimize: true, // 코드 압축 활성화
-    minimizer: [new TerserPlugin()], // TerserPlugin 사용
-  },
+    minimizer: [new TerserPlugin()] // TerserPlugin 사용
+  }
 };
 ```
 
@@ -88,17 +88,17 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    filename: "bundle.js"
   },
   mode: "production",
   module: {
     rules: [
       {
         test: /\.scss$/, // .scss 파일을 처리
-        use: ["style-loader", "css-loader", "sass-loader"], // SASS 변환 및 스타일 적용
-      },
-    ],
-  },
+        use: ["style-loader", "css-loader", "sass-loader"] // SASS 변환 및 스타일 적용
+      }
+    ]
+  }
 };
 ```
 
@@ -115,7 +115,7 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    filename: "bundle.js"
   },
   mode: "production",
   module: {
@@ -126,14 +126,14 @@ module.exports = {
         use: {
           loader: "babel-loader", // Babel로 변환
           options: {
-            presets: ["@babel/preset-react"], // React 지원
-          },
-        },
-      },
-    ],
+            presets: ["@babel/preset-react"] // React 지원
+          }
+        }
+      }
+    ]
   },
   resolve: {
-    extensions: [".js", ".jsx"], // import할 때 확장자 생략 가능
-  },
+    extensions: [".js", ".jsx"] // import할 때 확장자 생략 가능
+  }
 };
 ```

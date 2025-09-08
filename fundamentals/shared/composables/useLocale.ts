@@ -9,4 +9,4 @@ export function useLocale() {
   return {
     isKorean
   };
-} 
+}
