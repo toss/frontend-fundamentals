@@ -92,7 +92,7 @@ function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
 
   return (
     <Modal open={open} onClose={onClose}>
-      <ItemEditBody 
+      <ItemEditBody
         keyword={keyword}
         onKeywordChange={setKeyword}
         onClose={onClose}
