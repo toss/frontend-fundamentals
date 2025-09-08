@@ -6,6 +6,7 @@ import App from "./App.tsx";
 import { ThemeProvider } from "./contexts/ThemeContext.tsx";
 import { AuthProvider } from "./contexts/AuthContext.tsx";
 import { QueryProvider } from "./providers/QueryProvider.tsx";
+import { ErrorBoundary } from "./components/shared/ErrorBoundary.tsx";
 import "./index.css";
 
 const rootElement = document.getElementById("root");
@@ -17,7 +18,9 @@ if (rootElement) {
           <AuthProvider>
             <ThemeProvider>
               <BrowserRouter basename="/today-i-learned">
-                <App />
+                <ErrorBoundary>
+                  <App />
+                </ErrorBoundary>
               </BrowserRouter>
             </ThemeProvider>
           </AuthProvider>

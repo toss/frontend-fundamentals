@@ -1882,6 +1882,7 @@ const RAW_RUNTIME_STATE =
           ["autoprefixer", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:10.4.21::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fautoprefixer%2F-%2Fautoprefixer-10.4.21.tgz"],\
           ["class-variance-authority", "npm:0.7.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fclass-variance-authority%2F-%2Fclass-variance-authority-0.7.1.tgz"],\
           ["clsx", "npm:2.1.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fclsx%2F-%2Fclsx-2.1.1.tgz"],\
+          ["date-fns", "npm:4.1.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fdate-fns%2F-%2Fdate-fns-4.1.0.tgz"],\
           ["identity-obj-proxy", "npm:3.0.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fidentity-obj-proxy%2F-%2Fidentity-obj-proxy-3.0.0.tgz"],\
           ["jest", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:30.1.3::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fjest%2F-%2Fjest-30.1.3.tgz"],\
           ["jest-environment-jsdom", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:30.1.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-30.1.2.tgz"],\
@@ -5021,6 +5022,15 @@ const RAW_RUNTIME_STATE =
           ["data-urls", "npm:5.0.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fdata-urls%2F-%2Fdata-urls-5.0.0.tgz"],\
           ["whatwg-mimetype", "npm:4.0.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fwhatwg-mimetype%2F-%2Fwhatwg-mimetype-4.0.0.tgz"],\
           ["whatwg-url", "npm:14.2.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fwhatwg-url%2F-%2Fwhatwg-url-14.2.0.tgz"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["date-fns", [\
+      ["npm:4.1.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fdate-fns%2F-%2Fdate-fns-4.1.0.tgz", {\
+        "packageLocation": "./.yarn/cache/date-fns-npm-4.1.0-c2855f059a-d5f6e9de5b.zip/node_modules/date-fns/",\
+        "packageDependencies": [\
+          ["date-fns", "npm:4.1.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fdate-fns%2F-%2Fdate-fns-4.1.0.tgz"]\
         ],\
         "linkType": "HARD"\
       }]\
