@@ -155,7 +155,18 @@ function ItemEditModal({ open, onConfirm, onClose }) {
 function ItemEditList({ keyword, onConfirm }) {
   const { items, recommendedItems } = useItemEditModalContext();
 
-  return <>{/* items, recommendedItems 렌더링 로직 */}</>;
+  return (
+    <>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <Input
+          value={keyword}
+          onChange={(e) => onKeywordChange(e.target.value)}
+        />
+        <Button onClick={onClose}>닫기</Button>
+      </div>
+      {children}
+    </>
+  );
 }
 ```
 
