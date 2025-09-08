@@ -3595,7 +3595,7 @@ __metadata:
 
 "date-fns@npm:^4.1.0":
   version: 4.1.0
-  resolution: "date-fns@npm:4.1.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fdate-fns%2F-%2Fdate-fns-4.1.0.tgz"
+  resolution: "date-fns@npm:4.1.0"
   checksum: 10/d5f6e9de5bbc52310f786099e18609289ed5e30af60a71e0646784c8185ddd1d0eebcf7c96b7faaaefc4a8366f3a3a4244d099b6d0866ee2bec80d1361e64342
   languageName: node
   linkType: hard
