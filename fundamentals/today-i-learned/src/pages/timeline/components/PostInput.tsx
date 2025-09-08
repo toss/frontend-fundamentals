@@ -76,13 +76,13 @@ export function PostInput({
           {/* 입력 영역 */}
           <div className="flex flex-col items-start py-3 gap-6 flex-grow">
             {/* 제목 입력 필드 */}
-            <div className="flex flex-row justify-center items-center gap-[10px] w-[260px]">
+            <div className="flex flex-row justify-center items-center gap-[10px] w-full">
               <Input
                 value={title}
                 onChange={handleTitleChange}
                 onKeyDown={handleTitleKeyDown}
                 placeholder={placeholder}
-                className="text-[22px] font-bold leading-[130%] text-black tracking-[-0.4px] w-[260px] p-0 border-none outline-none focus:outline-none focus:ring-0 bg-transparent placeholder:text-black/20 shadow-none"
+                className="text-[22px] font-bold leading-[130%] text-black tracking-[-0.4px] w-full p-0 border-none outline-none focus:outline-none focus:ring-0 bg-transparent placeholder:text-black/20 shadow-none"
               />
             </div>
 

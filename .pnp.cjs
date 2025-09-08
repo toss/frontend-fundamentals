@@ -1867,6 +1867,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./fundamentals/today-i-learned/",\
         "packageDependencies": [\
           ["@frontend-fundamentals/today-i-learned", "workspace:fundamentals/today-i-learned"],\
+<<<<<<< HEAD
           ["@radix-ui/react-alert-dialog", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:1.1.15"],\
           ["@radix-ui/react-slot", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:1.2.3"],\
           ["@tailwindcss/line-clamp", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:0.4.4"],\
@@ -1900,6 +1901,42 @@ const RAW_RUNTIME_STATE =
           ["ts-node", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:10.9.2"],\
           ["typescript", "patch:typescript@npm%3A5.9.2#optional!builtin<compat/typescript>::version=5.9.2&hash=5786d5"],\
           ["vite", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:5.4.19"]\
+=======
+          ["@radix-ui/react-alert-dialog", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:1.1.15::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40radix-ui%2Freact-alert-dialog%2F-%2Freact-alert-dialog-1.1.15.tgz"],\
+          ["@radix-ui/react-slot", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:1.2.3::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40radix-ui%2Freact-slot%2F-%2Freact-slot-1.2.3.tgz"],\
+          ["@tailwindcss/line-clamp", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:0.4.4::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40tailwindcss%2Fline-clamp%2F-%2Fline-clamp-0.4.4.tgz"],\
+          ["@tanstack/react-query", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:5.87.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40tanstack%2Freact-query%2F-%2Freact-query-5.87.1.tgz"],\
+          ["@testing-library/jest-dom", "npm:6.8.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40testing-library%2Fjest-dom%2F-%2Fjest-dom-6.8.0.tgz"],\
+          ["@testing-library/react", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:16.3.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40testing-library%2Freact%2F-%2Freact-16.3.0.tgz"],\
+          ["@testing-library/user-event", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:14.6.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40testing-library%2Fuser-event%2F-%2Fuser-event-14.6.1.tgz"],\
+          ["@types/jest", "npm:30.0.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40types%2Fjest%2F-%2Fjest-30.0.0.tgz"],\
+          ["@types/node", "npm:24.3.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40types%2Fnode%2F-%2Fnode-24.3.1.tgz"],\
+          ["@types/react", "npm:18.3.24::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40types%2Freact%2F-%2Freact-18.3.24.tgz"],\
+          ["@types/react-dom", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:18.3.7::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40types%2Freact-dom%2F-%2Freact-dom-18.3.7.tgz"],\
+          ["@vitejs/plugin-react", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:4.7.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2F%40vitejs%2Fplugin-react%2F-%2Fplugin-react-4.7.0.tgz"],\
+          ["autoprefixer", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:10.4.21::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fautoprefixer%2F-%2Fautoprefixer-10.4.21.tgz"],\
+          ["class-variance-authority", "npm:0.7.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fclass-variance-authority%2F-%2Fclass-variance-authority-0.7.1.tgz"],\
+          ["clsx", "npm:2.1.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fclsx%2F-%2Fclsx-2.1.1.tgz"],\
+          ["date-fns", "npm:4.1.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fdate-fns%2F-%2Fdate-fns-4.1.0.tgz"],\
+          ["identity-obj-proxy", "npm:3.0.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fidentity-obj-proxy%2F-%2Fidentity-obj-proxy-3.0.0.tgz"],\
+          ["jest", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:30.1.3::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fjest%2F-%2Fjest-30.1.3.tgz"],\
+          ["jest-environment-jsdom", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:30.1.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-30.1.2.tgz"],\
+          ["lucide-react", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:0.525.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Flucide-react%2F-%2Flucide-react-0.525.0.tgz"],\
+          ["overlay-kit", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:1.8.5::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Foverlay-kit%2F-%2Foverlay-kit-1.8.5.tgz"],\
+          ["oxlint", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:1.14.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Foxlint%2F-%2Foxlint-1.14.0.tgz"],\
+          ["postcss", "npm:8.5.6::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fpostcss%2F-%2Fpostcss-8.5.6.tgz"],\
+          ["react", "npm:18.3.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Freact%2F-%2Freact-18.3.1.tgz"],\
+          ["react-dom", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:18.3.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Freact-dom%2F-%2Freact-dom-18.3.1.tgz"],\
+          ["react-hook-form", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:7.62.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Freact-hook-form%2F-%2Freact-hook-form-7.62.0.tgz"],\
+          ["react-router-dom", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:7.8.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Freact-router-dom%2F-%2Freact-router-dom-7.8.2.tgz"],\
+          ["tailwind-merge", "npm:3.3.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ftailwind-merge%2F-%2Ftailwind-merge-3.3.1.tgz"],\
+          ["tailwindcss", "npm:3.4.17::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ftailwindcss%2F-%2Ftailwindcss-3.4.17.tgz"],\
+          ["tailwindcss-animate", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:1.0.7::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Ftailwindcss-animate%2F-%2Ftailwindcss-animate-1.0.7.tgz"],\
+          ["ts-jest", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:29.4.1::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fts-jest%2F-%2Fts-jest-29.4.1.tgz"],\
+          ["ts-node", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:10.9.2::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fts-node%2F-%2Fts-node-10.9.2.tgz"],\
+          ["typescript", "patch:typescript@npm%3A5.9.2%3A%3A__archiveUrl=http%253A%252F%252Fnexus.toss.bz%252Frepository%252Fnpm-group%252Ftypescript%252F-%252Ftypescript-5.9.2.tgz#optional!builtin<compat/typescript>::version=5.9.2&hash=5786d5"],\
+          ["vite", "virtual:aa30a3c749b831fda0e7d0c36b75cc1150505c665cee2065ceaf5d3590984e9a3e86499ef1cb3e6374dd2ee412223e8ce7a4cbd0b9b5d40fbad1a1b5395f2ac4#npm:5.4.19::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fvite%2F-%2Fvite-5.4.19.tgz"]\
+>>>>>>> dev/today-i-learned
         ],\
         "linkType": "SOFT"\
       }]\
@@ -5020,6 +5057,15 @@ const RAW_RUNTIME_STATE =
           ["data-urls", "npm:5.0.0"],\
           ["whatwg-mimetype", "npm:4.0.0"],\
           ["whatwg-url", "npm:14.2.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["date-fns", [\
+      ["npm:4.1.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fdate-fns%2F-%2Fdate-fns-4.1.0.tgz", {\
+        "packageLocation": "./.yarn/cache/date-fns-npm-4.1.0-c2855f059a-d5f6e9de5b.zip/node_modules/date-fns/",\
+        "packageDependencies": [\
+          ["date-fns", "npm:4.1.0::__archiveUrl=http%3A%2F%2Fnexus.toss.bz%2Frepository%2Fnpm-group%2Fdate-fns%2F-%2Fdate-fns-4.1.0.tgz"]\
         ],\
         "linkType": "HARD"\
       }]\
