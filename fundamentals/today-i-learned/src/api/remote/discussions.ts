@@ -14,6 +14,7 @@ import {
   ADD_DISCUSSION_REACTION_MUTATION,
   REMOVE_DISCUSSION_REACTION_MUTATION
 } from "../graphql/discussions";
+import { ENV_CONFIG } from "@/libs/env";
 
 export interface GitHubAuthor {
   login: string;
@@ -186,7 +187,7 @@ export async function fetchWeeklyTopDiscussions({
   oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
   // 1주일 이내의 discussions를 인기도순으로 검색
-  const searchQuery = `repo:${owner}/${repo} is:discussion created:>=${oneWeekAgo.toISOString().split('T')[0]} sort:interactions-desc`;
+  const searchQuery = `repo:${owner}/${repo} is:discussion created:>=${oneWeekAgo.toISOString().split("T")[0]} sort:interactions-desc`;
 
   const data = await graphqlRequest(
     SEARCH_DISCUSSIONS_QUERY,
@@ -198,7 +199,7 @@ export async function fetchWeeklyTopDiscussions({
   );
 
   const discussions = data.data?.search?.nodes || [];
-  
+
   // 상위 5개만 반환
   return discussions.slice(0, 5);
 }
@@ -355,7 +356,9 @@ export async function fetchMyContributions({
   repo,
   accessToken,
   authorLogin
-}: Omit<DiscussionsApiParams, "categoryName"> & { authorLogin: string }): Promise<ContributionData[]> {
+}: Omit<DiscussionsApiParams, "categoryName"> & {
+  authorLogin: string;
+}): Promise<ContributionData[]> {
   const allContributions: ContributionData[] = [];
   let hasNextPage = true;
   let cursor: string | null = null;
@@ -377,7 +380,7 @@ export async function fetchMyContributions({
       );
 
       const searchData = data.data?.search;
-      
+
       if (!searchData) {
         break;
       }
@@ -475,7 +478,15 @@ export async function addDiscussionReaction({
   accessToken
 }: {
   subjectId: string;
-  content?: "THUMBS_UP" | "THUMBS_DOWN" | "LAUGH" | "HOORAY" | "CONFUSED" | "HEART" | "ROCKET" | "EYES";
+  content?:
+    | "THUMBS_UP"
+    | "THUMBS_DOWN"
+    | "LAUGH"
+    | "HOORAY"
+    | "CONFUSED"
+    | "HEART"
+    | "ROCKET"
+    | "EYES";
   accessToken: string;
 }): Promise<{ totalCount: number }> {
   const data = await graphqlRequest(
@@ -501,7 +512,15 @@ export async function removeDiscussionReaction({
   accessToken
 }: {
   subjectId: string;
-  content?: "THUMBS_UP" | "THUMBS_DOWN" | "LAUGH" | "HOORAY" | "CONFUSED" | "HEART" | "ROCKET" | "EYES";
+  content?:
+    | "THUMBS_UP"
+    | "THUMBS_DOWN"
+    | "LAUGH"
+    | "HOORAY"
+    | "CONFUSED"
+    | "HEART"
+    | "ROCKET"
+    | "EYES";
   accessToken: string;
 }): Promise<{ totalCount: number }> {
   const data = await graphqlRequest(
