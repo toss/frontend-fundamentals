@@ -1,7 +1,7 @@
-import { createRequire } from "node:module";
-import path from "node:path";
-import footnote from "markdown-it-footnote";
 import { defineConfig } from "vitepress";
+import footnote from "markdown-it-footnote";
+import path from "node:path";
+import { createRequire } from "node:module";
 import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 import { shared } from "./shared.mjs";
 

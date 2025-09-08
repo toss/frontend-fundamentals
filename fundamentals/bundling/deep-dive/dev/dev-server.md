@@ -55,7 +55,6 @@
 
 > 출처: [https://ko.vite.dev/guide/why.html](https://ko.vite.dev/guide/why.html)
 
-
 ## 개발 서버 설정 방법
 
 번들러별 개발 서버 설정 방법은 다음과 같아요.
@@ -74,21 +73,21 @@ npm install -D webpack-dev-server
 
 ```js
 // webpack.config.js
-const path = require('path');
+const path = require("path");
 
 module.exports = {
   devServer: {
-    static: { directory: path.join(__dirname, 'public') },
+    static: { directory: path.join(__dirname, "public") },
     compress: true,
     port: 9000,
     historyApiFallback: true,
     proxy: [
       {
-        context: ['/api'],
-        target: 'http://localhost:3000',
-      },
-    ],
-  },
+        context: ["/api"],
+        target: "http://localhost:3000"
+      }
+    ]
+  }
 };
 ```
 
@@ -108,15 +107,15 @@ npm install -D vite
 
 ```js
 // vite.config.js
-import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
 
 export default defineConfig({
   server: {
     port: 3000,
     proxy: {
-      '/api': 'http://localhost:5000',
-    },
-  },
+      "/api": "http://localhost:5000"
+    }
+  }
 });
 ```
 
@@ -147,8 +146,8 @@ npm install -D esbuild esbuild-serve
 
 이 문제를 해결하려면, 존재하지 않는 모든 경로에 대해 `index.html`을 반환하도록 설정하면 돼요. 이렇게 하면 어떤 경로로 접근해도 `index.html`이 제공되며, 이후 클라이언트 측에서 라우팅을 처리할 수 있어요. 이렇게 하면 모든 경로에 `index.html`이 제공되고, 이후 클라이언트 측에서 라우팅을 처리할 수 있어요.
 
-* 웹팩 설정: `historyApiFallback: true`
-* Vite 설정: Default
+- 웹팩 설정: `historyApiFallback: true`
+- Vite 설정: Default
 
 ### HTTPS 설정
 
@@ -187,44 +186,46 @@ devServer: {
 :::tabs key:bundler-proxy
 
 == Webpack
-  - `changeOrigin: true`로 요청 헤더의 `Origin`을 대상 서버에 맞게 변경하고,
-  - `secure: false`로 HTTPS 인증서 검증을 생략할 수 있어요.
+
+- `changeOrigin: true`로 요청 헤더의 `Origin`을 대상 서버에 맞게 변경하고,
+- `secure: false`로 HTTPS 인증서 검증을 생략할 수 있어요.
 
 ```js
 // webpack.config.js
 module.exports = {
   devServer: {
     proxy: {
-      '/api': {
-        target: 'https://test.com',
+      "/api": {
+        target: "https://test.com",
         changeOrigin: true,
-        secure: false,
-      },
-    },
-  },
+        secure: false
+      }
+    }
+  }
 };
 ```
 
 == Vite
-  - Webpack과 구조는 비슷하지만, Vite는 내부적으로 `http-proxy`를 사용해 설정이 더 직관적이고 간단해요.
-  - 필요에 따라 `rewrite` 옵션을 사용해 요청 경로를 수정할 수도 있어요.
+
+- Webpack과 구조는 비슷하지만, Vite는 내부적으로 `http-proxy`를 사용해 설정이 더 직관적이고 간단해요.
+- 필요에 따라 `rewrite` 옵션을 사용해 요청 경로를 수정할 수도 있어요.
 
 ```js
 // vite.config.js
-import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
 
 export default defineConfig({
   server: {
     proxy: {
-      '/api': {
-        target: 'https://test.com',
+      "/api": {
+        target: "https://test.com",
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace(/^\/api/, '/api-web/v3'),
-      },
-    },
-  },
+        rewrite: (path) => path.replace(/^\/api/, "/api-web/v3")
+      }
+    }
+  }
 });
 ```
-:::
 
+:::

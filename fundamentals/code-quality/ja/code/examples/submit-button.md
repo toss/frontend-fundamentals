@@ -61,7 +61,7 @@ function ViewerSubmitButton() {
 
 function AdminSubmitButton() {
   useEffect(() => {
-    showAnimation();
+    showButtonAnimation();
   }, []);
 
   return <Button type="submit">Submit</Button>;

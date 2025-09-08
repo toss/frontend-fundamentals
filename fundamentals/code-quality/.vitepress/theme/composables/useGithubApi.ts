@@ -183,7 +183,7 @@ const fetchGithubDiscussion = async (query: string) => {
 
   if (isLocalhost) {
     const accessToken = await (import.meta as any).env
-    .READ_GITHUB_DISCUSSION_ACCESS_TOKEN;
+      .READ_GITHUB_DISCUSSION_ACCESS_TOKEN;
 
     return fetch("https://api.github.com/graphql", {
       method: "POST",

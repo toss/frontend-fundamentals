@@ -30,7 +30,7 @@ async function onLikeClick() {
 
 ::: info
 
-这个 Hook 也可以从 [可读性](./magic-number-readability.md) 的角度来考虑。
+这个 Function 也可以从 [可读性](./magic-number-readability.md) 的角度来考虑。
 
 :::
 

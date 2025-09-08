@@ -8,7 +8,7 @@
 
 ```javascript
 // CSS를 import하면 웹팩이 알아서 처리해요
-import './style.css';
+import "./style.css";
 ```
 
 ## 1. CSS 로더 설치하기
@@ -19,7 +19,7 @@ import './style.css';
 npm install --save-dev style-loader css-loader
 ```
 
-- `css-loader`: CSS 파일을 JavaScript에서 import할 수 있는 형태로 바꿔줘요.  
+- `css-loader`: CSS 파일을 JavaScript에서 import할 수 있는 형태로 바꿔줘요.
 - `style-loader`: 변환된 CSS를 브라우저 실행 시 `<style>` 태그로 만들어 동적으로 삽입해요.
 
 ## 2. 웹팩에 CSS 로더 설정 추가하기
