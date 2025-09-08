@@ -9,7 +9,8 @@ export const ko = defineConfig({
     logo: "/images/ff-symbol.svg",
     nav: nav(),
     editLink: {
-      pattern: "https://github.com/toss/frontend-fundamentals/edit/main/fundamentals/code-quality/:path",
+      pattern:
+        "https://github.com/toss/frontend-fundamentals/edit/main/fundamentals/code-quality/:path",
       text: "GitHub에서 수정하기"
     },
     outline: {
@@ -46,7 +47,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: "좋은 코드를 위한 4가지 기준",
           link: "/code/"
-        },
+        }
       ]
     },
     {
@@ -160,7 +161,6 @@ function sidebar(): DefaultTheme.Sidebar {
     {
       text: "커뮤니티",
       items: [
-
         {
           text: "🏆 명예의 전당",
           link: "/code/community/good-discussions"
@@ -168,7 +168,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: "토론하기",
           link: "/code/dicussions"
-        },
+        }
       ]
     }
   ];

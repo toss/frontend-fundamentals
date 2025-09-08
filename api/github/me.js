@@ -1,27 +1,27 @@
 export default async function handler(req, res) {
   const { method } = req;
 
-  if (method !== 'GET') {
-    return res.status(405).json({ error: 'Method not allowed' });
+  if (method !== "GET") {
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
   const authHeader = req.headers.authorization;
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return res.status(401).json({ error: 'Authorization token required' });
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).json({ error: "Authorization token required" });
   }
 
-  const token = authHeader.replace('Bearer ', '');
+  const token = authHeader.replace("Bearer ", "");
 
   try {
-    const userResponse = await fetch('https://api.github.com/user', {
+    const userResponse = await fetch("https://api.github.com/user", {
       headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/vnd.github.v3+json',
-      },
+        Authorization: `Bearer ${token}`,
+        Accept: "application/vnd.github.v3+json"
+      }
     });
 
     if (!userResponse.ok) {
-      return res.status(401).json({ error: 'Invalid or expired token' });
+      return res.status(401).json({ error: "Invalid or expired token" });
     }
 
     const userData = await userResponse.json();
@@ -34,10 +34,10 @@ export default async function handler(req, res) {
       bio: userData.bio,
       public_repos: userData.public_repos,
       followers: userData.followers,
-      following: userData.following,
+      following: userData.following
     });
   } catch (error) {
-    console.error('User fetch error:', error);
-    return res.status(500).json({ error: 'Failed to fetch user information' });
+    console.error("User fetch error:", error);
+    return res.status(500).json({ error: "Failed to fetch user information" });
   }
 }

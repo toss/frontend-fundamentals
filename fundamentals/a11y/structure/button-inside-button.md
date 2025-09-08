@@ -21,7 +21,9 @@
 Button 컴포넌트가 `<a>` 태그를 렌더링할 수 있도록 옵션을 제공하세요.
 
 ```jsx
-<Button as="a" href="/go-to">확인했어요.</Button>
+<Button as="a" href="/go-to">
+  확인했어요.
+</Button>
 ```
 
 ## 문제 2: 버튼 안에 들어간 또 다른 버튼
@@ -37,7 +39,7 @@ UI 구성상 다음과 같이 버튼처럼 보이는 카드 안에 또 다른 �
 ```jsx
 <button>
   서비스 검토 관리
-  <button aria-label="삭제" onClick={event => event.stopPropagation()}>
+  <button aria-label="삭제" onClick={(event) => event.stopPropagation()}>
     x
   </button>
 </button>
@@ -56,7 +58,7 @@ UI 구성상 다음과 같이 버튼처럼 보이는 카드 안에 또 다른 �
   role="listitem"
   aria-label="서비스 검토 관리"
 >
-  <button 
+  <button
     className="detail-button"
     style="position: absolute; inset: 0; opacity: 0"
   >
@@ -77,6 +79,7 @@ UI 구성상 다음과 같이 버튼처럼 보이는 카드 안에 또 다른 �
   outline: 2px solid blue;
 }
 ```
+
 :::
 
 ## 이런 구조가 왜 문제가 될까요?
@@ -105,22 +108,20 @@ UI 구성상 다음과 같이 버튼처럼 보이는 카드 안에 또 다른 �
 
 다음 요소들은 모두 상호작용 요소예요. 이 중 하나를 포함하는 요소 안에는 또 다른 상호작용 요소를 넣을 수 없어요.
 
-| 요소 | 조건 |
-|------|------|
-| `<a>` | - |
-| `<audio>` | controls 속성이 있는 경우 |
-| `<button>` | - |
-| `<details>` | - |
-| `<embed>` | - |
-| `<iframe>` | - |
-| `<img>` | usemap 속성이 있는 경우 |
-| `<input>` | type 속성이 Hidden state가 아닌 경우 |
-| `<keygen>` | - |
-| `<label>` | - |
-| `<menu>` | type 속성이 toolbar state인 경우 |
-| `<object>` | usemap 속성이 있는 경우 |
-| `<select>` | - |
-| `<textarea>` | - |
-| `<video>` | controls 속성이 있는 경우 |
-
-
+| 요소         | 조건                                 |
+| ------------ | ------------------------------------ |
+| `<a>`        | -                                    |
+| `<audio>`    | controls 속성이 있는 경우            |
+| `<button>`   | -                                    |
+| `<details>`  | -                                    |
+| `<embed>`    | -                                    |
+| `<iframe>`   | -                                    |
+| `<img>`      | usemap 속성이 있는 경우              |
+| `<input>`    | type 속성이 Hidden state가 아닌 경우 |
+| `<keygen>`   | -                                    |
+| `<label>`    | -                                    |
+| `<menu>`     | type 속성이 toolbar state인 경우     |
+| `<object>`   | usemap 속성이 있는 경우              |
+| `<select>`   | -                                    |
+| `<textarea>` | -                                    |
+| `<video>`    | controls 속성이 있는 경우            |

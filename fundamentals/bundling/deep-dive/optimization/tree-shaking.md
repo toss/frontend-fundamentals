@@ -38,6 +38,7 @@ ESM은 `import`와 `export` 구문으로 모듈 간의 관계를 분석해 의�
 
   math = {}; // Error
   ```
+
 - `import` 및 `export` 구문은 항상 파일의 최상단에 위치해야 해요
   ESM에서는 `import`와 `export`가 코드가 실행되기 전에 정적으로 분석되므로, 실행 도중 동적으로 평가될 수 없어요.
   따라서 조건문 안에서 import를 사용할 수 없으며, 항상 최상단에 위치해야 해요.
@@ -94,7 +95,7 @@ if (SOME_CONDITION) {
 import { deepEqual } from "lodash";
 ```
 
-하지만 `lodash`는 CJS 방식으로 작성돼 트리셰이킹이 잘 적용되지 않아요. 
+하지만 `lodash`는 CJS 방식으로 작성돼 트리셰이킹이 잘 적용되지 않아요.
 결과적으로 `deepEqual` 외에도 `lodash`의 모든 코드가 번들에 포함될 수 있어요.
 
 이 문제를 해결하려면 `lodash` 대신 ESM을 지원하는 `es-toolkit`을 사용해야 해요.
@@ -144,7 +145,7 @@ Object.defineProperty(user, "name", {
     console.log("이름이 뭐예요?");
     this._name = this._name ? this._name + "!" : "Hany"; // 값을 변경하는 부작용 발생
     return this._name;
-  },
+  }
 });
 
 console.log(user.name); // "이름이 뭐에요?" 출력 후 "Hany"
@@ -173,7 +174,7 @@ const user = {
   get name() {
     console.log("이름이 뭐예요?");
     return this._name; // 값을 변경하지 않고 그대로 반환
-  },
+  }
 };
 
 console.log(user.name); // "이름이 뭐예요?" 출력 후 "Hany"
@@ -234,8 +235,6 @@ const Icon = /* @__PURE__ */ React.createElement(...);
 
 이렇게 설정하면, 번들러는 사용되지 않는 모든 파일을 안전하게 제거할 수 있어요.
 
-이 설정은 CSS 파일과 특정 자바스크립트 파일이 제거되지 않도록 명시하는 방식이에요. 예를 들어, `global.js` 파일이 전역 변수를 설정하거나 애플리케이션의 초기화를 담당하는 경우, 트리셰이킹 과정에서 실수로 제거되지 않도록 보호할 수 있어요.
-
 ### 특정 파일이나 디렉토리를 제거하지 않도록 설정하기
 
 ```json{3}
@@ -244,6 +243,8 @@ const Icon = /* @__PURE__ */ React.createElement(...);
   "sideEffects": ["*.css", "./src/global.js"]
 }
 ```
+
+이 설정은 CSS 파일과 특정 자바스크립트 파일이 제거되지 않도록 명시하는 방식이에요. 예를 들어, `global.js` 파일이 전역 변수를 설정하거나 애플리케이션의 초기화를 담당하는 경우, 트리셰이킹 과정에서 실수로 제거되지 않도록 보호할 수 있어요.
 
 이렇게 필요한 파일을 지정하면, 트리셰이킹의 효과를 유지하면서도 필수적인 코드가 번들에서 빠지는 문제를 방지할 수 있어요. 이로써 빌드 성능을 최적화할 수 있어요.
 
@@ -257,35 +258,37 @@ const Icon = /* @__PURE__ */ React.createElement(...);
 == Webpack
 
 **설치 방법**
+
 ```bash
 npm install --save-dev terser-webpack-plugin
 ```
 
 **설정 예시**
+
 ```js
 // webpack.config.js
-const TerserPlugin = require('terser-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   optimization: {
     minimize: true,
-    minimizer: [new TerserPlugin()],
-  },
+    minimizer: [new TerserPlugin()]
+  }
 };
 ```
 
 == Vite
 
-
 **설정 예시**
+
 ```js
 // vite.config.js
-import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
 
 export default defineConfig({
   build: {
-    minify: 'esbuild',
-  },
+    minify: "esbuild"
+  }
 });
 ```
 

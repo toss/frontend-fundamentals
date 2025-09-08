@@ -1,5 +1,5 @@
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   margin: 0;
   padding: 0;
   display: flex;
@@ -46,4 +46,4 @@ h1 {
 .emoji-name {
   font-size: 1.2rem;
   color: #555;
-} 
+}

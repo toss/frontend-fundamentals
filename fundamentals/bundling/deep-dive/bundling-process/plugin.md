@@ -11,21 +11,20 @@
 
 ```tsx
 // webpack.config.js
-const { HotModuleReplacementPlugin, DefinePlugin } = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+const { HotModuleReplacementPlugin, DefinePlugin } = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: "./src/index.html"
     }),
     new HotModuleReplacementPlugin(),
     new DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production'),
-      VERSION: JSON.stringify('1.0.0'),
-    }),
-  ],
+      "process.env.NODE_ENV": JSON.stringify("production"),
+      VERSION: JSON.stringify("1.0.0")
+    })
+  ]
 };
 ```
 
@@ -33,26 +32,25 @@ module.exports = {
 
 ```ts
 // vite.config.js
-import { defineConfig } from 'vite';
-import { createHtmlPlugin } from 'vite-plugin-html';
+import { defineConfig } from "vite";
+import { createHtmlPlugin } from "vite-plugin-html";
 
 export default defineConfig({
   plugins: [
     createHtmlPlugin({
       minify: true,
-      entry: 'src/index.tsx',
-      template: 'src/index.html',
-    }),
+      entry: "src/index.tsx",
+      template: "src/index.html"
+    })
   ],
   define: {
-    'process.env.NODE_ENV': JSON.stringify('production'),
-    VERSION: JSON.stringify('1.0.0'),
-  },
+    "process.env.NODE_ENV": JSON.stringify("production"),
+    VERSION: JSON.stringify("1.0.0")
+  }
 });
 ```
 
 :::
-
 
 ## 주요 플러그인
 
@@ -117,7 +115,7 @@ class HtmlBuildPlugin {
 
       compilation.assets["index.html"] = {
         source: () => htmlContent,
-        size: () => htmlContent.length,
+        size: () => htmlContent.length
       };
 
       // 다음 hook 진행

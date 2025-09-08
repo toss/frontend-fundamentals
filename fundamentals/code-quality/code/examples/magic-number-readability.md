@@ -36,7 +36,7 @@ async function onLikeClick() {
 
 ::: info
 
-이 Hook은 [응집도](./magic-number-cohesion.md) 관점으로도 볼 수 있어요.
+이 함수는 [응집도](./magic-number-cohesion.md) 관점으로도 볼 수 있어요.
 
 :::
 

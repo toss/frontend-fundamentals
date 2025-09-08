@@ -19,7 +19,7 @@
 웹팩을 사용하려면 Node.js가 필요해요. 터미널에서 다음 명령어로 Node.js 및 npm이 설치되어 있는지 확인해 보세요. Node.js 버전은 22 이상을 추천해요.
 
 ```bash
-$ node -v 
+$ node -v
 # 명령어를 입력했을 때 v22.13.0과 같은 버전명이 보이면 설치된 거예요.
 
 $ npm -v
@@ -46,7 +46,7 @@ Node.js 기반 프로젝트의 '설계도'라고 생각하면 돼요. 이 프로
 - 설치된 패키지 목록 (dependencies)
 - 실행 스크립트 (예: npm run dev)
 - 저자 정보, 라이선스 등
-:::
+  :::
 
 ## 웹팩 설치하기
 
@@ -68,14 +68,14 @@ $ npm install --save-dev webpack webpack-cli
 먼저 프로젝트 루트에 `webpack.config.js` 이름의 파일을 생성하고 다음과 같이 작성해 주세요. 이 설정 파일을 보고 웹팩은 `main.js` 파일을 번들링해서 `bundle.js` 파일로 만들어요.
 
 ```javascript
-const path = require('path');
+const path = require("path");
 
 module.exports = {
-  entry: './main.js', // 어떤 파일을 진입점으로 번들링할지
+  entry: "./main.js", // 어떤 파일을 진입점으로 번들링할지
   output: {
-    filename: 'bundle.js', // 번들로 만들어질 파일 이름
-    path: path.resolve(__dirname, 'dist'), // 번들 파일이 어디에 저장될지
-  },
+    filename: "bundle.js", // 번들로 만들어질 파일 이름
+    path: path.resolve(__dirname, "dist") // 번들 파일이 어디에 저장될지
+  }
 };
 ```
 
@@ -96,7 +96,17 @@ $ npx webpack
 `/dist/bundle.js` 를 열어보면 우리가 `main.js`에 적었던 코드가 한 줄로 압축되고, 변수명이 `t`, `e`같은 짧은 이름으로 바뀐걸 볼 수 있어요. 이렇게 웹팩은 추가 설정을 하지 않아도 기본적으로 코드를 최적화 해줘요.
 
 ```js
-document.addEventListener("DOMContentLoaded",(function(){const t=new Date,e=dateFns.format(t,"MMMM d, yyyy");document.getElementById("dateDisplay").textContent=e,function(){const t=Math.floor(Math.random()*emojis.length),e=emojis[t];document.getElementById("emojiDisplay").textContent=e.icon,document.getElementById("emojiName").textContent=e.name}()}));
+document.addEventListener("DOMContentLoaded", function () {
+  const t = new Date(),
+    e = dateFns.format(t, "MMMM d, yyyy");
+  ((document.getElementById("dateDisplay").textContent = e),
+    (function () {
+      const t = Math.floor(Math.random() * emojis.length),
+        e = emojis[t];
+      ((document.getElementById("emojiDisplay").textContent = e.icon),
+        (document.getElementById("emojiName").textContent = e.name));
+    })());
+});
 ```
 
 첫 번째 번들 파일을 만든 것, 축하해요! 🥳
@@ -166,7 +176,7 @@ You can also set it to 'none' to disable any default behavior.
 ```
 
 이 경고는 우리가 웹팩 설정 파일에 `mode`를 추가하지 않아서, 웹팩이 기본값인 프로덕션(`production`) 모드로 빌드했다는 뜻이예요.
- 
+
 웹팩은 크게 세 가지 모드를 지원해요. `mode`를 명시하면 개발(`development`)과 배포(`production`) 환경에 맞는 기본 설정이 자동으로 적용돼서, 경고도 사라지고 환경에 맞는 최적화도 더 잘 이뤄져요. 각각을 좀 더 자세히 살펴볼게요.
 
 - `development`: 디버깅이 쉬운 환경을 제공해요. 소스맵이 기본으로 포함되고, 최소한의 압축(공백 제거, 변수명 단순화 등)만 적용돼요.
@@ -178,16 +188,15 @@ You can also set it to 'none' to disable any default behavior.
 ```javascript
 // webpack.config.js
 module.exports = {
-  mode: 'development',
+  mode: "development"
   // 기존과 동일
 };
 ```
 
 다시 빌드를 해보면 경고 문장이 사라지는 걸 볼 수 있어요.
 
-
 ## 다음 단계
 
 이제 웹팩을 사용해서 첫 번째 번들을 만들었어요! 아직 단순한 설정이지만, 앞으로 더 복잡한 애플리케이션을 구축하는 기초가 될 거예요.
 
-다음 단계에서는 코드를 더 효율적으로 구조화하고, CDN 대신 npm으로 외부 라이브러리를 관리하는 방법을 배워볼게요. 
+다음 단계에서는 코드를 더 효율적으로 구조화하고, CDN 대신 npm으로 외부 라이브러리를 관리하는 방법을 배워볼게요.

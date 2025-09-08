@@ -1,6 +1,6 @@
 # 같은 이름의 요소에는 설명 추가하기
 
-같은 이름의 버튼이 여러 번 등장하는 화면이라면 사용자(특히 스크린 리더 사용자)는 각각의 버튼이 어떤 항목과 연결되는지 알 수 있도록 처리해야 해요. 
+같은 이름의 버튼이 여러 번 등장하는 화면이라면 사용자(특히 스크린 리더 사용자)는 각각의 버튼이 어떤 항목과 연결되는지 알 수 있도록 처리해야 해요.
 
 예를 들어 아래와 같은 구성에서 버튼 이름이 모두 "선택"이라면, 어떤 항목을 선택하는 버튼인지 알기 어렵기 때문에 **명확한 맥락을 함께 제공해야 해요.**
 
@@ -75,7 +75,6 @@
 가능하면 **시각적 텍스트를 포함한 문장으로 `aria-label`을 작성**해 주세요. 예를 들어 "종이를 사용할 경우" 대신 "종이를 선택" 또는 "선택 - 연필"처럼요.
 :::
 
-
 ### 2. 리스트 마크업과 레이블 연결하기
 
 `<li>` 같은 리스트 마크업에 제목 역할의 텍스트를 `aria-labelledby`로 연결해, 항목별로 어떤 버튼인지 구분할 수 있도록 해요.
@@ -125,7 +124,9 @@
         <div>종이로 이것 저것 적어보아요.</div>
       </div>
     </div>
-    <button id="paper-button" aria-labelledby="paper-title paper-button">선택</button>
+    <button id="paper-button" aria-labelledby="paper-title paper-button">
+      선택
+    </button>
   </li>
   <li aria-labelledby="pencil-title">
     <div>
@@ -135,7 +136,9 @@
         <div>연필을 잘 깎아볼까요.</div>
       </div>
     </div>
-    <button id="pencil-button" aria-labelledby="pencil-title pencil-button">선택</button>
+    <button id="pencil-button" aria-labelledby="pencil-title pencil-button">
+      선택
+    </button>
   </li>
 </ul>
 ```
@@ -146,6 +149,7 @@
 스크린 리더에서는 "종이를 사용할 경우 선택, 버튼"처럼 들리게 돼요.
 
 ```html
-<button id="paper-button" aria-labelledby="paper-title paper-button">선택</button>
+<button id="paper-button" aria-labelledby="paper-title paper-button">
+  선택
+</button>
 ```
-

@@ -9,7 +9,8 @@ export const ja = defineConfig({
     logo: "/images/ff-symbol.svg",
     nav: nav(),
     editLink: {
-      pattern: "https://github.com/toss/frontend-fundamentals/edit/main/fundamentals/code-quality/:path",
+      pattern:
+        "https://github.com/toss/frontend-fundamentals/edit/main/fundamentals/code-quality/:path",
       text: "GitHubで修正する"
     },
     outline: {
@@ -161,7 +162,7 @@ function sidebar(): DefaultTheme.Sidebar {
           ]
         }
       ]
-    },
+    }
   ];
 }
 
