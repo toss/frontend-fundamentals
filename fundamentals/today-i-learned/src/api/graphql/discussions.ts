@@ -22,8 +22,14 @@ export const GET_DISCUSSIONS_QUERY = `
             login
             avatarUrl
           }
-          reactions {
+          reactions(first: 50) {
             totalCount
+            nodes {
+              content
+              user {
+                login
+              }
+            }
           }
           comments {
             totalCount
@@ -56,8 +62,14 @@ export const CREATE_DISCUSSION_MUTATION = `
           login
           avatarUrl
         }
-        reactions {
+        reactions(first: 50) {
           totalCount
+          nodes {
+            content
+            user {
+              login
+            }
+          }
         }
         comments {
           totalCount
@@ -86,8 +98,14 @@ export const UPDATE_DISCUSSION_MUTATION = `
           login
           avatarUrl
         }
-        reactions {
+        reactions(first: 50) {
           totalCount
+          nodes {
+            content
+            user {
+              login
+            }
+          }
         }
         comments {
           totalCount
@@ -149,11 +167,26 @@ export const GET_INFINITE_DISCUSSIONS_QUERY = `
             login
             avatarUrl
           }
-          reactions {
+          reactions(first: 50) {
             totalCount
+            nodes {
+              content
+              user {
+                login
+              }
+            }
           }
-          comments {
+          comments(first: 1) {
             totalCount
+            nodes {
+              id
+              body
+              createdAt
+              author {
+                login
+                avatarUrl
+              }
+            }
           }
           category {
             name
@@ -232,11 +265,26 @@ export const SEARCH_DISCUSSIONS_QUERY = `
             login
             avatarUrl
           }
-          reactions {
+          reactions(first: 50) {
             totalCount
+            nodes {
+              content
+              user {
+                login
+              }
+            }
           }
-          comments {
+          comments(first: 1) {
             totalCount
+            nodes {
+              id
+              body
+              createdAt
+              author {
+                login
+                avatarUrl
+              }
+            }
           }
           category {
             name
@@ -292,8 +340,14 @@ export const GET_DISCUSSION_DETAIL_QUERY = `
           login
           avatarUrl
         }
-        reactions {
+        reactions(first: 50) {
           totalCount
+          nodes {
+            content
+            user {
+              login
+            }
+          }
         }
         category {
           name
@@ -313,8 +367,14 @@ export const GET_DISCUSSION_DETAIL_QUERY = `
               login
               avatarUrl
             }
-            reactions {
+            reactions(first: 50) {
               totalCount
+              nodes {
+                content
+                user {
+                  login
+                }
+              }
             }
             replies(first: 10) {
               totalCount
@@ -326,8 +386,14 @@ export const GET_DISCUSSION_DETAIL_QUERY = `
                   login
                   avatarUrl
                 }
-                reactions {
+                reactions(first: 50) {
                   totalCount
+                  nodes {
+                    content
+                    user {
+                      login
+                    }
+                  }
                 }
               }
             }
@@ -352,8 +418,14 @@ export const ADD_DISCUSSION_COMMENT_MUTATION = `
           login
           avatarUrl
         }
-        reactions {
+        reactions(first: 50) {
           totalCount
+          nodes {
+            content
+            user {
+              login
+            }
+          }
         }
         replies(first: 10) {
           totalCount
@@ -365,8 +437,64 @@ export const ADD_DISCUSSION_COMMENT_MUTATION = `
               login
               avatarUrl
             }
-            reactions {
+            reactions(first: 50) {
               totalCount
+              nodes {
+                content
+                user {
+                  login
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const ADD_DISCUSSION_COMMENT_REPLY_MUTATION = `
+  mutation AddDiscussionCommentReply($discussionId: ID!, $replyToId: ID!, $body: String!) {
+    addDiscussionComment(input: {
+      discussionId: $discussionId
+      replyToId: $replyToId
+      body: $body
+    }) {
+      comment {
+        id
+        body
+        createdAt
+        author {
+          login
+          avatarUrl
+        }
+        reactions(first: 50) {
+          totalCount
+          nodes {
+            content
+            user {
+              login
+            }
+          }
+        }
+        replies(first: 10) {
+          totalCount
+          nodes {
+            id
+            body
+            createdAt
+            author {
+              login
+              avatarUrl
+            }
+            reactions(first: 50) {
+              totalCount
+              nodes {
+                content
+                user {
+                  login
+                }
+              }
             }
           }
         }

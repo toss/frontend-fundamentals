@@ -4,10 +4,11 @@ import type { GitHubComment } from "@/api/remote/discussions";
 interface CommentListProps {
   comments: GitHubComment[];
   onUpvote: (commentId: string) => void;
+  onLike: (commentId: string) => void;
   onReply: (commentId: string, content: string) => void;
 }
 
-export function CommentList({ comments, onUpvote, onReply }: CommentListProps) {
+export function CommentList({ comments, onUpvote, onLike, onReply }: CommentListProps) {
   if (comments.length === 0) {
     return (
       <div className="text-center py-8">
@@ -22,7 +23,7 @@ export function CommentList({ comments, onUpvote, onReply }: CommentListProps) {
     <div className="flex flex-col items-center p-0 gap-6 w-full max-w-[800px]">
       {comments.map((comment, index) => (
         <div key={comment.id} className="w-full">
-          <Comment comment={comment} onUpvote={onUpvote} onReply={onReply} />
+          <Comment comment={comment} onUpvote={onUpvote} onLike={onLike} onReply={onReply} />
 
           {/* Border - 댓글 사이 경계선 */}
           {index < comments.length - 1 && (

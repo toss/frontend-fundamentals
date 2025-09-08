@@ -3,17 +3,15 @@
 import { graphqlRequest } from "../client";
 import { ADD_REACTION_MUTATION, REMOVE_REACTION_MUTATION } from "../graphql/reactions";
 
-export type ReactionContent = "THUMBS_UP" | "HEART" | "HOORAY" | "ROCKET" | "EYES" | "LAUGH";
-
 export interface AddReactionParams {
   discussionId: string;
-  content?: ReactionContent;
+  content?: string;
   accessToken: string;
 }
 
 export interface RemoveReactionParams {
   discussionId: string;
-  content?: ReactionContent;
+  content?: string;
   accessToken: string;
 }
 

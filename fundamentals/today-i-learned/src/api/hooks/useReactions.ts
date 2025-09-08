@@ -4,14 +4,13 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   addReaction,
-  removeReaction,
-  type ReactionContent
+  removeReaction
 } from "@/api/remote/reactions";
 import { DISCUSSIONS_QUERY_KEYS } from "./useDiscussions";
 
 interface ReactionMutationParams {
   discussionId: string;
-  content?: ReactionContent;
+  content?: string;
 }
 
 // 리액션 추가 훅

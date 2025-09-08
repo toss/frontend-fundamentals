@@ -7,12 +7,14 @@ interface PostMoreMenuProps {
   onEdit: () => void;
   onDelete: () => void;
   isLoading?: boolean;
+  isDeleteError?: boolean;
 }
 
 export function PostMoreMenu({
   onEdit,
   onDelete,
-  isLoading = false
+  isLoading = false,
+  isDeleteError = false
 }: PostMoreMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -112,7 +114,7 @@ export function PostMoreMenu({
       <AlertDialog open={isDeleteModalOpen} onOpenChange={setIsDeleteModalOpen}>
         <AlertDialog.Content
           showCloseButton
-          className="w-[343px] h-[230px] bg-[#FCFCFC] rounded-[16px] flex flex-col items-center p-6 gap-8"
+          className={`w-[343px] ${isDeleteError ? "h-[270px]" : "h-[230px]"} bg-[#FCFCFC] rounded-[16px] flex flex-col items-center p-6 gap-8`}
         >
           <div className="flex flex-col items-center gap-6 text-center">
             <h2 className="font-bold text-[22px] leading-[130%] tracking-[-0.4px] text-[#0F0F0F]">
@@ -125,13 +127,22 @@ export function PostMoreMenu({
             </p>
           </div>
 
-          <button
-            onClick={handleConfirmDelete}
-            disabled={isLoading}
-            className="w-24 h-[46px] bg-[#0F0F0F] rounded-[200px] font-bold text-[14px] leading-[130%] tracking-[-0.4px] text-[#FCFCFC] hover:bg-black/90 transition-colors flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isLoading ? "삭제중..." : "삭제하기"}
-          </button>
+          <div className="flex flex-col items-center gap-3">
+            <button
+              onClick={handleConfirmDelete}
+              disabled={isLoading}
+              className="w-24 h-[46px] bg-[#0F0F0F] rounded-[200px] font-bold text-[14px] leading-[130%] tracking-[-0.4px] text-[#FCFCFC] hover:bg-black/90 transition-colors flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isLoading ? "삭제중..." : "삭제하기"}
+            </button>
+
+            {/* 에러 메시지 */}
+            {isDeleteError && (
+              <p className="text-red-500 text-sm font-medium">
+                삭제에 실패했습니다. 네트워크 상태를 확인해주세요.
+              </p>
+            )}
+          </div>
         </AlertDialog.Content>
       </AlertDialog>
     </div>

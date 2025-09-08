@@ -92,6 +92,7 @@ export function TimelinePage() {
                       avatarUrl: user.avatar_url
                     }}
                     onSubmit={handlePostSubmit}
+                    isError={createPostMutation.isError}
                   />
                 </div>
 

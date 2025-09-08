@@ -1,68 +1,39 @@
-import { ChevronUp, MessageCircle } from "lucide-react";
+import { ChevronUp, MessageCircle, Heart } from "lucide-react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { CommentInput } from "./CommentInput";
 import type { GitHubComment } from "@/api/remote/discussions";
 import { formatNumber, formatTimeAgo } from "../utils/formatters";
+import { getHeartAndUpvoteCounts, getUserReactionStates } from "@/utils/reactions";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface CommentProps {
   comment: GitHubComment;
   onUpvote: (commentId: string) => void;
+  onLike: (commentId: string) => void;
   onReply: (commentId: string, content: string) => void;
   depth?: number;
 }
+
 function CommentContainer({
   children,
-  depth = 0,
-  hasReplies = false
+  depth = 0
 }: {
   children: React.ReactNode;
   depth?: number;
-  hasReplies?: boolean;
 }) {
   if (depth === 0) {
-    // 최상위 댓글 - 답글이 있으면 세로선 추가
-    if (hasReplies) {
-      return (
-        <div className="flex flex-col items-start px-8 w-full">
-          <div className="flex flex-row justify-center items-start p-0 gap-4 w-full max-w-[736px]">
-            <div className="flex flex-row items-start pt-4 gap-2.5 w-0 self-stretch min-h-full">
-              <div
-                className="w-px h-full border-l border-[rgba(201,201,201,0.4)]"
-                style={{
-                  minHeight: "160px"
-                }}
-              />
-            </div>
-            <div className="flex flex-col items-start py-6 gap-6 flex-1 w-full max-w-[720px]">
-              {children}
-            </div>
-          </div>
-        </div>
-      );
-    }
-
-    // 답글이 없는 최상위 댓글
+    // 최상위 댓글
     return (
-      <div className="flex flex-col items-start px-8 w-full">{children}</div>
+      <div className="flex flex-col items-start px-8 py-6 w-full">
+        {children}
+      </div>
     );
   }
 
-  // 대댓글 - Comment with nested structure
+  // 대댓글 - 동일한 패딩에 border만 추가
   return (
-    <div className="flex flex-col items-start px-8 w-full">
-      <div className="flex flex-row justify-center items-start p-0 gap-4 w-full max-w-[736px]">
-        <div className="flex flex-row items-start pt-4 gap-2.5 w-0 self-stretch min-h-full">
-          <div
-            className="w-px h-full border-l border-[rgba(201,201,201,0.4)]"
-            style={{
-              minHeight: "160px"
-            }}
-          />
-        </div>
-        <div className="flex flex-col items-start py-6 gap-6 flex-1 w-full max-w-[720px]">
-          {children}
-        </div>
-      </div>
+    <div className="flex flex-col items-start px-8 py-6 w-full ml-8 pl-4 border-l-2 border-gray-200">
+      {children}
     </div>
   );
 }
@@ -112,26 +83,72 @@ function CommentBody({ content }: { content: string }) {
 
 function CommentActions({
   upvotes,
+  likes,
   replies,
   onUpvote,
-  onReply
+  onLike,
+  onReply,
+  hasUserUpvoted,
+  hasUserLiked,
+  depth = 0
 }: {
   upvotes: number;
+  likes: number;
   replies: number;
   onUpvote: () => void;
+  onLike: () => void;
   onReply: () => void;
+  hasUserUpvoted?: boolean;
+  hasUserLiked?: boolean;
+  depth?: number;
 }) {
   return (
-    <div className="flex flex-row items-start py-2 gap-4 w-[180px] h-9">
+    <div className={`flex flex-row items-start py-2 gap-4 h-9 ${depth === 0 ? 'w-[250px]' : 'w-[180px]'}`}>
+      {depth === 0 && (
+        <button
+          onClick={onUpvote}
+          className={`flex flex-row items-center gap-1.5 hover:opacity-70 transition-all ${
+            hasUserUpvoted ? "text-gray-600" : ""
+          }`}
+        >
+          <div className="w-5 h-5">
+            <ChevronUp 
+              className={`w-full h-full stroke-[1.67px] ${
+                hasUserUpvoted ? "stroke-[#979797]" : "stroke-black/40"
+              }`} 
+            />
+          </div>
+          <span 
+            className={`font-semibold text-base leading-[130%] tracking-tight ${
+              hasUserUpvoted ? "text-[#979797]" : "text-black/40"
+            }`}
+          >
+            {formatNumber(upvotes)}
+          </span>
+        </button>
+      )}
+
       <button
-        onClick={onUpvote}
-        className="flex flex-row items-center gap-1.5 hover:opacity-70 transition-opacity"
+        onClick={onLike}
+        className={`flex flex-row items-center gap-1.5 hover:opacity-70 transition-all ${
+          hasUserLiked ? "text-gray-600" : ""
+        }`}
       >
         <div className="w-5 h-5">
-          <ChevronUp className="w-3 h-3 stroke-black/40 stroke-2" />
+          <Heart 
+            className={`w-full h-full stroke-[1.67px] ${
+              hasUserLiked
+                ? "stroke-[#979797] fill-[#656565]"
+                : "stroke-black/40 fill-none"
+            }`} 
+          />
         </div>
-        <span className="font-semibold text-base leading-[130%] tracking-tight text-black/40">
-          {formatNumber(upvotes)}
+        <span 
+          className={`font-semibold text-base leading-[130%] tracking-tight ${
+            hasUserLiked ? "text-[#979797]" : "text-black/40"
+          }`}
+        >
+          {formatNumber(likes)}
         </span>
       </button>
 
@@ -140,7 +157,7 @@ function CommentActions({
         className="flex flex-row items-center gap-1.5 hover:opacity-70 transition-opacity"
       >
         <div className="w-5 h-5">
-          <MessageCircle className="w-4 h-4 stroke-black/40 stroke-2" />
+          <MessageCircle className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
         </div>
         <span className="font-semibold text-base leading-[130%] tracking-tight text-black/40">
           {replies > 0 ? formatNumber(replies) : 0}
@@ -161,10 +178,12 @@ function useCommentInteraction() {
 export function Comment({
   comment,
   onUpvote,
+  onLike,
   onReply,
   depth = 0
 }: CommentProps) {
   const { hideReplyInput } = useCommentInteraction();
+  const { user } = useAuth();
 
   const handleReplySubmit = (content: string) => {
     onReply(comment.id, content);
@@ -172,15 +191,17 @@ export function Comment({
   };
 
   const handleUpvote = () => onUpvote(comment.id);
+  const handleLike = () => onLike(comment.id);
+
+  // Use utility functions to get reaction counts and user states
+  const { heartCount, upvoteCount } = getHeartAndUpvoteCounts(comment.reactions);
+  const { hasLiked: hasUserLiked, hasUpvoted: hasUserUpvoted } = getUserReactionStates(comment.reactions, user?.login);
 
   if (depth === 0) {
     return (
       <>
         <CommentContainer
           depth={depth}
-          hasReplies={
-            !!(comment.replies?.nodes && comment.replies.nodes.length > 0)
-          }
         >
           <div className="flex flex-row items-center p-0 gap-4 w-full h-10">
             <CommentHeader comment={comment} />
@@ -189,10 +210,15 @@ export function Comment({
           <div className="flex flex-col items-start py-6 gap-6 w-full">
             <CommentBody content={comment.body} />
             <CommentActions
-              upvotes={comment.reactions.totalCount}
+              upvotes={upvoteCount}
+              likes={heartCount}
               replies={comment.replies?.totalCount || 0}
               onUpvote={handleUpvote}
+              onLike={handleLike}
               onReply={() => {}}
+              hasUserUpvoted={hasUserUpvoted}
+              hasUserLiked={hasUserLiked}
+              depth={depth}
             />
           </div>
         </CommentContainer>
@@ -203,10 +229,22 @@ export function Comment({
                 key={reply.id}
                 comment={reply}
                 onUpvote={onUpvote}
+                onLike={onLike}
                 onReply={onReply}
                 depth={depth + 1}
               />
             ))}
+          </div>
+        )}
+
+        {depth === 0 && (
+          <div className="mt-4">
+            <CommentInput
+              onSubmit={handleReplySubmit}
+              placeholder="답글을 작성해보세요..."
+              isReply={true}
+              parentId={comment.id}
+            />
           </div>
         )}
       </>
@@ -218,13 +256,20 @@ export function Comment({
     <>
       <CommentContainer depth={depth}>
         <CommentHeader comment={comment} />
-        <CommentBody content={comment.body} />
-        <CommentActions
-          upvotes={comment.reactions.totalCount}
-          replies={comment.replies?.totalCount || 0}
-          onUpvote={handleUpvote}
-          onReply={() => {}}
-        />
+        <div className="flex flex-col items-start py-6 gap-6 w-full">
+          <CommentBody content={comment.body} />
+          <CommentActions
+            upvotes={upvoteCount}
+            likes={heartCount}
+            replies={comment.replies?.totalCount || 0}
+            onUpvote={handleUpvote}
+            onLike={handleLike}
+            onReply={() => {}}
+            hasUserUpvoted={hasUserUpvoted}
+            hasUserLiked={hasUserLiked}
+            depth={depth}
+          />
+        </div>
       </CommentContainer>
 
       {comment.replies?.nodes && comment.replies.nodes.length > 0 && (
@@ -234,21 +279,13 @@ export function Comment({
               key={reply.id}
               comment={reply}
               onUpvote={onUpvote}
+              onLike={onLike}
               onReply={onReply}
               depth={depth + 1}
             />
           ))}
         </div>
       )}
-
-      <div className="mt-4">
-        <CommentInput
-          onSubmit={handleReplySubmit}
-          placeholder="댓글을 작성해보세요..."
-          isReply={true}
-          parentId={comment.id}
-        />
-      </div>
     </>
   );
 }

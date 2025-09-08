@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ExternalLink } from "lucide-react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { useWeeklyTopDiscussions } from "@/api/hooks/useDiscussions";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
@@ -39,11 +38,6 @@ function PopularPostItem({
     onPostClick(post.id, post);
   };
 
-  const handleExternalClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    navigate(`/post/${post.id}`);
-  };
-
   return (
     <div className="flex items-start gap-3">
       <div className="flex items-center pt-2.5">
@@ -57,13 +51,6 @@ function PopularPostItem({
         onClick={handleClick}
         className="flex-1 flex flex-col justify-end py-5 px-6 bg-white border border-gray-300/50 rounded-2xl transition-all duration-200 text-left group min-h-[136px] relative"
       >
-        <button
-          onClick={handleExternalClick}
-          className="absolute top-3 right-3 p-1 text-black/40 hover:text-black/60 transition-colors"
-        >
-          <ExternalLink size={14} />
-        </button>
-
         <div className="flex items-center gap-1.5 mb-3">
           <Avatar
             size="20"

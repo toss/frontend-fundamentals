@@ -5,10 +5,13 @@ import type { GitHubDiscussion } from "@/api/remote/discussions";
 import {
   useDiscussionDetail,
   useAddDiscussionComment,
+  useAddDiscussionCommentReply,
   useToggleDiscussionReaction
 } from "@/api/hooks/useDiscussions";
 import { useAuth } from "@/contexts/AuthContext";
 import { CommentList } from "@/pages/timeline/components/CommentList";
+import { hasUserReacted, getHeartAndUpvoteCounts, getUserReactionStates } from "@/utils/reactions";
+import type { GitHubComment } from "@/api/remote/discussions";
 
 interface PostDetailProps {
   discussion: GitHubDiscussion;
@@ -59,10 +62,23 @@ export function PostDetail({
   const { data: discussionDetail, isLoading: isDetailLoading } =
     useDiscussionDetail(discussion.id);
   const addCommentMutation = useAddDiscussionComment();
+  const addCommentReplyMutation = useAddDiscussionCommentReply();
   const toggleReactionMutation = useToggleDiscussionReaction();
 
   const actualDiscussion = discussionDetail || discussion;
   const comments = discussionDetail?.comments?.nodes || [];
+
+  // Helper function to find comment by ID (including nested replies)
+  const findCommentById = (comments: GitHubComment[], id: string): GitHubComment | null => {
+    for (const comment of comments) {
+      if (comment.id === id) return comment;
+      if (comment.replies?.nodes) {
+        const found = findCommentById(comment.replies.nodes, id);
+        if (found) return found;
+      }
+    }
+    return null;
+  };
 
   const authorInfo = {
     src: actualDiscussion.author.avatarUrl,
@@ -87,19 +103,21 @@ export function PostDetail({
   };
 
   const handleReaction = async (type: "like" | "upvote") => {
-    if (!user?.accessToken) {
+    if (!user?.accessToken || !user?.login) {
       return;
     }
 
     try {
       const reactionContent = type === "like" ? "HEART" : "THUMBS_UP";
-      // TODO: 현재 반응 상태를 확인하는 로직 필요
-      const isReacted = false; // 임시값
+      
+      // 클릭 시점의 현재 UI 상태를 기준으로 토글 여부 결정
+      const { hasLiked: currentHasLiked, hasUpvoted: currentHasUpvoted } = getUserReactionStates(actualDiscussion.reactions, user.login);
+      const isCurrentlyReacted = type === "like" ? currentHasLiked : currentHasUpvoted;
 
       await toggleReactionMutation.mutateAsync({
         subjectId: discussion.id,
-        isReacted,
-        content: reactionContent as any
+        isReacted: isCurrentlyReacted,
+        content: reactionContent
       });
 
       // 기존 콜백도 호출 (UI 업데이트용)
@@ -115,35 +133,62 @@ export function PostDetail({
   };
 
   const handleCommentUpvote = async (commentId: string) => {
-    if (!user?.accessToken) {
+    if (!user?.accessToken || !user?.login) {
       return;
     }
 
     try {
+      const comment = findCommentById(comments, commentId);
+      const isCurrentlyReacted = comment ? hasUserReacted(comment.reactions, user.login, "THUMBS_UP") : false;
+
       await toggleReactionMutation.mutateAsync({
         subjectId: commentId,
-        isReacted: false, // TODO: 현재 반응 상태 확인
-        content: "THUMBS_UP" as any
+        isReacted: isCurrentlyReacted,
+        content: "THUMBS_UP"
       });
     } catch (error) {
       console.error("댓글 업보트 실패:", error);
     }
   };
 
-  const handleCommentReply = async (_commentId: string, content: string) => {
+  const handleCommentReply = async (commentId: string, content: string) => {
     if (!user?.accessToken) {
       return;
     }
 
     try {
-      await addCommentMutation.mutateAsync({
+      await addCommentReplyMutation.mutateAsync({
         discussionId: discussion.id,
+        replyToId: commentId,
         body: content
       });
     } catch (error) {
       console.error("댓글 답글 실패:", error);
     }
   };
+
+  const handleCommentLike = async (commentId: string) => {
+    if (!user?.accessToken || !user?.login) {
+      return;
+    }
+
+    try {
+      const comment = findCommentById(comments, commentId);
+      const isCurrentlyReacted = comment ? hasUserReacted(comment.reactions, user.login, "HEART") : false;
+
+      await toggleReactionMutation.mutateAsync({
+        subjectId: commentId,
+        isReacted: isCurrentlyReacted,
+        content: "HEART"
+      });
+    } catch (error) {
+      console.error("댓글 좋아요 실패:", error);
+    }
+  };
+
+  // 현재 사용자의 반응 상태와 개수 계산
+  const { heartCount, upvoteCount } = getHeartAndUpvoteCounts(actualDiscussion.reactions);
+  const { hasLiked: hasUserLiked, hasUpvoted: hasUserUpvoted } = getUserReactionStates(actualDiscussion.reactions, user?.login);
   return (
     <div className="w-full flex flex-col gap-8">
       {/* 헤더: 사용자 정보 */}
@@ -192,27 +237,47 @@ export function PostDetail({
       <div className="flex items-start gap-4 py-2">
         <button
           onClick={() => handleReaction("upvote")}
-          className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
-          disabled={toggleReactionMutation.isPending}
+          className={`flex items-center gap-[6px] hover:opacity-70 transition-all ${
+            hasUserUpvoted ? "text-gray-600" : ""
+          }`}
         >
           <div className="w-5 h-5">
-            <ChevronUp className="w-full h-full stroke-black/40 stroke-[1.67px]" />
+            <ChevronUp 
+              className={`w-full h-full stroke-[1.67px] ${
+                hasUserUpvoted ? "stroke-[#979797]" : "stroke-black/40"
+              }`} 
+            />
           </div>
-          <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-            {formatNumber(actualDiscussion.reactions.totalCount)}
+          <span 
+            className={`font-semibold text-[16px] leading-[130%] tracking-[-0.4px] ${
+              hasUserUpvoted ? "text-[#979797]" : "text-black/40"
+            }`}
+          >
+            {formatNumber(upvoteCount)}
           </span>
         </button>
 
         <button
           onClick={() => handleReaction("like")}
-          className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
-          disabled={toggleReactionMutation.isPending}
+          className={`flex items-center gap-[6px] hover:opacity-70 transition-all ${
+            hasUserLiked ? "text-gray-600" : ""
+          }`}
         >
           <div className="w-5 h-5">
-            <Heart className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
+            <Heart 
+              className={`w-full h-full stroke-[1.67px] ${
+                hasUserLiked
+                  ? "stroke-[#979797] fill-[#656565]"
+                  : "stroke-black/40 fill-none"
+              }`} 
+            />
           </div>
-          <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-            {formatNumber(actualDiscussion.reactions.totalCount)}
+          <span 
+            className={`font-semibold text-[16px] leading-[130%] tracking-[-0.4px] ${
+              hasUserLiked ? "text-[#979797]" : "text-black/40"
+            }`}
+          >
+            {formatNumber(heartCount)}
           </span>
         </button>
 
@@ -260,7 +325,7 @@ export function PostDetail({
               }}
             />
           </div>
-          <div className="flex justify-end">
+          <div className="flex flex-col items-end gap-2">
             <button
               onClick={handleCommentSubmit}
               disabled={!commentText.trim() || addCommentMutation.isPending}
@@ -268,6 +333,13 @@ export function PostDetail({
             >
               {addCommentMutation.isPending ? "작성중..." : "작성하기"}
             </button>
+
+            {/* 에러 메시지 */}
+            {addCommentMutation.isError && (
+              <p className="text-red-500 text-sm font-medium">
+                댓글 작성에 실패했습니다. 네트워크 상태를 확인해주세요.
+              </p>
+            )}
           </div>
         </div>
       )}
@@ -292,6 +364,7 @@ export function PostDetail({
             <CommentList
               comments={comments}
               onUpvote={handleCommentUpvote}
+              onLike={handleCommentLike}
               onReply={handleCommentReply}
             />
           )}

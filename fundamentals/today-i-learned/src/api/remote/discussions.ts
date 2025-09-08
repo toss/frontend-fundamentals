@@ -11,6 +11,7 @@ import {
   GET_MY_CONTRIBUTIONS_QUERY,
   GET_DISCUSSION_DETAIL_QUERY,
   ADD_DISCUSSION_COMMENT_MUTATION,
+  ADD_DISCUSSION_COMMENT_REPLY_MUTATION,
   ADD_DISCUSSION_REACTION_MUTATION,
   REMOVE_DISCUSSION_REACTION_MUTATION
 } from "../graphql/discussions";
@@ -31,9 +32,21 @@ export interface GitHubDiscussion {
   updatedAt: string;
   reactions: {
     totalCount: number;
+    nodes: Array<{
+      content: string;
+      user: {
+        login: string;
+      };
+    }>;
   };
   comments: {
     totalCount: number;
+    nodes?: Array<{
+      id: string;
+      body: string;
+      createdAt: string;
+      author: GitHubAuthor;
+    }>;
   };
   category: {
     name: string;
@@ -407,6 +420,12 @@ export interface GitHubComment {
   author: GitHubAuthor;
   reactions: {
     totalCount: number;
+    nodes?: Array<{
+      content: string;
+      user: {
+        login: string;
+      };
+    }>;
   };
   replies?: {
     totalCount: number;
@@ -472,21 +491,39 @@ export async function addDiscussionComment({
   return comment;
 }
 
+export async function addDiscussionCommentReply({
+  discussionId,
+  replyToId,
+  body,
+  accessToken
+}: {
+  discussionId: string;
+  replyToId: string;
+  body: string;
+  accessToken: string;
+}): Promise<GitHubComment> {
+  const data = await graphqlRequest(
+    ADD_DISCUSSION_COMMENT_REPLY_MUTATION,
+    { discussionId, replyToId, body },
+    accessToken
+  );
+
+  const comment = data.data?.addDiscussionComment?.comment;
+
+  if (!comment) {
+    throw new Error("Failed to add comment reply");
+  }
+
+  return comment;
+}
+
 export async function addDiscussionReaction({
   subjectId,
   content = "THUMBS_UP",
   accessToken
 }: {
   subjectId: string;
-  content?:
-    | "THUMBS_UP"
-    | "THUMBS_DOWN"
-    | "LAUGH"
-    | "HOORAY"
-    | "CONFUSED"
-    | "HEART"
-    | "ROCKET"
-    | "EYES";
+  content?: string;
   accessToken: string;
 }): Promise<{ totalCount: number }> {
   const data = await graphqlRequest(
@@ -512,15 +549,7 @@ export async function removeDiscussionReaction({
   accessToken
 }: {
   subjectId: string;
-  content?:
-    | "THUMBS_UP"
-    | "THUMBS_DOWN"
-    | "LAUGH"
-    | "HOORAY"
-    | "CONFUSED"
-    | "HEART"
-    | "ROCKET"
-    | "EYES";
+  content?: string;
   accessToken: string;
 }): Promise<{ totalCount: number }> {
   const data = await graphqlRequest(

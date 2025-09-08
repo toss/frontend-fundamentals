@@ -21,7 +21,7 @@ export function usePostActions({
 }: UsePostActionsParams = {}) {
   const { mutate: updateDiscussion, isPending: isUpdating } =
     useUpdateDiscussion();
-  const { mutate: deleteDiscussion, isPending: isDeleting } =
+  const { mutate: deleteDiscussion, isPending: isDeleting, isError: isDeleteError } =
     useDeleteDiscussion();
   const { handleApiError } = useErrorHandler();
   const { success: showSuccessToast } = useToast();
@@ -138,6 +138,9 @@ export function usePostActions({
     // 로딩 상태
     isUpdating,
     isDeleting,
-    isLoading: isUpdating || isDeleting
+    isLoading: isUpdating || isDeleting,
+
+    // 에러 상태
+    isDeleteError
   };
 }
