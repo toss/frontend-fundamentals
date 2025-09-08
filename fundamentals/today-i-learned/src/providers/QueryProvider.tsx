@@ -15,7 +15,22 @@ const queryClient = new QueryClient({
           return false;
         }
         return failureCount < 3;
+      },
+      // 네트워크 에러나 서버 에러(5xx)의 경우 Error Boundary로 전파
+      throwOnError: (error) => {
+        if (error instanceof Error) {
+          // 네트워크 에러나 5xx 서버 에러만 Error Boundary로 전파
+          return error.message.includes("NetworkError") || 
+                 error.message.includes("500") ||
+                 error.message.includes("502") ||
+                 error.message.includes("503");
+        }
+        return false;
       }
+    },
+    mutations: {
+      // mutation의 경우 기본적으로 Error Boundary를 사용하지 않음
+      throwOnError: false
     }
   }
 });
