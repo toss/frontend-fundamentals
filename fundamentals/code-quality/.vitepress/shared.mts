@@ -80,6 +80,7 @@ export const shared = defineConfig({
 
     head.push(["meta", { property: "og:title", content: title }]);
     head.push(["meta", { property: "og:description", content: description }]);
+    head.push(["base", { href: "/code-quality/" }]);
 
     return head;
   },
