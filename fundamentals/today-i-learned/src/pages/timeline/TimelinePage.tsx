@@ -9,7 +9,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import type { SortOption } from "@/types";
 import { useCreateDiscussion } from "@/api/hooks/useDiscussions";
 import { useErrorHandler } from "@/hooks/useErrorHandler";
-import { useToast } from "@/components/shared/ui/Toast";
+import { useToast } from "@/contexts/ToastContext";
 
 export function TimelinePage() {
   const { user } = useAuth();

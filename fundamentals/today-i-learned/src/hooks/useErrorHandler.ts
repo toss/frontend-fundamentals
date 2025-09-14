@@ -1,4 +1,4 @@
-import { useToast } from "@/components/shared/ui/Toast";
+import { useToast } from "@/contexts/ToastContext";
 import { ERROR_MESSAGES } from "@/constants";
 import {
   AuthError,

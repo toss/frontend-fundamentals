@@ -38,7 +38,7 @@ export function PostDetailPage() {
 
       {/* 사이드바 */}
       <div className="hidden lg:block w-[350px]">
-        <div className="sticky top-36">
+        <div className="sticky top-[120px] p-[24px]">
           <WeeklyTop5 />
         </div>
       </div>

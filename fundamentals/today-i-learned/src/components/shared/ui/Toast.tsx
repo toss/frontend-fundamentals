@@ -141,7 +141,7 @@ export function Toast({
 }
 
 // Toast manager hook
-interface ToastState {
+export interface ToastState {
   id: string;
   type: ToastType;
   title: string;

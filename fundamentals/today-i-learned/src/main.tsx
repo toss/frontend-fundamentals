@@ -18,6 +18,7 @@ import { PostDetailPage } from "./pages/post/PostDetailPage";
 import { MyPage } from "./pages/profile/MyPage";
 import { TimelinePage } from "./pages/timeline/TimelinePage";
 import { QueryProvider } from "./providers/QueryProvider.tsx";
+import { ToastProvider } from "./contexts/ToastContext";
 
 const RootLayout = () => {
   return (
@@ -80,9 +81,11 @@ if (rootElement) {
         <QueryProvider>
           <AuthProvider>
             <ThemeProvider>
-              <ErrorBoundary>
-                <RouterProvider router={router} />
-              </ErrorBoundary>
+              <ToastProvider>
+                <ErrorBoundary>
+                  <RouterProvider router={router} />
+                </ErrorBoundary>
+              </ToastProvider>
             </ThemeProvider>
           </AuthProvider>
         </QueryProvider>

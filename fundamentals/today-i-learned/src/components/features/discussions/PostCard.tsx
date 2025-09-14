@@ -1,12 +1,7 @@
 import {
   Heart,
   MessageCircle,
-  ChevronUp,
-  Share,
-  Link,
-  Linkedin,
-  Instagram,
-  Facebook
+  ChevronUp
 } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -21,6 +16,7 @@ import { usePostActions } from "@/hooks/usePostActions";
 import { usePostReactions } from "@/hooks/usePostReactions";
 import { useAuth } from "@/contexts/AuthContext";
 import { getHeartAndUpvoteCounts, getUserReactionStates, getUsersWhoReacted } from "@/utils/reactions";
+import { ShareLinkButton } from "@/components/shared/ShareLinkButton";
 
 interface PostCardProps {
   discussion: GitHubDiscussion;
@@ -42,7 +38,6 @@ export function PostCard({
   currentUserLogin
 }: PostCardProps) {
   const navigate = useNavigate();
-  const [isShareMenuOpen, setIsShareMenuOpen] = useState(false);
   const [isUpvoteHovered, setIsUpvoteHovered] = useState(false);
   const [isLikeHovered, setIsLikeHovered] = useState(false);
   const [isCommentHovered, setIsCommentHovered] = useState(false);
@@ -338,92 +333,7 @@ export function PostCard({
             )}
           </div>
 
-          <div
-            className="relative"
-            onMouseEnter={() => setIsShareMenuOpen(true)}
-            onMouseLeave={() => setIsShareMenuOpen(false)}
-          >
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsShareMenuOpen(!isShareMenuOpen);
-              }}
-              className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
-            >
-              <div className="w-5 h-5">
-                <Share className="w-full h-full stroke-[#979797] stroke-[1.67px] fill-none" />
-              </div>
-            </button>
-
-            {/* 공유 드롭다운 메뉴 */}
-            {isShareMenuOpen && (
-              <div
-                className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 flex flex-row items-start p-4 gap-2 w-[364px] h-[106px] bg-white rounded-2xl z-50"
-                style={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.08)" }}
-              >
-                {/* 링크 복사 */}
-                <div
-                  className="flex flex-col items-center p-2 gap-[10px] w-[64px] h-[74px] rounded-xl cursor-pointer hover:bg-gray-50"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    navigator.clipboard.writeText(
-                      `${window.location.origin}/discussion/${discussion.id}`
-                    );
-                    setIsShareMenuOpen(false);
-                  }}
-                >
-                  <div className="flex items-center justify-center w-8 h-8 bg-[#0F0F0F] rounded-full">
-                    <Link className="w-5 h-5 stroke-white stroke-[1.67px]" />
-                  </div>
-                  <span className="font-semibold text-[12px] leading-[130%] tracking-[-0.004em] text-black/80 text-center whitespace-nowrap">
-                    링크 복사
-                  </span>
-                </div>
-
-                {/* 링크드인 */}
-                <div className="flex flex-col items-center p-2 gap-[10px] w-[64px] h-[74px] rounded-xl cursor-pointer hover:bg-gray-50">
-                  <div className="flex items-center justify-center w-8 h-8 bg-[#2867B2] rounded-full">
-                    <Linkedin className="w-5 h-5 fill-white stroke-none" />
-                  </div>
-                  <span className="font-semibold text-[12px] leading-[130%] tracking-[-0.004em] text-black/80 text-center whitespace-nowrap">
-                    링크드인
-                  </span>
-                </div>
-
-                {/* 카카오톡 */}
-                <div className="flex flex-col items-center p-2 gap-[10px] w-[64px] h-[74px] rounded-xl cursor-pointer hover:bg-gray-50">
-                  <div className="flex items-center justify-center w-8 h-8 bg-[#FAE100] rounded-full">
-                    <div className="w-5 h-5 bg-[#3C1E1E] rounded-sm flex items-center justify-center text-[#FAE100] font-bold text-xs">
-                      톡
-                    </div>
-                  </div>
-                  <span className="font-semibold text-[12px] leading-[130%] tracking-[-0.004em] text-black/80 text-center whitespace-nowrap">
-                    카카오톡
-                  </span>
-                </div>
-
-                {/* 인스타그램 */}
-                <div className="flex flex-col items-center p-2 gap-[10px] w-[72px] h-[74px] rounded-xl cursor-pointer hover:bg-gray-50">
-                  <div className="flex items-center justify-center w-8 h-8 bg-gradient-to-tr from-[#E4405F] via-[#F77737] to-[#FFDC80] rounded-full">
-                    <Instagram className="w-5 h-5 stroke-white stroke-[1.67px] fill-none" />
-                  </div>
-                  <span className="font-semibold text-[12px] leading-[130%] tracking-[-0.004em] text-black/80 text-center whitespace-nowrap">
-                    인스타그램
-                  </span>
-                </div>
-
-                {/* 페이스북 */}
-                <div className="flex flex-col items-center p-2 gap-[10px] w-[64px] h-[74px] rounded-xl cursor-pointer hover:bg-gray-50">
-                  <div className="flex items-center justify-center w-8 h-8 bg-[#1877F2] rounded-full">
-                    <Facebook className="w-5 h-5 fill-white stroke-none" />
-                  </div>
-                  <span className="font-semibold text-[12px] leading-[130%] tracking-[-0.004em] text-black/80 text-center whitespace-nowrap">
-                    페이스북
-                  </span>
-                </div>
-              </div>
-            )}
-          </div>
+          <ShareLinkButton discussionId={discussion.id} />
         </div>
       </div>
       {WritePostModal}

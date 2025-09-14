@@ -1,4 +1,5 @@
 import { Heart, MessageCircle, ChevronUp } from "lucide-react";
+import { ShareLinkButton } from "@/components/shared/ShareLinkButton";
 import { useState } from "react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
@@ -292,6 +293,8 @@ export function PostDetail({
             {formatNumber(actualDiscussion.comments.totalCount)}
           </span>
         </button>
+
+        <ShareLinkButton discussionId={discussion.id} />
       </div>
 
       {/* 구분선 */}

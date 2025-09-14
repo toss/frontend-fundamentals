@@ -1,6 +1,6 @@
 import { useUserProfile } from "@/api/hooks/useUser";
 import { useErrorHandler } from "@/hooks/useErrorHandler";
-import { useToast } from "@/components/shared/ui/Toast";
+import { useToast } from "@/contexts/ToastContext";
 import type { BaseComponentProps } from "@/types";
 import { Share } from "lucide-react";
 import { useState } from "react";
