@@ -1,7 +1,8 @@
 import * as React from "react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { Button } from "@/components/shared/ui/Button";
-import { Input, Textarea } from "@/components/shared/ui/Input";
+import { Input } from "@/components/shared/ui/Input";
+import MDEditor from "@uiw/react-md-editor";
 import type { GitHubAuthor } from "@/api/remote/discussions";
 
 interface PostInputProps {
@@ -37,35 +38,29 @@ export function PostInput({
     setTitle(e.target.value);
   };
 
-  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(e.target.value);
+  const handleContentChange = (value: string | undefined) => {
+    setContent(value || "");
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
-      e.preventDefault();
-      handleSubmit();
-    }
-  };
 
   const handleTitleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      // Focus the textarea when Enter is pressed on title
-      const textarea = document.querySelector("textarea");
-      if (textarea) {
-        textarea.focus();
+      // Focus the markdown editor when Enter is pressed on title
+      const editorElement = document.querySelector("[data-md-editor] .cm-editor");
+      if (editorElement) {
+        (editorElement as HTMLElement).focus();
       }
     }
   };
 
   return (
     <div className="flex flex-col items-start gap-[10px] w-full mt-5">
-      <div className="flex flex-col justify-center items-start p-6 gap-3 w-full max-w-[800px] mx-auto h-[232px] bg-white rounded-2xl border-none">
-        {/* 상단 사용자 정보 및 입력 영역 */}
-        <div className="flex flex-row items-center pb-2 gap-6 self-stretch">
+      <div className="flex flex-col justify-center items-start p-6 gap-6 w-full max-w-[800px] mx-auto bg-white rounded-2xl border-none">
+        {/* 상단 사용자 정보 및 제목 입력 */}
+        <div className="flex flex-row items-center gap-6 self-stretch">
           {/* 아바타 영역 */}
-          <div className="flex flex-row items-start gap-[10px] w-[60px] self-stretch">
+          <div className="flex flex-row items-start gap-[10px] w-[60px]">
             <Avatar
               size="60"
               src={user.avatarUrl}
@@ -75,36 +70,38 @@ export function PostInput({
             />
           </div>
 
-          {/* 입력 영역 */}
-          <div className="flex flex-col items-start py-3 gap-6 flex-grow">
-            {/* 제목 입력 필드 */}
-            <div className="flex flex-row justify-center items-center gap-[10px] w-full">
-              <Input
-                value={title}
-                onChange={handleTitleChange}
-                onKeyDown={handleTitleKeyDown}
-                placeholder={placeholder}
-                className="text-[22px] font-bold leading-[130%] text-black tracking-[-0.4px] w-full p-0 border-none outline-none focus:outline-none focus:ring-0 bg-transparent placeholder:text-black/20 shadow-none"
-              />
-            </div>
-
-            {/* 텍스트 영역 */}
-            <Textarea
-              value={content}
-              onChange={handleContentChange}
-              onKeyDown={handleKeyDown}
-              placeholder="작은 기록이 모여 큰 성장이 됩니다.&#13;&#10;TIL은 Frontend Fundamentals Discussion에 여러분의 GitHub 계정으로 저장돼요.  &#13;&#10;하루에 한 줄씩, 함께 성장해봐요."
-              className="w-full h-[63px] resize-none border-none outline-none focus:outline-none focus:ring-0 p-0 text-base font-medium text-black leading-[160%] tracking-[-0.4px] bg-transparent placeholder:text-black/20 shadow-none self-stretch"
+          {/* 제목 입력 영역 */}
+          <div className="flex flex-col items-start flex-grow">
+            <Input
+              value={title}
+              onChange={handleTitleChange}
+              onKeyDown={handleTitleKeyDown}
+              placeholder={placeholder}
+              className="text-[22px] font-bold leading-[130%] text-black tracking-[-0.4px] w-full p-0 border-none outline-none focus:outline-none focus:ring-0 bg-transparent placeholder:text-black/20 shadow-none"
             />
           </div>
         </div>
 
-        {/* 하단 액션 영역 */}
-        <div className="flex flex-row justify-end items-center gap-5 self-stretch h-[51px]">
-          {/* 왼쪽 빈 공간 */}
-          <div className="flex-grow h-[51px]" />
+        {/* 마크다운 에디터 영역 */}
+        <div className="w-full" data-color-mode="light">
+          <MDEditor
+            value={content}
+            onChange={handleContentChange}
+            preview="edit"
+            hideToolbar={false}
+            visibleDragbar={false}
+            textareaProps={{
+              placeholder: "작은 기록이 모여 큰 성장이 됩니다.\nTIL은 Frontend Fundamentals Discussion에 여러분의 GitHub 계정으로 저장돼요.\n하루에 한 줄씩, 함께 성장해봐요.\n\n**마크다운을 사용할 수 있어요:**\n- **굵은 글씨**\n- *기울임체*\n- `코드`\n- [링크](https://example.com)\n- 리스트 등..."
+            }}
+            height={150}
+            style={{
+              backgroundColor: 'transparent',
+            }}
+          />
+        </div>
 
-          {/* 작성하기 버튼 */}
+        {/* 하단 액션 영역 */}
+        <div className="flex flex-row justify-end items-center gap-5 self-stretch">
           <Button
             onClick={handleSubmit}
             disabled={!title.trim() || !content.trim() || isLoading}
@@ -118,7 +115,7 @@ export function PostInput({
 
         {/* 에러 메시지 */}
         {isError && (
-          <div className="flex justify-end self-stretch mb-6">
+          <div className="flex justify-end self-stretch">
             <p className="text-red-500 text-sm font-medium">
               게시에 실패했습니다. 네트워크 상태를 확인해주세요.
             </p>

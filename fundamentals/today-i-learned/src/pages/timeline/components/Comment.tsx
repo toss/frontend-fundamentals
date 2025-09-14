@@ -1,5 +1,6 @@
 import { ChevronUp, MessageCircle, Heart } from "lucide-react";
 import { Avatar } from "@/components/shared/ui/Avatar";
+import { MarkdownRenderer } from "@/components/shared/ui/MarkdownRenderer";
 import { CommentInput } from "./CommentInput";
 import type { GitHubComment } from "@/api/remote/discussions";
 import { formatNumber, formatTimeAgo } from "../utils/formatters";
@@ -76,9 +77,10 @@ function CommentHeader({ comment }: { comment: CommentProps["comment"] }) {
 function CommentBody({ content }: { content: string }) {
   return (
     <div className="w-full">
-      <p className="font-medium text-base leading-[160%] tracking-tight text-black/80 whitespace-pre-wrap">
-        {content}
-      </p>
+      <MarkdownRenderer
+        content={content}
+        className="font-medium text-base leading-[160%] tracking-tight text-black/80"
+      />
     </div>
   );
 }

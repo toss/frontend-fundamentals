@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { Card } from "@/components/shared/ui/Card";
 import { ReactionTooltip } from "@/components/shared/ui/ReactionTooltip";
+import { MarkdownRenderer } from "@/components/shared/ui/MarkdownRenderer";
 import { useWritePostModal } from "@/pages/timeline/hooks/useWritePostModal";
 import { PostMoreMenu } from "./PostMoreMenu";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
@@ -145,9 +146,12 @@ export function PostCard({
             </h2>
 
             {/* 내용 미리보기 */}
-            <p className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80 line-clamp-2 hover:text-black/60 transition-colors">
-              {discussion.body}
-            </p>
+            <div className="line-clamp-2 hover:text-black/60 transition-colors">
+              <MarkdownRenderer
+                content={discussion.body}
+                className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80"
+              />
+            </div>
           </div>
         </div>
 

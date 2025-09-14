@@ -2,6 +2,7 @@ import { Heart, MessageCircle, ChevronUp } from "lucide-react";
 import { ShareLinkButton } from "@/components/shared/ShareLinkButton";
 import { useState } from "react";
 import { Avatar } from "@/components/shared/ui/Avatar";
+import { MarkdownRenderer } from "@/components/shared/ui/MarkdownRenderer";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
 import {
   useDiscussionDetail,
@@ -228,9 +229,10 @@ export function PostDetail({
 
         {/* 내용 */}
         <div className="flex flex-col gap-6">
-          <div className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80 whitespace-pre-wrap">
-            {actualDiscussion.body}
-          </div>
+          <MarkdownRenderer
+            content={actualDiscussion.body}
+            className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80"
+          />
         </div>
       </div>
 

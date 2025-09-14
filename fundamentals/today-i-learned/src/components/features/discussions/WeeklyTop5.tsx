@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Avatar } from "@/components/shared/ui/Avatar";
+import { MarkdownRenderer } from "@/components/shared/ui/MarkdownRenderer";
 import { useWeeklyTopDiscussions } from "@/api/hooks/useDiscussions";
 
 function getWeekLabel(): string {
@@ -15,9 +16,12 @@ function getWeekLabel(): string {
   return `${month}월 ${weekOfMonth}째주 인기글`;
 }
 
-function truncateText(text: string, maxLength: number): string {
-  if (text.length <= maxLength) return text;
-  return text.slice(0, maxLength) + "...";
+function truncateMarkdown(content: string, maxLength: number): string {
+  const plainText = content.replace(/[#*`\[\]()]/g, " ").replace(/\s+/g, " ").trim();
+  if (plainText.length <= maxLength) {
+    return plainText;
+  }
+  return plainText.slice(0, maxLength) + "...";
 }
 
 function PopularPostItem({ post, rank }: { post: any; rank: number }) {
@@ -57,9 +61,12 @@ function PopularPostItem({ post, rank }: { post: any; rank: number }) {
           {post.title}
         </h4>
 
-        <p className="text-base font-medium text-black/80 leading-relaxed tracking-tight line-clamp-1">
-          {truncateText(post.body.replace(/[#*`\n]/g, " ").trim(), 100)}
-        </p>
+        <div className="line-clamp-1">
+          <MarkdownRenderer
+            content={truncateMarkdown(post.body, 100)}
+            className="text-base font-medium text-black/80 leading-relaxed tracking-tight"
+          />
+        </div>
       </button>
     </div>
   );
