@@ -4,7 +4,7 @@ import {
   useDeleteDiscussion
 } from "@/api/hooks/useDiscussions";
 import { useErrorHandler } from "@/hooks/useErrorHandler";
-import { useToast } from "@/components/shared/ui/Toast";
+import { useToast } from "@/contexts/ToastContext";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
 
 interface UsePostActionsParams {

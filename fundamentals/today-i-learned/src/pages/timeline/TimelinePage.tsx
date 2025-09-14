@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import { PostInput } from "./components/PostInput";
 import { FilterSection } from "./components/FilterSection";
 import { PostList } from "./components/PostList";
@@ -9,10 +10,11 @@ import { useAuth } from "@/contexts/AuthContext";
 import type { SortOption } from "@/types";
 import { useCreateDiscussion } from "@/api/hooks/useDiscussions";
 import { useErrorHandler } from "@/hooks/useErrorHandler";
-import { useToast } from "@/components/shared/ui/Toast";
+import { useToast } from "@/contexts/ToastContext";
 
 export function TimelinePage() {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [sortOption, setSortOption] = React.useState<SortOption>("newest");
 
   const createPostMutation = useCreateDiscussion();
@@ -48,14 +50,14 @@ export function TimelinePage() {
 
   const handlePostSubmit = async (data: { title: string; content: string }) => {
     try {
-      await createPostMutation.mutateAsync({
+      const newPost = await createPostMutation.mutateAsync({
         title: data.title,
         body: data.content
       });
-      showSuccessToast(
-        "포스트 작성 완료",
-        "오늘 배운 내용이 성공적으로 게시되었습니다."
-      );
+      showSuccessToast("포스트 작성 완료", "성공적으로 게시되었습니다.", {
+        label: "보러가기",
+        onClick: () => navigate(`/post/${newPost.id}`)
+      });
     } catch (error) {
       handleApiError(error, "포스트 작성");
     }
@@ -74,7 +76,6 @@ export function TimelinePage() {
           <div className="flex flex-col lg:border-l lg:border-r border-[rgba(201,201,201,0.4)] lg:min-w-[820px]">
             {user ? (
               <>
-                {/* 3일 스프린트 챌린지 */}
                 <div className="pt-6 pb-0">
                   <SprintChallenge />
                 </div>
@@ -85,7 +86,7 @@ export function TimelinePage() {
                 </div>
 
                 {/* 포스트 입력 */}
-                <div className="lg:px-6 pt-6 pb-0">
+                <div className="lg:px-6">
                   <PostInput
                     user={{
                       login: user.login,
@@ -93,6 +94,7 @@ export function TimelinePage() {
                     }}
                     onSubmit={handlePostSubmit}
                     isError={createPostMutation.isError}
+                    isLoading={createPostMutation.isPending}
                   />
                 </div>
 
@@ -131,7 +133,7 @@ export function TimelinePage() {
 
           {/* 오른쪽 컬럼: 사이드바 (1024px 이상에서만 표시) */}
           <div className="hidden lg:block mt-[24px] lg:min-w-[490px]">
-            <div className="sticky top-4">
+            <div className="fixed top-[140px] bottom-4 pr-8 w-[490px] overflow-y-auto">
               <WeeklyTop5 />
             </div>
           </div>

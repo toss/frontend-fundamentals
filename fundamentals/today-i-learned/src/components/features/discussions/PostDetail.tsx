@@ -1,6 +1,7 @@
-import { Heart, MessageCircle, ChevronUp } from "lucide-react";
 import { useState } from "react";
 import { Avatar } from "@/components/shared/ui/Avatar";
+import { MarkdownRenderer } from "@/components/shared/ui/MarkdownRenderer";
+import { InteractionButtons } from "@/components/shared/ui/InteractionButtons";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
 import {
   useDiscussionDetail,
@@ -16,19 +17,8 @@ import type { GitHubComment } from "@/api/remote/discussions";
 interface PostDetailProps {
   discussion: GitHubDiscussion;
   onLike?: (postId: string) => void;
-  onComment?: (postId: string) => void;
   onUpvote?: (postId: string) => void;
   showComments?: boolean;
-}
-
-function formatNumber(num: number): string {
-  if (num >= 1000000) {
-    return (num / 1000000).toFixed(1) + "M";
-  }
-  if (num >= 1000) {
-    return (num / 1000).toFixed(1) + "K";
-  }
-  return num.toString();
 }
 
 function formatTimeAgo(dateString: string): string {
@@ -51,7 +41,6 @@ function formatTimeAgo(dateString: string): string {
 export function PostDetail({
   discussion,
   onLike,
-  onComment,
   onUpvote,
   showComments = true
 }: PostDetailProps) {
@@ -227,72 +216,23 @@ export function PostDetail({
 
         {/* 내용 */}
         <div className="flex flex-col gap-6">
-          <div className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80 whitespace-pre-wrap">
-            {actualDiscussion.body}
-          </div>
+          <MarkdownRenderer
+            content={actualDiscussion.body}
+            className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80"
+          />
         </div>
       </div>
 
-      {/* 상호작용 버튼들 */}
-      <div className="flex items-start gap-4 py-2">
-        <button
-          onClick={() => handleReaction("upvote")}
-          className={`flex items-center gap-[6px] hover:opacity-70 transition-all ${
-            hasUserUpvoted ? "text-gray-600" : ""
-          }`}
-        >
-          <div className="w-5 h-5">
-            <ChevronUp 
-              className={`w-full h-full stroke-[1.67px] ${
-                hasUserUpvoted ? "stroke-[#979797]" : "stroke-black/40"
-              }`} 
-            />
-          </div>
-          <span 
-            className={`font-semibold text-[16px] leading-[130%] tracking-[-0.4px] ${
-              hasUserUpvoted ? "text-[#979797]" : "text-black/40"
-            }`}
-          >
-            {formatNumber(upvoteCount)}
-          </span>
-        </button>
-
-        <button
-          onClick={() => handleReaction("like")}
-          className={`flex items-center gap-[6px] hover:opacity-70 transition-all ${
-            hasUserLiked ? "text-gray-600" : ""
-          }`}
-        >
-          <div className="w-5 h-5">
-            <Heart 
-              className={`w-full h-full stroke-[1.67px] ${
-                hasUserLiked
-                  ? "stroke-[#979797] fill-[#656565]"
-                  : "stroke-black/40 fill-none"
-              }`} 
-            />
-          </div>
-          <span 
-            className={`font-semibold text-[16px] leading-[130%] tracking-[-0.4px] ${
-              hasUserLiked ? "text-[#979797]" : "text-black/40"
-            }`}
-          >
-            {formatNumber(heartCount)}
-          </span>
-        </button>
-
-        <button
-          onClick={() => onComment?.(discussion.id)}
-          className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
-        >
-          <div className="w-5 h-5">
-            <MessageCircle className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
-          </div>
-          <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
-            {formatNumber(actualDiscussion.comments.totalCount)}
-          </span>
-        </button>
-      </div>
+      <InteractionButtons
+        discussion={actualDiscussion}
+        onLike={() => handleReaction("like")}
+        onUpvote={() => handleReaction("upvote")}
+        hasUserLiked={hasUserLiked}
+        hasUserUpvoted={hasUserUpvoted}
+        heartCount={heartCount}
+        upvoteCount={upvoteCount}
+        variant="detail"
+      />
 
       {/* 구분선 */}
       {showComments && (

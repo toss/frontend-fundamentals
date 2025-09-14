@@ -41,11 +41,11 @@ export function usePostDetail(postId: string | undefined) {
     });
   };
 
-  const handleComment = (postId: string) => {
+  const handleComment = () => {
     // TODO: Implement comment functionality
   };
 
-  const handleShare = (postId: string) => {
+  const handleShare = () => {
     // TODO: Implement share functionality
   };
 

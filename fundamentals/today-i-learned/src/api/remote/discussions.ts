@@ -15,7 +15,6 @@ import {
   ADD_DISCUSSION_REACTION_MUTATION,
   REMOVE_DISCUSSION_REACTION_MUTATION
 } from "../graphql/discussions";
-import { ENV_CONFIG } from "@/libs/env";
 
 export interface GitHubAuthor {
   login: string;

@@ -77,7 +77,6 @@ export function HallOfFameSection({ className }: HallOfFameSectionProps) {
                 key={discussion.id}
                 discussion={discussion}
                 onLike={(postId) => console.log("Like:", postId)}
-                onComment={(postId) => console.log("Comment:", postId)}
                 onUpvote={(postId) => console.log("Upvote:", postId)}
                 currentUserLogin={userProfile?.login}
               />

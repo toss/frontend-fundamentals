@@ -179,7 +179,7 @@ export function useGithubApi(config: GithubApiConfig) {
 }
 
 const fetchGithubDiscussion = async (query: string) => {
-  const isLocalhost = window.location.hostname === "localhost";
+  const isLocalhost = typeof window !== 'undefined' && window.location.hostname === "localhost";
 
   if (isLocalhost) {
     const accessToken = await (import.meta as any).env
