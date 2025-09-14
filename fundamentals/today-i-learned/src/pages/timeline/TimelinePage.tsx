@@ -86,7 +86,7 @@ export function TimelinePage() {
                 </div>
 
                 {/* 포스트 입력 */}
-                <div className="lg:px-6 pt-6 pb-0">
+                <div className="lg:px-6">
                   <PostInput
                     user={{
                       login: user.login,

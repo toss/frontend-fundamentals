@@ -1,5 +1,4 @@
 import { ProfileInfo } from "@/components/features/profile/ProfileInfo";
-import { ProfileShareButton } from "./ProfileShareButton";
 import { cn } from "@/libs/utils";
 import type { BaseComponentProps } from "@/types";
 
@@ -14,7 +13,6 @@ export function ProfileHeader({ className }: ProfileHeaderProps) {
       )}
     >
       <ProfileInfo />
-      <ProfileShareButton />
     </div>
   );
 }
