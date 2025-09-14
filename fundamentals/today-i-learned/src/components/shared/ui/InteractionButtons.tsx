@@ -228,13 +228,7 @@ export function InteractionButtons({
         onMouseEnter={() => setIsCommentHovered(true)}
         onMouseLeave={() => setIsCommentHovered(false)}
       >
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onComment?.(discussion.id);
-          }}
-          className="flex items-center gap-[6px] hover:opacity-70 transition-opacity"
-        >
+        <div className="flex items-center gap-[6px]">
           <div className="w-5 h-5">
             <MessageCircle
               className={`w-full h-full ${iconStroke} stroke-[1.67px] fill-none`}
@@ -245,7 +239,7 @@ export function InteractionButtons({
           >
             {formatNumber(discussion.comments.totalCount)}
           </span>
-        </button>
+        </div>
 
         {isCardVariant &&
           isCommentHovered &&
