@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import { PostInput } from "./components/PostInput";
 import { FilterSection } from "./components/FilterSection";
 import { PostList } from "./components/PostList";
@@ -13,6 +14,7 @@ import { useToast } from "@/contexts/ToastContext";
 
 export function TimelinePage() {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [sortOption, setSortOption] = React.useState<SortOption>("newest");
 
   const createPostMutation = useCreateDiscussion();
@@ -48,14 +50,14 @@ export function TimelinePage() {
 
   const handlePostSubmit = async (data: { title: string; content: string }) => {
     try {
-      await createPostMutation.mutateAsync({
+      const newPost = await createPostMutation.mutateAsync({
         title: data.title,
         body: data.content
       });
-      showSuccessToast(
-        "포스트 작성 완료",
-        "오늘 배운 내용이 성공적으로 게시되었습니다."
-      );
+      showSuccessToast("포스트 작성 완료", "성공적으로 게시되었습니다.", {
+        label: "보러가기",
+        onClick: () => navigate(`/post/${newPost.id}`)
+      });
     } catch (error) {
       handleApiError(error, "포스트 작성");
     }
@@ -93,6 +95,7 @@ export function TimelinePage() {
                     }}
                     onSubmit={handlePostSubmit}
                     isError={createPostMutation.isError}
+                    isLoading={createPostMutation.isPending}
                   />
                 </div>
 

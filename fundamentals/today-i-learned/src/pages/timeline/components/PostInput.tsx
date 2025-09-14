@@ -9,13 +9,15 @@ interface PostInputProps {
   onSubmit: (data: { title: string; content: string }) => void;
   placeholder?: string;
   isError?: boolean;
+  isLoading?: boolean;
 }
 
 export function PostInput({
   user,
   onSubmit,
   placeholder = "오늘 배운 내용을 기록해 보세요",
-  isError
+  isError,
+  isLoading = false
 }: PostInputProps) {
   const [title, setTitle] = React.useState("");
   const [content, setContent] = React.useState("");
@@ -105,11 +107,11 @@ export function PostInput({
           {/* 작성하기 버튼 */}
           <Button
             onClick={handleSubmit}
-            disabled={!title.trim() || !content.trim()}
+            disabled={!title.trim() || !content.trim() || isLoading}
             className="flex flex-row justify-center items-center px-[30px] py-5 gap-[10px] w-[115px] h-[51px] bg-black disabled:bg-[#00000033] rounded-[200px] border-none outline-none focus:outline-none"
           >
             <span className="text-[16px] font-bold leading-[130%] tracking-[-0.4px] text-[#FCFCFC]">
-              작성하기
+              {isLoading ? "작성중..." : "작성하기"}
             </span>
           </Button>
         </div>
