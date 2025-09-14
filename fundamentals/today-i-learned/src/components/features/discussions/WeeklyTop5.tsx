@@ -1,9 +1,6 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { useWeeklyTopDiscussions } from "@/api/hooks/useDiscussions";
-import type { GitHubDiscussion } from "@/api/remote/discussions";
-import { PostDetailModal } from "./PostDetailModal";
 
 function getWeekLabel(): string {
   const now = new Date();
@@ -25,17 +22,15 @@ function truncateText(text: string, maxLength: number): string {
 
 function PopularPostItem({
   post,
-  rank,
-  onPostClick
+  rank
 }: {
   post: any;
   rank: number;
-  onPostClick: (postId: string, discussion: GitHubDiscussion) => void;
 }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    onPostClick(post.id, post);
+    navigate(`/post/${post.id}`);
   };
 
   return (
@@ -77,33 +72,11 @@ function PopularPostItem({
 }
 
 export function WeeklyTop5() {
-  const [selectedPost, setSelectedPost] = useState<GitHubDiscussion | null>(
-    null
-  );
-  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
-
   const { data: discussions, isLoading } = useWeeklyTopDiscussions({
     limit: 5
   });
 
   const weekText = getWeekLabel();
-
-  const handlePostClick = (postId: string, discussion: GitHubDiscussion) => {
-    setSelectedPost(discussion);
-    setIsDetailModalOpen(true);
-  };
-
-  const handleLike = (postId: string) => {
-    // TODO: Implement like functionality
-  };
-
-  const handleComment = (postId: string) => {
-    // TODO: Implement comment functionality
-  };
-
-  const handleUpvote = (postId: string) => {
-    // TODO: Implement upvote functionality
-  };
 
   if (isLoading) {
     return (
@@ -147,37 +120,25 @@ export function WeeklyTop5() {
   }
 
   return (
-    <>
-      <div className="space-y-6">
-        <div className="space-y-2">
-          <h3 className="text-2xl font-extrabold text-black tracking-tight">
-            주간 Top 5
-          </h3>
-          <p className="text-base font-semibold text-black/60 tracking-tight">
-            {weekText}
-          </p>
-        </div>
-
-        <div className="space-y-4">
-          {discussions.map((discussion, index) => (
-            <PopularPostItem
-              key={discussion.id}
-              post={discussion}
-              rank={index + 1}
-              onPostClick={handlePostClick}
-            />
-          ))}
-        </div>
+    <div className="space-y-6">
+      <div className="space-y-2">
+        <h3 className="text-2xl font-extrabold text-black tracking-tight">
+          주간 Top 5
+        </h3>
+        <p className="text-base font-semibold text-black/60 tracking-tight">
+          {weekText}
+        </p>
       </div>
 
-      <PostDetailModal
-        discussion={selectedPost}
-        isOpen={isDetailModalOpen}
-        onClose={() => setIsDetailModalOpen(false)}
-        onLike={handleLike}
-        onComment={handleComment}
-        onUpvote={handleUpvote}
-      />
-    </>
+      <div className="space-y-4">
+        {discussions.map((discussion, index) => (
+          <PopularPostItem
+            key={discussion.id}
+            post={discussion}
+            rank={index + 1}
+          />
+        ))}
+      </div>
+    </div>
   );
 }

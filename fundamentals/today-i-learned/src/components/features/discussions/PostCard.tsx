@@ -9,13 +9,13 @@ import {
   Facebook
 } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { Card } from "@/components/shared/ui/Card";
 import { ReactionTooltip } from "@/components/shared/ui/ReactionTooltip";
 import { useWritePostModal } from "@/pages/timeline/hooks/useWritePostModal";
 import { PostMoreMenu } from "./PostMoreMenu";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
-import { PostDetailModal } from "@/components/features/discussions/PostDetailModal";
 import { formatNumber, formatTimeAgo } from "@/pages/timeline/utils/formatters";
 import { usePostActions } from "@/hooks/usePostActions";
 import { usePostReactions } from "@/hooks/usePostReactions";
@@ -41,7 +41,7 @@ export function PostCard({
   onUpvote,
   currentUserLogin
 }: PostCardProps) {
-  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+  const navigate = useNavigate();
   const [isShareMenuOpen, setIsShareMenuOpen] = useState(false);
   const [isUpvoteHovered, setIsUpvoteHovered] = useState(false);
   const [isLikeHovered, setIsLikeHovered] = useState(false);
@@ -86,9 +86,9 @@ export function PostCard({
   const handlePostClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    // 수정 모달이 열려있으면 상세 모달을 열지 않음
+    // 수정 모달이 열려있으면 페이지 이동하지 않음
     if (!isOpen) {
-      setIsDetailModalOpen(true);
+      navigate(`/post/${discussion.id}`);
     }
   };
   return (
@@ -427,15 +427,6 @@ export function PostCard({
         </div>
       </div>
       {WritePostModal}
-
-      <PostDetailModal
-        discussion={discussion}
-        isOpen={isDetailModalOpen}
-        onClose={() => setIsDetailModalOpen(false)}
-        onLike={onLike || (() => defaultHandleLike())}
-        onComment={onComment || (() => defaultHandleComment())}
-        onUpvote={onUpvote || (() => defaultHandleUpvote())}
-      />
     </Card>
   );
 }
