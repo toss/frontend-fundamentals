@@ -11,7 +11,8 @@ export function ShareLinkButton({ discussionId, className = "" }: ShareLinkButto
 
   const handleCopyLink = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const url = `${window.location.origin}/today-i-learned/post/${discussionId}`;
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
+    const url = `${origin}/today-i-learned/post/${discussionId}`;
     navigator.clipboard.writeText(url);
     showSuccessToast("링크가 복사되었습니다!");
   };

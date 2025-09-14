@@ -8,7 +8,7 @@ export function PostDetailPage() {
   const { id } = useParams<{ id: string }>();
   const { data: discussion, isLoading, error } = useDiscussionDetail(id || "");
 
-  const { handleLike, handleComment, handleUpvote } = usePostReactions({
+  const { handleLike, handleUpvote } = usePostReactions({
     discussion: discussion || undefined
   });
 
@@ -28,7 +28,6 @@ export function PostDetailPage() {
             <PostDetail
               discussion={discussion as any}
               onLike={handleLike}
-              onComment={handleComment}
               onUpvote={handleUpvote}
               showComments={true}
             />

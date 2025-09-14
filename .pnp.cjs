@@ -1802,7 +1802,8 @@ const RAW_RUNTIME_STATE =
           ["markdown-it-footnote", "npm:4.0.0"],\
           ["typescript", "patch:typescript@npm%3A5.9.2#optional!builtin<compat/typescript>::version=5.9.2&hash=5786d5"],\
           ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.6.4"],\
-          ["vitepress-plugin-tabs", "virtual:88dd596434121ca52e83acf1605e629b5dee0f0009464fe66a58d8dda13a773912568c4269d5ea4c5d64f9e2189898420c180c8e837f6ef7e40dde4d2abef475#npm:0.7.2"]\
+          ["vitepress-plugin-tabs", "virtual:88dd596434121ca52e83acf1605e629b5dee0f0009464fe66a58d8dda13a773912568c4269d5ea4c5d64f9e2189898420c180c8e837f6ef7e40dde4d2abef475#npm:0.7.2"],\
+          ["vue", "virtual:88dd596434121ca52e83acf1605e629b5dee0f0009464fe66a58d8dda13a773912568c4269d5ea4c5d64f9e2189898420c180c8e837f6ef7e40dde4d2abef475#npm:3.5.21"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -1816,7 +1817,8 @@ const RAW_RUNTIME_STATE =
           ["markdown-it-footnote", "npm:4.0.0"],\
           ["typescript", "patch:typescript@npm%3A5.9.2#optional!builtin<compat/typescript>::version=5.9.2&hash=5786d5"],\
           ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.6.4"],\
-          ["vitepress-plugin-tabs", "virtual:88dd596434121ca52e83acf1605e629b5dee0f0009464fe66a58d8dda13a773912568c4269d5ea4c5d64f9e2189898420c180c8e837f6ef7e40dde4d2abef475#npm:0.7.2"]\
+          ["vitepress-plugin-tabs", "virtual:88dd596434121ca52e83acf1605e629b5dee0f0009464fe66a58d8dda13a773912568c4269d5ea4c5d64f9e2189898420c180c8e837f6ef7e40dde4d2abef475#npm:0.7.2"],\
+          ["vue", "virtual:88dd596434121ca52e83acf1605e629b5dee0f0009464fe66a58d8dda13a773912568c4269d5ea4c5d64f9e2189898420c180c8e837f6ef7e40dde4d2abef475#npm:3.5.21"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -1843,7 +1845,8 @@ const RAW_RUNTIME_STATE =
           ["markdown-it-footnote", "npm:4.0.0"],\
           ["typescript", "patch:typescript@npm%3A5.9.2#optional!builtin<compat/typescript>::version=5.9.2&hash=5786d5"],\
           ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.6.4"],\
-          ["vitepress-plugin-tabs", "virtual:88dd596434121ca52e83acf1605e629b5dee0f0009464fe66a58d8dda13a773912568c4269d5ea4c5d64f9e2189898420c180c8e837f6ef7e40dde4d2abef475#npm:0.7.2"]\
+          ["vitepress-plugin-tabs", "virtual:88dd596434121ca52e83acf1605e629b5dee0f0009464fe66a58d8dda13a773912568c4269d5ea4c5d64f9e2189898420c180c8e837f6ef7e40dde4d2abef475#npm:0.7.2"],\
+          ["vue", "virtual:88dd596434121ca52e83acf1605e629b5dee0f0009464fe66a58d8dda13a773912568c4269d5ea4c5d64f9e2189898420c180c8e837f6ef7e40dde4d2abef475#npm:3.5.21"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -1857,7 +1860,7 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:18.3.1"],\
           ["typescript", "patch:typescript@npm%3A5.9.2#optional!builtin<compat/typescript>::version=5.9.2&hash=5786d5"],\
           ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.6.4"],\
-          ["vue", "virtual:ac3ac2e864cf87dde84e333a6a60a9ceed6a4108c79d5eb83f85393bf816d0671fd46e878e2ebd1d30bc14f3a297412483449292ac48e5b6a939f8eeed0a3e1f#npm:3.5.21"]\
+          ["vue", "virtual:88dd596434121ca52e83acf1605e629b5dee0f0009464fe66a58d8dda13a773912568c4269d5ea4c5d64f9e2189898420c180c8e837f6ef7e40dde4d2abef475#npm:3.5.21"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -4227,14 +4230,14 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:115d5db48970197e7c223e4af78eec9a724b132bb6fecc727859ba6ba63514483b2165eb037cb85024832d29706741f7bae7ea24e182e75c023ca3da9c436534#npm:3.5.21", {\
-        "packageLocation": "./.yarn/__virtual__/@vue-server-renderer-virtual-fa69f2744c/0/cache/@vue-server-renderer-npm-3.5.21-1ecdde03c2-7554e22d35.zip/node_modules/@vue/server-renderer/",\
+      ["virtual:6b93f010680730abf749d7a0e77aa66a62727b6598286e97ea6274a87c65c4e3942f1fbe1e820931b366a96f2eb32c3f8e65e39ed98b7f94cdb1c53e681f7b2b#npm:3.5.21", {\
+        "packageLocation": "./.yarn/__virtual__/@vue-server-renderer-virtual-f3a0418db1/0/cache/@vue-server-renderer-npm-3.5.21-1ecdde03c2-7554e22d35.zip/node_modules/@vue/server-renderer/",\
         "packageDependencies": [\
-          ["@vue/server-renderer", "virtual:115d5db48970197e7c223e4af78eec9a724b132bb6fecc727859ba6ba63514483b2165eb037cb85024832d29706741f7bae7ea24e182e75c023ca3da9c436534#npm:3.5.21"],\
+          ["@vue/server-renderer", "virtual:6b93f010680730abf749d7a0e77aa66a62727b6598286e97ea6274a87c65c4e3942f1fbe1e820931b366a96f2eb32c3f8e65e39ed98b7f94cdb1c53e681f7b2b#npm:3.5.21"],\
           ["@types/vue", null],\
           ["@vue/compiler-ssr", "npm:3.5.21"],\
           ["@vue/shared", "npm:3.5.21"],\
-          ["vue", "virtual:ac3ac2e864cf87dde84e333a6a60a9ceed6a4108c79d5eb83f85393bf816d0671fd46e878e2ebd1d30bc14f3a297412483449292ac48e5b6a939f8eeed0a3e1f#npm:3.5.21"]\
+          ["vue", "virtual:88dd596434121ca52e83acf1605e629b5dee0f0009464fe66a58d8dda13a773912568c4269d5ea4c5d64f9e2189898420c180c8e837f6ef7e40dde4d2abef475#npm:3.5.21"]\
         ],\
         "packagePeers": [\
           "@types/vue",\
@@ -10796,7 +10799,7 @@ const RAW_RUNTIME_STATE =
           ["@types/vitepress", null],\
           ["@types/vue", null],\
           ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.6.4"],\
-          ["vue", null]\
+          ["vue", "virtual:88dd596434121ca52e83acf1605e629b5dee0f0009464fe66a58d8dda13a773912568c4269d5ea4c5d64f9e2189898420c180c8e837f6ef7e40dde4d2abef475#npm:3.5.21"]\
         ],\
         "packagePeers": [\
           "@types/vitepress",\
@@ -10833,15 +10836,15 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["virtual:ac3ac2e864cf87dde84e333a6a60a9ceed6a4108c79d5eb83f85393bf816d0671fd46e878e2ebd1d30bc14f3a297412483449292ac48e5b6a939f8eeed0a3e1f#npm:3.5.21", {\
-        "packageLocation": "./.yarn/__virtual__/vue-virtual-115d5db489/0/cache/vue-npm-3.5.21-f62ec4ff26-60a755e605.zip/node_modules/vue/",\
+      ["virtual:88dd596434121ca52e83acf1605e629b5dee0f0009464fe66a58d8dda13a773912568c4269d5ea4c5d64f9e2189898420c180c8e837f6ef7e40dde4d2abef475#npm:3.5.21", {\
+        "packageLocation": "./.yarn/__virtual__/vue-virtual-6b93f01068/0/cache/vue-npm-3.5.21-f62ec4ff26-60a755e605.zip/node_modules/vue/",\
         "packageDependencies": [\
-          ["vue", "virtual:ac3ac2e864cf87dde84e333a6a60a9ceed6a4108c79d5eb83f85393bf816d0671fd46e878e2ebd1d30bc14f3a297412483449292ac48e5b6a939f8eeed0a3e1f#npm:3.5.21"],\
+          ["vue", "virtual:88dd596434121ca52e83acf1605e629b5dee0f0009464fe66a58d8dda13a773912568c4269d5ea4c5d64f9e2189898420c180c8e837f6ef7e40dde4d2abef475#npm:3.5.21"],\
           ["@types/typescript", null],\
           ["@vue/compiler-dom", "npm:3.5.21"],\
           ["@vue/compiler-sfc", "npm:3.5.21"],\
           ["@vue/runtime-dom", "npm:3.5.21"],\
-          ["@vue/server-renderer", "virtual:115d5db48970197e7c223e4af78eec9a724b132bb6fecc727859ba6ba63514483b2165eb037cb85024832d29706741f7bae7ea24e182e75c023ca3da9c436534#npm:3.5.21"],\
+          ["@vue/server-renderer", "virtual:6b93f010680730abf749d7a0e77aa66a62727b6598286e97ea6274a87c65c4e3942f1fbe1e820931b366a96f2eb32c3f8e65e39ed98b7f94cdb1c53e681f7b2b#npm:3.5.21"],\
           ["@vue/shared", "npm:3.5.21"],\
           ["typescript", "patch:typescript@npm%3A5.9.2#optional!builtin<compat/typescript>::version=5.9.2&hash=5786d5"]\
         ],\

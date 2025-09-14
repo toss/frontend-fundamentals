@@ -10,7 +10,6 @@ import type { GitHubDiscussion } from "@/api/remote/discussions";
 interface InteractionButtonsProps {
   discussion: GitHubDiscussion;
   onLike?: (postId: string) => void;
-  onComment?: (postId: string) => void;
   onUpvote?: (postId: string) => void;
   hasUserLiked: boolean;
   hasUserUpvoted: boolean;
@@ -22,7 +21,6 @@ interface InteractionButtonsProps {
 export function InteractionButtons({
   discussion,
   onLike,
-  onComment,
   onUpvote,
   hasUserLiked: initialHasUserLiked,
   hasUserUpvoted: initialHasUserUpvoted,

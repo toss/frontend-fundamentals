@@ -17,7 +17,6 @@ export function ActivitySection({ className }: ActivitySectionProps) {
     isFetchingNextPage,
     elementRef,
     handleFilterToggle,
-    handleComment,
     refetch
   } = useUserActivity();
 
@@ -59,7 +58,6 @@ export function ActivitySection({ className }: ActivitySectionProps) {
         hasNextPage={hasNextPage}
         isFetchingNextPage={isFetchingNextPage}
         elementRef={elementRef}
-        handleComment={handleComment}
         refetch={refetch}
       />
     </div>

@@ -17,7 +17,6 @@ import type { GitHubComment } from "@/api/remote/discussions";
 interface PostDetailProps {
   discussion: GitHubDiscussion;
   onLike?: (postId: string) => void;
-  onComment?: (postId: string) => void;
   onUpvote?: (postId: string) => void;
   showComments?: boolean;
 }
@@ -42,7 +41,6 @@ function formatTimeAgo(dateString: string): string {
 export function PostDetail({
   discussion,
   onLike,
-  onComment,
   onUpvote,
   showComments = true
 }: PostDetailProps) {
@@ -228,7 +226,6 @@ export function PostDetail({
       <InteractionButtons
         discussion={actualDiscussion}
         onLike={() => handleReaction("like")}
-        onComment={onComment}
         onUpvote={() => handleReaction("upvote")}
         hasUserLiked={hasUserLiked}
         hasUserUpvoted={hasUserUpvoted}

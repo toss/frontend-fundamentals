@@ -47,7 +47,9 @@ const { isKorean } = useLocale();
 const locationOrigin = ref("");
 
 onMounted(() => {
-  locationOrigin.value = window.location.origin;
+  if (typeof window !== 'undefined') {
+    locationOrigin.value = window.location.origin;
+  }
 });
 
 function isActive(path: string): boolean {
@@ -55,10 +57,12 @@ function isActive(path: string): boolean {
 }
 
 function handleNavigation(href: string): void {
-  // 현재 URL의 origin을 사용하여 전체 URL 생성
-  const fullUrl = locationOrigin.value + href;
-  // 현재 창에서 이동
-  window.location.href = fullUrl;
+  if (typeof window !== 'undefined') {
+    // 현재 URL의 origin을 사용하여 전체 URL 생성
+    const fullUrl = locationOrigin.value + href;
+    // 현재 창에서 이동
+    window.location.href = fullUrl;
+  }
 }
 </script>
 

@@ -15,7 +15,6 @@ interface ActivityContentProps extends BaseComponentProps {
   hasNextPage: boolean;
   isFetchingNextPage: boolean;
   elementRef: React.RefObject<HTMLDivElement>;
-  handleComment: () => void;
   refetch: () => Promise<any>;
 }
 
@@ -27,7 +26,6 @@ export function ActivityContent({
   hasNextPage,
   isFetchingNextPage,
   elementRef,
-  handleComment,
   refetch
 }: ActivityContentProps) {
   const { handleApiError } = useErrorHandler();
@@ -80,7 +78,6 @@ export function ActivityContent({
               key={discussion.id}
               discussion={discussion}
               onLike={(postId) => console.log("Like:", postId)}
-              onComment={handleComment}
               onUpvote={(postId) => console.log("Upvote:", postId)}
               currentUserLogin={userProfile?.login}
             />

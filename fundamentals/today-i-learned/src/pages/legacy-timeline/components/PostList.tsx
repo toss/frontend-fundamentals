@@ -44,7 +44,7 @@ export function PostList({
     rootMargin: "300px"
   });
 
-  const handleComment = (id: string) => {
+  const handleComment = () => {
     // TODO: 댓글 페이지로 이동
   };
 

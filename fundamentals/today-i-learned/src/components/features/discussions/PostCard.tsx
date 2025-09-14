@@ -15,7 +15,6 @@ import { getHeartAndUpvoteCounts, getUserReactionStates } from "@/utils/reaction
 interface PostCardProps {
   discussion: GitHubDiscussion;
   onLike?: (postId: string) => void;
-  onComment?: (postId: string) => void;
   onUpvote?: (postId: string) => void;
   currentUserLogin?: string;
 }
@@ -27,7 +26,6 @@ export function PostCardSkeleton() {
 export function PostCard({
   discussion,
   onLike,
-  onComment,
   onUpvote,
   currentUserLogin
 }: PostCardProps) {
@@ -51,7 +49,6 @@ export function PostCard({
   // Post reactions 훅 사용
   const {
     handleLike: defaultHandleLike,
-    handleComment: defaultHandleComment,
     handleUpvote: defaultHandleUpvote
   } = usePostReactions({ discussion });
 
@@ -143,7 +140,6 @@ export function PostCard({
         <InteractionButtons
           discussion={discussion}
           onLike={onLike || defaultHandleLike}
-          onComment={onComment || defaultHandleComment}
           onUpvote={onUpvote || defaultHandleUpvote}
           hasUserLiked={hasUserLiked}
           hasUserUpvoted={hasUserUpvoted}
