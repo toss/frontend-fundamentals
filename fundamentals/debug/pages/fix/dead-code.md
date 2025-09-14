@@ -7,8 +7,9 @@
 
 ## 사용되지 않는 유틸 함수
 
-과거 특정 기획에 맞춰 만들었던 유틸 함수가, 기획 변경으로 더 이상 사용되지 않는 경우가 있어요. 이런 함수가 코드베이스에 계속 남아 있으면, 유지보수 중에 "이 함수 아직 쓰이나?" 하고 혼란스러울 수 있어요. 기획이 종료되거나 기능이 제거될 때, 함께 정리하는 게 좋아요.
+과거 특정 기획에 맞춰 만든 유틸이 기획 변경으로 더 이상 쓰이지 않을 수 있어요. 이런 코드가 남아 있으면 유지보수 중에 “아직 쓰나?” 하고 시간을 낭비해요. **기획 종료나 기능 제거 시점에 함께 지우는 것**이 좋아요.
 ```tsx
+/** @deprecated 2024-12-31 이후 제거 예정. 크리스마스 이벤트 종료됨. 대체 없음 */
 export function formatDateForChristmasEventUser(date: Date): string {
   const year = date.getFullYear();
   const month = `${date.getMonth() + 1}`.padStart(2, '0');
@@ -16,23 +17,39 @@ export function formatDateForChristmasEventUser(date: Date): string {
   return `Merry Christmas ${year}-${month}-${day}`;
 }
 ```
-    
-## 사용되지 않는 CSS 클래스 정리
-더 이상 사용되지 않는데도 CSS 파일에 남아 있는 클래스나, HTML 엘리먼트에 존재하지 않는 클래스명이 들어가 있는 경우가 종종 있어요. 이런 스타일은 실제로 적용되지 않기 때문에 제거해도 되지만, 계속 쌓이면 스타일시트의 가독성이 떨어지고, 유지보수가 어려워져요. 더불어, 렌더링 시 불필요한 스타일 정보까지 파싱되면서 성능이 저하될 수 있어요. 사용되지 않는 CSS 클래스나 스타일이 확인되면, 가능한 빨리 제거해서 코드의 명확성과 퍼포먼스를 유지하는 게 좋아요.
+이런 데드코드 유틸 함수 등을 정리할 때는 도구를 함께 사용하면 좋아요. `ts-prune`은 사용되지 않는 export를 찾아주고, `knip`은 프로젝트 전체에서 미사용 파일이나 의존성을 정리할 수 있도록 도와줘요.
 
-```css
-.title {
-  font-size: 24px;
-  color: #333;
-  font-weight: bold;
+
+## 사용되지 않는 CSS 클래스 정리
+사용되지 않는 클래스가 쌓이면 스타일시트 가독성이 떨어지고, 파싱 비용이 늘어요.
+
+`stylelint`를 사용해 사용되지 않을 선택자가 저장되는 것을 예방할 수 도 있어요. 아래와 같이 `stylelintrc` 파일에 린트를 셋팅해 두면, 선언되었지만 사용되지 않은 클래스가 있으면 워닝을 띄워줘요. 단, 런타임에만 등장하는 클래스는 **오탐/미탐** 가능성이 있어요.
+
+```cli
+npm install --save-dev stylelint stylelint-no-unused-selectors
+```
+
+**.stylelintrc.json**
+```js
+{
+  "extends": ["stylelint-config-standard"],
+  "plugins": ["stylelint-no-unused-selectors"],
+  "rules": {
+    "plugin/no-unused-selectors": [true, {
+      "files": ["src/**/*.html", "src/**/*.tsx", "src/**/*.jsx"],
+    }]
+  }
 }
 ```
 
 
 ## 실험 종료 후 조건 분기
-실험이 종료됐음에도 조건 분기코드가 남아있는 경우가 종종 있어요. A/B 테스트는 1개월 전에 종료됐고, B안이 채택되었음에도 여전히 조건 분기가 코드에 남아 있는 경우에요. 분기 조건을 읽는 개발자는 아직 실험 중이라고 오해할 수 있어요. 실험 종료 후에도 코드가 남아 있으면 불필요한 경로로 디버깅하거나 리팩토링 시 혼란 발생할 수 있어요.
+A/B 테스트가 끝났는데 분기 코드가 남아 있으면, 독자가 “아직 실험 중인가?”라고 오해해요. 종료 후에는 **채택안만 남기고 분기 삭제**가 원칙이에요.
+
+이와같이 운영성으로 관리되어야 하는 코드는 개발자가 의지를 가지고 지워주어야 해요. 다른 업무로 바빠서 즉시 처리하지 못하는 경우, 주석을 남겨 추후 코드 제거에 도움이 될 수 있어요.
 ```tsx
 export function RecommendationBanner({ variant }: { variant: 'A' | 'B' }) {
+  //TODO:: 종료된 실험 제거 (실험안 A으로 종료)
   if (variant === 'A') {
     return <BannerA />;
   } else {
@@ -40,11 +57,5 @@ export function RecommendationBanner({ variant }: { variant: 'A' | 'B' }) {
   }
 }
 ```
-    
-
-## 데드코드 제거 도구
-이런 데드코드를 정리할 때는 도구를 함께 사용하면 좋아요.
-
-예를 들어, `ts-prune`은 사용되지 않는 TypeScript `export`를 찾아주고, `knip`은 프로젝트 전체에서 미사용 파일이나 의존성을 정리할 수 있도록 도와줘요.
 
 주기적으로 데드코드를 정리하면 코드베이스가 더 단순하고 명확해져서, 디버깅과 유지보수가 훨씬 쉬워져요.

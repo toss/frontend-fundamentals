@@ -77,7 +77,7 @@ export default ComplexComponent;
 이렇게 코드를 단순화하면 복잡한 상태 관리나 네트워크 요청 없이도 문제가 발생하는 조건만으로 에러를 재현할 수 있어요.
 이런 방식으로 문제를 단순하게 재현하고, 원인을 찾은 다음 원래 코드에 다시 반영하면 돼요.
 
-```tsx 6
+```tsx
 import React, { useEffect } from 'react';
 
 const SimpleComponent = () => {
@@ -97,5 +97,4 @@ const SimpleComponent = () => {
 
 export default SimpleComponent;
 ```
-
 이렇게 에러의 원인이 되는 **핵심 로직만 남기고**, 나머지 코드를 최대한 제거하면 **문제 재현이 단순하고 명확해져요**.

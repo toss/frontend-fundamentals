@@ -50,35 +50,5 @@ const DoubleClickTest = () => {
 };
 
 export default DoubleClickTest;
-
 ```
-
-이런 식으로 재현 로직을 자동화하면, 복잡한 상황에서도 일관되게 문제를 재현할 수 있고, 원인 분석과 회귀 테스트에도 유용하게 활용할 수 있어요.
-
-## 테스트 코드
-
-```tsx 7
-import React from 'react';
-import { render, fireEvent, screen, act } from '@testing-library/react';
-import { DoubleClickButton } from './DoubleClickButton';
-
-jest.useFakeTimers();
-
-test('빠르게 여러 번 클릭해도 클릭 카운트가 1을 넘지 않아야 한다', () => {
-  render(<DoubleClickButton />);
-  const button = screen.getByTestId('click-button');
-  const countText = screen.getByTestId('click-count');
-
-  act(() => {
-    for (let i = 0; i < 10; i++) {
-      fireEvent.click(button);
-    }
-
-    jest.advanceTimersByTime(1000);
-  });
-
-  expect(countText.textContent).toBe('클릭 횟수: 1');
-});
-```
-
 자동화된 재현 코드는 수동으로 조건을 만들기 어려운 상황에서도 쉽게 문제를 다시 만들어낼 수 있어, 디버깅과 테스트 효율을 크게 높여줘요.

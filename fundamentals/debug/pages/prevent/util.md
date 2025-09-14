@@ -10,27 +10,27 @@
 ```
 
 ### 해결방법
-이런 실수를 방지하려고, 공통 컴포넌트의 타입 정의에서 `disabled` 속성을 아예 막고, `isDisabled`만 사용할 수 있도록 수정했어요. 팀 내에서도 isDisabled만 사용하도록 명확한 컨벤션 확립을 해요. 이제 잘못된 prop을 넘기면 타입 에러가 나서 실수를 미리 잡을 수 있어요.
+이런 실수를 방지하려고, 공통 컴포넌트의 타입 정의에서 `isDisabled` 속성을 아예 제거하고, `disabled`만 사용할 수 있도록 수정했어요. 팀 내에서도 disabled만 사용하도록 명확한 컨벤션 확립을 해요. 이제 잘못된 prop을 넘기면 타입 에러가 나서 실수를 미리 잡을 수 있어요.
 
-```tsx 7,18
+```tsx 5
 import React from 'react';
 
 type Props = {
-  isDisabled?: boolean;
   value: string;
+  // isDisabled?: boolean; 제거
   onChange: (value: string) => void;
-} & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'disabled'>; 
+} & React.InputHTMLAttributes<HTMLInputElement>; 
 
 export const TextInput: React.FC<Props> = ({
-  isDisabled,
+  disabled,
   value,
   onChange,
   ...rest
 }) => {
   return (
     <input
+      disabled={disabled}
       {...rest}
-      disabled={isDisabled}
       value={value}
       onChange={(e) => onChange(e.target.value)}
     />
@@ -68,7 +68,7 @@ module.exports = {
 UI 개발 도중 사용한 더미 이름, 가짜 텍스트(“김토스님”, “홍길동”, “ㅇㅇㅇ” 등) 이 실제 PR에 포함돼 배포되거나 유저에게 노출되는 경우가 있어요. 특히 QA 환경에서는 가짜 이름이 버그처럼 보여 혼란을 유발하고, 실무에서 신뢰도를 해칠 수 있어요.
 
 ### 해결방법
-ESLint로 특정 문자열(“김토스”, “홍길동”, “테스트용” 등) 포함 시 에러 발생하도록 설정해요
+ESLint로 특정 문자열(“김토스”, “홍길동”, “테스트용” 등) 포함 시 에러 발생하도록 설정해요. `no-restricted-syntax`는특정 구문(Syntax)을 아예 사용하지 못하도록 제한하는 ESLint 규칙이에요.
 
 ```js 6
 module.exports = {

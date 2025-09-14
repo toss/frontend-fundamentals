@@ -57,40 +57,34 @@ function OrderSummary({ totalAmount, discountRate }: { totalAmount: number; disc
 ```
 
 ## 예시 2
-react의 hook예시도 들어볼게요. 알림 동의 모달을 보여주는 로직이에요.
+react의 hook예시도 들어볼게요. 모달을 보여주는 로직이에요.
 
 ### 기존코드
-비즈니스 로직이 `useEffect` 내부에 흩어져 있어 테스트가 어렵고 모듈화되어 있지 않아요.
+`localStorage`, `isTodayShown`등과 같은 여러 로직이 `useEffect` 내부에 흩어져 있어 모듈화되어 있지 않아요. 그래서 가독성도 떨어지고, 테스트도 어려워요3.
 
 ```tsx
 const STORAGE_KEY = 'notification-modal-shownAt'
 import { useEffect, useState } from 'react';
 
-function HomePage() {
+function Home() {
   const [showModal, setShowModal] = useState(false);
-  const { isAgreed, updateAgreementState } = useNotificationAgreementState(); 
   
   useEffect(() => {
     const lastShown = localStorage.getItem(STORAGE_KEY);
     const todayDateString = new Date().toDateString();
     const isTodayShown = lastShown === todayDateString
     
-    if (!isAgreed && !isTodayShown) {
+    if (!isTodayShown) {
       localStorage.setItem(STORAGE_KEY, todayDateString);
       setShowModal(true);
     }
   }, []);
 
-  const handleAgree = () => {
-    updateAgreementState(true);
-    setShowModal(false);
-  };
-
   return (
     <>
-      <h1>Welcome!</h1>
+      <h1>Modal</h1>
       {showModal && (
-        <NotificationModal onAgree={handleAgree} onClose={() => setShowModal(false)} />
+        <Modal onClose={() => setShowModal(false)} />
       )}
     </>
   );
@@ -99,34 +93,67 @@ function HomePage() {
 ```
 
 ### 순수함수로 분리하기
-로직을 커스텀 훅 `useNotificationConsentModal`로 분리해서 커스텀 훅을 독립적으로 테스트할 수 있어요. UI와 분리돼 있어 재사용성과 유지보수성도 높아져요.
+`localStorage` 관련 로직을 유틸리티 파일로 분리하고, `isTodayShown`을 계산하는 로직도 별도의 유틸리티 함수로 만들었어요. 그리고 이 두 가지를 조합해서 모달을 보여줄지 여부를 판단하는 `useIsModalShow` 커스텀 훅을 구현했어요.  
 
+**utils/localStorage.ts**
+```tsx 
+function getLocalStorage(): Storage | null {
+  if (typeof window === "undefined") return null;
+  try {
+    return window.localStorage;
+  } catch(err){
+    console.error(err)
+    return null;
+  }
+}
+
+export function getLocalStorageValue(key: string): string | null {
+  const localStorage = getLocalStorage();
+  return localStorage ? localStorage.getItem(key) : null;
+}
+
+export function setLocalStorageValue(key:string, value: string): void {
+  const localStorage = getLocalStorage();
+  if (!localStorage) return;
+  try {
+    localStorage.setItem(key, value);
+  } catch (err){
+    console.error(err)
+  }
+}
+```
+
+**utils/modal.ts**
+```tsx 
+export function getIsModalShownToday(modalKey: string){
+  const lastShown = getLocalStorageValue(modalKey);
+  const todayDateString = new Date().toDateString();
+  const isTodayShown = lastShown === todayDateString;
+  return isTodayShown;
+}
+
+export function setModalShownToday(modalKey:string){
+  const todayDateString = new Date().toDateString();
+  setLocalStorageValue(modalKey, todayDateString)
+}
+```
+
+**hooks/useIsModalShow.ts**
 ```tsx
-// useNotificationConsentModal.ts
 import { useEffect, useState } from 'react';
 import { useNotificationAgreementState } from './useNotificationAgreementState'; // 필요 시 경로 조정
 
-const STORAGE_KEY = 'notification-modal-shownAt';
-
-export function useNotificationConsentModal() {
+const MODAL_KEY = 'test1';
+export function useIsModalShow() {
   const [showModal, setShowModal] = useState(false);
-  const { isAgreed, updateAgreementState } = useNotificationAgreementState();
 
   useEffect(() => {
-    const lastShown = localStorage.getItem(STORAGE_KEY);
-    const todayDateString = new Date().toDateString();
-    const isTodayShown = lastShown === todayDateString;
-
-    if (!isAgreed && !isTodayShown) {
-      localStorage.setItem(STORAGE_KEY, todayDateString);
+    const isTodayShown = getIsModalShownToday(MODAL_KEY);
+    if (!isTodayShown) {
+      setModalShownToday(MODAL_KEY)
       setShowModal(true);
     }
   }, [isAgreed]);
-
-  const agree = () => {
-    updateAgreementState(true);
-    setShowModal(false);
-  };
 
   const close = () => {
     setShowModal(false);
@@ -134,23 +161,22 @@ export function useNotificationConsentModal() {
 
   return {
     showModal,
-    agree,
     close,
   };
 }
 ```
 
+**HomePage.tsx**
 ```tsx
-// HomePage.tsx
-import { useNotificationConsentModal } from './hooks/useNotificationConsentModal';
+import { useIsModalShow } from './hooks/useIsModalShow';
 
 function HomePage() {
-  const { showModal, agree, close } = useNotificationConsentModal();
+  const { showModal, close } = useIsModalShow();
 
   return (
     <>
       <h1>Welcome!</h1>
-      <NotificationModal isOpen={showModal} onAgree={agree} onClose={close} />}
+      <Modal isOpen={showModal} onAgree={agree} onClose={close} />}
     </>
   );
 }

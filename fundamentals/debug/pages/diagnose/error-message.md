@@ -31,8 +31,8 @@ the expected pattern.
 ```
 
 ### 확인할 것
-- 문법에 맞게 작성되었는지 확인해요
-- eslint rule을 적용해 문법오류를 쉽게 잡을 수 있도록 환경을 세팅해요.
+- 문법에 맞게 작성되었는지 확인해요.
+- 사용자가 코드를 작성하는 동안 IDE가 구문 오류를 실시간으로 감지하고 강조 표시하여 판단해주기 때문에, 문법오류는 코드 작성 시 문제를 파악하고 고칠 수 있어요.
 
 ## 모듈 import 오류
 
@@ -87,12 +87,28 @@ num();
 TypeError: num is not a function
 ```
 
+<br/>
+
+`async` 함수 안에서 비동기 작업을 실행할 때 `await`를 빠뜨리면 의도하지 않은 동작이나 `Promise` 타입 관련 오류가 발생할 수 있어요. 예를 들어, 함수가 `Promise`를 반환하는데 이를 `await`하지 않고 그대로 사용하면 타입스크립트는 `Promise<T>`와 `T`를 혼동해서 에러를 발생시켜요. 
+
+```tsx 2
+async function getUserName() {
+  return "Alice";
+}
+
+async function main() {
+  const name: string = getUserName(); 
+}
+```
+```
+Type 'Promise<string>' is not assignable to type 'string'
+```
+
 ### 확인할 것
 - 객체가 실제로 존재하는지 확인해요
 - API 응답 데이터 구조가 맞는지 확인해요 
-- `await` 누락 여부를 확인해요
 - `typeof`, `Array.isArray()` 등으로 미리 검사했는지 확인해요
-
+- `await` 누락 여부를 확인해요. 
 
 ## 참조 오류 (`ReferenceError`)
 
@@ -116,22 +132,39 @@ ReferenceError: userName is not defined
 
 ## 리소스 로딩 오류
 
-외부 자원을 불러오지 못할 때 주로 발생해요.
-```tsx 3
-fetch('https://api.example.com/data')
-  .then(res => res.json())
-  .catch(err => console.error(err));
+외부 자원을 가져오는 요청이 네트워크 단계에서 실패하면 브라우저는 `fetch`에서 `TypeError`를 던져요. 브라우저에 따라 `"TypeError: Load failed"` 또는 `"TypeError: Failed to fetch"`로 나타나요. 이 에러는 **HTTP 4xx, 5xx 같은 응답 에러와 다르게** 네트워크 자체가 실패했거나 보안 정책으로 차단됐을 때 발생해요. 이 경우엔 **reject**되어 바로 catch로 넘어가요. 
 
+```tsx 3
+fetch('https://api.otherdomain.com/data')
+  .then((res) => res.json())
+  .catch((err) => {
+    console.error('네트워크 또는 CORS 오류:', err.message);
+  });
 ```
 ```
 TypeError: Load failed
+TypeError: Failed to fetch
 ```
 
+<br/>
+
+참고로, **HTTP 4xx, 5xx 같은 응답 에러**가 발생했을 때는 **reject하여 catch로 넘기지 않고** `res.ok`가 `false`인 응답을 돌려줘요.
+
+```ts
+fetch('/api/data')
+  .then(async (res) => {
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(`서버 오류: HTTP ${res.status} ${res.statusText} ${text}`);
+    }
+    return res.json();
+  })
+  .catch((err) => console.error(err));
+```
+
+
 ### 확인할 것
-- 요청이 실패했는지 개발자 도구의 Network 탭에서 확인해요
-- CORS 정책 위반 여부를 확인해요
-- URL 오타나 네트워크 연결 문제를 확인해요 
-- iframe 삽입 허용 여부 (`X-Frame-Options`)를 확인해요
+- 콘솔에 `TypeError: Load failed`나 `Failed to fetch`가 보이면 네트워크, CORS, 인증서, CSP(Content Security Policy), 확장 프로그램 차단 가능성을 먼저 의심해요.
 
 ---
 

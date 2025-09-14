@@ -43,7 +43,6 @@ export default defineConfig({
             collapsed: false,
             items: [
               { text: "에러 메세지로 원인 추측하기", link: "/pages/diagnose/error-message.md" },
-              { text: "에러 로그 상세히 남기기", link: "/pages/diagnose/error-log.md" },
               { text: "작업 지도 그리기", link: "/pages/diagnose/map.md" },
              ],
           },
@@ -53,6 +52,7 @@ export default defineConfig({
             collapsed:false,
             items: [
               { text: "최대한 간단하게 재현하기", link: "/pages/reproduce/simply.md" },
+              { text: "디버거 활용하기", link: "/pages/reproduce/debugger.md" },
               { text: "일반적인 범위에서 벗어난 값 재현하기", link: "/pages/reproduce/out-range.md" },
               { text: "반복적인 재현 과정을 자동화하기", link: "/pages/reproduce/repeat.md" },
               { text: "버그 발생 경로를 추적하기", link: "/pages/reproduce/trace.md" },
@@ -73,6 +73,7 @@ export default defineConfig({
             link: "/pages/prevent/index.md",
             collapsed:false,
             items: [
+              { text: "에러 로그 상세히 남기기", link: "/pages/prevent/error-log.md" },
               { text: "버그 리포트 남기기", link: "/pages/prevent/bug-report.md" },
               { text: "팀과 공유하고 공통 유틸에 반영하기", link: "/pages/prevent/util.md" },
              ],

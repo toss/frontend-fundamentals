@@ -19,9 +19,14 @@
 5. 검사 결과가 `true`이면 정상 UI를 보여줘요.
 
 
-## 코드
+## 작업지도
+위의 동작 순서에 따라 작업지도를 그려보아요. 코드를 실행했을때 아래의 순서를 모두 통과하면 이 코드는 문제가 없다는 뜻이에요.
+![](../../images/diagnose/map.png)
 
-```tsx 9,15,19
+## 코드
+아래 코드에는 치명적인 오류가 있는데요, 작업지도를 하나씩 검증하며 어디에 문제가 발생하는지 살펴보아요.
+
+```tsx 8,15,19,26
 import React, { useState } from 'react';
 
 const ValidatedInput = () => {
@@ -29,21 +34,39 @@ const ValidatedInput = () => {
   const [isValid, setIsValid] = useState(true);
 
   const validate = (value) => {
+    //2. 입력이 바뀔 때마다 유효성 검사 함수가 실행돼요:"
     const valid = value.length < 5;
-    console.log("2. 입력이 바뀔 때마다 유효성 검사 함수가 실행돼요:", { valid });
     return valid;
   };
 
   const handleChange = (e) => {
     const value = e.target.value;
-    console.log("1. 사용자가 검색 입력창에 키워드를 입력해요:", { value });
+    //1. 사용자가 검색 입력창에 키워드를 입력해요
     setInput(value);
 
     const result = validate(value);
-    console.log("3. 검사 결과, 입력에 따라 true / false를 반환해요:", { result });
+    //3. 검사 결과에 따라 true/false를 반환해요
     setIsValid(result);
   };
 
+  return (
+    <div>
+      <input type="text" value={input} onChange={handleChange} />
+      {/* 4. isValid값이 false이면 에러메세지를 출력해요 */}
+      {isValid && (
+        <div style={{ color: 'red' }}>Error message</div>
+      )}
+    </div>
+  );
+};
+export default ValidatedInput;
+```
+![](../../images/diagnose/map-check.png)
+
+## 에러 도출
+검증 결과, `isValid &&` 조건으로 작성된 에러 UI 렌더링 부분에 **논리 오류**가 있었어요.`isValid === false`로 작성해야 하는데, `isValid &&`로 되어 있어서, **정상적인 UI가 아닌, 잘못된 조건에 의해 오류 메시지가 렌더링**되고 있었어요.
+
+```tsx 4
   return (
     <div>
       <input type="text" value={input} onChange={handleChange} />
@@ -53,19 +76,7 @@ const ValidatedInput = () => {
     </div>
   );
 };
-export default ValidatedInput;
 ```
 
-## 작업지도
-이 코드를 바탕으로 작업지도를 그려볼게요.
-![](../../images/diagnose/map.png)
-
-
-## 작업지도 검증
-이제 작업지도를 이루는 부분들을 하나씩 검증해요.
-![](../../images/diagnose/map-check.png)
-
-## 에러 도출
-검증 결과, `isValid &&` 조건으로 작성된 에러 UI 렌더링 부분에 **논리 오류**가 있었어요.`isValid === false`로 작성해야 하는데, `isValid &&`로 되어 있어서, **정상적인 UI가 아닌, 잘못된 조건에 의해 오류 메시지가 렌더링**되고 있었어요.
 
 이처럼 작업 지도를 그리고 단계별로 동작을 검증해 나가면, 코드 흐름이 머릿속에 명확하게 그려지고 문제를 빠르게 찾아낼 수 있어요. 특히 UI 상태 변화나 비동기 처리처럼 복잡한 로직에서는 작업 지도가 강력한 디버깅 도구가 될 수 있어요.

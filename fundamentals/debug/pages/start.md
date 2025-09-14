@@ -12,7 +12,6 @@ comments: false
 
 ### 진단력을 키우는 전략
  - [에러 메시지로 진단하기](./diagnose/error-message.md)
- - [에러 로그를 상세히 남기기](./diagnose/error-log.md)
  - [작업 지도 그리기](./diagnose/map.md)
 
 ## 2. 재현하기
@@ -21,6 +20,7 @@ comments: false
 
 ### 재현 가능성을 높이는 전략
  - [최대한 간단한 코드로 재현하기](./reproduce/simply.md)
+ - [디버거, 콘솔 활용하기](./reproduce/debugger.md)
  - [일반적인 범위에서 벗어나도록 재현하기](./reproduce/out-range.md)
  - [반복적인 재현 과정을 자동화하기](./reproduce/repeat.md)
  - [버그 발생 경로를 추적하기](./reproduce/trace.md)
@@ -38,5 +38,6 @@ comments: false
 **디버깅의 끝은 재발 방지예요.** 버그가 왜 생겼는지 되짚어 보고, 다음엔 같은 실수를 하지 않도록 기록하고 공유해요.
 
 ### 재발을 막는 전략
+- [에러 로그를 상세히 남기기](./prevent/error-log.md)
 - [버그 리포트 남기기](./prevent/bug-report.md)
 - [팀과 공유하고 공통 유틸에 반영하기](./prevent/util.md)
