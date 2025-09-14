@@ -76,7 +76,6 @@ export function TimelinePage() {
           <div className="flex flex-col lg:border-l lg:border-r border-[rgba(201,201,201,0.4)] lg:min-w-[820px]">
             {user ? (
               <>
-                {/* 3일 스프린트 챌린지 */}
                 <div className="pt-6 pb-0">
                   <SprintChallenge />
                 </div>
