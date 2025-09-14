@@ -11,13 +11,9 @@ export function SprintGrid({ days, isLoading = false }: SprintGridProps) {
   return (
     <div className="flex flex-row justify-center items-start px-6 pb-2 gap-[10px] w-full">
       <div className="flex flex-row items-center gap-4">
-        {isLoading ? (
-          <SprintGridSkeleton />
-        ) : (
-          days.map((day, index) => (
-            <SprintDayItem key={index} day={day} size="small" />
-          ))
-        )}
+        {days.map((day, index) => (
+          <SprintDayItem key={index} day={day} size="small" />
+        ))}
       </div>
     </div>
   );
