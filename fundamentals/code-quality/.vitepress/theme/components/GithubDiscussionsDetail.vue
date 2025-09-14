@@ -14,6 +14,7 @@ const { loading, error, fetchDiscussionDetail } = useGithubApi({
 const discussion = ref<any>(null);
 
 const getDiscussionIdFromUrl = () => {
+  if (typeof window === 'undefined') return null;
   const url = new URL(window.location.href);
   return url.searchParams.get("id");
 };

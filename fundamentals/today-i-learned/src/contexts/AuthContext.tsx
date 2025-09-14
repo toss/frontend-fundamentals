@@ -41,6 +41,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   useEffect(() => {
+    if (typeof window === 'undefined') {
+      setIsLoading(false);
+      return;
+    }
+    
     // 페이지 로드 시 로컬 스토리지에서 사용자 정보 복원
     const savedUser = localStorage.getItem("github_user");
     if (savedUser) {
@@ -83,6 +88,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   const login = () => {
+    if (typeof window === 'undefined') return;
+    
     const redirectUri = 'https://frontend-fundamentals.com/api/github/login-callback';
 
     const loginUrl = `${AUTH_LOGIN_URL}?redirect_uri=${encodeURIComponent(redirectUri)}`;

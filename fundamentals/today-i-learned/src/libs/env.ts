@@ -15,7 +15,7 @@ function parseEnvConfig(): EnvConfig {
 }
 
 function validateEnvConfig(config: EnvConfig): void {
-  const isLocalhost = window.location.hostname === 'localhost';
+  const isLocalhost = typeof window !== 'undefined' && window.location.hostname === 'localhost';
   
   if (isLocalhost && !config.GITHUB_TOKEN) {
     console.warn('VITE_GITHUB_TOKEN is not set. May encounter API rate limits.');
@@ -27,4 +27,4 @@ export const ENV_CONFIG = parseEnvConfig();
 validateEnvConfig(ENV_CONFIG);
 
 export const isDevelopment = () => import.meta.env.DEV;
-export const isLocalhost = () => window.location.hostname === 'localhost';
+export const isLocalhost = () => typeof window !== 'undefined' && window.location.hostname === 'localhost';
