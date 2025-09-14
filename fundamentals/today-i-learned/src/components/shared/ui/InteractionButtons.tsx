@@ -1,5 +1,5 @@
 import { Heart, MessageCircle, ChevronUp } from "lucide-react";
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { ReactionTooltip } from "@/components/shared/ui/ReactionTooltip";
 import { ShareLinkButton } from "@/components/shared/ShareLinkButton";
@@ -24,12 +24,20 @@ export function InteractionButtons({
   onLike,
   onComment,
   onUpvote,
-  hasUserLiked,
-  hasUserUpvoted,
-  heartCount,
-  upvoteCount,
+  hasUserLiked: initialHasUserLiked,
+  hasUserUpvoted: initialHasUserUpvoted,
+  heartCount: initialHeartCount,
+  upvoteCount: initialUpvoteCount,
   variant = "card"
 }: InteractionButtonsProps) {
+  // Optimistic UI state
+  const [optimisticState, setOptimisticState] = useState({
+    hasUserLiked: initialHasUserLiked,
+    hasUserUpvoted: initialHasUserUpvoted,
+    heartCount: initialHeartCount,
+    upvoteCount: initialUpvoteCount
+  });
+
   const [isUpvoteHovered, setIsUpvoteHovered] = useState(false);
   const [isLikeHovered, setIsLikeHovered] = useState(false);
   const [isCommentHovered, setIsCommentHovered] = useState(false);
@@ -41,6 +49,67 @@ export function InteractionButtons({
   const iconStroke = isCardVariant ? "stroke-[#979797]" : "stroke-black/40";
   const textColor = isCardVariant ? "text-[#979797]" : "text-black/40";
 
+  // Props 변화에 따른 상태 동기화
+  useEffect(() => {
+    setOptimisticState({
+      hasUserLiked: initialHasUserLiked,
+      hasUserUpvoted: initialHasUserUpvoted,
+      heartCount: initialHeartCount,
+      upvoteCount: initialUpvoteCount
+    });
+  }, [initialHasUserLiked, initialHasUserUpvoted, initialHeartCount, initialUpvoteCount]);
+
+  // Optimistic handlers
+  const handleOptimisticLike = useCallback(async (e: React.MouseEvent) => {
+    e.stopPropagation();
+
+    const wasLiked = optimisticState.hasUserLiked;
+
+    // Immediate UI update
+    setOptimisticState(prev => ({
+      ...prev,
+      hasUserLiked: !prev.hasUserLiked,
+      heartCount: prev.hasUserLiked ? prev.heartCount - 1 : prev.heartCount + 1
+    }));
+
+    try {
+      await onLike?.(discussion.id);
+    } catch (error) {
+      // Rollback on failure
+      setOptimisticState(prev => ({
+        ...prev,
+        hasUserLiked: wasLiked,
+        heartCount: wasLiked ? prev.heartCount + 1 : prev.heartCount - 1
+      }));
+      console.error("좋아요 실패:", error);
+    }
+  }, [optimisticState.hasUserLiked, onLike, discussion.id]);
+
+  const handleOptimisticUpvote = useCallback(async (e: React.MouseEvent) => {
+    e.stopPropagation();
+
+    const wasUpvoted = optimisticState.hasUserUpvoted;
+
+    // Immediate UI update
+    setOptimisticState(prev => ({
+      ...prev,
+      hasUserUpvoted: !prev.hasUserUpvoted,
+      upvoteCount: prev.hasUserUpvoted ? prev.upvoteCount - 1 : prev.upvoteCount + 1
+    }));
+
+    try {
+      await onUpvote?.(discussion.id);
+    } catch (error) {
+      // Rollback on failure
+      setOptimisticState(prev => ({
+        ...prev,
+        hasUserUpvoted: wasUpvoted,
+        upvoteCount: wasUpvoted ? prev.upvoteCount + 1 : prev.upvoteCount - 1
+      }));
+      console.error("업보트 실패:", error);
+    }
+  }, [optimisticState.hasUserUpvoted, onUpvote, discussion.id]);
+
   return (
     <div className="flex items-start gap-4 pt-2">
       {/* Upvote Button */}
@@ -50,32 +119,29 @@ export function InteractionButtons({
         onMouseLeave={() => setIsUpvoteHovered(false)}
       >
         <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onUpvote?.(discussion.id);
-          }}
+          onClick={handleOptimisticUpvote}
           className={`flex items-center gap-[6px] hover:opacity-70 transition-all ${
-            hasUserUpvoted ? "text-gray-600" : ""
+            optimisticState.hasUserUpvoted ? "text-gray-600" : ""
           }`}
         >
           <div className="w-5 h-5">
             <ChevronUp
               className={`w-full h-full stroke-[1.67px] ${
-                hasUserUpvoted ? "stroke-[#979797]" : iconStroke
+                optimisticState.hasUserUpvoted ? "stroke-[#979797]" : iconStroke
               }`}
             />
           </div>
           <span
             className={`text-[16px] leading-[130%] tracking-[-0.4px] font-bold ${
-              hasUserUpvoted ? "text-[#979797]" : textColor
+              optimisticState.hasUserUpvoted ? "text-[#979797]" : textColor
             }`}
           >
-            {formatNumber(upvoteCount)}
+            {formatNumber(optimisticState.upvoteCount)}
           </span>
         </button>
 
         {isCardVariant && (
-          <ReactionTooltip isVisible={isUpvoteHovered && upvoteCount > 0}>
+          <ReactionTooltip isVisible={isUpvoteHovered && optimisticState.upvoteCount > 0}>
             <div className="flex flex-row items-center gap-[6px]">
               <div className="flex flex-row items-center">
                 {upvoteUsers.slice(0, 3).map((reaction, index) => (
@@ -93,7 +159,7 @@ export function InteractionButtons({
                 ))}
               </div>
               <span className="text-sm font-medium text-gray-700 ml-2 pr-2 truncate">
-                {`${upvoteCount}명이 업보트했어요`}
+                {`${optimisticState.upvoteCount}명이 업보트했어요`}
               </span>
             </div>
           </ReactionTooltip>
@@ -107,18 +173,15 @@ export function InteractionButtons({
         onMouseLeave={() => setIsLikeHovered(false)}
       >
         <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onLike?.(discussion.id);
-          }}
+          onClick={handleOptimisticLike}
           className={`flex items-center gap-[6px] hover:opacity-70 transition-all ${
-            hasUserLiked ? "text-gray-600" : ""
+            optimisticState.hasUserLiked ? "text-gray-600" : ""
           }`}
         >
           <div className="w-5 h-5">
             <Heart
               className={`w-full h-full stroke-[1.67px] ${
-                hasUserLiked
+                optimisticState.hasUserLiked
                   ? "stroke-[#979797] fill-[#656565]"
                   : `${iconStroke} fill-none`
               }`}
@@ -126,15 +189,15 @@ export function InteractionButtons({
           </div>
           <span
             className={`text-[16px] leading-[130%] tracking-[-0.4px] font-semibold ${
-              hasUserLiked ? "text-[#979797]" : textColor
+              optimisticState.hasUserLiked ? "text-[#979797]" : textColor
             }`}
           >
-            {formatNumber(heartCount)}
+            {formatNumber(optimisticState.heartCount)}
           </span>
         </button>
 
         {isCardVariant && (
-          <ReactionTooltip isVisible={isLikeHovered && heartCount > 0}>
+          <ReactionTooltip isVisible={isLikeHovered && optimisticState.heartCount > 0}>
             <div className="flex flex-row items-center gap-[6px]">
               <div className="flex flex-row items-center">
                 {heartUsers.slice(0, 3).map((reaction, index) => (
@@ -152,7 +215,7 @@ export function InteractionButtons({
                 ))}
               </div>
               <span className="text-sm font-medium text-gray-700 ml-2 pr-2 truncate">
-                {`${heartCount}명이 좋아했어요`}
+                {`${optimisticState.heartCount}명이 좋아했어요`}
               </span>
             </div>
           </ReactionTooltip>
