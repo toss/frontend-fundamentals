@@ -1,100 +1,63 @@
-import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useRef } from "react";
-import { X } from "lucide-react";
-import { PostDetail } from "@/components/features/discussions/PostDetail";
 import { useDiscussionDetail } from "@/api/hooks/useDiscussions";
+import { PostDetail } from "@/components/features/discussions/PostDetail";
+import { WeeklyTop5 } from "@/components/features/discussions/WeeklyTop5";
 import { usePostReactions } from "@/hooks/usePostReactions";
+import { useParams } from "react-router-dom";
 
 export function PostDetailPage() {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
-  const previousId = useRef<string>();
-
-  useEffect(() => {
-    // 새로운 포스트로 이동하는 경우에만 스크롤 탑
-    if (previousId.current !== undefined && previousId.current !== id) {
-      window.scrollTo(0, 0);
-    }
-    previousId.current = id;
-  }, [id]);
-  
   const { data: discussion, isLoading, error } = useDiscussionDetail(id || "");
-  
-  const {
-    handleLike,
-    handleComment,
-    handleUpvote
-  } = usePostReactions({ discussion: discussion || undefined });
 
-  const handleClose = () => {
-    navigate(-1);
-  };
-
-  if (isLoading) {
-    return (
-      <div className="w-full h-screen bg-[#FCFCFC] flex items-center justify-center">
-        <div className="w-[800px] h-[1080px] bg-[#FCFCFC] rounded-[16px] flex flex-col items-center pt-0 px-0 pb-6 overflow-hidden isolate">
-          <div className="flex flex-row justify-end items-start p-6 gap-4 w-[800px] h-[68px] bg-[#FCFCFC] flex-none">
-            <button
-              className="w-5 h-5 flex items-center justify-center text-black/60 hover:text-black/80 transition-colors"
-              onClick={handleClose}
-            >
-              <X size={16} />
-            </button>
-          </div>
-          <div className="w-[800px] h-[696px] px-6 z-[1] overflow-y-auto flex items-center justify-center">
-            <div className="text-gray-500">로딩 중...</div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (error || !discussion) {
-    return (
-      <div className="w-full h-screen bg-[#FCFCFC] flex items-center justify-center">
-        <div className="w-[800px] h-[1080px] bg-[#FCFCFC] rounded-[16px] flex flex-col items-center pt-0 px-0 pb-6 overflow-hidden isolate">
-          <div className="flex flex-row justify-end items-start p-6 gap-4 w-[800px] h-[68px] bg-[#FCFCFC] flex-none">
-            <button
-              className="w-5 h-5 flex items-center justify-center text-black/60 hover:text-black/80 transition-colors"
-              onClick={handleClose}
-            >
-              <X size={16} />
-            </button>
-          </div>
-          <div className="w-[800px] h-[696px] px-6 z-[1] overflow-y-auto flex items-center justify-center">
-            <div className="text-gray-500">포스트를 찾을 수 없습니다.</div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const { handleLike, handleComment, handleUpvote } = usePostReactions({
+    discussion: discussion || undefined
+  });
 
   return (
-    <div className="w-full h-screen bg-[#FCFCFC] flex items-center justify-center">
-      <div className="w-[800px] h-[1080px] bg-[#FCFCFC] rounded-[16px] flex flex-col items-center pt-0 px-0 pb-6 overflow-hidden isolate">
-        {/* Header with buttons */}
-        <div className="flex flex-row justify-end items-start p-6 gap-4 w-[800px] h-[68px] bg-[#FCFCFC] flex-none">
-          {/* X 닫기 버튼 */}
-          <button
-            className="w-5 h-5 flex items-center justify-center text-black/60 hover:text-black/80 transition-colors"
-            onClick={handleClose}
-          >
-            <X size={16} />
-          </button>
-        </div>
+    <div className="flex">
+      <div className="lg:border-x border-gray-200 flex-1 p-[24px]">
+        {(() => {
+          if (isLoading) {
+            return <LoadingState />;
+          }
 
-        {/* 본문 영역 */}
-        <div className="w-[800px] h-[696px] px-6 z-[1] overflow-y-auto">
-          <PostDetail
-            discussion={discussion as any}
-            onLike={handleLike}
-            onComment={handleComment}
-            onUpvote={handleUpvote}
-            showComments={true}
-          />
+          if (error || !discussion) {
+            return <ErrorState />;
+          }
+
+          return (
+            <PostDetail
+              discussion={discussion as any}
+              onLike={handleLike}
+              onComment={handleComment}
+              onUpvote={handleUpvote}
+              showComments={true}
+            />
+          );
+        })()}
+      </div>
+
+      {/* 사이드바 */}
+      <div className="hidden lg:block w-[350px]">
+        <div className="sticky top-36">
+          <WeeklyTop5 />
         </div>
       </div>
+    </div>
+  );
+}
+
+function LoadingState() {
+  return (
+    <div className="flex items-center justify-center py-20">
+      <div className="text-gray-500">로딩 중...</div>
+    </div>
+  );
+}
+
+function ErrorState() {
+  return (
+    <div className="flex items-center justify-center py-20">
+      <div className="text-gray-500">포스트를 찾을 수 없습니다.</div>
     </div>
   );
 }

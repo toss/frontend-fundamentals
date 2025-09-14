@@ -3,7 +3,10 @@ import { Avatar } from "@/components/shared/ui/Avatar";
 import { CommentInput } from "./CommentInput";
 import type { GitHubComment } from "@/api/remote/discussions";
 import { formatNumber, formatTimeAgo } from "../utils/formatters";
-import { getHeartAndUpvoteCounts, getUserReactionStates } from "@/utils/reactions";
+import {
+  getHeartAndUpvoteCounts,
+  getUserReactionStates
+} from "@/utils/reactions";
 import { useAuth } from "@/contexts/AuthContext";
 
 interface CommentProps {
@@ -22,9 +25,8 @@ function CommentContainer({
   depth?: number;
 }) {
   if (depth === 0) {
-    // 최상위 댓글
     return (
-      <div className="flex flex-col items-start px-8 py-6 w-full">
+      <div className="flex flex-col items-start px-8 py-6 w-full pl-4">
         {children}
       </div>
     );
@@ -103,7 +105,9 @@ function CommentActions({
   depth?: number;
 }) {
   return (
-    <div className={`flex flex-row items-start py-2 gap-4 h-9 ${depth === 0 ? 'w-[250px]' : 'w-[180px]'}`}>
+    <div
+      className={`flex flex-row items-start py-2 gap-4 h-9 ${depth === 0 ? "w-[250px]" : "w-[180px]"}`}
+    >
       {depth === 0 && (
         <button
           onClick={onUpvote}
@@ -112,13 +116,13 @@ function CommentActions({
           }`}
         >
           <div className="w-5 h-5">
-            <ChevronUp 
+            <ChevronUp
               className={`w-full h-full stroke-[1.67px] ${
                 hasUserUpvoted ? "stroke-[#979797]" : "stroke-black/40"
-              }`} 
+              }`}
             />
           </div>
-          <span 
+          <span
             className={`font-semibold text-base leading-[130%] tracking-tight ${
               hasUserUpvoted ? "text-[#979797]" : "text-black/40"
             }`}
@@ -135,15 +139,15 @@ function CommentActions({
         }`}
       >
         <div className="w-5 h-5">
-          <Heart 
+          <Heart
             className={`w-full h-full stroke-[1.67px] ${
               hasUserLiked
                 ? "stroke-[#979797] fill-[#656565]"
                 : "stroke-black/40 fill-none"
-            }`} 
+            }`}
           />
         </div>
-        <span 
+        <span
           className={`font-semibold text-base leading-[130%] tracking-tight ${
             hasUserLiked ? "text-[#979797]" : "text-black/40"
           }`}
@@ -194,15 +198,16 @@ export function Comment({
   const handleLike = () => onLike(comment.id);
 
   // Use utility functions to get reaction counts and user states
-  const { heartCount, upvoteCount } = getHeartAndUpvoteCounts(comment.reactions);
-  const { hasLiked: hasUserLiked, hasUpvoted: hasUserUpvoted } = getUserReactionStates(comment.reactions, user?.login);
+  const { heartCount, upvoteCount } = getHeartAndUpvoteCounts(
+    comment.reactions
+  );
+  const { hasLiked: hasUserLiked, hasUpvoted: hasUserUpvoted } =
+    getUserReactionStates(comment.reactions, user?.login);
 
   if (depth === 0) {
     return (
       <>
-        <CommentContainer
-          depth={depth}
-        >
+        <CommentContainer depth={depth}>
           <div className="flex flex-row items-center p-0 gap-4 w-full h-10">
             <CommentHeader comment={comment} />
           </div>

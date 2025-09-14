@@ -6,13 +6,9 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
   return (
     <div className="min-h-screen bg-white font-sans antialiased">
       <LayoutNavigation />
-      <div className="relative flex min-h-screen flex-col pt-[120px]">
-        <main className="flex-1">
-          <div className="mx-auto min-w-3xl px-4 max-w-[1440px]">
-            {children}
-          </div>
-        </main>
-      </div>
+      <main className="pt-[120px] mx-auto min-w-3xl max-w-[1440px] lg:pl-[50px]">
+        {children}
+      </main>
     </div>
   );
 };

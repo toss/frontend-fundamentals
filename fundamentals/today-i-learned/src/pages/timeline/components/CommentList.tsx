@@ -27,8 +27,8 @@ export function CommentList({ comments, onUpvote, onLike, onReply }: CommentList
 
           {/* Border - 댓글 사이 경계선 */}
           {index < comments.length - 1 && (
-            <div className="flex flex-col items-start py-2 gap-2.5 w-full h-4">
-              <div className="w-full h-0 border-b border-[rgba(201,201,201,0.4)]" />
+            <div className="flex flex-col items-start py-4 gap-2.5 w-full">
+              <div className="w-full h-px bg-[rgba(201,201,201,0.5)]" />
             </div>
           )}
         </div>
