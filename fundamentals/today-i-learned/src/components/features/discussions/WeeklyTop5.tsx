@@ -20,13 +20,7 @@ function truncateText(text: string, maxLength: number): string {
   return text.slice(0, maxLength) + "...";
 }
 
-function PopularPostItem({
-  post,
-  rank
-}: {
-  post: any;
-  rank: number;
-}) {
+function PopularPostItem({ post, rank }: { post: any; rank: number }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -36,7 +30,7 @@ function PopularPostItem({
   return (
     <div className="flex items-start gap-3">
       <div className="flex items-center pt-2.5">
-        <span className="text-lg font-extrabold text-black/40 tracking-tight leading-tight">
+        <span className="text-lg font-bold text-black/40 tracking-tight leading-tight">
           {rank}
         </span>
       </div>
@@ -82,8 +76,8 @@ export function WeeklyTop5() {
     return (
       <div className="space-y-6">
         <div className="space-y-2">
-          <h3 className="text-2xl font-extrabold text-black tracking-tight">
-            주간 Top 5
+          <h3 className="text-2xl font-bold text-black tracking-tight">
+            주간 TOP 5
           </h3>
           <p className="text-base font-semibold text-black/60 tracking-tight">
             {weekText}
@@ -93,7 +87,7 @@ export function WeeklyTop5() {
           {[...new Array(5)].map((_, index) => (
             <div
               key={index}
-              className="h-[136px] bg-gray-100 rounded-2xl animate-pulse"
+              className="h-[136px] bg-gray-100 rounded-2xl animate-pulse w-full"
             />
           ))}
         </div>
@@ -105,8 +99,8 @@ export function WeeklyTop5() {
     return (
       <div className="space-y-6">
         <div className="space-y-2">
-          <h3 className="text-2xl font-extrabold text-black tracking-tight">
-            주간 Top 5
+          <h3 className="text-2xl font-bold text-black tracking-tight">
+            주간 TOP 5
           </h3>
           <p className="text-base font-semibold text-black/60 tracking-tight">
             {weekText}
@@ -122,8 +116,8 @@ export function WeeklyTop5() {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <h3 className="text-2xl font-extrabold text-black tracking-tight">
-          주간 Top 5
+        <h3 className="text-2xl font-bold text-black tracking-tight">
+          주간 TOP 5
         </h3>
         <p className="text-base font-semibold text-black/60 tracking-tight">
           {weekText}

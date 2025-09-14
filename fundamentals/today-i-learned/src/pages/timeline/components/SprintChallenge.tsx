@@ -130,10 +130,10 @@ function SprintHeader({ title }: { title: string }) {
 function SprintDayItem({ day }: { day: SprintDay }) {
   const circleStyles = day.isToday
     ? day.hasContribution
-      ? "bg-black"
+      ? "bg-[#C6DAFF99]"
       : "bg-black/20"
     : day.hasContribution
-      ? "bg-black/60"
+      ? "bg-[#C6DAFF99]"
       : "bg-black/10";
 
   const textStyles =
@@ -144,13 +144,33 @@ function SprintDayItem({ day }: { day: SprintDay }) {
       <div
         className={`flex flex-col justify-center items-center w-[60px] h-[60px] rounded-full ${circleStyles}`}
       >
-        <span
-          className={`text-[14px] font-bold leading-[160%] tracking-[-0.4px] ${textStyles}`}
-        >
-          {day.isToday ? "오늘" : format(day.date, "E", { locale: ko })}
-        </span>
+        {day.hasContribution ? (
+          <svg
+            width="64"
+            height="64"
+            viewBox="0 0 24 24"
+            fill="none"
+            className="text-[#67A4FF]"
+          >
+            <path
+              d="M9 12L11 14L15 10"
+              stroke="currentColor"
+              strokeWidth="1"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        ) : (
+          <span
+            className={`text-[14px] font-bold leading-[160%] tracking-[-0.4px] ${textStyles}`}
+          >
+            {day.isToday ? "오늘" : format(day.date, "E", { locale: ko })}
+          </span>
+        )}
       </div>
-      <span className="text-[14px] font-[600] leading-[160%] tracking-[-0.4px] text-black/20">
+      <span className={`text-[14px] font-[600] leading-[160%] tracking-[-0.4px] ${
+        day.hasContribution ? "text-[#67A4FF]" : "text-black/20"
+      }`}>
         {day.dayOfWeek}
       </span>
     </div>

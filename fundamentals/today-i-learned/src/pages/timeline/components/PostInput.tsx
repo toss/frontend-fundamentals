@@ -91,7 +91,7 @@ export function PostInput({
               value={content}
               onChange={handleContentChange}
               onKeyDown={handleKeyDown}
-              placeholder="여러분의 TIL, 의미 있는 기록으로 남아요! TIL은 별도의 서버 없이 운영되어 작성한 글은 프론트엔드 디스커션에도 기록되는 점을 확인해주세요. 하루에 한 줄씩, 함께 성장해봐요."
+              placeholder="작은 기록이 모여 큰 성장이 됩니다.&#13;&#10;TIL은 Frontend Fundamentals Discussion에 여러분의 GitHub 계정으로 바로 저장돼요.  &#13;&#10;하루에 한 줄씩, 함께 성장해봐요."
               className="w-full h-[63px] resize-none border-none outline-none focus:outline-none focus:ring-0 p-0 text-base font-medium text-black leading-[160%] tracking-[-0.4px] bg-transparent placeholder:text-black/20 shadow-none self-stretch"
             />
           </div>
