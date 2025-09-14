@@ -23,7 +23,7 @@ watchEffect(async () => {
   const discussionId = getDiscussionIdFromUrl();
 
   if (!discussionId) {
-    throw new Error("토론 ID가 제공되지 않았습니다.");
+    return;
   }
 
   try {
