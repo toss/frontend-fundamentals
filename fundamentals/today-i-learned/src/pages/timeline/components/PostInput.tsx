@@ -88,7 +88,8 @@ export function PostInput({
                 visibleDragbar={false}
                 textareaProps={{
                   placeholder:
-                    "작은 기록이 모여 큰 성장이 됩니다.\nTIL은 Frontend Fundamentals Discussion에 여러분의 GitHub 계정으로 저장돼요.\n하루에 한 줄씩, 함께 성장해봐요."
+                    "작은 기록이 모여 큰 성장이 됩니다.\nTIL은 Frontend Fundamentals Discussion에 여러분의 GitHub 계정으로 저장돼요.\n하루에 한 줄씩, 함께 성장해봐요.",
+                  style: { backgroundColor: "red !important" }
                 }}
                 height={150}
               />
