@@ -6,7 +6,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
   return (
     <div className="min-h-screen bg-white font-sans antialiased">
       <LayoutNavigation />
-      <main className="pt-[120px] mx-auto min-w-3xl max-w-[1440px] lg:pl-[50px]">
+      <main className="pt-[81px] mx-auto min-w-3xl max-w-[1440px] lg:pl-[50px]">
         {children}
       </main>
     </div>

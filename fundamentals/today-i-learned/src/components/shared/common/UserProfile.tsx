@@ -18,7 +18,7 @@ export function UserProfile() {
       <button
         type="button"
         onClick={!user ? login : () => setIsDropdownOpen(!isDropdownOpen)}
-        className="flex items-center space-x-3 px-6 py-4 border border-gray-200/50 rounded-2xl hover:bg-gray-50 transition-colors shadow-sm"
+        className="flex items-center space-x-3 px-4 py-2 border border-gray-200/50 rounded-2xl hover:bg-gray-50 transition-colors shadow-sm"
       >
         {isLoading ? (
           <>
@@ -33,10 +33,10 @@ export function UserProfile() {
             <img
               src={userProfile.avatar_url}
               alt={userProfile.name || userProfile.login}
-              className="w-10 h-10 rounded-full"
+              className="w-[30px] h-[30px] rounded-full"
             />
             <div className="flex items-center space-x-2">
-              <span className="text-base font-bold text-gray-700 tracking-tight">
+              <span className="text-base font-semibold text-gray-700 tracking-tight">
                 {userProfile.name || userProfile.login}
               </span>
               <ChevronDown className="w-5 h-5 text-gray-600" />

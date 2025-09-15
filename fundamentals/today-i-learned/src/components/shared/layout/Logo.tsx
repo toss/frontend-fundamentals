@@ -10,7 +10,7 @@ export function Logo() {
           alt="Frontend Fundamentals Logo"
           className="w-8 h-8"
         />
-        <span className="text-[20px] font-extrabold text-[#0F0F0F] tracking-tight leading-6">
+        <span className="text-[20px] font-bold text-[#0F0F0F] tracking-tight leading-6">
           Today I Learned
         </span>
       </Link>

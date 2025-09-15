@@ -56,7 +56,7 @@ export function PostInput({
   };
 
   return (
-    <div className="flex flex-col items-start gap-[10px] w-full mt-5">
+    <div className="flex flex-col items-start gap-[10px] w-full my-[24px]">
       {/* 상단 사용자 정보 및 제목 입력 */}
       <div className="flex flex-row gap-6 self-stretch">
         {/* 아바타 영역 */}
@@ -91,7 +91,7 @@ export function PostInput({
                     "작은 기록이 모여 큰 성장이 됩니다.\nTIL은 Frontend Fundamentals Discussion에 여러분의 GitHub 계정으로 저장돼요.\n하루에 한 줄씩, 함께 성장해봐요.",
                   style: { backgroundColor: "red !important" }
                 }}
-                height={150}
+                height={60}
               />
             </div>
           </div>
@@ -103,11 +103,9 @@ export function PostInput({
         <Button
           onClick={handleSubmit}
           disabled={!title.trim() || !content.trim() || isLoading}
-          className="flex flex-row justify-center items-center px-[30px] py-5 gap-[10px] w-[115px] h-[51px] bg-black disabled:bg-[#00000033] rounded-[200px] border-none outline-none focus:outline-none"
+          className="flex flex-row justify-center items-center px-[18px] py-[22px] gap-[10px] bg-black disabled:bg-[#00000033] rounded-[200px] border-none outline-none focus:outline-none text-[16px] font-bold text-[#FCFCFC]"
         >
-          <span className="text-[16px] font-bold leading-[130%] tracking-[-0.4px] text-[#FCFCFC]">
-            {isLoading ? "작성중..." : "작성하기"}
-          </span>
+          {isLoading ? "작성중..." : "작성하기"}
         </Button>
       </div>
 

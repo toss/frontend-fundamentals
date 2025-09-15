@@ -76,15 +76,11 @@ export function TimelinePage() {
           <div className="flex flex-col lg:border-l lg:border-r border-[rgba(201,201,201,0.4)] lg:min-w-[820px]">
             {user ? (
               <>
-                <div className="pt-6 pb-0">
+                <div className="pt-[12px] pb-0">
                   <SprintChallenge />
                 </div>
-
                 {/* 구분선 */}
-                <div className="flex flex-col items-start py-4 px-0">
-                  <div className="w-full h-0 border-b border-[rgba(201,201,201,0.4)]" />
-                </div>
-
+                <div className="w-full h-0 border-b border-[rgba(201,201,201,0.4)] mt-[16px]" />
                 {/* 포스트 입력 */}
                 <div className="lg:px-6">
                   <PostInput
@@ -97,11 +93,8 @@ export function TimelinePage() {
                     isLoading={createPostMutation.isPending}
                   />
                 </div>
-
-                {/* 구분선 */}
-                <div className="flex flex-col items-start py-4 px-0">
-                  <div className="w-full h-0 border-b border-[rgba(201,201,201,0.4)]" />
-                </div>
+                s{/* 구분선 */}
+                <div className="w-full h-0 border-b border-[rgba(201,201,201,0.4)]" />
               </>
             ) : (
               <>
@@ -118,7 +111,7 @@ export function TimelinePage() {
             )}
 
             {/* 필터 섹션 */}
-            <div className="lg:px-6 pb-4">
+            <div className="py-[24px] px-[12px]">
               <FilterSection
                 sortOption={sortOption}
                 onSortChange={handleSortChange}
@@ -133,7 +126,7 @@ export function TimelinePage() {
 
           {/* 오른쪽 컬럼: 사이드바 (1024px 이상에서만 표시) */}
           <div className="hidden lg:block mt-[24px] lg:min-w-[490px]">
-            <div className="fixed top-[140px] bottom-4 pr-8 w-[490px] overflow-y-auto">
+            <div className="fixed top-[100px] bottom-4 pr-8 w-[490px] overflow-y-auto">
               <WeeklyTop5 />
             </div>
           </div>

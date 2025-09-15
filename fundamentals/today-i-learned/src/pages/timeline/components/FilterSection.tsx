@@ -21,7 +21,7 @@ export function FilterSection({
   onSortChange
 }: FilterSectionProps) {
   return (
-    <div className="flex flex-row items-center pb-3  pt-1 gap-2">
+    <div className="flex flex-row items-center gap-2">
       {sortTabs.map((tab) => (
         <button
           type="button"
