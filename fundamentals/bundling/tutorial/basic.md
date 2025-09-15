@@ -14,6 +14,7 @@ mkdir webpack-tutorial
 cd webpack-tutorial
 npm init -y
 ```
+
 `npm init -y` 명령어는 기본 설정으로 `package.json` 파일을 자동으로 만들어줘요. `package.json` 파일은 프로젝트의 정보와 사용 중인 패키지를 기록하는 역할을 해요.
 
 ## 2. 웹팩과 웹팩 CLI 설치하기
@@ -27,7 +28,7 @@ npm init -y
 npm install webpack webpack-cli --save-dev
 ```
 
-`--save-dev` 옵션은 이 도구들이 앱 코드가 아니라 **개발 도구**라는 의미로 설치해요. 설치가 끝나면 `node_modules` 폴더와 `package-lock.json` 파일이 생겨요. 
+`--save-dev` 옵션은 이 도구들이 앱 코드가 아니라 **개발 도구**라는 의미로 설치해요. 설치가 끝나면 `node_modules` 폴더와 `package-lock.json` 파일이 생겨요.
 
 ::: details 개발 도구로 설치하는 것의 의미
 
@@ -58,13 +59,13 @@ export function subtract(a, b) {
 
 ```javascript
 // src/utils/index.js
-export { add } from './add.js';
-export { subtract } from './subtract.js';
+export { add } from "./add.js";
+export { subtract } from "./subtract.js";
 ```
 
 ```javascript
 // src/index.js
-import { add } from './utils/index.js';
+import { add } from "./utils/index.js";
 
 console.log(add(1, 2));
 ```
@@ -146,7 +147,10 @@ npm run build
 원래 소스 코드와 동작은 같지만, 훨씬 최적화되었어요. 불필요한 공백이 없고, 사용하지 않는 코드들은 모두 삭제되었어요.
 
 ```javascript
-(()=>{"use strict";console.log(3)})();
+(() => {
+  "use strict";
+  console.log(3);
+})();
 ```
 
 이제 폴더 구조는 다음과 같을 거예요.

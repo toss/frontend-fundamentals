@@ -16,7 +16,7 @@ export function Image() {
 
 이미지같이 정적 파일을 import했을 때 일어날 동작은 웹팩의 [Asset Modules](https://webpack.js.org/guides/asset-modules/) 로더로 정의할 수 있어요.
 
-Asset Modules를 사용하면, 웹팩은 정적 자원을 자원이 있는 위치를 가리키는 JavaScript 문자열로 변환해요. 
+Asset Modules를 사용하면, 웹팩은 정적 자원을 자원이 있는 위치를 가리키는 JavaScript 문자열로 변환해요.
 그래서 `<img />` 태그의 `src` 값을 그대로 제공해도 되죠.
 
 ```typescript
@@ -101,14 +101,14 @@ CSS에서도 이미지와 폰트를 바로 사용할 수 있어요. 웹팩은 CS
 ```css
 /* src/style.css */
 @font-face {
-  font-family: 'MyCustomFont';
-  src: url('./fonts/custom-font.woff2') format('woff2');
+  font-family: "MyCustomFont";
+  src: url("./fonts/custom-font.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
 }
 
 body {
-  font-family: 'MyCustomFont', 'Arial', sans-serif;
+  font-family: "MyCustomFont", "Arial", sans-serif;
   background-color: #f5f5f5;
 }
 
@@ -120,7 +120,7 @@ body {
   color: #0288d1;
   margin: 20px;
 
-  background-image: url('./images/icon.png');
+  background-image: url("./images/icon.png");
   background-repeat: no-repeat;
   background-position: 10px center;
   padding-left: 40px;

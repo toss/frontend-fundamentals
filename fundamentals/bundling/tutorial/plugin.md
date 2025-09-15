@@ -19,15 +19,15 @@ npm install html-webpack-plugin --save-dev
 
 ```javascript
 // webpack.config.js
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
-      title: '웹팩 튜토리얼',  // <title> 태그 내용
-      template: './src/template.html', // 선택: HTML 템플릿 지정
-    }),
-  ],
+      title: "웹팩 튜토리얼", // <title> 태그 내용
+      template: "./src/template.html" // 선택: HTML 템플릿 지정
+    })
+  ]
 };
 ```
 
@@ -40,13 +40,13 @@ module.exports = {
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8" />
-  <title><%= htmlWebpackPlugin.options.title %></title>
-</head>
-<body>
-  <div id="app"></div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
 </html>
 ```
 
@@ -151,11 +151,12 @@ module.exports = {
   ],
 };
 ```
+
 코드 내에서 아래와 같이 환경 변수에 따라 다르게 동작하도록 만들 수 있어요.
 
 ```javascript
-if (process.env.NODE_ENV === 'development') {
-  console.log('개발 중입니다!');
+if (process.env.NODE_ENV === "development") {
+  console.log("개발 중입니다!");
 }
 ```
 
@@ -165,13 +166,13 @@ if (process.env.NODE_ENV === 'development') {
 
 플러그인은 웹팩을 더 강력하고 편리하게 만들어주는 도구예요. 아래는 자주 쓰이는 플러그인들의 사용 목적을 간략히 정리한 거예요.
 
-| 목적 | 플러그인 |
-|------|----------|
-| HTML 파일 자동 생성 | `HtmlWebpackPlugin` |
-| CSS 파일 분리 | `MiniCssExtractPlugin` |
-| dist 폴더 정리 | `CleanWebpackPlugin` 또는 `output.clean: true` |
-| 환경 변수 설정 | `DefinePlugin` 또는 `dotenv-webpack` |
-| 코드 압축 | `TerserWebpackPlugin`, `CssMinimizerPlugin` 등 |
+| 목적                | 플러그인                                       |
+| ------------------- | ---------------------------------------------- |
+| HTML 파일 자동 생성 | `HtmlWebpackPlugin`                            |
+| CSS 파일 분리       | `MiniCssExtractPlugin`                         |
+| dist 폴더 정리      | `CleanWebpackPlugin` 또는 `output.clean: true` |
+| 환경 변수 설정      | `DefinePlugin` 또는 `dotenv-webpack`           |
+| 코드 압축           | `TerserWebpackPlugin`, `CssMinimizerPlugin` 등 |
 
 웹팩 플러그인을 사용하면 번들링 결과를 더 효율적으로 만들 수 있어요. 코드 최적화, 파일 정리, 환경 설정, 자동화 등 다양한 작업을 설정 한 번으로 처리할 수 있어서 개발 속도와 유지보수 품질을 동시에 높일 수 있어요.
 

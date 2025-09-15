@@ -13,12 +13,12 @@ API を叩くのと関連した Hook のように同じ種類の関数やHookが
 しかし`useUser`は`@tanstack/react-query`の`Query`オブジェクトを返し、`useServerTime`はサーバー時間を持ってきてデータだけを返しています。
 
 ```typescript 9,18
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
 function useUser() {
   const query = useQuery({
-    queryKey: ['user'],
-    queryFn: () => fetchUser(),
+    queryKey: ["user"],
+    queryFn: () => fetchUser()
   });
 
   return query;
@@ -26,8 +26,8 @@ function useUser() {
 
 function useServerTime() {
   const query = useQuery({
-    queryKey: ['serverTime'],
-    queryFn: () => fetchServerTime(),
+    queryKey: ["serverTime"],
+    queryFn: () => fetchServerTime()
   });
 
   return query.data;
@@ -47,12 +47,12 @@ function useServerTime() {
 次のようにサーバーのAPIを叩くHookは一貫性を持たせて`Query`オブジェクトを返してあげるようにすれば、チームメンバーがコードを予測できる可能性が高まります。
 
 ```typescript 9,18
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
 function useUser() {
   const query = useQuery({
-    queryKey: ['user'],
-    queryFn: () => fetchUser(),
+    queryKey: ["user"],
+    queryFn: () => fetchUser()
   });
 
   return query;
@@ -60,8 +60,8 @@ function useUser() {
 
 function useServerTime() {
   const query = useQuery({
-    queryKey: ['serverTime'],
-    queryFn: () => fetchServerTime(),
+    queryKey: ["serverTime"],
+    queryFn: () => fetchServerTime()
   });
 
   return query;

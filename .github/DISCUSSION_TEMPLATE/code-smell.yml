@@ -1,4 +1,4 @@
-labels: ['Discussion']
+labels: ["Discussion"]
 body:
   - type: markdown
     attributes:

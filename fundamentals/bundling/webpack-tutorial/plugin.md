@@ -32,15 +32,15 @@ $ npm install --save-dev html-webpack-plugin
 `webpack.config.js`에 플러그인 설정을 추가해 주세요.
 
 ```js
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   // ...기존과 동일
   plugins: [
     new HtmlWebpackPlugin({
-      template: './index.html', // 템플릿 HTML
-      filename: 'index.html',   // 출력될 HTML 파일 이름
-      inject: true              // <script> 태그 자동 삽입
+      template: "./index.html", // 템플릿 HTML
+      filename: "index.html", // 출력될 HTML 파일 이름
+      inject: true // <script> 태그 자동 삽입
     })
   ]
 };
@@ -82,6 +82,7 @@ dist/
 ```
 
 `/dist/index.html`파일을 열어보면 `bundle.js` 스크립트가 추가된걸 확인할 수 있어요. 이제는 이 파일을 브라우저에서 열어서 테스트해주세요.
+
 ```html{7-7}
 <!DOCTYPE html>
 <html lang="en">

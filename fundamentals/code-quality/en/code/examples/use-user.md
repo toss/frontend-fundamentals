@@ -13,11 +13,11 @@ The `useUser` and `useServerTime` hooks are both related to API calls.
 However, `useUser` returns a `Query` object from `@tanstack/react-query`, while `useServerTime` fetches the server time and only returns the data.
 
 ```typescript 9,18
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
 function useUser() {
   const query = useQuery({
-    queryKey: ['user'],
+    queryKey: ["user"],
     queryFn: fetchUser
   });
 
@@ -26,8 +26,8 @@ function useUser() {
 
 function useServerTime() {
   const query = useQuery({
-    queryKey: ['serverTime'],
-    queryFn: fetchServerTime,
+    queryKey: ["serverTime"],
+    queryFn: fetchServerTime
   });
 
   return query.data;
@@ -47,11 +47,11 @@ When code performing the same type of action does not follow consistent rules, i
 By making hooks that call server APIs consistently return a `Query` object, as shown in the following example, you can enhance the predictability of the code for your teammates.
 
 ```typescript 9,18
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
 function useUser() {
   const query = useQuery({
-    queryKey: ['user'],
+    queryKey: ["user"],
     queryFn: fetchUser
   });
 
@@ -60,7 +60,7 @@ function useUser() {
 
 function useServerTime() {
   const query = useQuery({
-    queryKey: ['serverTime'],
+    queryKey: ["serverTime"],
     queryFn: fetchServerTime
   });
 
@@ -138,14 +138,14 @@ function checkIsNameValid(name: string) {
   if (name.length === 0) {
     return {
       ok: false,
-      reason: 'Name cannot be empty.'
+      reason: "Name cannot be empty."
     };
-  } 
-  
+  }
+
   if (name.length >= 20) {
     return {
       ok: false,
-      reason: 'Name cannot be longer than 20 characters'
+      reason: "Name cannot be longer than 20 characters"
     };
   }
 

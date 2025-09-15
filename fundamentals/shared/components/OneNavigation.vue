@@ -6,12 +6,9 @@
         :key="item.path"
         class="nav-item"
         :class="{ active: isActive(item.path) }"
-        :data-tooltip="(isKorean ? item.tooltip.ko : item.tooltip.en)"
+        :data-tooltip="isKorean ? item.tooltip.ko : item.tooltip.en"
       >
-        <a 
-          href="javascript:void(0)" 
-          @click="handleNavigation(item.href)"
-        >
+        <a href="javascript:void(0)" @click="handleNavigation(item.href)">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -35,9 +32,7 @@ const { lang } = useData();
 const navigationItems = computed(() =>
   ONE_NAVIGATION_ITEMS.map((item) => ({
     ...item,
-    href: item.href
-      .replace("/{lang}", `/${lang.value.split("-").at(0)}`)
-      .replace("/ko", "")
+    href: item.href.replace("/{lang}", `/${lang.value}`).replace("/ko", "")
   }))
 );
 
@@ -206,4 +201,4 @@ function handleNavigation(href: string): void {
     width: calc(100% - 16px);
   }
 }
-</style> 
+</style>
