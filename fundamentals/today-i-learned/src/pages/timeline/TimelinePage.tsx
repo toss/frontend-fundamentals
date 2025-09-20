@@ -93,7 +93,7 @@ export function TimelinePage() {
                     isLoading={createPostMutation.isPending}
                   />
                 </div>
-                s{/* 구분선 */}
+                {/* 구분선 */}
                 <div className="w-full h-0 border-b border-[rgba(201,201,201,0.4)]" />
               </>
             ) : (
