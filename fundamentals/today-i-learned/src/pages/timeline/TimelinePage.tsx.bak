@@ -22,6 +22,7 @@ export function TimelinePage() {
   const { handleApiError } = useErrorHandler();
   const { success: showSuccessToast } = useToast();
 
+  // sortOption에 따른 API 파라미터 계산
   const getPostListProps = () => {
     switch (sortOption) {
       case "newest":
@@ -123,6 +124,7 @@ export function TimelinePage() {
   );
 }
 
+// Page Layout Styles
 const pageContainer = css({
   minHeight: "100vh",
   backgroundColor: "white"
@@ -140,6 +142,7 @@ const mainGridLayout = css({
   gap: "2rem"
 });
 
+// Main Content Column
 const mainContentColumn = css({
   display: "flex",
   flexDirection: "column",
@@ -148,6 +151,7 @@ const mainContentColumn = css({
   minWidth: { lg: "820px" }
 });
 
+// Content Sections
 const sprintChallengeSection = css({
   paddingTop: "12px",
   paddingBottom: 0
@@ -173,6 +177,7 @@ const postListSection = css({
   paddingBottom: 0
 });
 
+// Sidebar Column
 const sidebarColumn = css({
   display: { base: "none", lg: "block" },
   marginTop: "24px",
@@ -188,6 +193,7 @@ const sidebarContent = css({
   overflowY: "auto"
 });
 
+// Section Divider Component
 function SectionDivider() {
   return <div className={sectionDivider} />;
 }

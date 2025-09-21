@@ -28,6 +28,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  // 토큰으로 사용자 정보 조회
   const fetchUserInfo = async (token: string) => {
     try {
       const userData = await getUserInfo(token);
@@ -45,6 +46,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       return;
     }
 
+    // 페이지 로드 시 로컬 스토리지에서 사용자 정보 복원
     const savedUser = localStorage.getItem("github_user");
     if (savedUser) {
       try {
@@ -56,6 +58,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       }
     }
 
+    // URL 파라미터에서 OAuth 콜백 처리
     const urlParams = new URLSearchParams(window.location.search);
     const authStatus = urlParams.get("auth");
     const tokenParam = urlParams.get("token");
@@ -64,8 +67,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
     if (authStatus === "success" && tokenParam) {
       try {
         const token = atob(tokenParam);
+        // 토큰으로 사용자 정보 조회
         fetchUserInfo(token);
 
+        // URL에서 파라미터 제거
         window.history.replaceState(
           {},
           document.title,
@@ -76,6 +81,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       }
     } else if (error) {
       console.error("OAuth error:", error);
+      // 에러 처리 (토스트 등)
     }
 
     setIsLoading(false);

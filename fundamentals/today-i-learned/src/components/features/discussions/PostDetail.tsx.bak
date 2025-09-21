@@ -52,6 +52,7 @@ export function PostDetail({
   const [commentText, setCommentText] = useState("");
   const { user } = useAuth();
 
+  // GitHub API 훅들
   const { data: discussionDetail, isLoading: isDetailLoading } =
     useDiscussionDetail(discussion.id);
   const addCommentMutation = useAddDiscussionComment();
@@ -106,6 +107,7 @@ export function PostDetail({
     try {
       const reactionContent = type === "like" ? "HEART" : "THUMBS_UP";
 
+      // 클릭 시점의 현재 UI 상태를 기준으로 토글 여부 결정
       const { hasLiked: currentHasLiked, hasUpvoted: currentHasUpvoted } =
         getUserReactionStates(actualDiscussion.reactions, user.login);
       const isCurrentlyReacted =
@@ -117,6 +119,7 @@ export function PostDetail({
         content: reactionContent
       });
 
+      // 기존 콜백도 호출 (UI 업데이트용)
       if (type === "like" && onLike) {
         onLike(discussion.id);
       }
@@ -186,6 +189,7 @@ export function PostDetail({
     }
   };
 
+  // 현재 사용자의 반응 상태와 개수 계산
   const { heartCount, upvoteCount } = getHeartAndUpvoteCounts(
     actualDiscussion.reactions
   );
@@ -317,6 +321,7 @@ export function PostDetail({
   );
 }
 
+// Semantic style definitions
 const postContainer = css({
   width: "100%",
   display: "flex",
