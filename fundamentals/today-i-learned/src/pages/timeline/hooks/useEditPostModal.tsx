@@ -3,6 +3,114 @@ import { X } from "lucide-react";
 import { AlertDialog } from "@/components/shared/ui/AlertDialog";
 import { useUserProfile } from "@/api/hooks/useUser";
 import { useMutation } from "@tanstack/react-query";
+import { css } from "@styled-system/css";
+
+const modalContainer = {
+  position: "fixed",
+  top: "0",
+  left: "0",
+  width: "100%",
+  height: "100%",
+  backgroundColor: "rgba(0, 0, 0, 0.5)",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  zIndex: "9999"
+};
+
+const modalContent = {
+  backgroundColor: "white",
+  borderRadius: "24px",
+  padding: "32px",
+  width: "90%",
+  maxWidth: "600px",
+  maxHeight: "80vh",
+  display: "flex",
+  flexDirection: "column",
+  boxShadow:
+    "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+};
+
+const modalHeader = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  marginBottom: "24px"
+};
+
+const modalTitle = {
+  fontSize: "24px",
+  fontWeight: "700",
+  color: "rgb(15, 15, 15)"
+};
+
+const closeButton = {
+  padding: "8px",
+  borderRadius: "8px",
+  cursor: "pointer",
+  transition: "background-color 0.2s ease",
+  _hover: {
+    backgroundColor: "rgb(243, 244, 246)"
+  }
+};
+
+const contentWrapper = {
+  flex: "1",
+  marginBottom: "24px"
+};
+
+const textArea = {
+  width: "100%",
+  height: "100%",
+  resize: "none",
+  border: "none",
+  outline: "none",
+  fontSize: "16px",
+  fontWeight: "500",
+  lineHeight: "160%",
+  letterSpacing: "-0.4px",
+  color: "rgb(15, 15, 15)",
+  backgroundColor: "transparent",
+  "&::placeholder": {
+    color: "rgba(15, 15, 15, 0.4)"
+  }
+};
+
+const titleInput = {
+  width: "100%",
+  fontSize: "22px",
+  fontWeight: "700",
+  lineHeight: "130%",
+  letterSpacing: "-0.4px",
+  color: "rgb(15, 15, 15)",
+  backgroundColor: "transparent",
+  border: "none",
+  outline: "none",
+  padding: "0",
+  "&::placeholder": {
+    color: "rgba(15, 15, 15, 0.4)"
+  }
+};
+
+const submitButton = {
+  backgroundColor: "black",
+  color: "white",
+  paddingX: "24px",
+  paddingY: "12px",
+  borderRadius: "12px",
+  fontSize: "16px",
+  fontWeight: "600",
+  cursor: "pointer",
+  border: "none",
+  transition: "background-color 0.2s ease",
+  _hover: {
+    backgroundColor: "rgb(31, 41, 55)"
+  },
+  _disabled: {
+    backgroundColor: "rgb(156, 163, 175)",
+    cursor: "not-allowed"
+  }
+};
 
 interface UseWritePostModalOptions {
   onSubmit?: (title: string, content: string) => void;
@@ -11,7 +119,7 @@ interface UseWritePostModalOptions {
   initialContent?: string;
 }
 
-export function useWritePostModal(options: UseWritePostModalOptions = {}) {
+export function useEditPostModal(options: UseWritePostModalOptions = {}) {
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState(options.initialTitle || "");
   const [content, setContent] = useState(options.initialContent || "");
@@ -38,7 +146,7 @@ export function useWritePostModal(options: UseWritePostModalOptions = {}) {
     }
   });
 
-  const WritePostModal = (
+  const EditPostModal = (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
       <AlertDialog.Content className="flex flex-col max-w-[800px] min-h-[628px]">
         {/* Header with close button */}
@@ -74,7 +182,7 @@ export function useWritePostModal(options: UseWritePostModalOptions = {}) {
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="제목을 입력하세요"
-                  className="w-full text-[22px] font-bold leading-[130%] tracking-[-0.4px] text-[#0F0F0F] placeholder:text-[#0F0F0F]/40 bg-transparent border-none outline-none p-0"
+                  className={css(titleInput)}
                   style={{
                     fontFamily:
                       "'Toss Product Sans OTF', ui-sans-serif, system-ui, sans-serif"
@@ -88,12 +196,12 @@ export function useWritePostModal(options: UseWritePostModalOptions = {}) {
             </div>
 
             {/* Text area - 본문만 입력 */}
-            <div className="flex-1 mb-6">
+            <div className={css(contentWrapper)}>
               <textarea
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 placeholder="## 오늘 한 일&#10;- [X] 블로그 초안 쓰기&#10;- [ ] 커밋 푸시하기&#10;&#10;오늘 이만큼이나 했어요! 짱이죠?"
-                className="w-full h-full resize-none border-none outline-none text-[16px] font-medium leading-[160%] tracking-[-0.4px] text-[#0F0F0F] placeholder:text-[#0F0F0F]/40 bg-transparent"
+                className={css(textArea)}
                 style={{
                   fontFamily:
                     "'Toss Product Sans OTF', ui-sans-serif, system-ui, sans-serif"
@@ -142,7 +250,7 @@ export function useWritePostModal(options: UseWritePostModalOptions = {}) {
     isOpen,
     openModal,
     closeModal: () => setIsOpen(false),
-    WritePostModal,
+    EditPostModal,
     title,
     content,
     setTitle,

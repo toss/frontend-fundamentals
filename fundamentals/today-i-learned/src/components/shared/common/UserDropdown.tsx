@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { css } from "../../../../styled-system/css";
+import { css } from "@styled-system/css";
 
 const dropdownContainer = {
   position: "absolute",
@@ -50,11 +50,7 @@ export function UserDropdown({ isOpen, onClose, onLogout }: UserDropdownProps) {
 
   return (
     <div className={css(dropdownContainer)}>
-      <Link
-        to="/profile"
-        className={css(dropdownItem)}
-        onClick={onClose}
-      >
+      <Link to="/profile" className={css(dropdownItem)} onClick={onClose}>
         내 프로필
       </Link>
       <button

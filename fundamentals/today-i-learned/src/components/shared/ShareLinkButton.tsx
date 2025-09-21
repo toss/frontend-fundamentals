@@ -1,6 +1,6 @@
 import { Link } from "lucide-react";
 import { useToast } from "@/contexts/ToastContext";
-import { css, cx } from "../../../styled-system/css";
+import { css, cx } from "@styled-system/css";
 
 const shareButton = {
   display: "flex",
@@ -31,12 +31,15 @@ interface ShareLinkButtonProps {
   className?: string;
 }
 
-export function ShareLinkButton({ discussionId, className = "" }: ShareLinkButtonProps) {
+export function ShareLinkButton({
+  discussionId,
+  className = ""
+}: ShareLinkButtonProps) {
   const { success: showSuccessToast } = useToast();
 
   const handleCopyLink = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const origin = typeof window !== 'undefined' ? window.location.origin : '';
+    const origin = typeof window !== "undefined" ? window.location.origin : "";
     const url = `${origin}/today-i-learned/post/${discussionId}`;
     navigator.clipboard.writeText(url);
     showSuccessToast("링크가 복사되었습니다!");

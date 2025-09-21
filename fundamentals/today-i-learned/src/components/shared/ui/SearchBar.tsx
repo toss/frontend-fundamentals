@@ -1,7 +1,7 @@
 import { Search, Command } from "lucide-react";
 import { useState, useRef, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { css } from "../../../../styled-system/css";
+import { css } from "@styled-system/css";
 
 const searchContainer = {
   display: "none",
@@ -129,12 +129,11 @@ export function SearchBar({
 
   return (
     <div className={css(searchContainer)}>
-      <form
-        onSubmit={handleSearchSubmit}
-        className={css(searchForm)}
-      >
+      <form onSubmit={handleSearchSubmit} className={css(searchForm)}>
         <div
-          className={css(isSearchFocused ? searchInputContainerFocused : searchInputContainer)}
+          className={css(
+            isSearchFocused ? searchInputContainerFocused : searchInputContainer
+          )}
         >
           <Search className={css(searchIcon)} />
           <input

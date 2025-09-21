@@ -1,6 +1,6 @@
 import { User } from "lucide-react";
 import type { GitHubUser, AuthenticatedUser } from "@/api/remote/user";
-import { css } from "../../../../styled-system/css";
+import { css } from "@styled-system/css";
 
 const avatarImage = {
   height: "44px",
@@ -18,7 +18,8 @@ const avatarFallback = {
   alignItems: "center",
   justifyContent: "center",
   borderRadius: "9999px",
-  background: "linear-gradient(to right, rgb(156, 163, 175), rgb(107, 114, 128))",
+  background:
+    "linear-gradient(to right, rgb(156, 163, 175), rgb(107, 114, 128))",
   boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.05)"
 };
 

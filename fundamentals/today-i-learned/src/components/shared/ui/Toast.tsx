@@ -1,9 +1,8 @@
 import { UI_CONFIG } from "@/constants";
-import { cn } from "@/libs/utils";
 import type { BaseComponentProps } from "@/types";
 import { X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { css, cx } from "../../../../styled-system/css";
+import { css, cx } from "@styled-system/css";
 
 const toastWrapper = {
   minWidth: "400px",
@@ -22,7 +21,8 @@ const toastContainer = {
   position: "relative",
   backgroundColor: "white",
   borderRadius: "9999px",
-  boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+  boxShadow:
+    "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
   paddingX: "24px",
   paddingY: "16px",
   display: "flex",
@@ -149,10 +149,7 @@ export function Toast({
         </div>
 
         {action && (
-          <button
-            onClick={action.onClick}
-            className={css(toastAction)}
-          >
+          <button onClick={action.onClick} className={css(toastAction)}>
             {action.label}
           </button>
         )}

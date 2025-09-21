@@ -6,7 +6,7 @@ import { ShareLinkButton } from "@/components/shared/ShareLinkButton";
 import { formatNumber } from "@/pages/timeline/utils/formatters";
 import { getUsersWhoReacted } from "@/utils/reactions";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
-import { css } from "../../../../styled-system/css";
+import { css } from "@styled-system/css";
 
 const interactionContainer = {
   display: "flex",
@@ -170,58 +170,73 @@ export function InteractionButtons({
       heartCount: initialHeartCount,
       upvoteCount: initialUpvoteCount
     });
-  }, [initialHasUserLiked, initialHasUserUpvoted, initialHeartCount, initialUpvoteCount]);
+  }, [
+    initialHasUserLiked,
+    initialHasUserUpvoted,
+    initialHeartCount,
+    initialUpvoteCount
+  ]);
 
   // Optimistic handlers
-  const handleOptimisticLike = useCallback(async (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handleOptimisticLike = useCallback(
+    async (e: React.MouseEvent) => {
+      e.stopPropagation();
 
-    const wasLiked = optimisticState.hasUserLiked;
+      const wasLiked = optimisticState.hasUserLiked;
 
-    // Immediate UI update
-    setOptimisticState(prev => ({
-      ...prev,
-      hasUserLiked: !prev.hasUserLiked,
-      heartCount: prev.hasUserLiked ? prev.heartCount - 1 : prev.heartCount + 1
-    }));
-
-    try {
-      await onLike?.(discussion.id);
-    } catch (error) {
-      // Rollback on failure
-      setOptimisticState(prev => ({
+      // Immediate UI update
+      setOptimisticState((prev) => ({
         ...prev,
-        hasUserLiked: wasLiked,
-        heartCount: wasLiked ? prev.heartCount + 1 : prev.heartCount - 1
+        hasUserLiked: !prev.hasUserLiked,
+        heartCount: prev.hasUserLiked
+          ? prev.heartCount - 1
+          : prev.heartCount + 1
       }));
-      console.error("좋아요 실패:", error);
-    }
-  }, [optimisticState.hasUserLiked, onLike, discussion.id]);
 
-  const handleOptimisticUpvote = useCallback(async (e: React.MouseEvent) => {
-    e.stopPropagation();
+      try {
+        await onLike?.(discussion.id);
+      } catch (error) {
+        // Rollback on failure
+        setOptimisticState((prev) => ({
+          ...prev,
+          hasUserLiked: wasLiked,
+          heartCount: wasLiked ? prev.heartCount + 1 : prev.heartCount - 1
+        }));
+        console.error("좋아요 실패:", error);
+      }
+    },
+    [optimisticState.hasUserLiked, onLike, discussion.id]
+  );
 
-    const wasUpvoted = optimisticState.hasUserUpvoted;
+  const handleOptimisticUpvote = useCallback(
+    async (e: React.MouseEvent) => {
+      e.stopPropagation();
 
-    // Immediate UI update
-    setOptimisticState(prev => ({
-      ...prev,
-      hasUserUpvoted: !prev.hasUserUpvoted,
-      upvoteCount: prev.hasUserUpvoted ? prev.upvoteCount - 1 : prev.upvoteCount + 1
-    }));
+      const wasUpvoted = optimisticState.hasUserUpvoted;
 
-    try {
-      await onUpvote?.(discussion.id);
-    } catch (error) {
-      // Rollback on failure
-      setOptimisticState(prev => ({
+      // Immediate UI update
+      setOptimisticState((prev) => ({
         ...prev,
-        hasUserUpvoted: wasUpvoted,
-        upvoteCount: wasUpvoted ? prev.upvoteCount + 1 : prev.upvoteCount - 1
+        hasUserUpvoted: !prev.hasUserUpvoted,
+        upvoteCount: prev.hasUserUpvoted
+          ? prev.upvoteCount - 1
+          : prev.upvoteCount + 1
       }));
-      console.error("업보트 실패:", error);
-    }
-  }, [optimisticState.hasUserUpvoted, onUpvote, discussion.id]);
+
+      try {
+        await onUpvote?.(discussion.id);
+      } catch (error) {
+        // Rollback on failure
+        setOptimisticState((prev) => ({
+          ...prev,
+          hasUserUpvoted: wasUpvoted,
+          upvoteCount: wasUpvoted ? prev.upvoteCount + 1 : prev.upvoteCount - 1
+        }));
+        console.error("업보트 실패:", error);
+      }
+    },
+    [optimisticState.hasUserUpvoted, onUpvote, discussion.id]
+  );
 
   return (
     <div className={css(interactionContainer)}>
@@ -244,14 +259,22 @@ export function InteractionButtons({
                 width: "100%",
                 height: "100%",
                 strokeWidth: "1.67px",
-                stroke: optimisticState.hasUserUpvoted ? "#979797" : (isCardVariant ? "#979797" : "rgba(0,0,0,0.4)")
+                stroke: optimisticState.hasUserUpvoted
+                  ? "#979797"
+                  : isCardVariant
+                    ? "#979797"
+                    : "rgba(0,0,0,0.4)"
               }}
             />
           </div>
           <span
             className={css(upvoteText)}
             style={{
-              color: optimisticState.hasUserUpvoted ? "#979797" : (isCardVariant ? "#979797" : "rgba(0,0,0,0.4)")
+              color: optimisticState.hasUserUpvoted
+                ? "#979797"
+                : isCardVariant
+                  ? "#979797"
+                  : "rgba(0,0,0,0.4)"
             }}
           >
             {formatNumber(optimisticState.upvoteCount)}
@@ -259,7 +282,9 @@ export function InteractionButtons({
         </button>
 
         {isCardVariant && (
-          <ReactionTooltip isVisible={isUpvoteHovered && optimisticState.upvoteCount > 0}>
+          <ReactionTooltip
+            isVisible={isUpvoteHovered && optimisticState.upvoteCount > 0}
+          >
             <div className={css(avatarGroup)}>
               <div className={css(avatarList)}>
                 {upvoteUsers.slice(0, 3).map((reaction, index) => (
@@ -271,7 +296,7 @@ export function InteractionButtons({
                     <Avatar
                       src={`https://github.com/${reaction.user.login}.png`}
                       alt={reaction.user.login}
-                      className="w-full h-full"
+                      size="20"
                     />
                   </div>
                 ))}
@@ -303,7 +328,11 @@ export function InteractionButtons({
                 width: "100%",
                 height: "100%",
                 strokeWidth: "1.67px",
-                stroke: optimisticState.hasUserLiked ? "#979797" : (isCardVariant ? "#979797" : "rgba(0,0,0,0.4)"),
+                stroke: optimisticState.hasUserLiked
+                  ? "#979797"
+                  : isCardVariant
+                    ? "#979797"
+                    : "rgba(0,0,0,0.4)",
                 fill: optimisticState.hasUserLiked ? "#656565" : "none"
               }}
             />
@@ -311,7 +340,11 @@ export function InteractionButtons({
           <span
             className={css(buttonText)}
             style={{
-              color: optimisticState.hasUserLiked ? "#979797" : (isCardVariant ? "#979797" : "rgba(0,0,0,0.4)")
+              color: optimisticState.hasUserLiked
+                ? "#979797"
+                : isCardVariant
+                  ? "#979797"
+                  : "rgba(0,0,0,0.4)"
             }}
           >
             {formatNumber(optimisticState.heartCount)}
@@ -319,7 +352,9 @@ export function InteractionButtons({
         </button>
 
         {isCardVariant && (
-          <ReactionTooltip isVisible={isLikeHovered && optimisticState.heartCount > 0}>
+          <ReactionTooltip
+            isVisible={isLikeHovered && optimisticState.heartCount > 0}
+          >
             <div className={css(avatarGroup)}>
               <div className={css(avatarList)}>
                 {heartUsers.slice(0, 3).map((reaction, index) => (
@@ -331,7 +366,7 @@ export function InteractionButtons({
                     <Avatar
                       src={`https://github.com/${reaction.user.login}.png`}
                       alt={reaction.user.login}
-                      className="w-full h-full"
+                      size="20"
                     />
                   </div>
                 ))}
@@ -386,7 +421,7 @@ export function InteractionButtons({
                         `https://github.com/${discussion.comments.nodes[0].author.login}.png`
                       }
                       alt={discussion.comments.nodes[0].author.login}
-                      className="w-full h-full"
+                      size="20"
                     />
                   </div>
                   <span className={css(commentText)}>

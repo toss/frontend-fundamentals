@@ -1,7 +1,7 @@
 import { Component, ErrorInfo, ReactNode } from "react";
 import constructionsImage from "@/assets/constructions.png";
 import { LayoutNavigation } from "./layout/LayoutNavigation";
-import { css } from "../../../styled-system/css";
+import { css } from "@styled-system/css";
 
 interface Props {
   children: ReactNode;

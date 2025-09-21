@@ -4,7 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useUserProfile } from "@/api/hooks/useUser";
 import { UserDropdown } from "@/components/shared/common/UserDropdown";
 import { useClickOutside } from "@/hooks/useClickOutside";
-import { css } from "../../../../styled-system/css";
+import { css } from "@styled-system/css";
 
 const userProfileContainer = {
   flexShrink: "0",
@@ -140,17 +140,13 @@ export function UserProfile() {
               className={css(fallbackAvatar)}
             />
             <div className={css(profileContent)}>
-              <span className={css(fallbackName)}>
-                {user.login}
-              </span>
+              <span className={css(fallbackName)}>{user.login}</span>
               <ChevronDown className={css(chevronIconUser)} />
             </div>
           </>
         ) : (
           <>
-            <span className={css(loginText)}>
-              Log in
-            </span>
+            <span className={css(loginText)}>Log in</span>
           </>
         )}
       </button>
