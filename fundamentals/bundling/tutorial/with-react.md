@@ -2,7 +2,7 @@
 
 지금까지는 순수 JavaScript 프로젝트를 위한 웹팩 설정을 살펴봤어요. 이번에는 실제 프론트엔드 프로젝트에서 React를 사용할 때 웹팩을 어떻게 사용할 수 있는지 배워볼게요.
 
-[React](https://react.dev)는 사용자 인터페이스(UI)를 구성하기 위한 JavaScript 라이브러리예요. `JSX`라는 문법을 사용하는데, 이는 JavaScript 안에서 HTML처럼 코드를 작성할 수 있도록 도와줘요. 
+[React](https://react.dev)는 사용자 인터페이스(UI)를 구성하기 위한 JavaScript 라이브러리예요. `JSX`라는 문법을 사용하는데, 이는 JavaScript 안에서 HTML처럼 코드를 작성할 수 있도록 도와줘요.
 
 ```tsx 2
 export function Component() {
@@ -10,7 +10,7 @@ export function Component() {
 }
 ```
 
-하지만 브라우저는 JSX를 바로 이해할 수 없기 때문에, JSX를 일반 JavaScript로 변환하는 작업이 필요해요. 
+하지만 브라우저는 JSX를 바로 이해할 수 없기 때문에, JSX를 일반 JavaScript로 변환하는 작업이 필요해요.
 
 ## 1. React 프로젝트 만들기
 
@@ -46,8 +46,8 @@ npm install @types/react @types/react-dom
     "strict": true,
     "jsx": "react"
   },
-  "include": ["src/**/*"],             
-  "exclude": ["node_modules", "dist"]  
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
 ```
 
@@ -120,36 +120,36 @@ npm install babel-loader @babel/core @babel/preset-react @babel/preset-typescrip
 
 ```js 15-31
 // webpack.config.js
-const path = require('path');
+const path = require("path");
 
 module.exports = {
   // ./src/index.tsx 부터 시작해요.
-  entry: './src/index.tsx',
+  entry: "./src/index.tsx",
 
   // 번들된 결과물은 ./dist/bundle.js에 저장해요.
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist")
   },
 
-  mode: 'production',
+  mode: "production",
 
   module: {
     rules: [
       {
-        test: /\.(ts|tsx)$/,  // .ts 또는 .tsx 확장자를 가진 파일에만 이 규칙을 적용해요
+        test: /\.(ts|tsx)$/, // .ts 또는 .tsx 확장자를 가진 파일에만 이 규칙을 적용해요
         use: [
           // Babel로 JSX 및 TypeScript 문법을 JavaScript로 변환해요
-          { 
-            loader: 'babel-loader',
+          {
+            loader: "babel-loader",
             options: {
-              presets: ['@babel/preset-react', '@babel/preset-typescript'],
-            },
-          },
-        ],
-      },
-    ],
-  },
+              presets: ["@babel/preset-react", "@babel/preset-typescript"]
+            }
+          }
+        ]
+      }
+    ]
+  }
 };
 ```
 
@@ -177,13 +177,13 @@ React는 JavaScript로 사용자 인터페이스를 만들어서 HTML 문서 안
 <!-- src/template.html -->
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
-<body>
-  <div id="root"></div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
 </html>
 ```
 
@@ -200,21 +200,20 @@ npm install html-webpack-plugin --save-dev
 그리고 `webpack.config.js`에 `HtmlWebpackPlugin`을 정의하세요.
 
 ```javascript 10-12
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 /* ... */
 
 // webpack.config.js
 module.exports = {
-  /* ... */ 
+  /* ... */
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/template.html'  // 사용할 HTML 템플릿 파일 경로
+      template: "./src/template.html" // 사용할 HTML 템플릿 파일 경로
     })
-  ],
-}
-
+  ]
+};
 ```
 
 이렇게 템플릿을 지정하면 우리가 만든 HTML 구조를 유지하면서, 웹팩이 자동으로 번들된 JavaScript 파일을 가리키는 `<script src="...">`를 추가해줘요.
@@ -241,7 +240,7 @@ module.exports = {
 npm run build
 ```
 
-그러면 `dist` 폴더에 `bundle.js`와 `index.html`이 생겨요. 
+그러면 `dist` 폴더에 `bundle.js`와 `index.html`이 생겨요.
 JavaScript 파일에는 우리가 만든 React 서비스가 번들링되어 있고, HTML 파일은 그 JavaScript 파일을 로드하죠.
 
 브라우저에서 실행할 수 없는 JSX와 TypeScript 문법도 JavaScript 파일로 변환되어, 문제없이 실행이 가능해요.

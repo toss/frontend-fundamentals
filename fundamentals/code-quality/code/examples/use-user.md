@@ -13,11 +13,11 @@ API 호출과 관련된 Hook들처럼 같은 종류의 함수나 Hook이 서로 
 그렇지만 `useUser`는 `@tanstack/react-query`의 `Query` 객체를 반환하고, `useServerTime`은 서버 시간을 가져와서 데이터만 반환해요.
 
 ```typescript 9,18
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
 function useUser() {
   const query = useQuery({
-    queryKey: ['user'],
+    queryKey: ["user"],
     queryFn: fetchUser
   });
 
@@ -26,7 +26,7 @@ function useUser() {
 
 function useServerTime() {
   const query = useQuery({
-    queryKey: ['serverTime'],
+    queryKey: ["serverTime"],
     queryFn: fetchServerTime
   });
 
@@ -47,11 +47,11 @@ function useServerTime() {
 다음 코드처럼 서버 API를 호출하는 Hook은 일관적으로 `Query` 객체를 반환하게 하면, 팀원들이 코드에 대한 예측 가능성을 높일 수 있어요.
 
 ```typescript 9,18
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
 function useUser() {
   const query = useQuery({
-    queryKey: ['user'],
+    queryKey: ["user"],
     queryFn: fetchUser
   });
 
@@ -60,7 +60,7 @@ function useUser() {
 
 function useServerTime() {
   const query = useQuery({
-    queryKey: ['serverTime'],
+    queryKey: ["serverTime"],
     queryFn: fetchServerTime
   });
 
@@ -140,12 +140,12 @@ function checkIsNameValid(name: string) {
       ok: false,
       reason: "이름은 빈 값일 수 없어요."
     };
-  } 
-  
+  }
+
   if (name.length >= 20) {
     return {
       ok: false,
-      reason: '이름은 20자 이상 입력할 수 없어요.'
+      reason: "이름은 20자 이상 입력할 수 없어요."
     };
   }
 

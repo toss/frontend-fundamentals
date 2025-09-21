@@ -20,7 +20,7 @@
 
 ```javascript
 // index.js
-import { add } from './math.js';
+import { add } from "./math.js";
 console.log(add(2, 3));
 
 // math.js
@@ -39,6 +39,7 @@ export function add(a, b) {
 이 그래프는 각 모듈이 어떤 다른 모듈에 의존하는지를 보여주고, 번들 파일 생성의 설계도가 돼요.
 
 탐색 결과를 아래와 같은 형태로 정리할 수 있어요.
+
 ```json
 {
   "index.js": {
@@ -51,6 +52,7 @@ export function add(a, b) {
   }
 }
 ```
+
 정리된 객체를 보면, index.js는 math.js에 의존하고, math.js는 다른 의존성이 없음을 확인할 수 있어요.
 
 ### 3. 번들 파일 생성
@@ -59,31 +61,32 @@ export function add(a, b) {
 이를 통해 브라우저가 여러 파일을 따로 요청하지 않고도 한 번에 코드를 불러올 수 있게 돼요.
 
 ```javascript
-(function(modules) {
+(function (modules) {
   function require(file) {
     const exports = {};
     modules[file](exports, require);
     return exports;
   }
 
-  require('index.js');
+  require("index.js");
 })({
-  'index.js': function(exports, require) {
-    const { add } = require('math.js');
+  "index.js": function (exports, require) {
+    const { add } = require("math.js");
     console.log(add(2, 3));
   },
-  'math.js': function(exports) {
-    exports.add = function(a, b) {
+  "math.js": function (exports) {
+    exports.add = function (a, b) {
       return a + b;
     };
   }
 });
 ```
 
-번들 파일은 각각의 모듈을 객체로 관리하고, require 함수를 통해 모듈 간 의존성을 연결해요. 
+번들 파일은 각각의 모듈을 객체로 관리하고, require 함수를 통해 모듈 간 의존성을 연결해요.
 덕분에 브라우저는 별도의 파일 요청 없이 모든 코드를 순서대로 실행할 수 있어요.
 
 :::details Q. 번들 파일에서는 왜 즉시 실행 함수(IIFE)를 사용할까요?
+
 1. **스코프를 분리할 수 있어요**
 
    IIFE는 자체 스코프를 가지기 때문에, 내부 변수나 함수가 전역 스코프를 오염시키지 않아요.
@@ -91,4 +94,4 @@ export function add(a, b) {
 2. **모듈 시스템을 안전하게 구성할 수 있어요**
 
    `require` 함수나 `modules` 객체 같은 모듈 로딩 로직을 IIFE 내부에서 정의하면 외부와 격리된 안전한 실행 환경을 만들 수 있어요.
-:::
+   :::

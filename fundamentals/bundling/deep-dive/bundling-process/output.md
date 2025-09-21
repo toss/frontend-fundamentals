@@ -21,14 +21,14 @@
 
 ```tsx
 // webpack.config.js
-const path = require('path');
+const path = require("path");
 
 module.exports = {
-  entry: './src/index.tsx',
+  entry: "./src/index.tsx",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
-  },
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js"
+  }
 };
 ```
 
@@ -36,19 +36,20 @@ module.exports = {
 
 ```ts
 // vite.config.js
-import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
 
 export default defineConfig({
   build: {
     rollupOptions: {
-      input: './src/index.tsx',
+      input: "./src/index.tsx",
       output: {
-        entryFileNames: 'bundle.js',
-      },
-    },
-  },
+        entryFileNames: "bundle.js"
+      }
+    }
+  }
 });
 ```
+
 :::
 
 `yarn build` 명령을 실행하면, `filename`으로 설정했던 이름으로 번들 파일이 출력된 것을 확인할 수 있어요.
@@ -64,24 +65,23 @@ export default defineConfig({
 
 예를 들어, 다음과 같이 `filename`에 플레이스홀더 `[name]`을 적용해볼게요.
 
-
 :::tabs key:bundler-object-entry
 
 === Webpack
 
 ```tsx
 // webpack.config.js
-const path = require('path');
+const path = require("path");
 
 module.exports = {
   entry: {
-    app: './src/index.tsx',
-    adminApp: './src/admin.ts',
+    app: "./src/index.tsx",
+    adminApp: "./src/admin.ts"
   },
   output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-  },
+    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, "dist")
+  }
 };
 ```
 
@@ -89,25 +89,24 @@ module.exports = {
 
 ```ts
 // vite.config.js
-import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
 
 export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        app: './src/index.tsx',
-        adminApp: './src/admin.ts',
+        app: "./src/index.tsx",
+        adminApp: "./src/admin.ts"
       },
       output: {
-        entryFileNames: '[name].bundle.js',
-      },
-    },
-  },
+        entryFileNames: "[name].bundle.js"
+      }
+    }
+  }
 });
 ```
 
 :::
-
 
 `yarn build` 명령을 실행하면, `entry` 필드의 key인 `app`와 `adminApp`이 각각 번들 파일의 이름에 반영돼요.
 
@@ -145,8 +144,8 @@ export default defineConfig({
 // webpack.config.js
 module.exports = {
   output: {
-    clean: true,
-  },
+    clean: true
+  }
 };
 ```
 
@@ -154,7 +153,6 @@ module.exports = {
 clean 옵션이 기본 적용되어 별도 설정이 필요 없어요.
 
 :::
-
 
 ## 파일 이름을 동적으로 설정하기
 
@@ -177,8 +175,8 @@ clean 옵션이 기본 적용되어 별도 설정이 필요 없어요.
 module.exports = {
   output: {
     filename: "[name].bundle.js",
-    chunkFilename: "[id].js",
-  },
+    chunkFilename: "[id].js"
+  }
 };
 ```
 
@@ -186,19 +184,20 @@ module.exports = {
 
 ```ts
 // vite.config.js
-import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
 
 export default defineConfig({
   build: {
     rollupOptions: {
       output: {
         entryFileNames: "[name].bundle.js",
-        chunkFileNames: "[name].bundle.js",
-      },
-    },
-  },
+        chunkFileNames: "[name].bundle.js"
+      }
+    }
+  }
 });
 ```
+
 :::
 
 또한 이름은 함수로 작성할 수도 있는데, 이 함수는 **파일 경로와 관련된 메타데이터 객체**를 인자로 받아요. 이를 활용하면 각 파일의 이름이나 타입에 따라 동적으로 파일 이름을 설정할 수 있어요.
@@ -220,9 +219,9 @@ export default defineConfig({
 // webpack.config.js
 module.exports = {
   output: {
-    filename: '[name].[hash].js',
-    chunkFilename:'[name].[hash].js',
-  },
+    filename: "[name].[hash].js",
+    chunkFilename: "[name].[hash].js"
+  }
 };
 ```
 
@@ -230,19 +229,20 @@ module.exports = {
 
 ```ts
 // vite.config.js
-import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
 
 export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        entryFileNames: '[name].[hash].js',
-        chunkFileNames: '[name].[hash].js',
-      },
-    },
-  },
+        entryFileNames: "[name].[hash].js",
+        chunkFileNames: "[name].[hash].js"
+      }
+    }
+  }
 });
 ```
+
 :::
 
 반면, 규모가 작거나 변경이 자주 일어나지 않는 프로젝트라면 번들 파일 자체의 고유한 `[hash]` 하나로 단순하게 관리할 수도 있어요. 이 경우 빌드할 때마다 동일한 해시가 적용되어 캐시 활용도는 줄어들지만 설정이 간단해지는 장점이 있어요.

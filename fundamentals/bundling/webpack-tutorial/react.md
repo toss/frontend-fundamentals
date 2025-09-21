@@ -11,7 +11,7 @@ React는 JSX라는 특별한 문법을 사용해요. JSX는 JavaScript 안에 HT
 const element = <h1>Hello, {name}!</h1>;
 
 // 변환된 JavaScript
-const element = React.createElement('h1', null, 'Hello, ', name, '!');
+const element = React.createElement("h1", null, "Hello, ", name, "!");
 ```
 
 ## 1. React 개발 환경 설정하기
@@ -62,19 +62,19 @@ $ npm install --save-dev @babel/core babel-loader @babel/preset-env @babel/prese
 ```js
 module.exports = {
   // ... 기존 설정 유지
-  entry: './main.tsx', // 웹팩이 읽기 시작할 파일을 .tsx로 변경했어요.
+  entry: "./main.tsx", // 웹팩이 읽기 시작할 파일을 .tsx로 변경했어요.
   module: {
     rules: [
       {
         test: /\.(ts|tsx)$/, // .ts와 .tsx 파일을 대상으로
         use: [
           {
-            loader: 'babel-loader',
+            loader: "babel-loader",
             options: {
               presets: [
-                '@babel/preset-env', // 최신 JS 문법을 변환해요
-                '@babel/preset-react', // JSX를 변환해요
-                '@babel/preset-typescript' // 타입스크립트를 변환해요
+                "@babel/preset-env", // 최신 JS 문법을 변환해요
+                "@babel/preset-react", // JSX를 변환해요
+                "@babel/preset-typescript" // 타입스크립트를 변환해요
               ]
             }
           }
@@ -84,7 +84,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'] // .tsx 확장자도 처리할 수 있게 해요
+    extensions: [".tsx", ".ts", ".js"] // .tsx 확장자도 처리할 수 있게 해요
   }
 };
 ```
@@ -93,14 +93,14 @@ module.exports = {
 
 바벨은 최신 JavaScript 코드를 이전 버전의 JavaScript로 변환해 주는 도구예요. 예를 들어, ES6+ 문법을 ES5로 변환해서 오래된 브라우저에서도 동작하게 만들어줘요.
 
-성경에 나오는 '바벨탑'처럼, 많은 언어가 혼재하는 혼란스러운 상황을 상징해요. 
+성경에 나오는 '바벨탑'처럼, 많은 언어가 혼재하는 혼란스러운 상황을 상징해요.
 
 ```js
 // 변환 전 (ES6+)
 const sum = (a, b) => a + b;
 
 // 변환 후 (ES5)
-var sum = function(a, b) {
+var sum = function (a, b) {
   return a + b;
 };
 ```
@@ -121,7 +121,6 @@ React에서는 JSX를 일반 JavaScript로 변환하는 데 바벨이 필수적�
 
 - `.scss`, `.tsx` 같은 새로운 파일을 추가했는데 웹팩이 못 읽을 때
 - 로더를 새로 추가할 때 (예: 이미지, 폰트, SVG 등 처리용)
-
 
 **`resolve`: import, require문을 썼을 때 어떤 파일을 가리키는지 알려주고 싶을 때**
 
@@ -156,9 +155,9 @@ React에서는 JSX를 일반 JavaScript로 변환하는 데 바벨이 필수적�
 그리고 `App.tsx` 컴포넌트를 만들어요:
 
 ```tsx
-import React from 'react';
-import { emojis } from './emoji';
-import { format } from 'date-fns';
+import React from "react";
+import { emojis } from "./emoji";
+import { format } from "date-fns";
 
 const App = () => {
   const [selectedEmoji, setSelectedEmoji] = React.useState(emojis[0]);
@@ -173,9 +172,7 @@ const App = () => {
     <div className="container">
       <img src="./assets/logo.svg" alt="Logo" className="logo"></img>
       <h1>Emoji of the Day</h1>
-      <div className="date-display">
-        {format(new Date(), 'MMMM d, yyyy')}
-      </div>
+      <div className="date-display">{format(new Date(), "MMMM d, yyyy")}</div>
       <div className="emoji-container">
         <div className="emoji">{selectedEmoji.icon}</div>
         <div className="emoji-name">{selectedEmoji.name}</div>
@@ -192,11 +189,11 @@ export default App;
 마지막으로 `main.ts`파일 이름을 `main.tsx`로 변경하고, `App.tsx`에 만들었던 React 앱을 그리도록 수정해 줘요.
 
 ```tsx
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import App from './App';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App";
 
-createRoot(document.getElementById('root')!).render(<App />);
+createRoot(document.getElementById("root")!).render(<App />);
 ```
 
 ## 5. React 앱 빌드하기
@@ -210,7 +207,6 @@ npm run build
 `index.html` 파일을 브라우저에서 열어보세요. 'See other emoji' 버튼이 추가되고, 잘 동작한다면 이제 우리 프로젝트는 React 컴포넌트로 구성된 앱이 된 거예요!
 
 ![](/images/react-app.png)
-
 
 ## 다음 단계
 

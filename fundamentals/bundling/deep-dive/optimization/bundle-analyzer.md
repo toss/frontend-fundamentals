@@ -1,6 +1,6 @@
 # 번들 분석
 
-번들 분석(Bundle Analysis)은 번들의 크기와 구성 요소를 시각화해 불필요한 코드와 라이브러리를 제거하는 최적화 방법이에요. 
+번들 분석(Bundle Analysis)은 번들의 크기와 구성 요소를 시각화해 불필요한 코드와 라이브러리를 제거하는 최적화 방법이에요.
 
 번들이 크면 로딩이 느려지고 성능이 떨어지기 때문에, 번들 분석을 사용해 문제를 찾고 성능을 높일 수 있어요.
 
@@ -16,11 +16,10 @@
 
 **번들 분석 설정**
 
-* `webpack-bundle-analyzer`를 사용해 번들 크기를 시각화할 수 있어요.
-* 주요 옵션
-
-  * `analyzerMode: 'server'`: 로컬 서버에서 분석 결과를 보여줘요.
-  * `openAnalyzer: true`: 빌드 후 자동으로 브라우저를 열어줘요.
+- `webpack-bundle-analyzer`를 사용해 번들 크기를 시각화할 수 있어요.
+- 주요 옵션
+  - `analyzerMode: 'server'`: 로컬 서버에서 분석 결과를 보여줘요.
+  - `openAnalyzer: true`: 빌드 후 자동으로 브라우저를 열어줘요.
 
 **설치 방법**
 
@@ -32,15 +31,15 @@ npm install --save-dev webpack-bundle-analyzer
 
 ```js
 // webpack.config.js
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
 module.exports = {
   plugins: [
     new BundleAnalyzerPlugin({
-      analyzerMode: 'server',
-      openAnalyzer: true,
-    }),
-  ],
+      analyzerMode: "server",
+      openAnalyzer: true
+    })
+  ]
 };
 ```
 
@@ -48,12 +47,11 @@ module.exports = {
 
 **번들 분석 설정**
 
-* `rollup-plugin-visualizer`를 사용해 번들 구성을 시각화할 수 있어요.
-* 주요 옵션
-
-  * `open: true`: 빌드 후 분석 결과를 브라우저에서 자동으로 열어요.
-  * `filename`: 결과 파일 저장 위치를 지정할 수 있어요.
-  * `template`: 시각화 형태(`treemap`, `sunburst`, `network`)를 선택할 수 있어요.
+- `rollup-plugin-visualizer`를 사용해 번들 구성을 시각화할 수 있어요.
+- 주요 옵션
+  - `open: true`: 빌드 후 분석 결과를 브라우저에서 자동으로 열어요.
+  - `filename`: 결과 파일 저장 위치를 지정할 수 있어요.
+  - `template`: 시각화 형태(`treemap`, `sunburst`, `network`)를 선택할 수 있어요.
 
 **설치 방법**
 
@@ -65,8 +63,8 @@ npm install --save-dev rollup-plugin-visualizer
 
 ```js
 // vite.config.js
-import { defineConfig } from 'vite';
-import { visualizer } from 'rollup-plugin-visualizer';
+import { defineConfig } from "vite";
+import { visualizer } from "rollup-plugin-visualizer";
 
 export default defineConfig({
   build: {
@@ -74,12 +72,12 @@ export default defineConfig({
       plugins: [
         visualizer({
           open: true,
-          filename: 'dist/stats.html',
-          template: 'treemap',
-        }),
-      ],
-    },
-  },
+          filename: "dist/stats.html",
+          template: "treemap"
+        })
+      ]
+    }
+  }
 });
 ```
 
@@ -87,8 +85,8 @@ export default defineConfig({
 
 **번들 분석 설정**
 
-* `esbuild-analyzer`를 사용해 메타파일을 분석할 수 있어요.
-* 결과를 콘솔에 출력해 번들 크기와 구성을 확인할 수 있어요.
+- `esbuild-analyzer`를 사용해 메타파일을 분석할 수 있어요.
+- 결과를 콘솔에 출력해 번들 크기와 구성을 확인할 수 있어요.
 
 **설치 방법**
 
@@ -100,15 +98,17 @@ npm install --save-dev esbuild-analyzer
 
 ```js
 // 분석 스크립트 예시
-const esbuild = require('esbuild');
-const { analyzeMetafile } = require('esbuild-analyzer');
+const esbuild = require("esbuild");
+const { analyzeMetafile } = require("esbuild-analyzer");
 
-esbuild.build({
-  entryPoints: ['./src/index.ts'],
-  bundle: true,
-  metafile: true,
-  outfile: 'dist/bundle.js',
-}).then((result) => analyzeMetafile(result.metafile));
+esbuild
+  .build({
+    entryPoints: ["./src/index.ts"],
+    bundle: true,
+    metafile: true,
+    outfile: "dist/bundle.js"
+  })
+  .then((result) => analyzeMetafile(result.metafile));
 ```
 
 :::
@@ -154,7 +154,5 @@ yarn dedupe
 
 부수 효과가 있는 모듈은 트리 셰이킹 대상에서 제외돼요. 순수 모듈만 남겨 번들을 최적화하세요.
 
-* 웹팩의 `webpack-cli --json` 또는 `StatsWriterPlugin`을 이용해 Side Effect 모듈을 찾으세요.
-* `package.json`의 `sideEffects: false` 필드를 설정해 Side Effect가 없는 모듈만 남기세요.
-
-
+- 웹팩의 `webpack-cli --json` 또는 `StatsWriterPlugin`을 이용해 Side Effect 모듈을 찾으세요.
+- `package.json`의 `sideEffects: false` 필드를 설정해 Side Effect가 없는 모듈만 남기세요.

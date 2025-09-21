@@ -12,13 +12,13 @@ The following code assigns `"BOTH"`, `"A"`, `"B"`, or `"NONE"` to `status` based
 
 ```typescript
 const status =
-  (ACondition && BCondition)
+  ACondition && BCondition
     ? "BOTH"
-    : (ACondition || BCondition)
-    ? (ACondition
+    : ACondition || BCondition
+      ? ACondition
         ? "A"
-        : "B")
-    : "NONE";
+        : "B"
+      : "NONE";
 ```
 
 ## 👃 Smell the Code

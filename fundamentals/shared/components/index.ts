@@ -1,1 +1,1 @@
-export { OneNavigationReact } from './react/OneNavigation'; 
+export { OneNavigationReact } from "./react/OneNavigation";

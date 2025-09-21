@@ -1,9 +1,9 @@
 <script setup>
-import { ref, onMounted, defineProps } from 'vue';
+import { ref, onMounted, defineProps } from "vue";
 
 defineProps({
   title: String,
-  url: String,
+  url: String
 });
 
 const isMobile = ref(true);
@@ -13,11 +13,11 @@ onMounted(() => {
     isMobile.value = window.innerWidth < 768;
   }
 
-  window.addEventListener('resize', handleResize);
+  window.addEventListener("resize", handleResize);
   handleResize();
 
   return () => {
-    window.removeEventListener('resize', handleResize);
+    window.removeEventListener("resize", handleResize);
   };
 });
 </script>
@@ -26,11 +26,5 @@ onMounted(() => {
   <a :href="url" target="_blank" v-if="isMobile">
     {{ title }}
   </a>
-  <iframe
-    :src="url"
-    frameborder="0"
-    width="378"
-    height="827"
-    v-else
-  ></iframe>
+  <iframe :src="url" frameborder="0" width="378" height="827" v-else></iframe>
 </template>
