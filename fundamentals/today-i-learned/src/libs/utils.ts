@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { cx } from "@styled-system/css";
-import type { ActivityDay } from "@/types";
+import type { ActivityDay } from "@/components/features/profile/types";
 import { APP_CONSTANTS, STREAK_CONFIG } from "@/constants";
 
 // === Style Utilities ===

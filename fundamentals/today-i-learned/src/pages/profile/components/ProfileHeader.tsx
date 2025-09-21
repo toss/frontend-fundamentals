@@ -1,6 +1,9 @@
 import { ProfileInfo } from "@/components/features/profile/ProfileInfo";
 import { css, cx } from "@styled-system/css";
-import type { BaseComponentProps } from "@/types";
+interface BaseComponentProps {
+  className?: string;
+  children?: React.ReactNode;
+}
 
 interface ProfileHeaderProps extends BaseComponentProps {}
 

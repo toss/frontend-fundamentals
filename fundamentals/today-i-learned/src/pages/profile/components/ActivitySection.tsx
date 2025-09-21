@@ -1,7 +1,10 @@
 import { useUserActivity } from "@/pages/profile/hooks/useUserActivity";
 import { ActivityContent } from "./ActivityContent";
 import { ChevronDown } from "lucide-react";
-import type { BaseComponentProps } from "@/types";
+interface BaseComponentProps {
+  className?: string;
+  children?: React.ReactNode;
+}
 import { css, cx } from "@styled-system/css";
 
 interface ActivitySectionProps extends BaseComponentProps {}

@@ -7,7 +7,7 @@ import { WeeklyTop5 } from "@/components/features/discussions/WeeklyTop5";
 import { SprintChallenge } from "./components/SprintChallenge";
 import { UnauthenticatedState } from "@/components/features/auth/UnauthenticatedState";
 import { useAuth } from "@/contexts/AuthContext";
-import type { SortOption } from "@/types";
+import type { SortOption } from "./types";
 import { useCreateDiscussion } from "@/api/hooks/useDiscussions";
 import { useErrorHandler } from "@/hooks/useErrorHandler";
 import { useToast } from "@/contexts/ToastContext";

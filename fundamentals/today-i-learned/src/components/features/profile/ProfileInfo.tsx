@@ -1,7 +1,10 @@
 import { useUserProfile } from "@/api/hooks/useUser";
 import { UserAvatar } from "@/components/shared/common/UserAvatar";
 import { cn } from "@/libs/utils";
-import type { BaseComponentProps } from "@/types";
+interface BaseComponentProps {
+  className?: string;
+  children?: React.ReactNode;
+}
 
 interface ProfileInfoProps extends BaseComponentProps {
   showLoadingSkeleton?: boolean;

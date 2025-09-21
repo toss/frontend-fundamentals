@@ -1,5 +1,8 @@
 import { cn } from "@/libs/utils";
-import type { BaseComponentProps } from "@/types";
+interface BaseComponentProps {
+  className?: string;
+  children?: React.ReactNode;
+}
 
 interface LoadingSpinnerProps extends BaseComponentProps {
   size?: "sm" | "md" | "lg";

@@ -14,7 +14,7 @@ import type {
   StreakInfo,
   SprintData,
   SprintType
-} from "@/types/sprint";
+} from "@/components/features/sprint/types";
 
 /**
  * 현재 연속 기록 일수를 계산합니다.

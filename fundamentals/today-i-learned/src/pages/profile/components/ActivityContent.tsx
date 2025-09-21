@@ -3,7 +3,10 @@ import {
   PostCard,
   PostCardSkeleton
 } from "@/components/features/discussions/PostCard";
-import type { BaseComponentProps } from "@/types";
+interface BaseComponentProps {
+  className?: string;
+  children?: React.ReactNode;
+}
 import type { GitHubUser } from "@/api/remote/user";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
 
