@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
-import type { SprintDay } from "@/types/sprint";
+import type { SprintDay } from "./types";
 import { css } from "@styled-system/css";
 
 interface SprintDayItemProps {

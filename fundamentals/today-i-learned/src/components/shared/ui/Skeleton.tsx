@@ -1,4 +1,4 @@
-import { cn } from "@/libs/cn";
+import { css, cx } from "@styled-system/css";
 
 interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -7,7 +7,11 @@ interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
 export function Skeleton({ className, ...props }: SkeletonProps) {
   return (
     <div
-      className={cn("animate-pulse rounded-md bg-black/10", className)}
+      className={cx(css({
+        animation: "pulse 2s infinite",
+        borderRadius: "6px",
+        backgroundColor: "rgba(0, 0, 0, 0.1)"
+      }), className)}
       {...props}
     />
   );

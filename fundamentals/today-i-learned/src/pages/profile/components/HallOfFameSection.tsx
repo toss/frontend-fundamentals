@@ -5,8 +5,12 @@ import {
   PostCardSkeleton
 } from "@/components/features/discussions/PostCard";
 
-import type { BaseComponentProps } from "@/types";
 import { css, cx } from "@styled-system/css";
+
+interface BaseComponentProps {
+  className?: string;
+  children?: React.ReactNode;
+}
 
 interface HallOfFameSectionProps extends BaseComponentProps {}
 

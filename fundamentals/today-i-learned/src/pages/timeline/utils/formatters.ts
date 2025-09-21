@@ -25,13 +25,30 @@ export function formatNumber(num: number): string {
   return num.toString();
 }
 
-export function truncateText(text: string, maxLength: number): string {
+export function truncateText(text: string, maxLength: number, suffix: string = "..."): string {
   if (text.length <= maxLength) {
     return text;
   }
-  return text.slice(0, maxLength) + "...";
+  const truncateLength = maxLength - suffix.length;
+  return text.substring(0, truncateLength) + suffix;
 }
 
 export function cleanMarkdown(text: string): string {
   return text.replace(/[#*`\n]/g, " ").trim();
 }
+
+export const generateTitle = (content: string, maxLength: number = 50): string => {
+  return truncateText(content, maxLength);
+};
+
+export const extractTags = (content: string): string[] => {
+  const tagRegex = /#[\w가-힣]+/g;
+  return content.match(tagRegex)?.map((tag) => tag.slice(1)) || [];
+};
+
+export const highlightTags = (content: string): string => {
+  return content.replace(
+    /#([\w가-힣]+)/g,
+    '<span style="color: #3b82f6; font-weight: 500">#$1</span>'
+  );
+};

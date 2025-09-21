@@ -1,39 +1,65 @@
 import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/libs/cn";
+import { css, cx } from "@styled-system/css";
 
-const cardVariants = cva("rounded-2xl border bg-white transition-all", {
+type CardVariant = "default" | "elevated" | "bordered" | "interactive";
+type CardPadding = "none" | "sm" | "md" | "lg";
+
+const cardVariants = {
+  base: css({
+    borderRadius: "16px",
+    border: "1px solid",
+    borderColor: "gray.200",
+    backgroundColor: "white",
+    transition: "all 0.2s ease-in-out"
+  }),
   variants: {
-    variant: {
-      default: "border-gray-200 shadow-sm hover:shadow-md",
-      elevated:
-        "border-[rgba(201,201,201,0.5)] shadow-[0px_0px_18px_rgba(0,0,0,0.23)]",
-      bordered: "border border-[rgba(201,201,201,0.5)] shadow-none",
-      interactive:
-        "border-gray-200 shadow-sm hover:shadow-[0_0_18px_rgba(0,0,0,0.2)] cursor-pointer"
-    },
-    padding: {
-      none: "p-0",
-      sm: "p-4",
-      md: "p-6",
-      lg: "p-8"
-    }
+    default: css({
+      borderColor: "gray.200",
+      boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+      _hover: { 
+        boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
+      }
+    }),
+    elevated: css({
+      borderColor: "rgba(201, 201, 201, 0.5)",
+      boxShadow: "0px 0px 18px rgba(0, 0, 0, 0.23)"
+    }),
+    bordered: css({
+      borderColor: "rgba(201, 201, 201, 0.5)",
+      boxShadow: "none"
+    }),
+    interactive: css({
+      borderColor: "gray.200",
+      boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+      cursor: "pointer",
+      _hover: { 
+        boxShadow: "0 0 18px rgba(0, 0, 0, 0.2)"
+      }
+    })
   },
-  defaultVariants: {
-    variant: "default",
-    padding: "md"
+  padding: {
+    none: css({ padding: "0" }),
+    sm: css({ padding: "16px" }),
+    md: css({ padding: "24px" }),
+    lg: css({ padding: "32px" })
   }
-});
+};
 
-export interface CardProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof cardVariants> {}
+export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: CardVariant;
+  padding?: CardPadding;
+}
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, variant, padding, ...props }, ref) => (
+  ({ className, variant = "default", padding = "md", ...props }, ref) => (
     <div
       ref={ref}
-      className={cn(cardVariants({ variant, padding }), className)}
+      className={cx(
+        cardVariants.base,
+        variant && cardVariants.variants[variant],
+        padding && cardVariants.padding[padding],
+        className
+      )}
       {...props}
     />
   )
@@ -46,7 +72,14 @@ const CardHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex flex-col space-y-1.5", className)}
+    className={cx(
+      css({
+        display: "flex",
+        flexDirection: "column",
+        gap: "6px"
+      }),
+      className
+    )}
     {...props}
   />
 ));
@@ -58,7 +91,15 @@ const CardTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h3
     ref={ref}
-    className={cn("font-bold text-xl leading-tight tracking-tight", className)}
+    className={cx(
+      css({
+        fontWeight: "bold",
+        fontSize: "20px",
+        lineHeight: "1.25",
+        letterSpacing: "-0.025em"
+      }),
+      className
+    )}
     {...props}
   />
 ));
@@ -70,7 +111,14 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-gray-600 text-base leading-relaxed", className)}
+    className={cx(
+      css({
+        color: "gray.600",
+        fontSize: "16px",
+        lineHeight: "1.625"
+      }),
+      className
+    )}
     {...props}
   />
 ));
@@ -80,7 +128,18 @@ const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("space-y-4", className)} {...props} />
+  <div
+    ref={ref}
+    className={cx(
+      css({
+        display: "flex",
+        flexDirection: "column",
+        gap: "16px"
+      }),
+      className
+    )}
+    {...props}
+  />
 ));
 CardContent.displayName = "CardContent";
 
@@ -90,7 +149,15 @@ const CardFooter = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex items-center gap-2 pt-2", className)}
+    className={cx(
+      css({
+        display: "flex",
+        alignItems: "center",
+        gap: "8px",
+        paddingTop: "8px"
+      }),
+      className
+    )}
     {...props}
   />
 ));

@@ -396,15 +396,19 @@ export function useToggleDiscussionReaction() {
         });
       }
     },
+    // optimistic update 제거하고 단순하게 처리
     onMutate: async () => {
+      // 관련 쿼리들을 취소하여 race condition 방지
       await queryClient.cancelQueries({ queryKey: DISCUSSIONS_QUERY_KEYS.all });
     },
     onError: () => {
+      // 에러 시 전체 쿼리 무효화
       queryClient.invalidateQueries({
         queryKey: DISCUSSIONS_QUERY_KEYS.all
       });
     },
     onSuccess: () => {
+      // 성공 시 관련 쿼리들 무효화하여 서버 데이터로 업데이트
       queryClient.invalidateQueries({
         queryKey: DISCUSSIONS_QUERY_KEYS.all
       });
@@ -412,12 +416,14 @@ export function useToggleDiscussionReaction() {
   });
 }
 
+// Discussion 수정을 위한 간단한 인터페이스
 interface UpdatePostParams {
   discussionId: string;
   title: string;
   body: string;
 }
 
+// Discussion 수정 Mutation
 export function useUpdateDiscussion() {
   const queryClient = useQueryClient();
   const { user } = useAuth();
@@ -440,6 +446,7 @@ export function useUpdateDiscussion() {
         queryKey: DISCUSSIONS_QUERY_KEYS.all
       });
 
+      // 상세 정보도 업데이트
       queryClient.setQueryData(
         DISCUSSIONS_QUERY_KEYS.detail(updatedDiscussion.id),
         (oldData: any) => {
@@ -484,6 +491,7 @@ export function useDeleteDiscussion() {
         queryKey: DISCUSSIONS_QUERY_KEYS.all
       });
 
+      // 상세 정보 캐시 제거
       queryClient.removeQueries({
         queryKey: DISCUSSIONS_QUERY_KEYS.detail(deletedDiscussion.id)
       });

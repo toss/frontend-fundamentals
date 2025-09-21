@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import {
   PostCard,
   PostCardSkeleton
-} from "../../../components/features/discussions/PostCard";
+} from "@/components/features/discussions/PostCard";
 import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { useUserProfile } from "@/api/hooks/useUser";

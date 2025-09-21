@@ -1,10 +1,10 @@
 // 리액션 관련 원격 API 함수
 
-import { graphqlRequest } from "../client";
+import { graphqlRequest } from "@/api/client";
 import {
   ADD_REACTION_MUTATION,
   REMOVE_REACTION_MUTATION
-} from "../graphql/reactions";
+} from "@/api/graphql/reactions";
 
 export interface AddReactionParams {
   discussionId: string;

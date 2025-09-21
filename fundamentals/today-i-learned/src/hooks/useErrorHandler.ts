@@ -4,7 +4,7 @@ import {
   AuthError,
   getUserFriendlyErrorMessage,
   logError
-} from "@/libs/errors";
+} from "@/utils/errors";
 import { useCallback } from "react";
 
 interface ErrorHandlerOptions {
@@ -26,7 +26,6 @@ export function useErrorHandler() {
         fallbackMessage = ERROR_MESSAGES.GENERIC_ERROR
       } = options;
 
-      // 에러 객체 정규화
       let processedError: Error;
       if (error instanceof Error) {
         processedError = error;
@@ -36,12 +35,10 @@ export function useErrorHandler() {
         processedError = new Error(fallbackMessage);
       }
 
-      // 콘솔 로깅
       if (logToConsole) {
         logError(processedError, context);
       }
 
-      // 토스트 메시지 표시
       if (showToast) {
         const userMessage = getUserFriendlyErrorMessage(processedError);
         showErrorToast("오류 발생", userMessage);
@@ -52,7 +49,6 @@ export function useErrorHandler() {
     [showErrorToast]
   );
 
-  // 특별한 에러 타입별 헬퍼 메서드들
   const handleApiError = useCallback(
     (error: unknown, context?: string) => {
       return handleError(error, { context: context || "API" });
@@ -95,7 +91,6 @@ export function useErrorHandler() {
     [handleError]
   );
 
-  // 조용한 에러 처리 (토스트 없이 로깅만)
   const handleSilentError = useCallback(
     (error: unknown, context?: string) => {
       return handleError(error, {
@@ -116,7 +111,6 @@ export function useErrorHandler() {
   };
 }
 
-// React Query와 함께 사용하기 위한 헬퍼
 export function useQueryErrorHandler() {
   const { handleApiError } = useErrorHandler();
 
@@ -128,7 +122,6 @@ export function useQueryErrorHandler() {
   );
 }
 
-// 폼 에러 처리를 위한 헬퍼
 export function useFormErrorHandler() {
   const { handleValidationError } = useErrorHandler();
 

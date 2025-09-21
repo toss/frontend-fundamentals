@@ -1,4 +1,4 @@
-import type { SprintDay } from "@/types/sprint";
+import type { SprintDay } from "./types";
 import { SprintDayItem } from "./SprintDayItem";
 import { css } from "@styled-system/css";
 

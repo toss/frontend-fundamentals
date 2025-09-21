@@ -1,4 +1,12 @@
-import type { AppConstants, PostCategory, TabItem } from "@/types";
+import type { PostCategory, TabItem } from "@/pages/timeline/types";
+
+interface AppConstants {
+  MAX_TITLE_LENGTH: number;
+  TITLE_TRUNCATE_LENGTH: number;
+  TITLE_SUFFIX: string;
+  MAX_CONTENT_LENGTH: number;
+  RECENT_ACTIVITY_DAYS: number;
+}
 
 // === App Configuration ===
 export const APP_CONSTANTS: AppConstants = {

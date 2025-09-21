@@ -1,4 +1,4 @@
-import type { SortOption } from "@/types";
+import type { SortOption } from "../types";
 import { css, cx } from "@styled-system/css";
 
 interface FilterSectionProps {

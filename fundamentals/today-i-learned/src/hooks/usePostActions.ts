@@ -29,9 +29,6 @@ export function usePostActions({
   const { handleApiError } = useErrorHandler();
   const { success: showSuccessToast } = useToast();
 
-  /**
-   * 글 수정 액션
-   */
   const handleEdit = useCallback(
     async (
       discussion: GitHubDiscussion,
@@ -63,16 +60,12 @@ export function usePostActions({
           );
         });
       } catch (error) {
-        // 에러는 이미 handleApiError에서 처리됨
         throw error;
       }
     },
     [updateDiscussion, handleApiError, showSuccessToast]
   );
 
-  /**
-   * 글 삭제 액션
-   */
   const handleDelete = useCallback(
     async (discussion: GitHubDiscussion, callbacks?: PostActionCallbacks) => {
       try {
@@ -98,16 +91,12 @@ export function usePostActions({
           );
         });
       } catch (error) {
-        // 에러는 이미 handleApiError에서 처리됨
         throw error;
       }
     },
     [deleteDiscussion, handleApiError, showSuccessToast]
   );
 
-  /**
-   * 현재 사용자가 해당 글의 작성자인지 확인
-   */
   const canEditPost = useCallback(
     (discussion: GitHubDiscussion): boolean => {
       return Boolean(
@@ -117,9 +106,6 @@ export function usePostActions({
     [currentUserLogin]
   );
 
-  /**
-   * 현재 사용자가 해당 글을 삭제할 수 있는지 확인
-   */
   const canDeletePost = useCallback(
     (discussion: GitHubDiscussion): boolean => {
       return Boolean(
@@ -130,20 +116,13 @@ export function usePostActions({
   );
 
   return {
-    // 액션 함수들
     handleEdit,
     handleDelete,
-
-    // 권한 체크 함수들
     canEditPost,
     canDeletePost,
-
-    // 로딩 상태
     isUpdating,
     isDeleting,
     isLoading: isUpdating || isDeleting,
-
-    // 에러 상태
     isDeleteError
   };
 }

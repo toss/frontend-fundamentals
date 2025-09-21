@@ -1,6 +1,6 @@
 import { Card } from "@/components/shared/ui/Card";
 import { css, cx } from "@styled-system/css";
-import type { ChallengeDay, MonthlyChallenge } from "@/types";
+import type { ChallengeDay, MonthlyChallenge } from "./types";
 import { useMyContributions } from "@/api/hooks/useDiscussions";
 import { useMemo } from "react";
 import { Check } from "lucide-react";

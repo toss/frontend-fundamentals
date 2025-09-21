@@ -143,6 +143,7 @@ export function InteractionButtons({
   upvoteCount: initialUpvoteCount,
   variant = "card"
 }: InteractionButtonsProps) {
+  // Optimistic UI state
   const [optimisticState, setOptimisticState] = useState({
     hasUserLiked: initialHasUserLiked,
     hasUserUpvoted: initialHasUserUpvoted,
@@ -159,6 +160,7 @@ export function InteractionButtons({
 
   const isCardVariant = variant === "card";
 
+  // Props 변화에 따른 상태 동기화
   useEffect(() => {
     setOptimisticState({
       hasUserLiked: initialHasUserLiked,
@@ -173,12 +175,14 @@ export function InteractionButtons({
     initialUpvoteCount
   ]);
 
+  // Optimistic handlers
   const handleOptimisticLike = useCallback(
     async (e: React.MouseEvent) => {
       e.stopPropagation();
 
       const wasLiked = optimisticState.hasUserLiked;
 
+      // Immediate UI update
       setOptimisticState((prev) => ({
         ...prev,
         hasUserLiked: !prev.hasUserLiked,
@@ -190,6 +194,7 @@ export function InteractionButtons({
       try {
         await onLike?.(discussion.id);
       } catch (error) {
+        // Rollback on failure
         setOptimisticState((prev) => ({
           ...prev,
           hasUserLiked: wasLiked,
@@ -207,6 +212,7 @@ export function InteractionButtons({
 
       const wasUpvoted = optimisticState.hasUserUpvoted;
 
+      // Immediate UI update
       setOptimisticState((prev) => ({
         ...prev,
         hasUserUpvoted: !prev.hasUserUpvoted,
@@ -218,6 +224,7 @@ export function InteractionButtons({
       try {
         await onUpvote?.(discussion.id);
       } catch (error) {
+        // Rollback on failure
         setOptimisticState((prev) => ({
           ...prev,
           hasUserUpvoted: wasUpvoted,

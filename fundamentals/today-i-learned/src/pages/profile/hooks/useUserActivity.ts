@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from "react";
 import { useUserProfile } from "@/api/hooks/useUser";
 import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
-import { processUserPosts } from "@/libs/postFilters";
+import { processUserPosts } from "@/utils/postFilters";
 import { PAGE_SIZE } from "@/constants/github";
 
 type SortFilter = "created" | "lastActivity";

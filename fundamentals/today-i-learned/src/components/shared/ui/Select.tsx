@@ -1,32 +1,50 @@
 import * as React from "react";
 import { ChevronDown } from "lucide-react";
-import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/libs/cn";
+import { css, cx } from "@styled-system/css";
 
-const selectVariants = cva(
-  "flex items-center justify-center gap-1.5 rounded-lg border border-black/8 bg-white text-sm font-bold transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 tracking-tight leading-[160%]",
-  {
-    variants: {
-      size: {
-        sm: "h-8 pl-3 pr-4 text-xs",
-        md: "h-10 pl-[15px] pr-[18px] text-sm",
-        lg: "h-12 pl-4 pr-5 text-base"
-      },
-      fullWidth: {
-        true: "w-full",
-        false: "w-auto min-w-[120px]"
-      }
+type SelectSize = "sm" | "md" | "lg";
+
+const selectVariants = {
+  base: css({
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "6px",
+    borderRadius: "8px",
+    border: "1px solid",
+    borderColor: "rgba(0, 0, 0, 0.08)",
+    backgroundColor: "white",
+    fontSize: "14px",
+    fontWeight: "bold",
+    transition: "colors",
+    letterSpacing: "-0.025em",
+    lineHeight: "1.6",
+    cursor: "pointer",
+    _hover: { backgroundColor: "gray.50" },
+    _focus: {
+      outline: "2px solid",
+      outlineColor: "gray.300",
+      outlineOffset: "2px"
     },
-    defaultVariants: {
-      size: "md",
-      fullWidth: false
+    _disabled: {
+      cursor: "not-allowed",
+      opacity: "0.5"
     }
+  }),
+  sizes: {
+    sm: css({ height: "32px", paddingLeft: "12px", paddingRight: "16px", fontSize: "12px" }),
+    md: css({ height: "40px", paddingLeft: "15px", paddingRight: "18px", fontSize: "14px" }),
+    lg: css({ height: "48px", paddingLeft: "16px", paddingRight: "20px", fontSize: "16px" })
+  },
+  fullWidth: {
+    true: css({ width: "100%" }),
+    false: css({ width: "auto", minWidth: "120px" })
   }
-);
+};
 
-export interface SelectProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onChange">,
-    VariantProps<typeof selectVariants> {
+export interface SelectProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onChange"> {
+  size?: SelectSize;
+  fullWidth?: boolean;
   value?: string;
   placeholder?: string;
   options: Array<{ value: string; label: string }>;
@@ -37,8 +55,8 @@ const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
   (
     {
       className,
-      size,
-      fullWidth,
+      size = "md",
+      fullWidth = false,
       value,
       placeholder = "선택하세요",
       options,
@@ -81,40 +99,84 @@ const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
     }, [isOpen]);
 
     return (
-      <div className="relative" data-select-container>
+      <div className={css({ position: "relative" })} data-select-container>
         <button
           ref={ref}
           type="button"
-          className={cn(selectVariants({ size, fullWidth }), className)}
+          className={cx(
+            selectVariants.base,
+            size && selectVariants.sizes[size],
+            fullWidth && selectVariants.fullWidth.true,
+            className
+          )}
           onClick={handleToggle}
           {...props}
         >
           <span
-            className={cn(
-              "truncate text-black/60",
-              !selectedOption && "text-black/60"
+            className={cx(
+              css({
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                color: "rgba(0, 0, 0, 0.6)"
+              }),
+              !selectedOption && css({ color: "rgba(0, 0, 0, 0.6)" })
             )}
           >
             {displayText}
           </span>
           <ChevronDown
-            className={cn(
-              "h-4 w-4 shrink-0 transition-transform text-black/40",
-              isOpen && "rotate-180"
+            className={cx(
+              css({
+                width: "16px",
+                height: "16px",
+                flexShrink: "0",
+                transition: "transform",
+                color: "rgba(0, 0, 0, 0.4)"
+              }),
+              isOpen && css({ transform: "rotate(180deg)" })
             )}
           />
         </button>
 
         {isOpen && (
-          <div className="absolute top-full left-0 right-0 z-50 mt-1 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg">
-            <div className="max-h-60 overflow-y-auto py-1">
+          <div className={css({
+            position: "absolute",
+            top: "full",
+            left: "0",
+            right: "0",
+            zIndex: "50",
+            marginTop: "4px",
+            overflow: "hidden",
+            borderRadius: "8px",
+            border: "1px solid",
+            borderColor: "gray.200",
+            backgroundColor: "white",
+            boxShadow: "lg"
+          })}>
+            <div className={css({
+              maxHeight: "240px",
+              overflowY: "auto",
+              paddingY: "4px"
+            })}>
               {options.map((option) => (
                 <button
                   key={option.value}
                   type="button"
-                  className={cn(
-                    "w-full px-3 py-2 text-left text-sm hover:bg-gray-50 transition-colors",
-                    selectedValue === option.value && "bg-gray-100 font-medium"
+                  className={cx(
+                    css({
+                      width: "full",
+                      paddingX: "12px",
+                      paddingY: "8px",
+                      textAlign: "left",
+                      fontSize: "14px",
+                      transition: "colors",
+                      _hover: { backgroundColor: "gray.50" }
+                    }),
+                    selectedValue === option.value && css({
+                      backgroundColor: "gray.100",
+                      fontWeight: "500"
+                    })
                   )}
                   onClick={() => handleSelect(option.value)}
                 >

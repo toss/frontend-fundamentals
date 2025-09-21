@@ -1,7 +1,7 @@
 import { ProfileHeader } from "./components/ProfileHeader";
 import { HallOfFameSection } from "./components/HallOfFameSection";
 import { ActivitySection } from "./components/ActivitySection";
-import { MonthlyChallenge } from "@/pages/timeline/components/MonthlyChallenge";
+import { MonthlyChallenge } from "@/components/features/challenge/MonthlyChallenge";
 import { css } from "@styled-system/css";
 
 export function MyPage() {

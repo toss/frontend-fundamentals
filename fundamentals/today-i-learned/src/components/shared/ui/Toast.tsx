@@ -1,5 +1,8 @@
 import { UI_CONFIG } from "@/constants";
-import type { BaseComponentProps } from "@/types";
+interface BaseComponentProps {
+  className?: string;
+  children?: React.ReactNode;
+}
 import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { css, cx } from "@styled-system/css";
