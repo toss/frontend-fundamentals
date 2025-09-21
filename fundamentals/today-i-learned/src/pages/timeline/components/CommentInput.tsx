@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { useAuth } from "@/contexts/AuthContext";
+import { css } from "@styled-system/css";
 
 interface CommentInputProps {
   onSubmit: (content: string) => void;
@@ -36,20 +37,20 @@ export function CommentInput({
   }
 
   return (
-    <div className="px-8 pb-3 flex flex-col gap-3">
-      <div className="flex items-center gap-4">
+    <div className={commentInputContainer}>
+      <div className={inputWrapper}>
         <Avatar
           size="40"
           src={user.avatar_url}
           alt={user.login}
           fallback={user.login}
-          className="shrink-0"
+          className={avatarStyle}
         />
         <textarea
           value={commentText}
           onChange={(e) => setCommentText(e.target.value)}
           placeholder={placeholder}
-          className="flex-1 font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80 placeholder:text-black/20 bg-transparent border-none outline-none resize-none min-h-[24px] max-h-[120px]"
+          className={textareaStyle}
           rows={1}
           onInput={(e) => {
             const target = e.target as HTMLTextAreaElement;
@@ -58,18 +59,18 @@ export function CommentInput({
           }}
         />
       </div>
-      <div className="flex flex-col items-end gap-2">
+      <div className={buttonWrapper}>
         <button
           onClick={handleCommentSubmit}
           disabled={!commentText.trim() || isPending}
-          className="flex justify-center items-center px-6 py-[18px] gap-[10px] w-24 h-[46px] bg-[#0F0F0F] hover:bg-[#333333] disabled:bg-black/20 disabled:cursor-not-allowed rounded-[200px] font-bold text-[14px] leading-[130%] tracking-[-0.4px] text-[#FCFCFC] transition-colors"
+          className={submitButton}
         >
           {isPending ? "작성중..." : "작성하기"}
         </button>
         
         {/* 에러 메시지 */}
         {isError && (
-          <p className="text-red-500 text-sm">
+          <p className={errorMessage}>
             댓글 작성에 실패했습니다. 네트워크 상태를 확인해주세요.
           </p>
         )}
@@ -77,3 +78,80 @@ export function CommentInput({
     </div>
   );
 }
+
+// Semantic style definitions
+const commentInputContainer = css({
+  paddingX: '2rem',
+  paddingBottom: '0.75rem',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.75rem'
+});
+
+const inputWrapper = css({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '1rem'
+});
+
+const avatarStyle = css({
+  flexShrink: '0'
+});
+
+const textareaStyle = css({
+  flex: '1',
+  fontWeight: '500',
+  fontSize: '16px',
+  lineHeight: '160%',
+  letterSpacing: '-0.4px',
+  color: 'rgba(0, 0, 0, 0.8)',
+  backgroundColor: 'transparent',
+  border: 'none',
+  outline: 'none',
+  resize: 'none',
+  minHeight: '24px',
+  maxHeight: '120px',
+  _placeholder: {
+    color: 'rgba(0, 0, 0, 0.2)'
+  }
+});
+
+const buttonWrapper = css({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-end',
+  gap: '0.5rem'
+});
+
+const submitButton = css({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  paddingX: '1.5rem',
+  paddingY: '18px',
+  gap: '10px',
+  width: '6rem',
+  height: '46px',
+  backgroundColor: '#0F0F0F',
+  borderRadius: '200px',
+  fontWeight: '700',
+  fontSize: '14px',
+  lineHeight: '130%',
+  letterSpacing: '-0.4px',
+  color: '#FCFCFC',
+  transition: 'colors 0.15s ease-in-out',
+  border: 'none',
+  cursor: 'pointer',
+  _hover: {
+    backgroundColor: '#333333'
+  },
+  _disabled: {
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    cursor: 'not-allowed'
+  }
+});
+
+const errorMessage = css({
+  color: '#ef4444',
+  fontSize: '14px'
+});
