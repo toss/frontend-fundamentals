@@ -159,8 +159,6 @@ export function InteractionButtons({
   const upvoteUsers = getUsersWhoReacted(discussion.reactions, "THUMBS_UP");
 
   const isCardVariant = variant === "card";
-  const iconStroke = isCardVariant ? "stroke-[#979797]" : "stroke-black/40";
-  const textColor = isCardVariant ? "text-[#979797]" : "text-black/40";
 
   // Props 변화에 따른 상태 동기화
   useEffect(() => {

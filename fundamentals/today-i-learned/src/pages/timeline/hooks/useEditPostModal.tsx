@@ -5,55 +5,6 @@ import { useUserProfile } from "@/api/hooks/useUser";
 import { useMutation } from "@tanstack/react-query";
 import { css } from "@styled-system/css";
 
-const modalContainer = {
-  position: "fixed",
-  top: "0",
-  left: "0",
-  width: "100%",
-  height: "100%",
-  backgroundColor: "rgba(0, 0, 0, 0.5)",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  zIndex: "9999"
-};
-
-const modalContent = {
-  backgroundColor: "white",
-  borderRadius: "24px",
-  padding: "32px",
-  width: "90%",
-  maxWidth: "600px",
-  maxHeight: "80vh",
-  display: "flex",
-  flexDirection: "column",
-  boxShadow:
-    "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
-};
-
-const modalHeader = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  marginBottom: "24px"
-};
-
-const modalTitle = {
-  fontSize: "24px",
-  fontWeight: "700",
-  color: "rgb(15, 15, 15)"
-};
-
-const closeButton = {
-  padding: "8px",
-  borderRadius: "8px",
-  cursor: "pointer",
-  transition: "background-color 0.2s ease",
-  _hover: {
-    backgroundColor: "rgb(243, 244, 246)"
-  }
-};
-
 const contentWrapper = {
   flex: "1",
   marginBottom: "24px"

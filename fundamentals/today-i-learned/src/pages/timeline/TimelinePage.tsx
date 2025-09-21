@@ -202,5 +202,5 @@ const sectionDivider = css({
   width: "100%",
   height: 0,
   borderBottom: "1px solid rgba(201, 201, 201, 0.4)",
-  marginTop: { base: 0, authenticated: "1rem" }
+  marginTop: { base: 0, lg: "1rem" }
 });

@@ -1,4 +1,3 @@
-import { cn } from "@/libs/utils";
 import { LogIn, LogOut, Menu, Moon, Sun } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import ffSymbolUrl from "@/assets/ff-symbol.svg";

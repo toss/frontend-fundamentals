@@ -226,17 +226,15 @@ const postTitle = css({
   letterSpacing: "-0.025em",
   transition: "color 0.2s",
   overflow: "hidden",
-  display: "-webkit-box",
-  WebkitLineClamp: 1,
-  WebkitBoxOrient: "vertical",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
   marginBottom: "0.75rem"
 });
 
 const postPreview = css({
   overflow: "hidden",
-  display: "-webkit-box",
-  WebkitLineClamp: 1,
-  WebkitBoxOrient: "vertical"
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap"
 });
 
 const markdownContent = css({

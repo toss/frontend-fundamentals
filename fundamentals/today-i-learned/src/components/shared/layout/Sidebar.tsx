@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { ChevronDown, ChevronRight } from "lucide-react";
-import { cn } from "@/libs/utils";
 import { css } from "@styled-system/css";
 import { cx } from "@styled-system/css";
 
