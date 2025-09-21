@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { searchDiscussions } from "@/api/remote/discussions";
-import { ENV_CONFIG } from "@/libs/env";
+import { ENV_CONFIG } from "@/utils/env";
 import { useAuth } from "@/contexts/AuthContext";
 
 interface UseSearchDiscussionsParams {

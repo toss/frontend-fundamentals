@@ -4,7 +4,7 @@ import { Avatar } from "@/components/shared/ui/Avatar";
 import { ReactionTooltip } from "@/components/shared/ui/ReactionTooltip";
 import { ShareLinkButton } from "@/components/shared/ShareLinkButton";
 import { formatNumber } from "@/pages/timeline/utils/formatters";
-import { getUsersWhoReacted } from "@/libs/reactions";
+import { getUsersWhoReacted } from "@/utils/reactions";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
 import { css } from "@styled-system/css";
 

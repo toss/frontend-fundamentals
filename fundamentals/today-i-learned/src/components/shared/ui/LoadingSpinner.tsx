@@ -1,4 +1,4 @@
-import { cn } from "@/libs/utils";
+import { cn } from "@/utils/cn";
 interface BaseComponentProps {
   className?: string;
   children?: React.ReactNode;

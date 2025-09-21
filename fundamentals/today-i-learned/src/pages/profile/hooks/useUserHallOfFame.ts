@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { useUserProfile } from "@/api/hooks/useUser";
 import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
-import { filterUserPosts } from "@/libs/postFilters";
+import { filterUserPosts } from "@/utils/postFilters";
 import { PAGE_SIZE } from "@/constants/github";
 
 const INITIAL_DISPLAY_COUNT = 6;

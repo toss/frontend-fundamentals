@@ -11,7 +11,11 @@ import {
 } from "@/api/hooks/useDiscussions";
 import { useAuth } from "@/contexts/AuthContext";
 import { CommentList } from "@/pages/timeline/components/CommentList";
-import { hasUserReacted, getHeartAndUpvoteCounts, getUserReactionStates } from "@/libs/reactions";
+import {
+  hasUserReacted,
+  getHeartAndUpvoteCounts,
+  getUserReactionStates
+} from "@/utils/reactions";
 import type { GitHubComment } from "@/api/remote/discussions";
 import { css } from "@styled-system/css";
 
@@ -59,7 +63,10 @@ export function PostDetail({
   const comments = discussionDetail?.comments?.nodes || [];
 
   // Helper function to find comment by ID (including nested replies)
-  const findCommentById = (comments: GitHubComment[], id: string): GitHubComment | null => {
+  const findCommentById = (
+    comments: GitHubComment[],
+    id: string
+  ): GitHubComment | null => {
     for (const comment of comments) {
       if (comment.id === id) return comment;
       if (comment.replies?.nodes) {
@@ -99,10 +106,12 @@ export function PostDetail({
 
     try {
       const reactionContent = type === "like" ? "HEART" : "THUMBS_UP";
-      
+
       // 클릭 시점의 현재 UI 상태를 기준으로 토글 여부 결정
-      const { hasLiked: currentHasLiked, hasUpvoted: currentHasUpvoted } = getUserReactionStates(actualDiscussion.reactions, user.login);
-      const isCurrentlyReacted = type === "like" ? currentHasLiked : currentHasUpvoted;
+      const { hasLiked: currentHasLiked, hasUpvoted: currentHasUpvoted } =
+        getUserReactionStates(actualDiscussion.reactions, user.login);
+      const isCurrentlyReacted =
+        type === "like" ? currentHasLiked : currentHasUpvoted;
 
       await toggleReactionMutation.mutateAsync({
         subjectId: discussion.id,
@@ -129,7 +138,9 @@ export function PostDetail({
 
     try {
       const comment = findCommentById(comments, commentId);
-      const isCurrentlyReacted = comment ? hasUserReacted(comment.reactions, user.login, "THUMBS_UP") : false;
+      const isCurrentlyReacted = comment
+        ? hasUserReacted(comment.reactions, user.login, "THUMBS_UP")
+        : false;
 
       await toggleReactionMutation.mutateAsync({
         subjectId: commentId,
@@ -164,7 +175,9 @@ export function PostDetail({
 
     try {
       const comment = findCommentById(comments, commentId);
-      const isCurrentlyReacted = comment ? hasUserReacted(comment.reactions, user.login, "HEART") : false;
+      const isCurrentlyReacted = comment
+        ? hasUserReacted(comment.reactions, user.login, "HEART")
+        : false;
 
       await toggleReactionMutation.mutateAsync({
         subjectId: commentId,
@@ -177,8 +190,11 @@ export function PostDetail({
   };
 
   // 현재 사용자의 반응 상태와 개수 계산
-  const { heartCount, upvoteCount } = getHeartAndUpvoteCounts(actualDiscussion.reactions);
-  const { hasLiked: hasUserLiked, hasUpvoted: hasUserUpvoted } = getUserReactionStates(actualDiscussion.reactions, user?.login);
+  const { heartCount, upvoteCount } = getHeartAndUpvoteCounts(
+    actualDiscussion.reactions
+  );
+  const { hasLiked: hasUserLiked, hasUpvoted: hasUserUpvoted } =
+    getUserReactionStates(actualDiscussion.reactions, user?.login);
   return (
     <div className={postContainer}>
       {/* 헤더: 사용자 정보 */}
@@ -191,16 +207,10 @@ export function PostDetail({
           className={avatarStyles}
         />
         <div className={authorInfoContainer}>
-          <h4 className={authorName}>
-            {authorInfo.name}
-          </h4>
+          <h4 className={authorName}>{authorInfo.name}</h4>
           <div className={authorMeta}>
-            <span className={authorHandle}>
-              @{authorInfo.username}
-            </span>
-            <span className={separator}>
-              ·
-            </span>
+            <span className={authorHandle}>@{authorInfo.username}</span>
+            <span className={separator}>·</span>
             <span className={timeStamp}>
               {formatTimeAgo(actualDiscussion.createdAt)}
             </span>
@@ -211,9 +221,7 @@ export function PostDetail({
       {/* 본문 */}
       <div className={contentSection}>
         {/* 제목 */}
-        <h2 className={postTitle}>
-          {actualDiscussion.title}
-        </h2>
+        <h2 className={postTitle}>{actualDiscussion.title}</h2>
 
         {/* 내용 */}
         <div className={contentContainer}>
@@ -297,9 +305,7 @@ export function PostDetail({
         <div className={commentsSection}>
           {isDetailLoading ? (
             <div className={loadingCommentsContainer}>
-              <p className={loadingCommentsText}>
-                댓글을 불러오는 중...
-              </p>
+              <p className={loadingCommentsText}>댓글을 불러오는 중...</p>
             </div>
           ) : (
             <CommentList
@@ -317,195 +323,195 @@ export function PostDetail({
 
 // Semantic style definitions
 const postContainer = css({
-  width: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '2rem'
+  width: "100%",
+  display: "flex",
+  flexDirection: "column",
+  gap: "2rem"
 });
 
 const headerSection = css({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '0.75rem'
+  display: "flex",
+  alignItems: "center",
+  gap: "0.75rem"
 });
 
 const avatarStyles = css({
-  flexShrink: '0'
+  flexShrink: "0"
 });
 
 const authorInfoContainer = css({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '0.25rem'
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.25rem"
 });
 
 const authorName = css({
-  fontWeight: '700',
-  fontSize: '20px',
-  lineHeight: '130%',
-  letterSpacing: '-0.4px',
-  color: 'rgba(0, 0, 0, 0.8)'
+  fontWeight: "700",
+  fontSize: "20px",
+  lineHeight: "130%",
+  letterSpacing: "-0.4px",
+  color: "rgba(0, 0, 0, 0.8)"
 });
 
 const authorMeta = css({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '0.25rem'
+  display: "flex",
+  alignItems: "center",
+  gap: "0.25rem"
 });
 
 const authorHandle = css({
-  fontWeight: '600',
-  fontSize: '16px',
-  lineHeight: '130%',
-  letterSpacing: '-0.4px',
-  color: 'rgba(0, 0, 0, 0.4)'
+  fontWeight: "600",
+  fontSize: "16px",
+  lineHeight: "130%",
+  letterSpacing: "-0.4px",
+  color: "rgba(0, 0, 0, 0.4)"
 });
 
 const separator = css({
-  fontWeight: '600',
-  fontSize: '16px',
-  lineHeight: '130%',
-  letterSpacing: '-0.4px',
-  color: 'rgba(0, 0, 0, 0.4)'
+  fontWeight: "600",
+  fontSize: "16px",
+  lineHeight: "130%",
+  letterSpacing: "-0.4px",
+  color: "rgba(0, 0, 0, 0.4)"
 });
 
 const timeStamp = css({
-  fontWeight: '600',
-  fontSize: '16px',
-  lineHeight: '130%',
-  letterSpacing: '-0.4px',
-  color: 'rgba(0, 0, 0, 0.4)'
+  fontWeight: "600",
+  fontSize: "16px",
+  lineHeight: "130%",
+  letterSpacing: "-0.4px",
+  color: "rgba(0, 0, 0, 0.4)"
 });
 
 const contentSection = css({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '2rem'
+  display: "flex",
+  flexDirection: "column",
+  gap: "2rem"
 });
 
 const postTitle = css({
-  fontWeight: '700',
-  fontSize: '22px',
-  lineHeight: '130%',
-  letterSpacing: '-0.4px',
-  color: '#0F0F0F'
+  fontWeight: "700",
+  fontSize: "22px",
+  lineHeight: "130%",
+  letterSpacing: "-0.4px",
+  color: "#0F0F0F"
 });
 
 const contentContainer = css({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '1.5rem'
+  display: "flex",
+  flexDirection: "column",
+  gap: "1.5rem"
 });
 
 const markdownContent = css({
-  fontWeight: '500',
-  fontSize: '16px',
-  lineHeight: '160%',
-  letterSpacing: '-0.4px',
-  color: 'rgba(0, 0, 0, 0.8)'
+  fontWeight: "500",
+  fontSize: "16px",
+  lineHeight: "160%",
+  letterSpacing: "-0.4px",
+  color: "rgba(0, 0, 0, 0.8)"
 });
 
 const dividerContainer = css({
-  paddingY: '1rem'
+  paddingY: "1rem"
 });
 
 const dividerContainerSmall = css({
-  paddingY: '0.5rem'
+  paddingY: "0.5rem"
 });
 
 const dividerLine = css({
-  width: '100%',
-  height: '0',
-  borderTop: '1px solid rgba(201, 201, 201, 0.4)'
+  width: "100%",
+  height: "0",
+  borderTop: "1px solid rgba(201, 201, 201, 0.4)"
 });
 
 const commentInputSection = css({
-  paddingX: '2rem',
-  paddingBottom: '0.75rem',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '0.75rem'
+  paddingX: "2rem",
+  paddingBottom: "0.75rem",
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.75rem"
 });
 
 const commentInputContainer = css({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '1rem'
+  display: "flex",
+  alignItems: "center",
+  gap: "1rem"
 });
 
 const commentTextarea = css({
-  flex: '1',
-  fontWeight: '500',
-  fontSize: '16px',
-  lineHeight: '160%',
-  letterSpacing: '-0.4px',
-  color: 'rgba(0, 0, 0, 0.8)',
-  backgroundColor: 'transparent',
-  border: 'none',
-  outline: 'none',
-  resize: 'none',
-  minHeight: '24px',
-  maxHeight: '120px',
+  flex: "1",
+  fontWeight: "500",
+  fontSize: "16px",
+  lineHeight: "160%",
+  letterSpacing: "-0.4px",
+  color: "rgba(0, 0, 0, 0.8)",
+  backgroundColor: "transparent",
+  border: "none",
+  outline: "none",
+  resize: "none",
+  minHeight: "24px",
+  maxHeight: "120px",
   _placeholder: {
-    color: 'rgba(0, 0, 0, 0.2)'
+    color: "rgba(0, 0, 0, 0.2)"
   }
 });
 
 const submitButtonContainer = css({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-end',
-  gap: '0.5rem'
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-end",
+  gap: "0.5rem"
 });
 
 const submitButton = css({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  paddingX: '1.5rem',
-  paddingY: '18px',
-  gap: '10px',
-  width: '6rem',
-  height: '46px',
-  backgroundColor: '#0F0F0F',
-  borderRadius: '200px',
-  fontWeight: '700',
-  fontSize: '14px',
-  lineHeight: '130%',
-  letterSpacing: '-0.4px',
-  color: '#FCFCFC',
-  transition: 'colors 0.15s ease-in-out',
-  border: 'none',
-  cursor: 'pointer',
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  paddingX: "1.5rem",
+  paddingY: "18px",
+  gap: "10px",
+  width: "6rem",
+  height: "46px",
+  backgroundColor: "#0F0F0F",
+  borderRadius: "200px",
+  fontWeight: "700",
+  fontSize: "14px",
+  lineHeight: "130%",
+  letterSpacing: "-0.4px",
+  color: "#FCFCFC",
+  transition: "colors 0.15s ease-in-out",
+  border: "none",
+  cursor: "pointer",
   _hover: {
-    backgroundColor: '#333333'
+    backgroundColor: "#333333"
   },
   _disabled: {
-    backgroundColor: 'rgba(0, 0, 0, 0.2)',
-    cursor: 'not-allowed'
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
+    cursor: "not-allowed"
   }
 });
 
 const errorMessage = css({
-  color: '#ef4444',
-  fontSize: '14px',
-  fontWeight: '500'
+  color: "#ef4444",
+  fontSize: "14px",
+  fontWeight: "500"
 });
 
 const commentsSection = css({
-  display: 'flex',
-  flexDirection: 'column'
+  display: "flex",
+  flexDirection: "column"
 });
 
 const loadingCommentsContainer = css({
-  paddingX: '2rem',
-  paddingY: '1rem'
+  paddingX: "2rem",
+  paddingY: "1rem"
 });
 
 const loadingCommentsText = css({
-  fontWeight: '500',
-  fontSize: '16px',
-  lineHeight: '160%',
-  letterSpacing: '-0.4px',
-  color: 'rgba(0, 0, 0, 0.4)'
+  fontWeight: "500",
+  fontSize: "16px",
+  lineHeight: "160%",
+  letterSpacing: "-0.4px",
+  color: "rgba(0, 0, 0, 0.4)"
 });

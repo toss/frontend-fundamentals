@@ -1,5 +1,5 @@
 import { useAuth } from "@/contexts/AuthContext";
-import { ENV_CONFIG } from "@/libs/env";
+import { ENV_CONFIG } from "@/utils/env";
 import {
   useInfiniteQuery,
   useMutation,

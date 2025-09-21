@@ -1,6 +1,6 @@
 import { useUserProfile } from "@/api/hooks/useUser";
 import { UserAvatar } from "@/components/shared/common/UserAvatar";
-import { cn } from "@/libs/utils";
+import { cn } from "@/utils/cn";
 interface BaseComponentProps {
   className?: string;
   children?: React.ReactNode;

@@ -1,10 +1,13 @@
 import { useCallback } from "react";
-import { useToggleDiscussionReaction, DISCUSSIONS_QUERY_KEYS } from "@/api/hooks/useDiscussions";
+import {
+  useToggleDiscussionReaction,
+  DISCUSSIONS_QUERY_KEYS
+} from "@/api/hooks/useDiscussions";
 import { useErrorHandler } from "@/hooks/useErrorHandler";
 import { useAuth } from "@/contexts/AuthContext";
 import { useQueryClient } from "@tanstack/react-query";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
-import { hasUserReacted as hasUserReactedUtil } from "@/libs/reactions";
+import { hasUserReacted as hasUserReactedUtil } from "@/utils/reactions";
 
 interface UsePostReactionsParams {
   discussion?: GitHubDiscussion;
@@ -23,9 +26,16 @@ export function usePostReactions({ discussion }: UsePostReactionsParams = {}) {
   const queryClient = useQueryClient();
 
   // Helper function to check if user has reacted
-  const hasUserReacted = useCallback((discussionData: GitHubDiscussion, content: "HEART" | "THUMBS_UP") => {
-    return hasUserReactedUtil(discussionData.reactions, user?.login || "", content);
-  }, [user?.login]);
+  const hasUserReacted = useCallback(
+    (discussionData: GitHubDiscussion, content: "HEART" | "THUMBS_UP") => {
+      return hasUserReactedUtil(
+        discussionData.reactions,
+        user?.login || "",
+        content
+      );
+    },
+    [user?.login]
+  );
 
   /**
    * 좋아요 액션
@@ -39,9 +49,11 @@ export function usePostReactions({ discussion }: UsePostReactionsParams = {}) {
       }
 
       // Get current discussion data from query cache or props
-      const currentData = discussion || queryClient.getQueryData<GitHubDiscussion>(
-        DISCUSSIONS_QUERY_KEYS.detail(targetId)
-      );
+      const currentData =
+        discussion ||
+        queryClient.getQueryData<GitHubDiscussion>(
+          DISCUSSIONS_QUERY_KEYS.detail(targetId)
+        );
 
       if (!currentData) return;
 
@@ -73,7 +85,14 @@ export function usePostReactions({ discussion }: UsePostReactionsParams = {}) {
         // 에러는 이미 handleApiError에서 처리됨
       }
     },
-    [user?.accessToken, discussion, toggleReaction, handleApiError, queryClient, hasUserReacted]
+    [
+      user?.accessToken,
+      discussion,
+      toggleReaction,
+      handleApiError,
+      queryClient,
+      hasUserReacted
+    ]
   );
 
   /**
@@ -109,9 +128,11 @@ export function usePostReactions({ discussion }: UsePostReactionsParams = {}) {
       }
 
       // Get current discussion data from query cache or props
-      const currentData = discussion || queryClient.getQueryData<GitHubDiscussion>(
-        DISCUSSIONS_QUERY_KEYS.detail(targetId)
-      );
+      const currentData =
+        discussion ||
+        queryClient.getQueryData<GitHubDiscussion>(
+          DISCUSSIONS_QUERY_KEYS.detail(targetId)
+        );
 
       if (!currentData) return;
 
@@ -143,7 +164,14 @@ export function usePostReactions({ discussion }: UsePostReactionsParams = {}) {
         // 에러는 이미 handleApiError에서 처리됨
       }
     },
-    [user?.accessToken, discussion, toggleReaction, handleApiError, queryClient, hasUserReacted]
+    [
+      user?.accessToken,
+      discussion,
+      toggleReaction,
+      handleApiError,
+      queryClient,
+      hasUserReacted
+    ]
   );
 
   return {

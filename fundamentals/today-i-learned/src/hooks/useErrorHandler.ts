@@ -4,7 +4,7 @@ import {
   AuthError,
   getUserFriendlyErrorMessage,
   logError
-} from "@/libs/errors";
+} from "@/utils/errors";
 import { useCallback } from "react";
 
 interface ErrorHandlerOptions {
