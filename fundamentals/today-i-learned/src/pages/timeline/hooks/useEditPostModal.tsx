@@ -92,24 +92,131 @@ const titleInput = {
   }
 };
 
-const submitButton = {
-  backgroundColor: "black",
-  color: "white",
+const dialogContent = {
+  display: "flex",
+  flexDirection: "column",
+  maxWidth: "800px",
+  minHeight: "628px"
+};
+
+const headerContainer = {
+  display: "flex",
+  justifyContent: "end",
+  padding: "24px",
+  paddingBottom: "0"
+};
+
+const closeButtonStyle = {
+  width: "20px",
+  height: "20px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  color: "rgba(0, 0, 0, 0.6)",
+  cursor: "pointer",
+  transition: "color 0.2s ease",
+  _hover: {
+    color: "rgba(0, 0, 0, 0.8)"
+  }
+};
+
+const mainContent = {
+  display: "flex",
   paddingX: "24px",
-  paddingY: "12px",
-  borderRadius: "12px",
-  fontSize: "16px",
-  fontWeight: "600",
+  paddingBottom: "24px",
+  gap: "24px",
+  flex: "1",
+  minHeight: "0"
+};
+
+const avatarContainer = {
+  flexShrink: "0"
+};
+
+const avatarStyle = {
+  width: "60px",
+  height: "60px",
+  borderRadius: "9999px",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat"
+};
+
+const contentArea = {
+  flex: "1",
+  display: "flex",
+  flexDirection: "column"
+};
+
+const titleContainer = {
+  marginBottom: "24px"
+};
+
+const dialogTitle = {
+  fontSize: "22px",
+  fontWeight: "700",
+  lineHeight: "130%",
+  letterSpacing: "-0.4px",
+  color: "rgb(15, 15, 15)"
+};
+
+const submitButtonWrapper = {
+  display: "flex",
+  justifyContent: "end",
+  flexDirection: "column",
+  alignItems: "end",
+  gap: "8px"
+};
+
+const submitButtonStyle = {
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "center",
+  alignItems: "center",
+  paddingX: "24px",
+  paddingY: "18px",
+  gap: "10px",
+  width: "96px",
+  height: "46px",
+  backgroundColor: "rgb(15, 15, 15)",
+  borderRadius: "200px",
+  transition: "background-color 0.2s ease",
   cursor: "pointer",
   border: "none",
-  transition: "background-color 0.2s ease",
+  flexShrink: "0",
   _hover: {
-    backgroundColor: "rgb(31, 41, 55)"
+    backgroundColor: "rgb(51, 51, 51)"
   },
   _disabled: {
-    backgroundColor: "rgb(156, 163, 175)",
+    backgroundColor: "rgba(0, 0, 0, 0.1)",
     cursor: "not-allowed"
   }
+};
+
+const submitButtonText = {
+  width: "48px",
+  height: "10px",
+  fontSize: "14px",
+  fontWeight: "700",
+  lineHeight: "130%",
+  letterSpacing: "-0.4px",
+  color: "rgb(252, 252, 252)",
+  display: "flex",
+  alignItems: "center",
+  flexShrink: "0"
+};
+
+const errorContainer = {
+  display: "flex",
+  justifyContent: "end",
+  alignSelf: "stretch",
+  marginTop: "8px"
+};
+
+const errorText = {
+  color: "rgb(239, 68, 68)",
+  fontSize: "14px",
+  fontWeight: "500"
 };
 
 interface UseWritePostModalOptions {
@@ -148,22 +255,22 @@ export function useEditPostModal(options: UseWritePostModalOptions = {}) {
 
   const EditPostModal = (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-      <AlertDialog.Content className="flex flex-col max-w-[800px] min-h-[628px]">
+      <AlertDialog.Content className={css(dialogContent)}>
         {/* Header with close button */}
-        <div className="flex justify-end p-6 pb-0">
+        <div className={css(headerContainer)}>
           <AlertDialog.Cancel asChild>
-            <button className="w-5 h-5 flex items-center justify-center text-black/60 hover:text-black/80 transition-colors">
+            <button className={css(closeButtonStyle)}>
               <X size={16} />
             </button>
           </AlertDialog.Cancel>
         </div>
 
         {/* Main content */}
-        <div className="flex px-6 pb-6 gap-6 flex-1 min-h-0">
+        <div className={css(mainContent)}>
           {/* Profile Avatar */}
-          <div className="flex-shrink-0">
+          <div className={css(avatarContainer)}>
             <div
-              className="w-[60px] h-[60px] rounded-full bg-cover bg-center bg-no-repeat"
+              className={css(avatarStyle)}
               style={{
                 backgroundImage: userProfile?.avatar_url
                   ? `url(${userProfile.avatar_url})`
@@ -173,9 +280,9 @@ export function useEditPostModal(options: UseWritePostModalOptions = {}) {
           </div>
 
           {/* Content area */}
-          <div className="flex-1 flex flex-col">
+          <div className={css(contentArea)}>
             {/* Title */}
-            <div className="mb-6">
+            <div className={css(titleContainer)}>
               {options.isEdit ? (
                 <input
                   type="text"
@@ -189,7 +296,7 @@ export function useEditPostModal(options: UseWritePostModalOptions = {}) {
                   }}
                 />
               ) : (
-                <AlertDialog.Title className="text-[22px] font-bold leading-[130%] tracking-[-0.4px] text-[#0F0F0F]">
+                <AlertDialog.Title className={css(dialogTitle)}>
                   오늘 배운 내용을 기록해 보세요
                 </AlertDialog.Title>
               )}
@@ -210,7 +317,7 @@ export function useEditPostModal(options: UseWritePostModalOptions = {}) {
             </div>
 
             {/* Submit button */}
-            <div className="flex justify-end flex-col items-end gap-2">
+            <div className={css(submitButtonWrapper)}>
               <AlertDialog.Action asChild>
                 <button
                   onClick={() => handleSubmit.mutate()}
@@ -219,10 +326,10 @@ export function useEditPostModal(options: UseWritePostModalOptions = {}) {
                       ? !title.trim() || !content.trim()
                       : !content.trim()
                   }
-                  className="flex flex-row justify-center items-center px-6 py-[18px] gap-[10px] w-24 h-[46px] bg-[#0F0F0F] hover:bg-[#333333] disabled:bg-black/10 disabled:cursor-not-allowed rounded-[200px] transition-colors flex-none"
+                  className={css(submitButtonStyle)}
                 >
                   <span
-                    className="w-12 h-[10px] text-[14px] font-bold leading-[130%] tracking-[-0.4px] text-[#FCFCFC] flex items-center flex-none"
+                    className={css(submitButtonText)}
                     style={{
                       fontFamily:
                         "'Toss Product Sans OTF', ui-sans-serif, system-ui, sans-serif"
@@ -233,8 +340,8 @@ export function useEditPostModal(options: UseWritePostModalOptions = {}) {
                 </button>
               </AlertDialog.Action>
               {handleSubmit.isError && (
-                <div className="flex justify-end self-stretch mt-2">
-                  <p className="text-red-500 text-sm font-medium">
+                <div className={css(errorContainer)}>
+                  <p className={css(errorText)}>
                     저장에 실패했습니다. 네트워크 상태를 확인해주세요.
                   </p>
                 </div>
