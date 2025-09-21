@@ -53,7 +53,12 @@ const buttonVariants = {
   },
   sizes: {
     sm: css({ height: "32px", paddingX: "12px", fontSize: "14px" }),
-    md: css({ height: "40px", paddingX: "16px", paddingY: "8px", fontSize: "14px" }),
+    md: css({
+      height: "40px",
+      paddingX: "16px",
+      paddingY: "8px",
+      fontSize: "14px"
+    }),
     lg: css({ height: "48px", paddingX: "24px", fontSize: "16px" })
   },
   fullWidth: {
@@ -62,7 +67,8 @@ const buttonVariants = {
   }
 };
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   fullWidth?: boolean;
@@ -70,7 +76,17 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "primary", size = "md", fullWidth = false, asChild = false, ...props }, ref) => {
+  (
+    {
+      className,
+      variant = "primary",
+      size = "md",
+      fullWidth = false,
+      asChild = false,
+      ...props
+    },
+    ref
+  ) => {
     const Comp = asChild ? Slot : "button";
     return (
       <Comp

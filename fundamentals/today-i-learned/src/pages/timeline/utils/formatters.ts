@@ -25,7 +25,11 @@ export function formatNumber(num: number): string {
   return num.toString();
 }
 
-export function truncateText(text: string, maxLength: number, suffix: string = "..."): string {
+export function truncateText(
+  text: string,
+  maxLength: number,
+  suffix: string = "..."
+): string {
   if (text.length <= maxLength) {
     return text;
   }
@@ -37,7 +41,10 @@ export function cleanMarkdown(text: string): string {
   return text.replace(/[#*`\n]/g, " ").trim();
 }
 
-export const generateTitle = (content: string, maxLength: number = 50): string => {
+export const generateTitle = (
+  content: string,
+  maxLength: number = 50
+): string => {
   return truncateText(content, maxLength);
 };
 

@@ -30,12 +30,17 @@ export function LoadingSpinner({
   className
 }: LoadingSpinnerProps) {
   return (
-    <div className={cx(css({
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: "12px"
-    }), className)}>
+    <div
+      className={cx(
+        css({
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "12px"
+        }),
+        className
+      )}
+    >
       <div
         className={cx(
           css({
@@ -51,13 +56,15 @@ export function LoadingSpinner({
         aria-label="로딩 중"
       />
       {text && (
-        <span className={cx(
-          css({
-            fontSize: "14px",
-            fontWeight: "500"
-          }),
-          variantStyles[variant]
-        )}>
+        <span
+          className={cx(
+            css({
+              fontSize: "14px",
+              fontWeight: "500"
+            }),
+            variantStyles[variant]
+          )}
+        >
           {text}
         </span>
       )}
@@ -114,12 +121,17 @@ export function LoadingSkeleton({
   className
 }: LoadingSkeletonProps) {
   return (
-    <div className={cx(css({
-      animation: "pulse 2s infinite",
-      "& > * + *": {
-        marginTop: "12px"
-      }
-    }), className)}>
+    <div
+      className={cx(
+        css({
+          animation: "pulse 2s infinite",
+          "& > * + *": {
+            marginTop: "12px"
+          }
+        }),
+        className
+      )}
+    >
       {Array.from({ length: lines }).map((_, index) => (
         <div
           key={index}

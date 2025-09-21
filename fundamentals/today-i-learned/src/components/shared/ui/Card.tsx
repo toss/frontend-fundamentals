@@ -15,9 +15,11 @@ const cardVariants = {
   variants: {
     default: css({
       borderColor: "gray.200",
-      boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
-      _hover: { 
-        boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
+      boxShadow:
+        "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+      _hover: {
+        boxShadow:
+          "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
       }
     }),
     elevated: css({
@@ -30,9 +32,10 @@ const cardVariants = {
     }),
     interactive: css({
       borderColor: "gray.200",
-      boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+      boxShadow:
+        "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
       cursor: "pointer",
-      _hover: { 
+      _hover: {
         boxShadow: "0 0 18px rgba(0, 0, 0, 0.2)"
       }
     })

@@ -32,9 +32,24 @@ const selectVariants = {
     }
   }),
   sizes: {
-    sm: css({ height: "32px", paddingLeft: "12px", paddingRight: "16px", fontSize: "12px" }),
-    md: css({ height: "40px", paddingLeft: "15px", paddingRight: "18px", fontSize: "14px" }),
-    lg: css({ height: "48px", paddingLeft: "16px", paddingRight: "20px", fontSize: "16px" })
+    sm: css({
+      height: "32px",
+      paddingLeft: "12px",
+      paddingRight: "16px",
+      fontSize: "12px"
+    }),
+    md: css({
+      height: "40px",
+      paddingLeft: "15px",
+      paddingRight: "18px",
+      fontSize: "14px"
+    }),
+    lg: css({
+      height: "48px",
+      paddingLeft: "16px",
+      paddingRight: "20px",
+      fontSize: "16px"
+    })
   },
   fullWidth: {
     true: css({ width: "100%" }),
@@ -42,7 +57,8 @@ const selectVariants = {
   }
 };
 
-export interface SelectProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onChange"> {
+export interface SelectProps
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onChange"> {
   size?: SelectSize;
   fullWidth?: boolean;
   value?: string;
@@ -140,25 +156,29 @@ const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
         </button>
 
         {isOpen && (
-          <div className={css({
-            position: "absolute",
-            top: "full",
-            left: "0",
-            right: "0",
-            zIndex: "50",
-            marginTop: "4px",
-            overflow: "hidden",
-            borderRadius: "8px",
-            border: "1px solid",
-            borderColor: "gray.200",
-            backgroundColor: "white",
-            boxShadow: "lg"
-          })}>
-            <div className={css({
-              maxHeight: "240px",
-              overflowY: "auto",
-              paddingY: "4px"
-            })}>
+          <div
+            className={css({
+              position: "absolute",
+              top: "full",
+              left: "0",
+              right: "0",
+              zIndex: "50",
+              marginTop: "4px",
+              overflow: "hidden",
+              borderRadius: "8px",
+              border: "1px solid",
+              borderColor: "gray.200",
+              backgroundColor: "white",
+              boxShadow: "lg"
+            })}
+          >
+            <div
+              className={css({
+                maxHeight: "240px",
+                overflowY: "auto",
+                paddingY: "4px"
+              })}
+            >
               {options.map((option) => (
                 <button
                   key={option.value}
@@ -173,10 +193,11 @@ const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                       transition: "colors",
                       _hover: { backgroundColor: "gray.50" }
                     }),
-                    selectedValue === option.value && css({
-                      backgroundColor: "gray.100",
-                      fontWeight: "500"
-                    })
+                    selectedValue === option.value &&
+                      css({
+                        backgroundColor: "gray.100",
+                        fontWeight: "500"
+                      })
                   )}
                   onClick={() => handleSelect(option.value)}
                 >

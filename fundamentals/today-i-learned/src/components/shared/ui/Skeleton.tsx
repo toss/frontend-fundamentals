@@ -7,11 +7,14 @@ interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
 export function Skeleton({ className, ...props }: SkeletonProps) {
   return (
     <div
-      className={cx(css({
-        animation: "pulse 2s infinite",
-        borderRadius: "6px",
-        backgroundColor: "rgba(0, 0, 0, 0.1)"
-      }), className)}
+      className={cx(
+        css({
+          animation: "pulse 2s infinite",
+          borderRadius: "6px",
+          backgroundColor: "rgba(0, 0, 0, 0.1)"
+        }),
+        className
+      )}
       {...props}
     />
   );
