@@ -9,6 +9,8 @@ import {
   getUserReactionStates
 } from "@/utils/reactions";
 import { useAuth } from "@/contexts/AuthContext";
+import { css } from "@styled-system/css";
+import { cx } from "@styled-system/css";
 
 interface CommentProps {
   comment: GitHubComment;
@@ -27,7 +29,7 @@ function CommentContainer({
 }) {
   if (depth === 0) {
     return (
-      <div className="flex flex-col items-start px-8 py-6 w-full pl-4">
+      <div className={commentContainerBase}>
         {children}
       </div>
     );
@@ -35,7 +37,7 @@ function CommentContainer({
 
   // 대댓글 - 동일한 패딩에 border만 추가
   return (
-    <div className="flex flex-col items-start px-8 py-6 w-full ml-8 pl-4 border-l-2 border-gray-200">
+    <div className={cx(commentContainerBase, commentContainerReply)}>
       {children}
     </div>
   );
@@ -43,28 +45,28 @@ function CommentContainer({
 
 function CommentHeader({ comment }: { comment: CommentProps["comment"] }) {
   return (
-    <div className="flex flex-row items-center gap-4 w-full h-10">
+    <div className={headerContainer}>
       {/* Profile Info */}
-      <div className="flex flex-row items-center gap-3">
+      <div className={profileInfoContainer}>
         <Avatar
           size="40"
           src={comment.author.avatarUrl || "/api/placeholder/40/40"}
           alt={comment.author.login}
           fallback={comment.author.login}
-          className="w-10 h-10 rounded-full flex-shrink-0"
+          className={avatarStyle}
         />
-        <div className="flex flex-row items-center gap-2">
-          <span className="font-bold text-xl leading-[130%] tracking-tight text-black/80">
+        <div className={userInfoContainer}>
+          <span className={userName}>
             {comment.author.login}
           </span>
-          <div className="flex flex-row items-start gap-1">
-            <span className="font-semibold text-base leading-[130%] tracking-tight text-black/40">
+          <div className={userMetaContainer}>
+            <span className={userHandle}>
               @{comment.author.login}
             </span>
-            <span className="font-semibold text-base leading-[130%] tracking-tight text-black/40">
+            <span className={separator}>
               ·
             </span>
-            <span className="font-semibold text-base leading-[130%] tracking-tight text-black/40">
+            <span className={timeStamp}>
               {formatTimeAgo(comment.createdAt)}
             </span>
           </div>
@@ -76,10 +78,10 @@ function CommentHeader({ comment }: { comment: CommentProps["comment"] }) {
 
 function CommentBody({ content }: { content: string }) {
   return (
-    <div className="w-full">
+    <div className={bodyContainer}>
       <MarkdownRenderer
         content={content}
-        className="font-medium text-base leading-[160%] tracking-tight text-black/80"
+        className={markdownContent}
       />
     </div>
   );
@@ -107,28 +109,18 @@ function CommentActions({
   depth?: number;
 }) {
   return (
-    <div
-      className={`flex flex-row items-start py-2 gap-4 h-9 ${depth === 0 ? "w-[250px]" : "w-[180px]"}`}
-    >
+    <div className={cx(actionsContainer, depth === 0 ? actionsContainerMain : actionsContainerReply)}>
       {depth === 0 && (
         <button
           onClick={onUpvote}
-          className={`flex flex-row items-center gap-1.5 hover:opacity-70 transition-all ${
-            hasUserUpvoted ? "text-gray-600" : ""
-          }`}
+          className={cx(actionButton, hasUserUpvoted && actionButtonActive)}
         >
-          <div className="w-5 h-5">
+          <div className={iconContainer}>
             <ChevronUp
-              className={`w-full h-full stroke-[1.67px] ${
-                hasUserUpvoted ? "stroke-[#979797]" : "stroke-black/40"
-              }`}
+              className={cx(upvoteIcon, hasUserUpvoted ? upvoteIconActive : upvoteIconDefault)}
             />
           </div>
-          <span
-            className={`font-semibold text-base leading-[130%] tracking-tight ${
-              hasUserUpvoted ? "text-[#979797]" : "text-black/40"
-            }`}
-          >
+          <span className={cx(actionText, hasUserUpvoted ? actionTextActive : actionTextDefault)}>
             {formatNumber(upvotes)}
           </span>
         </button>
@@ -136,36 +128,26 @@ function CommentActions({
 
       <button
         onClick={onLike}
-        className={`flex flex-row items-center gap-1.5 hover:opacity-70 transition-all ${
-          hasUserLiked ? "text-gray-600" : ""
-        }`}
+        className={cx(actionButton, hasUserLiked && actionButtonActive)}
       >
-        <div className="w-5 h-5">
+        <div className={iconContainer}>
           <Heart
-            className={`w-full h-full stroke-[1.67px] ${
-              hasUserLiked
-                ? "stroke-[#979797] fill-[#656565]"
-                : "stroke-black/40 fill-none"
-            }`}
+            className={cx(heartIcon, hasUserLiked ? heartIconActive : heartIconDefault)}
           />
         </div>
-        <span
-          className={`font-semibold text-base leading-[130%] tracking-tight ${
-            hasUserLiked ? "text-[#979797]" : "text-black/40"
-          }`}
-        >
+        <span className={cx(actionText, hasUserLiked ? actionTextActive : actionTextDefault)}>
           {formatNumber(likes)}
         </span>
       </button>
 
       <button
         onClick={onReply}
-        className="flex flex-row items-center gap-1.5 hover:opacity-70 transition-opacity"
+        className={replyButton}
       >
-        <div className="w-5 h-5">
-          <MessageCircle className="w-full h-full stroke-black/40 stroke-[1.67px] fill-none" />
+        <div className={iconContainer}>
+          <MessageCircle className={replyIcon} />
         </div>
-        <span className="font-semibold text-base leading-[130%] tracking-tight text-black/40">
+        <span className={replyText}>
           {replies > 0 ? formatNumber(replies) : 0}
         </span>
       </button>
@@ -210,11 +192,11 @@ export function Comment({
     return (
       <>
         <CommentContainer depth={depth}>
-          <div className="flex flex-row items-center p-0 gap-4 w-full h-10">
+          <div className={commentHeaderWrapper}>
             <CommentHeader comment={comment} />
           </div>
 
-          <div className="flex flex-col items-start py-6 gap-6 w-full">
+          <div className={commentContentWrapper}>
             <CommentBody content={comment.body} />
             <CommentActions
               upvotes={upvoteCount}
@@ -245,7 +227,7 @@ export function Comment({
         )}
 
         {depth === 0 && (
-          <div className="mt-4">
+          <div className={commentInputWrapper}>
             <CommentInput
               onSubmit={handleReplySubmit}
               placeholder="답글을 작성해보세요..."
@@ -263,7 +245,7 @@ export function Comment({
     <>
       <CommentContainer depth={depth}>
         <CommentHeader comment={comment} />
-        <div className="flex flex-col items-start py-6 gap-6 w-full">
+        <div className={commentContentWrapper}>
           <CommentBody content={comment.body} />
           <CommentActions
             upvotes={upvoteCount}
@@ -296,3 +278,239 @@ export function Comment({
     </>
   );
 }
+
+// Semantic style definitions
+const commentContainerBase = css({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  paddingX: '2rem',
+  paddingY: '1.5rem',
+  width: '100%',
+  paddingLeft: '1rem'
+});
+
+const commentContainerReply = css({
+  marginLeft: '2rem',
+  paddingLeft: '1rem',
+  borderLeft: '2px solid #e5e7eb'
+});
+
+const headerContainer = css({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  gap: '1rem',
+  width: '100%',
+  height: '2.5rem'
+});
+
+const profileInfoContainer = css({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  gap: '0.75rem'
+});
+
+const avatarStyle = css({
+  width: '2.5rem',
+  height: '2.5rem',
+  borderRadius: '50%',
+  flexShrink: '0'
+});
+
+const userInfoContainer = css({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  gap: '0.5rem'
+});
+
+const userName = css({
+  fontWeight: '700',
+  fontSize: '20px',
+  lineHeight: '130%',
+  letterSpacing: '-0.025em',
+  color: 'rgba(0, 0, 0, 0.8)'
+});
+
+const userMetaContainer = css({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'flex-start',
+  gap: '0.25rem'
+});
+
+const userHandle = css({
+  fontWeight: '600',
+  fontSize: '16px',
+  lineHeight: '130%',
+  letterSpacing: '-0.025em',
+  color: 'rgba(0, 0, 0, 0.4)'
+});
+
+const separator = css({
+  fontWeight: '600',
+  fontSize: '16px',
+  lineHeight: '130%',
+  letterSpacing: '-0.025em',
+  color: 'rgba(0, 0, 0, 0.4)'
+});
+
+const timeStamp = css({
+  fontWeight: '600',
+  fontSize: '16px',
+  lineHeight: '130%',
+  letterSpacing: '-0.025em',
+  color: 'rgba(0, 0, 0, 0.4)'
+});
+
+const bodyContainer = css({
+  width: '100%'
+});
+
+const markdownContent = css({
+  fontWeight: '500',
+  fontSize: '16px',
+  lineHeight: '160%',
+  letterSpacing: '-0.025em',
+  color: 'rgba(0, 0, 0, 0.8)'
+});
+
+const actionsContainer = css({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'flex-start',
+  paddingY: '0.5rem',
+  gap: '1rem',
+  height: '2.25rem'
+});
+
+const actionsContainerMain = css({
+  width: '250px'
+});
+
+const actionsContainerReply = css({
+  width: '180px'
+});
+
+const actionButton = css({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  gap: '0.375rem',
+  transition: 'opacity 0.2s ease-in-out',
+  border: 'none',
+  background: 'transparent',
+  cursor: 'pointer',
+  _hover: {
+    opacity: '0.7'
+  }
+});
+
+const actionButtonActive = css({
+  color: '#6b7280'
+});
+
+const iconContainer = css({
+  width: '1.25rem',
+  height: '1.25rem'
+});
+
+const upvoteIcon = css({
+  width: '100%',
+  height: '100%',
+  strokeWidth: '1.67px'
+});
+
+const upvoteIconActive = css({
+  stroke: '#979797'
+});
+
+const upvoteIconDefault = css({
+  stroke: 'rgba(0, 0, 0, 0.4)'
+});
+
+const heartIcon = css({
+  width: '100%',
+  height: '100%',
+  strokeWidth: '1.67px'
+});
+
+const heartIconActive = css({
+  stroke: '#979797',
+  fill: '#656565'
+});
+
+const heartIconDefault = css({
+  stroke: 'rgba(0, 0, 0, 0.4)',
+  fill: 'none'
+});
+
+const actionText = css({
+  fontWeight: '600',
+  fontSize: '16px',
+  lineHeight: '130%',
+  letterSpacing: '-0.025em'
+});
+
+const actionTextActive = css({
+  color: '#979797'
+});
+
+const actionTextDefault = css({
+  color: 'rgba(0, 0, 0, 0.4)'
+});
+
+const replyButton = css({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  gap: '0.375rem',
+  transition: 'opacity 0.2s ease-in-out',
+  border: 'none',
+  background: 'transparent',
+  cursor: 'pointer',
+  _hover: {
+    opacity: '0.7'
+  }
+});
+
+const replyIcon = css({
+  width: '100%',
+  height: '100%',
+  stroke: 'rgba(0, 0, 0, 0.4)',
+  strokeWidth: '1.67px',
+  fill: 'none'
+});
+
+const replyText = css({
+  fontWeight: '600',
+  fontSize: '16px',
+  lineHeight: '130%',
+  letterSpacing: '-0.025em',
+  color: 'rgba(0, 0, 0, 0.4)'
+});
+
+const commentHeaderWrapper = css({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  padding: '0',
+  gap: '1rem',
+  width: '100%',
+  height: '2.5rem'
+});
+
+const commentContentWrapper = css({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  paddingY: '1.5rem',
+  gap: '1.5rem',
+  width: '100%'
+});
+
+const commentInputWrapper = css({
+  marginTop: '1rem'
+});

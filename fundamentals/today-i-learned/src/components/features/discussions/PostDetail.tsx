@@ -13,6 +13,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { CommentList } from "@/pages/timeline/components/CommentList";
 import { hasUserReacted, getHeartAndUpvoteCounts, getUserReactionStates } from "@/utils/reactions";
 import type { GitHubComment } from "@/api/remote/discussions";
+import { css } from "@styled-system/css";
 
 interface PostDetailProps {
   discussion: GitHubDiscussion;
@@ -179,28 +180,28 @@ export function PostDetail({
   const { heartCount, upvoteCount } = getHeartAndUpvoteCounts(actualDiscussion.reactions);
   const { hasLiked: hasUserLiked, hasUpvoted: hasUserUpvoted } = getUserReactionStates(actualDiscussion.reactions, user?.login);
   return (
-    <div className="w-full flex flex-col gap-8">
+    <div className={postContainer}>
       {/* 헤더: 사용자 정보 */}
-      <div className="flex items-center gap-3">
+      <div className={headerSection}>
         <Avatar
           size="40"
           src={authorInfo.src}
           alt={authorInfo.alt}
           fallback={authorInfo.fallback}
-          className="shrink-0"
+          className={avatarStyles}
         />
-        <div className="flex flex-col gap-1">
-          <h4 className="font-bold text-[20px] leading-[130%] tracking-[-0.4px] text-black/80">
+        <div className={authorInfoContainer}>
+          <h4 className={authorName}>
             {authorInfo.name}
           </h4>
-          <div className="flex items-center gap-1">
-            <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
+          <div className={authorMeta}>
+            <span className={authorHandle}>
               @{authorInfo.username}
             </span>
-            <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
+            <span className={separator}>
               ·
             </span>
-            <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black/40">
+            <span className={timeStamp}>
               {formatTimeAgo(actualDiscussion.createdAt)}
             </span>
           </div>
@@ -208,17 +209,17 @@ export function PostDetail({
       </div>
 
       {/* 본문 */}
-      <div className="flex flex-col gap-8">
+      <div className={contentSection}>
         {/* 제목 */}
-        <h2 className="font-bold text-[22px] leading-[130%] tracking-[-0.4px] text-[#0F0F0F]">
+        <h2 className={postTitle}>
           {actualDiscussion.title}
         </h2>
 
         {/* 내용 */}
-        <div className="flex flex-col gap-6">
+        <div className={contentContainer}>
           <MarkdownRenderer
             content={actualDiscussion.body}
-            className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80"
+            className={markdownContent}
           />
         </div>
       </div>
@@ -236,27 +237,27 @@ export function PostDetail({
 
       {/* 구분선 */}
       {showComments && (
-        <div className="py-4">
-          <div className="w-full h-0 border-t border-[rgba(201,201,201,0.4)]" />
+        <div className={dividerContainer}>
+          <div className={dividerLine} />
         </div>
       )}
 
       {/* 댓글 입력 */}
       {showComments && user && (
-        <div className="px-8 pb-3 flex flex-col gap-3">
-          <div className="flex items-center gap-4">
+        <div className={commentInputSection}>
+          <div className={commentInputContainer}>
             <Avatar
               size="40"
               src={user.avatar_url}
               alt={user.login}
               fallback={user.login}
-              className="shrink-0"
+              className={avatarStyles}
             />
             <textarea
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
               placeholder="댓글을 작성해주세요"
-              className="flex-1 font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80 placeholder:text-black/20 bg-transparent border-none outline-none resize-none min-h-[24px] max-h-[120px]"
+              className={commentTextarea}
               rows={1}
               onInput={(e) => {
                 const target = e.target as HTMLTextAreaElement;
@@ -265,18 +266,18 @@ export function PostDetail({
               }}
             />
           </div>
-          <div className="flex flex-col items-end gap-2">
+          <div className={submitButtonContainer}>
             <button
               onClick={handleCommentSubmit}
               disabled={!commentText.trim() || addCommentMutation.isPending}
-              className="flex justify-center items-center px-6 py-[18px] gap-[10px] w-24 h-[46px] bg-[#0F0F0F] hover:bg-[#333333] disabled:bg-black/20 disabled:cursor-not-allowed rounded-[200px] font-bold text-[14px] leading-[130%] tracking-[-0.4px] text-[#FCFCFC] transition-colors"
+              className={submitButton}
             >
               {addCommentMutation.isPending ? "작성중..." : "작성하기"}
             </button>
 
             {/* 에러 메시지 */}
             {addCommentMutation.isError && (
-              <p className="text-red-500 text-sm font-medium">
+              <p className={errorMessage}>
                 댓글 작성에 실패했습니다. 네트워크 상태를 확인해주세요.
               </p>
             )}
@@ -286,17 +287,17 @@ export function PostDetail({
 
       {/* 구분선 */}
       {showComments && (
-        <div className="py-2">
-          <div className="w-full h-0 border-t border-[rgba(201,201,201,0.4)]" />
+        <div className={dividerContainerSmall}>
+          <div className={dividerLine} />
         </div>
       )}
 
       {/* 댓글들 */}
       {showComments && (
-        <div className="flex flex-col">
+        <div className={commentsSection}>
           {isDetailLoading ? (
-            <div className="px-8 py-4">
-              <p className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/40">
+            <div className={loadingCommentsContainer}>
+              <p className={loadingCommentsText}>
                 댓글을 불러오는 중...
               </p>
             </div>
@@ -313,3 +314,198 @@ export function PostDetail({
     </div>
   );
 }
+
+// Semantic style definitions
+const postContainer = css({
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '2rem'
+});
+
+const headerSection = css({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.75rem'
+});
+
+const avatarStyles = css({
+  flexShrink: '0'
+});
+
+const authorInfoContainer = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.25rem'
+});
+
+const authorName = css({
+  fontWeight: '700',
+  fontSize: '20px',
+  lineHeight: '130%',
+  letterSpacing: '-0.4px',
+  color: 'rgba(0, 0, 0, 0.8)'
+});
+
+const authorMeta = css({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.25rem'
+});
+
+const authorHandle = css({
+  fontWeight: '600',
+  fontSize: '16px',
+  lineHeight: '130%',
+  letterSpacing: '-0.4px',
+  color: 'rgba(0, 0, 0, 0.4)'
+});
+
+const separator = css({
+  fontWeight: '600',
+  fontSize: '16px',
+  lineHeight: '130%',
+  letterSpacing: '-0.4px',
+  color: 'rgba(0, 0, 0, 0.4)'
+});
+
+const timeStamp = css({
+  fontWeight: '600',
+  fontSize: '16px',
+  lineHeight: '130%',
+  letterSpacing: '-0.4px',
+  color: 'rgba(0, 0, 0, 0.4)'
+});
+
+const contentSection = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '2rem'
+});
+
+const postTitle = css({
+  fontWeight: '700',
+  fontSize: '22px',
+  lineHeight: '130%',
+  letterSpacing: '-0.4px',
+  color: '#0F0F0F'
+});
+
+const contentContainer = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1.5rem'
+});
+
+const markdownContent = css({
+  fontWeight: '500',
+  fontSize: '16px',
+  lineHeight: '160%',
+  letterSpacing: '-0.4px',
+  color: 'rgba(0, 0, 0, 0.8)'
+});
+
+const dividerContainer = css({
+  paddingY: '1rem'
+});
+
+const dividerContainerSmall = css({
+  paddingY: '0.5rem'
+});
+
+const dividerLine = css({
+  width: '100%',
+  height: '0',
+  borderTop: '1px solid rgba(201, 201, 201, 0.4)'
+});
+
+const commentInputSection = css({
+  paddingX: '2rem',
+  paddingBottom: '0.75rem',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.75rem'
+});
+
+const commentInputContainer = css({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '1rem'
+});
+
+const commentTextarea = css({
+  flex: '1',
+  fontWeight: '500',
+  fontSize: '16px',
+  lineHeight: '160%',
+  letterSpacing: '-0.4px',
+  color: 'rgba(0, 0, 0, 0.8)',
+  backgroundColor: 'transparent',
+  border: 'none',
+  outline: 'none',
+  resize: 'none',
+  minHeight: '24px',
+  maxHeight: '120px',
+  _placeholder: {
+    color: 'rgba(0, 0, 0, 0.2)'
+  }
+});
+
+const submitButtonContainer = css({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-end',
+  gap: '0.5rem'
+});
+
+const submitButton = css({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  paddingX: '1.5rem',
+  paddingY: '18px',
+  gap: '10px',
+  width: '6rem',
+  height: '46px',
+  backgroundColor: '#0F0F0F',
+  borderRadius: '200px',
+  fontWeight: '700',
+  fontSize: '14px',
+  lineHeight: '130%',
+  letterSpacing: '-0.4px',
+  color: '#FCFCFC',
+  transition: 'colors 0.15s ease-in-out',
+  border: 'none',
+  cursor: 'pointer',
+  _hover: {
+    backgroundColor: '#333333'
+  },
+  _disabled: {
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    cursor: 'not-allowed'
+  }
+});
+
+const errorMessage = css({
+  color: '#ef4444',
+  fontSize: '14px',
+  fontWeight: '500'
+});
+
+const commentsSection = css({
+  display: 'flex',
+  flexDirection: 'column'
+});
+
+const loadingCommentsContainer = css({
+  paddingX: '2rem',
+  paddingY: '1rem'
+});
+
+const loadingCommentsText = css({
+  fontWeight: '500',
+  fontSize: '16px',
+  lineHeight: '160%',
+  letterSpacing: '-0.4px',
+  color: 'rgba(0, 0, 0, 0.4)'
+});

@@ -1,11 +1,11 @@
 import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { cx } from "@styled-system/css";
 import type { ActivityDay } from "@/types";
 import { APP_CONSTANTS, STREAK_CONFIG } from "@/constants";
 
 // === Style Utilities ===
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+  return cx(clsx(inputs));
 }
 
 // === Text Utilities ===
@@ -14,7 +14,9 @@ export const truncateText = (
   maxLength: number = APP_CONSTANTS.MAX_TITLE_LENGTH,
   suffix: string = APP_CONSTANTS.TITLE_SUFFIX
 ): string => {
-  if (text.length <= maxLength) {return text;}
+  if (text.length <= maxLength) {
+    return text;
+  }
 
   const truncateLength = maxLength - suffix.length;
   return text.substring(0, truncateLength) + suffix;
@@ -32,7 +34,7 @@ export const extractTags = (content: string): string[] => {
 export const highlightTags = (content: string): string => {
   return content.replace(
     /#([\w가-힣]+)/g,
-    '<span class="text-blue-500 font-medium">#$1</span>'
+    '<span style="color: #3b82f6; font-weight: 500">#$1</span>'
   );
 };
 
@@ -44,9 +46,15 @@ export const clamp = (value: number, min: number, max: number): number => {
 export const getStreakLevel = (
   streak: number
 ): keyof typeof STREAK_CONFIG.EMOJIS => {
-  if (streak >= STREAK_CONFIG.EMOJI_THRESHOLDS.LEGENDARY) {return "LEGENDARY";}
-  if (streak >= STREAK_CONFIG.EMOJI_THRESHOLDS.MASTER) {return "MASTER";}
-  if (streak >= STREAK_CONFIG.EMOJI_THRESHOLDS.APPRENTICE) {return "APPRENTICE";}
+  if (streak >= STREAK_CONFIG.EMOJI_THRESHOLDS.LEGENDARY) {
+    return "LEGENDARY";
+  }
+  if (streak >= STREAK_CONFIG.EMOJI_THRESHOLDS.MASTER) {
+    return "MASTER";
+  }
+  if (streak >= STREAK_CONFIG.EMOJI_THRESHOLDS.APPRENTICE) {
+    return "APPRENTICE";
+  }
   return "BEGINNER";
 };
 
@@ -196,7 +204,9 @@ export const debounce = <T extends (...args: any[]) => any>(
   let timeout: NodeJS.Timeout | null = null;
 
   return (...args: Parameters<T>) => {
-    if (timeout) {clearTimeout(timeout);}
+    if (timeout) {
+      clearTimeout(timeout);
+    }
     timeout = setTimeout(() => func(...args), wait);
   };
 };

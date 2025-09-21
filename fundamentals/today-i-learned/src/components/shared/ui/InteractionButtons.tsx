@@ -6,6 +6,121 @@ import { ShareLinkButton } from "@/components/shared/ShareLinkButton";
 import { formatNumber } from "@/pages/timeline/utils/formatters";
 import { getUsersWhoReacted } from "@/utils/reactions";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
+import { css } from "@styled-system/css";
+
+const interactionContainer = {
+  display: "flex",
+  alignItems: "start",
+  gap: "16px",
+  paddingTop: "8px"
+};
+
+const buttonSection = {
+  position: "relative"
+};
+
+const interactionButton = {
+  display: "flex",
+  alignItems: "center",
+  gap: "6px",
+  cursor: "pointer",
+  transition: "opacity 0.2s ease",
+  _hover: {
+    opacity: "0.7"
+  }
+};
+
+const iconContainer = {
+  width: "20px",
+  height: "20px"
+};
+
+const buttonText = {
+  fontSize: "16px",
+  lineHeight: "130%",
+  letterSpacing: "-0.4px",
+  fontWeight: "600"
+};
+
+const upvoteText = {
+  fontSize: "16px",
+  lineHeight: "130%",
+  letterSpacing: "-0.4px",
+  fontWeight: "700"
+};
+
+const avatarGroup = {
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  gap: "6px"
+};
+
+const avatarList = {
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center"
+};
+
+const avatarItem = {
+  width: "24px",
+  height: "24px",
+  borderRadius: "9999px",
+  border: "2px solid white",
+  backgroundColor: "rgb(243, 244, 246)",
+  overflow: "hidden",
+  flexShrink: "0"
+};
+
+const tooltipText = {
+  fontSize: "14px",
+  fontWeight: "500",
+  color: "rgb(55, 65, 81)",
+  marginLeft: "8px",
+  paddingRight: "8px",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap"
+};
+
+const commentTooltip = {
+  position: "absolute",
+  bottom: "100%",
+  left: "0",
+  marginBottom: "8px",
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  backgroundColor: "white",
+  borderRadius: "9999px",
+  zIndex: "50",
+  padding: "4px",
+  gap: "6px",
+  boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.16)",
+  minWidth: "fit-content",
+  whiteSpace: "nowrap",
+  maxWidth: "300px"
+};
+
+const commentAvatar = {
+  width: "24px",
+  height: "24px",
+  borderRadius: "9999px",
+  backgroundColor: "rgb(243, 244, 246)",
+  overflow: "hidden",
+  flexShrink: "0"
+};
+
+const commentText = {
+  fontSize: "14px",
+  fontWeight: "500",
+  color: "rgb(55, 65, 81)",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  paddingX: "8px",
+  paddingY: "4px",
+  maxWidth: "30vw"
+};
 
 interface InteractionButtonsProps {
   discussion: GitHubDiscussion;
@@ -55,108 +170,138 @@ export function InteractionButtons({
       heartCount: initialHeartCount,
       upvoteCount: initialUpvoteCount
     });
-  }, [initialHasUserLiked, initialHasUserUpvoted, initialHeartCount, initialUpvoteCount]);
+  }, [
+    initialHasUserLiked,
+    initialHasUserUpvoted,
+    initialHeartCount,
+    initialUpvoteCount
+  ]);
 
   // Optimistic handlers
-  const handleOptimisticLike = useCallback(async (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handleOptimisticLike = useCallback(
+    async (e: React.MouseEvent) => {
+      e.stopPropagation();
 
-    const wasLiked = optimisticState.hasUserLiked;
+      const wasLiked = optimisticState.hasUserLiked;
 
-    // Immediate UI update
-    setOptimisticState(prev => ({
-      ...prev,
-      hasUserLiked: !prev.hasUserLiked,
-      heartCount: prev.hasUserLiked ? prev.heartCount - 1 : prev.heartCount + 1
-    }));
-
-    try {
-      await onLike?.(discussion.id);
-    } catch (error) {
-      // Rollback on failure
-      setOptimisticState(prev => ({
+      // Immediate UI update
+      setOptimisticState((prev) => ({
         ...prev,
-        hasUserLiked: wasLiked,
-        heartCount: wasLiked ? prev.heartCount + 1 : prev.heartCount - 1
+        hasUserLiked: !prev.hasUserLiked,
+        heartCount: prev.hasUserLiked
+          ? prev.heartCount - 1
+          : prev.heartCount + 1
       }));
-      console.error("좋아요 실패:", error);
-    }
-  }, [optimisticState.hasUserLiked, onLike, discussion.id]);
 
-  const handleOptimisticUpvote = useCallback(async (e: React.MouseEvent) => {
-    e.stopPropagation();
+      try {
+        await onLike?.(discussion.id);
+      } catch (error) {
+        // Rollback on failure
+        setOptimisticState((prev) => ({
+          ...prev,
+          hasUserLiked: wasLiked,
+          heartCount: wasLiked ? prev.heartCount + 1 : prev.heartCount - 1
+        }));
+        console.error("좋아요 실패:", error);
+      }
+    },
+    [optimisticState.hasUserLiked, onLike, discussion.id]
+  );
 
-    const wasUpvoted = optimisticState.hasUserUpvoted;
+  const handleOptimisticUpvote = useCallback(
+    async (e: React.MouseEvent) => {
+      e.stopPropagation();
 
-    // Immediate UI update
-    setOptimisticState(prev => ({
-      ...prev,
-      hasUserUpvoted: !prev.hasUserUpvoted,
-      upvoteCount: prev.hasUserUpvoted ? prev.upvoteCount - 1 : prev.upvoteCount + 1
-    }));
+      const wasUpvoted = optimisticState.hasUserUpvoted;
 
-    try {
-      await onUpvote?.(discussion.id);
-    } catch (error) {
-      // Rollback on failure
-      setOptimisticState(prev => ({
+      // Immediate UI update
+      setOptimisticState((prev) => ({
         ...prev,
-        hasUserUpvoted: wasUpvoted,
-        upvoteCount: wasUpvoted ? prev.upvoteCount + 1 : prev.upvoteCount - 1
+        hasUserUpvoted: !prev.hasUserUpvoted,
+        upvoteCount: prev.hasUserUpvoted
+          ? prev.upvoteCount - 1
+          : prev.upvoteCount + 1
       }));
-      console.error("업보트 실패:", error);
-    }
-  }, [optimisticState.hasUserUpvoted, onUpvote, discussion.id]);
+
+      try {
+        await onUpvote?.(discussion.id);
+      } catch (error) {
+        // Rollback on failure
+        setOptimisticState((prev) => ({
+          ...prev,
+          hasUserUpvoted: wasUpvoted,
+          upvoteCount: wasUpvoted ? prev.upvoteCount + 1 : prev.upvoteCount - 1
+        }));
+        console.error("업보트 실패:", error);
+      }
+    },
+    [optimisticState.hasUserUpvoted, onUpvote, discussion.id]
+  );
 
   return (
-    <div className="flex items-start gap-4 pt-2">
+    <div className={css(interactionContainer)}>
       {/* Upvote Button */}
       <div
-        className="relative"
+        className={css(buttonSection)}
         onMouseEnter={() => setIsUpvoteHovered(true)}
         onMouseLeave={() => setIsUpvoteHovered(false)}
       >
         <button
           onClick={handleOptimisticUpvote}
-          className={`flex items-center gap-[6px] hover:opacity-70 transition-all ${
-            optimisticState.hasUserUpvoted ? "text-gray-600" : ""
-          }`}
+          className={css(interactionButton)}
+          style={{
+            color: optimisticState.hasUserUpvoted ? "rgb(107, 114, 128)" : ""
+          }}
         >
-          <div className="w-5 h-5">
+          <div className={css(iconContainer)}>
             <ChevronUp
-              className={`w-full h-full stroke-[1.67px] ${
-                optimisticState.hasUserUpvoted ? "stroke-[#979797]" : iconStroke
-              }`}
+              style={{
+                width: "100%",
+                height: "100%",
+                strokeWidth: "1.67px",
+                stroke: optimisticState.hasUserUpvoted
+                  ? "#979797"
+                  : isCardVariant
+                    ? "#979797"
+                    : "rgba(0,0,0,0.4)"
+              }}
             />
           </div>
           <span
-            className={`text-[16px] leading-[130%] tracking-[-0.4px] font-bold ${
-              optimisticState.hasUserUpvoted ? "text-[#979797]" : textColor
-            }`}
+            className={css(upvoteText)}
+            style={{
+              color: optimisticState.hasUserUpvoted
+                ? "#979797"
+                : isCardVariant
+                  ? "#979797"
+                  : "rgba(0,0,0,0.4)"
+            }}
           >
             {formatNumber(optimisticState.upvoteCount)}
           </span>
         </button>
 
         {isCardVariant && (
-          <ReactionTooltip isVisible={isUpvoteHovered && optimisticState.upvoteCount > 0}>
-            <div className="flex flex-row items-center gap-[6px]">
-              <div className="flex flex-row items-center">
+          <ReactionTooltip
+            isVisible={isUpvoteHovered && optimisticState.upvoteCount > 0}
+          >
+            <div className={css(avatarGroup)}>
+              <div className={css(avatarList)}>
                 {upvoteUsers.slice(0, 3).map((reaction, index) => (
                   <div
                     key={`${reaction.user.login}-${index}`}
-                    className="w-6 h-6 rounded-full border-2 border-white bg-gray-100 overflow-hidden flex-shrink-0"
+                    className={css(avatarItem)}
                     style={{ marginLeft: index > 0 ? "-8px" : "0" }}
                   >
                     <Avatar
                       src={`https://github.com/${reaction.user.login}.png`}
                       alt={reaction.user.login}
-                      className="w-full h-full"
+                      size="20"
                     />
                   </div>
                 ))}
               </div>
-              <span className="text-sm font-medium text-gray-700 ml-2 pr-2 truncate">
+              <span className={css(tooltipText)}>
                 {`${optimisticState.upvoteCount}명이 업보트했어요`}
               </span>
             </div>
@@ -166,53 +311,67 @@ export function InteractionButtons({
 
       {/* Like Button */}
       <div
-        className="relative"
+        className={css(buttonSection)}
         onMouseEnter={() => setIsLikeHovered(true)}
         onMouseLeave={() => setIsLikeHovered(false)}
       >
         <button
           onClick={handleOptimisticLike}
-          className={`flex items-center gap-[6px] hover:opacity-70 transition-all ${
-            optimisticState.hasUserLiked ? "text-gray-600" : ""
-          }`}
+          className={css(interactionButton)}
+          style={{
+            color: optimisticState.hasUserLiked ? "rgb(107, 114, 128)" : ""
+          }}
         >
-          <div className="w-5 h-5">
+          <div className={css(iconContainer)}>
             <Heart
-              className={`w-full h-full stroke-[1.67px] ${
-                optimisticState.hasUserLiked
-                  ? "stroke-[#979797] fill-[#656565]"
-                  : `${iconStroke} fill-none`
-              }`}
+              style={{
+                width: "100%",
+                height: "100%",
+                strokeWidth: "1.67px",
+                stroke: optimisticState.hasUserLiked
+                  ? "#979797"
+                  : isCardVariant
+                    ? "#979797"
+                    : "rgba(0,0,0,0.4)",
+                fill: optimisticState.hasUserLiked ? "#656565" : "none"
+              }}
             />
           </div>
           <span
-            className={`text-[16px] leading-[130%] tracking-[-0.4px] font-semibold ${
-              optimisticState.hasUserLiked ? "text-[#979797]" : textColor
-            }`}
+            className={css(buttonText)}
+            style={{
+              color: optimisticState.hasUserLiked
+                ? "#979797"
+                : isCardVariant
+                  ? "#979797"
+                  : "rgba(0,0,0,0.4)"
+            }}
           >
             {formatNumber(optimisticState.heartCount)}
           </span>
         </button>
 
         {isCardVariant && (
-          <ReactionTooltip isVisible={isLikeHovered && optimisticState.heartCount > 0}>
-            <div className="flex flex-row items-center gap-[6px]">
-              <div className="flex flex-row items-center">
+          <ReactionTooltip
+            isVisible={isLikeHovered && optimisticState.heartCount > 0}
+          >
+            <div className={css(avatarGroup)}>
+              <div className={css(avatarList)}>
                 {heartUsers.slice(0, 3).map((reaction, index) => (
                   <div
                     key={`${reaction.user.login}-${index}`}
-                    className="w-6 h-6 rounded-full border-2 border-white bg-gray-100 overflow-hidden flex-shrink-0"
+                    className={css(avatarItem)}
                     style={{ marginLeft: index > 0 ? "-8px" : "0" }}
                   >
                     <Avatar
                       src={`https://github.com/${reaction.user.login}.png`}
                       alt={reaction.user.login}
-                      className="w-full h-full"
+                      size="20"
                     />
                   </div>
                 ))}
               </div>
-              <span className="text-sm font-medium text-gray-700 ml-2 pr-2 truncate">
+              <span className={css(tooltipText)}>
                 {`${optimisticState.heartCount}명이 좋아했어요`}
               </span>
             </div>
@@ -222,18 +381,27 @@ export function InteractionButtons({
 
       {/* Comment Button */}
       <div
-        className="relative"
+        className={css(buttonSection)}
         onMouseEnter={() => setIsCommentHovered(true)}
         onMouseLeave={() => setIsCommentHovered(false)}
       >
-        <div className="flex items-center gap-[6px]">
-          <div className="w-5 h-5">
+        <div className={css(interactionButton)}>
+          <div className={css(iconContainer)}>
             <MessageCircle
-              className={`w-full h-full ${iconStroke} stroke-[1.67px] fill-none`}
+              style={{
+                width: "100%",
+                height: "100%",
+                stroke: isCardVariant ? "#979797" : "rgba(0,0,0,0.4)",
+                strokeWidth: "1.67px",
+                fill: "none"
+              }}
             />
           </div>
           <span
-            className={`font-semibold text-[16px] leading-[130%] tracking-[-0.4px] ${textColor}`}
+            className={css(buttonText)}
+            style={{
+              color: isCardVariant ? "#979797" : "rgba(0,0,0,0.4)"
+            }}
           >
             {formatNumber(discussion.comments.totalCount)}
           </span>
@@ -242,35 +410,27 @@ export function InteractionButtons({
         {isCardVariant &&
           isCommentHovered &&
           discussion.comments.totalCount > 0 && (
-            <div
-              className="absolute bottom-full left-0 mb-2 flex flex-row items-center bg-white rounded-full z-50 p-1 gap-[6px]"
-              style={{
-                boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.16)",
-                minWidth: "fit-content",
-                whiteSpace: "nowrap",
-                maxWidth: "300px"
-              }}
-            >
+            <div className={css(commentTooltip)}>
               {discussion.comments.nodes &&
               discussion.comments.nodes.length > 0 ? (
                 <>
-                  <div className="w-6 h-6 rounded-full bg-gray-100 overflow-hidden flex-shrink-0">
+                  <div className={css(commentAvatar)}>
                     <Avatar
                       src={
                         discussion.comments.nodes[0].author.avatarUrl ||
                         `https://github.com/${discussion.comments.nodes[0].author.login}.png`
                       }
                       alt={discussion.comments.nodes[0].author.login}
-                      className="w-full h-full"
+                      size="20"
                     />
                   </div>
-                  <span className="text-sm font-medium text-gray-700 truncate px-2 py-1 max-w-[30vw]">
+                  <span className={css(commentText)}>
                     @{discussion.comments.nodes[0].author.login}:{" "}
                     {discussion.comments.nodes[0].body}
                   </span>
                 </>
               ) : (
-                <span className="text-sm font-medium text-gray-700 truncate px-2 py-1">
+                <span className={css(commentText)}>
                   {discussion.comments.totalCount === 1
                     ? "1개의 댓글"
                     : `${discussion.comments.totalCount}개의 댓글`}

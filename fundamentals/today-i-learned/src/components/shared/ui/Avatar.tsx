@@ -1,55 +1,60 @@
 import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/libs/cn";
+import { css, cx } from "@styled-system/css";
 
-const avatarVariants = cva(
-  "relative inline-flex shrink-0 overflow-hidden rounded-full bg-gray-100",
-  {
-    variants: {
-      size: {
-        "20": "h-5 w-5",
-        "32": "h-8 w-8",
-        "40": "h-10 w-10",
-        "48": "h-12 w-12",
-        "60": "h-15 w-15"
-      }
-    },
-    defaultVariants: {
-      size: "40"
-    }
-  }
-);
+const avatarBase = {
+  position: "relative",
+  display: "inline-flex",
+  flexShrink: "0",
+  overflow: "hidden",
+  borderRadius: "9999px",
+  backgroundColor: "rgb(243, 244, 246)"
+};
 
-const avatarImageVariants = cva("aspect-square h-full w-full object-cover");
+const avatarSizes = {
+  "20": { height: "20px", width: "20px" },
+  "32": { height: "32px", width: "32px" },
+  "40": { height: "40px", width: "40px" },
+  "48": { height: "48px", width: "48px" },
+  "60": { height: "60px", width: "60px" }
+};
 
-const avatarFallbackVariants = cva(
-  "flex h-full w-full items-center justify-center bg-gray-100 font-bold text-gray-600",
-  {
-    variants: {
-      size: {
-        "20": "text-xs",
-        "32": "text-sm",
-        "40": "text-base",
-        "48": "text-lg",
-        "60": "text-2xl"
-      }
-    },
-    defaultVariants: {
-      size: "40"
-    }
-  }
-);
+const avatarImage = {
+  aspectRatio: "1",
+  height: "100%",
+  width: "100%",
+  objectFit: "cover"
+};
 
-export interface AvatarProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof avatarVariants> {
+const avatarFallbackBase = {
+  display: "flex",
+  height: "100%",
+  width: "100%",
+  alignItems: "center",
+  justifyContent: "center",
+  backgroundColor: "rgb(243, 244, 246)",
+  fontWeight: "700",
+  color: "rgb(75, 85, 99)"
+};
+
+const fallbackTextSizes = {
+  "20": { fontSize: "12px" },
+  "32": { fontSize: "14px" },
+  "40": { fontSize: "16px" },
+  "48": { fontSize: "18px" },
+  "60": { fontSize: "24px" }
+};
+
+type AvatarSize = "20" | "32" | "40" | "48" | "60";
+
+export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
   src?: string;
   alt?: string;
   fallback?: string;
+  size?: AvatarSize;
 }
 
 const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
-  ({ className, size, src, alt, fallback, ...props }, ref) => {
+  ({ className, size = "40", src, alt, fallback, ...props }, ref) => {
     const [imageError, setImageError] = React.useState(false);
 
     const handleImageError = () => {
@@ -68,21 +73,27 @@ const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
         .slice(0, 2);
     };
 
+    const avatarStyles = {
+      ...avatarBase,
+      ...avatarSizes[size]
+    };
+
+    const fallbackStyles = {
+      ...avatarFallbackBase,
+      ...fallbackTextSizes[size]
+    };
+
     return (
-      <div
-        ref={ref}
-        className={cn(avatarVariants({ size }), className)}
-        {...props}
-      >
+      <div ref={ref} className={cx(css(avatarStyles), className)} {...props}>
         {src && !imageError ? (
           <img
             src={src}
             alt={alt || "Avatar"}
-            className={avatarImageVariants()}
+            className={css(avatarImage)}
             onError={handleImageError}
           />
         ) : (
-          <span className={avatarFallbackVariants({ size })}>
+          <span className={css(fallbackStyles)}>
             {fallback || getInitials(alt)}
           </span>
         )}
@@ -92,4 +103,4 @@ const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
 );
 Avatar.displayName = "Avatar";
 
-export { Avatar, avatarVariants };
+export { Avatar };

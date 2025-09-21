@@ -1,6 +1,7 @@
 import { Component, ErrorInfo, ReactNode } from "react";
 import constructionsImage from "@/assets/constructions.png";
 import { LayoutNavigation } from "./layout/LayoutNavigation";
+import { css } from "@styled-system/css";
 
 interface Props {
   children: ReactNode;
@@ -11,6 +12,82 @@ interface State {
   hasError: boolean;
   error: Error | null;
 }
+
+const pageContainer = {
+  minHeight: "100vh",
+  backgroundColor: "white",
+  fontFamily: "system-ui, sans-serif",
+  fontSmoothing: "antialiased"
+};
+
+const contentWrapper = {
+  paddingTop: "180px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  paddingX: "24px",
+  minHeight: "100vh"
+};
+
+const errorContainer = {
+  maxWidth: "400px",
+  width: "100%"
+};
+
+const errorContent = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  textAlign: "center"
+};
+
+const errorImage = {
+  width: "200px",
+  height: "200px",
+  marginBottom: "32px",
+  objectFit: "contain"
+};
+
+const errorTitle = {
+  fontSize: "24px",
+  fontWeight: "800",
+  lineHeight: "130%",
+  letterSpacing: "-0.4px",
+  color: "#0F0F0F",
+  marginBottom: "12px"
+};
+
+const errorDescription = {
+  fontSize: "16px",
+  fontWeight: "600",
+  lineHeight: "130%",
+  letterSpacing: "-0.4px",
+  color: "rgba(0, 0, 0, 0.6)",
+  marginBottom: "8px"
+};
+
+const errorMessageContainer = {
+  fontSize: "14px",
+  fontWeight: "500",
+  lineHeight: "150%",
+  color: "rgba(0, 0, 0, 0.4)",
+  marginBottom: "32px"
+};
+
+const homeButton = {
+  paddingX: "32px",
+  paddingY: "12px",
+  backgroundColor: "black",
+  color: "white",
+  borderRadius: "9999px",
+  fontWeight: "bold",
+  fontSize: "16px",
+  cursor: "pointer",
+  transition: "background-color 0.2s ease",
+  _hover: {
+    backgroundColor: "rgb(31, 41, 55)"
+  }
+};
 
 export class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
@@ -61,33 +138,28 @@ export class ErrorBoundary extends Component<Props, State> {
       const errorMessage = this.getErrorMessage(this.state.error);
 
       return (
-        <div className="min-h-screen bg-white font-sans antialiased">
+        <div className={css(pageContainer)}>
           <LayoutNavigation />
-          <div className="pt-[180px] flex items-center justify-center px-6 min-h-screen">
-            <div className="max-w-[400px] w-full">
-              <div className="flex flex-col items-center text-center">
+          <div className={css(contentWrapper)}>
+            <div className={css(errorContainer)}>
+              <div className={css(errorContent)}>
                 <img
                   src={constructionsImage}
                   alt="Error"
-                  className="w-[200px] h-[200px] mb-8 object-contain"
+                  className={css(errorImage)}
                 />
 
-                <h1 className="text-[24px] font-[800] leading-[130%] tracking-[-0.4px] text-[#0F0F0F] mb-3">
+                <h1 className={css(errorTitle)}>
                   예상치 못한 오류가 발생한 것 같아요!
                 </h1>
 
-                <p className="text-[16px] font-[600] leading-[130%] tracking-[-0.4px] text-black/60 mb-2">
+                <p className={css(errorDescription)}>
                   연결 상태를 확인하거나, 잠시 후 다시 접속해 주세요.
                 </p>
 
-                <p className="text-[14px] font-[500] leading-[150%] text-black/40 mb-8">
-                  {errorMessage}
-                </p>
+                <p className={css(errorMessageContainer)}>{errorMessage}</p>
 
-                <button
-                  onClick={this.resetError}
-                  className="px-8 py-3 bg-black text-white rounded-full font-bold text-[16px] hover:bg-gray-800 transition-colors"
-                >
+                <button onClick={this.resetError} className={css(homeButton)}>
                   홈으로 돌아가기
                 </button>
               </div>

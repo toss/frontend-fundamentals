@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { MarkdownRenderer } from "@/components/shared/ui/MarkdownRenderer";
 import { useWeeklyTopDiscussions } from "@/api/hooks/useDiscussions";
+import { css } from "@styled-system/css";
 
 function getWeekLabel(): string {
   const now = new Date();
@@ -17,7 +18,10 @@ function getWeekLabel(): string {
 }
 
 function truncateMarkdown(content: string, maxLength: number): string {
-  const plainText = content.replace(/[#*`\[\]()]/g, " ").replace(/\s+/g, " ").trim();
+  const plainText = content
+    .replace(/[#*`\[\]()]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
   if (plainText.length <= maxLength) {
     return plainText;
   }
@@ -32,39 +36,29 @@ function PopularPostItem({ post, rank }: { post: any; rank: number }) {
   };
 
   return (
-    <div className="flex items-start gap-3">
-      <div className="flex items-center pt-2.5">
-        <span className="text-lg font-bold text-black/40 tracking-tight leading-tight">
-          {rank}
-        </span>
+    <div className={postItemContainer}>
+      <div className={rankContainer}>
+        <span className={rankNumber}>{rank}</span>
       </div>
 
-      <button
-        type="button"
-        onClick={handleClick}
-        className="flex-1 flex flex-col justify-end py-5 px-6 bg-white border border-gray-300/50 rounded-2xl transition-all duration-200 text-left group min-h-[136px] relative"
-      >
-        <div className="flex items-center gap-1.5 mb-3">
+      <button type="button" onClick={handleClick} className={postButton}>
+        <div className={authorSection}>
           <Avatar
             size="20"
             src={post.author.avatarUrl}
             alt={post.author.login}
             fallback={post.author.login}
-            className="shrink-0"
+            className={avatarStyle}
           />
-          <span className="text-base font-bold text-black/60 tracking-tight truncate">
-            {post.author.login}
-          </span>
+          <span className={authorName}>{post.author.login}</span>
         </div>
 
-        <h4 className="font-bold text-lg text-[#0F0F0F] leading-tight tracking-tight group-hover:text-gray-700 transition-colors line-clamp-1 mb-3">
-          {post.title}
-        </h4>
+        <h4 className={postTitle}>{post.title}</h4>
 
-        <div className="line-clamp-1">
+        <div className={postPreview}>
           <MarkdownRenderer
             content={truncateMarkdown(post.body, 100)}
-            className="text-base font-medium text-black/80 leading-relaxed tracking-tight"
+            className={markdownContent}
           />
         </div>
       </button>
@@ -81,21 +75,14 @@ export function WeeklyTop5() {
 
   if (isLoading) {
     return (
-      <div className="space-y-6">
-        <div className="space-y-2">
-          <h3 className="text-2xl font-bold text-black tracking-tight">
-            주간 TOP 5
-          </h3>
-          <p className="text-base font-semibold text-black/60 tracking-tight">
-            {weekText}
-          </p>
+      <div className={weeklyTop5Container}>
+        <div className={headerSection}>
+          <h3 className={mainTitle}>주간 TOP 5</h3>
+          <p className={subtitle}>{weekText}</p>
         </div>
-        <div className="space-y-4">
+        <div className={contentSection}>
           {[...new Array(5)].map((_, index) => (
-            <div
-              key={index}
-              className="h-[136px] bg-gray-100 rounded-2xl animate-pulse w-full"
-            />
+            <div key={index} className={skeletonItem} />
           ))}
         </div>
       </div>
@@ -104,34 +91,24 @@ export function WeeklyTop5() {
 
   if (!discussions?.length) {
     return (
-      <div className="space-y-6">
-        <div className="space-y-2">
-          <h3 className="text-2xl font-bold text-black tracking-tight">
-            주간 TOP 5
-          </h3>
-          <p className="text-base font-semibold text-black/60 tracking-tight">
-            {weekText}
-          </p>
+      <div className={weeklyTop5Container}>
+        <div className={headerSection}>
+          <h3 className={mainTitle}>주간 TOP 5</h3>
+          <p className={subtitle}>{weekText}</p>
         </div>
-        <div className="text-center py-8 text-gray-500">
-          이번주 인기글이 없습니다
-        </div>
+        <div className={emptyState}>이번주 인기글이 없습니다</div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
-      <div className="space-y-2">
-        <h3 className="text-2xl font-bold text-black tracking-tight">
-          주간 TOP 5
-        </h3>
-        <p className="text-base font-semibold text-black/60 tracking-tight">
-          {weekText}
-        </p>
+    <div className={weeklyTop5Container}>
+      <div className={headerSection}>
+        <h3 className={mainTitle}>주간 TOP 5</h3>
+        <p className={subtitle}>{weekText}</p>
       </div>
 
-      <div className="space-y-4">
+      <div className={contentSection}>
         {discussions.map((discussion, index) => (
           <PopularPostItem
             key={discussion.id}
@@ -143,3 +120,144 @@ export function WeeklyTop5() {
     </div>
   );
 }
+
+// Main Container Styles
+const weeklyTop5Container = css({
+  display: "flex",
+  flexDirection: "column",
+  gap: "1.5rem"
+});
+
+const headerSection = css({
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.5rem"
+});
+
+const mainTitle = css({
+  fontSize: "24px",
+  fontWeight: "bold",
+  color: "black",
+  letterSpacing: "-0.025em"
+});
+
+const subtitle = css({
+  fontSize: "16px",
+  fontWeight: "semibold",
+  color: "rgba(0, 0, 0, 0.6)",
+  letterSpacing: "-0.025em"
+});
+
+const contentSection = css({
+  display: "flex",
+  flexDirection: "column",
+  gap: "1rem"
+});
+
+// Post Item Styles
+const postItemContainer = css({
+  display: "flex",
+  alignItems: "flex-start",
+  gap: "0.75rem"
+});
+
+const rankContainer = css({
+  display: "flex",
+  alignItems: "center",
+  paddingTop: "0.625rem"
+});
+
+const rankNumber = css({
+  fontSize: "18px",
+  fontWeight: "bold",
+  color: "rgba(0, 0, 0, 0.4)",
+  letterSpacing: "-0.025em",
+  lineHeight: "tight"
+});
+
+const postButton = css({
+  flex: 1,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "flex-end",
+  paddingY: "1.25rem",
+  paddingX: "1.5rem",
+  backgroundColor: "white",
+  border: "1px solid rgba(209, 213, 219, 0.5)",
+  borderRadius: "1rem",
+  transition: "all 0.2s",
+  textAlign: "left",
+  minHeight: "136px",
+  position: "relative",
+  cursor: "pointer",
+  _hover: {
+    "& h4": {
+      color: "rgb(55, 65, 81)"
+    }
+  }
+});
+
+const authorSection = css({
+  display: "flex",
+  alignItems: "center",
+  gap: "0.375rem",
+  marginBottom: "0.75rem"
+});
+
+const avatarStyle = css({
+  flexShrink: 0
+});
+
+const authorName = css({
+  fontSize: "16px",
+  fontWeight: "bold",
+  color: "rgba(0, 0, 0, 0.6)",
+  letterSpacing: "-0.025em",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap"
+});
+
+const postTitle = css({
+  fontWeight: "bold",
+  fontSize: "18px",
+  color: "#0F0F0F",
+  lineHeight: "tight",
+  letterSpacing: "-0.025em",
+  transition: "color 0.2s",
+  overflow: "hidden",
+  display: "-webkit-box",
+  WebkitLineClamp: 1,
+  WebkitBoxOrient: "vertical",
+  marginBottom: "0.75rem"
+});
+
+const postPreview = css({
+  overflow: "hidden",
+  display: "-webkit-box",
+  WebkitLineClamp: 1,
+  WebkitBoxOrient: "vertical"
+});
+
+const markdownContent = css({
+  fontSize: "16px",
+  fontWeight: "medium",
+  color: "rgba(0, 0, 0, 0.8)",
+  lineHeight: "relaxed",
+  letterSpacing: "-0.025em"
+});
+
+// Loading and Empty States
+const skeletonItem = css({
+  height: "136px",
+  backgroundColor: "rgb(243, 244, 246)",
+  borderRadius: "1rem",
+  animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+  width: "100%"
+});
+
+const emptyState = css({
+  textAlign: "center",
+  paddingY: "2rem",
+  color: "rgb(107, 114, 128)"
+});

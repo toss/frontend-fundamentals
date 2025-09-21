@@ -4,6 +4,7 @@ import { Button } from "@/components/shared/ui/Button";
 import { Input } from "@/components/shared/ui/Input";
 import MDEditor from "@uiw/react-md-editor";
 import type { GitHubAuthor } from "@/api/remote/discussions";
+import { css } from "@styled-system/css";
 
 interface PostInputProps {
   user: GitHubAuthor;
@@ -56,30 +57,28 @@ export function PostInput({
   };
 
   return (
-    <div className="flex flex-col items-start gap-[10px] w-full my-[24px]">
-      {/* 상단 사용자 정보 및 제목 입력 */}
-      <div className="flex flex-row gap-6 self-stretch">
-        {/* 아바타 영역 */}
-        <div className="flex flex-row items-start gap-[10px] w-[60px]">
+    <div className={postInputContainer}>
+      <div className={inputContentArea}>
+        <div className={avatarSection}>
           <Avatar
             size="60"
             src={user.avatarUrl}
             alt={user.login}
             fallback={user.login}
-            className="shrink-0 w-[60px] h-[60px] rounded-[150px]"
+            className={avatarStyle}
           />
         </div>
 
-        <div className="flex flex-col items-start flex-grow">
+        <div className={inputFieldsArea}>
           <Input
             value={title}
             onChange={handleTitleChange}
             onKeyDown={handleTitleKeyDown}
             placeholder={placeholder}
-            className="text-[22px] font-bold leading-[130%] text-black tracking-[-0.4px] w-full p-0 border-none outline-none focus:outline-none focus:ring-0 bg-transparent placeholder:text-black/20 shadow-none pb-2"
+            className={titleInputStyle}
           />
-          <div className="w-full" data-color-mode="light">
-            <div className="[&_.w-md-editor]:!border-none [&_.w-md-editor]:!shadow-none [&_.w-md-editor-text]:!p-0 [&_.w-md-editor-text]:h-full">
+          <div className={editorWrapper} data-color-mode="light">
+            <div className={editorContainer}>
               <MDEditor
                 value={content}
                 onChange={handleContentChange}
@@ -98,21 +97,19 @@ export function PostInput({
         </div>
       </div>
 
-      {/* 하단 액션 영역 */}
-      <div className="flex flex-row justify-end items-center gap-5 self-stretch">
+      <div className={actionArea}>
         <Button
           onClick={handleSubmit}
           disabled={!title.trim() || !content.trim() || isLoading}
-          className="flex flex-row justify-center items-center px-[18px] py-[22px] gap-[10px] bg-black disabled:bg-[#00000033] rounded-[200px] border-none outline-none focus:outline-none text-[16px] font-bold text-[#FCFCFC]"
+          className={submitButton}
         >
           {isLoading ? "작성중..." : "작성하기"}
         </Button>
       </div>
 
-      {/* 에러 메시지 */}
       {isError && (
-        <div className="flex justify-end self-stretch">
-          <p className="text-red-500 text-sm font-medium">
+        <div className={errorContainer}>
+          <p className={errorMessage}>
             게시에 실패했습니다. 네트워크 상태를 확인해주세요.
           </p>
         </div>
@@ -120,3 +117,128 @@ export function PostInput({
     </div>
   );
 }
+
+// Container Styles
+const postInputContainer = css({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  gap: '10px',
+  width: '100%',
+  marginY: '24px'
+});
+
+// Input Content Area
+const inputContentArea = css({
+  display: 'flex',
+  flexDirection: 'row',
+  gap: '1.5rem',
+  alignSelf: 'stretch'
+});
+
+const avatarSection = css({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'flex-start',
+  gap: '10px',
+  width: '60px'
+});
+
+const avatarStyle = css({
+  flexShrink: 0,
+  width: '60px',
+  height: '60px',
+  borderRadius: '150px'
+});
+
+const inputFieldsArea = css({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  flexGrow: 1
+});
+
+// Input Styles
+const titleInputStyle = css({
+  fontSize: '22px',
+  fontWeight: 'bold',
+  lineHeight: '130%',
+  color: 'black',
+  letterSpacing: '-0.4px',
+  width: '100%',
+  padding: 0,
+  border: 'none',
+  outline: 'none',
+  backgroundColor: 'transparent',
+  boxShadow: 'none',
+  paddingBottom: '0.5rem',
+  _focus: {
+    outline: 'none',
+    ring: 0
+  },
+  _placeholder: {
+    color: 'rgba(0, 0, 0, 0.2)'
+  }
+});
+
+// Editor Styles
+const editorWrapper = css({
+  width: '100%'
+});
+
+const editorContainer = css({
+  '& .w-md-editor': {
+    border: 'none !important',
+    boxShadow: 'none !important'
+  },
+  '& .w-md-editor-text': {
+    padding: '0 !important',
+    height: 'full'
+  }
+});
+
+// Action Area
+const actionArea = css({
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'flex-end',
+  alignItems: 'center',
+  gap: '1.25rem',
+  alignSelf: 'stretch'
+});
+
+const submitButton = css({
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignItems: 'center',
+  paddingX: '18px',
+  paddingY: '22px',
+  gap: '10px',
+  backgroundColor: 'black',
+  borderRadius: '200px',
+  border: 'none',
+  outline: 'none',
+  fontSize: '16px',
+  fontWeight: 'bold',
+  color: '#FCFCFC',
+  _focus: {
+    outline: 'none'
+  },
+  _disabled: {
+    backgroundColor: 'rgba(0, 0, 0, 0.2)'
+  }
+});
+
+// Error Styles
+const errorContainer = css({
+  display: 'flex',
+  justifyContent: 'flex-end',
+  alignSelf: 'stretch'
+});
+
+const errorMessage = css({
+  color: 'rgb(239, 68, 68)',
+  fontSize: '14px',
+  fontWeight: 'medium'
+});
