@@ -11,6 +11,7 @@ import { usePostActions } from "@/hooks/usePostActions";
 import { usePostReactions } from "@/hooks/usePostReactions";
 import { useAuth } from "@/contexts/AuthContext";
 import { getHeartAndUpvoteCounts, getUserReactionStates } from "@/utils/reactions";
+import { css } from "@styled-system/css";
 
 interface PostCardProps {
   discussion: GitHubDiscussion;
@@ -20,7 +21,7 @@ interface PostCardProps {
 }
 
 export function PostCardSkeleton() {
-  return <div className="w-full h-[322px] bg-black/[0.03] rounded-2xl" />;
+  return <div className={skeletonContainer} />;
 }
 
 export function PostCard({
@@ -73,32 +74,32 @@ export function PostCard({
     <Card
       variant="bordered"
       padding="none"
-      className="w-full cursor-pointer"
+      className={cardContainer}
       onClick={handlePostClick}
     >
-      <div className="flex flex-col p-6 gap-6">
+      <div className={cardContent}>
         {/* 헤더: 사용자 정보 */}
-        <div className="flex items-center justify-between h-10">
-          <div className="flex items-center gap-3 min-w-0 flex-1">
+        <div className={headerSection}>
+          <div className={userInfoContainer}>
             <Avatar
               size="40"
               src={discussion.author.avatarUrl}
               alt={discussion.author.login}
               fallback={discussion.author.login}
-              className="shrink-0"
+              className={avatarStyles}
             />
-            <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-2 flex-wrap">
-                <h4 className="font-bold text-[20px] leading-[130%] tracking-[-0.4px] text-black/80 truncate">
+            <div className={userDetailsContainer}>
+              <div className={userMetaContainer}>
+                <h4 className={userName}>
                   {discussion.author.login}
                 </h4>
-                <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-[#979797]">
+                <span className={userHandle}>
                   @{discussion.author.login}
                 </span>
-                <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-[#979797]">
+                <span className={separator}>
                   ·
                 </span>
-                <span className="font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-[#979797]">
+                <span className={timeStamp}>
                   {formatTimeAgo(discussion.createdAt)}
                 </span>
               </div>
@@ -119,19 +120,19 @@ export function PostCard({
         </div>
 
         {/* 본문 */}
-        <div className="flex flex-col gap-5">
+        <div className={contentSection}>
           {/* 제목과 내용 */}
-          <div className="flex flex-col gap-5">
+          <div className={contentContainer}>
             {/* 제목 */}
-            <h2 className="font-bold text-[22px] leading-[130%] tracking-[-0.4px] text-[#0F0F0F] hover:text-gray-700 transition-colors">
+            <h2 className={postTitle}>
               {discussion.title}
             </h2>
 
             {/* 내용 미리보기 */}
-            <div className="line-clamp-2 hover:text-black/60 transition-colors">
+            <div className={contentPreview}>
               <MarkdownRenderer
                 content={discussion.body}
-                className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80"
+                className={markdownContent}
               />
             </div>
           </div>
@@ -152,3 +153,132 @@ export function PostCard({
     </Card>
   );
 }
+
+// Semantic style definitions
+const skeletonContainer = css({
+  width: '100%',
+  height: '322px',
+  backgroundColor: 'rgba(0, 0, 0, 0.03)',
+  borderRadius: '1rem'
+});
+
+const cardContainer = css({
+  width: '100%',
+  cursor: 'pointer'
+});
+
+const cardContent = css({
+  display: 'flex',
+  flexDirection: 'column',
+  padding: '1.5rem',
+  gap: '1.5rem'
+});
+
+const headerSection = css({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  height: '2.5rem'
+});
+
+const userInfoContainer = css({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.75rem',
+  minWidth: '0',
+  flex: '1'
+});
+
+const avatarStyles = css({
+  flexShrink: '0'
+});
+
+const userDetailsContainer = css({
+  minWidth: '0',
+  flex: '1'
+});
+
+const userMetaContainer = css({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.5rem',
+  flexWrap: 'wrap'
+});
+
+const userName = css({
+  fontWeight: '700',
+  fontSize: '20px',
+  lineHeight: '130%',
+  letterSpacing: '-0.4px',
+  color: 'rgba(0, 0, 0, 0.8)',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap'
+});
+
+const userHandle = css({
+  fontWeight: '600',
+  fontSize: '16px',
+  lineHeight: '130%',
+  letterSpacing: '-0.4px',
+  color: '#979797'
+});
+
+const separator = css({
+  fontWeight: '600',
+  fontSize: '16px',
+  lineHeight: '130%',
+  letterSpacing: '-0.4px',
+  color: '#979797'
+});
+
+const timeStamp = css({
+  fontWeight: '600',
+  fontSize: '16px',
+  lineHeight: '130%',
+  letterSpacing: '-0.4px',
+  color: '#979797'
+});
+
+const contentSection = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1.25rem'
+});
+
+const contentContainer = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1.25rem'
+});
+
+const postTitle = css({
+  fontWeight: '700',
+  fontSize: '22px',
+  lineHeight: '130%',
+  letterSpacing: '-0.4px',
+  color: '#0F0F0F',
+  transition: 'colors 0.15s ease-in-out',
+  _hover: {
+    color: 'rgb(55, 65, 81)'
+  }
+});
+
+const contentPreview = css({
+  display: '-webkit-box',
+  WebkitLineClamp: '2',
+  WebkitBoxOrient: 'vertical',
+  overflow: 'hidden',
+  transition: 'colors 0.15s ease-in-out',
+  _hover: {
+    color: 'rgba(0, 0, 0, 0.6)'
+  }
+});
+
+const markdownContent = css({
+  fontWeight: '500',
+  fontSize: '16px',
+  lineHeight: '160%',
+  letterSpacing: '-0.4px',
+  color: 'rgba(0, 0, 0, 0.8)'
+});

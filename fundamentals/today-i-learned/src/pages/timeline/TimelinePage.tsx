@@ -126,71 +126,71 @@ export function TimelinePage() {
 
 // Page Layout Styles
 const pageContainer = css({
-  minHeight: '100vh',
-  backgroundColor: 'white'
+  minHeight: "100vh",
+  backgroundColor: "white"
 });
 
 const contentWrapper = css({
-  maxWidth: '1440px',
-  margin: '0 auto',
-  paddingX: { base: 0, lg: '2rem' }
+  maxWidth: "1440px",
+  margin: "0 auto",
+  paddingX: { base: 0, lg: "2rem" }
 });
 
 const mainGridLayout = css({
-  display: 'grid',
-  gridTemplateColumns: { base: '1fr', lg: '5fr 3fr' },
-  gap: '2rem'
+  display: "grid",
+  gridTemplateColumns: { base: "1fr", lg: "5fr 3fr" },
+  gap: "2rem"
 });
 
 // Main Content Column
 const mainContentColumn = css({
-  display: 'flex',
-  flexDirection: 'column',
-  borderLeft: { lg: '1px solid rgba(201, 201, 201, 0.4)' },
-  borderRight: { lg: '1px solid rgba(201, 201, 201, 0.4)' },
-  minWidth: { lg: '820px' }
+  display: "flex",
+  flexDirection: "column",
+  borderLeft: { lg: "1px solid rgba(201, 201, 201, 0.4)" },
+  borderRight: { lg: "1px solid rgba(201, 201, 201, 0.4)" },
+  minWidth: { lg: "820px" }
 });
 
 // Content Sections
 const sprintChallengeSection = css({
-  paddingTop: '12px',
+  paddingTop: "12px",
   paddingBottom: 0
 });
 
 const postInputSection = css({
-  paddingX: { lg: '1.5rem' }
+  paddingX: { lg: "1.5rem" }
 });
 
 const unauthenticatedSection = css({
-  paddingTop: '1.5rem',
-  paddingBottom: '1rem',
-  paddingX: '1.5rem'
+  paddingTop: "1.5rem",
+  paddingBottom: "1rem",
+  paddingX: "1.5rem"
 });
 
 const filterSection = css({
-  paddingY: '24px',
-  paddingX: '12px'
+  paddingY: "24px",
+  paddingX: "12px"
 });
 
 const postListSection = css({
-  paddingX: { lg: '1.5rem' },
+  paddingX: { lg: "1.5rem" },
   paddingBottom: 0
 });
 
 // Sidebar Column
 const sidebarColumn = css({
-  display: { base: 'none', lg: 'block' },
-  marginTop: '24px',
-  minWidth: { lg: '490px' }
+  display: { base: "none", lg: "block" },
+  marginTop: "24px",
+  minWidth: { lg: "490px" }
 });
 
 const sidebarContent = css({
-  position: 'fixed',
-  top: '100px',
-  bottom: '1rem',
-  paddingRight: '2rem',
-  width: '490px',
-  overflowY: 'auto'
+  position: "fixed",
+  top: "100px",
+  bottom: "1rem",
+  paddingRight: "2rem",
+  width: "490px",
+  overflowY: "auto"
 });
 
 // Section Divider Component
@@ -199,8 +199,8 @@ function SectionDivider() {
 }
 
 const sectionDivider = css({
-  width: '100%',
+  width: "100%",
   height: 0,
-  borderBottom: '1px solid rgba(201, 201, 201, 0.4)',
-  marginTop: { base: 0, authenticated: '1rem' }
+  borderBottom: "1px solid rgba(201, 201, 201, 0.4)",
+  marginTop: { base: 0, authenticated: "1rem" }
 });

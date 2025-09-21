@@ -54,12 +54,15 @@ export function PostList({
 
   const discussions =
     postsData?.pages.flatMap((page) => page.discussions) || [];
-    
+
   if (isLoading) {
     return (
       <div className={postListContainer}>
         {[...new Array(3)].map((_, index) => (
-          <div key={index} className={index < 2 ? skeletonItemWithMargin : skeletonItem}>
+          <div
+            key={index}
+            className={index < 2 ? skeletonItemWithMargin : skeletonItem}
+          >
             <PostCardSkeleton />
           </div>
         ))}
@@ -74,9 +77,7 @@ export function PostList({
           <div className={emptyStateIcon}>
             <span className={emptyStateEmoji}>📝</span>
           </div>
-          <h3 className={emptyStateTitle}>
-            아직 포스트가 없습니다
-          </h3>
+          <h3 className={emptyStateTitle}>아직 포스트가 없습니다</h3>
           <p className={emptyStateDescription}>
             첫 번째 포스트를 작성해서 오늘 배운 내용을 공유해보세요!
           </p>
@@ -90,7 +91,9 @@ export function PostList({
       {discussions.map((discussion, index) => (
         <div
           key={discussion.id}
-          className={index < discussions.length - 1 ? postItemWithMargin : postItem}
+          className={
+            index < discussions.length - 1 ? postItemWithMargin : postItem
+          }
         >
           <PostCard
             discussion={discussion}
@@ -110,7 +113,7 @@ export function PostList({
 
 // Container Styles
 const postListContainer = css({
-  width: '100%'
+  width: "100%"
 });
 
 // Post Item Styles
@@ -119,7 +122,7 @@ const postItem = css({
 });
 
 const postItemWithMargin = css({
-  marginBottom: '1.5rem'
+  marginBottom: "1.5rem"
 });
 
 // Skeleton Styles
@@ -128,58 +131,58 @@ const skeletonItem = css({
 });
 
 const skeletonItemWithMargin = css({
-  marginBottom: '1.5rem'
+  marginBottom: "1.5rem"
 });
 
 // Empty State Styles
 const emptyStateContainer = css({
-  width: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  paddingY: '3rem',
-  paddingX: '1rem'
+  width: "100%",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  paddingY: "3rem",
+  paddingX: "1rem"
 });
 
 const emptyStateContent = css({
-  textAlign: 'center',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '0.75rem'
+  textAlign: "center",
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.75rem"
 });
 
 const emptyStateIcon = css({
-  width: '4rem',
-  height: '4rem',
-  backgroundColor: 'rgb(243, 244, 246)',
-  borderRadius: '50%',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  marginX: 'auto'
+  width: "4rem",
+  height: "4rem",
+  backgroundColor: "rgb(243, 244, 246)",
+  borderRadius: "50%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  marginX: "auto"
 });
 
 const emptyStateEmoji = css({
-  fontSize: '24px'
+  fontSize: "24px"
 });
 
 const emptyStateTitle = css({
-  fontSize: '18px',
-  fontWeight: 'medium',
-  color: 'rgb(17, 24, 39)'
+  fontSize: "18px",
+  fontWeight: "medium",
+  color: "rgb(17, 24, 39)"
 });
 
 const emptyStateDescription = css({
-  color: 'rgb(107, 114, 128)',
-  fontSize: '14px',
-  maxWidth: '28rem'
+  color: "rgb(107, 114, 128)",
+  fontSize: "14px",
+  maxWidth: "28rem"
 });
 
 // Load More Styles
 const loadMoreContainer = css({
-  width: '100%',
-  paddingY: '1rem',
-  display: 'flex',
-  justifyContent: 'center'
+  width: "100%",
+  paddingY: "1rem",
+  display: "flex",
+  justifyContent: "center"
 });

@@ -1,5 +1,6 @@
 import type { SprintDay } from "@/types/sprint";
 import { SprintDayItem } from "./SprintDayItem";
+import { css } from "@styled-system/css";
 
 interface SprintGridProps {
   days: SprintDay[];
@@ -8,8 +9,8 @@ interface SprintGridProps {
 
 export function SprintGrid({ days }: SprintGridProps) {
   return (
-    <div className="flex flex-row justify-center items-start px-6 pb-2 gap-[10px] w-full">
-      <div className="flex flex-row items-center gap-4">
+    <div className={gridContainer}>
+      <div className={daysContainer}>
         {days.map((day, index) => (
           <SprintDayItem key={index} day={day} size="small" />
         ))}
@@ -17,3 +18,21 @@ export function SprintGrid({ days }: SprintGridProps) {
     </div>
   );
 }
+
+const gridContainer = css({
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignItems: 'flex-start',
+  paddingX: '1.5rem',
+  paddingBottom: '0.5rem',
+  gap: '10px',
+  width: '100%'
+});
+
+const daysContainer = css({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  gap: '1rem'
+});
