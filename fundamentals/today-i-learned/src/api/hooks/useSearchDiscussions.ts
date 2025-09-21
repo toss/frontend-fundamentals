@@ -16,7 +16,7 @@ export function useSearchDiscussions({
 
   return useInfiniteQuery({
     queryKey: ["searchDiscussions", query],
-    queryFn: ({ pageParam }) =>
+    queryFn: ({ pageParam }: { pageParam: string | null }) =>
       searchDiscussions({
         query,
         owner: ENV_CONFIG.GITHUB_OWNER,
