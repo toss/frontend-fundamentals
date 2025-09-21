@@ -3,6 +3,90 @@ import { cn } from "@/libs/utils";
 import type { BaseComponentProps } from "@/types";
 import { X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { css, cx } from "../../../../styled-system/css";
+
+const toastWrapper = {
+  minWidth: "400px",
+  transform: "translate-y-0",
+  opacity: "1",
+  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+};
+
+const toastWrapperLeaving = {
+  ...toastWrapper,
+  transform: "translate-y--8px",
+  opacity: "0"
+};
+
+const toastContainer = {
+  position: "relative",
+  backgroundColor: "white",
+  borderRadius: "9999px",
+  boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+  paddingX: "24px",
+  paddingY: "16px",
+  display: "flex",
+  alignItems: "center",
+  gap: "16px",
+  border: "1px solid rgb(243, 244, 246)"
+};
+
+const toastContent = {
+  flex: "1"
+};
+
+const toastTitle = {
+  fontWeight: "500",
+  color: "rgb(17, 24, 39)"
+};
+
+const toastAction = {
+  flexShrink: "0",
+  backgroundColor: "black",
+  color: "white",
+  paddingX: "20px",
+  paddingY: "8px",
+  borderRadius: "9999px",
+  fontWeight: "500",
+  fontSize: "14px",
+  cursor: "pointer",
+  transition: "background-color 0.2s ease",
+  _hover: {
+    backgroundColor: "rgb(31, 41, 55)"
+  }
+};
+
+const toastCloseButton = {
+  flexShrink: "0",
+  color: "rgb(156, 163, 175)",
+  marginLeft: "8px",
+  cursor: "pointer",
+  transition: "color 0.2s ease",
+  _hover: {
+    color: "rgb(75, 85, 99)"
+  }
+};
+
+const toastCloseIcon = {
+  height: "20px",
+  width: "20px"
+};
+
+const toastContainerFixed = {
+  position: "fixed",
+  top: "32px",
+  left: "50%",
+  transform: "translate-x--50%",
+  zIndex: "9999",
+  pointerEvents: "none"
+};
+
+const toastList = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "12px",
+  pointerEvents: "auto"
+};
 
 export type ToastType = "success" | "error" | "warning" | "info";
 
@@ -54,27 +138,20 @@ export function Toast({
 
   return (
     <div
-      className={cn(
-        "min-w-[400px]",
-        "transform transition-all duration-300 ease-in-out",
-        isLeaving ? "-translate-y-2 opacity-0" : "translate-y-0 opacity-100",
+      className={cx(
+        css(isLeaving ? toastWrapperLeaving : toastWrapper),
         className
       )}
     >
-      <div
-        className={cn(
-          "relative bg-white rounded-full shadow-lg px-6 py-4 flex items-center gap-4",
-          "border border-gray-100"
-        )}
-      >
-        <div className="flex-1">
-          <p className="font-medium text-gray-900">{title}</p>
+      <div className={css(toastContainer)}>
+        <div className={css(toastContent)}>
+          <p className={css(toastTitle)}>{title}</p>
         </div>
 
         {action && (
           <button
             onClick={action.onClick}
-            className="flex-shrink-0 bg-black text-white px-5 py-2 rounded-full font-medium text-sm hover:bg-gray-800 transition-colors"
+            className={css(toastAction)}
           >
             {action.label}
           </button>
@@ -82,10 +159,10 @@ export function Toast({
 
         <button
           onClick={handleClose}
-          className="flex-shrink-0 text-gray-400 hover:text-gray-600 transition-colors ml-2"
+          className={css(toastCloseButton)}
           aria-label="토스트 닫기"
         >
-          <X className="h-5 w-5" />
+          <X className={css(toastCloseIcon)} />
         </button>
       </div>
     </div>
@@ -149,8 +226,8 @@ interface ToastContainerProps {
 
 export function ToastContainer({ toasts, onRemove }: ToastContainerProps) {
   return (
-    <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[9999] pointer-events-none">
-      <div className="flex flex-col gap-3 pointer-events-auto">
+    <div className={css(toastContainerFixed)}>
+      <div className={css(toastList)}>
         {toasts.map((toast) => (
           <Toast
             key={toast.id}

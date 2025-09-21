@@ -1,6 +1,87 @@
 import { Search, Command } from "lucide-react";
 import { useState, useRef, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { css } from "../../../../styled-system/css";
+
+const searchContainer = {
+  display: "none",
+  flex: "1",
+  marginLeft: "32px",
+  "@media (min-width: 1024px)": {
+    display: "flex"
+  }
+};
+
+const searchForm = {
+  position: "relative",
+  width: "100%",
+  maxWidth: "260px"
+};
+
+const searchInputContainer = {
+  display: "flex",
+  alignItems: "center",
+  backgroundColor: "#F6F6F7",
+  borderRadius: "8px",
+  height: "40px",
+  paddingX: "12px",
+  transition: "all 0.2s ease"
+};
+
+const searchInputContainerFocused = {
+  ...searchInputContainer,
+  outline: "2px solid rgb(59, 130, 246)",
+  outlineOffset: "2px"
+};
+
+const searchIcon = {
+  width: "14px",
+  height: "14px",
+  color: "#65656B",
+  marginRight: "8px"
+};
+
+const searchInput = {
+  flex: "1",
+  backgroundColor: "transparent",
+  fontSize: "13px",
+  color: "rgb(17, 24, 39)",
+  outline: "none",
+  border: "none",
+  "&::placeholder": {
+    color: "#65656B"
+  }
+};
+
+const shortcutContainer = {
+  display: "flex",
+  alignItems: "center",
+  gap: "4px",
+  marginLeft: "8px"
+};
+
+const shortcutKey = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  paddingX: "8px",
+  paddingY: "2px",
+  border: "1px solid rgba(156, 163, 175, 0.3)",
+  borderRadius: "4px",
+  backgroundColor: "white"
+};
+
+const commandIcon = {
+  width: "12px",
+  height: "12px",
+  color: "#65656B"
+};
+
+const keyText = {
+  fontSize: "12px",
+  fontWeight: "500",
+  color: "#65656B"
+};
 
 interface SearchBarProps {
   placeholder?: string;
@@ -47,31 +128,29 @@ export function SearchBar({
   };
 
   return (
-    <div className="hidden lg:flex flex-1 ml-8">
+    <div className={css(searchContainer)}>
       <form
         onSubmit={handleSearchSubmit}
-        className="relative w-full max-w-[260px]"
+        className={css(searchForm)}
       >
         <div
-          className={`flex items-center bg-[#F6F6F7] rounded-lg h-10 px-3 transition-all ${
-            isSearchFocused ? "ring-2 ring-blue-500 ring-opacity-50" : ""
-          }`}
+          className={css(isSearchFocused ? searchInputContainerFocused : searchInputContainer)}
         >
-          <Search className="w-[14px] h-[14px] text-[#65656B] mr-2" />
+          <Search className={css(searchIcon)} />
           <input
             ref={searchInputRef}
             type="search"
             placeholder={placeholder}
             value={searchValue}
             onChange={handleSearchChange}
-            className="flex-1 bg-transparent text-[13px] text-gray-900 placeholder-[#65656B] outline-none"
+            className={css(searchInput)}
             onFocus={() => setIsSearchFocused(true)}
             onBlur={() => setIsSearchFocused(false)}
           />
-          <div className="flex items-center space-x-1 ml-2">
-            <div className="flex items-center justify-center px-2 py-0.5 border border-gray-400/30 rounded bg-white">
-              <Command className="w-3 h-3 text-[#65656B]" />
-              <span className="text-xs font-medium text-[#65656B]">K</span>
+          <div className={css(shortcutContainer)}>
+            <div className={css(shortcutKey)}>
+              <Command className={css(commandIcon)} />
+              <span className={css(keyText)}>K</span>
             </div>
           </div>
         </div>
