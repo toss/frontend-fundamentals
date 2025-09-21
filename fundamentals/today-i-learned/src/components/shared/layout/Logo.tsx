@@ -1,19 +1,44 @@
 import { Link } from "react-router-dom";
 import ffSymbol from "@/assets/ff-symbol2.svg";
+import { css } from "@styled-system/css";
 
 export function Logo() {
   return (
-    <div className="flex-shrink-0">
-      <Link to="/" className="flex items-center gap-3">
+    <div className={logoContainer}>
+      <Link to="/" className={logoLink}>
         <img
           src={ffSymbol}
           alt="Frontend Fundamentals Logo"
-          className="w-8 h-8"
+          className={logoImage}
         />
-        <span className="text-[20px] font-bold text-[#0F0F0F] tracking-tight leading-6">
+        <span className={logoText}>
           Today I Learned
         </span>
       </Link>
     </div>
   );
 }
+
+// Semantic style definitions
+const logoContainer = css({
+  flexShrink: '0'
+});
+
+const logoLink = css({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.75rem'
+});
+
+const logoImage = css({
+  width: '2rem',
+  height: '2rem'
+});
+
+const logoText = css({
+  fontSize: '20px',
+  fontWeight: '700',
+  color: '#0F0F0F',
+  letterSpacing: '-0.025em',
+  lineHeight: '1.5'
+});

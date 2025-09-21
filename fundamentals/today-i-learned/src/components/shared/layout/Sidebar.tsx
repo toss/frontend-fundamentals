@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { cn } from "@/libs/utils";
+import { css } from "@styled-system/css";
+import { cx } from "@styled-system/css";
 
 interface SidebarItem {
   title: string;
@@ -68,35 +70,29 @@ export function Sidebar() {
     const hasChildren = item.children && item.children.length > 0;
 
     return (
-      <div key={item.title} className="mb-1">
+      <div key={item.title} className={sidebarItemContainer}>
         {hasChildren ? (
           <>
             <button
               onClick={() => toggleExpanded(item.title)}
-              className={cn(
-                "flex w-full items-center justify-between px-2 py-1.5 text-sm font-semibold text-gray-900 hover:text-gray-600 transition-colors",
-                "dark:text-gray-100 dark:hover:text-gray-300"
-              )}
+              className={parentButton}
             >
               <span>{item.title}</span>
               {isExpanded ? (
-                <ChevronDown className="h-3 w-3 text-gray-400" />
+                <ChevronDown className={chevronIcon} />
               ) : (
-                <ChevronRight className="h-3 w-3 text-gray-400" />
+                <ChevronRight className={chevronIcon} />
               )}
             </button>
             {isExpanded && (
-              <div className="mt-1 ml-2 space-y-1">
+              <div className={childrenContainer}>
                 {item.children!.map((child) => (
                   <a
                     key={child.title}
                     href={child.href}
-                    className={cn(
-                      "block px-2 py-1.5 text-sm transition-colors rounded",
-                      child.active
-                        ? "text-[#ff8a80] font-medium bg-[#ff8a80]/5"
-                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
-                      "dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-800/50"
+                    className={cx(
+                      childLink,
+                      child.active ? childLinkActive : childLinkDefault
                     )}
                   >
                     {child.title}
@@ -108,12 +104,9 @@ export function Sidebar() {
         ) : (
           <a
             href={item.href}
-            className={cn(
-              "block px-2 py-1.5 text-sm transition-colors rounded",
-              item.active
-                ? "text-[#ff8a80] font-medium bg-[#ff8a80]/5"
-                : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
-              "dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-800/50"
+            className={cx(
+              directLink,
+              item.active ? directLinkActive : directLinkDefault
             )}
           >
             {item.title}
@@ -124,10 +117,127 @@ export function Sidebar() {
   };
 
   return (
-    <div className="h-full overflow-y-auto py-6 pr-6">
-      <nav className="space-y-2">
+    <div className={sidebarContainer}>
+      <nav className={navigationContainer}>
         {sidebarData.map((item) => renderSidebarItem(item))}
       </nav>
     </div>
   );
 }
+
+// Semantic style definitions
+const sidebarContainer = css({
+  height: '100%',
+  overflowY: 'auto',
+  paddingY: '1.5rem',
+  paddingRight: '1.5rem'
+});
+
+const navigationContainer = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.5rem'
+});
+
+const sidebarItemContainer = css({
+  marginBottom: '0.25rem'
+});
+
+const parentButton = css({
+  display: 'flex',
+  width: '100%',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  paddingX: '0.5rem',
+  paddingY: '0.375rem',
+  fontSize: '14px',
+  fontWeight: '600',
+  color: '#111827',
+  transition: 'colors 0.15s ease-in-out',
+  border: 'none',
+  background: 'transparent',
+  cursor: 'pointer',
+  _hover: {
+    color: '#6b7280'
+  },
+  '@media (prefers-color-scheme: dark)': {
+    color: '#f3f4f6',
+    _hover: {
+      color: '#d1d5db'
+    }
+  }
+});
+
+const chevronIcon = css({
+  height: '0.75rem',
+  width: '0.75rem',
+  color: '#9ca3af'
+});
+
+const childrenContainer = css({
+  marginTop: '0.25rem',
+  marginLeft: '0.5rem',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.25rem'
+});
+
+const childLink = css({
+  display: 'block',
+  paddingX: '0.5rem',
+  paddingY: '0.375rem',
+  fontSize: '14px',
+  transition: 'colors 0.15s ease-in-out',
+  borderRadius: '0.25rem'
+});
+
+const childLinkActive = css({
+  color: '#ff8a80',
+  fontWeight: '500',
+  backgroundColor: 'rgba(255, 138, 128, 0.05)'
+});
+
+const childLinkDefault = css({
+  color: '#6b7280',
+  _hover: {
+    color: '#111827',
+    backgroundColor: '#f9fafb'
+  },
+  '@media (prefers-color-scheme: dark)': {
+    color: '#d1d5db',
+    _hover: {
+      color: '#f3f4f6',
+      backgroundColor: 'rgba(31, 41, 55, 0.5)'
+    }
+  }
+});
+
+const directLink = css({
+  display: 'block',
+  paddingX: '0.5rem',
+  paddingY: '0.375rem',
+  fontSize: '14px',
+  transition: 'colors 0.15s ease-in-out',
+  borderRadius: '0.25rem'
+});
+
+const directLinkActive = css({
+  color: '#ff8a80',
+  fontWeight: '500',
+  backgroundColor: 'rgba(255, 138, 128, 0.05)'
+});
+
+const directLinkDefault = css({
+  color: '#6b7280',
+  _hover: {
+    color: '#111827',
+    backgroundColor: '#f9fafb'
+  },
+  '@media (prefers-color-scheme: dark)': {
+    color: '#d1d5db',
+    _hover: {
+      color: '#f3f4f6',
+      backgroundColor: 'rgba(31, 41, 55, 0.5)'
+    }
+  }
+});
