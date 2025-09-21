@@ -1,4 +1,5 @@
-import { cn } from "@/utils/cn";
+import { css, cx } from "@styled-system/css";
+
 interface BaseComponentProps {
   className?: string;
   children?: React.ReactNode;
@@ -10,16 +11,16 @@ interface LoadingSpinnerProps extends BaseComponentProps {
   text?: string;
 }
 
-const sizeClasses = {
-  sm: "h-4 w-4",
-  md: "h-6 w-6",
-  lg: "h-8 w-8"
+const sizeStyles = {
+  sm: css({ width: "16px", height: "16px" }),
+  md: css({ width: "24px", height: "24px" }),
+  lg: css({ width: "32px", height: "32px" })
 } as const;
 
-const variantClasses = {
-  default: "text-gray-500",
-  primary: "text-[#ff8a80]",
-  secondary: "text-gray-400"
+const variantStyles = {
+  default: css({ color: "gray.500" }),
+  primary: css({ color: "#ff8a80" }),
+  secondary: css({ color: "gray.400" })
 } as const;
 
 export function LoadingSpinner({
@@ -29,18 +30,34 @@ export function LoadingSpinner({
   className
 }: LoadingSpinnerProps) {
   return (
-    <div className={cn("flex items-center justify-center gap-3", className)}>
+    <div className={cx(css({
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: "12px"
+    }), className)}>
       <div
-        className={cn(
-          "animate-spin rounded-full border-2 border-current border-t-transparent",
-          sizeClasses[size],
-          variantClasses[variant]
+        className={cx(
+          css({
+            animation: "spin 1s linear infinite",
+            borderRadius: "50%",
+            border: "2px solid currentColor",
+            borderTopColor: "transparent"
+          }),
+          sizeStyles[size],
+          variantStyles[variant]
         )}
         role="status"
         aria-label="로딩 중"
       />
       {text && (
-        <span className={cn("text-sm font-medium", variantClasses[variant])}>
+        <span className={cx(
+          css({
+            fontSize: "14px",
+            fontWeight: "500"
+          }),
+          variantStyles[variant]
+        )}>
           {text}
         </span>
       )}
@@ -64,9 +81,20 @@ export function LoadingOverlay({
 
   return (
     <div
-      className={cn(
-        "absolute inset-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm",
-        "flex items-center justify-center z-50",
+      className={cx(
+        css({
+          position: "absolute",
+          inset: "0",
+          backgroundColor: "rgba(255, 255, 255, 0.8)",
+          backdropFilter: "blur(4px)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          zIndex: "50",
+          _dark: {
+            backgroundColor: "rgba(17, 24, 39, 0.8)"
+          }
+        }),
         className
       )}
     >
@@ -86,11 +114,23 @@ export function LoadingSkeleton({
   className
 }: LoadingSkeletonProps) {
   return (
-    <div className={cn("animate-pulse space-y-3", className)}>
+    <div className={cx(css({
+      animation: "pulse 2s infinite",
+      "& > * + *": {
+        marginTop: "12px"
+      }
+    }), className)}>
       {Array.from({ length: lines }).map((_, index) => (
         <div
           key={index}
-          className="h-4 bg-gray-200 dark:bg-gray-700 rounded"
+          className={css({
+            height: "16px",
+            backgroundColor: "gray.200",
+            borderRadius: "4px",
+            _dark: {
+              backgroundColor: "gray.700"
+            }
+          })}
           style={{
             width: index === lines - 1 ? "75%" : width
           }}
