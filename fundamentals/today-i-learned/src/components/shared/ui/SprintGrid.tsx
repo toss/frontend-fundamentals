@@ -12,7 +12,7 @@ export function SprintGrid({ days }: SprintGridProps) {
     <div className={gridContainer}>
       <div className={daysContainer}>
         {days.map((day, index) => (
-          <SprintDayItem key={index} day={day} size="small" />
+          <SprintDayItem key={index} day={day} />
         ))}
       </div>
     </div>
@@ -20,19 +20,19 @@ export function SprintGrid({ days }: SprintGridProps) {
 }
 
 const gridContainer = css({
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'center',
-  alignItems: 'flex-start',
-  paddingX: '1.5rem',
-  paddingBottom: '0.5rem',
-  gap: '10px',
-  width: '100%'
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "center",
+  alignItems: "flex-start",
+  paddingX: "1.5rem",
+  paddingBottom: "0.5rem",
+  gap: "10px",
+  width: "100%"
 });
 
 const daysContainer = css({
-  display: 'flex',
-  flexDirection: 'row',
-  alignItems: 'center',
-  gap: '1rem'
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  gap: "1rem"
 });
