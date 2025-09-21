@@ -1,1 +1,1 @@
-export { default as OneNavigation } from "./OneNavigation.vue";
+export { OneNavigationReact } from "./react/OneNavigation";

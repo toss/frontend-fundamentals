@@ -12,7 +12,9 @@ export default async function handler(req, res) {
         .json({ error: "GitHub OAuth configuration not complete" });
     }
 
-    const authUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=read:user,user:email,repo`;
+    const authUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(
+      redirectUri
+    )}&scope=read:user,user:email,repo`;
 
     return res.redirect(authUrl);
   }

@@ -1,0 +1,197 @@
+/* CSS Variables for z-index management */
+.overlay {
+  --dialog-overlay-z-index: 50;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  inset: 0;
+  z-index: var(--dialog-overlay-z-index);
+  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Content container styles */
+.content {
+  --dialog-content-z-index: calc(var(--dialog-overlay-z-index, 50) + 1);
+  background-color: #fcfcfc;
+  border-radius: 16px;
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.1),
+    0 6px 10px rgba(0, 0, 0, 0.08);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 24px;
+  z-index: var(--dialog-content-z-index);
+  animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.content:focus {
+  outline: none;
+}
+
+/* Title styles */
+.title {
+  margin: 0;
+  color: #1a1a1a;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Description styles */
+.description {
+  margin-top: 8px;
+  margin-bottom: 20px;
+  color: #666666;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Button base styles */
+.button {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 200px;
+  padding: 0 16px;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 600;
+  height: 40px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 150ms ease;
+}
+
+.button:focus:not(:focus-visible) {
+  outline: 0;
+}
+
+.button:focus-visible {
+  outline: 2px solid #646cff;
+  outline-offset: 2px;
+}
+
+.button:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Action button (primary) */
+.actionButton {
+  background-color: #1a1a1a;
+  color: white;
+}
+
+.actionButton:hover:not(:disabled) {
+  background-color: #333333;
+}
+
+/* Cancel button (secondary) */
+.cancelButton {
+  background-color: transparent;
+  color: #666666;
+  border: 1px solid #e5e5e5;
+}
+
+.cancelButton:hover:not(:disabled) {
+  background-color: #f5f5f5;
+  color: #1a1a1a;
+}
+
+/* Close button */
+.closeButton {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #666666;
+  transition: all 150ms ease;
+}
+
+.closeButton:hover {
+  background-color: #f5f5f5;
+  color: #1a1a1a;
+}
+
+.closeButton:focus-visible {
+  outline: 2px solid #646cff;
+  outline-offset: 2px;
+}
+
+/* Footer styles */
+.footer {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+/* Animations */
+@keyframes overlayShow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes contentShow {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .content {
+    width: 95vw;
+    padding: 20px;
+  }
+
+  .footer {
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
+
+  .button {
+    width: 100%;
+  }
+}
+
+/* Accessibility: High contrast mode support */
+@media (prefers-contrast: high) {
+  .overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  .content {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Accessibility: Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .content {
+    animation-duration: 0.01ms !important;
+  }
+}

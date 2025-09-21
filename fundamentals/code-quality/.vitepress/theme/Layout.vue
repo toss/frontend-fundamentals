@@ -32,7 +32,7 @@ html {
   scrollbar-gutter: stable;
 }
 
-@media (min-width: 960px) {
+@media (min-width: 1024px) {
   .layout-wrapper {
     padding-left: var(--one-navi-width);
   }

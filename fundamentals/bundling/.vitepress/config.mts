@@ -215,6 +215,9 @@ export default defineConfig({
           replacement: path.resolve(__dirname, "../../shared")
         }
       ]
+    },
+    ssr: {
+      noExternal: ['vitepress-plugin-tabs']
     }
   }
 });
