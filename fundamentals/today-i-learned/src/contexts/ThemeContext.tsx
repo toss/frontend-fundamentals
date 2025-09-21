@@ -22,7 +22,10 @@ interface ThemeProviderProps {
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const [theme, setThemeState] = useState<Theme>(() => {
-    if (typeof window !== 'undefined' && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
       return "dark";
     }
     return "light";
@@ -46,8 +49,8 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
   };
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    
+    if (typeof window === "undefined") return;
+
     const savedTheme = localStorage.getItem("theme") as Theme;
     if (savedTheme) {
       setTheme(savedTheme);

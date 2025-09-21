@@ -20,10 +20,12 @@ const queryClient = new QueryClient({
       throwOnError: (error) => {
         if (error instanceof Error) {
           // 네트워크 에러나 5xx 서버 에러만 Error Boundary로 전파
-          return error.message.includes("NetworkError") || 
-                 error.message.includes("500") ||
-                 error.message.includes("502") ||
-                 error.message.includes("503");
+          return (
+            error.message.includes("NetworkError") ||
+            error.message.includes("500") ||
+            error.message.includes("502") ||
+            error.message.includes("503")
+          );
         }
         return false;
       }

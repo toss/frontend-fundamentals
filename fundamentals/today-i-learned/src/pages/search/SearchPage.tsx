@@ -7,9 +7,7 @@ export default function SearchPage() {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
   return (
-    <Suspense
-      fallback={<div className={loadingFallback}>Loading...</div>}
-    >
+    <Suspense fallback={<div className={loadingFallback}>Loading...</div>}>
       <SearchContent query={query} />
     </Suspense>
   );
@@ -17,7 +15,7 @@ export default function SearchPage() {
 
 // Semantic style definitions
 const loadingFallback = css({
-  display: 'flex',
-  justifyContent: 'center',
-  padding: '2rem'
+  display: "flex",
+  justifyContent: "center",
+  padding: "2rem"
 });

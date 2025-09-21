@@ -31,9 +31,7 @@ export function Header() {
               alt="Frontend Fundamentals"
               className={logoImage}
             />
-            <span className={logoText}>
-              Today I Learned
-            </span>
+            <span className={logoText}>Today I Learned</span>
           </Link>
         </div>
 
@@ -53,7 +51,9 @@ export function Header() {
               to="/profile"
               className={cx(
                 navLink,
-                location.pathname === "/profile" ? navLinkActive : navLinkDefault
+                location.pathname === "/profile"
+                  ? navLinkActive
+                  : navLinkDefault
               )}
             >
               마이페이지
@@ -83,9 +83,7 @@ export function Header() {
                   className={userAvatar}
                   style={{ aspectRatio: "1 / 1" }}
                 />
-                <span className={userName}>
-                  {user.login}
-                </span>
+                <span className={userName}>{user.login}</span>
                 <Button
                   variant="ghost"
                   onClick={logout}
@@ -124,234 +122,234 @@ export function Header() {
 
 // Semantic style definitions
 const headerContainer = css({
-  position: 'fixed',
-  top: '0',
-  left: '88px',
-  right: '0',
-  zIndex: '50',
-  borderBottom: '1px solid',
-  backdropBlur: 'md',
-  '@media (prefers-color-scheme: dark)': {
-    backgroundColor: 'rgba(27, 27, 31, 0.95)'
+  position: "fixed",
+  top: "0",
+  left: "88px",
+  right: "0",
+  zIndex: "50",
+  borderBottom: "1px solid",
+  backdropBlur: "md",
+  "@media (prefers-color-scheme: dark)": {
+    backgroundColor: "rgba(27, 27, 31, 0.95)"
   }
 });
 
 const headerContent = css({
-  marginX: 'auto',
-  display: 'flex',
-  height: '4rem',
-  maxWidth: '1440px',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  paddingX: '1.5rem',
-  '@media (min-width: 1024px)': {
-    paddingX: '2rem'
+  marginX: "auto",
+  display: "flex",
+  height: "4rem",
+  maxWidth: "1440px",
+  alignItems: "center",
+  justifyContent: "space-between",
+  paddingX: "1.5rem",
+  "@media (min-width: 1024px)": {
+    paddingX: "2rem"
   }
 });
 
 const logoContainer = css({
-  display: 'flex',
-  alignItems: 'center'
+  display: "flex",
+  alignItems: "center"
 });
 
 const logoLink = css({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '0.5rem'
+  display: "flex",
+  alignItems: "center",
+  gap: "0.5rem"
 });
 
 const logoImage = css({
-  height: '1.5rem',
-  width: '1.5rem'
+  height: "1.5rem",
+  width: "1.5rem"
 });
 
 const logoText = css({
-  fontSize: '18px',
-  fontWeight: '600',
-  color: '#2c3e50',
-  '@media (prefers-color-scheme: dark)': {
-    color: 'white'
+  fontSize: "18px",
+  fontWeight: "600",
+  color: "#2c3e50",
+  "@media (prefers-color-scheme: dark)": {
+    color: "white"
   }
 });
 
 const rightSection = css({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '0.25rem'
+  display: "flex",
+  alignItems: "center",
+  gap: "0.25rem"
 });
 
 const navigation = css({
-  display: 'none',
-  alignItems: 'center',
-  gap: '0.25rem',
-  '@media (min-width: 768px)': {
-    display: 'flex'
+  display: "none",
+  alignItems: "center",
+  gap: "0.25rem",
+  "@media (min-width: 768px)": {
+    display: "flex"
   }
 });
 
 const navLink = css({
-  paddingX: '0.75rem',
-  paddingY: '0.5rem',
-  fontSize: '14px',
-  fontWeight: '500',
-  transition: 'colors 0.15s ease-in-out'
+  paddingX: "0.75rem",
+  paddingY: "0.5rem",
+  fontSize: "14px",
+  fontWeight: "500",
+  transition: "colors 0.15s ease-in-out"
 });
 
 const navLinkActive = css({
-  color: '#3451b2',
+  color: "#3451b2",
   _hover: {
-    color: '#3451b2'
+    color: "#3451b2"
   }
 });
 
 const navLinkDefault = css({
-  color: '#6b7280',
+  color: "#6b7280",
   _hover: {
-    color: '#111827'
+    color: "#111827"
   },
-  '@media (prefers-color-scheme: dark)': {
-    color: '#d1d5db',
+  "@media (prefers-color-scheme: dark)": {
+    color: "#d1d5db",
     _hover: {
-      color: 'white'
+      color: "white"
     }
   }
 });
 
 const themeToggleButton = css({
-  height: '2.25rem',
-  width: '2.25rem',
-  color: '#6b7280',
+  height: "2.25rem",
+  width: "2.25rem",
+  color: "#6b7280",
   _hover: {
-    color: '#111827'
+    color: "#111827"
   },
-  '@media (prefers-color-scheme: dark)': {
-    color: '#d1d5db',
+  "@media (prefers-color-scheme: dark)": {
+    color: "#d1d5db",
     _hover: {
-      color: 'white'
+      color: "white"
     }
   }
 });
 
 const sunIcon = css({
-  height: '1rem',
-  width: '1rem',
-  rotate: '0deg',
-  scale: '1',
-  transition: 'all 0.15s ease-in-out',
-  '@media (prefers-color-scheme: dark)': {
-    rotate: '-90deg',
-    scale: '0'
+  height: "1rem",
+  width: "1rem",
+  rotate: "0deg",
+  scale: "1",
+  transition: "all 0.15s ease-in-out",
+  "@media (prefers-color-scheme: dark)": {
+    rotate: "-90deg",
+    scale: "0"
   }
 });
 
 const moonIcon = css({
-  position: 'absolute',
-  height: '1rem',
-  width: '1rem',
-  rotate: '90deg',
-  scale: '0',
-  transition: 'all 0.15s ease-in-out',
-  '@media (prefers-color-scheme: dark)': {
-    rotate: '0deg',
-    scale: '1'
+  position: "absolute",
+  height: "1rem",
+  width: "1rem",
+  rotate: "90deg",
+  scale: "0",
+  transition: "all 0.15s ease-in-out",
+  "@media (prefers-color-scheme: dark)": {
+    rotate: "0deg",
+    scale: "1"
   }
 });
 
 const authSection = css({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '0.5rem',
-  marginLeft: '0.5rem'
+  display: "flex",
+  alignItems: "center",
+  gap: "0.5rem",
+  marginLeft: "0.5rem"
 });
 
 const loadingSkeleton = css({
-  width: '2rem',
-  height: '2rem',
-  backgroundColor: '#e5e7eb',
-  borderRadius: '50%',
-  animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-  '@media (prefers-color-scheme: dark)': {
-    backgroundColor: '#374151'
+  width: "2rem",
+  height: "2rem",
+  backgroundColor: "#e5e7eb",
+  borderRadius: "50%",
+  animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+  "@media (prefers-color-scheme: dark)": {
+    backgroundColor: "#374151"
   }
 });
 
 const userProfile = css({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '0.5rem'
+  display: "flex",
+  alignItems: "center",
+  gap: "0.5rem"
 });
 
 const userAvatar = css({
-  width: '2rem',
-  height: '2rem',
-  borderRadius: '50%',
-  objectFit: 'cover'
+  width: "2rem",
+  height: "2rem",
+  borderRadius: "50%",
+  objectFit: "cover"
 });
 
 const userName = css({
-  fontSize: '14px',
-  fontWeight: '500',
-  color: '#374151',
-  '@media (prefers-color-scheme: dark)': {
-    color: '#d1d5db'
+  fontSize: "14px",
+  fontWeight: "500",
+  color: "#374151",
+  "@media (prefers-color-scheme: dark)": {
+    color: "#d1d5db"
   }
 });
 
 const logoutButton = css({
-  height: '2rem',
-  width: '2rem',
-  color: '#6b7280',
+  height: "2rem",
+  width: "2rem",
+  color: "#6b7280",
   _hover: {
-    color: '#111827'
+    color: "#111827"
   },
-  '@media (prefers-color-scheme: dark)': {
-    color: '#d1d5db',
+  "@media (prefers-color-scheme: dark)": {
+    color: "#d1d5db",
     _hover: {
-      color: 'white'
+      color: "white"
     }
   }
 });
 
 const loginButton = css({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '0.5rem',
-  color: '#6b7280',
+  display: "flex",
+  alignItems: "center",
+  gap: "0.5rem",
+  color: "#6b7280",
   _hover: {
-    color: '#111827'
+    color: "#111827"
   },
-  '@media (prefers-color-scheme: dark)': {
-    color: '#d1d5db',
+  "@media (prefers-color-scheme: dark)": {
+    color: "#d1d5db",
     _hover: {
-      color: 'white'
+      color: "white"
     }
   }
 });
 
 const loginText = css({
-  fontSize: '14px'
+  fontSize: "14px"
 });
 
 const mobileMenuButton = css({
-  display: 'block',
-  height: '2.25rem',
-  width: '2.25rem',
-  color: '#6b7280',
+  display: "block",
+  height: "2.25rem",
+  width: "2.25rem",
+  color: "#6b7280",
   _hover: {
-    color: '#111827'
+    color: "#111827"
   },
-  '@media (min-width: 768px)': {
-    display: 'none'
+  "@media (min-width: 768px)": {
+    display: "none"
   },
-  '@media (prefers-color-scheme: dark)': {
-    color: '#d1d5db',
+  "@media (prefers-color-scheme: dark)": {
+    color: "#d1d5db",
     _hover: {
-      color: 'white'
+      color: "white"
     }
   }
 });
 
 const iconSize = css({
-  height: '1rem',
-  width: '1rem'
+  height: "1rem",
+  width: "1rem"
 });

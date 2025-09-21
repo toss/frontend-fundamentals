@@ -30,16 +30,46 @@ function ChallengeDayItem({ day }: { day: ChallengeDay }) {
     switch (day.status) {
       case "completed":
         const colors = [
-          css({ backgroundColor: 'rgba(0, 0, 0, 0.1)', color: 'rgba(0, 0, 0, 0.4)' }),
-          css({ backgroundColor: 'rgba(188, 233, 233, 0.2)', color: '#58C7C7' }),
-          css({ backgroundColor: 'rgba(237, 204, 248, 0.4)', color: '#DA9BEF' }),
-          css({ backgroundColor: 'rgba(255, 239, 191, 0.6)', color: '#FFC342' }),
-          css({ backgroundColor: 'rgba(255, 212, 214, 0.2)', color: '#FB8890' }),
-          css({ backgroundColor: 'rgba(188, 233, 233, 0.2)', color: '#58C7C7' }),
-          css({ backgroundColor: 'rgba(188, 233, 233, 0.2)', color: '#58C7C7' }),
-          css({ backgroundColor: 'rgba(255, 212, 214, 0.2)', color: '#FB8890' }),
-          css({ backgroundColor: 'rgba(255, 239, 191, 0.6)', color: '#FFC342' }),
-          css({ backgroundColor: 'rgba(0, 0, 0, 0.1)', color: 'rgba(0, 0, 0, 0.4)' })
+          css({
+            backgroundColor: "rgba(0, 0, 0, 0.1)",
+            color: "rgba(0, 0, 0, 0.4)"
+          }),
+          css({
+            backgroundColor: "rgba(188, 233, 233, 0.2)",
+            color: "#58C7C7"
+          }),
+          css({
+            backgroundColor: "rgba(237, 204, 248, 0.4)",
+            color: "#DA9BEF"
+          }),
+          css({
+            backgroundColor: "rgba(255, 239, 191, 0.6)",
+            color: "#FFC342"
+          }),
+          css({
+            backgroundColor: "rgba(255, 212, 214, 0.2)",
+            color: "#FB8890"
+          }),
+          css({
+            backgroundColor: "rgba(188, 233, 233, 0.2)",
+            color: "#58C7C7"
+          }),
+          css({
+            backgroundColor: "rgba(188, 233, 233, 0.2)",
+            color: "#58C7C7"
+          }),
+          css({
+            backgroundColor: "rgba(255, 212, 214, 0.2)",
+            color: "#FB8890"
+          }),
+          css({
+            backgroundColor: "rgba(255, 239, 191, 0.6)",
+            color: "#FFC342"
+          }),
+          css({
+            backgroundColor: "rgba(0, 0, 0, 0.1)",
+            color: "rgba(0, 0, 0, 0.4)"
+          })
         ];
         const colorIndex = (day.day - 1) % colors.length;
         return colors[colorIndex];
@@ -67,9 +97,7 @@ function ChallengeDayItem({ day }: { day: ChallengeDay }) {
 
   return (
     <div className={dayItemContainer}>
-      <div className={cx(dayCircle, getDayStyle())}>
-        {getStreakLabel()}
-      </div>
+      <div className={cx(dayCircle, getDayStyle())}>{getStreakLabel()}</div>
       <span className={dayLabel}>{day.day}일</span>
     </div>
   );
@@ -150,9 +178,7 @@ export function MonthlyChallenge({ challenge }: MonthlyChallengeProps) {
     return (
       <div className={challengeContainer}>
         <div className={headerSection}>
-          <h3 className={mainTitle}>
-            월간 기록
-          </h3>
+          <h3 className={mainTitle}>월간 기록</h3>
           <p className={subtitle}>
             {currentYear}년 {monthName} 한 달 기록
           </p>
@@ -161,10 +187,7 @@ export function MonthlyChallenge({ challenge }: MonthlyChallengeProps) {
           <div className={cardContent}>
             <div className={calendarGrid}>
               {Array.from({ length: 7 }).map((_, index) => (
-                <div
-                  key={index}
-                  className={skeletonDay}
-                />
+                <div key={index} className={skeletonDay} />
               ))}
             </div>
           </div>
@@ -182,9 +205,7 @@ export function MonthlyChallenge({ challenge }: MonthlyChallengeProps) {
   return (
     <div className={challengeContainer}>
       <div className={headerSection}>
-        <h3 className={mainTitle}>
-          월간 기록
-        </h3>
+        <h3 className={mainTitle}>월간 기록</h3>
         <p className={subtitle}>
           {displayData.year}년 {monthName} 한 달 기록
         </p>
@@ -192,10 +213,7 @@ export function MonthlyChallenge({ challenge }: MonthlyChallengeProps) {
       <Card variant="bordered" padding="md" className="w-full">
         <div className={cardContent}>
           {weeks.map((week, weekIndex) => (
-            <div
-              key={weekIndex}
-              className={calendarGrid}
-            >
+            <div key={weekIndex} className={calendarGrid}>
               {week.map((day) => (
                 <ChallengeDayItem key={day.day} day={day} />
               ))}
@@ -213,96 +231,96 @@ export function MonthlyChallenge({ challenge }: MonthlyChallengeProps) {
 
 // Layout Styles
 const challengeContainer = css({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '1.5rem'
+  display: "flex",
+  flexDirection: "column",
+  gap: "1.5rem"
 });
 
 const headerSection = css({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '0.5rem',
-  marginTop: '1.25rem'
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.5rem",
+  marginTop: "1.25rem"
 });
 
 const mainTitle = css({
-  fontSize: '24px',
-  fontWeight: 'extrabold',
-  color: 'black',
-  letterSpacing: '-0.025em'
+  fontSize: "24px",
+  fontWeight: "extrabold",
+  color: "black",
+  letterSpacing: "-0.025em"
 });
 
 const subtitle = css({
-  fontSize: '16px',
-  fontWeight: 'semibold',
-  color: 'rgba(0, 0, 0, 0.6)',
-  letterSpacing: '-0.025em'
+  fontSize: "16px",
+  fontWeight: "semibold",
+  color: "rgba(0, 0, 0, 0.6)",
+  letterSpacing: "-0.025em"
 });
 
 const cardContent = css({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '1rem'
+  display: "flex",
+  flexDirection: "column",
+  gap: "1rem"
 });
 
 const calendarGrid = css({
-  display: 'grid',
-  gridTemplateColumns: 'repeat(7, 1fr)',
-  gap: '1rem',
-  justifyItems: 'center'
+  display: "grid",
+  gridTemplateColumns: "repeat(7, 1fr)",
+  gap: "1rem",
+  justifyItems: "center"
 });
 
 // Day Item Styles
 const dayItemContainer = css({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  gap: '0.75rem'
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: "0.75rem"
 });
 
 const dayCircle = css({
-  width: '3.5rem',
-  height: '3.5rem',
-  borderRadius: '50%',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  fontSize: '14px',
-  fontWeight: 'bold'
+  width: "3.5rem",
+  height: "3.5rem",
+  borderRadius: "50%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  fontSize: "14px",
+  fontWeight: "bold"
 });
 
 const dayLabel = css({
-  fontSize: '14px',
-  fontWeight: 'medium',
-  color: 'rgb(75, 85, 99)'
+  fontSize: "14px",
+  fontWeight: "medium",
+  color: "rgb(75, 85, 99)"
 });
 
 // Day Status Styles
 const postedDayStyle = css({
-  backgroundColor: 'rgba(198, 218, 255, 0.6)',
-  color: '#6B9AFF'
+  backgroundColor: "rgba(198, 218, 255, 0.6)",
+  color: "#6B9AFF"
 });
 
 const todayStyle = css({
-  backgroundColor: 'rgba(0, 0, 0, 0.7)',
-  color: '#FCFCFC'
+  backgroundColor: "rgba(0, 0, 0, 0.7)",
+  color: "#FCFCFC"
 });
 
 const pendingDayStyle = css({
-  backgroundColor: 'rgba(0, 0, 0, 0.05)',
-  color: 'rgba(0, 0, 0, 0.6)'
+  backgroundColor: "rgba(0, 0, 0, 0.05)",
+  color: "rgba(0, 0, 0, 0.6)"
 });
 
 // Skeleton and Empty Styles
 const skeletonDay = css({
-  width: '3.5rem',
-  height: '3.5rem',
-  backgroundColor: 'rgb(243, 244, 246)',
-  borderRadius: '50%',
-  animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+  width: "3.5rem",
+  height: "3.5rem",
+  backgroundColor: "rgb(243, 244, 246)",
+  borderRadius: "50%",
+  animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite"
 });
 
 const emptyCell = css({
-  width: '3.5rem',
-  height: '3.5rem'
+  width: "3.5rem",
+  height: "3.5rem"
 });

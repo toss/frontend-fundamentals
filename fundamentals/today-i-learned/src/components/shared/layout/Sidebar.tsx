@@ -126,117 +126,117 @@ export function Sidebar() {
 
 // Semantic style definitions
 const sidebarContainer = css({
-  height: '100%',
-  overflowY: 'auto',
-  paddingY: '1.5rem',
-  paddingRight: '1.5rem'
+  height: "100%",
+  overflowY: "auto",
+  paddingY: "1.5rem",
+  paddingRight: "1.5rem"
 });
 
 const navigationContainer = css({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '0.5rem'
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.5rem"
 });
 
 const sidebarItemContainer = css({
-  marginBottom: '0.25rem'
+  marginBottom: "0.25rem"
 });
 
 const parentButton = css({
-  display: 'flex',
-  width: '100%',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  paddingX: '0.5rem',
-  paddingY: '0.375rem',
-  fontSize: '14px',
-  fontWeight: '600',
-  color: '#111827',
-  transition: 'colors 0.15s ease-in-out',
-  border: 'none',
-  background: 'transparent',
-  cursor: 'pointer',
+  display: "flex",
+  width: "100%",
+  alignItems: "center",
+  justifyContent: "space-between",
+  paddingX: "0.5rem",
+  paddingY: "0.375rem",
+  fontSize: "14px",
+  fontWeight: "600",
+  color: "#111827",
+  transition: "colors 0.15s ease-in-out",
+  border: "none",
+  background: "transparent",
+  cursor: "pointer",
   _hover: {
-    color: '#6b7280'
+    color: "#6b7280"
   },
-  '@media (prefers-color-scheme: dark)': {
-    color: '#f3f4f6',
+  "@media (prefers-color-scheme: dark)": {
+    color: "#f3f4f6",
     _hover: {
-      color: '#d1d5db'
+      color: "#d1d5db"
     }
   }
 });
 
 const chevronIcon = css({
-  height: '0.75rem',
-  width: '0.75rem',
-  color: '#9ca3af'
+  height: "0.75rem",
+  width: "0.75rem",
+  color: "#9ca3af"
 });
 
 const childrenContainer = css({
-  marginTop: '0.25rem',
-  marginLeft: '0.5rem',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '0.25rem'
+  marginTop: "0.25rem",
+  marginLeft: "0.5rem",
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.25rem"
 });
 
 const childLink = css({
-  display: 'block',
-  paddingX: '0.5rem',
-  paddingY: '0.375rem',
-  fontSize: '14px',
-  transition: 'colors 0.15s ease-in-out',
-  borderRadius: '0.25rem'
+  display: "block",
+  paddingX: "0.5rem",
+  paddingY: "0.375rem",
+  fontSize: "14px",
+  transition: "colors 0.15s ease-in-out",
+  borderRadius: "0.25rem"
 });
 
 const childLinkActive = css({
-  color: '#ff8a80',
-  fontWeight: '500',
-  backgroundColor: 'rgba(255, 138, 128, 0.05)'
+  color: "#ff8a80",
+  fontWeight: "500",
+  backgroundColor: "rgba(255, 138, 128, 0.05)"
 });
 
 const childLinkDefault = css({
-  color: '#6b7280',
+  color: "#6b7280",
   _hover: {
-    color: '#111827',
-    backgroundColor: '#f9fafb'
+    color: "#111827",
+    backgroundColor: "#f9fafb"
   },
-  '@media (prefers-color-scheme: dark)': {
-    color: '#d1d5db',
+  "@media (prefers-color-scheme: dark)": {
+    color: "#d1d5db",
     _hover: {
-      color: '#f3f4f6',
-      backgroundColor: 'rgba(31, 41, 55, 0.5)'
+      color: "#f3f4f6",
+      backgroundColor: "rgba(31, 41, 55, 0.5)"
     }
   }
 });
 
 const directLink = css({
-  display: 'block',
-  paddingX: '0.5rem',
-  paddingY: '0.375rem',
-  fontSize: '14px',
-  transition: 'colors 0.15s ease-in-out',
-  borderRadius: '0.25rem'
+  display: "block",
+  paddingX: "0.5rem",
+  paddingY: "0.375rem",
+  fontSize: "14px",
+  transition: "colors 0.15s ease-in-out",
+  borderRadius: "0.25rem"
 });
 
 const directLinkActive = css({
-  color: '#ff8a80',
-  fontWeight: '500',
-  backgroundColor: 'rgba(255, 138, 128, 0.05)'
+  color: "#ff8a80",
+  fontWeight: "500",
+  backgroundColor: "rgba(255, 138, 128, 0.05)"
 });
 
 const directLinkDefault = css({
-  color: '#6b7280',
+  color: "#6b7280",
   _hover: {
-    color: '#111827',
-    backgroundColor: '#f9fafb'
+    color: "#111827",
+    backgroundColor: "#f9fafb"
   },
-  '@media (prefers-color-scheme: dark)': {
-    color: '#d1d5db',
+  "@media (prefers-color-scheme: dark)": {
+    color: "#d1d5db",
     _hover: {
-      color: '#f3f4f6',
-      backgroundColor: 'rgba(31, 41, 55, 0.5)'
+      color: "#f3f4f6",
+      backgroundColor: "rgba(31, 41, 55, 0.5)"
     }
   }
 });

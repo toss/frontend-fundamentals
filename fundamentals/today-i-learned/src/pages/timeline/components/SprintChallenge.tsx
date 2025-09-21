@@ -38,22 +38,22 @@ export function SprintChallenge() {
 
 // Container Styles
 const challengeContainer = css({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-  paddingX: '12px',
-  gap: '10px',
-  width: '100%'
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+  paddingX: "12px",
+  gap: "10px",
+  width: "100%"
 });
 
 const challengeCard = css({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-  padding: '1.5rem',
-  gap: '0.5rem',
-  width: '100%',
-  backgroundColor: 'white',
-  border: '1px solid rgba(201, 201, 201, 0.5)',
-  borderRadius: '1rem'
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+  padding: "1.5rem",
+  gap: "0.5rem",
+  width: "100%",
+  backgroundColor: "white",
+  border: "1px solid rgba(201, 201, 201, 0.5)",
+  borderRadius: "1rem"
 });

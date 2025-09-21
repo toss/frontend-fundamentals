@@ -1,5 +1,5 @@
 # 프론트엔드 규칙
->
+
 > frontend fundamentals의 code quality 문서를 준수합니다.
 > toy-crane 님의 cursurrules(<https://gist.github.com/toy-crane/dde6258997519d954063a536fc72d055#file-toss-frontend-rules-mdc>) 를 그대로 사용합니다.
 
@@ -218,7 +218,7 @@ function Page() {
   // Simple policy defined right here, easy to see
   const policy = {
     admin: { canInvite: true, canView: true },
-    viewer: { canInvite: false, canView: true },
+    viewer: { canInvite: false, canView: true }
   }[user.role];
 
   // Ensure policy exists before accessing properties if role might not match
@@ -295,7 +295,7 @@ function useUser(): UseQueryResult<UserType, Error> {
 function useServerTime(): UseQueryResult<Date, Error> {
   const query = useQuery({
     queryKey: ["serverTime"],
-    queryFn: fetchServerTime,
+    queryFn: fetchServerTime
   });
   return query;
 }
@@ -380,9 +380,9 @@ export const httpService = {
     // Descriptive function name
     const token = await fetchToken();
     return httpLibrary.get(url, {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${token}` }
     });
-  },
+  }
 };
 
 // In fetchUser.ts - Usage clearly indicates auth
@@ -417,7 +417,7 @@ export function Form() {
   const {
     register,
     formState: { errors },
-    handleSubmit,
+    handleSubmit
   } = useForm({
     /* defaultValues etc. */
   });
@@ -432,7 +432,7 @@ export function Form() {
         <input
           {...register("name", {
             validate: (value) =>
-              value.trim() === "" ? "Please enter your name." : true, // Example validation
+              value.trim() === "" ? "Please enter your name." : true // Example validation
           })}
           placeholder="Name"
         />
@@ -444,7 +444,7 @@ export function Form() {
             validate: (value) =>
               /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)
                 ? true
-                : "Invalid email address.", // Example validation
+                : "Invalid email address." // Example validation
           })}
           placeholder="Email"
         />
@@ -466,17 +466,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 const schema = z.object({
   name: z.string().min(1, "Please enter your name."),
-  email: z.string().min(1, "Please enter your email.").email("Invalid email."),
+  email: z.string().min(1, "Please enter your email.").email("Invalid email.")
 });
 
 export function Form() {
   const {
     register,
     formState: { errors },
-    handleSubmit,
+    handleSubmit
   } = useForm({
     resolver: zodResolver(schema),
-    defaultValues: { name: "", email: "" },
+    defaultValues: { name: "", email: "" }
   });
 
   const onSubmit = handleSubmit((formData) => {
@@ -666,7 +666,7 @@ function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
         style={{
           display: "flex",
           justifyContent: "space-between",
-          marginBottom: "1rem",
+          marginBottom: "1rem"
         }}
       >
         <Input

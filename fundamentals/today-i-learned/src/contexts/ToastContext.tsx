@@ -1,7 +1,12 @@
 import React, { createContext, useContext } from "react";
-import { useToast as useToastHook, ToastContainer } from "@/components/shared/ui/Toast";
+import {
+  useToast as useToastHook,
+  ToastContainer
+} from "@/components/shared/ui/Toast";
 
-const ToastContext = createContext<ReturnType<typeof useToastHook> | undefined>(undefined);
+const ToastContext = createContext<ReturnType<typeof useToastHook> | undefined>(
+  undefined
+);
 
 export function ToastProvider({ children }: { children: React.ReactNode }) {
   const toastMethods = useToastHook();
@@ -9,7 +14,10 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   return (
     <ToastContext.Provider value={toastMethods}>
       {children}
-      <ToastContainer toasts={toastMethods.toasts} onRemove={toastMethods.removeToast} />
+      <ToastContainer
+        toasts={toastMethods.toasts}
+        onRemove={toastMethods.removeToast}
+      />
     </ToastContext.Provider>
   );
 }

@@ -21,7 +21,7 @@
 
 ```tsx
 function NameInput() {
-  const [name, setName] = React.useState('');
+  const [name, setName] = React.useState("");
 
   const handleChange = (e) => {
     if (e.target.value.length > 10) return;
@@ -46,7 +46,7 @@ function NameInput() {
 ```tsx
 function calculateDiscount(price) {
   if (price < 0) {
-    throw new Error('가격은 음수일 수 없습니다');
+    throw new Error("가격은 음수일 수 없습니다");
   }
   return price > 10000 ? 0.2 : 0.1;
 }
@@ -56,10 +56,9 @@ calculateDiscount(-500);
 
 이처럼 입력 값의 조건을 명확히 하지 않으면, 시스템은 예상치 못한 동작을 하거나 오류 없이 잘못된 결과를 반환할 수 있어요.
 
-
 ## 그 외 범위를 벗어난 값
+
 숫자의 최대값, 최소값 같은 **극단적인 값**으로도 테스트해볼 수 있어요. 이런 값을 테스트하면, 숫자 오버플로우(overflow)나 정밀도 손실 같은 문제가 발생하는지 확인할 수 있어요.
-    
 
 ```tsx
 const numbers = [Number.MAX_SAFE_INTEGER, Number.MIN_SAFE_INTEGER];

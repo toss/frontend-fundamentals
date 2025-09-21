@@ -74,7 +74,8 @@ export function SearchContent({ query }: SearchContentProps) {
     );
   }
 
-  const discussions = data?.pages?.flatMap((page: DiscussionsResponse) => page.discussions) ?? [];
+  const discussions =
+    data?.pages?.flatMap((page: DiscussionsResponse) => page.discussions) ?? [];
 
   if (discussions.length === 0) {
     return (

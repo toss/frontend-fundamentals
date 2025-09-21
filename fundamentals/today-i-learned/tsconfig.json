@@ -27,7 +27,7 @@
       "@shared/*": ["../shared/*"],
       "@styled-system/*": ["styled-system/*"]
     },
-    
+
     /* Jest */
     "types": ["jest", "@testing-library/jest-dom"],
     "esModuleInterop": true

@@ -11,7 +11,11 @@
 ```tsx 3,4,5,6,7,8,9,10,26
 import React, { useState } from "react";
 
-function simulateRapidClicks(target: HTMLElement, count: number, interval: number) {
+function simulateRapidClicks(
+  target: HTMLElement,
+  count: number,
+  interval: number
+) {
   let i = 0;
   const clickInterval = setInterval(() => {
     target.click();
@@ -51,4 +55,5 @@ const DoubleClickTest = () => {
 
 export default DoubleClickTest;
 ```
+
 자동화된 재현 코드는 수동으로 조건을 만들기 어려운 상황에서도 쉽게 문제를 다시 만들어낼 수 있어, 디버깅과 테스트 효율을 크게 높여줘요.
