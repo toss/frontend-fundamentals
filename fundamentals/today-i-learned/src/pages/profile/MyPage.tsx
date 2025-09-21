@@ -6,45 +6,29 @@ import { css } from "@styled-system/css";
 
 export function MyPage() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* Panda CSS 테스트 div */}
-      <div className={css({ color: 'red', padding: '16px', fontSize: '18px', fontWeight: 'bold' })}>
-        Panda CSS 테스트: 빨간색 텍스트
-      </div>
-      <div className="max-w-[1440px] mx-auto lg:px-8">
-        {/* 메인 그리드 레이아웃 */}
-        <div className="grid grid-cols-1 lg:grid-cols-[5fr_3fr] gap-8">
-          {/* 왼쪽 컬럼: 메인 컨텐츠 */}
-          <div className="flex flex-col lg:border-l lg:border-r border-[rgba(201,201,201,0.4)] lg:min-w-[820px]">
-            {/* 프로필 헤더 */}
-            <div className="lg:px-6 pt-6 pb-6">
+    <div className={pageContainer}>
+      <div className={contentWrapper}>
+        <div className={mainGridLayout}>
+          <div className={mainContentColumn}>
+            <div className={profileSection}>
               <ProfileHeader />
             </div>
 
-            {/* 구분선 */}
-            <div className="flex flex-col items-start py-4 px-0">
-              <div className="w-full h-0 border-b border-[rgba(201,201,201,0.4)]" />
-            </div>
+            <SectionDivider />
 
-            {/* 명예의 전당 섹션 */}
-            <div className="lg:px-6 pb-8">
+            <div className={hallOfFameSection}>
               <HallOfFameSection />
             </div>
 
-            {/* 구분선 */}
-            <div className="flex flex-col items-start py-4 px-0">
-              <div className="w-full h-0 border-b border-[rgba(201,201,201,0.4)]" />
-            </div>
+            <SectionDivider />
 
-            {/* 활동 섹션 */}
-            <div className="lg:px-6 pb-8">
+            <div className={activitySection}>
               <ActivitySection />
             </div>
           </div>
 
-          {/* 오른쪽 컬럼: 사이드바 (1024px 이상에서만 표시) */}
-          <div className="hidden lg:block mt-[24px] lg:min-w-[490px]">
-            <div className="sticky top-4">
+          <div className={sidebarColumn}>
+            <div className={sidebarContent}>
               <MonthlyChallenge />
             </div>
           </div>
@@ -53,3 +37,81 @@ export function MyPage() {
     </div>
   );
 }
+
+// Page Layout Styles
+const pageContainer = css({
+  minHeight: "100vh",
+  backgroundColor: "white"
+});
+
+const contentWrapper = css({
+  maxWidth: "1440px",
+  margin: "0 auto",
+  paddingX: { base: 0, lg: "2rem" }
+});
+
+const mainGridLayout = css({
+  display: "grid",
+  gridTemplateColumns: { base: "1fr", lg: "5fr 3fr" },
+  gap: "2rem"
+});
+
+// Main Content Column
+const mainContentColumn = css({
+  display: "flex",
+  flexDirection: "column",
+  borderLeft: { lg: "1px solid rgba(201, 201, 201, 0.4)" },
+  borderRight: { lg: "1px solid rgba(201, 201, 201, 0.4)" },
+  minWidth: { lg: "820px" }
+});
+
+const profileSection = css({
+  paddingX: { lg: "1.5rem" },
+  paddingTop: "1.5rem",
+  paddingBottom: "1.5rem"
+});
+
+const hallOfFameSection = css({
+  paddingX: { lg: "1.5rem" },
+  paddingBottom: "2rem"
+});
+
+const activitySection = css({
+  paddingX: { lg: "1.5rem" },
+  paddingBottom: "2rem"
+});
+
+// Sidebar Column
+const sidebarColumn = css({
+  display: { base: "none", lg: "block" },
+  marginTop: "1.5rem",
+  minWidth: { lg: "490px" }
+});
+
+const sidebarContent = css({
+  position: "sticky",
+  top: "1rem"
+});
+
+// Section Divider Component
+function SectionDivider() {
+  return (
+    <div className={sectionDividerContainer}>
+      <div className={sectionDividerLine} />
+    </div>
+  );
+}
+
+const sectionDividerContainer = css({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+  paddingY: "1rem",
+  paddingX: 0
+});
+
+const sectionDividerLine = css({
+  width: "100%",
+  height: 0,
+  borderBottom: "1px solid rgba(201, 201, 201, 0.4)"
+});
