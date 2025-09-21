@@ -13,11 +13,11 @@ export function ProfileHeader({ className }: ProfileHeaderProps) {
 }
 
 const profileHeaderContainer = css({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  paddingY: '1rem',
-  paddingX: '1rem',
-  gap: '1.5rem',
-  position: 'relative'
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  paddingY: "1rem",
+  paddingX: "1rem",
+  gap: "1.5rem",
+  position: "relative"
 });

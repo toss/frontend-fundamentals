@@ -1,5 +1,5 @@
 import { Card } from "@/components/shared/ui/Card";
-import { cn } from "@/libs/cn";
+import { css, cx } from "@styled-system/css";
 import type { ChallengeDay, MonthlyChallenge } from "@/types";
 import { useMyContributions } from "@/api/hooks/useDiscussions";
 import { useMemo } from "react";
@@ -29,28 +29,26 @@ function ChallengeDayItem({ day }: { day: ChallengeDay }) {
   const getDayStyle = () => {
     switch (day.status) {
       case "completed":
-        // 완료된 날들의 다양한 색상 (피그마 디자인 매치)
         const colors = [
-          "bg-black/10 text-black/40", // 1일차
-          "bg-[rgba(188,233,233,0.2)] text-[#58C7C7]", // 2일차
-          "bg-[rgba(237,204,248,0.4)] text-[#DA9BEF]", // 3일차
-          "bg-[rgba(255,239,191,0.6)] text-[#FFC342]", // 4일차
-          "bg-[rgba(255,212,214,0.2)] text-[#FB8890]", // 5일차
-          "bg-[rgba(188,233,233,0.2)] text-[#58C7C7]", // 6일차
-          "bg-[rgba(188,233,233,0.2)] text-[#58C7C7]", // 7일차
-          "bg-[rgba(255,212,214,0.2)] text-[#FB8890]", // 8일차
-          "bg-[rgba(255,239,191,0.6)] text-[#FFC342]", // 9일차
-          "bg-black/10 text-black/40" // 10일차
+          css({ backgroundColor: 'rgba(0, 0, 0, 0.1)', color: 'rgba(0, 0, 0, 0.4)' }),
+          css({ backgroundColor: 'rgba(188, 233, 233, 0.2)', color: '#58C7C7' }),
+          css({ backgroundColor: 'rgba(237, 204, 248, 0.4)', color: '#DA9BEF' }),
+          css({ backgroundColor: 'rgba(255, 239, 191, 0.6)', color: '#FFC342' }),
+          css({ backgroundColor: 'rgba(255, 212, 214, 0.2)', color: '#FB8890' }),
+          css({ backgroundColor: 'rgba(188, 233, 233, 0.2)', color: '#58C7C7' }),
+          css({ backgroundColor: 'rgba(188, 233, 233, 0.2)', color: '#58C7C7' }),
+          css({ backgroundColor: 'rgba(255, 212, 214, 0.2)', color: '#FB8890' }),
+          css({ backgroundColor: 'rgba(255, 239, 191, 0.6)', color: '#FFC342' }),
+          css({ backgroundColor: 'rgba(0, 0, 0, 0.1)', color: 'rgba(0, 0, 0, 0.4)' })
         ];
         const colorIndex = (day.day - 1) % colors.length;
         return colors[colorIndex];
       case "posted":
-        // 글을 작성한 날 - 파란색 체크마크
-        return "bg-[rgba(198,218,255,0.6)] text-[#6B9AFF]";
+        return postedDayStyle;
       case "today":
-        return "bg-black/70 text-[#FCFCFC]";
+        return todayStyle;
       default:
-        return "bg-black/5 text-black/60";
+        return pendingDayStyle;
     }
   };
 
@@ -68,16 +66,11 @@ function ChallengeDayItem({ day }: { day: ChallengeDay }) {
   };
 
   return (
-    <div className="flex flex-col items-center gap-3">
-      <div
-        className={cn(
-          "w-14 h-14 rounded-full flex items-center justify-center text-sm font-bold",
-          getDayStyle()
-        )}
-      >
+    <div className={dayItemContainer}>
+      <div className={cx(dayCircle, getDayStyle())}>
         {getStreakLabel()}
       </div>
-      <span className="text-sm font-medium text-gray-600">{day.day}일</span>
+      <span className={dayLabel}>{day.day}일</span>
     </div>
   );
 }
@@ -155,22 +148,22 @@ export function MonthlyChallenge({ challenge }: MonthlyChallengeProps) {
 
   if (isLoading || !displayData) {
     return (
-      <div className="space-y-6">
-        <div className="space-y-2 mt-5">
-          <h3 className="text-2xl font-extrabold text-black tracking-tight">
+      <div className={challengeContainer}>
+        <div className={headerSection}>
+          <h3 className={mainTitle}>
             월간 기록
           </h3>
-          <p className="text-base font-semibold text-black/60 tracking-tight">
+          <p className={subtitle}>
             {currentYear}년 {monthName} 한 달 기록
           </p>
         </div>
         <Card variant="bordered" padding="md" className="w-full">
-          <div className="space-y-4">
-            <div className="grid grid-cols-7 gap-4 justify-items-center">
+          <div className={cardContent}>
+            <div className={calendarGrid}>
               {Array.from({ length: 7 }).map((_, index) => (
                 <div
                   key={index}
-                  className="w-14 h-14 bg-gray-100 rounded-full animate-pulse"
+                  className={skeletonDay}
                 />
               ))}
             </div>
@@ -187,31 +180,28 @@ export function MonthlyChallenge({ challenge }: MonthlyChallengeProps) {
   }
 
   return (
-    <div className="space-y-6">
-      {/* 헤더 */}
-      <div className="space-y-2 mt-5">
-        <h3 className="text-2xl font-extrabold text-black tracking-tight">
+    <div className={challengeContainer}>
+      <div className={headerSection}>
+        <h3 className={mainTitle}>
           월간 기록
         </h3>
-        <p className="text-base font-semibold text-black/60 tracking-tight">
+        <p className={subtitle}>
           {displayData.year}년 {monthName} 한 달 기록
         </p>
       </div>
       <Card variant="bordered" padding="md" className="w-full">
-        {/* 캘린더 그리드 */}
-        <div className="space-y-4">
+        <div className={cardContent}>
           {weeks.map((week, weekIndex) => (
             <div
               key={weekIndex}
-              className="grid grid-cols-7 gap-4 justify-items-center"
+              className={calendarGrid}
             >
               {week.map((day) => (
                 <ChallengeDayItem key={day.day} day={day} />
               ))}
-              {/* 빈 칸 채우기 (마지막 주가 7일 미만인 경우) */}
               {week.length < 7 &&
                 Array.from({ length: 7 - week.length }).map((_, emptyIndex) => (
-                  <div key={`empty-${emptyIndex}`} className="w-14 h-14" />
+                  <div key={`empty-${emptyIndex}`} className={emptyCell} />
                 ))}
             </div>
           ))}
@@ -220,3 +210,99 @@ export function MonthlyChallenge({ challenge }: MonthlyChallengeProps) {
     </div>
   );
 }
+
+// Layout Styles
+const challengeContainer = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1.5rem'
+});
+
+const headerSection = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.5rem',
+  marginTop: '1.25rem'
+});
+
+const mainTitle = css({
+  fontSize: '24px',
+  fontWeight: 'extrabold',
+  color: 'black',
+  letterSpacing: '-0.025em'
+});
+
+const subtitle = css({
+  fontSize: '16px',
+  fontWeight: 'semibold',
+  color: 'rgba(0, 0, 0, 0.6)',
+  letterSpacing: '-0.025em'
+});
+
+const cardContent = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1rem'
+});
+
+const calendarGrid = css({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(7, 1fr)',
+  gap: '1rem',
+  justifyItems: 'center'
+});
+
+// Day Item Styles
+const dayItemContainer = css({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: '0.75rem'
+});
+
+const dayCircle = css({
+  width: '3.5rem',
+  height: '3.5rem',
+  borderRadius: '50%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  fontSize: '14px',
+  fontWeight: 'bold'
+});
+
+const dayLabel = css({
+  fontSize: '14px',
+  fontWeight: 'medium',
+  color: 'rgb(75, 85, 99)'
+});
+
+// Day Status Styles
+const postedDayStyle = css({
+  backgroundColor: 'rgba(198, 218, 255, 0.6)',
+  color: '#6B9AFF'
+});
+
+const todayStyle = css({
+  backgroundColor: 'rgba(0, 0, 0, 0.7)',
+  color: '#FCFCFC'
+});
+
+const pendingDayStyle = css({
+  backgroundColor: 'rgba(0, 0, 0, 0.05)',
+  color: 'rgba(0, 0, 0, 0.6)'
+});
+
+// Skeleton and Empty Styles
+const skeletonDay = css({
+  width: '3.5rem',
+  height: '3.5rem',
+  backgroundColor: 'rgb(243, 244, 246)',
+  borderRadius: '50%',
+  animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+});
+
+const emptyCell = css({
+  width: '3.5rem',
+  height: '3.5rem'
+});

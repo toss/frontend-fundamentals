@@ -2,7 +2,7 @@ import { useUserActivity } from "@/pages/profile/hooks/useUserActivity";
 import { ActivityContent } from "./ActivityContent";
 import { ChevronDown } from "lucide-react";
 import type { BaseComponentProps } from "@/types";
-import { cn } from "@/libs/utils";
+import { css, cx } from "@styled-system/css";
 
 interface ActivitySectionProps extends BaseComponentProps {}
 
@@ -21,30 +21,23 @@ export function ActivitySection({ className }: ActivitySectionProps) {
   } = useUserActivity();
 
   return (
-    <div className={cn("space-y-6", className)}>
-      {/* 헤더와 필터 */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <h2 className="font-bold text-[22px] leading-[130%] tracking-[-0.4px] text-[#0F0F0F]">
+    <div className={cx(sectionContainer, className)}>
+      <div className={headerContainer}>
+        <div className={headerContent}>
+          <div className={titleWrapper}>
+            <h2 className={sectionTitle}>
               활동
             </h2>
           </div>
 
-          {/* 필터 버튼 */}
           <button
             onClick={handleFilterToggle}
-            className="flex items-center justify-center gap-[6px] h-10 border border-black/8 rounded-lg text-sm font-semibold transition-colors bg-white text-black/60 hover:bg-black/5"
+            className={filterButton}
             style={{
-              boxSizing: "border-box",
-              paddingLeft: "15px",
-              paddingRight: "18px",
-              paddingTop: "12px",
-              paddingBottom: "12px",
               minWidth: sortFilter === "created" ? "117px" : "140px"
             }}
           >
-            <ChevronDown className="w-4 h-4" />
+            <ChevronDown className={chevronIcon} />
             {sortFilter === "created" ? "새로 올라온" : "새로 업데이트됨"}
           </button>
         </div>
@@ -63,3 +56,65 @@ export function ActivitySection({ className }: ActivitySectionProps) {
     </div>
   );
 }
+
+// Layout Styles
+const sectionContainer = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1.5rem'
+});
+
+const headerContainer = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1rem'
+});
+
+const headerContent = css({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between'
+});
+
+const titleWrapper = css({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.5rem'
+});
+
+const sectionTitle = css({
+  fontWeight: 'bold',
+  fontSize: '22px',
+  lineHeight: '130%',
+  letterSpacing: '-0.4px',
+  color: '#0F0F0F'
+});
+
+// Filter Button
+const filterButton = css({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '6px',
+  height: '2.5rem',
+  border: '1px solid rgba(0, 0, 0, 0.08)',
+  borderRadius: '0.5rem',
+  fontSize: '14px',
+  fontWeight: 'semibold',
+  backgroundColor: 'white',
+  color: 'rgba(0, 0, 0, 0.6)',
+  paddingLeft: '15px',
+  paddingRight: '18px',
+  paddingTop: '12px',
+  paddingBottom: '12px',
+  boxSizing: 'border-box',
+  transition: 'background-color 0.2s',
+  _hover: {
+    backgroundColor: 'rgba(0, 0, 0, 0.05)'
+  }
+});
+
+const chevronIcon = css({
+  width: '1rem',
+  height: '1rem'
+});
