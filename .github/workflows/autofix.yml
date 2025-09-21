@@ -25,5 +25,5 @@ jobs:
           cache-dependency-path: "yarn.lock"
           node-version-file: ".nvmrc"
       - run: yarn install
-      - run: yarn prettier --write '**/*' '!.github/**'
+      - run: yarn prettier --write '**/*.{js,jsx,ts,tsx,json,md,yml,yaml,css,scss,html}' '!.github/**'
       - uses: autofix-ci/action@635ffb0c9798bd160680f18fd73371e355b85f27
