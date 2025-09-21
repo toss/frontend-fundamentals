@@ -1,6 +1,10 @@
 /* Google Fonts에서 Pretendard 로드 (Toss Product Sans와 유사한 한국형 폰트) */
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 
+/* Panda CSS 레이어 */
+@layer reset, base, tokens, recipes, utilities;
+
+/* Tailwind CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

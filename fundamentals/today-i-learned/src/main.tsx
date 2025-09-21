@@ -13,7 +13,6 @@ import { Layout } from "./components/shared/layout/Layout";
 import { AuthProvider } from "./contexts/AuthContext.tsx";
 import { ThemeProvider } from "./contexts/ThemeContext.tsx";
 import "./index.css";
-import { LegacyTimelinePage } from "./pages/legacy-timeline/TimelinePage";
 import { PostDetailPage } from "./pages/post/PostDetailPage";
 import { MyPage } from "./pages/profile/MyPage";
 import { TimelinePage } from "./pages/timeline/TimelinePage";
@@ -56,10 +55,6 @@ const router = createBrowserRouter(
         {
           path: "profile",
           element: <MyPage />
-        },
-        {
-          path: "legacy-timeline",
-          element: <LegacyTimelinePage />
         },
         {
           path: "post/:id",
