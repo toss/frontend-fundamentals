@@ -1,11 +1,11 @@
 /* Google Fonts에서 Pretendard 로드 (Toss Product Sans와 유사한 한국형 폰트) */
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 
+@layer reset, base, tokens, recipes, utilities;
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer reset, base, tokens, recipes, utilities;
 
 /*
   Global reset only — keep the global surface minimal.
@@ -15,77 +15,81 @@
   Each page/component should style itself using Tailwind utilities.
 */
 
-/* 1) Modern element reset */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-html,
-body,
-#root {
-  height: 100%;
-}
-body {
-  margin: 0;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  font-family:
-    "Pretendard",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    "Malgun Gothic",
-    "맑은 고딕",
-    sans-serif;
-}
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
-}
-button,
-input,
-textarea,
-select {
-  font: inherit;
-  color: inherit;
-}
-a {
-  color: inherit;
-  text-decoration: none;
-}
-ul,
-ol {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-/* 2) Accessibility helpers */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+@layer base {
+  /* 1) Modern element reset */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-family:
+      "Pretendard",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      "Malgun Gothic",
+      "맑은 고딕",
+      sans-serif;
+  }
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+    color: inherit;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  ul,
+  ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
 }
 
-/* 3) Modal body scroll prevention */
-body.modal-open {
-  overflow: hidden;
+@layer utilities {
+  /* 2) Accessibility helpers */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* 3) Modal body scroll prevention */
+  body.modal-open {
+    overflow: hidden;
+  }
 }
 @layer base {
   :root {

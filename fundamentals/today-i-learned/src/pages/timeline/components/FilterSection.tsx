@@ -1,4 +1,5 @@
 import type { SortOption } from "@/types";
+import { css, cx } from "@styled-system/css";
 
 interface FilterSectionProps {
   sortOption: SortOption;
@@ -21,28 +22,22 @@ export function FilterSection({
   onSortChange
 }: FilterSectionProps) {
   return (
-    <div className="flex flex-row items-center gap-2">
+    <div className={filterContainer}>
       {sortTabs.map((tab) => (
         <button
           type="button"
           key={tab.value}
           onClick={() => onSortChange(tab.value)}
-          className={`
-            flex flex-row justify-center items-center
-            px-4 py-3 min-w-[114px] h-[46px]
-            rounded-[12px] transition-colors duration-200
-            ${
-              sortOption === tab.value
-                ? "bg-transparent"
-                : "bg-transparent hover:bg-black/5"
-            }
-          `}
+          className={cx(
+            tabButton,
+            sortOption !== tab.value && tabButtonInactive
+          )}
         >
           <span
-            className={`
-              font-bold text-[18px] leading-[22px]
-              ${sortOption === tab.value ? "text-[#0F0F0F]" : "text-black/20"}
-            `}
+            className={cx(
+              tabLabelBase,
+              sortOption === tab.value ? tabLabelActive : tabLabelInactive
+            )}
           >
             {tab.label}
           </span>
@@ -51,3 +46,49 @@ export function FilterSection({
     </div>
   );
 }
+
+// Container Styles
+const filterContainer = css({
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  gap: "0.5rem"
+});
+
+// Tab Button Styles
+const tabButton = css({
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "center",
+  alignItems: "center",
+  paddingX: "1rem",
+  paddingY: "0.75rem",
+  minWidth: "114px",
+  height: "46px",
+  borderRadius: "12px",
+  backgroundColor: "transparent",
+  border: "none",
+  cursor: "pointer",
+  transition: "background-color 0.2s"
+});
+
+const tabButtonInactive = css({
+  _hover: {
+    backgroundColor: "rgba(0, 0, 0, 0.05)"
+  }
+});
+
+// Tab Label Styles
+const tabLabelBase = css({
+  fontWeight: "bold",
+  fontSize: "18px",
+  lineHeight: "22px"
+});
+
+const tabLabelActive = css({
+  color: "#0F0F0F"
+});
+
+const tabLabelInactive = css({
+  color: "rgba(0, 0, 0, 0.2)"
+});

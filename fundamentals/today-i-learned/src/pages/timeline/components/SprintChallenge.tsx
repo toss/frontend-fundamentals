@@ -4,6 +4,7 @@ import { SprintGridSkeleton } from "@/components/shared/ui/SprintGridSkeleton";
 import { SprintHeader } from "@/components/shared/ui/SprintHeader";
 import { createSprintData } from "@/utils/sprintCalculator";
 import { useMemo } from "react";
+import { css } from "@styled-system/css";
 
 export function SprintChallenge() {
   const { data: contributions, isLoading } = useMyContributions();
@@ -14,8 +15,8 @@ export function SprintChallenge() {
   }, [contributions]);
 
   return (
-    <div className="flex flex-col items-start px-[12px] gap-[10px] w-full">
-      <div className="flex flex-col items-start p-6 gap-2 w-full bg-white border border-[rgba(201,201,201,0.5)] rounded-2xl">
+    <div className={challengeContainer}>
+      <div className={challengeCard}>
         {(() => {
           if (isLoading || !sprintData) {
             return <SprintGridSkeleton />;
@@ -34,3 +35,25 @@ export function SprintChallenge() {
     </div>
   );
 }
+
+// Container Styles
+const challengeContainer = css({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  paddingX: '12px',
+  gap: '10px',
+  width: '100%'
+});
+
+const challengeCard = css({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  padding: '1.5rem',
+  gap: '0.5rem',
+  width: '100%',
+  backgroundColor: 'white',
+  border: '1px solid rgba(201, 201, 201, 0.5)',
+  borderRadius: '1rem'
+});

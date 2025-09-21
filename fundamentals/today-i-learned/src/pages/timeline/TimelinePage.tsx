@@ -11,6 +11,7 @@ import type { SortOption } from "@/types";
 import { useCreateDiscussion } from "@/api/hooks/useDiscussions";
 import { useErrorHandler } from "@/hooks/useErrorHandler";
 import { useToast } from "@/contexts/ToastContext";
+import { css } from "@styled-system/css";
 
 export function TimelinePage() {
   const { user } = useAuth();
@@ -68,21 +69,17 @@ export function TimelinePage() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="max-w-[1440px] mx-auto lg:px-8">
-        {/* 메인 그리드 레이아웃 */}
-        <div className="grid grid-cols-1 lg:grid-cols-[5fr_3fr] gap-8">
-          {/* 왼쪽 컬럼: 메인 피드 */}
-          <div className="flex flex-col lg:border-l lg:border-r border-[rgba(201,201,201,0.4)] lg:min-w-[820px]">
+    <div className={pageContainer}>
+      <div className={contentWrapper}>
+        <div className={mainGridLayout}>
+          <div className={mainContentColumn}>
             {user ? (
               <>
-                <div className="pt-[12px] pb-0">
+                <div className={sprintChallengeSection}>
                   <SprintChallenge />
                 </div>
-                {/* 구분선 */}
-                <div className="w-full h-0 border-b border-[rgba(201,201,201,0.4)] mt-[16px]" />
-                {/* 포스트 입력 */}
-                <div className="lg:px-6">
+                <SectionDivider />
+                <div className={postInputSection}>
                   <PostInput
                     user={{
                       login: user.login,
@@ -93,40 +90,31 @@ export function TimelinePage() {
                     isLoading={createPostMutation.isPending}
                   />
                 </div>
-                s{/* 구분선 */}
-                <div className="w-full h-0 border-b border-[rgba(201,201,201,0.4)]" />
+                <SectionDivider />
               </>
             ) : (
               <>
-                {/* 로그인 안된 상태 */}
-                <div className="pt-6 pb-4 px-6">
+                <div className={unauthenticatedSection}>
                   <UnauthenticatedState />
                 </div>
-
-                {/* 구분선 */}
-                <div className="flex flex-col items-start py-4 px-0">
-                  <div className="w-full h-0 border-b border-[rgba(201,201,201,0.4)]" />
-                </div>
+                <SectionDivider />
               </>
             )}
 
-            {/* 필터 섹션 */}
-            <div className="py-[24px] px-[12px]">
+            <div className={filterSection}>
               <FilterSection
                 sortOption={sortOption}
                 onSortChange={handleSortChange}
               />
             </div>
 
-            {/* 포스트 리스트 */}
-            <div className="lg:px-6 pb-0">
+            <div className={postListSection}>
               <PostList {...getPostListProps()} />
             </div>
           </div>
 
-          {/* 오른쪽 컬럼: 사이드바 (1024px 이상에서만 표시) */}
-          <div className="hidden lg:block mt-[24px] lg:min-w-[490px]">
-            <div className="fixed top-[100px] bottom-4 pr-8 w-[490px] overflow-y-auto">
+          <div className={sidebarColumn}>
+            <div className={sidebarContent}>
               <WeeklyTop5 />
             </div>
           </div>
@@ -135,3 +123,84 @@ export function TimelinePage() {
     </div>
   );
 }
+
+// Page Layout Styles
+const pageContainer = css({
+  minHeight: '100vh',
+  backgroundColor: 'white'
+});
+
+const contentWrapper = css({
+  maxWidth: '1440px',
+  margin: '0 auto',
+  paddingX: { base: 0, lg: '2rem' }
+});
+
+const mainGridLayout = css({
+  display: 'grid',
+  gridTemplateColumns: { base: '1fr', lg: '5fr 3fr' },
+  gap: '2rem'
+});
+
+// Main Content Column
+const mainContentColumn = css({
+  display: 'flex',
+  flexDirection: 'column',
+  borderLeft: { lg: '1px solid rgba(201, 201, 201, 0.4)' },
+  borderRight: { lg: '1px solid rgba(201, 201, 201, 0.4)' },
+  minWidth: { lg: '820px' }
+});
+
+// Content Sections
+const sprintChallengeSection = css({
+  paddingTop: '12px',
+  paddingBottom: 0
+});
+
+const postInputSection = css({
+  paddingX: { lg: '1.5rem' }
+});
+
+const unauthenticatedSection = css({
+  paddingTop: '1.5rem',
+  paddingBottom: '1rem',
+  paddingX: '1.5rem'
+});
+
+const filterSection = css({
+  paddingY: '24px',
+  paddingX: '12px'
+});
+
+const postListSection = css({
+  paddingX: { lg: '1.5rem' },
+  paddingBottom: 0
+});
+
+// Sidebar Column
+const sidebarColumn = css({
+  display: { base: 'none', lg: 'block' },
+  marginTop: '24px',
+  minWidth: { lg: '490px' }
+});
+
+const sidebarContent = css({
+  position: 'fixed',
+  top: '100px',
+  bottom: '1rem',
+  paddingRight: '2rem',
+  width: '490px',
+  overflowY: 'auto'
+});
+
+// Section Divider Component
+function SectionDivider() {
+  return <div className={sectionDivider} />;
+}
+
+const sectionDivider = css({
+  width: '100%',
+  height: 0,
+  borderBottom: '1px solid rgba(201, 201, 201, 0.4)',
+  marginTop: { base: 0, authenticated: '1rem' }
+});
