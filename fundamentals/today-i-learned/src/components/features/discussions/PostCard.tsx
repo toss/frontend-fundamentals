@@ -13,7 +13,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import {
   getHeartAndUpvoteCounts,
   getUserReactionStates
-} from "@/utils/reactions";
+} from "@/libs/reactions";
 import { css } from "@styled-system/css";
 
 interface PostCardProps {

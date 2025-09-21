@@ -11,7 +11,7 @@ import {
 } from "@/api/hooks/useDiscussions";
 import { useAuth } from "@/contexts/AuthContext";
 import { CommentList } from "@/pages/timeline/components/CommentList";
-import { hasUserReacted, getHeartAndUpvoteCounts, getUserReactionStates } from "@/utils/reactions";
+import { hasUserReacted, getHeartAndUpvoteCounts, getUserReactionStates } from "@/libs/reactions";
 import type { GitHubComment } from "@/api/remote/discussions";
 import { css } from "@styled-system/css";
 

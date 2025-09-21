@@ -1,8 +1,8 @@
 import { useMyContributions } from "@/api/hooks/useDiscussions";
-import { SprintGrid } from "@/components/shared/ui/SprintGrid";
-import { SprintGridSkeleton } from "@/components/shared/ui/SprintGridSkeleton";
-import { SprintHeader } from "@/components/shared/ui/SprintHeader";
-import { createSprintData } from "@/utils/sprintCalculator";
+import { SprintGrid } from "@/components/features/sprint/SprintGrid";
+import { SprintGridSkeleton } from "@/components/features/sprint/SprintGridSkeleton";
+import { SprintHeader } from "@/components/features/sprint/SprintHeader";
+import { createSprintData } from "@/libs/sprintCalculator";
 import { useMemo } from "react";
 import { css } from "@styled-system/css";
 

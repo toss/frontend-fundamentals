@@ -4,7 +4,7 @@ import { useErrorHandler } from "@/hooks/useErrorHandler";
 import { useAuth } from "@/contexts/AuthContext";
 import { useQueryClient } from "@tanstack/react-query";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
-import { hasUserReacted as hasUserReactedUtil } from "@/utils/reactions";
+import { hasUserReacted as hasUserReactedUtil } from "@/libs/reactions";
 
 interface UsePostReactionsParams {
   discussion?: GitHubDiscussion;

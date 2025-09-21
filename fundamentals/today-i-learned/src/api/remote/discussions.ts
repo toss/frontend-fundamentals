@@ -1,4 +1,4 @@
-import { graphqlRequest } from "../client";
+import { graphqlRequest } from "@/api/client";
 import { PAGE_SIZE } from "@/constants/github";
 import {
   GET_DISCUSSIONS_QUERY,
@@ -14,7 +14,7 @@ import {
   ADD_DISCUSSION_COMMENT_REPLY_MUTATION,
   ADD_DISCUSSION_REACTION_MUTATION,
   REMOVE_DISCUSSION_REACTION_MUTATION
-} from "../graphql/discussions";
+} from "@/api/graphql/discussions";
 
 export interface GitHubAuthor {
   login: string;

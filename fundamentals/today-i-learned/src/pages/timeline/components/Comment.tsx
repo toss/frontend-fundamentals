@@ -7,7 +7,7 @@ import { formatNumber, formatTimeAgo } from "../utils/formatters";
 import {
   getHeartAndUpvoteCounts,
   getUserReactionStates
-} from "@/utils/reactions";
+} from "@/libs/reactions";
 import { useAuth } from "@/contexts/AuthContext";
 import { css } from "@styled-system/css";
 import { cx } from "@styled-system/css";
