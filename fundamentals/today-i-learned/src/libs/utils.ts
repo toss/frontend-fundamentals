@@ -1,11 +1,11 @@
 import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { cx } from "../../styled-system/css";
 import type { ActivityDay } from "@/types";
 import { APP_CONSTANTS, STREAK_CONFIG } from "@/constants";
 
 // === Style Utilities ===
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+  return cx(clsx(inputs));
 }
 
 // === Text Utilities ===
@@ -32,7 +32,7 @@ export const extractTags = (content: string): string[] => {
 export const highlightTags = (content: string): string => {
   return content.replace(
     /#([\w가-힣]+)/g,
-    '<span class="text-blue-500 font-medium">#$1</span>'
+    '<span style="color: #3b82f6; font-weight: 500">#$1</span>'
   );
 };
 

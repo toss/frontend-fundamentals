@@ -3,9 +3,6 @@
 
 @layer reset, base, tokens, recipes, utilities;
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 /*
   Global reset only — keep the global surface minimal.
