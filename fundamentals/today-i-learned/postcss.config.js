@@ -1,6 +1,6 @@
 export default {
   plugins: {
-    '@pandacss/dev/postcss': {},
-    autoprefixer: {},
-  },
-}
+    "@pandacss/dev/postcss": {},
+    autoprefixer: {}
+  }
+};

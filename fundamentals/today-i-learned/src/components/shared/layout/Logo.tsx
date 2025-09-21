@@ -11,9 +11,7 @@ export function Logo() {
           alt="Frontend Fundamentals Logo"
           className={logoImage}
         />
-        <span className={logoText}>
-          Today I Learned
-        </span>
+        <span className={logoText}>Today I Learned</span>
       </Link>
     </div>
   );
@@ -21,24 +19,24 @@ export function Logo() {
 
 // Semantic style definitions
 const logoContainer = css({
-  flexShrink: '0'
+  flexShrink: "0"
 });
 
 const logoLink = css({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '0.75rem'
+  display: "flex",
+  alignItems: "center",
+  gap: "0.75rem"
 });
 
 const logoImage = css({
-  width: '2rem',
-  height: '2rem'
+  width: "2rem",
+  height: "2rem"
 });
 
 const logoText = css({
-  fontSize: '20px',
-  fontWeight: '700',
-  color: '#0F0F0F',
-  letterSpacing: '-0.025em',
-  lineHeight: '1.5'
+  fontSize: "20px",
+  fontWeight: "700",
+  color: "#0F0F0F",
+  letterSpacing: "-0.025em",
+  lineHeight: "1.5"
 });

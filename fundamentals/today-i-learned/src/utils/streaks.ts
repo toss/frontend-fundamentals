@@ -27,7 +27,7 @@ export const calculateStreaks = (discussions: any[]) => {
   // 현재 streak 계산 (오늘부터 역순으로)
   let currentStreak = 0;
   const today = new Date();
-  
+
   // UTC 기준으로 오늘 날짜 문자열 생성 (타임존 문제 방지)
   const todayDateKey = today.toISOString().split("T")[0];
   let currentDateKey = todayDateKey;

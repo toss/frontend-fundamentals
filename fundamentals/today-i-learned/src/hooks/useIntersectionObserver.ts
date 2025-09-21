@@ -10,7 +10,12 @@ interface UseIntersectionObserverOptions {
 export function useIntersectionObserver(
   options: UseIntersectionObserverOptions = {}
 ) {
-  const { threshold = 0.1, rootMargin = "100px", enabled = true, onIntersect } = options;
+  const {
+    threshold = 0.1,
+    rootMargin = "100px",
+    enabled = true,
+    onIntersect
+  } = options;
 
   const elementRef = useRef<HTMLDivElement>(null);
   const [isIntersecting, setIsIntersecting] = useState(false);
@@ -23,7 +28,7 @@ export function useIntersectionObserver(
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsIntersecting(entry.isIntersecting);
-        
+
         if (entry.isIntersecting && onIntersect) {
           onIntersect();
         }

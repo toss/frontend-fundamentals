@@ -3,7 +3,7 @@ import {
   useContext,
   useState,
   useEffect,
-  type ReactNode,
+  type ReactNode
 } from "react";
 import { AUTH_LOGIN_URL, getUserInfo } from "@/api/client";
 import type { AuthenticatedUser } from "@/api/remote/user";
@@ -36,16 +36,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setUser(userWithToken);
       localStorage.setItem("github_user", JSON.stringify(userWithToken));
     } catch (error) {
-      console.error('Error fetching user info:', error);
+      console.error("Error fetching user info:", error);
     }
   };
 
   useEffect(() => {
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       setIsLoading(false);
       return;
     }
-    
+
     // 페이지 로드 시 로컬 스토리지에서 사용자 정보 복원
     const savedUser = localStorage.getItem("github_user");
     if (savedUser) {
@@ -74,7 +74,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         window.history.replaceState(
           {},
           document.title,
-          window.location.pathname,
+          window.location.pathname
         );
       } catch (error) {
         console.error("Failed to parse OAuth callback data:", error);
@@ -88,9 +88,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   const login = () => {
-    if (typeof window === 'undefined') return;
-    
-    const redirectUri = 'https://frontend-fundamentals.com/api/github/login-callback';
+    if (typeof window === "undefined") return;
+
+    const redirectUri =
+      "https://frontend-fundamentals.com/api/github/login-callback";
 
     const loginUrl = `${AUTH_LOGIN_URL}?redirect_uri=${encodeURIComponent(redirectUri)}`;
     window.location.href = loginUrl;
@@ -106,7 +107,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     isLoading,
     login,
     logout,
-    isAuthenticated: !!user,
+    isAuthenticated: !!user
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

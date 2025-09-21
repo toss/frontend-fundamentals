@@ -6,7 +6,10 @@ interface MarkdownRendererProps {
   className?: string;
 }
 
-export function MarkdownRenderer({ content, className = "" }: MarkdownRendererProps) {
+export function MarkdownRenderer({
+  content,
+  className = ""
+}: MarkdownRendererProps) {
   return (
     <div className={`prose prose-sm max-w-none ${className}`}>
       <ReactMarkdown
@@ -33,19 +36,13 @@ export function MarkdownRenderer({ content, className = "" }: MarkdownRendererPr
             </p>
           ),
           strong: ({ children }) => (
-            <strong className="font-bold text-black/80">
-              {children}
-            </strong>
+            <strong className="font-bold text-black/80">{children}</strong>
           ),
           em: ({ children }) => (
-            <em className="italic text-black/80">
-              {children}
-            </em>
+            <em className="italic text-black/80">{children}</em>
           ),
           ul: ({ children }) => (
-            <ul className="list-disc list-inside mb-4 space-y-1">
-              {children}
-            </ul>
+            <ul className="list-disc list-inside mb-4 space-y-1">{children}</ul>
           ),
           ol: ({ children }) => (
             <ol className="list-decimal list-inside mb-4 space-y-1">
@@ -63,7 +60,7 @@ export function MarkdownRenderer({ content, className = "" }: MarkdownRendererPr
             </blockquote>
           ),
           code: ({ className, children, ...props }) => {
-            const match = /language-(\w+)/.exec(className || '');
+            const match = /language-(\w+)/.exec(className || "");
 
             if (match) {
               // Code block
@@ -78,7 +75,10 @@ export function MarkdownRenderer({ content, className = "" }: MarkdownRendererPr
 
             // Inline code
             return (
-              <code className="bg-gray-100 px-2 py-1 rounded text-sm font-mono text-gray-800" {...props}>
+              <code
+                className="bg-gray-100 px-2 py-1 rounded text-sm font-mono text-gray-800"
+                {...props}
+              >
                 {children}
               </code>
             );
@@ -101,9 +101,7 @@ export function MarkdownRenderer({ content, className = "" }: MarkdownRendererPr
             </div>
           ),
           thead: ({ children }) => (
-            <thead className="bg-gray-50">
-              {children}
-            </thead>
+            <thead className="bg-gray-50">{children}</thead>
           ),
           th: ({ children }) => (
             <th className="border border-gray-300 px-4 py-2 text-left font-semibold text-gray-800">
@@ -115,9 +113,7 @@ export function MarkdownRenderer({ content, className = "" }: MarkdownRendererPr
               {children}
             </td>
           ),
-          hr: () => (
-            <hr className="border-t border-gray-300 my-6" />
-          ),
+          hr: () => <hr className="border-t border-gray-300 my-6" />
         }}
       >
         {content}

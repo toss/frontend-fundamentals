@@ -120,125 +120,125 @@ export function PostInput({
 
 // Container Styles
 const postInputContainer = css({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-  gap: '10px',
-  width: '100%',
-  marginY: '24px'
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+  gap: "10px",
+  width: "100%",
+  marginY: "24px"
 });
 
 // Input Content Area
 const inputContentArea = css({
-  display: 'flex',
-  flexDirection: 'row',
-  gap: '1.5rem',
-  alignSelf: 'stretch'
+  display: "flex",
+  flexDirection: "row",
+  gap: "1.5rem",
+  alignSelf: "stretch"
 });
 
 const avatarSection = css({
-  display: 'flex',
-  flexDirection: 'row',
-  alignItems: 'flex-start',
-  gap: '10px',
-  width: '60px'
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "flex-start",
+  gap: "10px",
+  width: "60px"
 });
 
 const avatarStyle = css({
   flexShrink: 0,
-  width: '60px',
-  height: '60px',
-  borderRadius: '150px'
+  width: "60px",
+  height: "60px",
+  borderRadius: "150px"
 });
 
 const inputFieldsArea = css({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
   flexGrow: 1
 });
 
 // Input Styles
 const titleInputStyle = css({
-  fontSize: '22px',
-  fontWeight: 'bold',
-  lineHeight: '130%',
-  color: 'black',
-  letterSpacing: '-0.4px',
-  width: '100%',
+  fontSize: "22px",
+  fontWeight: "bold",
+  lineHeight: "130%",
+  color: "black",
+  letterSpacing: "-0.4px",
+  width: "100%",
   padding: 0,
-  border: 'none',
-  outline: 'none',
-  backgroundColor: 'transparent',
-  boxShadow: 'none',
-  paddingBottom: '0.5rem',
+  border: "none",
+  outline: "none",
+  backgroundColor: "transparent",
+  boxShadow: "none",
+  paddingBottom: "0.5rem",
   _focus: {
-    outline: 'none',
+    outline: "none",
     ring: 0
   },
   _placeholder: {
-    color: 'rgba(0, 0, 0, 0.2)'
+    color: "rgba(0, 0, 0, 0.2)"
   }
 });
 
 // Editor Styles
 const editorWrapper = css({
-  width: '100%'
+  width: "100%"
 });
 
 const editorContainer = css({
-  '& .w-md-editor': {
-    border: 'none !important',
-    boxShadow: 'none !important'
+  "& .w-md-editor": {
+    border: "none !important",
+    boxShadow: "none !important"
   },
-  '& .w-md-editor-text': {
-    padding: '0 !important',
-    height: 'full'
+  "& .w-md-editor-text": {
+    padding: "0 !important",
+    height: "full"
   }
 });
 
 // Action Area
 const actionArea = css({
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'flex-end',
-  alignItems: 'center',
-  gap: '1.25rem',
-  alignSelf: 'stretch'
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "flex-end",
+  alignItems: "center",
+  gap: "1.25rem",
+  alignSelf: "stretch"
 });
 
 const submitButton = css({
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'center',
-  alignItems: 'center',
-  paddingX: '18px',
-  paddingY: '22px',
-  gap: '10px',
-  backgroundColor: 'black',
-  borderRadius: '200px',
-  border: 'none',
-  outline: 'none',
-  fontSize: '16px',
-  fontWeight: 'bold',
-  color: '#FCFCFC',
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "center",
+  alignItems: "center",
+  paddingX: "18px",
+  paddingY: "22px",
+  gap: "10px",
+  backgroundColor: "black",
+  borderRadius: "200px",
+  border: "none",
+  outline: "none",
+  fontSize: "16px",
+  fontWeight: "bold",
+  color: "#FCFCFC",
   _focus: {
-    outline: 'none'
+    outline: "none"
   },
   _disabled: {
-    backgroundColor: 'rgba(0, 0, 0, 0.2)'
+    backgroundColor: "rgba(0, 0, 0, 0.2)"
   }
 });
 
 // Error Styles
 const errorContainer = css({
-  display: 'flex',
-  justifyContent: 'flex-end',
-  alignSelf: 'stretch'
+  display: "flex",
+  justifyContent: "flex-end",
+  alignSelf: "stretch"
 });
 
 const errorMessage = css({
-  color: 'rgb(239, 68, 68)',
-  fontSize: '14px',
-  fontWeight: 'medium'
+  color: "rgb(239, 68, 68)",
+  fontSize: "14px",
+  fontWeight: "medium"
 });

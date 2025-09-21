@@ -21,8 +21,11 @@ export function usePostActions({
 }: UsePostActionsParams = {}) {
   const { mutate: updateDiscussion, isPending: isUpdating } =
     useUpdateDiscussion();
-  const { mutate: deleteDiscussion, isPending: isDeleting, isError: isDeleteError } =
-    useDeleteDiscussion();
+  const {
+    mutate: deleteDiscussion,
+    isPending: isDeleting,
+    isError: isDeleteError
+  } = useDeleteDiscussion();
   const { handleApiError } = useErrorHandler();
   const { success: showSuccessToast } = useToast();
 

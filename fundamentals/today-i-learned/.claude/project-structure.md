@@ -36,7 +36,7 @@ src/
 - props만으로 동작하는 순수 함수
 - 어디서든 사용 가능
 
-### shared/layout/ - 레이아웃 컴포넌트  
+### shared/layout/ - 레이아웃 컴포넌트
 
 - 페이지 전체 구조 담당
 - 여러 페이지에서 공통 사용
@@ -64,7 +64,7 @@ src/
 ### 도메인별 분리
 
 - `remote/` - 각 도메인별 API 함수와 타입
-- `graphql/` - GraphQL 쿼리/뮤테이션 정의  
+- `graphql/` - GraphQL 쿼리/뮤테이션 정의
 - `hooks/` - React Query 훅들
 
 ### GitHub API 원본 데이터 사용

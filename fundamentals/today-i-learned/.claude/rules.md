@@ -17,7 +17,7 @@ yarn build
 src/
 ├── components/
 │   ├── shared/ui/       # Button, Input, LoadingSpinner
-│   ├── shared/layout/   # Header, Layout, Sidebar  
+│   ├── shared/layout/   # Header, Layout, Sidebar
 │   ├── shared/common/   # UserAvatar, ErrorBoundary
 │   └── features/        # PostCard, LoginPrompt (도메인별)
 └── pages/[page]/components/  # CreatePost, WeeklyTop5 (페이지 전용)
@@ -74,13 +74,13 @@ src/api/
 ```typescript
 // ✅ 원본 그대로
 interface GitHubUser {
-  avatar_url: string;  // 변환하지 않음
+  avatar_url: string; // 변환하지 않음
   public_repos: number;
 }
 
 // ❌ 변환 금지
 interface User {
-  avatarUrl: string;  // 카멜케이스 변환 금지
+  avatarUrl: string; // 카멜케이스 변환 금지
   repoCount: number;
 }
 ```
@@ -116,7 +116,7 @@ const { handleApiError, handleAuthError } = useErrorHandler();
 try {
   await apiCall();
 } catch (error) {
-  handleApiError(error, 'Context');
+  handleApiError(error, "Context");
 }
 ```
 
@@ -124,13 +124,13 @@ try {
 
 ```typescript
 // 즉시 UI 업데이트
-setLikeCount(prev => prev + 1);
+setLikeCount((prev) => prev + 1);
 
 try {
   await toggleLike(id);
 } catch (error) {
   // 실패 시 롤백
-  setLikeCount(prev => prev - 1);
+  setLikeCount((prev) => prev - 1);
   handleApiError(error);
 }
 ```
@@ -138,11 +138,12 @@ try {
 ## 금지 사항
 
 - `../` 상대 경로 import
-- API 응답 불필요한 변환  
+- API 응답 불필요한 변환
 - 구조+행위 변경 동시 커밋
 - `--no-verify` 사용
 - `any` 타입 사용
 - 실패하는 테스트 무시
 
 ---
+
 **이 규칙들은 프로젝트 안정성을 위한 필수 사항입니다.**

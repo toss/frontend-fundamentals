@@ -14,7 +14,10 @@ export const DISCUSSIONS_QUERY = gql`
           id
           title
           body
-          author { login avatarUrl }
+          author {
+            login
+            avatarUrl
+          }
         }
       }
     }
@@ -33,7 +36,9 @@ export interface GitHubDiscussion {
   author: GitHubAuthor;
 }
 
-export async function fetchDiscussions(params: DiscussionsParams): Promise<DiscussionsResponse> {
+export async function fetchDiscussions(
+  params: DiscussionsParams
+): Promise<DiscussionsResponse> {
   return graphqlRequest(DISCUSSIONS_QUERY, params, accessToken);
 }
 ```
@@ -45,8 +50,9 @@ export async function fetchDiscussions(params: DiscussionsParams): Promise<Discu
 export function useInfiniteDiscussions(params: UseInfiniteDiscussionsParams) {
   return useInfiniteQuery({
     queryKey: DISCUSSIONS_QUERY_KEYS.infinite(params),
-    queryFn: ({ pageParam }) => fetchDiscussions({ ...params, after: pageParam }),
-    getNextPageParam: (lastPage) => lastPage.pageInfo.endCursor,
+    queryFn: ({ pageParam }) =>
+      fetchDiscussions({ ...params, after: pageParam }),
+    getNextPageParam: (lastPage) => lastPage.pageInfo.endCursor
   });
 }
 ```
@@ -60,13 +66,13 @@ export function useInfiniteDiscussions(params: UseInfiniteDiscussionsParams) {
 export interface GitHubUser {
   id: number;
   login: string;
-  avatar_url: string;  // GitHub 원본 필드명
+  avatar_url: string; // GitHub 원본 필드명
   public_repos: number; // GitHub 원본 필드명
 }
 
 // API 함수에서 원본 데이터 반환
 export async function fetchUserProfile(): Promise<GitHubUser> {
-  const response = await fetch('/api/github/me');
+  const response = await fetch("/api/github/me");
   return response.json(); // 변환 없이 그대로 반환
 }
 ```
@@ -78,8 +84,8 @@ export async function fetchUserProfile(): Promise<GitHubUser> {
 export interface User {
   id: number;
   username: string;
-  avatarUrl: string;  // 카멜케이스로 변환 ❌
-  repoCount: number;  // 이름 변경 ❌
+  avatarUrl: string; // 카멜케이스로 변환 ❌
+  repoCount: number; // 이름 변경 ❌
 }
 
 // 불필요한 변환 함수
@@ -88,7 +94,7 @@ function transformUser(githubUser: GitHubUser): User {
     id: githubUser.id,
     username: githubUser.login,
     avatarUrl: githubUser.avatar_url, // ❌ 변환 불필요
-    repoCount: githubUser.public_repos, // ❌ 변환 불필요
+    repoCount: githubUser.public_repos // ❌ 변환 불필요
   };
 }
 ```
@@ -132,10 +138,10 @@ export interface PageInfo {
 ```typescript
 // api/hooks/queryKeys.ts
 export const DISCUSSIONS_QUERY_KEYS = {
-  all: ['discussions'] as const,
-  lists: () => [...DISCUSSIONS_QUERY_KEYS.all, 'list'] as const,
+  all: ["discussions"] as const,
+  lists: () => [...DISCUSSIONS_QUERY_KEYS.all, "list"] as const,
   infinite: (params: Partial<UseInfiniteDiscussionsParams>) =>
-    [...DISCUSSIONS_QUERY_KEYS.lists(), params] as const,
+    [...DISCUSSIONS_QUERY_KEYS.lists(), params] as const
 };
 ```
 
@@ -144,7 +150,7 @@ export const DISCUSSIONS_QUERY_KEYS = {
 ```typescript
 export function useInfiniteDiscussions(params: UseInfiniteDiscussionsParams) {
   return useInfiniteQuery({
-    queryKey: DISCUSSIONS_QUERY_KEYS.infinite(params), // 타입 안전
+    queryKey: DISCUSSIONS_QUERY_KEYS.infinite(params) // 타입 안전
     // ...
   });
 }

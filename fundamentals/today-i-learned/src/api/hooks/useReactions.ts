@@ -2,10 +2,7 @@
 
 import { useAuth } from "@/contexts/AuthContext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-  addReaction,
-  removeReaction
-} from "@/api/remote/reactions";
+import { addReaction, removeReaction } from "@/api/remote/reactions";
 import { DISCUSSIONS_QUERY_KEYS } from "./useDiscussions";
 
 interface ReactionMutationParams {

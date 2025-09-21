@@ -6,8 +6,8 @@ import { fetchUserProfile } from "@/api/remote/user";
 
 // Query Keys
 export const USER_QUERY_KEYS = {
-  all: ['user'] as const,
-  profile: () => [...USER_QUERY_KEYS.all, 'profile'] as const,
+  all: ["user"] as const,
+  profile: () => [...USER_QUERY_KEYS.all, "profile"] as const
 } as const;
 
 // 현재 인증된 사용자 프로필 조회
@@ -18,7 +18,7 @@ export function useUserProfile() {
     queryKey: USER_QUERY_KEYS.profile(),
     queryFn: () => {
       if (!user?.accessToken) {
-        throw new Error('User not authenticated');
+        throw new Error("User not authenticated");
       }
       return fetchUserProfile({ accessToken: user.accessToken });
     },

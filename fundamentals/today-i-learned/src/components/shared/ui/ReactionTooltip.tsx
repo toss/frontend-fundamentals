@@ -26,16 +26,12 @@ const tooltipStyles = css({
   maxWidth: "300px"
 });
 
-export function ReactionTooltip({ 
-  isVisible, 
+export function ReactionTooltip({
+  isVisible,
   children,
-  className 
+  className
 }: ReactionTooltipProps) {
   if (!isVisible) return null;
 
-  return (
-    <div className={cx(tooltipStyles, className)}>
-      {children}
-    </div>
-  );
+  return <div className={cx(tooltipStyles, className)}>{children}</div>;
 }

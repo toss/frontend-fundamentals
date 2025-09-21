@@ -67,7 +67,7 @@ export function CommentInput({
         >
           {isPending ? "작성중..." : "작성하기"}
         </button>
-        
+
         {/* 에러 메시지 */}
         {isError && (
           <p className={errorMessage}>
@@ -81,77 +81,77 @@ export function CommentInput({
 
 // Semantic style definitions
 const commentInputContainer = css({
-  paddingX: '2rem',
-  paddingBottom: '0.75rem',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '0.75rem'
+  paddingX: "2rem",
+  paddingBottom: "0.75rem",
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.75rem"
 });
 
 const inputWrapper = css({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '1rem'
+  display: "flex",
+  alignItems: "center",
+  gap: "1rem"
 });
 
 const avatarStyle = css({
-  flexShrink: '0'
+  flexShrink: "0"
 });
 
 const textareaStyle = css({
-  flex: '1',
-  fontWeight: '500',
-  fontSize: '16px',
-  lineHeight: '160%',
-  letterSpacing: '-0.4px',
-  color: 'rgba(0, 0, 0, 0.8)',
-  backgroundColor: 'transparent',
-  border: 'none',
-  outline: 'none',
-  resize: 'none',
-  minHeight: '24px',
-  maxHeight: '120px',
+  flex: "1",
+  fontWeight: "500",
+  fontSize: "16px",
+  lineHeight: "160%",
+  letterSpacing: "-0.4px",
+  color: "rgba(0, 0, 0, 0.8)",
+  backgroundColor: "transparent",
+  border: "none",
+  outline: "none",
+  resize: "none",
+  minHeight: "24px",
+  maxHeight: "120px",
   _placeholder: {
-    color: 'rgba(0, 0, 0, 0.2)'
+    color: "rgba(0, 0, 0, 0.2)"
   }
 });
 
 const buttonWrapper = css({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-end',
-  gap: '0.5rem'
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-end",
+  gap: "0.5rem"
 });
 
 const submitButton = css({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  paddingX: '1.5rem',
-  paddingY: '18px',
-  gap: '10px',
-  width: '6rem',
-  height: '46px',
-  backgroundColor: '#0F0F0F',
-  borderRadius: '200px',
-  fontWeight: '700',
-  fontSize: '14px',
-  lineHeight: '130%',
-  letterSpacing: '-0.4px',
-  color: '#FCFCFC',
-  transition: 'colors 0.15s ease-in-out',
-  border: 'none',
-  cursor: 'pointer',
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  paddingX: "1.5rem",
+  paddingY: "18px",
+  gap: "10px",
+  width: "6rem",
+  height: "46px",
+  backgroundColor: "#0F0F0F",
+  borderRadius: "200px",
+  fontWeight: "700",
+  fontSize: "14px",
+  lineHeight: "130%",
+  letterSpacing: "-0.4px",
+  color: "#FCFCFC",
+  transition: "colors 0.15s ease-in-out",
+  border: "none",
+  cursor: "pointer",
   _hover: {
-    backgroundColor: '#333333'
+    backgroundColor: "#333333"
   },
   _disabled: {
-    backgroundColor: 'rgba(0, 0, 0, 0.2)',
-    cursor: 'not-allowed'
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
+    cursor: "not-allowed"
   }
 });
 
 const errorMessage = css({
-  color: '#ef4444',
-  fontSize: '14px'
+  color: "#ef4444",
+  fontSize: "14px"
 });
