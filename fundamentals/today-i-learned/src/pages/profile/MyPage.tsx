@@ -2,10 +2,15 @@ import { ProfileHeader } from "./components/ProfileHeader";
 import { HallOfFameSection } from "./components/HallOfFameSection";
 import { ActivitySection } from "./components/ActivitySection";
 import { MonthlyChallenge } from "@/pages/timeline/components/MonthlyChallenge";
+import { css } from "@styled-system/css";
 
 export function MyPage() {
   return (
     <div className="min-h-screen bg-white">
+      {/* Panda CSS 테스트 div */}
+      <div className={css({ color: 'red', padding: '16px', fontSize: '18px', fontWeight: 'bold' })}>
+        Panda CSS 테스트: 빨간색 텍스트
+      </div>
       <div className="max-w-[1440px] mx-auto lg:px-8">
         {/* 메인 그리드 레이아웃 */}
         <div className="grid grid-cols-1 lg:grid-cols-[5fr_3fr] gap-8">

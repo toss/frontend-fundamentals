@@ -11,7 +11,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
-      '@shared': resolve(__dirname, '../shared')
+      '@shared': resolve(__dirname, '../shared'),
+      '@styled-system': resolve(__dirname, './styled-system')
     }
   },
   optimizeDeps: {
