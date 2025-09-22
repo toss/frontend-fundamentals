@@ -63,13 +63,17 @@ const formatDate = (dateString: string | null) => {
 };
 
 function handleClick(id: number) {
-  window.location.href = `/code-quality/code/detail?id=${id}`;
+  if (typeof window !== 'undefined') {
+    window.location.href = `/code-quality/code/detail?id=${id}`;
+  }
 }
 
 const handleWriteClick = () => {
-  window.open(
-    "https://github.com/toss/frontend-fundamentals/discussions/new/choose"
-  );
+  if (typeof window !== 'undefined') {
+    window.open(
+      "https://github.com/toss/frontend-fundamentals/discussions/new/choose"
+    );
+  }
 };
 </script>
 

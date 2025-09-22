@@ -1,6 +1,7 @@
 # 1. 진단하기
 
 ### Q1. 처음 맞딱뜨리신 에러 현상과 에러 메세지에 대해 짧게 소개해주실 수 있을까요?
+
 먼저 현상부터 간략히 말씀드리자면, `웹뷰를 5분 정도 켜놓고 있다가, 앱을 백그라운드 상태로 두었다가 다시 앱을 키면 갑자기 Suspense에러가 발생한다.` 는 현상이었어요.
 
 ![](../../../images/interview/react-query/1.jpeg)
@@ -9,13 +10,12 @@
 에러메세지는 다음과 같았는데요,
 
 ```
-A component suspended while responding to synchronous input. 
+A component suspended while responding to synchronous input.
 This will cause the UI to be replaced with a loading indicator.
 To fix, updates that suspend should be wrapped with startTransition.
 ```
 
 이 에러 메세지는 컴포넌트가 `suspense`를 일으킬때 나타나요. `suspense`가 일어났다는 것은 곧 `준비되지 않은 쿼리가 있음`을 의미해요. 삭제되었거나 로딩 중이라 준비되지 않았거나, 존재하지 않는 쿼리를 컴포넌트에서 사용할 때 일어나는 에러에요.
-
 
 ### Q2. 문제의 증상과 에러 메시지를 처음 접했을 때 어떤 생각을 하셨나요?
 
