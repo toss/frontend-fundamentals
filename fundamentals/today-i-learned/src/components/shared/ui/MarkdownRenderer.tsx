@@ -16,49 +16,23 @@ export function MarkdownRenderer({
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
-          h1: ({ children }) => (
-            <h1 className={heading1Style}>
-              {children}
-            </h1>
-          ),
-          h2: ({ children }) => (
-            <h2 className={heading2Style}>
-              {children}
-            </h2>
-          ),
-          h3: ({ children }) => (
-            <h3 className={heading3Style}>
-              {children}
-            </h3>
-          ),
-          p: ({ children }) => (
-            <p className={paragraphStyle}>
-              {children}
-            </p>
-          ),
+          h1: ({ children }) => <h1 className={heading1Style}>{children}</h1>,
+          h2: ({ children }) => <h2 className={heading2Style}>{children}</h2>,
+          h3: ({ children }) => <h3 className={heading3Style}>{children}</h3>,
+          p: ({ children }) => <p className={paragraphStyle}>{children}</p>,
           strong: ({ children }) => (
             <strong className={strongStyle}>{children}</strong>
           ),
-          em: ({ children }) => (
-            <em className={emphasisStyle}>{children}</em>
-          ),
+          em: ({ children }) => <em className={emphasisStyle}>{children}</em>,
           ul: ({ children }) => (
             <ul className={unorderedListStyle}>{children}</ul>
           ),
           ol: ({ children }) => (
-            <ol className={orderedListStyle}>
-              {children}
-            </ol>
+            <ol className={orderedListStyle}>{children}</ol>
           ),
-          li: ({ children }) => (
-            <li className={listItemStyle}>
-              {children}
-            </li>
-          ),
+          li: ({ children }) => <li className={listItemStyle}>{children}</li>,
           blockquote: ({ children }) => (
-            <blockquote className={blockquoteStyle}>
-              {children}
-            </blockquote>
+            <blockquote className={blockquoteStyle}>{children}</blockquote>
           ),
           code: ({ className, children, ...props }) => {
             const match = /language-(\w+)/.exec(className || "");
@@ -76,10 +50,7 @@ export function MarkdownRenderer({
 
             // Inline code
             return (
-              <code
-                className={inlineCodeStyle}
-                {...props}
-              >
+              <code className={inlineCodeStyle} {...props}>
                 {children}
               </code>
             );
@@ -96,24 +67,16 @@ export function MarkdownRenderer({
           ),
           table: ({ children }) => (
             <div className={tableWrapperStyle}>
-              <table className={tableStyle}>
-                {children}
-              </table>
+              <table className={tableStyle}>{children}</table>
             </div>
           ),
           thead: ({ children }) => (
             <thead className={tableHeadStyle}>{children}</thead>
           ),
           th: ({ children }) => (
-            <th className={tableHeaderStyle}>
-              {children}
-            </th>
+            <th className={tableHeaderStyle}>{children}</th>
           ),
-          td: ({ children }) => (
-            <td className={tableCellStyle}>
-              {children}
-            </td>
-          ),
+          td: ({ children }) => <td className={tableCellStyle}>{children}</td>,
           hr: () => <hr className={horizontalRuleStyle} />
         }}
       >
