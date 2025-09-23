@@ -276,5 +276,58 @@ const markdownContent = css({
   fontSize: "16px",
   lineHeight: "160%",
   letterSpacing: "-0.4px",
-  color: "rgba(0, 0, 0, 0.8)"
+  color: "rgba(0, 0, 0, 0.8)",
+  // PostCard에서 모든 마크다운 요소의 텍스트 크기를 균일하게 만들기
+  "& h1, & h2, & h3, & h4, & h5, & h6": {
+    fontSize: "16px !important",
+    fontWeight: "500 !important",
+    lineHeight: "160% !important",
+    letterSpacing: "-0.4px !important",
+    color: "rgba(0, 0, 0, 0.8) !important",
+    margin: "0 !important"
+  },
+  "& p": {
+    fontSize: "16px !important",
+    fontWeight: "500 !important",
+    lineHeight: "160% !important",
+    letterSpacing: "-0.4px !important",
+    color: "rgba(0, 0, 0, 0.8) !important",
+    margin: "0 !important"
+  },
+  "& strong": {
+    fontSize: "16px !important",
+    fontWeight: "600 !important",
+    color: "rgba(0, 0, 0, 0.8) !important"
+  },
+  "& em": {
+    fontSize: "16px !important",
+    fontStyle: "italic !important",
+    color: "rgba(0, 0, 0, 0.8) !important"
+  },
+  "& ul, & ol": {
+    margin: "0 !important",
+    fontSize: "16px !important"
+  },
+  "& li": {
+    fontSize: "16px !important",
+    fontWeight: "500 !important",
+    lineHeight: "160% !important",
+    letterSpacing: "-0.4px !important",
+    color: "rgba(0, 0, 0, 0.8) !important"
+  },
+  "& code": {
+    fontSize: "14px !important",
+    fontFamily: "monospace !important",
+    backgroundColor: "#F5F5F5 !important",
+    padding: "2px 4px !important",
+    borderRadius: "4px !important"
+  },
+  "& blockquote": {
+    fontSize: "16px !important",
+    fontWeight: "500 !important",
+    color: "rgba(0, 0, 0, 0.7) !important",
+    margin: "0 !important",
+    paddingLeft: "8px !important",
+    borderLeft: "2px solid #D3D3D3 !important"
+  }
 });
