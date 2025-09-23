@@ -1,5 +1,6 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { css } from "@styled-system/css";
 
 interface MarkdownRendererProps {
   content: string;
@@ -11,51 +12,51 @@ export function MarkdownRenderer({
   className = ""
 }: MarkdownRendererProps) {
   return (
-    <div className={`prose prose-sm max-w-none ${className}`}>
+    <div className={`${markdownContainer} ${className}`}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
           h1: ({ children }) => (
-            <h1 className="text-xl font-bold text-[#0F0F0F] mb-4 leading-[130%] tracking-[-0.4px]">
+            <h1 className={heading1Style}>
               {children}
             </h1>
           ),
           h2: ({ children }) => (
-            <h2 className="text-lg font-bold text-[#0F0F0F] mb-3 leading-[130%] tracking-[-0.4px]">
+            <h2 className={heading2Style}>
               {children}
             </h2>
           ),
           h3: ({ children }) => (
-            <h3 className="text-base font-bold text-[#0F0F0F] mb-2 leading-[130%] tracking-[-0.4px]">
+            <h3 className={heading3Style}>
               {children}
             </h3>
           ),
           p: ({ children }) => (
-            <p className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80 mb-4">
+            <p className={paragraphStyle}>
               {children}
             </p>
           ),
           strong: ({ children }) => (
-            <strong className="font-bold text-black/80">{children}</strong>
+            <strong className={strongStyle}>{children}</strong>
           ),
           em: ({ children }) => (
-            <em className="italic text-black/80">{children}</em>
+            <em className={emphasisStyle}>{children}</em>
           ),
           ul: ({ children }) => (
-            <ul className="list-disc list-inside mb-4 space-y-1">{children}</ul>
+            <ul className={unorderedListStyle}>{children}</ul>
           ),
           ol: ({ children }) => (
-            <ol className="list-decimal list-inside mb-4 space-y-1">
+            <ol className={orderedListStyle}>
               {children}
             </ol>
           ),
           li: ({ children }) => (
-            <li className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80">
+            <li className={listItemStyle}>
               {children}
             </li>
           ),
           blockquote: ({ children }) => (
-            <blockquote className="border-l-4 border-gray-300 pl-4 mb-4 italic text-black/70">
+            <blockquote className={blockquoteStyle}>
               {children}
             </blockquote>
           ),
@@ -65,8 +66,8 @@ export function MarkdownRenderer({
             if (match) {
               // Code block
               return (
-                <pre className="bg-gray-100 rounded-lg p-4 mb-4 overflow-x-auto">
-                  <code className="text-sm font-mono text-gray-800" {...props}>
+                <pre className={codeBlockStyle}>
+                  <code className={codeTextStyle} {...props}>
                     {children}
                   </code>
                 </pre>
@@ -76,7 +77,7 @@ export function MarkdownRenderer({
             // Inline code
             return (
               <code
-                className="bg-gray-100 px-2 py-1 rounded text-sm font-mono text-gray-800"
+                className={inlineCodeStyle}
                 {...props}
               >
                 {children}
@@ -88,32 +89,32 @@ export function MarkdownRenderer({
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:text-blue-800 underline"
+              className={linkStyle}
             >
               {children}
             </a>
           ),
           table: ({ children }) => (
-            <div className="overflow-x-auto mb-4">
-              <table className="min-w-full border-collapse border border-gray-300">
+            <div className={tableWrapperStyle}>
+              <table className={tableStyle}>
                 {children}
               </table>
             </div>
           ),
           thead: ({ children }) => (
-            <thead className="bg-gray-50">{children}</thead>
+            <thead className={tableHeadStyle}>{children}</thead>
           ),
           th: ({ children }) => (
-            <th className="border border-gray-300 px-4 py-2 text-left font-semibold text-gray-800">
+            <th className={tableHeaderStyle}>
               {children}
             </th>
           ),
           td: ({ children }) => (
-            <td className="border border-gray-300 px-4 py-2 text-gray-700">
+            <td className={tableCellStyle}>
               {children}
             </td>
           ),
-          hr: () => <hr className="border-t border-gray-300 my-6" />
+          hr: () => <hr className={horizontalRuleStyle} />
         }}
       >
         {content}
@@ -121,3 +122,169 @@ export function MarkdownRenderer({
     </div>
   );
 }
+
+// Container Styles
+const markdownContainer = css({
+  maxWidth: "none",
+  fontSize: "14px",
+  lineHeight: "1.6"
+});
+
+// Heading Styles
+const heading1Style = css({
+  fontSize: "24px",
+  fontWeight: "bold",
+  color: "#0F0F0F",
+  marginBottom: "16px",
+  lineHeight: "130%",
+  letterSpacing: "-0.4px"
+});
+
+const heading2Style = css({
+  fontSize: "20px",
+  fontWeight: "bold",
+  color: "#0F0F0F",
+  marginBottom: "12px",
+  lineHeight: "130%",
+  letterSpacing: "-0.4px"
+});
+
+const heading3Style = css({
+  fontSize: "16px",
+  fontWeight: "bold",
+  color: "#0F0F0F",
+  marginBottom: "8px",
+  lineHeight: "130%",
+  letterSpacing: "-0.4px"
+});
+
+// Text Styles
+const paragraphStyle = css({
+  fontWeight: "500",
+  fontSize: "16px",
+  lineHeight: "160%",
+  letterSpacing: "-0.4px",
+  color: "rgba(0, 0, 0, 0.8)",
+  marginBottom: "16px"
+});
+
+const strongStyle = css({
+  fontWeight: "bold",
+  color: "rgba(0, 0, 0, 0.8)"
+});
+
+const emphasisStyle = css({
+  fontStyle: "italic",
+  color: "rgba(0, 0, 0, 0.8)"
+});
+
+// List Styles
+const unorderedListStyle = css({
+  listStyleType: "disc",
+  listStylePosition: "inside",
+  marginBottom: "16px",
+  "& > li": {
+    marginTop: "4px",
+    marginBottom: "4px"
+  }
+});
+
+const orderedListStyle = css({
+  listStyleType: "decimal",
+  listStylePosition: "inside",
+  marginBottom: "16px",
+  "& > li": {
+    marginTop: "4px",
+    marginBottom: "4px"
+  }
+});
+
+const listItemStyle = css({
+  fontWeight: "500",
+  fontSize: "16px",
+  lineHeight: "160%",
+  letterSpacing: "-0.4px",
+  color: "rgba(0, 0, 0, 0.8)"
+});
+
+// Quote Styles
+const blockquoteStyle = css({
+  borderLeftWidth: "4px",
+  borderLeftColor: "#D3D3D3",
+  paddingLeft: "16px",
+  marginBottom: "16px",
+  fontStyle: "italic",
+  color: "rgba(0, 0, 0, 0.7)"
+});
+
+// Code Styles
+const codeBlockStyle = css({
+  backgroundColor: "#F5F5F5",
+  borderRadius: "8px",
+  padding: "16px",
+  marginBottom: "16px",
+  overflowX: "auto"
+});
+
+const codeTextStyle = css({
+  fontSize: "14px",
+  fontFamily: "monospace",
+  color: "#333333"
+});
+
+const inlineCodeStyle = css({
+  backgroundColor: "#F5F5F5",
+  paddingX: "8px",
+  paddingY: "4px",
+  borderRadius: "4px",
+  fontSize: "14px",
+  fontFamily: "monospace",
+  color: "#333333"
+});
+
+// Link Styles
+const linkStyle = css({
+  color: "#2563EB",
+  textDecoration: "underline",
+  _hover: {
+    color: "#1E40AF"
+  }
+});
+
+// Table Styles
+const tableWrapperStyle = css({
+  overflowX: "auto",
+  marginBottom: "16px"
+});
+
+const tableStyle = css({
+  minWidth: "100%",
+  borderCollapse: "collapse",
+  border: "1px solid #D3D3D3"
+});
+
+const tableHeadStyle = css({
+  backgroundColor: "#F9F9F9"
+});
+
+const tableHeaderStyle = css({
+  border: "1px solid #D3D3D3",
+  paddingX: "16px",
+  paddingY: "8px",
+  textAlign: "left",
+  fontWeight: "600",
+  color: "#333333"
+});
+
+const tableCellStyle = css({
+  border: "1px solid #D3D3D3",
+  paddingX: "16px",
+  paddingY: "8px",
+  color: "#555555"
+});
+
+// Other Styles
+const horizontalRuleStyle = css({
+  borderTop: "1px solid #D3D3D3",
+  marginY: "24px"
+});
