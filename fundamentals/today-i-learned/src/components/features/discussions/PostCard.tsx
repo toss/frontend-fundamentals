@@ -250,6 +250,9 @@ const postTitle = css({
   letterSpacing: "-0.4px",
   color: "#0F0F0F",
   transition: "colors 0.15s ease-in-out",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
   _hover: {
     color: "rgb(55, 65, 81)"
   }
@@ -257,8 +260,11 @@ const postTitle = css({
 
 const contentPreview = css({
   display: "-webkit-box",
-  WebkitLineClamp: "2",
+  WebkitLineClamp: "3",
+  // @ts-ignore
+  WebkitBoxOrient: "vertical",
   overflow: "hidden",
+  textOverflow: "ellipsis",
   transition: "colors 0.15s ease-in-out",
   _hover: {
     color: "rgba(0, 0, 0, 0.6)"
