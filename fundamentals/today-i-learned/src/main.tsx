@@ -18,6 +18,7 @@ import { MyPage } from "./pages/profile/MyPage";
 import { TimelinePage } from "./pages/timeline/TimelinePage";
 import { QueryProvider } from "./providers/QueryProvider.tsx";
 import { ToastProvider } from "./contexts/ToastContext";
+import OauthTestPage from "./pages/oauth-test/OauthTestPage";
 
 const RootLayout = () => {
   return (
@@ -55,6 +56,10 @@ const router = createBrowserRouter(
         {
           path: "profile",
           element: <MyPage />
+        },
+        {
+          path: "oauth-test",
+          element: <OauthTestPage />
         },
         {
           path: "post/:id",
