@@ -72,6 +72,9 @@ export function TimelinePage() {
       <div className={contentWrapper}>
         <div className={mainGridLayout}>
           <div className={mainContentColumn}>
+            <button onClick={() => navigate("/oauth-test")}>
+              oauth 테스트 페이지로 가기
+            </button>
             {user ? (
               <>
                 <div className={sprintChallengeSection}>
