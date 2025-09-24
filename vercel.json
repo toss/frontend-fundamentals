@@ -22,6 +22,10 @@
     {
       "source": "/code-quality/:path*",
       "destination": "/dist/fundamentals/code-quality/:path*"
+    },
+    {
+      "source": "/today-i-learned/:path*",
+      "destination": "/dist/fundamentals/today-i-learned/index.html"
     }
   ]
 }

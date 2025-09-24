@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/today-i-learned/(.*)",
+      "destination": "/today-i-learned/index.html"
+    }
+  ]
+}
