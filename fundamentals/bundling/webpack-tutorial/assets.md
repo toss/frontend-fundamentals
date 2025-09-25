@@ -42,7 +42,7 @@ module.exports = {
 `App.tsx`에서 logo 파일을 import하고 로고 이미지 태그 `src`에 넣어주세요.
 
 ```tsx
-// logo.svg 를 import로 가져옴 (타입에러는 일단 무시해주세요)
+// logo.svg 를 import로 가져옴
 import logo from "./assets/logo.svg";
 
 // 가져온 logo 모듈을 src에 넣어줌
@@ -54,6 +54,25 @@ import logo from "./assets/logo.svg";
 ```bash
 npm run build
 ```
+
+::: details Q: 이미지 파일 import 시 타입에러가 발생한다면 어떻게 해결하나요?
+
+만약 아래와 같은 에러가 발생한다면,
+
+`Cannot find module './assets/logo.svg' or its corresponding type declarations.`
+
+이는 TypeScript가 이미지 파일을 모듈로 인식하지 못해서 발생하는 문제예요.
+
+`src/global.d.ts` 파일을 생성하고 아래 내용을 추가해 주세요.
+
+```ts
+declare module "*.png";
+declare module "*.jpg";
+declare module "*.svg";
+```
+
+이렇게 하면 `.png`, `.jpg`, `.svg` 같은 이미지 파일을 TypeScript에서 정상적으로 import할 수 있어요.
+:::
 
 ## CSS에서 이미지와 폰트 사용하기
 
