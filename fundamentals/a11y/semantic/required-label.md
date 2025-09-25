@@ -4,23 +4,24 @@
 
 ::: details 인터랙티브 요소 목록
 
-| 요소 | 조건 |
-|------|------|
-| `<a>` | - |
-| `<audio>` | `controls` 속성이 있는 경우 |
-| `<button>` | - |
-| `<details>` | - |
-| `<embed>` | - |
-| `<iframe>` | - |
-| `<img>` | `usemap` 속성이 있는 경우 |
-| `<input>` | `type` 속성이 "hidden" 이 아닌 경우 |
-| `<keygen>` | - |
-| `<label>` | - |
-| `<menu>` | `type` 속성이 toolbar state인 경우 |
-| `<object>` | `usemap` 속성이 있는 경우 |
-| `<select>` | - |
-| `<textarea>` | - |
-| `<video>` | `controls` 속성이 있는 경우 |
+| 요소         | 조건                                |
+| ------------ | ----------------------------------- |
+| `<a>`        | -                                   |
+| `<audio>`    | `controls` 속성이 있는 경우         |
+| `<button>`   | -                                   |
+| `<details>`  | -                                   |
+| `<embed>`    | -                                   |
+| `<iframe>`   | -                                   |
+| `<img>`      | `usemap` 속성이 있는 경우           |
+| `<input>`    | `type` 속성이 "hidden" 이 아닌 경우 |
+| `<keygen>`   | -                                   |
+| `<label>`    | -                                   |
+| `<menu>`     | `type` 속성이 toolbar state인 경우  |
+| `<object>`   | `usemap` 속성이 있는 경우           |
+| `<select>`   | -                                   |
+| `<textarea>` | -                                   |
+| `<video>`    | `controls` 속성이 있는 경우         |
+
 :::
 
 인터랙티브 요소에 이름을 붙이는 방법은 여러 가지가 있는데요. 스크린 리더는 다음 순서대로 이름을 읽습니다:

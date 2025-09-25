@@ -168,23 +168,24 @@ export default [
 
 ::: details 인터랙티브 요소 목록
 
-| 요소 | 조건 |
-|------|------|
-| `<a>` | - |
-| `<audio>` | controls 속성이 있는 경우 |
-| `<button>` | - |
-| `<details>` | - |
-| `<embed>` | - |
-| `<iframe>` | - |
-| `<img>` | usemap 속성이 있는 경우 |
-| `<input>` | type 속성이 Hidden state가 아닌 경우 |
-| `<keygen>` | - |
-| `<label>` | - |
-| `<menu>` | type 속성이 toolbar state인 경우 |
-| `<object>` | usemap 속성이 있는 경우 |
-| `<select>` | - |
-| `<textarea>` | - |
-| `<video>` | controls 속성이 있는 경우 |
+| 요소         | 조건                                 |
+| ------------ | ------------------------------------ |
+| `<a>`        | -                                    |
+| `<audio>`    | controls 속성이 있는 경우            |
+| `<button>`   | -                                    |
+| `<details>`  | -                                    |
+| `<embed>`    | -                                    |
+| `<iframe>`   | -                                    |
+| `<img>`      | usemap 속성이 있는 경우              |
+| `<input>`    | type 속성이 Hidden state가 아닌 경우 |
+| `<keygen>`   | -                                    |
+| `<label>`    | -                                    |
+| `<menu>`     | type 속성이 toolbar state인 경우     |
+| `<object>`   | usemap 속성이 있는 경우              |
+| `<select>`   | -                                    |
+| `<textarea>` | -                                    |
+| `<video>`    | controls 속성이 있는 경우            |
+
 :::
 
 ::: info 왜 `role` 속성이 없는 비상호작용 요소에 클릭 이벤트 핸들러를 추가할 수 없나요?
