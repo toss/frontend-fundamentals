@@ -21,6 +21,7 @@ HTML 요소를 올바르게 감싸고 배치하는 건 접근성의 시작이에
 눈에 보이는 모습과 실제 동작이 일치해야 해요.
 
 - [버튼의 역할과 동작이 일치하게 만들기](./predictability/fake-button.md)
+- [입력 요소는 &lt;form&gt; 으로 감싸기](./predictability/form.md)
 
 ## 4. 🌈 시각 정보에만 의존하지 않기
 
