@@ -23,6 +23,7 @@ export function PostInput({
 }: PostInputProps) {
   const [title, setTitle] = React.useState("");
   const [content, setContent] = React.useState("");
+  const [editorHeight, setEditorHeight] = React.useState(100);
 
   const handleSubmit = () => {
     if (title.trim() || content.trim()) {
@@ -32,6 +33,7 @@ export function PostInput({
       });
       setTitle("");
       setContent("");
+      setEditorHeight(100);
     }
   };
 
@@ -41,6 +43,7 @@ export function PostInput({
 
   const handleContentChange = (value: string | undefined) => {
     setContent(value || "");
+    setEditorHeight(calculateEditorHeight(value));
   };
 
   const handleTitleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -90,7 +93,7 @@ export function PostInput({
                     "작은 기록이 모여 큰 성장이 됩니다.\nTIL은 Frontend Fundamentals Discussion에 여러분의 GitHub 계정으로 저장돼요.\n하루에 한 줄씩, 함께 성장해봐요.",
                   style: { backgroundColor: "red !important" }
                 }}
-                height={60}
+                height={editorHeight}
               />
             </div>
           </div>
@@ -116,6 +119,37 @@ export function PostInput({
       )}
     </div>
   );
+}
+
+const DEFAULT_CONFIG = {
+  minHeight: 100,
+  maxHeight: 400,
+  lineHeight: 22,
+  padding: 20
+};
+
+export function calculateEditorHeight(
+  content: string | undefined,
+  config?: {
+    minHeight?: number;
+    maxHeight?: number;
+    lineHeight?: number;
+    padding?: number;
+  }
+): number {
+  const { minHeight, maxHeight, lineHeight, padding } = {
+    ...DEFAULT_CONFIG,
+    ...config
+  };
+
+  if (!content) {
+    return minHeight;
+  }
+
+  const lines = content.split("\n").length;
+  const estimatedHeight = lines * lineHeight + padding;
+
+  return Math.min(Math.max(minHeight, estimatedHeight), maxHeight);
 }
 
 // Container Styles
