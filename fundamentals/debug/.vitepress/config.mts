@@ -27,12 +27,12 @@ export default defineConfig({
             link: "/pages/introduce.md"
           },
           {
-            text: "참여하기",
-            link: "/pages/event.md"
-          },
-          {
             text: "효과적인 디버깅을 위한 4가지 단계",
             link: "/pages/start.md"
+          },
+          {
+            text: "참여하기",
+            link: "/pages/event.md"
           }
         ]
       },
@@ -181,7 +181,7 @@ export default defineConfig({
       ]
     },
     ssr: {
-      noExternal: ['vitepress-plugin-tabs']
+      noExternal: ["vitepress-plugin-tabs"]
     }
   }
 });
