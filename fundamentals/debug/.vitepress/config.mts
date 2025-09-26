@@ -109,11 +109,11 @@ export default defineConfig({
       {
         text: "디버깅 실무 사례",
         items: [
-          { text: "기여하기", link: "/pages/experience/contribute.md" },
           {
             text: "Suspense Error 디버깅 _ 김형규",
             link: "/pages/experience/suspense_debug_by_hyungkyu.md"
-          }
+          },
+          { text: "기여하기", link: "/pages/experience/contribute.md" }
         ]
       }
     ]
