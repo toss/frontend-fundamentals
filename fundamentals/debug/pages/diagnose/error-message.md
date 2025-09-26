@@ -30,9 +30,8 @@ function run() {
 `Unexpected '<'` 에러 메세지는 보통 잘못된 URL로 인해 HTML 응답을 JSON으로 파싱하려는 시도에서 발생해요. 에러 메세지에서 'html...is not valid JSON' 이라는 문구에서 JSON.parse의 인자로 잘못된 타입의 데이터가 들어갔음을 추측해볼 수 있어요.
 
 ```js
-  JSON.parse('<!DOCTYPE html><html><body>oops</body></html>');
+JSON.parse("<!DOCTYPE html><html><body>oops</body></html>");
 ```
-
 
 <br/>
 
@@ -73,7 +72,6 @@ const num = 42;
 num();
 ```
 
-
 <br/>
 
 ![](../../images/diagnose/error-syntax-6.png)
@@ -83,7 +81,7 @@ num();
 
 ```tsx 10
 async function getMessage() {
-  return 'Hello, world!';
+  return "Hello, world!";
 }
 
 function printMessage(msg) {
@@ -95,7 +93,6 @@ function main() {
   printMessage(message);
 }
 main();
-
 ```
 
 ### 확인할 것
@@ -160,7 +157,6 @@ fetch("/api/data")
 
 - 콘솔에 `TypeError: Load failed`나 `Failed to fetch`가 보이면 네트워크, CORS, 인증서, CSP(Content Security Policy), 확장 프로그램 차단 가능성을 먼저 의심해요.
 
-
 ## 모듈 import 오류
 
 ![](../../images/diagnose/error-syntax-9.png)
@@ -186,7 +182,6 @@ fs.readFile("example.txt", "utf8", (err, data) => {
   - CommonJS 사용 시: `"type"` 필드를 생략하거나, `"type": "commonjs"`로 명시해도 돼요
 - `.mjs`, `.cjs`, `.js` 확장자가 적절히 사용됐는지 확인해요
 - 잘못된 번들 경로로 `esm` 전용 모듈을 가져오지 않았는지 확인해요
-
 
 ---
 

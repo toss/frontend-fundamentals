@@ -2,14 +2,15 @@
 
 재현 상황을 만들기 위해서는 디버거와 콘솔로그를 잘 활용할 수 있어야 해요. 앞에서 에러의 원인이 되는 **핵심 로직만 남기고**, 나머지 코드를 최대한 제거했어요. 코드를 간단하게 줄인 후에는, 중점적으로 봐야하는 곳에 `debugger`를 넣거나 `console.log`를 찍어보며 상태값이 어떻게 변화하는지 추적해요.
 
-## Debugger 
+## Debugger
+
 `debugger`는 코드상에서 break point를 쉽게 걸어줄 수 있는 기능이에요. 코드에서 중단점이 필요한 곳에 `debugger;`라는 디버거 명령어 한줄을 추가해주면, chrome에서 파일을 실행하다 해당 줄에서 잠시 멈춰 여러 상태값들을 확이할 수 있게 도와줘요.
 
 아래의 코드를 Chrome에서 실행하면 개발자도구 > 소스 탭에서 자동으로 디버거가 걸려요. 오른쪽 탭 중에서 "감시(watch)"를 찾아 중점적으로 봐야할 변수를 추가해주어요. 중단점에 따른 변수의 변화를 차근차근 살펴볼 수 있어요
 
 ![](../../images/reproduce/chrome-debugger.gif)
 
-```js 5,8,11,14,17 
+```js 5,8,11,14,17
 function main() {
   let a = 0;
   let b = 1;
@@ -30,7 +31,6 @@ function main() {
 }
 main();
 ```
-
 
 ## 콘솔 로그
 
@@ -113,10 +113,11 @@ console.error("이건 에러입니다!");
 ```js
 for (let i = 0; i < 10; i++) {
   if (i > 5) {
-     console.log('i가 5보다 큼:', i);
+    console.log("i가 5보다 큼:", i);
   }
 }
 ```
+
 ![](../../images/reproduce/console/6.png)
 <br>
 
@@ -139,6 +140,7 @@ console.assert(1 === 2, "1은 2가 아니기 때문에 이 메시지가 뜸!");
 console.log("[UserModule]", "유저 정보 로드됨:", userData);
 console.log("[API][POST /login]", "로그인 요청 결과:", response);
 ```
+
 <br>
 
 #### 9. console.trace

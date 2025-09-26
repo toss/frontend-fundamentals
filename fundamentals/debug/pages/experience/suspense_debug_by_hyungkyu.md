@@ -16,6 +16,7 @@
 에러메세지는 다음과 같았는데요,
 
 ![](../../images/interview/react-query/suspense-error.png)
+
 ```
 A component suspended while responding to synchronous input.
 This will cause the UI to be replaced with a loading indicator.
