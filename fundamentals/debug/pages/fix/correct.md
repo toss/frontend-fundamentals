@@ -107,7 +107,7 @@ useEffect(() => {
 
 AbortController 또는 요청 순서 관리하도록 수정했어요. 디바운스로 불필요한 요청 자체를 줄이고, AbortController로 진행 중이던 이전 요청을 취소하여 레이스를 막았어요.
 
-```tsx 6,7,15,16,22,35,37,38,39,40,41,42,43
+```tsx
 import { useEffect, useRef, useState } from "react";
 function SearchBox() {
   const [query, setQuery] = useState("");

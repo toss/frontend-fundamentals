@@ -27,12 +27,12 @@ export default defineConfig({
             link: "/pages/introduce.md"
           },
           {
-            text: "참여하기",
-            link: "/pages/event.md"
-          },
-          {
             text: "효과적인 디버깅을 위한 4가지 단계",
             link: "/pages/start.md"
+          },
+          {
+            text: "참여하기",
+            link: "/pages/event.md"
           }
         ]
       },
@@ -109,11 +109,11 @@ export default defineConfig({
       {
         text: "디버깅 실무 사례",
         items: [
-          { text: "기여하기", link: "/pages/experience/contribute.md" },
           {
             text: "Suspense Error 디버깅 _ 김형규",
             link: "/pages/experience/suspense_debug_by_hyungkyu.md"
-          }
+          },
+          { text: "기여하기", link: "/pages/experience/contribute.md" }
         ]
       }
     ]
@@ -181,7 +181,7 @@ export default defineConfig({
       ]
     },
     ssr: {
-      noExternal: ['vitepress-plugin-tabs']
+      noExternal: ["vitepress-plugin-tabs"]
     }
   }
 });
