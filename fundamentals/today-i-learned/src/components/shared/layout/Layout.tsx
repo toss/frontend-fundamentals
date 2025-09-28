@@ -17,10 +17,13 @@ const layoutContainer = css({
   minHeight: "100vh",
   backgroundColor: "white",
   fontFamily: "sans-serif",
-  fontSmoothing: "antialiased"
+  fontSmoothing: "antialiased",
+  overflow: "hidden"
 });
 
 const mainContent = css({
-  marginTop: "4.6875rem",
-  marginLeft: "3.125rem"
+  height: "100vh",
+  paddingTop: "4.6875rem",
+  paddingLeft: "3.125rem",
+  overflow: "hidden"
 });

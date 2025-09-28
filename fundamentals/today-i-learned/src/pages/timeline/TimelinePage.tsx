@@ -68,64 +68,57 @@ export function TimelinePage() {
   };
 
   return (
-    <div className={pageContainer}>
-      <div className={mainGridLayout}>
-        <div className={mainContentColumn}>
-          {user ? (
-            <>
-              <div className={sprintChallengeSection}>
-                <SprintChallenge />
-              </div>
-              <SectionDivider />
-              <div className={postInputSection}>
-                <PostInput
-                  user={{
-                    login: user.login,
-                    avatarUrl: user.avatar_url
-                  }}
-                  onSubmit={handlePostSubmit}
-                  isError={createPostMutation.isError}
-                  isLoading={createPostMutation.isPending}
-                />
-              </div>
-            </>
-          ) : (
-            <UnauthenticatedState />
-          )}
+    <div className={gridLayout}>
+      <section className={mainContentColumn}>
+        {user ? (
+          <>
+            <div className={sprintChallengeSection}>
+              <SprintChallenge />
+            </div>
+            <SectionDivider />
+            <div className={postInputSection}>
+              <PostInput
+                user={{
+                  login: user.login,
+                  avatarUrl: user.avatar_url
+                }}
+                onSubmit={handlePostSubmit}
+                isError={createPostMutation.isError}
+                isLoading={createPostMutation.isPending}
+              />
+            </div>
+          </>
+        ) : (
+          <UnauthenticatedState />
+        )}
 
-          <SectionDivider />
+        <SectionDivider />
 
-          <div className={filterSection}>
-            <FilterSection
-              sortOption={sortOption}
-              onSortChange={handleSortChange}
-            />
-          </div>
-
-          <div className={postListSection}>
-            <PostList {...getPostListProps()} />
-          </div>
+        <div className={filterSection}>
+          <FilterSection
+            sortOption={sortOption}
+            onSortChange={handleSortChange}
+          />
         </div>
 
-        <div className={sidebarColumn}>
-          <div className={sidebarContent}>
-            <WeeklyTop5 />
-          </div>
+        <div className={postListSection}>
+          <PostList {...getPostListProps()} />
         </div>
-      </div>
+      </section>
+
+      <section className={sidebarColumn}>
+        <WeeklyTop5 />
+      </section>
     </div>
   );
 }
 
-const pageContainer = css({
-  minHeight: "100vh",
-  backgroundColor: "white"
-});
-
-const mainGridLayout = css({
+const gridLayout = css({
   display: "grid",
   gridTemplateColumns: { base: "1fr", lg: "5fr 3fr" },
-  gap: "2rem"
+  height: "100%",
+  backgroundColor: "white",
+  overflow: "hidden"
 });
 
 const mainContentColumn = css({
@@ -133,7 +126,9 @@ const mainContentColumn = css({
   flexDirection: "column",
   borderLeft: { lg: "1px solid rgba(201, 201, 201, 0.4)" },
   borderRight: { lg: "1px solid rgba(201, 201, 201, 0.4)" },
-  minWidth: { lg: "820px" }
+  height: "100%",
+  overflowY: "auto",
+  scrollbarWidth: "none"
 });
 
 const sprintChallengeSection = css({
@@ -157,17 +152,9 @@ const postListSection = css({
 
 const sidebarColumn = css({
   display: { base: "none", lg: "block" },
-  marginTop: "24px",
-  minWidth: { lg: "490px" }
-});
-
-const sidebarContent = css({
-  position: "fixed",
-  top: "100px",
-  bottom: "1rem",
-  paddingRight: "2rem",
-  width: "490px",
-  overflowY: "auto"
+  paddingBottom: "2rem",
+  overflowY: "auto",
+  scrollbarWidth: "none"
 });
 
 function SectionDivider() {
