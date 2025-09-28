@@ -21,11 +21,6 @@ const layoutContainer = css({
 });
 
 const mainContent = css({
-  paddingTop: "81px",
-  marginX: "auto",
-  minWidth: "48rem",
-  maxWidth: "1440px",
-  "@media (min-width: 1024px)": {
-    paddingLeft: "50px"
-  }
+  marginTop: "4.6875rem",
+  marginLeft: "3.125rem"
 });

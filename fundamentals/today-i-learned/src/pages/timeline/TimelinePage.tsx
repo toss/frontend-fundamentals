@@ -69,53 +69,47 @@ export function TimelinePage() {
 
   return (
     <div className={pageContainer}>
-      <div className={contentWrapper}>
-        <div className={mainGridLayout}>
-          <div className={mainContentColumn}>
-            {user ? (
-              <>
-                <div className={sprintChallengeSection}>
-                  <SprintChallenge />
-                </div>
-                <SectionDivider />
-                <div className={postInputSection}>
-                  <PostInput
-                    user={{
-                      login: user.login,
-                      avatarUrl: user.avatar_url
-                    }}
-                    onSubmit={handlePostSubmit}
-                    isError={createPostMutation.isError}
-                    isLoading={createPostMutation.isPending}
-                  />
-                </div>
-                <SectionDivider />
-              </>
-            ) : (
-              <>
-                <div className={unauthenticatedSection}>
-                  <UnauthenticatedState />
-                </div>
-                <SectionDivider />
-              </>
-            )}
+      <div className={mainGridLayout}>
+        <div className={mainContentColumn}>
+          {user ? (
+            <>
+              <div className={sprintChallengeSection}>
+                <SprintChallenge />
+              </div>
+              <SectionDivider />
+              <div className={postInputSection}>
+                <PostInput
+                  user={{
+                    login: user.login,
+                    avatarUrl: user.avatar_url
+                  }}
+                  onSubmit={handlePostSubmit}
+                  isError={createPostMutation.isError}
+                  isLoading={createPostMutation.isPending}
+                />
+              </div>
+            </>
+          ) : (
+            <UnauthenticatedState />
+          )}
 
-            <div className={filterSection}>
-              <FilterSection
-                sortOption={sortOption}
-                onSortChange={handleSortChange}
-              />
-            </div>
+          <SectionDivider />
 
-            <div className={postListSection}>
-              <PostList {...getPostListProps()} />
-            </div>
+          <div className={filterSection}>
+            <FilterSection
+              sortOption={sortOption}
+              onSortChange={handleSortChange}
+            />
           </div>
 
-          <div className={sidebarColumn}>
-            <div className={sidebarContent}>
-              <WeeklyTop5 />
-            </div>
+          <div className={postListSection}>
+            <PostList {...getPostListProps()} />
+          </div>
+        </div>
+
+        <div className={sidebarColumn}>
+          <div className={sidebarContent}>
+            <WeeklyTop5 />
           </div>
         </div>
       </div>
@@ -126,12 +120,6 @@ export function TimelinePage() {
 const pageContainer = css({
   minHeight: "100vh",
   backgroundColor: "white"
-});
-
-const contentWrapper = css({
-  maxWidth: "1440px",
-  margin: "0 auto",
-  paddingX: { base: 0, lg: "2rem" }
 });
 
 const mainGridLayout = css({
@@ -157,15 +145,9 @@ const postInputSection = css({
   paddingX: { lg: "1.5rem" }
 });
 
-const unauthenticatedSection = css({
-  paddingTop: "1.5rem",
-  paddingBottom: "1rem",
-  paddingX: "1.5rem"
-});
-
 const filterSection = css({
-  paddingY: "24px",
-  paddingX: "12px"
+  paddingY: "0.5rem",
+  paddingX: "1.5rem"
 });
 
 const postListSection = css({
@@ -195,6 +177,5 @@ function SectionDivider() {
 const sectionDivider = css({
   width: "100%",
   height: 0,
-  borderBottom: "1px solid rgba(201, 201, 201, 0.4)",
-  marginTop: { base: 0, lg: "1rem" }
+  borderBottom: "1px solid rgba(201, 201, 201, 0.4)"
 });
