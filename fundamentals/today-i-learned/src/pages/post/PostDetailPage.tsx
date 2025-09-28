@@ -14,8 +14,8 @@ export function PostDetailPage() {
   });
 
   return (
-    <div className={pageContainer}>
-      <div className={mainContent}>
+    <div className={gridLayout}>
+      <section className={mainContentColumn}>
         {(() => {
           if (isLoading) {
             return <LoadingState />;
@@ -34,14 +34,11 @@ export function PostDetailPage() {
             />
           );
         })()}
-      </div>
+      </section>
 
-      {/* 사이드바 */}
-      <div className={sidebar}>
-        <div className={sidebarContent}>
-          <WeeklyTop5 />
-        </div>
-      </div>
+      <section className={sidebarColumn}>
+        <WeeklyTop5 />
+      </section>
     </div>
   );
 }
@@ -69,31 +66,30 @@ function ErrorState() {
 }
 
 // Semantic style definitions
-const pageContainer = css({
-  display: "flex"
+const gridLayout = css({
+  display: "grid",
+  gridTemplateColumns: { base: "1fr", lg: "5fr 3fr" },
+  height: "100%",
+  backgroundColor: "white",
+  overflow: "hidden"
 });
 
-const mainContent = css({
-  flex: "1",
-  padding: "24px",
-  "@media (min-width: 1024px)": {
-    borderLeft: "1px solid #e5e7eb",
-    borderRight: "1px solid #e5e7eb"
-  }
+const mainContentColumn = css({
+  display: "flex",
+  flexDirection: "column",
+  padding: "1.5rem",
+  borderLeft: { lg: "1px solid rgba(201, 201, 201, 0.4)" },
+  borderRight: { lg: "1px solid rgba(201, 201, 201, 0.4)" },
+  height: "100%",
+  overflowY: "auto",
+  scrollbarWidth: "none"
 });
 
-const sidebar = css({
-  width: "350px",
-  display: "none",
-  "@media (min-width: 1024px)": {
-    display: "block"
-  }
-});
-
-const sidebarContent = css({
-  position: "sticky",
-  top: "120px",
-  padding: "24px"
+const sidebarColumn = css({
+  display: { base: "none", lg: "block" },
+  paddingBottom: "2rem",
+  overflowY: "auto",
+  scrollbarWidth: "none"
 });
 
 const loadingContainer = css({
