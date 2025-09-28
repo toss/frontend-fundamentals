@@ -156,7 +156,14 @@ const cardContainer = css({
 const cardContent = css({
   display: "flex",
   flexDirection: "column",
-  padding: "1.5rem"
+  padding: "1.5rem",
+  transition: "all 0.2s",
+  _hover: {
+    "& h2": {
+      color: "#0064FF",
+      opacity: 0.8
+    }
+  }
 });
 
 const headerSection = css({
@@ -233,13 +240,10 @@ const postTitle = css({
   lineHeight: "130%",
   letterSpacing: "-0.4px",
   color: "#0F0F0F",
-  transition: "colors 0.15s ease-in-out",
   overflow: "hidden",
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
-  _hover: {
-    color: "rgb(55, 65, 81)"
-  }
+  transition: "color 0.2s"
 });
 
 const contentPreview = css({
