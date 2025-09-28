@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { MoreHorizontal } from "lucide-react";
+import { css } from "@styled-system/css";
 import { Button } from "@/components/shared/ui/Button";
 import { AlertDialog } from "@/components/shared/ui/AlertDialog";
 
@@ -73,7 +74,7 @@ export function PostMoreMenu({
   };
 
   return (
-    <div className="relative">
+    <div className={css({ position: "relative" })}>
       <Button
         ref={buttonRef}
         variant="ghost"
@@ -91,20 +92,78 @@ export function PostMoreMenu({
       {isOpen && (
         <div
           ref={menuRef}
-          className="absolute right-0 top-8 z-50 w-[160px] bg-white rounded-[16px] p-2 gap-2 flex flex-col"
-          style={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.08)" }}
+          className={css({
+            position: "absolute",
+            right: "0",
+            top: "32px",
+            zIndex: "50",
+            width: "160px",
+            backgroundColor: "white",
+            borderRadius: "16px",
+            padding: "8px",
+            gap: "8px",
+            display: "flex",
+            flexDirection: "column",
+            boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.08)"
+          })}
         >
           <button
             onClick={handleEdit}
             disabled={isLoading}
-            className="w-full px-3 py-2 text-left font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black hover:bg-gray-50 transition-colors rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            className={css({
+              width: "100%",
+              height: "37px",
+              paddingX: "16px",
+              paddingY: "8px",
+              textAlign: "left",
+              fontWeight: "semibold",
+              fontSize: "16px",
+              lineHeight: "130%",
+              letterSpacing: "-0.004em",
+              color: "rgba(0, 0, 0, 0.8)",
+              backgroundColor: "transparent",
+              borderRadius: "12px",
+              border: "none",
+              cursor: "pointer",
+              transition: "all 0.2s ease-in-out",
+              _hover: {
+                backgroundColor: "rgba(0, 0, 0, 0.03)"
+              },
+              _disabled: {
+                opacity: "0.5",
+                cursor: "not-allowed"
+              }
+            })}
           >
             수정하기
           </button>
           <button
             onClick={handleDeleteClick}
             disabled={isLoading}
-            className="w-full px-3 py-2 text-left font-semibold text-[16px] leading-[130%] tracking-[-0.4px] text-black hover:bg-gray-50 transition-colors rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            className={css({
+              width: "100%",
+              height: "37px",
+              paddingX: "16px",
+              paddingY: "8px",
+              textAlign: "left",
+              fontWeight: "semibold",
+              fontSize: "16px",
+              lineHeight: "130%",
+              letterSpacing: "-0.004em",
+              color: "rgba(0, 0, 0, 0.8)",
+              backgroundColor: "transparent",
+              borderRadius: "12px",
+              border: "none",
+              cursor: "pointer",
+              transition: "all 0.2s ease-in-out",
+              _hover: {
+                backgroundColor: "rgba(0, 0, 0, 0.03)"
+              },
+              _disabled: {
+                opacity: "0.5",
+                cursor: "not-allowed"
+              }
+            })}
           >
             삭제하기
           </button>
@@ -114,31 +173,103 @@ export function PostMoreMenu({
       <AlertDialog open={isDeleteModalOpen} onOpenChange={setIsDeleteModalOpen}>
         <AlertDialog.Content
           showCloseButton
-          className={`w-[343px] ${isDeleteError ? "h-[270px]" : "h-[230px]"} bg-[#FCFCFC] rounded-[16px] flex flex-col items-center p-6 gap-8`}
+          className={css({
+            // FIXME: AlertDialog 컴포넌트 내부도 pandacss로 마이그레이션 한후 important 제거 가능
+            width: "343px !important",
+            height: isDeleteError ? "270px" : "230px",
+            backgroundColor: "#FCFCFC",
+            borderRadius: "16px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "24px",
+            gap: "32px"
+          })}
         >
-          <div className="flex flex-col items-center gap-6 text-center">
-            <h2 className="font-bold text-[22px] leading-[130%] tracking-[-0.4px] text-[#0F0F0F]">
+          <div
+            className={css({
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "24px",
+              textAlign: "center"
+            })}
+          >
+            <h2
+              className={css({
+                fontWeight: "bold",
+                fontSize: "22px",
+                lineHeight: "130%",
+                letterSpacing: "-0.4px",
+                color: "#0F0F0F"
+              })}
+            >
               글을 삭제하시겠습니까?
             </h2>
-            <p className="font-medium text-[16px] leading-[160%] tracking-[-0.4px] text-black/80 text-center">
+            <p
+              className={css({
+                fontWeight: "medium",
+                fontSize: "16px",
+                lineHeight: "160%",
+                letterSpacing: "-0.4px",
+                color: "rgba(0, 0, 0, 0.8)",
+                textAlign: "center"
+              })}
+            >
               댓글과 반응도 함께 삭제됩니다.
               <br />
               삭제 후에는 복구할 수 없습니다.
             </p>
           </div>
 
-          <div className="flex flex-col items-center gap-3">
+          <div
+            className={css({
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "12px"
+            })}
+          >
             <button
               onClick={handleConfirmDelete}
               disabled={isLoading}
-              className="w-24 h-[46px] bg-[#0F0F0F] rounded-[200px] font-bold text-[14px] leading-[130%] tracking-[-0.4px] text-[#FCFCFC] hover:bg-black/90 transition-colors flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+              className={css({
+                width: "96px",
+                height: "46px",
+                backgroundColor: "#0F0F0F",
+                borderRadius: "200px",
+                fontWeight: "bold",
+                fontSize: "14px",
+                lineHeight: "130%",
+                letterSpacing: "-0.4px",
+                color: "#FCFCFC",
+                border: "none",
+                cursor: "pointer",
+                transition: "all 0.2s ease-in-out",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                _hover: {
+                  backgroundColor: "rgba(0, 0, 0, 0.9)"
+                },
+                _disabled: {
+                  opacity: "0.5",
+                  cursor: "not-allowed"
+                }
+              })}
             >
               {isLoading ? "삭제중..." : "삭제하기"}
             </button>
 
             {/* 에러 메시지 */}
             {isDeleteError && (
-              <p className="text-red-500 text-sm font-medium">
+              <p
+                className={css({
+                  color: "red.500",
+                  fontSize: "14px",
+                  fontWeight: "medium"
+                })}
+              >
                 삭제에 실패했습니다. 네트워크 상태를 확인해주세요.
               </p>
             )}
