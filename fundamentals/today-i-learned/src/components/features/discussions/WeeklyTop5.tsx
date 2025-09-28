@@ -54,13 +54,7 @@ function PopularPostItem({ post, rank }: { post: any; rank: number }) {
         </div>
 
         <h4 className={postTitle}>{post.title}</h4>
-
-        <div className={postPreview}>
-          <MarkdownRenderer
-            content={truncateMarkdown(post.body, 100)}
-            className={markdownContent}
-          />
-        </div>
+        <p className={contentPreview}>{post.body}</p>
       </button>
     </div>
   );
@@ -125,6 +119,7 @@ export function WeeklyTop5() {
 const weeklyTop5Container = css({
   display: "flex",
   flexDirection: "column",
+  padding: "1rem",
   gap: "1.5rem"
 });
 
@@ -176,23 +171,24 @@ const rankNumber = css({
 });
 
 const postButton = css({
-  flex: 1,
+  position: "relative",
   display: "flex",
   flexDirection: "column",
-  justifyContent: "flex-end",
+  justifyContent: "space-between",
+  width: "100%",
   paddingY: "1.25rem",
   paddingX: "1.5rem",
   backgroundColor: "white",
   border: "1px solid rgba(209, 213, 219, 0.5)",
   borderRadius: "1rem",
-  transition: "all 0.2s",
   textAlign: "left",
-  minHeight: "136px",
-  position: "relative",
+  transition: "all 0.2s",
+  overflow: "hidden",
   cursor: "pointer",
   _hover: {
     "& h4": {
-      color: "rgb(55, 65, 81)"
+      color: "#0064FF",
+      opacity: 0.8
     }
   }
 });
@@ -201,7 +197,7 @@ const authorSection = css({
   display: "flex",
   alignItems: "center",
   gap: "0.375rem",
-  marginBottom: "0.75rem"
+  marginBottom: "1rem"
 });
 
 const avatarStyle = css({
@@ -211,7 +207,7 @@ const avatarStyle = css({
 const authorName = css({
   fontSize: "16px",
   fontWeight: "bold",
-  color: "rgba(0, 0, 0, 0.6)",
+  color: "rgba(0, 0, 0, 0.8)",
   letterSpacing: "-0.025em",
   overflow: "hidden",
   textOverflow: "ellipsis",
@@ -219,30 +215,33 @@ const authorName = css({
 });
 
 const postTitle = css({
+  marginBottom: "0.5rem",
+  overflow: "hidden",
+
   fontWeight: "bold",
   fontSize: "18px",
   color: "#0F0F0F",
   lineHeight: "tight",
   letterSpacing: "-0.025em",
-  transition: "color 0.2s",
-  overflow: "hidden",
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
-  marginBottom: "0.75rem"
+
+  transition: "color 0.2s"
 });
 
-const postPreview = css({
+const contentPreview = css({
+  display: "-webkit-box",
   overflow: "hidden",
-  textOverflow: "ellipsis",
-  whiteSpace: "nowrap"
-});
 
-const markdownContent = css({
   fontSize: "16px",
   fontWeight: "medium",
   color: "rgba(0, 0, 0, 0.8)",
   lineHeight: "relaxed",
-  letterSpacing: "-0.025em"
+  letterSpacing: "-0.025em",
+  WebkitLineClamp: 2,
+  // @ts-ignore
+  WebkitBoxOrient: "vertical",
+  whiteSpace: "normal"
 });
 
 // Loading and Empty States
