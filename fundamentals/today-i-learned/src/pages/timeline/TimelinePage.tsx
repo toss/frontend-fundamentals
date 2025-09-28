@@ -1,17 +1,17 @@
+import { css } from "@styled-system/css";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import { PostInput } from "./components/PostInput";
-import { FilterSection } from "./components/FilterSection";
-import { PostList } from "./components/PostList";
-import { WeeklyTop5 } from "@/components/features/discussions/WeeklyTop5";
-import { SprintChallenge } from "./components/SprintChallenge";
-import { UnauthenticatedState } from "@/components/features/auth/UnauthenticatedState";
-import { useAuth } from "@/contexts/AuthContext";
-import type { SortOption } from "./types";
 import { useCreateDiscussion } from "@/api/hooks/useDiscussions";
-import { useErrorHandler } from "@/hooks/useErrorHandler";
+import { UnauthenticatedState } from "@/components/features/auth/UnauthenticatedState";
+import { WeeklyTop5 } from "@/components/features/discussions/WeeklyTop5";
+import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/contexts/ToastContext";
-import { css } from "@styled-system/css";
+import { useErrorHandler } from "@/hooks/useErrorHandler";
+import { FilterSection } from "./components/FilterSection";
+import { PostInput } from "./components/PostInput";
+import { PostList } from "./components/PostList";
+import { SprintChallenge } from "./components/SprintChallenge";
+import type { SortOption } from "./types";
 
 export function TimelinePage() {
   const { user } = useAuth();
@@ -69,54 +69,50 @@ export function TimelinePage() {
 
   return (
     <div className={pageContainer}>
-      <div className={contentWrapper}>
-        <div className={mainGridLayout}>
-          <div className={mainContentColumn}>
-            {user ? (
-              <>
-                <div className={sprintChallengeSection}>
-                  <SprintChallenge />
-                </div>
-                <SectionDivider />
-                <div className={postInputSection}>
-                  <PostInput
-                    user={{
-                      login: user.login,
-                      avatarUrl: user.avatar_url
-                    }}
-                    onSubmit={handlePostSubmit}
-                    isError={createPostMutation.isError}
-                    isLoading={createPostMutation.isPending}
-                  />
-                </div>
-                <SectionDivider />
-              </>
-            ) : (
-              <>
-                <div className={unauthenticatedSection}>
-                  <UnauthenticatedState />
-                </div>
-                <SectionDivider />
-              </>
-            )}
-
-            <div className={filterSection}>
-              <FilterSection
-                sortOption={sortOption}
-                onSortChange={handleSortChange}
+      <div className={mainContentColumn}>
+        {user ? (
+          <>
+            <div className={sprintChallengeSection}>
+              <SprintChallenge />
+            </div>
+            <SectionDivider />
+            <div className={postInputSection}>
+              <PostInput
+                user={{
+                  login: user.login,
+                  avatarUrl: user.avatar_url
+                }}
+                onSubmit={handlePostSubmit}
+                isError={createPostMutation.isError}
+                isLoading={createPostMutation.isPending}
               />
             </div>
-
-            <div className={postListSection}>
-              <PostList {...getPostListProps()} />
+            <SectionDivider />
+          </>
+        ) : (
+          <>
+            <div className={unauthenticatedSection}>
+              <UnauthenticatedState />
             </div>
-          </div>
+            <SectionDivider />
+          </>
+        )}
 
-          <div className={sidebarColumn}>
-            <div className={sidebarContent}>
-              <WeeklyTop5 />
-            </div>
-          </div>
+        <div className={filterSection}>
+          <FilterSection
+            sortOption={sortOption}
+            onSortChange={handleSortChange}
+          />
+        </div>
+
+        <div className={postListSection}>
+          <PostList {...getPostListProps()} />
+        </div>
+      </div>
+
+      <div className={sidebarColumn}>
+        <div className={sidebarContent}>
+          <WeeklyTop5 />
         </div>
       </div>
     </div>
@@ -125,19 +121,10 @@ export function TimelinePage() {
 
 const pageContainer = css({
   minHeight: "100vh",
-  backgroundColor: "white"
-});
-
-const contentWrapper = css({
   maxWidth: "1440px",
-  margin: "0 auto",
-  paddingX: { base: 0, lg: "2rem" }
-});
-
-const mainGridLayout = css({
-  display: "grid",
-  gridTemplateColumns: { base: "1fr", lg: "5fr 3fr" },
-  gap: "2rem"
+  backgroundColor: "white",
+  display: "flex",
+  gap: { base: "0", lg: "2rem" }
 });
 
 const mainContentColumn = css({
@@ -149,12 +136,11 @@ const mainContentColumn = css({
 });
 
 const sprintChallengeSection = css({
-  paddingTop: "12px",
-  paddingBottom: 0
+  paddingY: "1rem"
 });
 
 const postInputSection = css({
-  paddingX: { lg: "1.5rem" }
+  paddingX: "1rem"
 });
 
 const unauthenticatedSection = css({
@@ -169,7 +155,8 @@ const filterSection = css({
 });
 
 const postListSection = css({
-  paddingX: { lg: "1.5rem" },
+  paddingX: "1rem",
+  width: { base: "100dvw", lg: "100%" },
   paddingBottom: 0
 });
 
@@ -180,7 +167,7 @@ const sidebarColumn = css({
 });
 
 const sidebarContent = css({
-  position: "fixed",
+  position: "sticky",
   top: "100px",
   bottom: "1rem",
   paddingRight: "2rem",
@@ -195,6 +182,5 @@ function SectionDivider() {
 const sectionDivider = css({
   width: "100%",
   height: 0,
-  borderBottom: "1px solid rgba(201, 201, 201, 0.4)",
-  marginTop: { base: 0, lg: "1rem" }
+  borderBottom: "1px solid rgba(201, 201, 201, 0.4)"
 });

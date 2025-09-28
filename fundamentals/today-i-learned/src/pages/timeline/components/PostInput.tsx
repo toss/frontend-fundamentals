@@ -1,10 +1,10 @@
+import { css } from "@styled-system/css";
+import MDEditor from "@uiw/react-md-editor";
 import * as React from "react";
+import type { GitHubAuthor } from "@/api/remote/discussions";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { Button } from "@/components/shared/ui/Button";
 import { Input } from "@/components/shared/ui/Input";
-import MDEditor from "@uiw/react-md-editor";
-import type { GitHubAuthor } from "@/api/remote/discussions";
-import { css } from "@styled-system/css";
 
 interface PostInputProps {
   user: GitHubAuthor;
@@ -206,6 +206,7 @@ const titleInputStyle = css({
   backgroundColor: "transparent",
   boxShadow: "none",
   paddingBottom: "0.5rem",
+  paddingLeft: 0,
   _focus: {
     outline: "none",
     ring: 0
