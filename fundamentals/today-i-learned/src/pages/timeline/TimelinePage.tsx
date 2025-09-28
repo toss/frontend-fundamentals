@@ -146,7 +146,7 @@ const filterSection = css({
 });
 
 const postListSection = css({
-  paddingX: { lg: "1.5rem" },
+  paddingX: { base: "1rem", lg: "1.5rem" },
   paddingBottom: 0
 });
 

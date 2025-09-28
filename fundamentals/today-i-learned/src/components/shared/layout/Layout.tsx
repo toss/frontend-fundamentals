@@ -24,6 +24,6 @@ const layoutContainer = css({
 const mainContent = css({
   height: "100vh",
   paddingTop: "4.6875rem",
-  paddingLeft: "3.125rem",
+  paddingLeft: { base: 0, lg: "3.125rem" },
   overflow: "hidden"
 });
