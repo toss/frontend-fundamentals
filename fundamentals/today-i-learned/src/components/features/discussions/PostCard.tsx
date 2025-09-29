@@ -113,21 +113,15 @@ export function PostCard({
           )}
         </div>
 
-        {/* 본문 */}
-        <div className={contentSection}>
-          {/* 제목과 내용 */}
-          <div className={contentContainer}>
-            {/* 제목 */}
-            <h2 className={postTitle}>{discussion.title}</h2>
+        {/* 제목 */}
+        <h2 className={postTitle}>{discussion.title}</h2>
 
-            {/* 내용 미리보기 */}
-            <div className={contentPreview}>
-              <MarkdownRenderer
-                content={discussion.body}
-                className={markdownContent}
-              />
-            </div>
-          </div>
+        {/* 내용 미리보기 */}
+        <div className={contentPreview}>
+          <MarkdownRenderer
+            content={discussion.body}
+            className={markdownContent}
+          />
         </div>
 
         <InteractionButtons
@@ -141,6 +135,7 @@ export function PostCard({
           variant="card"
         />
       </div>
+
       {EditPostModal}
     </Card>
   );
@@ -162,14 +157,21 @@ const cardContent = css({
   display: "flex",
   flexDirection: "column",
   padding: "1.5rem",
-  gap: "1.5rem"
+  transition: "all 0.2s",
+  _hover: {
+    "& h2": {
+      color: "#0064FF",
+      opacity: 0.8
+    }
+  }
 });
 
 const headerSection = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  height: "2.5rem"
+  height: "2.5rem",
+  marginBottom: "1rem"
 });
 
 const userInfoContainer = css({
@@ -231,35 +233,22 @@ const timeStamp = css({
   color: "#979797"
 });
 
-const contentSection = css({
-  display: "flex",
-  flexDirection: "column",
-  gap: "1.25rem"
-});
-
-const contentContainer = css({
-  display: "flex",
-  flexDirection: "column",
-  gap: "1.25rem"
-});
-
 const postTitle = css({
+  marginBottom: "0.5rem",
   fontWeight: "700",
   fontSize: "22px",
   lineHeight: "130%",
   letterSpacing: "-0.4px",
   color: "#0F0F0F",
-  transition: "colors 0.15s ease-in-out",
   overflow: "hidden",
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
-  _hover: {
-    color: "rgb(55, 65, 81)"
-  }
+  transition: "color 0.2s"
 });
 
 const contentPreview = css({
   display: "-webkit-box",
+  marginBottom: "1rem",
   WebkitLineClamp: "3",
   // @ts-ignore
   WebkitBoxOrient: "vertical",
