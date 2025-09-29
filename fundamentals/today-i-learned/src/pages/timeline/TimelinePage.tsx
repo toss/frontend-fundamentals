@@ -1,17 +1,17 @@
+import { css } from "@styled-system/css";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import { PostInput } from "./components/PostInput";
-import { FilterSection } from "./components/FilterSection";
-import { PostList } from "./components/PostList";
-import { WeeklyTop5 } from "@/components/features/discussions/WeeklyTop5";
-import { SprintChallenge } from "./components/SprintChallenge";
-import { UnauthenticatedState } from "@/components/features/auth/UnauthenticatedState";
-import { useAuth } from "@/contexts/AuthContext";
-import type { SortOption } from "./types";
 import { useCreateDiscussion } from "@/api/hooks/useDiscussions";
-import { useErrorHandler } from "@/hooks/useErrorHandler";
+import { UnauthenticatedState } from "@/components/features/auth/UnauthenticatedState";
+import { WeeklyTop5 } from "@/components/features/discussions/WeeklyTop5";
+import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/contexts/ToastContext";
-import { css } from "@styled-system/css";
+import { useErrorHandler } from "@/hooks/useErrorHandler";
+import { FilterSection } from "./components/FilterSection";
+import { PostInput } from "./components/PostInput";
+import { PostList } from "./components/PostList";
+import { SprintChallenge } from "./components/SprintChallenge";
+import type { SortOption } from "./types";
 
 export function TimelinePage() {
   const { user } = useAuth();
@@ -132,12 +132,11 @@ const mainContentColumn = css({
 });
 
 const sprintChallengeSection = css({
-  paddingTop: "12px",
-  paddingBottom: 0
+  paddingY: "1rem"
 });
 
 const postInputSection = css({
-  paddingX: { lg: "1.5rem" }
+  paddingX: "1rem"
 });
 
 const filterSection = css({

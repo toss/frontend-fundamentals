@@ -1,5 +1,5 @@
-import { LayoutNavigation } from "./LayoutNavigation";
 import { css } from "@styled-system/css";
+import { LayoutNavigation } from "./LayoutNavigation";
 
 export const Layout: React.FC<{ children: React.ReactNode }> = ({
   children

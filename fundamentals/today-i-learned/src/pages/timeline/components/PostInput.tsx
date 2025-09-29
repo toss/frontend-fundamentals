@@ -205,6 +205,7 @@ const titleInputStyle = css({
   backgroundColor: "transparent",
   boxShadow: "none",
   paddingBottom: "0.5rem",
+  paddingLeft: 0,
   _focus: {
     outline: "none",
     ring: 0
