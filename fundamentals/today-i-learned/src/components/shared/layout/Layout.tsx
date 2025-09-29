@@ -22,17 +22,8 @@ const layoutContainer = css({
 });
 
 const mainContent = css({
-  // <<<<<<< HEAD
-  //   paddingTop: "81px",
-  //   marginX: "auto",
-  //   maxWidth: "1440px",
-  //   "@media (min-width: 1024px)": {
-  //     paddingLeft: "50px"
-  //   }
-  // =======
   height: "100vh",
   paddingTop: "4.6875rem",
   paddingLeft: { base: 0, lg: "3.125rem" },
   overflow: "hidden"
-  // >>>>>>> main
 });
