@@ -17,14 +17,22 @@ const layoutContainer = css({
   minHeight: "100vh",
   backgroundColor: "white",
   fontFamily: "sans-serif",
-  fontSmoothing: "antialiased"
+  fontSmoothing: "antialiased",
+  overflow: "hidden"
 });
 
 const mainContent = css({
-  paddingTop: "81px",
-  marginX: "auto",
-  maxWidth: "1440px",
-  "@media (min-width: 1024px)": {
-    paddingLeft: "50px"
-  }
+  // <<<<<<< HEAD
+  //   paddingTop: "81px",
+  //   marginX: "auto",
+  //   maxWidth: "1440px",
+  //   "@media (min-width: 1024px)": {
+  //     paddingLeft: "50px"
+  //   }
+  // =======
+  height: "100vh",
+  paddingTop: "4.6875rem",
+  paddingLeft: { base: 0, lg: "3.125rem" },
+  overflow: "hidden"
+  // >>>>>>> main
 });

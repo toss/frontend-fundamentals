@@ -81,21 +81,20 @@ export function PostInput({
             className={titleInputStyle}
           />
           <div className={editorWrapper} data-color-mode="light">
-            <div className={editorContainer}>
-              <MDEditor
-                value={content}
-                onChange={handleContentChange}
-                preview="edit"
-                hideToolbar={true}
-                visibleDragbar={false}
-                textareaProps={{
-                  placeholder:
-                    "작은 기록이 모여 큰 성장이 됩니다.\nTIL은 Frontend Fundamentals Discussion에 여러분의 GitHub 계정으로 저장돼요.\n하루에 한 줄씩, 함께 성장해봐요.",
-                  style: { backgroundColor: "red !important" }
-                }}
-                height={editorHeight}
-              />
-            </div>
+            <MDEditor
+              value={content}
+              style={{ boxShadow: "none" }}
+              onChange={handleContentChange}
+              preview="edit"
+              hideToolbar={true}
+              visibleDragbar={false}
+              textareaProps={{
+                placeholder:
+                  "작은 기록이 모여 큰 성장이 됩니다.\nTIL은 Frontend Fundamentals Discussion에 여러분의 GitHub 계정으로 저장돼요.\n하루에 한 줄씩, 함께 성장해봐요.",
+                style: { backgroundColor: "red !important" }
+              }}
+              height={editorHeight}
+            />
           </div>
         </div>
       </div>
@@ -219,17 +218,6 @@ const titleInputStyle = css({
 // Editor Styles
 const editorWrapper = css({
   width: "100%"
-});
-
-const editorContainer = css({
-  "& .w-md-editor": {
-    border: "none !important",
-    boxShadow: "none !important"
-  },
-  "& .w-md-editor-text": {
-    padding: "0 !important",
-    height: "full"
-  }
 });
 
 // Action Area

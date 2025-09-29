@@ -1,4 +1,4 @@
-import { Heart, MessageCircle, ChevronUp } from "lucide-react";
+import { Heart, MessageCircle, ArrowUp } from "lucide-react";
 import { useState, useCallback, useEffect } from "react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { ReactionTooltip } from "@/components/shared/ui/ReactionTooltip";
@@ -36,17 +36,11 @@ const iconContainer = {
 };
 
 const buttonText = {
+  height: "16px",
   fontSize: "16px",
+  fontWeight: "600",
   lineHeight: "130%",
-  letterSpacing: "-0.4px",
-  fontWeight: "600"
-};
-
-const upvoteText = {
-  fontSize: "16px",
-  lineHeight: "130%",
-  letterSpacing: "-0.4px",
-  fontWeight: "700"
+  letterSpacing: "-0.4px"
 };
 
 const avatarGroup = {
@@ -245,11 +239,10 @@ export function InteractionButtons({
           }}
         >
           <div className={css(iconContainer)}>
-            <ChevronUp
+            <ArrowUp
               style={{
                 width: "100%",
                 height: "100%",
-                strokeWidth: "1.67px",
                 stroke: optimisticState.hasUserUpvoted
                   ? "#979797"
                   : isCardVariant
@@ -259,7 +252,7 @@ export function InteractionButtons({
             />
           </div>
           <span
-            className={css(upvoteText)}
+            className={css(buttonText)}
             style={{
               color: optimisticState.hasUserUpvoted
                 ? "#979797"
@@ -318,7 +311,7 @@ export function InteractionButtons({
               style={{
                 width: "100%",
                 height: "100%",
-                strokeWidth: "1.67px",
+                strokeWidth: "2px",
                 stroke: optimisticState.hasUserLiked
                   ? "#979797"
                   : isCardVariant
@@ -383,7 +376,6 @@ export function InteractionButtons({
                 width: "100%",
                 height: "100%",
                 stroke: isCardVariant ? "#979797" : "rgba(0,0,0,0.4)",
-                strokeWidth: "1.67px",
                 fill: "none"
               }}
             />

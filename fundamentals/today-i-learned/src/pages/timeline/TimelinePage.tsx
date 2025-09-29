@@ -68,8 +68,8 @@ export function TimelinePage() {
   };
 
   return (
-    <div className={pageContainer}>
-      <div className={mainContentColumn}>
+    <div className={gridLayout}>
+      <section className={mainContentColumn}>
         {user ? (
           <>
             <div className={sprintChallengeSection}>
@@ -87,16 +87,12 @@ export function TimelinePage() {
                 isLoading={createPostMutation.isPending}
               />
             </div>
-            <SectionDivider />
           </>
         ) : (
-          <>
-            <div className={unauthenticatedSection}>
-              <UnauthenticatedState />
-            </div>
-            <SectionDivider />
-          </>
+          <UnauthenticatedState />
         )}
+
+        <SectionDivider />
 
         <div className={filterSection}>
           <FilterSection
@@ -108,23 +104,21 @@ export function TimelinePage() {
         <div className={postListSection}>
           <PostList {...getPostListProps()} />
         </div>
-      </div>
+      </section>
 
-      <div className={sidebarColumn}>
-        <div className={sidebarContent}>
-          <WeeklyTop5 />
-        </div>
-      </div>
+      <section className={sidebarColumn}>
+        <WeeklyTop5 />
+      </section>
     </div>
   );
 }
 
-const pageContainer = css({
-  minHeight: "100vh",
-  maxWidth: "1440px",
+const gridLayout = css({
+  display: "grid",
+  gridTemplateColumns: { base: "1fr", lg: "5fr 3fr" },
+  height: "100%",
   backgroundColor: "white",
-  display: "flex",
-  gap: { base: "0", lg: "2rem" }
+  overflow: "hidden"
 });
 
 const mainContentColumn = css({
@@ -132,7 +126,9 @@ const mainContentColumn = css({
   flexDirection: "column",
   borderLeft: { lg: "1px solid rgba(201, 201, 201, 0.4)" },
   borderRight: { lg: "1px solid rgba(201, 201, 201, 0.4)" },
-  minWidth: { lg: "820px" }
+  height: "100%",
+  overflowY: "auto",
+  scrollbarWidth: "none"
 });
 
 const sprintChallengeSection = css({
@@ -143,36 +139,21 @@ const postInputSection = css({
   paddingX: "1rem"
 });
 
-const unauthenticatedSection = css({
-  paddingTop: "1.5rem",
-  paddingBottom: "1rem",
+const filterSection = css({
+  paddingY: "0.5rem",
   paddingX: "1.5rem"
 });
 
-const filterSection = css({
-  paddingY: "24px",
-  paddingX: "12px"
-});
-
 const postListSection = css({
-  paddingX: "1rem",
-  width: { base: "100dvw", lg: "100%" },
+  paddingX: { base: "1rem", lg: "1.5rem" },
   paddingBottom: 0
 });
 
 const sidebarColumn = css({
   display: { base: "none", lg: "block" },
-  marginTop: "24px",
-  minWidth: { lg: "490px" }
-});
-
-const sidebarContent = css({
-  position: "sticky",
-  top: "100px",
-  bottom: "1rem",
-  paddingRight: "2rem",
-  width: "490px",
-  overflowY: "auto"
+  paddingBottom: "2rem",
+  overflowY: "auto",
+  scrollbarWidth: "none"
 });
 
 function SectionDivider() {
