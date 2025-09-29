@@ -6,9 +6,11 @@
 
 ## 자동화 코드
 
+![](../../images/reproduce/auto-clicker.gif)
+
 예를 들어, 버튼에 이미 더블클릭 방지 처리를 해두었지만, 실제 사용자 환경에서 동일한 요청이 여러 번 발생하는 버그 리포트를 받았다고 가정해 볼게요. 이 문제를 재현하려면, 다음처럼 **자동 클릭 함수**를 만들어 반복적인 클릭 상황을 쉽게 만들 수 있어요.
 
-```tsx 3,4,5,6,7,8,9,10,26
+```tsx
 import React, { useState } from "react";
 
 function simulateRapidClicks(
