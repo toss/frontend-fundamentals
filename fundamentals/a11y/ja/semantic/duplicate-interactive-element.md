@@ -4,7 +4,7 @@
 
 たとえば下のような構成でボタン名がすべて「選択」だと、どの項目を選ぶボタンなのか分かりにくいため、**明確な文脈を合わせて提供する必要があります。**
 
-![重複するボタンの例](../images/duplicate-interactive-element.png)
+![重複するボタンの例](../../images/duplicate-interactive-element.png)
 
 ## 問題：意味を読み取れないスクリーンリーダー
 
