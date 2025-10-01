@@ -8,8 +8,9 @@
 
 次のように`<a>`タグの中に`<button>`を出力するコンポーネントを入れるのは間違いです。HTMLでは、インタラクティブな要素の中に別のインタラクティブ要素を入れることは許可されていないためです[^1].この構造ではアクセシビリティの問題が発生し、ブラウザで予期しない動作が起きる可能性があります。
 
-[^1]: https://www.w3.org/TR/2011/WD-html5-20110405/text-level-semantics.html#the-a-element
-のContent model項目を参考にしてください。
+[^1]:
+    https://www.w3.org/TR/2011/WD-html5-20110405/text-level-semantics.html#the-a-element
+    のContent model項目を参考にしてください。
 
 ```jsx
 <a href="/go-to">
@@ -109,20 +110,20 @@ UIの構成上、ボタンのように見えるカードの中に別のボタン
 
 以下の要素はいずれもインタラクティブ要素です。これらのいずれかを含む要素の中に、さらに別のインタラクティブ要素を入れてはいけません。
 
-| 요소         | 조건                                 |
-| ------------ | ------------------------------------ |
-| `<a>`        | -                                    |
-| `<audio>`    | controls属性がある場合           |
-| `<button>`   | -                                    |
-| `<details>`  | -                                    |
-| `<embed>`    | -                                    |
-| `<iframe>`   | -                                    |
-| `<img>`      | usemap属性がある場合              |
+| 요소         | 조건                               |
+| ------------ | ---------------------------------- |
+| `<a>`        | -                                  |
+| `<audio>`    | controls属性がある場合             |
+| `<button>`   | -                                  |
+| `<details>`  | -                                  |
+| `<embed>`    | -                                  |
+| `<iframe>`   | -                                  |
+| `<img>`      | usemap属性がある場合               |
 | `<input>`    | type属性が Hidden state でない場合 |
-| `<keygen>`   | -                                    |
-| `<label>`    | -                                    |
-| `<menu>`     | type属性が toolbar 状態の場合     |
-| `<object>`   | usemap属性がある場合              |
-| `<select>`   | -                                    |
-| `<textarea>` | -                                    |
-| `<video>`    | controls属性がある場合            |
+| `<keygen>`   | -                                  |
+| `<label>`    | -                                  |
+| `<menu>`     | type属性が toolbar 状態の場合      |
+| `<object>`   | usemap属性がある場合               |
+| `<select>`   | -                                  |
+| `<textarea>` | -                                  |
+| `<video>`    | controls属性がある場合             |
