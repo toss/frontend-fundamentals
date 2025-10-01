@@ -25,54 +25,55 @@ const MONTH_NAMES = [
   "12월"
 ];
 
+const COLORS = [
+  css({
+    backgroundColor: "rgba(0, 0, 0, 0.1)",
+    color: "rgba(0, 0, 0, 0.4)"
+  }),
+  css({
+    backgroundColor: "rgba(188, 233, 233, 0.2)",
+    color: "#58C7C7"
+  }),
+  css({
+    backgroundColor: "rgba(237, 204, 248, 0.4)",
+    color: "#DA9BEF"
+  }),
+  css({
+    backgroundColor: "rgba(255, 239, 191, 0.6)",
+    color: "#FFC342"
+  }),
+  css({
+    backgroundColor: "rgba(255, 212, 214, 0.2)",
+    color: "#FB8890"
+  }),
+  css({
+    backgroundColor: "rgba(188, 233, 233, 0.2)",
+    color: "#58C7C7"
+  }),
+  css({
+    backgroundColor: "rgba(188, 233, 233, 0.2)",
+    color: "#58C7C7"
+  }),
+  css({
+    backgroundColor: "rgba(255, 212, 214, 0.2)",
+    color: "#FB8890"
+  }),
+  css({
+    backgroundColor: "rgba(255, 239, 191, 0.6)",
+    color: "#FFC342"
+  }),
+  css({
+    backgroundColor: "rgba(0, 0, 0, 0.1)",
+    color: "rgba(0, 0, 0, 0.4)"
+  })
+];
+
 function ChallengeDayItem({ day }: { day: ChallengeDay }) {
   const getDayStyle = () => {
     switch (day.status) {
       case "completed":
-        const colors = [
-          css({
-            backgroundColor: "rgba(0, 0, 0, 0.1)",
-            color: "rgba(0, 0, 0, 0.4)"
-          }),
-          css({
-            backgroundColor: "rgba(188, 233, 233, 0.2)",
-            color: "#58C7C7"
-          }),
-          css({
-            backgroundColor: "rgba(237, 204, 248, 0.4)",
-            color: "#DA9BEF"
-          }),
-          css({
-            backgroundColor: "rgba(255, 239, 191, 0.6)",
-            color: "#FFC342"
-          }),
-          css({
-            backgroundColor: "rgba(255, 212, 214, 0.2)",
-            color: "#FB8890"
-          }),
-          css({
-            backgroundColor: "rgba(188, 233, 233, 0.2)",
-            color: "#58C7C7"
-          }),
-          css({
-            backgroundColor: "rgba(188, 233, 233, 0.2)",
-            color: "#58C7C7"
-          }),
-          css({
-            backgroundColor: "rgba(255, 212, 214, 0.2)",
-            color: "#FB8890"
-          }),
-          css({
-            backgroundColor: "rgba(255, 239, 191, 0.6)",
-            color: "#FFC342"
-          }),
-          css({
-            backgroundColor: "rgba(0, 0, 0, 0.1)",
-            color: "rgba(0, 0, 0, 0.4)"
-          })
-        ];
-        const colorIndex = (day.day - 1) % colors.length;
-        return colors[colorIndex];
+        const colorIndex = (day.day - 1) % COLORS.length;
+        return COLORS[colorIndex];
       case "posted":
         return postedDayStyle;
       case "today":
