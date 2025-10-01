@@ -65,7 +65,7 @@
 
 ## 実戦例：ログインフォームを作る
 
-<img src="../images/login-form.png" style="max-width: 100%; width: 300px" alt="" />
+<img src="../../images/login-form.png" style="max-width: 100%; width: 300px" alt="" />
 
 実際によく使われるログインフォームのマークアップをしてみます。IDとパスワードの入力欄があり、送信できるログインボタンがあります。各入力欄には、値があるときだけ表示される削除ボタンがあります。
 

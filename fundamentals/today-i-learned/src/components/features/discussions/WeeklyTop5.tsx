@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { Avatar } from "@/components/shared/ui/Avatar";
-import { MarkdownRenderer } from "@/components/shared/ui/MarkdownRenderer";
 import { useWeeklyTopDiscussions } from "@/api/hooks/useDiscussions";
 import { css } from "@styled-system/css";
 
@@ -15,17 +14,6 @@ function getWeekLabel(): string {
   const weekOfMonth = Math.ceil(weekStart.getDate() / 7);
 
   return `${month}월 ${weekOfMonth}째주 인기글`;
-}
-
-function truncateMarkdown(content: string, maxLength: number): string {
-  const plainText = content
-    .replace(/[#*`\[\]()]/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-  if (plainText.length <= maxLength) {
-    return plainText;
-  }
-  return plainText.slice(0, maxLength) + "...";
 }
 
 function PopularPostItem({ post, rank }: { post: any; rank: number }) {
