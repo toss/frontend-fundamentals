@@ -9,6 +9,7 @@ interface BaseComponentProps {
 }
 import type { GitHubUser } from "@/api/remote/user";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
+import { css } from "@styled-system/css";
 
 interface ActivityContentProps extends BaseComponentProps {
   isLoading: boolean;
@@ -75,7 +76,7 @@ export function ActivityContent({
   if (userPosts.length > 0) {
     return (
       <>
-        <div className="space-y-4">
+        <div className={activityContentContainer}>
           {userPosts.map((discussion) => (
             <PostCard
               key={discussion.id}
@@ -119,3 +120,9 @@ export function ActivityContent({
     </div>
   );
 }
+
+const activityContentContainer = css({
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.5rem"
+});
