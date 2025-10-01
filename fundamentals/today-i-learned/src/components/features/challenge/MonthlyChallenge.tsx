@@ -196,12 +196,6 @@ export function MonthlyChallenge({ challenge }: MonthlyChallengeProps) {
     );
   }
 
-  // 7x5 그리드로 배치 (주단위)
-  const weeks = [];
-  for (let i = 0; i < displayData.days.length; i += 7) {
-    weeks.push(displayData.days.slice(i, i + 7));
-  }
-
   return (
     <div className={challengeContainer}>
       <div className={headerSection}>
@@ -212,16 +206,8 @@ export function MonthlyChallenge({ challenge }: MonthlyChallengeProps) {
       </div>
       <Card variant="bordered" padding="md" className="w-full">
         <div className={cardContent}>
-          {weeks.map((week, weekIndex) => (
-            <div key={weekIndex} className={calendarGrid}>
-              {week.map((day) => (
-                <ChallengeDayItem key={day.day} day={day} />
-              ))}
-              {week.length < 7 &&
-                Array.from({ length: 7 - week.length }).map((_, emptyIndex) => (
-                  <div key={`empty-${emptyIndex}`} className={emptyCell} />
-                ))}
-            </div>
+          {displayData.days.map((day) => (
+            <ChallengeDayItem key={day.day} day={day} />
           ))}
         </div>
       </Card>
@@ -233,6 +219,7 @@ export function MonthlyChallenge({ challenge }: MonthlyChallengeProps) {
 const challengeContainer = css({
   display: "flex",
   flexDirection: "column",
+  padding: "1rem",
   gap: "1.5rem"
 });
 
@@ -258,8 +245,8 @@ const subtitle = css({
 });
 
 const cardContent = css({
-  display: "flex",
-  flexDirection: "column",
+  display: "grid",
+  gridTemplateColumns: "repeat(7, 1fr)",
   gap: "1rem"
 });
 
@@ -279,8 +266,10 @@ const dayItemContainer = css({
 });
 
 const dayCircle = css({
-  width: "3.5rem",
-  height: "3.5rem",
+  minWidth: "1.5rem",
+  minHeight: "1.5rem",
+  width: "100%",
+  aspectRatio: "1/1",
   borderRadius: "50%",
   display: "flex",
   alignItems: "center",
