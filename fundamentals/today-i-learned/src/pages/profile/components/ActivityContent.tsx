@@ -22,6 +22,7 @@ interface ActivityContentProps extends BaseComponentProps {
   refetch: () => Promise<any>;
 }
 
+// FIXME: infinity data fetching이 3번 반복되는 문제
 export function ActivityContent({
   isLoading,
   error,
@@ -94,7 +95,7 @@ export function ActivityContent({
             className="flex items-center justify-center py-4"
           >
             {isFetchingNextPage && (
-              <div className="space-y-4">
+              <div className={activityContentContainer}>
                 {Array.from({ length: 3 }).map((_, index) => (
                   <PostCardSkeleton key={`loading-${index}`} />
                 ))}
