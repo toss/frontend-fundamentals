@@ -60,7 +60,7 @@ const hallOfFameSection = css({
 });
 
 const activitySection = css({
-  paddingX: { lg: "1.5rem" },
+  padding: "1rem",
   paddingBottom: "2rem"
 });
 
