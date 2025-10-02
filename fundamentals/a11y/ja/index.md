@@ -1,33 +1,31 @@
 ---
+# https://vitepress.dev/reference/default-theme-home-page
 layout: home
-title: Bundling
-description: Frontend Bundling Guide (Coming Soon)
-comments: false
+
+hero:
+  name: "A11y Fundamentals"
+  tagline: "フロントエンド・アクセシビリティのすべて"
+  image:
+    loading: eager
+    fetchpriority: high
+    decoding: async
+    src: /images/ff-symbol-gradient-webp-80.webp
+    alt: Frontend Fundamentals symbol
+  actions:
+    - text: はじめる
+      link: /overview
+
+features:
+  - icon: 📦
+    title: なぜアクセシビリティを守るべきなのでしょうか？
+    details: 障害の有無にかかわらず、開発者を含むすべての人により良いWeb体験を提供できます。
+    link: /why
+  - icon: 🚀
+    title: 主要原則
+    details: 正しい構造、明確な意味、予測可能なインタラクション、視覚情報の補完という4つのコア原則を見ていきます。
+    link: /principles
+  - icon: 🔍
+    title: eslintでアクセシビリティを改善する
+    details: コード作成段階でアクセシビリティの問題を事前に発見・解決し、デザインシステムと組み合わせる方法を学びます。
+    link: /eslint/rules
 ---
-
-<div class="coming-soon">
-  <h2>✨ Coming Soon</h2>
-  <p>Stay tuned! We're working on something awesome for you.</p>
-</div>
-
-<style>
-.coming-soon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 60vh;
-  text-align: center;
-  color: var(--vp-c-text-2);
-}
-
-.coming-soon h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  border: none;
-}
-
-.coming-soon p {
-  font-size: 1.2rem;
-}
-</style>

@@ -24,7 +24,88 @@ export default defineConfig({
     ja: {
       label: "日本語",
       lang: "ja",
-      themeConfig: { nav: [{ text: "ホーム", link: "/ja" }] }
+      themeConfig: {
+        nav: [{ text: "ホーム", link: "/ja/" }],
+        sidebar: [
+          {
+            text: "紹介",
+            items: [
+              { text: "はじめに", link: "/ja/overview" },
+              { text: "体験してみる", link: "/ja/playground" },
+              { text: "アクセシビリティを守る理由", link: "/ja/why" },
+              { text: "主要原則", link: "/ja/principles" }
+            ]
+          },
+          {
+            text: "実践ガイド",
+            items: [
+              {
+                text: "1. 構造を明確にする",
+                items: [
+                  {
+                    text: "ボタンの中にボタンを入れない",
+                    link: "/ja/structure/button-inside-button"
+                  },
+                  {
+                    text: "テーブル行に直接onClickを付けない",
+                    link: "/ja/structure/table-row-link"
+                  }
+                ]
+              },
+              {
+                text: "2. 意味を正確に伝える",
+                items: [
+                  {
+                    text: "インタラクティブ要素に名前を付ける",
+                    link: "/ja/semantic/required-label"
+                  },
+                  {
+                    text: "同じ名前の要素には説明を追加する",
+                    link: "/ja/semantic/duplicate-interactive-element"
+                  }
+                ]
+              },
+              {
+                text: "3. 予測可能な動作を作る",
+                items: [
+                  {
+                    text: "ボタンの役割と動作を一致させる",
+                    link: "/ja/predictability/fake-button"
+                  },
+                  {
+                    text: "入力要素は &lt;form&gt; で包む",
+                    link: "/ja/predictability/form"
+                  }
+                ]
+              },
+              {
+                text: "4. 視覚情報を補完する",
+                items: [
+                  {
+                    text: "画像とアイコンに適切な代替テキストを提供する",
+                    link: "/ja/alt-text/image-alt"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            text: "発展ガイド",
+            items: [
+              {
+                text: "ESLintでアクセシビリティを改善する",
+                items: [
+                  { text: "主要ルール紹介", link: "/ja/eslint/rules" },
+                  {
+                    text: "デザインシステムと組み合わせる",
+                    link: "/ja/eslint/design-system"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
     },
     "zh-hans": {
       label: "简体中文",
