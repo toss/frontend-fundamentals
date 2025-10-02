@@ -205,7 +205,7 @@ export function MonthlyChallenge({ challenge }: MonthlyChallengeProps) {
           {displayData.year}년 {monthName} 한 달 기록
         </p>
       </div>
-      <Card variant="bordered" padding="md" className="w-full">
+      <Card variant="bordered" padding="md" className={cardContainer}>
         <div className={cardContent}>
           {displayData.days.map((day) => (
             <ChallengeDayItem key={day.day} day={day} />
@@ -245,10 +245,14 @@ const subtitle = css({
   letterSpacing: "-0.025em"
 });
 
+const cardContainer = css({
+  maxWidth: "32rem"
+});
+
 const cardContent = css({
   display: "grid",
   gridTemplateColumns: "repeat(7, 1fr)",
-  gap: "1rem"
+  gap: "0.75rem"
 });
 
 const calendarGrid = css({
@@ -263,7 +267,7 @@ const dayItemContainer = css({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  gap: "0.75rem"
+  gap: "0.5rem"
 });
 
 const dayCircle = css({
