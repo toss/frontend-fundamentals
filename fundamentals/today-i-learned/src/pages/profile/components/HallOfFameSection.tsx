@@ -142,8 +142,8 @@ const sectionTitle = css({
 // Grid Layout
 const postsGrid = css({
   display: "grid",
-  gridTemplateColumns: { base: "1fr", md: "repeat(2, 1fr)" },
-  gap: "1rem",
+  gridTemplateColumns: "repeat(auto-fill, minmax(400px, 1fr))",
+  gap: "0.5rem",
   width: "100%"
 });
 

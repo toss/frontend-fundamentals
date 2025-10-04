@@ -18,7 +18,7 @@
 
 ```jsx
 <div class="button-style" style="cursor: pointer" onclick="handleAnything()">
-   お問い合わせ
+  お問い合わせ
 </div>
 ```
 

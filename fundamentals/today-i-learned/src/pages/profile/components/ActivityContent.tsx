@@ -9,6 +9,7 @@ interface BaseComponentProps {
 }
 import type { GitHubUser } from "@/api/remote/user";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
+import { css } from "@styled-system/css";
 
 interface ActivityContentProps extends BaseComponentProps {
   isLoading: boolean;
@@ -21,6 +22,7 @@ interface ActivityContentProps extends BaseComponentProps {
   refetch: () => Promise<any>;
 }
 
+// FIXME: infinity data fetching이 3번 반복되는 문제
 export function ActivityContent({
   isLoading,
   error,
@@ -75,7 +77,7 @@ export function ActivityContent({
   if (userPosts.length > 0) {
     return (
       <>
-        <div className="space-y-4">
+        <div className={activityContentContainer}>
           {userPosts.map((discussion) => (
             <PostCard
               key={discussion.id}
@@ -93,7 +95,7 @@ export function ActivityContent({
             className="flex items-center justify-center py-4"
           >
             {isFetchingNextPage && (
-              <div className="space-y-4">
+              <div className={activityContentContainer}>
                 {Array.from({ length: 3 }).map((_, index) => (
                   <PostCardSkeleton key={`loading-${index}`} />
                 ))}
@@ -119,3 +121,9 @@ export function ActivityContent({
     </div>
   );
 }
+
+const activityContentContainer = css({
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.5rem"
+});
