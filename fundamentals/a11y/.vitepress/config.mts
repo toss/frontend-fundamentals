@@ -228,7 +228,7 @@ export default defineConfig({
       {
         rel: "icon",
         type: "image/x-icon",
-        href: "/bundling/images/favicon.ico"
+        href: "/a11y/images/favicon.ico"
       }
     ],
     [
