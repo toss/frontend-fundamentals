@@ -313,8 +313,3 @@ const skeletonDay = css({
   borderRadius: "50%",
   animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite"
 });
-
-const emptyCell = css({
-  width: "3.5rem",
-  height: "3.5rem"
-});
