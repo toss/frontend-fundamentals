@@ -7,7 +7,6 @@
     }
   ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/" },
     {
       "source": "/fundamentals/code-quality/:path*",
       "destination": "/dist/fundamentals/code-quality/:path*"
@@ -23,6 +22,11 @@
     {
       "source": "/code-quality/:path*",
       "destination": "/dist/fundamentals/code-quality/:path*"
-    }
+    },
+    {
+      "source": "/today-i-learned/:path*",
+      "destination": "/today-i-learned/index.html"
+    },
+    { "source": "/(.*)", "destination": "/" }
   ]
 }
