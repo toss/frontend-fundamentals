@@ -9,7 +9,7 @@
       "destination": "/dist/fundamentals/bundling/:path*"
     },
     {
-      "source": "/fundamentals/today-i-learned/:path*",
+      "source": "/fundamentals/today-i-learned/(.*)",
       "destination": "/dist/fundamentals/today-i-learned/index.html"
     },
     {
