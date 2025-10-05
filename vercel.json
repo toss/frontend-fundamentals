@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/code-quality/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/fundamentals/code-quality/:path*",

@@ -7,7 +7,7 @@ export function UnauthenticatedState() {
 
   return (
     <div className={container}>
-      <span className={title}>오늘 배운 내용을 기록하려면 로그인해 주세요</span>
+      <span className={title}>오늘 배운 내용을 기록하려면 로그인 해주세요</span>
 
       <Button onClick={login} variant="primary" size="lg" className={button}>
         로그인하기
