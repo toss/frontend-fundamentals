@@ -113,7 +113,7 @@ export default defineConfig({
             text: "Suspense Error 디버깅 _ 김형규",
             link: "/pages/experience/suspense_debug_by_hyungkyu.md"
           },
-          { text: "기여하기", link: "/pages/experience/contribute.md" }
+          { text: "기여하기 탬플릿", link: "/pages/experience/contribute.md" }
         ]
       }
     ]

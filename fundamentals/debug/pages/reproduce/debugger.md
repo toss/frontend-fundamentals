@@ -36,7 +36,7 @@ main();
 
 단순히 console.log만 쓰기보다는, 다양한 방법으로 로그를 꾸미고, 정리하고, 조건을 걸어서 더 효율적으로 디버깅할 수 있어요.
 
-#### 1. style
+### 1. style
 
 console을 꾸며서 문자열에 스타일을 줄 수 있어요.
 
@@ -50,7 +50,7 @@ console.log(
 ![](../../images/reproduce/console/1.png)
 <br>
 
-#### 2. console.table
+### 2. console.table
 
 배열/객체를 표 형태로 보기 쉽게 출력할 수 있어요.
 
@@ -65,7 +65,7 @@ console.table(users);
 ![](../../images/reproduce/console/2.png)
 <br>
 
-#### 3. console.group
+### 3. console.group
 
 관련 로그 묶어볼 수 있어요. 여러 로그를 그룹으로 묶어서 보기 쉽게 해줄 수 있어요
 
@@ -79,7 +79,7 @@ console.groupEnd();
 ![](../../images/reproduce/console/3.png)
 <br>
 
-#### 4. console.time / console.timeEnd
+### 4. console.time / console.timeEnd
 
 코드 실행 시간 측정할 수 있어요. 함수나 코드 블록의 실행 시간을 볼 때 유용해요.
 
@@ -94,7 +94,7 @@ setTimeout(() => {
 ![](../../images/reproduce/console/4.png)
 <br>
 
-#### 5. console.warn / console.error
+### 5. console.warn / console.error
 
 로그 레벨 구분할 수 있어요. 중요한 경고나 에러는 눈에 띄게할 수 있어요
 
@@ -106,7 +106,7 @@ console.error("이건 에러입니다!");
 ![](../../images/reproduce/console/5.png)
 <br>
 
-#### 6. 조건부 디버깅
+### 6. 조건부 디버깅
 
 특정 조건일 때만 로그 출력하면 불필요한 로그를 제외할 수 있어요
 
@@ -121,7 +121,7 @@ for (let i = 0; i < 10; i++) {
 ![](../../images/reproduce/console/6.png)
 <br>
 
-#### 7. console.assert
+### 7. console.assert
 
 조건이 거짓일 때만 에러 출력할 수 있어요.
 
@@ -132,7 +132,7 @@ console.assert(1 === 2, "1은 2가 아니기 때문에 이 메시지가 뜸!");
 ![](../../images/reproduce/console/7.png)
 <br>
 
-#### 8. Tagged Logging
+### 8. Tagged Logging
 
 로그에 태그 붙이면 검색에 용이해요.
 
@@ -143,7 +143,7 @@ console.log("[API][POST /login]", "로그인 요청 결과:", response);
 
 <br>
 
-#### 9. console.trace
+### 9. console.trace
 
 호출 스택 추적할 수 있어요.
 
@@ -166,7 +166,7 @@ callA();
 ![](../../images/reproduce/console/9.png)
 <br>
 
-#### 10. 브라우저 콘솔 필터링 기능을 활용해 보아요.
+### 10. 브라우저 콘솔 필터링 기능을 활용해 보아요.
 
 Chrome DevTools에서는 로그를 레벨별로 필터링 가능해요. 특정 레벨만 빠르게 보고 싶을 때, 탭 분리로 효율적 디버깅이 가능해요
 
