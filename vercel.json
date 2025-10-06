@@ -1,6 +1,4 @@
 {
-  "buildCommand": "yarn build",
-  "outputDirectory": "dist",
   "redirects": [
     {
       "source": "/",
@@ -11,28 +9,28 @@
   "rewrites": [
     {
       "source": "/code-quality/:path*",
-      "destination": "/fundamentals/code-quality/:path*"
+      "destination": "/code-quality/:path*"
     },
     {
-      "source": "/fundamentals/code-quality/:path*",
-      "destination": "/fundamentals/code-quality/:path*"
+      "source": "/bundling/:path*",
+      "destination": "/bundling/:path*"
     },
     {
-      "source": "/fundamentals/bundling/:path*",
-      "destination": "/fundamentals/bundling/:path*"
+      "source": "/a11y/:path*",
+      "destination": "/a11y/:path*"
     },
+
     {
       "source": "/today-i-learned/assets/:path*",
-      "destination": "/fundamentals/today-i-learned/assets/:path*"
+      "destination": "/today-i-learned/assets/:path*"
     },
     {
       "source": "/today-i-learned/:path*",
-      "destination": "/fundamentals/today-i-learned/index.html"
+      "destination": "/today-i-learned/index.html"
     },
     {
-      "source": "/fundamentals/today-i-learned/:path*",
-      "destination": "/fundamentals/today-i-learned/:path*"
-    },
-    { "source": "/(.*)", "destination": "/" }
+      "source": "/(.*)",
+      "destination": "/"
+    }
   ]
 }
