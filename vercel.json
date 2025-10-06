@@ -17,22 +17,10 @@
     },
     {
       "source": "/fundamentals/today-i-learned/:path*",
-      "missing": [
-        {
-          "type": "file",
-          "value": "/dist/fundamentals/today-i-learned/:path*"
-        }
-      ],
       "destination": "/dist/fundamentals/today-i-learned/index.html"
     },
     {
       "source": "/today-i-learned/:path*",
-      "missing": [
-        {
-          "type": "file",
-          "value": "/dist/fundamentals/today-i-learned/:path*"
-        }
-      ],
       "destination": "/dist/fundamentals/today-i-learned/index.html"
     },
     {
