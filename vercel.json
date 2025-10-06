@@ -21,10 +21,6 @@
       "destination": "/a11y/:path*"
     },
     {
-      "source": "/today-i-learned/assets/:path*",
-      "destination": "/today-i-learned/assets/:path*"
-    },
-    {
       "source": "/today-i-learned/:path*",
       "destination": "/today-i-learned/index.html"
     },
