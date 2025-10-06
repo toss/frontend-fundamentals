@@ -1,4 +1,5 @@
 {
+  "outputDirectory": "./dist/fundamentals",
   "redirects": [
     {
       "source": "/",
@@ -19,7 +20,6 @@
       "source": "/a11y/:path*",
       "destination": "/a11y/:path*"
     },
-
     {
       "source": "/today-i-learned/assets/:path*",
       "destination": "/today-i-learned/assets/:path*"
