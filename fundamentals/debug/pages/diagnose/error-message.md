@@ -161,7 +161,7 @@ fetch("/api/data")
 
 ![](../../images/diagnose/error-syntax-9.png)
 
-모듈을 import 하는 과정에서도 문법 오류(`SyntaxError`)가 발생할 수 있어요. 특히 ES 모듈(ESM)과 CommonJS(CJS) 방식이 혼합된 환경에서는 설정이 서로 충돌해서 문법 오류처럼 보이는 에러가 나타날 수 있어요. 
+모듈을 import 하는 과정에서도 문법 오류(`SyntaxError`)가 발생할 수 있어요. 특히 ES 모듈(ESM)과 CommonJS(CJS) 방식이 혼합된 환경에서는 설정이 서로 충돌해서 문법 오류처럼 보이는 에러가 나타날 수 있어요.
 이때 모듈 관련 에러 메시지를 보면 단순 문법 문제가 아니라 **모듈 시스템 설정에 문제가 있을 가능성**을 유추할 수 있어요.
 
 예를 들어, .js 파일에 import 구문을 사용하게 되면 아래와 같은 에러 메시지가 나타나요. Node.js는 기본적으로 .js 파일을 CommonJS로 해석하기 때문에, `import`를 사용할 수 없고 `require()`를 써야 해요.
