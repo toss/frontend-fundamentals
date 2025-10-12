@@ -60,7 +60,7 @@ export default defineConfig({
                 text: "최대한 간단하게 재현하기",
                 link: "/pages/reproduce/simply.md"
               },
-              { text: "디버거 활용하기", link: "/pages/reproduce/debugger.md" },
+              { text: "디버거와 콘솔로그 활용하기", link: "/pages/reproduce/debugger.md" },
               {
                 text: "일반적인 범위에서 벗어난 값 재현하기",
                 link: "/pages/reproduce/out-range.md"
@@ -110,10 +110,10 @@ export default defineConfig({
         text: "디버깅 실무 사례",
         items: [
           {
-            text: "Suspense Error 디버깅 _ 김형규",
-            link: "/pages/experience/suspense_debug_by_hyungkyu.md"
+            text: "Suspense Error 디버깅 by.김형규",
+            link: "/pages/contribute/suspense_debug_by_hyungkyu.md"
           },
-          { text: "기여하기 탬플릿", link: "/pages/experience/contribute.md" }
+          { text: "기여하기 탬플릿", link: "/pages/contribute/template.md" }
         ]
       }
     ]
