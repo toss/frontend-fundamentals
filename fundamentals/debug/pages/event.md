@@ -14,7 +14,7 @@
 
 1. [디버깅 실무 사례 > 기여하기 탬플릿](../pages/contribute/template.md)을 복사하여 `debug/contribute`폴더에 새로운 파일로 생성하기 (간단한 사례도 환영해요)
 ```
-# {에러 종류} 디버깅
+# {버그 종류} 디버깅
 ### 부제
 <br/>
 <ContributorHeader name="이름" avatar="../../images/contribute/profile-default.png" />
@@ -32,7 +32,7 @@
 ```
 2. 탬플릿에 맞게 디버깅 사례를 작성하기
 3. config.mts 파일에서 목록 중 디버깅 실무 사례 > items에 item 추가하기
-    - item.text: {버그종류} 디버깅 by.작성자이름
+    - item.text: {버그 종류} 디버깅 by.작성자이름
     - item.link: /pages/contribute/{파일명}.md 
 4. PR로 올리기
 

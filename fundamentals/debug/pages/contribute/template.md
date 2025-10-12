@@ -1,5 +1,5 @@
 
-# {에러 종류} 디버깅
+# {버그 종류} 디버깅
 ### 부제
 <br/>
 <ContributorHeader name="이름" avatar="../../images/contribute/profile-default.png" />
@@ -22,6 +22,6 @@
     - 부제는 선택입니다.
     - 각 항목에 부합하는 내용이 없다면 스킵하셔도 됩니다.
 2. config.mts 파일에서 목록 중, 디버깅 실무 사례 > items에 item 추가하기
-    - item.text: {버그종류} 디버깅 by.작성자이름
+    - item.text: {버그 종류} 디버깅 by.작성자이름
     - item.link: /pages/contribute/{파일명}.md
 3. PR로 올리기
