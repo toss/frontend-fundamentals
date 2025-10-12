@@ -6,109 +6,75 @@ import { css } from "@styled-system/css";
 
 export function MyPage() {
   return (
-    <div className={pageContainer}>
-      <div className={contentWrapper}>
-        <div className={mainGridLayout}>
-          <div className={mainContentColumn}>
-            <div className={profileSection}>
-              <ProfileHeader />
-            </div>
-
-            <SectionDivider />
-
-            <div className={hallOfFameSection}>
-              <HallOfFameSection />
-            </div>
-
-            <SectionDivider />
-
-            <div className={activitySection}>
-              <ActivitySection />
-            </div>
-          </div>
-
-          <div className={sidebarColumn}>
-            <div className={sidebarContent}>
-              <MonthlyChallenge />
-            </div>
-          </div>
+    <div className={gridLayout}>
+      <section className={leftContent}>
+        <div className={profileSection}>
+          <ProfileHeader />
         </div>
-      </div>
+
+        <SectionDivider />
+
+        <div className={hallOfFameSection}>
+          <HallOfFameSection />
+        </div>
+
+        <SectionDivider />
+
+        <div className={activitySection}>
+          <ActivitySection />
+        </div>
+      </section>
+
+      <section className={rightContent}>
+        <MonthlyChallenge />
+      </section>
     </div>
   );
 }
 
-// Page Layout Styles
-const pageContainer = css({
-  minHeight: "100vh",
-  backgroundColor: "white"
-});
-
-const contentWrapper = css({
-  maxWidth: "1440px",
-  margin: "0 auto",
-  paddingX: { base: 0, lg: "2rem" }
-});
-
-const mainGridLayout = css({
+const gridLayout = css({
   display: "grid",
   gridTemplateColumns: { base: "1fr", lg: "5fr 3fr" },
-  gap: "2rem"
+  height: "100%",
+  backgroundColor: "white",
+  overflow: "hidden"
 });
 
-// Main Content Column
-const mainContentColumn = css({
+const leftContent = css({
   display: "flex",
   flexDirection: "column",
   borderLeft: { lg: "1px solid rgba(201, 201, 201, 0.4)" },
   borderRight: { lg: "1px solid rgba(201, 201, 201, 0.4)" },
-  minWidth: { lg: "820px" }
+  height: "100%",
+  overflowY: "auto",
+  scrollbarWidth: "none"
 });
 
 const profileSection = css({
-  paddingX: { lg: "1.5rem" },
-  paddingTop: "1.5rem",
-  paddingBottom: "1.5rem"
+  paddingY: "2rem"
 });
 
 const hallOfFameSection = css({
-  paddingX: { lg: "1.5rem" },
+  padding: "1rem",
   paddingBottom: "2rem"
 });
 
 const activitySection = css({
-  paddingX: { lg: "1.5rem" },
+  padding: "1rem",
   paddingBottom: "2rem"
 });
 
-// Sidebar Column
-const sidebarColumn = css({
+const rightContent = css({
   display: { base: "none", lg: "block" },
-  marginTop: "1.5rem",
-  minWidth: { lg: "490px" }
-});
-
-const sidebarContent = css({
-  position: "sticky",
-  top: "1rem"
+  paddingBottom: "2rem",
+  overflowY: "auto",
+  scrollbarWidth: "none"
 });
 
 // Section Divider Component
 function SectionDivider() {
-  return (
-    <div className={sectionDividerContainer}>
-      <div className={sectionDividerLine} />
-    </div>
-  );
+  return <div className={sectionDividerLine} />;
 }
-
-const sectionDividerContainer = css({
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "flex-start",
-  paddingY: "1rem",
-  paddingX: 0
-});
 
 const sectionDividerLine = css({
   width: "100%",

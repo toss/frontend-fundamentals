@@ -62,7 +62,7 @@ export function ActivitySection({ className }: ActivitySectionProps) {
 const sectionContainer = css({
   display: "flex",
   flexDirection: "column",
-  gap: "1.5rem"
+  gap: "1rem"
 });
 
 const headerContainer = css({
