@@ -81,13 +81,13 @@ export default ComplexComponent;
 ```tsx
 import React, { useEffect } from "react";
 
-const SimpleComponent = () => {
-  function filterEvenNumbers(numbers) {
-    return numbers.filter((num) => {
-      return num % 2 === 1;
-    });
-  }
+function filterEvenNumbers(numbers) {
+  return numbers.filter((num) => {
+    return num % 2 === 1;
+  });
+}
 
+const SimpleComponent = () => {
   useEffect(() => {
     const testArray = [1, 2, 3, 4, 5, 6];
     const result = filterEvenNumbers(testArray);

@@ -20,7 +20,7 @@ comments: false
 **재현되지 않는 버그는 고칠 수 없어요.** 문제를 확실히 재현할 수 있어야, 빠르게 수정하고 테스트할 수 있어요.
 
 - [최대한 간단한 코드로 재현하기](./reproduce/simply.md)
-- [디버거, 콘솔 활용하기](./reproduce/debugger.md)
+- [디버거와 콘솔로그 활용하기](./reproduce/debugger.md)
 - [일반적인 범위에서 벗어나도록 재현하기](./reproduce/out-range.md)
 - [반복적인 재현 과정을 자동화하기](./reproduce/repeat.md)
 - [버그 발생 경로를 추적하기](./reproduce/trace.md)
