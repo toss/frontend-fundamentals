@@ -137,14 +137,14 @@ export default defineConfig({
       "meta",
       {
         property: "og:image",
-        content: "https://static.toss.im/illusts/bf-meta.png"
+        content: "https://static.toss.im/illusts-common/df-meta.png"
       }
     ],
     [
       "meta",
       {
         name: "twitter:image",
-        content: "https://static.toss.im/illusts/bf-meta.png"
+        content: "https://static.toss.im/illusts-common/df-meta.png"
       }
     ],
     [
