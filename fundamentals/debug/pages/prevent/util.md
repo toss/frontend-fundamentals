@@ -42,7 +42,7 @@ export const TextInput: React.FC<Props> = ({
 };
 ```
 
-## 린트 룰에 맞춤법 확인 추가 
+## 린트 룰에 맞춤법 확인 추가
 
 ### 문제
 
