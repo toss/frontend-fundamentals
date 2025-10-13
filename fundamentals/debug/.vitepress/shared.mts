@@ -59,11 +59,11 @@ export const sharedConfig = defineConfig({
   transformHead: ({ pageData }) => {
     const head: HeadConfig[] = [];
     const title =
-      pageData.frontmatter.title || pageData.title || "Bundling Fundamentals";
+      pageData.frontmatter.title || pageData.title || "Debug fundamentals";
     const description =
       pageData.frontmatter.description ||
       pageData.description ||
-      "Practical Guide to Efficient Frontend Bundling";
+      "Practical Guide to Efficient Frontend Debug";
 
     head.push(["meta", { property: "og:title", content: title }]);
     head.push(["meta", { property: "og:description", content: description }]);
