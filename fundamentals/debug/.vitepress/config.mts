@@ -14,109 +14,131 @@ export default defineConfig({
   description: "프론트엔드 접근성의 모든 것",
   ignoreDeadLinks: false,
   base: "/debug/",
-  themeConfig: {
-    // https://vitepress.dev/reference/default-theme-config
-    ...sharedConfig.themeConfig,
-    nav: [{ text: "홈", link: "/" }],
-    sidebar: [
-      {
-        text: "소개",
-        items: [
+  locales: {
+    // temporary
+    en: {
+      label: "English",
+      lang: "en",
+      themeConfig: { nav: [{ text: "Home", link: "/en/" }] }
+    },
+    ja: {
+      label: "日本語",
+      lang: "ja",
+      themeConfig: { nav: [{ text: "ホーム", link: "/ja/" }] }
+    },
+    "zh-hans": {
+      label: "简体中文",
+      lang: "zh-hans",
+      themeConfig: { nav: [{ text: "首页", link: "/zh-hans" }] }
+    },
+    root: {
+      label: "한국어",
+      lang: "ko",
+      themeConfig: {
+        // https://vitepress.dev/reference/default-theme-config
+        ...sharedConfig.themeConfig,
+        nav: [{ text: "홈", link: "/" }],
+        sidebar: [
           {
-            text: "시작하기",
-            link: "/pages/introduce.md"
-          },
-          {
-            text: "효과적인 디버깅을 위한 4가지 단계",
-            link: "/pages/start.md"
-          },
-          {
-            text: "참여하기",
-            link: "/pages/event.md"
-          }
-        ]
-      },
-      {
-        text: "실전 가이드",
-        items: [
-          {
-            text: "진단하기",
-            link: "/pages/diagnose/index.md",
-            collapsed: false,
+            text: "소개",
             items: [
               {
-                text: "에러 메세지로 원인 추측하기",
-                link: "/pages/diagnose/error-message.md"
-              },
-              { text: "작업 지도 그리기", link: "/pages/diagnose/map.md" }
-            ]
-          },
-          {
-            text: "재현하기",
-            link: "/pages/reproduce/index.md",
-            collapsed: false,
-            items: [
-              {
-                text: "최대한 간단하게 재현하기",
-                link: "/pages/reproduce/simply.md"
-              },
-              { text: "디버거 활용하기", link: "/pages/reproduce/debugger.md" },
-              {
-                text: "일반적인 범위에서 벗어난 값 재현하기",
-                link: "/pages/reproduce/out-range.md"
+                text: "시작하기",
+                link: "/pages/introduce.md"
               },
               {
-                text: "반복적인 재현 과정을 자동화하기",
-                link: "/pages/reproduce/repeat.md"
+                text: "효과적인 디버깅을 위한 4가지 단계",
+                link: "/pages/start.md"
               },
               {
-                text: "버그 발생 경로를 추적하기",
-                link: "/pages/reproduce/trace.md"
+                text: "참여하기",
+                link: "/pages/event.md"
               }
             ]
           },
           {
-            text: "수정하기",
-            link: "/pages/fix/index.md",
-            collapsed: false,
+            text: "실전 가이드",
             items: [
-              { text: "근본 원인 수정하기", link: "/pages/fix/correct.md" },
-              { text: "순수함수 만들기", link: "/pages/fix/pure.md" },
-              { text: "데드코드 제거하기", link: "/pages/fix/dead-code.md" }
+              {
+                text: "진단하기",
+                link: "/pages/diagnose/index.md",
+                collapsed: false,
+                items: [
+                  {
+                    text: "에러 메세지로 원인 추측하기",
+                    link: "/pages/diagnose/error-message.md"
+                  },
+                  { text: "작업 지도 그리기", link: "/pages/diagnose/map.md" }
+                ]
+              },
+              {
+                text: "재현하기",
+                link: "/pages/reproduce/index.md",
+                collapsed: false,
+                items: [
+                  {
+                    text: "최대한 간단하게 재현하기",
+                    link: "/pages/reproduce/simply.md"
+                  },
+                  { text: "디버거와 콘솔로그 활용하기", link: "/pages/reproduce/debugger.md" },
+                  {
+                    text: "일반적인 범위에서 벗어난 값 재현하기",
+                    link: "/pages/reproduce/out-range.md"
+                  },
+                  {
+                    text: "반복적인 재현 과정을 자동화하기",
+                    link: "/pages/reproduce/repeat.md"
+                  },
+                  {
+                    text: "버그 발생 경로를 추적하기",
+                    link: "/pages/reproduce/trace.md"
+                  }
+                ]
+              },
+              {
+                text: "수정하기",
+                link: "/pages/fix/index.md",
+                collapsed: false,
+                items: [
+                  { text: "근본 원인 수정하기", link: "/pages/fix/correct.md" },
+                  { text: "순수함수 만들기", link: "/pages/fix/pure.md" },
+                  { text: "데드코드 제거하기", link: "/pages/fix/dead-code.md" }
+                ]
+              },
+              {
+                text: "재발 방지하기",
+                link: "/pages/prevent/index.md",
+                collapsed: false,
+                items: [
+                  {
+                    text: "에러 로그 상세히 남기기",
+                    link: "/pages/prevent/error-log.md"
+                  },
+                  {
+                    text: "버그 리포트 남기기",
+                    link: "/pages/prevent/bug-report.md"
+                  },
+                  {
+                    text: "팀과 공유하고 공통 유틸에 반영하기",
+                    link: "/pages/prevent/util.md"
+                  }
+                ]
+              }
             ]
           },
           {
-            text: "재발 방지하기",
-            link: "/pages/prevent/index.md",
-            collapsed: false,
+            text: "디버깅 실무 사례",
             items: [
               {
-                text: "에러 로그 상세히 남기기",
-                link: "/pages/prevent/error-log.md"
+                text: "Suspense Error 디버깅 by.김형규",
+                link: "/pages/contribute/suspense_debug_by_hyungkyu.md"
               },
-              {
-                text: "버그 리포트 남기기",
-                link: "/pages/prevent/bug-report.md"
-              },
-              {
-                text: "팀과 공유하고 공통 유틸에 반영하기",
-                link: "/pages/prevent/util.md"
-              }
+              { text: "기여하기 탬플릿", link: "/pages/contribute/template.md" }
             ]
           }
         ]
       },
-      {
-        text: "디버깅 실무 사례",
-        items: [
-          {
-            text: "Suspense Error 디버깅 _ 김형규",
-            link: "/pages/experience/suspense_debug_by_hyungkyu.md"
-          },
-          { text: "기여하기 탬플릿", link: "/pages/experience/contribute.md" }
-        ]
-      }
-    ]
+    }
   },
   markdown: {
     config: (md) => {
@@ -137,14 +159,14 @@ export default defineConfig({
       "meta",
       {
         property: "og:image",
-        content: "https://static.toss.im/illusts/bf-meta.png"
+        content: "https://static.toss.im/illusts-common/df-meta.png"
       }
     ],
     [
       "meta",
       {
         name: "twitter:image",
-        content: "https://static.toss.im/illusts/bf-meta.png"
+        content: "https://static.toss.im/illusts-common/df-meta.png"
       }
     ],
     [
