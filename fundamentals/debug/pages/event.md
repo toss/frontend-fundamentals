@@ -12,7 +12,7 @@
 
 아래의 순서대로 참여해주세요.
 
-1. [디버깅 실무 사례 > 기여하기 탬플릿](../pages/contribute/template.md)을 복사하여 `debug/contribute`폴더에 새로운 파일로 생성하기 (간단한 사례도 환영해요)
+1. [디버깅 실무 사례 > 기여하기 탬플릿](../pages/contribute/template.md)을 복사하여 `/debug/contribute`폴더에 새로운 파일로 생성하기 (간단한 사례도 환영해요)
 ```
 # {버그 종류} 디버깅
 ### 부제
