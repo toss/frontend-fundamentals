@@ -59,7 +59,7 @@ export const sharedConfig = defineConfig({
   transformHead: ({ pageData }) => {
     const head: HeadConfig[] = [];
     const title =
-      pageData.frontmatter.title || pageData.title || "Debugging Fundamentals";
+      pageData.frontmatter.title || pageData.title || "Debug fundamentals";
     const description =
       pageData.frontmatter.description ||
       pageData.description ||
