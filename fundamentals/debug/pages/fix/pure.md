@@ -76,7 +76,7 @@ react의 hook예시도 들어볼게요. 모달을 보여주는 로직이에요.
 
 ### 기존코드
 
-`localStorage`, `isTodayShown`등과 같은 여러 로직이 `useEffect` 내부에 흩어져 있어 모듈화되어 있지 않아요. 그래서 가독성도 떨어지고, 테스트도 어려워요3.
+`localStorage`, `isTodayShown`등과 같은 여러 로직이 `useEffect` 내부에 흩어져 있어 모듈화되어 있지 않아요. 그래서 가독성도 떨어지고, 테스트도 어려워요.
 
 ```tsx
 const STORAGE_KEY = "notification-modal-shownAt";
