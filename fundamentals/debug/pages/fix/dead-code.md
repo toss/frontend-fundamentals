@@ -56,7 +56,7 @@ A/B 테스트가 끝났는데 분기 코드가 남아 있으면, 독자가 “�
 
 ```tsx
 export function RecommendationBanner({ variant }: { variant: "A" | "B" }) {
-  //TODO:: 종료된 실험 제거 (실험안 A으로 종료)
+  //TODO: 종료된 실험 제거 (실험안 A로 종료)
   if (variant === "A") {
     return <BannerA />;
   } else {
