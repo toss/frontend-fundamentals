@@ -8,7 +8,7 @@
 
 다음과 같이 `<a>` 태그 안에 `<button>` 을 출력하는 컴포넌트를 넣는 것은 잘못된 방법이에요. HTML에서는 상호작용하는 요소 안에 또 다른 상호작용 요소를 넣는 걸 허용하지 않기 때문이에요[^1]. 이런 구조에서는 접근성에 문제가 생기고, 브라우저에서 예측하지 못한 동작이 생길 수 있어요.
 
-[^1]: https://www.w3.org/TR/2011/WD-html5-20110405/text-level-semantics.html#the-a-element 의 Content model 항목을 참고해주세요.
+[^1]: <https://www.w3.org/TR/2011/WD-html5-20110405/text-level-semantics.html#the-a-element> 의 Content model 항목을 참고해 주세요.
 
 ```jsx
 <a href="/go-to">
@@ -84,7 +84,7 @@ UI 구성상 다음과 같이 버튼처럼 보이는 카드 안에 또 다른 �
 
 ## 이런 구조가 왜 문제가 될까요?
 
-왜 버튼 안에 버튼을 넣으면 안되는지 자세히 설명해 드릴게요.
+왜 버튼 안에 버튼을 넣으면 안 되는지 자세히 설명해 드릴게요.
 
 ### 접근성 관점에서의 문제
 
