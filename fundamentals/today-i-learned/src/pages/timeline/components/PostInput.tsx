@@ -10,7 +10,8 @@ import { useErrorHandler } from "@/hooks/useErrorHandler";
 import { useToast } from "@/contexts/ToastContext";
 import { useAuth } from "@/contexts/AuthContext";
 
-export function PostInput() {
+// FIXME: UI 대비 코드가 복잡해서 1:1 매칭이 안된다고 느껴짐 -> 어떻게 하지?
+export function PostWriteSection() {
   const navigate = useNavigate();
 
   const createPostMutation = useCreateDiscussion();
@@ -22,45 +23,32 @@ export function PostInput() {
   const [content, setContent] = React.useState("");
   const [editorHeight, setEditorHeight] = React.useState(100);
 
-  const onSubmit = async (data: { title: string; content: string }) => {
-    try {
-      const newPost = await createPostMutation.mutateAsync({
-        title: data.title,
-        body: data.content
-      });
-      showSuccessToast("포스트 작성 완료", "성공적으로 게시되었습니다.", {
-        label: "보러가기",
-        onClick: () => navigate(`/post/${newPost.id}`)
-      });
-    } catch (error) {
-      handleApiError(error, "포스트 작성");
-    }
-  };
-
-  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value);
-  };
-
-  const handleContentChange = (value: string | undefined) => {
-    setContent(value || "");
-    setEditorHeight(calculateEditorHeight(value));
-  };
-
-  const handleTitleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      // Focus the markdown editor when Enter is pressed on title
-      const editorElement = document.querySelector(
-        "[data-md-editor] .cm-editor"
-      );
-      if (editorElement) {
-        (editorElement as HTMLElement).focus();
-      }
-    }
-  };
-
+  // TODO: react-hook-form + zod 사용하기
   return (
-    <div className={postInputContainer}>
+    <form
+      className={postInputContainer}
+      onSubmit={async (e) => {
+        e.preventDefault();
+        // NOTE: trim 잡초?
+        if (title.trim() || content.trim()) {
+          try {
+            const newPost = await createPostMutation.mutateAsync({
+              title: title.trim(),
+              body: content.trim()
+            });
+            showSuccessToast("포스트 작성 완료", "성공적으로 게시되었습니다.", {
+              label: "보러가기",
+              onClick: () => navigate(`/post/${newPost.id}`)
+            });
+            setTitle("");
+            setContent("");
+            setEditorHeight(100);
+          } catch (error) {
+            handleApiError(error, "포스트 작성");
+          }
+        }
+      }}
+    >
       <div className={inputContentArea}>
         <div className={avatarSection}>
           <UserAvatar />
@@ -69,8 +57,21 @@ export function PostInput() {
         <div className={inputFieldsArea}>
           <Input
             value={title}
-            onChange={handleTitleChange}
-            onKeyDown={handleTitleKeyDown}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setTitle(e.target.value);
+            }}
+            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                // Focus the markdown editor when Enter is pressed on title
+                const editorElement = document.querySelector(
+                  "[data-md-editor] .cm-editor"
+                );
+                if (editorElement) {
+                  (editorElement as HTMLElement).focus();
+                }
+              }
+            }}
             placeholder={"오늘 배운 내용을 기록해 보세요"}
             className={titleInputStyle}
           />
@@ -78,7 +79,10 @@ export function PostInput() {
             <MDEditor
               value={content}
               style={{ boxShadow: "none" }}
-              onChange={handleContentChange}
+              onChange={(value: string | undefined) => {
+                setContent(value || "");
+                setEditorHeight(calculateEditorHeight(value));
+              }}
               preview="edit"
               hideToolbar={true}
               visibleDragbar={false}
@@ -96,18 +100,7 @@ export function PostInput() {
 
       <div className={actionArea}>
         <Button
-          // FIXME: button type submit도 없고 form submit에서 처리하기
-          onClick={() => {
-            if (title.trim() || content.trim()) {
-              onSubmit({
-                title: title.trim(),
-                content: content.trim()
-              });
-              setTitle("");
-              setContent("");
-              setEditorHeight(100);
-            }
-          }}
+          type="submit"
           disabled={
             !title.trim() || !content.trim() || createPostMutation.isError
           }
@@ -124,7 +117,7 @@ export function PostInput() {
           </p>
         </div>
       )}
-    </div>
+    </form>
   );
 }
 

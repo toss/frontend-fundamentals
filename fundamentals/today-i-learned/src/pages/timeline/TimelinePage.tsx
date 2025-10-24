@@ -4,7 +4,7 @@ import { GoToLogin } from "@/components/features/auth/UnauthenticatedState";
 import { WeeklyTop5 } from "@/components/features/discussions/WeeklyTop5";
 import { useAuth } from "@/contexts/AuthContext";
 import { FilterSection } from "./components/FilterSection";
-import { PostInput } from "./components/PostInput";
+import { PostWriteSection } from "./components/PostInput";
 import { PostList } from "./components/PostList";
 import { SprintChallenge } from "./components/SprintChallenge";
 
@@ -21,7 +21,7 @@ export function TimelinePage() {
             </div>
             <SectionDivider />
             <div className={postInputSection}>
-              <PostInput />
+              <PostWriteSection />
             </div>
           </>
         ) : (
