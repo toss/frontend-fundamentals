@@ -22,51 +22,6 @@ export function TimelinePage() {
   const { handleApiError } = useErrorHandler();
   const { success: showSuccessToast } = useToast();
 
-  const getPostListProps = () => {
-    switch (sortOption) {
-      case "newest":
-        return {
-          categoryName: "Today I Learned",
-          sortBy: "latest" as const
-        };
-      case "realtime":
-        return {
-          categoryName: "Today I Learned",
-          sortBy: "lastActivity" as const
-        };
-      case "hall-of-fame":
-        return {
-          categoryName: "Today I Learned",
-          sortBy: "latest" as const,
-          filterBy: { label: "성지 ⛲" }
-        };
-      default:
-        return {
-          categoryName: "Today I Learned",
-          sortBy: "latest" as const
-        };
-    }
-  };
-
-  const handlePostSubmit = async (data: { title: string; content: string }) => {
-    try {
-      const newPost = await createPostMutation.mutateAsync({
-        title: data.title,
-        body: data.content
-      });
-      showSuccessToast("포스트 작성 완료", "성공적으로 게시되었습니다.", {
-        label: "보러가기",
-        onClick: () => navigate(`/post/${newPost.id}`)
-      });
-    } catch (error) {
-      handleApiError(error, "포스트 작성");
-    }
-  };
-
-  const handleSortChange = (option: SortOption) => {
-    setSortOption(option);
-  };
-
   return (
     <div className={gridLayout}>
       <section className={mainContentColumn}>
@@ -82,7 +37,24 @@ export function TimelinePage() {
                   login: user.login,
                   avatarUrl: user.avatar_url
                 }}
-                onSubmit={handlePostSubmit}
+                onSubmit={async (data: { title: string; content: string }) => {
+                  try {
+                    const newPost = await createPostMutation.mutateAsync({
+                      title: data.title,
+                      body: data.content
+                    });
+                    showSuccessToast(
+                      "포스트 작성 완료",
+                      "성공적으로 게시되었습니다.",
+                      {
+                        label: "보러가기",
+                        onClick: () => navigate(`/post/${newPost.id}`)
+                      }
+                    );
+                  } catch (error) {
+                    handleApiError(error, "포스트 작성");
+                  }
+                }}
                 isError={createPostMutation.isError}
                 isLoading={createPostMutation.isPending}
               />
@@ -97,12 +69,14 @@ export function TimelinePage() {
         <div className={filterSection}>
           <FilterSection
             sortOption={sortOption}
-            onSortChange={handleSortChange}
+            onSortChange={(option: SortOption) => {
+              setSortOption(option);
+            }}
           />
         </div>
 
         <div className={postListSection}>
-          <PostList {...getPostListProps()} />
+          <PostList sortOption={sortOption} />
         </div>
       </section>
 

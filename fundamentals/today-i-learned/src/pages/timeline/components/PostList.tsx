@@ -7,24 +7,15 @@ import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { useUserProfile } from "@/api/hooks/useUser";
 import { css } from "@styled-system/css";
+import { SortOption } from "../types";
 
 interface PostListProps {
   owner?: string;
   repo?: string;
-  categoryName?: string;
-  sortBy?: "latest" | "lastActivity" | "created" | "popularity";
-  filterBy?: {
-    label?: string;
-  };
+  sortOption: SortOption;
 }
 
-export function PostList({
-  owner,
-  repo,
-  categoryName,
-  sortBy = "latest",
-  filterBy
-}: PostListProps) {
+export function PostList({ owner, repo, sortOption }: PostListProps) {
   const { data: userProfile } = useUserProfile();
   const {
     data: postsData,
@@ -35,9 +26,7 @@ export function PostList({
   } = useInfiniteDiscussions({
     owner,
     repo,
-    categoryName,
-    sortBy,
-    filterBy
+    ...getPostListProps(sortOption)
   });
 
   const handleLoadMore = useCallback(() => {
@@ -110,6 +99,32 @@ export function PostList({
     </div>
   );
 }
+
+const getPostListProps = (sortOption: SortOption) => {
+  switch (sortOption) {
+    case "newest":
+      return {
+        categoryName: "Today I Learned",
+        sortBy: "latest" as const
+      };
+    case "realtime":
+      return {
+        categoryName: "Today I Learned",
+        sortBy: "lastActivity" as const
+      };
+    case "hall-of-fame":
+      return {
+        categoryName: "Today I Learned",
+        sortBy: "latest" as const,
+        filterBy: { label: "성지 ⛲" }
+      };
+    default:
+      return {
+        categoryName: "Today I Learned",
+        sortBy: "latest" as const
+      };
+  }
+};
 
 // Container Styles
 const postListContainer = css({
