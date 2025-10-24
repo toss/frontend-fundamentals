@@ -1,5 +1,4 @@
 import { css } from "@styled-system/css";
-import * as React from "react";
 
 import { GoToLogin } from "@/components/features/auth/UnauthenticatedState";
 import { WeeklyTop5 } from "@/components/features/discussions/WeeklyTop5";
@@ -8,11 +7,9 @@ import { FilterSection } from "./components/FilterSection";
 import { PostInput } from "./components/PostInput";
 import { PostList } from "./components/PostList";
 import { SprintChallenge } from "./components/SprintChallenge";
-import type { SortOption } from "./types";
 
 export function TimelinePage() {
   const { isAuthenticated } = useAuth();
-  const [sortOption, setSortOption] = React.useState<SortOption>("newest");
 
   return (
     <div className={gridLayout}>
@@ -34,16 +31,11 @@ export function TimelinePage() {
         <SectionDivider />
 
         <div className={filterSection}>
-          <FilterSection
-            sortOption={sortOption}
-            onSortChange={(option: SortOption) => {
-              setSortOption(option);
-            }}
-          />
+          <FilterSection />
         </div>
 
         <div className={postListSection}>
-          <PostList sortOption={sortOption} />
+          <PostList />
         </div>
       </section>
 

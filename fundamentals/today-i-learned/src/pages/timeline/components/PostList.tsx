@@ -8,14 +8,13 @@ import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { useUserProfile } from "@/api/hooks/useUser";
 import { css } from "@styled-system/css";
 import { SortOption } from "../types";
+import { useSearchParams } from "react-router-dom";
 
-interface PostListProps {
-  owner?: string;
-  repo?: string;
-  sortOption: SortOption;
-}
+export function PostList() {
+  const [searchParams] = useSearchParams({ sort: "newest" });
 
-export function PostList({ owner, repo, sortOption }: PostListProps) {
+  const sortOption = searchParams.get("sort") as SortOption;
+
   const { data: userProfile } = useUserProfile();
   const {
     data: postsData,
@@ -23,11 +22,7 @@ export function PostList({ owner, repo, sortOption }: PostListProps) {
     hasNextPage,
     isFetchingNextPage,
     isLoading
-  } = useInfiniteDiscussions({
-    owner,
-    repo,
-    ...getPostListProps(sortOption)
-  });
+  } = useInfiniteDiscussions({ ...getPostListProps(sortOption) });
 
   const handleLoadMore = useCallback(() => {
     if (hasNextPage && !isFetchingNextPage) {
