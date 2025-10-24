@@ -23,6 +23,7 @@ import {
   type DiscussionsApiParams
 } from "@/api/remote/discussions";
 
+// NOTE: 만약 쿼리 옵션으로 분리된다면 각각의 쿼리 옵션에서 인라인하기 (중앙 집권형 쿼리 키 x)
 export const DISCUSSIONS_QUERY_KEYS = {
   all: ["discussions"] as const,
   lists: () => [...DISCUSSIONS_QUERY_KEYS.all, "list"] as const,
@@ -210,7 +211,10 @@ export function useCreateDiscussion() {
   });
 }
 
+// TODO: queryOptions로 분리 + 사용처에서 useQuery를 드러낼 수 있으면 좋겠다
+// NOTE: 다른 remote fetching 훅들도 useQuery + queryOptions로 만들 수 있기를 희망
 export function useMyContributions({
+  // FIXME: 외부에서 주입하는 의존성 어떻게 처리할지 고민해보기
   owner = ENV_CONFIG.GITHUB_OWNER,
   repo = ENV_CONFIG.GITHUB_REPO,
   enabled = true
@@ -230,6 +234,7 @@ export function useMyContributions({
         authorLogin: user.login
       });
     },
+    // NOTE: (잡초?) enabled 너 꼭 필요해?
     enabled: enabled && !!user?.accessToken && !!user?.login,
     staleTime: 1000 * 60 * 10, // 10분
     gcTime: 1000 * 60 * 30, // 30분
