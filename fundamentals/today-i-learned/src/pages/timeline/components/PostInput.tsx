@@ -1,39 +1,39 @@
 import { css } from "@styled-system/css";
 import MDEditor from "@uiw/react-md-editor";
 import * as React from "react";
-import type { GitHubAuthor } from "@/api/remote/discussions";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { Button } from "@/components/shared/ui/Button";
 import { Input } from "@/components/shared/ui/Input";
+import { useNavigate } from "react-router-dom";
+import { useCreateDiscussion } from "@/api/hooks/useDiscussions";
+import { useErrorHandler } from "@/hooks/useErrorHandler";
+import { useToast } from "@/contexts/ToastContext";
+import { useAuth } from "@/contexts/AuthContext";
 
-interface PostInputProps {
-  user: GitHubAuthor;
-  onSubmit: (data: { title: string; content: string }) => void;
-  placeholder?: string;
-  isError?: boolean;
-  isLoading?: boolean;
-}
+export function PostInput() {
+  const navigate = useNavigate();
 
-export function PostInput({
-  user,
-  onSubmit,
-  placeholder = "오늘 배운 내용을 기록해 보세요",
-  isError,
-  isLoading = false
-}: PostInputProps) {
+  const createPostMutation = useCreateDiscussion();
+  const { handleApiError } = useErrorHandler();
+  // TODO: 중복되는 useToast를 하나로 통일하기
+  const { success: showSuccessToast } = useToast();
+
   const [title, setTitle] = React.useState("");
   const [content, setContent] = React.useState("");
   const [editorHeight, setEditorHeight] = React.useState(100);
 
-  const handleSubmit = () => {
-    if (title.trim() || content.trim()) {
-      onSubmit({
-        title: title.trim(),
-        content: content.trim()
+  const onSubmit = async (data: { title: string; content: string }) => {
+    try {
+      const newPost = await createPostMutation.mutateAsync({
+        title: data.title,
+        body: data.content
       });
-      setTitle("");
-      setContent("");
-      setEditorHeight(100);
+      showSuccessToast("포스트 작성 완료", "성공적으로 게시되었습니다.", {
+        label: "보러가기",
+        onClick: () => navigate(`/post/${newPost.id}`)
+      });
+    } catch (error) {
+      handleApiError(error, "포스트 작성");
     }
   };
 
@@ -63,13 +63,7 @@ export function PostInput({
     <div className={postInputContainer}>
       <div className={inputContentArea}>
         <div className={avatarSection}>
-          <Avatar
-            size="60"
-            src={user.avatarUrl}
-            alt={user.login}
-            fallback={user.login}
-            className={avatarStyle}
-          />
+          <UserAvatar />
         </div>
 
         <div className={inputFieldsArea}>
@@ -77,7 +71,7 @@ export function PostInput({
             value={title}
             onChange={handleTitleChange}
             onKeyDown={handleTitleKeyDown}
-            placeholder={placeholder}
+            placeholder={"오늘 배운 내용을 기록해 보세요"}
             className={titleInputStyle}
           />
           <div className={editorWrapper} data-color-mode="light">
@@ -102,15 +96,28 @@ export function PostInput({
 
       <div className={actionArea}>
         <Button
-          onClick={handleSubmit}
-          disabled={!title.trim() || !content.trim() || isLoading}
+          // FIXME: button type submit도 없고 form submit에서 처리하기
+          onClick={() => {
+            if (title.trim() || content.trim()) {
+              onSubmit({
+                title: title.trim(),
+                content: content.trim()
+              });
+              setTitle("");
+              setContent("");
+              setEditorHeight(100);
+            }
+          }}
+          disabled={
+            !title.trim() || !content.trim() || createPostMutation.isError
+          }
           className={submitButton}
         >
-          {isLoading ? "작성중..." : "작성하기"}
+          {createPostMutation.isError ? "작성중..." : "작성하기"}
         </Button>
       </div>
 
-      {isError && (
+      {createPostMutation.isError && (
         <div className={errorContainer}>
           <p className={errorMessage}>
             게시에 실패했습니다. 네트워크 상태를 확인해주세요.
@@ -120,6 +127,24 @@ export function PostInput({
     </div>
   );
 }
+
+const UserAvatar = () => {
+  const { user } = useAuth();
+
+  if (!user) {
+    // FIXME: 유저 정보가 없을 때의 처리 필요
+    return null;
+  }
+  return (
+    <Avatar
+      size="60"
+      src={user.avatar_url}
+      alt={user.login}
+      fallback={user.login}
+      className={avatarStyle}
+    />
+  );
+};
 
 const DEFAULT_CONFIG = {
   minHeight: 100,

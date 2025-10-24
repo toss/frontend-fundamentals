@@ -1,12 +1,9 @@
 import { css } from "@styled-system/css";
 import * as React from "react";
-import { useNavigate } from "react-router-dom";
-import { useCreateDiscussion } from "@/api/hooks/useDiscussions";
-import { UnauthenticatedState } from "@/components/features/auth/UnauthenticatedState";
+
+import { GoToLogin } from "@/components/features/auth/UnauthenticatedState";
 import { WeeklyTop5 } from "@/components/features/discussions/WeeklyTop5";
 import { useAuth } from "@/contexts/AuthContext";
-import { useToast } from "@/contexts/ToastContext";
-import { useErrorHandler } from "@/hooks/useErrorHandler";
 import { FilterSection } from "./components/FilterSection";
 import { PostInput } from "./components/PostInput";
 import { PostList } from "./components/PostList";
@@ -14,54 +11,24 @@ import { SprintChallenge } from "./components/SprintChallenge";
 import type { SortOption } from "./types";
 
 export function TimelinePage() {
-  const { user } = useAuth();
-  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
   const [sortOption, setSortOption] = React.useState<SortOption>("newest");
-
-  const createPostMutation = useCreateDiscussion();
-  const { handleApiError } = useErrorHandler();
-  const { success: showSuccessToast } = useToast();
 
   return (
     <div className={gridLayout}>
       <section className={mainContentColumn}>
-        {user ? (
+        {isAuthenticated ? (
           <>
             <div className={sprintChallengeSection}>
               <SprintChallenge />
             </div>
             <SectionDivider />
             <div className={postInputSection}>
-              <PostInput
-                user={{
-                  login: user.login,
-                  avatarUrl: user.avatar_url
-                }}
-                onSubmit={async (data: { title: string; content: string }) => {
-                  try {
-                    const newPost = await createPostMutation.mutateAsync({
-                      title: data.title,
-                      body: data.content
-                    });
-                    showSuccessToast(
-                      "포스트 작성 완료",
-                      "성공적으로 게시되었습니다.",
-                      {
-                        label: "보러가기",
-                        onClick: () => navigate(`/post/${newPost.id}`)
-                      }
-                    );
-                  } catch (error) {
-                    handleApiError(error, "포스트 작성");
-                  }
-                }}
-                isError={createPostMutation.isError}
-                isLoading={createPostMutation.isPending}
-              />
+              <PostInput />
             </div>
           </>
         ) : (
-          <UnauthenticatedState />
+          <GoToLogin />
         )}
 
         <SectionDivider />

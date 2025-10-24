@@ -1,9 +1,11 @@
 import { css } from "@styled-system/css";
 import { Outlet, ScrollRestoration } from "react-router-dom";
+import { LayoutNavigation } from "./LayoutNavigation";
 
 export const RootLayout = () => {
   return (
     <div className={layoutContainer}>
+      <LayoutNavigation />
       <main className={mainContent}>
         <ScrollRestoration
           getKey={(location) => {
