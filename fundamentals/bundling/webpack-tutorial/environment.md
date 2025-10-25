@@ -31,7 +31,7 @@ npm install --save-dev dotenv-webpack
 
 `.env` 파일 예시:
 
-```env
+```dotenv
 # API 설정
 API_URL=https://api.example.com
 API_KEY=your-api-key
@@ -108,7 +108,7 @@ const App: React.FC = () => {
    - `dotenv-webpack`의 `safe` 옵션을 사용해요
    - `.env.example` 파일에 필수 변수를 정의해요:
 
-   ```env
+   ```dotenv
    API_URL=
    API_KEY=
    DEBUG_MODE=
