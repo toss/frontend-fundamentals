@@ -3,7 +3,6 @@
 <br/>
 <ContributorHeader name="김희철" githubUrl="https://github.com/heecheolman" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U01JVCVAP41-ea9f13e55dd5-512" />
 
-
 ## 진단하기
 
 Android에서 React Native 번들을 불러오는 과정에서 앱이 크래시되는 현상이 발생했어요. 에러
@@ -14,17 +13,19 @@ Android에서 React Native 번들을 불러오는 과정에서 앱이 크래시�
 토스 앱에서는 React Native 번들을 효율적으로 관리하기 위해 캐시 시스템을 사용하고 있어요:
 
 - 번들 캐시는 `cache/toss_react_bundle_cache` 디렉토리에 저장돼요
-    - 예: `cache/toss_react_bundle_cache/insurance-ads`
+  - 예: `cache/toss_react_bundle_cache/insurance-ads`
 - 실행 가능한(실행 중인) 번들은 `cache/toss_react_bundle_cache/execute/*` 에 저장돼요
-    - 예: `cache/toss_react_bundle_cache/execute/insurance-ads`
+  - 예: `cache/toss_react_bundle_cache/execute/insurance-ads`
 
 ### 번들 캐시 동작 방식
 
 1. 로컬에서 번들 찾기 및 검증 (`maxAge`, 시그니처 검증)
 2. 검증 성공 시 캐시 디렉토리에서 `execute` 디렉토리로 복사
 3. 백그라운드에서 `remote` 번들 확인
+
 - `304 not modified`면 메타 파일만 업데이트
 - 수정되었다면 `.pending_activation suffix`로 저장
+
 4. 특정 조건이 되면 `.pending_activation` 파일을 `active` 상태로 전환
 
 문제는 이 과정에서 이미 실행되고 있는 번들 파일에 동시에 write 작업이 발생하면서 `SIGBUS`
@@ -52,7 +53,7 @@ Android 버그 리포트에서 발생한 userNo를 키바나(토스의 로그 �
 - `maxAge가` 0이어서 항상 remote에서 번들을 받고 있었어요
 - `verify` 로직에서 `maxAge`가 0이면 항상 `null`을 반환하고, 그래서 항상 remote에서 불러오게 돼요
 - 초기 설계에서는 하루 캐시가 기본값이었고, 튜바 변수 `reactNative.scheme.maxage`를 참조해야
-했어요
+  했어요
 - 그런데 언젠가부터 이 튜바 변수가 사라져서 `maxAge`가 0으로 설정되고 있었어요
 
 ## 수정하기

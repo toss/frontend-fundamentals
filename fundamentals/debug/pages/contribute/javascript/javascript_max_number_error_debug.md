@@ -32,10 +32,11 @@ debugger; // 여기서 값이 바뀜을 확인!
 
 const result = await receiveBonusChanceByPushId({ pushId });
 ```
+
 디버거를 통해 Number() 함수를 호출하는 순간 값이 변경된다는 것을 명확히 확인했어요.
 
+### 원인파악
 
-### 원인파악 
 JavaScript의 Number 타입은 IEEE 754 배정밀도(64-bit) 부동소수점 형식을 사용해요. 이 형식에서
 정수의 안전 정밀 범위는 ≤ 2^53 - 1 = 9,007,199,254,740,991이에요.
 
@@ -44,16 +45,17 @@ pushId 값인 17593310758458777은 이 범위를 초과하므로, Number(pushId)
 
 ```jsx
 // JavaScript의 안전한 정수 범위
-Number.MAX_SAFE_INTEGER // 9007199254740991
+Number.MAX_SAFE_INTEGER; // 9007199254740991
 
 // 문제가 되는 pushId
-17593310758458777 > Number.MAX_SAFE_INTEGER // true
+17593310758458777 > Number.MAX_SAFE_INTEGER; // true
 
 // 변환 시 정밀도 손실
-Number("17593310758458777") // 17593310758458776
+Number("17593310758458777"); // 17593310758458776
 ```
 
 ## 수정하기
+
 API에 전달할 때 string 값을 그대로 사용하도록 수정했어요. Number로 변환하지 않고 문자열
 그대로 서버에 보내면 정밀도 손실 없이 정확한 값을 전달할 수 있어요.
 
@@ -65,7 +67,6 @@ await receiveBonusChanceByPushId({ pushId });
 // 수정 후
 const pushId = queryParam; // string 그대로 사용
 await receiveBonusChanceByPushId({ pushId });
-
 ```
 
 ## 재발방지하기

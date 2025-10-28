@@ -3,7 +3,6 @@
 <br/>
 <ContributorHeader name="김덕원" githubUrl="https://github.com/KimChunsick" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U03R097F2DC-6a627a382d79-512" />
 
-
 ## 진단하기
 
 yarn workspace를 사용하여 서비스들과 공통 코드를 나누어 관리하는 모노레포 환경에서 문제가
@@ -42,13 +41,13 @@ yarn PnP(Plug'n'Play) API로 전환
 
 ```jsx
 // .yarnrc.yml
-nodeLinker: pnp  // node-modules에서 pnp로 변경
+nodeLinker: pnp; // node-modules에서 pnp로 변경
 ```
 
 주요 변경 사항:
 
 1. 패키지 해상도 최적화: PnP는 패키지를 설치할 때 디스크에 복사하는 대신, .pnp.cjs 파일에
-매핑 정보만 저장해요
+   매핑 정보만 저장해요
 2. 의존성 그래프 명확화: peer dependency 해상도가 더 명확하고 빠르게 동작해요
 3. `HMR` 지원: 워크스페이스 패키지 변경 시 즉시 감지되어 `HMR`이 정상 동작해요
 

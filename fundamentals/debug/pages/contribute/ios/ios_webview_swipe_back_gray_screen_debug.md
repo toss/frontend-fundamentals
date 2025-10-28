@@ -3,7 +3,6 @@
 <br/>
 <ContributorHeader name="김민수" githubUrl="https://github.com/minsoo-web" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U077AFXLDU0-d52a2afee622-512" />
 
-
 ## 진단하기
 
 Vue.js로 개발한 하이브리드 앱에서 iOS의 스와이프 뒤로가기 제스처를 사용할 때 이전 화면이
@@ -21,7 +20,7 @@ Vue.js로 개발한 하이브리드 앱에서 iOS의 스와이프 뒤로가기 �
 2. 페이지에서 스크롤 동작 수행
 3. iOS의 스와이프 뒤로가기 제스처 사용
 
-`Vue Router`의 ``scrollBehavior`` 옵션과 관련이 있을 것으로 추정하고, 공식 GitHub 저장소의 이슈를
+`Vue Router`의 `scrollBehavior` 옵션과 관련이 있을 것으로 추정하고, 공식 GitHub 저장소의 이슈를
 검색했습니다. 비슷한 현상을 보고한 이슈에서 Evan You의 답변을 확인할 수 있었습니다. 그는
 이것이 Vue의 문제가 아니라 WKWebView 환경에서 swipe navigation 시 발생할 수 있는 환경적
 문제라고 설명했습니다.
@@ -49,9 +48,9 @@ Vue.js로 개발한 하이브리드 앱에서 iOS의 스와이프 뒤로가기 �
 최종 해결 방법은 다음과 같았습니다
 
 - 페이지를 떠나기 전: `Vue Router`의 beforeEach 메서드로 현재 페이지의 이름과 스크롤 위치를
-`Vuex store`에 저장
+  `Vuex store`에 저장
 - 페이지에 진입하기 전: `store`에 저장된 `stack`의 길이와 브라우저 `history`의 길이를 비교하여
-뒤로가기인지 새로운 페이지 진입인지 판단
+  뒤로가기인지 새로운 페이지 진입인지 판단
 - 스크롤 위치 복원: 뒤로가기로 판단되면 저장된 스크롤 위치로 복원
 
 이 방식으로 `Vue Router`의 `scrollBehavior`에 의존하지 않고도 네이티브와 같은 스크롤 유지 경험을

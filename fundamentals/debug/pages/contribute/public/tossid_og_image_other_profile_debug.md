@@ -56,20 +56,20 @@ OG 이미지를 그리는 로직이 `Selenium`으로 서버에서 브라우저�
 ```jsx
 // 수정 전: 동시에 여러 요청이 같은 브라우저 인스턴스 사용
 async function generateOG(params) {
-	const browser = await getBrowser(); // 공유 리소스
-	const image = await captureScreen(browser, params);
-	return image;
+  const browser = await getBrowser(); // 공유 리소스
+  const image = await captureScreen(browser, params);
+  return image;
 }
 
 // 수정 후: Semaphore로 순차 처리 보장
 const ogSemaphore = new Semaphore(1); // 한 번에 하나의 요청만 처리
 
 async function generateOG(params) {
-	return await ogSemaphore.run(async () => {
-		const browser = await getBrowser();
-		const image = await captureScreen(browser, params);
-	  return image;
-	});
+  return await ogSemaphore.run(async () => {
+    const browser = await getBrowser();
+    const image = await captureScreen(browser, params);
+    return image;
+  });
 }
 ```
 

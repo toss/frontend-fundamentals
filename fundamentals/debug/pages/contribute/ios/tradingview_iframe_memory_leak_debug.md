@@ -3,7 +3,6 @@
 <br/>
 <ContributorHeader name="서상희" githubUrl="https://github.com/tbvjaos510" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U077KGSAD4N-768549fffdd5-512" />
 
-
 ## 진단하기
 
 iOS Safari에서만 발생하는 메모리 누수 문제가 발견되었어요. TradingView 차트를 사용하는
@@ -60,9 +59,11 @@ TradingView 내부에서 이렇게 `AbortController`를 사용한 후, abort()�
 문제를 해결하기 위해 단계적으로 접근했어요
 
 ### 1단계
+
 임시 해결책 (긴급 대응)문제가 되는 코드는 TradingView의 내부 코드였기 때문에 직접 수정할 수 없었어요. 급한 대로 `AbortController`의 폴리필을 주입하여 Safari의 버그를 우회하는 방식으로 임시 해결했어요. 이를 통해 사용자들이 겪는 메모리 누수 문제를 빠르게 완화할 수 있었어요.
 
 ### 2단계
+
 근본적인 해결책하지만 폴리필은 어디까지나 임시방편일 뿐이에요. 근본적인 문제를 해결하기 위해 Safari의 렌더링 엔진인 `WebKit`의 소스 코드를 직접 분석했어요.
 그리고 `WebKit` 저장소에 직접 [Pull Request](https://github.com/WebKit/WebKit/pull/50419%EB%A5%BC)를 제출하여 `AbortController`의 메모리 누수 문제를 브라우저 엔진 레벨에서 해결했어요.
 
@@ -72,11 +73,11 @@ WebKit 구현을 바꾸지 않고 `AbortSignal`을 안전하게 사용하려면 
 
 ```jsx
 const controller = new AbortController();
-const handler = () => console.log('aborted');
-controller.signal.addEventListener('abort', handler);
+const handler = () => console.log("aborted");
+controller.signal.addEventListener("abort", handler);
 
 // 사용 후 반드시 다음 중 하나를 수행
-controller.signal.removeEventListener('abort', handler); // 이벤트 리스너 제거
+controller.signal.removeEventListener("abort", handler); // 이벤트 리스너 제거
 // 또는
 controller.abort(); // abort 명시적 호출
 ```

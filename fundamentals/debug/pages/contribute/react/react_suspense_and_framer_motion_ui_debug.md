@@ -10,8 +10,8 @@
 
 ![](../../../images/contribute/react/react_suspense_and_framer_motion_ui_debug/1.gif)
 
-
 ### 컴포넌트 구조
+
 ```jsx
 <Route
   path="/consumer-report"
@@ -45,7 +45,7 @@
 근본 원인:
 
 `BusinessGroupSidebar` 내의 `sidebar.menuItem` 컴포넌트에서 **framer-motion의 useAnimate**를
-사용하여 ``hover`` 애니메이션을 실행하고 있었어요.
+사용하여 `hover` 애니메이션을 실행하고 있었어요.
 
 문제는 URL이 바뀔 때 컴포넌트 내에서 `useSuspenseQuery`를 사용하는데, 이때 suspend가 걸렸을 때
 `useAnimate` 동작이 멈춰버리는 것이었어요.
@@ -64,11 +64,10 @@
 
 ```jsx
 // 메뉴 깜빡임 발생
-<MenuItem key={url} /> 
+<MenuItem key={url} />
 ```
 
 ![](../../../images/contribute/react/react_suspense_and_framer_motion_ui_debug/2.gif)
-
 
 시도 2: Suspense 위치 변경 (최종 해결책)
 
@@ -89,13 +88,12 @@
   </ConsumerReportPage>
 </SidebarLayout>
 ```
-![](../../../images/contribute/react/react_suspense_and_framer_motion_ui_debug/3.gif)
 
+![](../../../images/contribute/react/react_suspense_and_framer_motion_ui_debug/3.gif)
 
 이렇게 `Suspense`를 `ConsumerReportPage`안에 넣어서 `Layout` 전체가 언마운트되지 않도록 했어요.
 이제 페이지 전환 시에도 `BusinessGroupSidebar`는 유지되고, `useAnimate` 컨텍스트가 손실되지
 않아서 문제가 완전히 해결되었어요!
-
 
 ## 재발방지하기
 

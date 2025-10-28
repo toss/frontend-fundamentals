@@ -3,7 +3,6 @@
 <br/>
 <ContributorHeader name="박찬혁" githubUrl="https://github.com/okinawaa" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U06H69MRQMN-07d1cde6565c-512" />
 
-
 ## 진단하기
 
 추석 이후로 Cursor에서 Biome 자동 포맷팅이 갑자기 동작하지 않는 문제가 발생했어요. 코드를
@@ -15,11 +14,14 @@ Biome extension의 Output 로그를 확인해보니 플러그인 버전에 따�
 있었어요:
 
 - 최신 플러그인 사용 시:
+
 ```
 Cannot unshim Biome binary at "/Users/chanhyuk.park/Desktop/toss/toss-frontend/biome"
 because it is version 1.x.x. Please update to version 2 or higher.
 ```
+
 - 구버전 플러그인 사용 시:
+
 ```
 Unable to find the Biome binary.
 ```
@@ -35,9 +37,12 @@ Unable to find the Biome binary.
 2. 구글링 → 유의미한 자료를 찾기 어려움
 3. GitHub 이슈 검색 → 비슷한 사례 찾기
 4. 플러그인 수동 설치 시도
+
 - 플러그인이 자동 업데이트되었을 것으로 추정
 - vsix 파일로 수동 설치 시도
+
 5. 동료에게 문의
+
 - 민호님께 사용 중인 플러그인 버전 확인
 - 민호님은 v3.2.0을 마켓플레이스에서 설치해서 정상 동작 중
 
