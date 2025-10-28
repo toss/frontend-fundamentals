@@ -1,5 +1,8 @@
 # iOS 웹뷰 이미지 업로드 시 페이지가 새로고침 되는 현상 디버깅
 
+<br/>
+<ContributorHeader name="김덕원" githubUrl="https://github.com/KimChunsick" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U03R097F2DC-6a627a382d79-512" />
+
 ## 진단하기
 
 iOS 웹뷰 환경에서 `<input type="file" accept="image/*" capture="camera">`를 사용해 이미지를

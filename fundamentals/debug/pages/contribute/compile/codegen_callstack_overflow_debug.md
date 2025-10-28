@@ -1,5 +1,9 @@
 # ESLint/TSC 파싱 콜스택 오버플로우 디버깅
 
+<br/>
+<ContributorHeader name="윤민석" githubUrl="https://github.com/black7375" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U085U98PY31-d26c07fac97e-512" />
+
+
 ## 진단하기
 
 TDS Desktop 마이그레이션 작업 중, `Codegen`으로 자동 생성된 결과로 매우 긴 코드를 작성했더니

@@ -2,6 +2,7 @@
 const props = defineProps<{
   name: string
   avatar?: string
+  githubUrl?: string
   size?: number
 }>();
 </script>
@@ -16,5 +17,6 @@ const props = defineProps<{
       style="border-radius:50%; object-fit:cover;"
     />
     <strong>{{ name }}</strong>
-  </div>
+    <a :href="githubUrl" :target="_blank">github</a>
+</div>
 </template>

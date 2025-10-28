@@ -1,5 +1,9 @@
 # Safari에서 TradingView iframe 메모리 누수 현상 디버깅
 
+<br/>
+<ContributorHeader name="서상희" githubUrl="https://github.com/tbvjaos510" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U077KGSAD4N-768549fffdd5-512" />
+
+
 ## 진단하기
 
 iOS Safari에서만 발생하는 메모리 누수 문제가 발견되었어요. TradingView 차트를 사용하는

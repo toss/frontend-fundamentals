@@ -1,5 +1,8 @@
 # 토스아이디 OG 이미지에 타인의 프로필이 표시되는 현상 디버깅
 
+<br/>
+<ContributorHeader name="김형규" githubUrl="https://github.com/khg0" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U03KVUYTXK4-5de0e0f7f2f1-512" />
+
 ## 진단하기
 
 토스아이디를 디스코드나 카카오톡에 공유할 때, 간헐적으로 자신의 프로필이 아닌 타인의 프로필이 담긴 OG 이미지가 표시되는 문제가 발생했어요. 이 문제는 자주 발생하지 않는 간헐적인 현상이었고, 과거에도 여러 차례 비슷한 사례가 보고된 적이 있었어요. `timestamp`를 추가해서 OG 캐싱을 방지했어야 했는데도 문제가 계속 발생했어요.

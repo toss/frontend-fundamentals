@@ -1,5 +1,9 @@
 # yarn Workspace에서 공통 패키지 수정 시 HMR이 동작하지 않는 문제 디버깅
 
+<br/>
+<ContributorHeader name="김덕원" githubUrl="https://github.com/KimChunsick" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U03R097F2DC-6a627a382d79-512" />
+
+
 ## 진단하기
 
 yarn workspace를 사용하여 서비스들과 공통 코드를 나누어 관리하는 모노레포 환경에서 문제가

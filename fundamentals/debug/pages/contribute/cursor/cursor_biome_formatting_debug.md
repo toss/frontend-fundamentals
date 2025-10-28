@@ -1,5 +1,9 @@
 # Cursor에서 Biome 포맷팅이 동작하지 않는 현상 디버깅
 
+<br/>
+<ContributorHeader name="박찬혁" githubUrl="https://github.com/okinawaa" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U06H69MRQMN-07d1cde6565c-512" />
+
+
 ## 진단하기
 
 추석 이후로 Cursor에서 Biome 자동 포맷팅이 갑자기 동작하지 않는 문제가 발생했어요. 코드를

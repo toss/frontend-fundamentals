@@ -1,5 +1,8 @@
 # MAX_SAFE_INTEGER 정밀도 손실 디버깅
 
+<br/>
+<ContributorHeader name="이지수" githubUrl="https://github.com/lee-ji-soo-v2" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U070UAECPSB-764e21afe6ca-512" />
+
 ## 진단하기
 
 특정 푸시를 타고 들어온 사용자가 보너스 찬스를 받지 못하는 문제가 발생했어요. Push URL의

@@ -1,5 +1,8 @@
 # React Suspense와 framer-motion useAnimate의 상호작용으로 인한 UI 충돌 디버깅
 
+<br/>
+<ContributorHeader name="이호찬" githubUrl="https://github.com/lhc0506" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U099ND6Q7SB-879387cc1e97-512" />
+
 ## 진단하기
 
 비즈니스 앱에서 사이드바 메뉴를 클릭하여 페이지를 이동할 때, 이전 URL의 메뉴에 `active` CSS가

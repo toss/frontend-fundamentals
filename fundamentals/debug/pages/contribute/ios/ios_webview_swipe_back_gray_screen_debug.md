@@ -1,5 +1,9 @@
 # iOS 웹뷰에서 스와이프 뒤로가기 시 회색 화면이 표시되는 현상 디버깅
 
+<br/>
+<ContributorHeader name="김민수" githubUrl="https://github.com/minsoo-web" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U077AFXLDU0-d52a2afee622-512" />
+
+
 ## 진단하기
 
 Vue.js로 개발한 하이브리드 앱에서 iOS의 스와이프 뒤로가기 제스처를 사용할 때 이전 화면이
