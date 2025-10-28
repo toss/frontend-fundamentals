@@ -130,8 +130,86 @@ export default defineConfig({
             text: "디버깅 실무 사례",
             items: [
               {
-                text: "Suspense Error 디버깅 by.김형규",
-                link: "/pages/contribute/suspense_debug_by_hyungkyu.md"
+                text:"javascript",
+                items:[
+                  {
+                  text: "MAX_SAFE_INTEGER 정밀도 손실",
+                  link: "/pages/contribute/javascript/javascript_max_number_error_debug.md"
+                }]
+              },
+              {
+                text:"react",
+                items:[
+                  {
+                    text: "BroadcastQueryClient SuspenseError",
+                    link: "/pages/contribute/react/broadcast_suspense_error_debug.md"
+                  },
+                  {
+                    text: "React Suspense와 framer-motion UI 충돌",
+                    link: "/pages/contribute/react/react_suspense_and_framer_motion_ui_debug.md"
+                  }
+                ]
+              },
+              {
+                text:'ios',
+                items:[
+                  {
+                    text: "iOS 웹뷰 이미지 업로드 시 페이지가 새로고침 되는 현상",
+                    link: "/pages/contribute/ios/ios_webview_image_upload_refresh_debug.md"
+                  },
+                  {
+                    text: "iOS 웹뷰에서 스와이프 뒤로가기 시 회색 화면이 표시되는 현상",
+                    link: "/pages/contribute/ios/ios_webview_swipe_back_gray_screen_debug.md"
+                  },
+                  {
+                    text: "Safari에서 TradingView iframe 메모리 누수",
+                    link: "/pages/contribute/ios/tradingview_iframe_memory_leak_debug.md"
+                  }
+                ]
+              },
+              {text:'android',
+                items:[
+                  {
+                    text: "Android에서 React Native 번들 로딩 시 SIGBUS 크래시",
+                    link: "/pages/contribute/android/android_react_native_bundle_loading_sigbus_crash_debug.md"
+                  },
+                ]
+              },
+              {
+                text:'public',
+                items:[
+                  {
+                    text: "토스아이디 OG 이미지에 타인의 프로필이 표시되는 현상",
+                    link: "/pages/contribute/public/tossid_og_image_other_profile_debug.md"
+                  },
+                ]
+              },
+              {
+                text:'compile',
+                items:[
+                  {
+                    text: "ESLint/TSC 파싱 콜스택 오버플로우",
+                    link: "/pages/contribute/compile/codegen_callstack_overflow_debug.md"
+                  }
+                ]
+              },
+              {
+                text:'yarn',
+                items:[
+                  {
+                    text: "Yarn Workspace에서 HMR이 동작하지 않는 현상",
+                    link: "/pages/contribute/yarn/yarn_workspace_hmr_debug.md"
+                  },
+                ]
+              },
+              {
+                text:'cursor',
+                items:[
+                  {
+                    text: "Cursor에서 Biome 포맷팅이 동작하지 않는 현상",
+                    link: "/pages/contribute/cursor/cursor_biome_formatting_debug.md"
+                  }
+                ]
               },
               { text: "기여하기 탬플릿", link: "/pages/contribute/template.md" }
             ]
