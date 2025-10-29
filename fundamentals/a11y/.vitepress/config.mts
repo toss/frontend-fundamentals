@@ -142,6 +142,35 @@ export default defineConfig({
             ]
           },
           {
+            text: "UI 요소 별 접근성 기초",
+            items: [
+              {
+                text: "탭",
+                link: "/ui-foundation/tab"
+              },
+              {
+                text: "아코디언",
+                link: "/ui-foundation/accordion"
+              },
+              {
+                text: "체크박스",
+                link: "/ui-foundation/checkbox"
+              },
+              {
+                text: "모달",
+                link: "/ui-foundation/modal"
+              },
+              {
+                text: "라디오",
+                link: "/ui-foundation/radio"
+              },
+              {
+                text: "스위치",
+                link: "/ui-foundation/switch"
+              }
+            ]
+          },
+          {
             text: "실전 가이드",
             items: [
               {
@@ -279,7 +308,7 @@ export default defineConfig({
       ]
     },
     ssr: {
-      noExternal: ['vitepress-plugin-tabs']
+      noExternal: ["vitepress-plugin-tabs"]
     }
   }
 });
