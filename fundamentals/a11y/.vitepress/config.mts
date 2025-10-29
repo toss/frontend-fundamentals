@@ -138,6 +138,10 @@ export default defineConfig({
               {
                 text: "주요 원칙",
                 link: "/principles"
+              },
+              {
+                text: "접근성 개발 입문 가이드",
+                link: "/basic-guide"
               }
             ]
           },
@@ -153,12 +157,12 @@ export default defineConfig({
                 link: "/ui-foundation/accordion"
               },
               {
-                text: "체크박스",
-                link: "/ui-foundation/checkbox"
-              },
-              {
                 text: "모달",
                 link: "/ui-foundation/modal"
+              },
+              {
+                text: "체크박스",
+                link: "/ui-foundation/checkbox"
               },
               {
                 text: "라디오",
