@@ -24,6 +24,8 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
+// FIXME: 리액트 쿼리로 바꿔요 -> persist를 쓸지 고려해보기
+// FIXME: 로컬 스토리지 의존성 제거하기 -> 만약 필요할 경우 캐시에 의존하도록 하기
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -40,11 +42,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   useEffect(() => {
-    if (typeof window === "undefined") {
-      setIsLoading(false);
-      return;
-    }
-
     const savedUser = localStorage.getItem("github_user");
     if (savedUser) {
       try {

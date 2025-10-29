@@ -1,13 +1,25 @@
 import { css } from "@styled-system/css";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 import { LayoutNavigation } from "./LayoutNavigation";
 
-export const Layout: React.FC<{ children: React.ReactNode }> = ({
-  children
-}) => {
+export const RootLayout = () => {
   return (
     <div className={layoutContainer}>
       <LayoutNavigation />
-      <main className={mainContent}>{children}</main>
+      <main className={mainContent}>
+        <ScrollRestoration
+          getKey={(location) => {
+            if (
+              location.pathname === "/" ||
+              location.pathname === "/today-i-learned/"
+            ) {
+              return location.key;
+            }
+            return null;
+          }}
+        />
+        <Outlet />
+      </main>
     </div>
   );
 };
