@@ -11,7 +11,7 @@
 예를 들어, 동일한 요청이 여러 번 반복될 때 비정상적인 화면이 보여지는 버그 리포트를 받았다고 가정해 볼게요. 이 문제를 재현하기 위해, 다음처럼 **자동 클릭 함수**를 만들어 반복적인 클릭 상황을 만들어 볼 수 있어요. 그리고 디버거를 걸어서 중간 중간 값이 어떻게 변경되는지 추적해볼 수 있어요.
 
 ```tsx
-import React, { useState } from "react";
+import { useState } from "react";
 
 function simulateRapidClicks(
   target: HTMLElement,
@@ -26,7 +26,7 @@ function simulateRapidClicks(
   }, interval);
 }
 
-const DoubleClickTest = () => {
+function DoubleClickTest() {
   const [count, setCount] = useState(0);
   const [disabled, setDisabled] = useState(false);
 
@@ -53,7 +53,7 @@ const DoubleClickTest = () => {
       <button onClick={handleAutoClick}>자동 광클 재현</button>
     </div>
   );
-};
+}
 
 export default DoubleClickTest;
 ```

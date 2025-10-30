@@ -72,11 +72,11 @@ function OrderSummary({
 
 ## 예시: React Hook을 활용해 팝업창을 보여줄 때
 
-react의 hook예시도 들어볼게요. 모달을 보여주는 로직이에요.
+react의 hook 예시도 들어볼게요. 모달을 보여주는 로직이에요.
 
 ### 기존코드
 
-`localStorage`, `isTodayShown`등과 같은 여러 로직이 `useEffect` 내부에 흩어져 있어 모듈화되어 있지 않아요. 그래서 가독성도 떨어지고, 테스트도 어려워요3.
+`localStorage`, `isTodayShown`등과 같은 여러 로직이 `useEffect` 내부에 흩어져 있어 모듈화되어 있지 않아요. 그래서 가독성도 떨어지고, 테스트도 어려워요.
 
 ```tsx
 const STORAGE_KEY = "notification-modal-shownAt";
@@ -141,6 +141,8 @@ export function setLocalStorageValue(key: string, value: string): void {
 **utils/modal.ts**
 
 ```tsx
+import { getLocalStorageValue, setLocalStorageValue } from "./localStorage";
+
 export function getIsModalShownToday(modalKey: string) {
   const lastShown = getLocalStorageValue(modalKey);
   const todayDateString = new Date().toDateString();
@@ -158,7 +160,7 @@ export function setModalShownToday(modalKey: string) {
 
 ```tsx
 import { useEffect, useState } from "react";
-import { useNotificationAgreementState } from "./useNotificationAgreementState"; // 필요 시 경로 조정
+import { getIsModalShownToday, setModalShownToday } from "./utils/modal";
 
 const MODAL_KEY = "test1";
 export function useIsModalShow() {
@@ -170,7 +172,7 @@ export function useIsModalShow() {
       setModalShownToday(MODAL_KEY);
       setShowModal(true);
     }
-  }, [isAgreed]);
+  }, []);
 
   const close = () => {
     setShowModal(false);
@@ -186,7 +188,7 @@ export function useIsModalShow() {
 **HomePage.tsx**
 
 ```tsx
-import { useIsModalShow } from './hooks/useIsModalShow';
+import { useIsModalShow } from "./hooks/useIsModalShow";
 
 function HomePage() {
   const { showModal, close } = useIsModalShow();
@@ -194,7 +196,7 @@ function HomePage() {
   return (
     <>
       <h1>Welcome!</h1>
-      <Modal isOpen={showModal} onAgree={agree} onClose={close} />}
+      <Modal isOpen={showModal} onClose={close} />
     </>
   );
 }
