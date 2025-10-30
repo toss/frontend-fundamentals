@@ -30,7 +30,7 @@ export function formatDateForChristmasEventUser(date: Date): string {
 
 `stylelint`를 사용해 사용되지 않을 선택자가 저장되는 것을 예방할 수 도 있어요. 아래와 같이 `stylelintrc` 파일에 린트를 셋팅해 두면, 선언되었지만 사용되지 않은 클래스가 있으면 워닝을 띄워줘요. 단, 런타임에만 등장하는 클래스는 **오탐/미탐** 가능성이 있어요.
 
-```cli
+```bash
 npm install --save-dev stylelint stylelint-no-unused-selectors
 ```
 

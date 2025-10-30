@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 지금까지 만들어진 파일 구조를 다시 살펴볼게요.
 
-```{6-10}
+```text{6-10}
 example-project/
 ├── index.html
 ├── style.css
