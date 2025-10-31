@@ -1,9 +1,9 @@
 # Broadcast query client Suspense Error 디버깅
 
-### 부제: react-query 상태는 어떻게 돌아가는가?
-
 <br/>
-<ContributorHeader name="김형규" githubUrl="https://github.com/khg0" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U03KVUYTXK4-5de0e0f7f2f1-512" />
+<ContributorHeader name="김형규" githubUrl="https://github.com/khg0" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U03KVUYTXK4-5de0e0f7f2f1-512" date="2025.10.31"/>
+
+### 부제: react-query 상태는 어떻게 돌아가는가?
 
 토스 내부 디버깅 실무 사례를 소개드리기 위해 토스의 프론트엔드 개발자 김형규님을 인터뷰 했어요. 이 인터뷰는 웹뷰 간 tanstack-query 캐시 동기화 도구인 broadcast query client를 사용할 때 발생할 수 있는 Suspense 현상 문제의 원인과 해결 과정을 담고 있어요.
 
@@ -66,7 +66,7 @@ react-query 유저로서 생각해봤을 때 잘 사용되고 있던 페이지�
 
 ![](../../../images/contribute/react/broadcast_suspense_error_debug/3.jpeg)
 
-### Q. 문제가 발생하는 구조를 명확히 확인하기 위해 어떤 값이나 상태를 주의 깊게 추적하셨는지 궁금해요.
+### Q. 문제가 발생하는 구조를 명확히 확인하기 위해 어떤 값이나 상태를 주의 깊게 추적하셨는지 궁금해요
 
 일단, 로컬에서 재현되는게 문제를 해결하는 가장 빠른 길이라고 생각해서 로컬에서 재현을 시도했어요. 재현을 위해 로컬에서 query client dev tool을 설치했어요. 로컬 호스트에서 서비스를 띄우고, 페이지A에서 페이지B를 열어가며 쿼리 상태가 어떻게 변하는지 확인했어요.
 
@@ -76,12 +76,13 @@ react-query 유저로서 생각해봤을 때 잘 사용되고 있던 페이지�
 ### Q. 쿼리의 상태값에서 원인을 찾으셨나요?
 
 결론은 캐시 상태와 관련이 있었어요. 캐시 상태에는 아래의 상태들이 있어요.
-|상태 |의미|
-|---|--|
-|none| none 캐시에 데이터가 전혀 없어요 (설명을 위한 가상의 상태)|
-|fresh|fetch 이후, staleTime 이내 – 데이터가 유효해요|
-|stale| staleTime 이후 – 데이터가 오래되어 다시 불러올 수 있어요|
-|inactive| 컴포넌트에서 더 이상 사용하지 않지만 아직 캐시는 남아있어요 (cacheTime 이후 삭제됨)|
+
+| 상태     | 의미                                                                                |
+| -------- | ----------------------------------------------------------------------------------- |
+| none     | none 캐시에 데이터가 전혀 없어요 (설명을 위한 가상의 상태)                          |
+| fresh    | fetch 이후, staleTime 이내 – 데이터가 유효해요                                      |
+| stale    | staleTime 이후 – 데이터가 오래되어 다시 불러올 수 있어요                            |
+| inactive | 컴포넌트에서 더 이상 사용하지 않지만 아직 캐시는 남아있어요 (cacheTime 이후 삭제됨) |
 
 여기서 `staleTime`과 `cacheTime`은 완전히 별도의 개념이에요.
 
@@ -131,7 +132,7 @@ query 상태가 하나라도 존재할 때라는 조건이 리패치 조건에 �
 
 ## 추가질문
 
-### Q. 디버깅 중 포기하고 싶은 순간도 있을 것 같아요. 어떤 생각이 끝까지 디버깅을 하게 하는지 궁금해요.
+### Q. 디버깅 중 포기하고 싶은 순간도 있을 것 같아요. 어떤 생각이 끝까지 디버깅을 하게 하는지 궁금해요
 
 처음 에러 메세지나 현상을 봤을 때 `useQuery`, `cache-time` 사이 어딘가에 존재하는 이슈일 것 같아 크게 어렵지 않은 이슈일 것이라 생각했어요. 또 그냥 순수 재미와 궁금증으로 파보고 싶었어요. 그리고 이 문제를 해결하면 러닝이 생길 것 같았거든요. “결국에 해결은 될 것이다” 라는 믿음이 있었습니다 ^-^
 

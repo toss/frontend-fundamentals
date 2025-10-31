@@ -14,6 +14,7 @@ export default defineConfig({
   description: "프론트엔드 접근성의 모든 것",
   ignoreDeadLinks: false,
   base: "/debug/",
+  lastUpdated: true,
   locales: {
     // temporary
     en: {

@@ -1,14 +1,14 @@
 # Cursor에서 Biome 포맷팅이 동작하지 않는 현상 디버깅
 
 <br/>
-<ContributorHeader name="박찬혁" githubUrl="https://github.com/okinawaa" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U06H69MRQMN-07d1cde6565c-512" />
+<ContributorHeader name="박찬혁" githubUrl="https://github.com/okinawaa" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U06H69MRQMN-07d1cde6565c-512" date="2025.10.31"/>
 
 ## 진단하기
 
 추석 이후로 Cursor에서 Biome 자동 포맷팅이 갑자기 동작하지 않는 문제가 발생했어요. 코드를
 저장해도 포맷팅이 전혀 적용되지 않아서 개발 생산성에 큰 지장이 생겼어요.
 
-### Output 로그에서 확인한 에러:
+### Output 로그에서 확인한 에러
 
 Biome extension의 Output 로그를 확인해보니 플러그인 버전에 따라 다른 에러가 교차로 발생하고
 있었어요:

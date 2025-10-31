@@ -1,7 +1,7 @@
 # React Suspense와 framer-motion useAnimate의 상호작용으로 인한 UI 충돌 디버깅
 
 <br/>
-<ContributorHeader name="이호찬" githubUrl="https://github.com/lhc0506" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U099ND6Q7SB-879387cc1e97-512" />
+<ContributorHeader name="이호찬" githubUrl="https://github.com/lhc0506" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U099ND6Q7SB-879387cc1e97-512" date="2025.10.31"/>
 
 ## 진단하기
 

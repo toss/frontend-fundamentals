@@ -1,7 +1,7 @@
 # yarn Workspace에서 공통 패키지 수정 시 HMR이 동작하지 않는 문제 디버깅
 
 <br/>
-<ContributorHeader name="김덕원" githubUrl="https://github.com/KimChunsick" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U03R097F2DC-6a627a382d79-512" />
+<ContributorHeader name="김덕원" githubUrl="https://github.com/KimChunsick" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U03R097F2DC-6a627a382d79-512" date="2025.10.31"/>
 
 ## 진단하기
 

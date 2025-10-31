@@ -1,7 +1,11 @@
 # MAX_SAFE_INTEGER 정밀도 손실 디버깅
 
-<br/>
-<ContributorHeader name="이지수" githubUrl="https://github.com/lee-ji-soo-v2" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U070UAECPSB-764e21afe6ca-512" />
+<ContributorHeader
+  name="이지수"
+  githubUrl="https://github.com/lee-ji-soo-v2"
+  avatar="https://ca.slack-edge.com/E01JAGTHP8R-U070UAECPSB-764e21afe6ca-512"
+  date="2025.10.31"
+/>
 
 ## 진단하기
 
