@@ -12,7 +12,7 @@
 # {버그 종류} 디버깅
 ### 부제
 <br/>
-<ContributorHeader name="이름" avatar="../../images/contribute/profile-default.png" />
+<ContributorHeader name="이름" avatar="../../images/contribute/profile-default.png" date="YYYY-MM-DD"/>
 
 간략한 소개
 

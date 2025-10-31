@@ -1,7 +1,7 @@
 # iOS 웹뷰 이미지 업로드 시 페이지가 새로고침 되는 현상 디버깅
 
 <br/>
-<ContributorHeader name="김덕원" githubUrl="https://github.com/KimChunsick" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U03R097F2DC-6a627a382d79-512" />
+<ContributorHeader name="김덕원" githubUrl="https://github.com/KimChunsick" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U03R097F2DC-6a627a382d79-512" date="2025.10.31"/>
 
 ## 진단하기
 

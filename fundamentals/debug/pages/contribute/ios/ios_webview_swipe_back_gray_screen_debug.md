@@ -1,7 +1,7 @@
 # iOS 웹뷰에서 스와이프 뒤로가기 시 회색 화면이 표시되는 현상 디버깅
 
 <br/>
-<ContributorHeader name="김민수" githubUrl="https://github.com/minsoo-web" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U077AFXLDU0-d52a2afee622-512" />
+<ContributorHeader name="김민수" githubUrl="https://github.com/minsoo-web" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U077AFXLDU0-d52a2afee622-512" date="2025.10.31"/>
 
 ## 진단하기
 

@@ -1,7 +1,7 @@
 # Android에서 React Native 번들 로딩 시 SIGBUS 크래시 발생
 
 <br/>
-<ContributorHeader name="김희철" githubUrl="https://github.com/heecheolman" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U01JVCVAP41-ea9f13e55dd5-512" />
+<ContributorHeader name="김희철" githubUrl="https://github.com/heecheolman" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U01JVCVAP41-ea9f13e55dd5-512" date="2025.10.31"/>
 
 ## 진단하기
 

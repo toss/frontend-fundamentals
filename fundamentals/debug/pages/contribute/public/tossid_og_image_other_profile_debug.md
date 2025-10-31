@@ -1,7 +1,7 @@
 # 토스아이디 OG 이미지에 타인의 프로필이 표시되는 현상 디버깅
 
 <br/>
-<ContributorHeader name="김형규" githubUrl="https://github.com/khg0" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U03KVUYTXK4-5de0e0f7f2f1-512" />
+<ContributorHeader name="김형규" githubUrl="https://github.com/khg0" avatar="https://ca.slack-edge.com/E01JAGTHP8R-U03KVUYTXK4-5de0e0f7f2f1-512" date="2025.10.31"/>
 
 ## 진단하기
 
