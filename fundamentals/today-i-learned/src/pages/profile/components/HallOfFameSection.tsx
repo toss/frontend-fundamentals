@@ -21,8 +21,8 @@ interface BaseComponentProps {
 interface HallOfFameSectionProps extends BaseComponentProps {}
 
 export function HallOfFameSection({ className }: HallOfFameSectionProps) {
-  const { data: userProfile } = useSuspendedUserProfile();
   const [isExpanded, setIsExpanded] = useState(false);
+  const { data: userProfile } = useSuspendedUserProfile();
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useSuspendedInfiniteDiscussions({
@@ -37,6 +37,7 @@ export function HallOfFameSection({ className }: HallOfFameSectionProps) {
     }
 
     const allDiscussions = data.pages.flatMap((page) => page.discussions);
+
     return filterUserPosts(allDiscussions, userProfile.login);
   }, [data, userProfile?.login]);
 
@@ -55,8 +56,6 @@ export function HallOfFameSection({ className }: HallOfFameSectionProps) {
   const displayedPosts = isExpanded
     ? userHallOfFamePosts
     : userHallOfFamePosts.slice(0, INITIAL_DISPLAY_COUNT);
-
-  const showToggleButton = userHallOfFamePosts.length > INITIAL_DISPLAY_COUNT;
 
   return (
     <div className={cx(sectionContainer, className)}>
@@ -92,7 +91,7 @@ export function HallOfFameSection({ className }: HallOfFameSectionProps) {
             </div>
           )}
 
-          {showToggleButton && (
+          {userHallOfFamePosts.length > INITIAL_DISPLAY_COUNT && (
             <div className={toggleButtonContainer}>
               <button
                 onClick={handleToggleExpand}
@@ -176,5 +175,63 @@ const toggleButton = css({
   _disabled: {
     backgroundColor: "rgba(0, 0, 0, 0.2)",
     cursor: "not-allowed"
+  }
+});
+
+HallOfFameSection.Loading = () => {
+  return (
+    <div className={sectionContainer}>
+      <div className={headerSection}>
+        <div className={loadingSectionTitle} />
+      </div>
+      <div className={loadingPostsGrid}>
+        {Array.from({ length: 4 }).map((_, index) => (
+          <PostCardSkeleton key={`loading-${index}`} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+HallOfFameSection.Error = () => {
+  return (
+    <div className={sectionContainer}>
+      <div className={headerSection}>
+        <h2 className={sectionTitle}>명예의 전당</h2>
+      </div>
+      <div className={errorState}>
+        <h3>명예의 전당을 불러올 수 없습니다</h3>
+      </div>
+    </div>
+  );
+};
+
+// Loading 스타일
+const loadingSectionTitle = css({
+  width: "120px",
+  height: "28px",
+  backgroundColor: "#e5e7eb",
+  borderRadius: "4px",
+  animation: "pulse 2s infinite"
+});
+
+const loadingPostsGrid = css({
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+  gap: "1rem",
+  animation: "pulse 2s infinite"
+});
+
+const errorState = css({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: "1rem",
+  padding: "2rem",
+  textAlign: "center",
+  "& h3": {
+    fontWeight: "600",
+    fontSize: "14px",
+    color: "#ef4444"
   }
 });

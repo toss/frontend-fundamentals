@@ -77,3 +77,79 @@ export function ProfileInfo({ className }: ProfileInfoProps) {
     </div>
   );
 }
+
+ProfileInfo.Loading = () => {
+  return (
+    <div className={profileInfoContainer}>
+      <div className={avatarSkeleton} />
+      <div className={profileTextContainer}>
+        <div className={nameSkeleton} />
+        <div className={usernameSkeleton} />
+      </div>
+    </div>
+  );
+};
+
+ProfileInfo.Error = () => {
+  return (
+    <div className={profileInfoContainer}>
+      <div className={errorState}>
+        <h3>프로필 정보를 불러올 수 없습니다</h3>
+      </div>
+    </div>
+  );
+};
+
+// 공통 스타일
+const profileInfoContainer = css({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: "16px"
+});
+
+const profileTextContainer = css({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: "8px"
+});
+
+// Loading 스타일
+const avatarSkeleton = css({
+  width: "100px",
+  height: "100px",
+  backgroundColor: "#e5e7eb",
+  borderRadius: "50%",
+  animation: "pulse 2s infinite"
+});
+
+const nameSkeleton = css({
+  width: "128px",
+  height: "32px",
+  backgroundColor: "#e5e7eb",
+  borderRadius: "4px",
+  animation: "pulse 2s infinite"
+});
+
+const usernameSkeleton = css({
+  width: "96px",
+  height: "20px",
+  backgroundColor: "#e5e7eb",
+  borderRadius: "4px",
+  animation: "pulse 2s infinite"
+});
+
+const errorState = css({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: "1rem",
+  padding: "2rem",
+  textAlign: "center",
+  "& h3": {
+    fontWeight: "600",
+    fontSize: "14px",
+    color: "#ef4444"
+  }
+});

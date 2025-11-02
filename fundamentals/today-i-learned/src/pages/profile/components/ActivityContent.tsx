@@ -34,47 +34,41 @@ export function ActivityContent({
     );
   }
 
-  if (userPosts.length > 0) {
-    return (
-      <>
-        <div className={activityContentContainer}>
-          {userPosts.map((discussion) => (
-            <PostCard
-              key={discussion.id}
-              discussion={discussion}
-              onLike={(postId) => console.log("Like:", postId)}
-              onUpvote={(postId) => console.log("Upvote:", postId)}
-              currentUserLogin={userProfile?.login}
-            />
-          ))}
-        </div>
+  return (
+    <>
+      <div className={activityContentContainer}>
+        {userPosts.map((discussion) => (
+          <PostCard
+            key={discussion.id}
+            discussion={discussion}
+            currentUserLogin={userProfile?.login}
+          />
+        ))}
+      </div>
 
-        {hasNextPage && (
-          <div ref={elementRef} className={infiniteScrollTrigger}>
-            {isFetchingNextPage ? (
-              <div className={loadingMoreContainer}>
-                <div className={activityContentContainer}>
-                  {Array.from({ length: 3 }).map((_, index) => (
-                    <PostCardSkeleton key={`loading-${index}`} />
-                  ))}
-                </div>
+      {hasNextPage && (
+        <div ref={elementRef} className={infiniteScrollTrigger}>
+          {isFetchingNextPage ? (
+            <div className={loadingMoreContainer}>
+              <div className={activityContentContainer}>
+                {Array.from({ length: 3 }).map((_, index) => (
+                  <PostCardSkeleton key={`loading-${index}`} />
+                ))}
               </div>
-            ) : (
-              <div className={loadMoreTrigger} />
-            )}
-          </div>
-        )}
+            </div>
+          ) : (
+            <div className={loadMoreTrigger} />
+          )}
+        </div>
+      )}
 
-        {!hasNextPage && userPosts.length > 0 && (
-          <div className={endStateContainer}>
-            <p className={endStateText}>모든 글을 불러왔습니다.</p>
-          </div>
-        )}
-      </>
-    );
-  }
-
-  return null;
+      {!hasNextPage && (
+        <div className={endStateContainer}>
+          <p className={endStateText}>모든 글을 불러왔습니다.</p>
+        </div>
+      )}
+    </>
+  );
 }
 
 const activityContentContainer = css({

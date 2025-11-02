@@ -1,6 +1,7 @@
 import { ActivityContent } from "./ActivityContent";
 import { ChevronDown } from "lucide-react";
 import { PAGE_SIZE } from "@/constants/github";
+import { PostCardSkeleton } from "@/components/features/discussions/PostCard";
 
 interface BaseComponentProps {
   className?: string;
@@ -31,12 +32,6 @@ export function ActivitySection({ className }: ActivitySectionProps) {
     enabled: hasNextPage && !isFetchingNextPage
   });
 
-  useEffect(() => {
-    if (isIntersecting && hasNextPage && !isFetchingNextPage) {
-      fetchNextPage();
-    }
-  }, [isIntersecting, hasNextPage, isFetchingNextPage, fetchNextPage]);
-
   const userPosts = useMemo(() => {
     if (!userProfile?.login || !data) {
       return [];
@@ -49,6 +44,12 @@ export function ActivitySection({ className }: ActivitySectionProps) {
     const newFilter = sortFilter === "created" ? "lastActivity" : "created";
     setSortFilter(newFilter);
   };
+
+  useEffect(() => {
+    if (isIntersecting && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [isIntersecting, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return (
     <div className={cx(sectionContainer, className)}>
@@ -142,4 +143,79 @@ const filterButton = css({
 const chevronIcon = css({
   width: "1rem",
   height: "1rem"
+});
+
+ActivitySection.Loading = () => {
+  return (
+    <div className={sectionContainer}>
+      <div className={headerContainer}>
+        <div className={headerContent}>
+          <div className={titleWrapper}>
+            <div className={loadingSectionTitle} />
+          </div>
+          <div className={loadingFilterButton} />
+        </div>
+      </div>
+      <div className={loadingPostsList}>
+        {Array.from({ length: 3 }).map((_, index) => (
+          <PostCardSkeleton key={`loading-${index}`} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+ActivitySection.Error = () => {
+  return (
+    <div className={sectionContainer}>
+      <div className={headerContainer}>
+        <div className={headerContent}>
+          <div className={titleWrapper}>
+            <h2 className={sectionTitle}>활동</h2>
+          </div>
+        </div>
+      </div>
+      <div className={errorState}>
+        <h3>활동 내역을 불러올 수 없습니다</h3>
+      </div>
+    </div>
+  );
+};
+
+// Loading 스타일
+const loadingSectionTitle = css({
+  width: "120px",
+  height: "28px",
+  backgroundColor: "#e5e7eb",
+  borderRadius: "4px",
+  animation: "pulse 2s infinite"
+});
+
+const loadingFilterButton = css({
+  width: "140px",
+  height: "40px",
+  backgroundColor: "#e5e7eb",
+  borderRadius: "8px",
+  animation: "pulse 2s infinite"
+});
+
+const loadingPostsList = css({
+  display: "flex",
+  flexDirection: "column",
+  gap: "1rem",
+  animation: "pulse 2s infinite"
+});
+
+const errorState = css({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: "1rem",
+  padding: "2rem",
+  textAlign: "center",
+  "& h3": {
+    fontWeight: "600",
+    fontSize: "14px",
+    color: "#ef4444"
+  }
 });

@@ -4,25 +4,15 @@ import { ActivitySection } from "./components/ActivitySection";
 import { MonthlyChallenge } from "@/components/features/challenge/MonthlyChallenge";
 import { ErrorBoundary } from "@/components/shared/ErrorBoundary";
 import { Suspense } from "react";
-import {
-  ProfileInfoLoadingState,
-  ProfileInfoErrorState,
-  HallOfFameLoadingState,
-  HallOfFameErrorState,
-  ActivityLoadingState,
-  ActivityErrorState,
-  ChallengeErrorState
-} from "./components/ProfileLoadingStates";
 import { css } from "@styled-system/css";
-import { ChallengeHeader } from "@/components/features/challenge/ChallengeHeader";
 
 export function MyPage() {
   return (
     <div className={gridLayout}>
       <section className={leftContent}>
         <div className={profileSection}>
-          <ErrorBoundary fallback={ProfileInfoErrorState}>
-            <Suspense fallback={<ProfileInfoLoadingState />}>
+          <ErrorBoundary fallback={() => <ProfileInfo.Error />}>
+            <Suspense fallback={<ProfileInfo.Loading />}>
               <ProfileInfo />
             </Suspense>
           </ErrorBoundary>
@@ -31,8 +21,8 @@ export function MyPage() {
         <SectionDivider />
 
         <div className={hallOfFameSection}>
-          <ErrorBoundary fallback={HallOfFameErrorState}>
-            <Suspense fallback={<HallOfFameLoadingState />}>
+          <ErrorBoundary fallback={() => <HallOfFameSection.Error />}>
+            <Suspense fallback={<HallOfFameSection.Loading />}>
               <HallOfFameSection />
             </Suspense>
           </ErrorBoundary>
@@ -41,8 +31,8 @@ export function MyPage() {
         <SectionDivider />
 
         <div className={activitySection}>
-          <ErrorBoundary fallback={ActivityErrorState}>
-            <Suspense fallback={<ActivityLoadingState />}>
+          <ErrorBoundary fallback={() => <ActivitySection.Error />}>
+            <Suspense fallback={<ActivitySection.Loading />}>
               <ActivitySection />
             </Suspense>
           </ErrorBoundary>
@@ -50,17 +40,8 @@ export function MyPage() {
       </section>
 
       <section className={rightContent}>
-        <ErrorBoundary fallback={ChallengeErrorState}>
-          <Suspense
-            fallback={
-              <div className={challengeContainer}>
-                <ChallengeHeader
-                  year={new Date().getFullYear()}
-                  month={new Date().getMonth() + 1}
-                />
-              </div>
-            }
-          >
+        <ErrorBoundary fallback={MonthlyChallenge.Error}>
+          <Suspense fallback={<MonthlyChallenge.Loading />}>
             <MonthlyChallenge />
           </Suspense>
         </ErrorBoundary>
