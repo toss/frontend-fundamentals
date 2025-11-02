@@ -217,13 +217,6 @@ const contentPreview = css({
 });
 
 // Loading and Empty States
-const skeletonItem = css({
-  height: "136px",
-  backgroundColor: "rgb(243, 244, 246)",
-  borderRadius: "1rem",
-  animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-  width: "100%"
-});
 
 const emptyState = css({
   textAlign: "center",

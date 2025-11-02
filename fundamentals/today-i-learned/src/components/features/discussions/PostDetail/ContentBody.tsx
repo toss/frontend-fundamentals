@@ -8,6 +8,7 @@ import {
   getHeartAndUpvoteCounts,
   getUserReactionStates
 } from "@/utils/reactions";
+import { useAuth } from "@/contexts/AuthContext";
 import { css } from "@styled-system/css";
 
 export function ContentBody({
@@ -15,12 +16,10 @@ export function ContentBody({
 }: {
   discussionDetail: GitHubDiscussionDetail;
 }) {
-  {
-    /* 헤더: 사용자 정보 + 본문 */
-  }
+  const { user } = useAuth();
 
   const { handleLike, handleUpvote } = usePostReactions({
-    discussion: discussion || undefined
+    discussion: discussionDetail
   });
 
   const toggleReactionMutation = useToggleDiscussionReaction();
@@ -33,50 +32,51 @@ export function ContentBody({
       const reactionContent = type === "like" ? "HEART" : "THUMBS_UP";
 
       const { hasLiked: currentHasLiked, hasUpvoted: currentHasUpvoted } =
-        getUserReactionStates(actualDiscussion.reactions, user.login);
+        getUserReactionStates(discussionDetail.reactions, user.login);
       const isCurrentlyReacted =
         type === "like" ? currentHasLiked : currentHasUpvoted;
 
       await toggleReactionMutation.mutateAsync({
-        subjectId: discussion.id,
+        subjectId: discussionDetail.id,
         isReacted: isCurrentlyReacted,
         content: reactionContent
       });
 
       if (type === "like") {
-        handleLike(discussion.id);
+        handleLike(discussionDetail.id);
       }
       if (type === "upvote") {
-        handleUpvote(discussion.id);
+        handleUpvote(discussionDetail.id);
       }
     } catch (error) {
       console.error("반응 처리 실패:", error);
     }
   };
+
   const { heartCount, upvoteCount } = getHeartAndUpvoteCounts(
-    actualDiscussion.reactions
+    discussionDetail.reactions
   );
   const { hasLiked: hasUserLiked, hasUpvoted: hasUserUpvoted } =
-    getUserReactionStates(actualDiscussion.reactions, user?.login);
+    getUserReactionStates(discussionDetail.reactions, user?.login);
   return (
     <>
       <div className={headerSection}>
         <Avatar
           size="40"
-          src={actualDiscussion.author.avatarUrl}
-          alt={actualDiscussion.author.login}
-          fallback={actualDiscussion.author.login}
+          src={discussionDetail.author.avatarUrl}
+          alt={discussionDetail.author.login}
+          fallback={discussionDetail.author.login}
           className={avatarStyles}
         />
         <div className={authorInfoContainer}>
-          <h4 className={authorName}>{actualDiscussion.author.login}</h4>
+          <h4 className={authorName}>{discussionDetail.author.login}</h4>
           <div className={authorMeta}>
             <span className={authorHandle}>
-              @{actualDiscussion.author.login}
+              @{discussionDetail.author.login}
             </span>
             <span className={separator}>·</span>
             <span className={timeStamp}>
-              {formatTimeAgo(actualDiscussion.createdAt)}
+              {formatTimeAgo(discussionDetail.createdAt)}
             </span>
           </div>
         </div>
@@ -84,19 +84,19 @@ export function ContentBody({
 
       <div className={contentSection}>
         {/* 제목 */}
-        <h2 className={postTitle}>{actualDiscussion.title}</h2>
+        <h2 className={postTitle}>{discussionDetail.title}</h2>
 
         {/* 내용 */}
         <div className={contentContainer}>
           <MarkdownRenderer
-            content={actualDiscussion.body}
+            content={discussionDetail.body}
             className={markdownContent}
           />
         </div>
       </div>
 
       <InteractionButtons
-        discussion={actualDiscussion}
+        discussion={discussionDetail}
         onLike={() => handleReaction("like")}
         onUpvote={() => handleReaction("upvote")}
         hasUserLiked={hasUserLiked}
@@ -204,6 +204,6 @@ const markdownContent = css({
   color: "rgba(0, 0, 0, 0.8)"
 });
 
-const dividerContainerSmall = css({
-  paddingY: "0.5rem"
+const avatarStyles = css({
+  flexShrink: "0"
 });
