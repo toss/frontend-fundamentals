@@ -12,7 +12,6 @@ import {
 import { useAuth } from "@/contexts/AuthContext";
 import { CommentList } from "@/pages/timeline/components/CommentList";
 import {
-  hasUserReacted,
   getHeartAndUpvoteCounts,
   getUserReactionStates
 } from "@/utils/reactions";
@@ -23,169 +22,163 @@ import { useParams } from "react-router-dom";
 
 export function PostDetail() {
   const { user } = useAuth();
-  const [commentText, setCommentText] = useState("");
+  // const [commentText, setCommentText] = useState("");
   const { id } = useParams<{ id: string }>();
 
+  // const { handleLike, handleUpvote } = usePostReactions({
+  //   discussion: discussion || undefined
+  // });
+
   const { data: discussion } = useDiscussionDetail(id || "");
-
-  const { handleLike, handleUpvote } = usePostReactions({
-    discussion: discussion || undefined
-  });
-
   const { data: discussionDetail, isLoading: isDetailLoading } =
     useDiscussionDetail(discussion.id);
   const addCommentMutation = useAddDiscussionComment();
-  const addCommentReplyMutation = useAddDiscussionCommentReply();
-  const toggleReactionMutation = useToggleDiscussionReaction();
+  // const addCommentReplyMutation = useAddDiscussionCommentReply();
+  // const toggleReactionMutation = useToggleDiscussionReaction();
 
   const actualDiscussion = discussionDetail || discussion;
   const comments = discussionDetail?.comments?.nodes || [];
 
-  // Helper function to find comment by ID (including nested replies)
-  const findCommentById = (
-    comments: GitHubComment[],
-    id: string
-  ): GitHubComment | null => {
-    for (const comment of comments) {
-      if (comment.id === id) return comment;
-      if (comment.replies?.nodes) {
-        const found = findCommentById(comment.replies.nodes, id);
-        if (found) return found;
-      }
-    }
-    return null;
-  };
+  // const findCommentById = (
+  //   comments: GitHubComment[],
+  //   id: string
+  // ): GitHubComment | null => {
+  //   for (const comment of comments) {
+  //     if (comment.id === id) return comment;
+  //     if (comment.replies?.nodes) {
+  //       const found = findCommentById(comment.replies.nodes, id);
+  //       if (found) return found;
+  //     }
+  //   }
+  //   return null;
+  // };
 
-  const authorInfo = {
-    src: actualDiscussion.author.avatarUrl,
-    alt: actualDiscussion.author.login,
-    fallback: actualDiscussion.author.login,
-    name: actualDiscussion.author.login,
-    username: actualDiscussion.author.login
-  };
+  // const handleCommentSubmit = async () => {
+  //   if (commentText.trim() && user?.accessToken) {
+  //     try {
+  //       await addCommentMutation.mutateAsync({
+  //         discussionId: discussion.id,
+  //         body: commentText
+  //       });
+  //       setCommentText("");
+  //     } catch (error) {
+  //       console.error("댓글 작성 실패:", error);
+  //     }
+  //   }
+  // };
 
-  const handleCommentSubmit = async () => {
-    if (commentText.trim() && user?.accessToken) {
-      try {
-        await addCommentMutation.mutateAsync({
-          discussionId: discussion.id,
-          body: commentText
-        });
-        setCommentText("");
-      } catch (error) {
-        console.error("댓글 작성 실패:", error);
-      }
-    }
-  };
+  // const handleReaction = async (type: "like" | "upvote") => {
+  //   if (!user?.accessToken || !user?.login) {
+  //     return;
+  //   }
 
-  const handleReaction = async (type: "like" | "upvote") => {
-    if (!user?.accessToken || !user?.login) {
-      return;
-    }
+  //   try {
+  //     const reactionContent = type === "like" ? "HEART" : "THUMBS_UP";
 
-    try {
-      const reactionContent = type === "like" ? "HEART" : "THUMBS_UP";
+  //     const { hasLiked: currentHasLiked, hasUpvoted: currentHasUpvoted } =
+  //       getUserReactionStates(actualDiscussion.reactions, user.login);
+  //     const isCurrentlyReacted =
+  //       type === "like" ? currentHasLiked : currentHasUpvoted;
 
-      const { hasLiked: currentHasLiked, hasUpvoted: currentHasUpvoted } =
-        getUserReactionStates(actualDiscussion.reactions, user.login);
-      const isCurrentlyReacted =
-        type === "like" ? currentHasLiked : currentHasUpvoted;
+  //     await toggleReactionMutation.mutateAsync({
+  //       subjectId: discussion.id,
+  //       isReacted: isCurrentlyReacted,
+  //       content: reactionContent
+  //     });
 
-      await toggleReactionMutation.mutateAsync({
-        subjectId: discussion.id,
-        isReacted: isCurrentlyReacted,
-        content: reactionContent
-      });
+  //     if (type === "like") {
+  //       handleLike(discussion.id);
+  //     }
+  //     if (type === "upvote") {
+  //       handleUpvote(discussion.id);
+  //     }
+  //   } catch (error) {
+  //     console.error("반응 처리 실패:", error);
+  //   }
+  // };
 
-      if (type === "like") {
-        handleLike(discussion.id);
-      }
-      if (type === "upvote") {
-        handleUpvote(discussion.id);
-      }
-    } catch (error) {
-      console.error("반응 처리 실패:", error);
-    }
-  };
+  // const handleCommentUpvote = async (commentId: string) => {
+  //   if (!user?.accessToken || !user?.login) {
+  //     return;
+  //   }
 
-  const handleCommentUpvote = async (commentId: string) => {
-    if (!user?.accessToken || !user?.login) {
-      return;
-    }
+  //   try {
+  //     const comment = findCommentById(comments, commentId);
+  //     const isCurrentlyReacted = comment
+  //       ? hasUserReacted(comment.reactions, user.login, "THUMBS_UP")
+  //       : false;
 
-    try {
-      const comment = findCommentById(comments, commentId);
-      const isCurrentlyReacted = comment
-        ? hasUserReacted(comment.reactions, user.login, "THUMBS_UP")
-        : false;
+  //     await toggleReactionMutation.mutateAsync({
+  //       subjectId: commentId,
+  //       isReacted: isCurrentlyReacted,
+  //       content: "THUMBS_UP"
+  //     });
+  //   } catch (error) {
+  //     console.error("댓글 업보트 실패:", error);
+  //   }
+  // };
 
-      await toggleReactionMutation.mutateAsync({
-        subjectId: commentId,
-        isReacted: isCurrentlyReacted,
-        content: "THUMBS_UP"
-      });
-    } catch (error) {
-      console.error("댓글 업보트 실패:", error);
-    }
-  };
+  // const handleCommentReply = async (commentId: string, content: string) => {
+  //   if (!user?.accessToken) {
+  //     return;
+  //   }
 
-  const handleCommentReply = async (commentId: string, content: string) => {
-    if (!user?.accessToken) {
-      return;
-    }
+  //   try {
+  //     await addCommentReplyMutation.mutateAsync({
+  //       discussionId: discussion.id,
+  //       replyToId: commentId,
+  //       body: content
+  //     });
+  //   } catch (error) {
+  //     console.error("댓글 답글 실패:", error);
+  //   }
+  // };
 
-    try {
-      await addCommentReplyMutation.mutateAsync({
-        discussionId: discussion.id,
-        replyToId: commentId,
-        body: content
-      });
-    } catch (error) {
-      console.error("댓글 답글 실패:", error);
-    }
-  };
+  // const handleCommentLike = async (commentId: string) => {
+  //   if (!user?.accessToken || !user?.login) {
+  //     return;
+  //   }
 
-  const handleCommentLike = async (commentId: string) => {
-    if (!user?.accessToken || !user?.login) {
-      return;
-    }
+  //   try {
+  //     const comment = findCommentById(comments, commentId);
+  //     const isCurrentlyReacted = comment
+  //       ? hasUserReacted(comment.reactions, user.login, "HEART")
+  //       : false;
 
-    try {
-      const comment = findCommentById(comments, commentId);
-      const isCurrentlyReacted = comment
-        ? hasUserReacted(comment.reactions, user.login, "HEART")
-        : false;
+  //     await toggleReactionMutation.mutateAsync({
+  //       subjectId: commentId,
+  //       isReacted: isCurrentlyReacted,
+  //       content: "HEART"
+  //     });
+  //   } catch (error) {
+  //     console.error("댓글 좋아요 실패:", error);
+  //   }
+  // };
 
-      await toggleReactionMutation.mutateAsync({
-        subjectId: commentId,
-        isReacted: isCurrentlyReacted,
-        content: "HEART"
-      });
-    } catch (error) {
-      console.error("댓글 좋아요 실패:", error);
-    }
-  };
+  // const { heartCount, upvoteCount } = getHeartAndUpvoteCounts(
+  //   actualDiscussion.reactions
+  // );
+  // const { hasLiked: hasUserLiked, hasUpvoted: hasUserUpvoted } =
+  //   getUserReactionStates(actualDiscussion.reactions, user?.login);
 
-  const { heartCount, upvoteCount } = getHeartAndUpvoteCounts(
-    actualDiscussion.reactions
-  );
-  const { hasLiked: hasUserLiked, hasUpvoted: hasUserUpvoted } =
-    getUserReactionStates(actualDiscussion.reactions, user?.login);
   return (
     <div className={postContainer}>
-      {/* 헤더: 사용자 정보 */}
+      {/* 헤더: 사용자 정보 + 본문 */}
+      {/* FIXME: 본문 컴포넌트 1개 추출 */}
       <div className={headerSection}>
         <Avatar
           size="40"
-          src={authorInfo.src}
-          alt={authorInfo.alt}
-          fallback={authorInfo.fallback}
+          src={actualDiscussion.author.avatarUrl}
+          alt={actualDiscussion.author.login}
+          fallback={actualDiscussion.author.login}
           className={avatarStyles}
         />
         <div className={authorInfoContainer}>
-          <h4 className={authorName}>{authorInfo.name}</h4>
+          <h4 className={authorName}>{actualDiscussion.author.login}</h4>
           <div className={authorMeta}>
-            <span className={authorHandle}>@{authorInfo.username}</span>
+            <span className={authorHandle}>
+              @{actualDiscussion.author.login}
+            </span>
             <span className={separator}>·</span>
             <span className={timeStamp}>
               {formatTimeAgo(actualDiscussion.createdAt)}
@@ -194,7 +187,6 @@ export function PostDetail() {
         </div>
       </div>
 
-      {/* 본문 */}
       <div className={contentSection}>
         {/* 제목 */}
         <h2 className={postTitle}>{actualDiscussion.title}</h2>
@@ -210,6 +202,43 @@ export function PostDetail() {
 
       <InteractionButtons
         discussion={actualDiscussion}
+        // const { handleLike, handleUpvote } = usePostReactions({
+        //   discussion: discussion || undefined
+        // });
+        // const handleReaction = async (type: "like" | "upvote") => {
+        //   if (!user?.accessToken || !user?.login) {
+        //     return;
+        //   }
+
+        //   try {
+        //     const reactionContent = type === "like" ? "HEART" : "THUMBS_UP";
+
+        //     const { hasLiked: currentHasLiked, hasUpvoted: currentHasUpvoted } =
+        //       getUserReactionStates(actualDiscussion.reactions, user.login);
+        //     const isCurrentlyReacted =
+        //       type === "like" ? currentHasLiked : currentHasUpvoted;
+
+        //     await toggleReactionMutation.mutateAsync({
+        //       subjectId: discussion.id,
+        //       isReacted: isCurrentlyReacted,
+        //       content: reactionContent
+        //     });
+
+        //     if (type === "like") {
+        //       handleLike(discussion.id);
+        //     }
+        //     if (type === "upvote") {
+        //       handleUpvote(discussion.id);
+        //     }
+        //   } catch (error) {
+        //     console.error("반응 처리 실패:", error);
+        //   }
+        // };
+        // const { heartCount, upvoteCount } = getHeartAndUpvoteCounts(
+        //   actualDiscussion.reactions
+        // );
+        // const { hasLiked: hasUserLiked, hasUpvoted: hasUserUpvoted } =
+        // getUserReactionStates(actualDiscussion.reactions, user?.login);
         onLike={() => handleReaction("like")}
         onUpvote={() => handleReaction("upvote")}
         hasUserLiked={hasUserLiked}
@@ -225,7 +254,7 @@ export function PostDetail() {
         <div className={dividerLine} />
       </div>
 
-      {/* 댓글 입력 */}
+      {/* FIXME: 댓글 입력 컴포넌트 1개 추출 */}
       {user && (
         <div className={commentInputSection}>
           <div className={commentInputContainer}>
@@ -237,6 +266,7 @@ export function PostDetail() {
               className={avatarStyles}
             />
             <textarea
+              // const [commentText, setCommentText] = useState("");
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
               placeholder="댓글을 작성해주세요"
@@ -251,6 +281,19 @@ export function PostDetail() {
           </div>
           <div className={submitButtonContainer}>
             <button
+              // const handleCommentSubmit = async () => {
+              //   if (commentText.trim() && user?.accessToken) {
+              //     try {
+              //       await addCommentMutation.mutateAsync({
+              //         discussionId: discussion.id,
+              //         body: commentText
+              //       });
+              //       setCommentText("");
+              //     } catch (error) {
+              //       console.error("댓글 작성 실패:", error);
+              //     }
+              //   }
+              // };
               onClick={handleCommentSubmit}
               disabled={!commentText.trim() || addCommentMutation.isPending}
               className={submitButton}
@@ -268,23 +311,35 @@ export function PostDetail() {
         </div>
       )}
 
-      {/* 댓글들 */}
+      {/* FIXME: 댓글들 1개 추출 */}
       <div className={commentsSection}>
         {isDetailLoading ? (
           <div className={loadingCommentsContainer}>
             <p className={loadingCommentsText}>댓글을 불러오는 중...</p>
           </div>
         ) : (
-          <CommentList
-            comments={comments}
-            onUpvote={handleCommentUpvote}
-            onLike={handleCommentLike}
-            onReply={handleCommentReply}
-          />
+          <CommentList comments={comments} discussionId={discussion.id} />
         )}
       </div>
     </div>
   );
+}
+
+function formatTimeAgo(dateString: string): string {
+  const now = new Date();
+  const date = new Date(dateString);
+  const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+
+  if (diffInSeconds < 60) {
+    return "방금 전";
+  }
+  if (diffInSeconds < 3600) {
+    return `${Math.floor(diffInSeconds / 60)}분 전`;
+  }
+  if (diffInSeconds < 86400) {
+    return `${Math.floor(diffInSeconds / 3600)}시간 전`;
+  }
+  return `${Math.floor(diffInSeconds / 86400)}일 전`;
 }
 
 const postContainer = css({
@@ -480,20 +535,3 @@ const loadingCommentsText = css({
   letterSpacing: "-0.4px",
   color: "rgba(0, 0, 0, 0.4)"
 });
-
-function formatTimeAgo(dateString: string): string {
-  const now = new Date();
-  const date = new Date(dateString);
-  const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
-
-  if (diffInSeconds < 60) {
-    return "방금 전";
-  }
-  if (diffInSeconds < 3600) {
-    return `${Math.floor(diffInSeconds / 60)}분 전`;
-  }
-  if (diffInSeconds < 86400) {
-    return `${Math.floor(diffInSeconds / 3600)}시간 전`;
-  }
-  return `${Math.floor(diffInSeconds / 86400)}일 전`;
-}
