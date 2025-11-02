@@ -11,20 +11,11 @@ import { useAuth } from "@/contexts/AuthContext";
 interface CommentListProps {
   comments: GitHubComment[];
   discussionId: string;
-  // onUpvote: (commentId: string) => void;
-  // onLike: (commentId: string) => void;
-  // onReply: (commentId: string, content: string) => void;
 }
 
-// FIXME: suspense 적용 + errorboundary 적용 + 내부로 함수 다 불러오기
-export function CommentList({
-  comments,
-  discussionId
-  // onUpvote,
-  // onLike,
-  // onReply
-}: CommentListProps) {
+export function CommentList({ comments, discussionId }: CommentListProps) {
   const { user } = useAuth();
+
   if (comments.length === 0) {
     return (
       <div className={emptyState}>
@@ -124,10 +115,14 @@ const findCommentById = (
   id: string
 ): GitHubComment | null => {
   for (const comment of comments) {
-    if (comment.id === id) return comment;
+    if (comment.id === id) {
+      return comment;
+    }
     if (comment.replies?.nodes) {
       const found = findCommentById(comment.replies.nodes, id);
-      if (found) return found;
+      if (found) {
+        return found;
+      }
     }
   }
   return null;

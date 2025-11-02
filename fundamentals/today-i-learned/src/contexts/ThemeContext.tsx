@@ -49,7 +49,9 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
   };
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined") {
+      return;
+    }
 
     const savedTheme = localStorage.getItem("theme") as Theme;
     if (savedTheme) {

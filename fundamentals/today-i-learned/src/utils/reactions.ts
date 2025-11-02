@@ -19,7 +19,9 @@ export function getReactionCount(
   reactions: ReactionsData,
   reactionType: string
 ): number {
-  if (!reactions.nodes) return 0;
+  if (!reactions.nodes) {
+    return 0;
+  }
   return reactions.nodes.filter((reaction) => reaction.content === reactionType)
     .length;
 }
@@ -32,7 +34,9 @@ export function hasUserReacted(
   userLogin: string,
   reactionType: string
 ): boolean {
-  if (!reactions.nodes || !userLogin) return false;
+  if (!reactions.nodes || !userLogin) {
+    return false;
+  }
   return reactions.nodes.some(
     (reaction) =>
       reaction.user.login === userLogin && reaction.content === reactionType
@@ -77,7 +81,9 @@ export function getUsersWhoReacted(
   reactions: ReactionsData,
   reactionType: string
 ): ReactionNode[] {
-  if (!reactions.nodes) return [];
+  if (!reactions.nodes) {
+    return [];
+  }
   return reactions.nodes.filter(
     (reaction) => reaction.content === reactionType
   );

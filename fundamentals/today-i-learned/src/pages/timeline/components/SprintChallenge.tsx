@@ -10,7 +10,9 @@ export function SprintChallenge() {
   const { data: contributions, isLoading } = useMyContributions();
 
   const sprintData = useMemo(() => {
-    if (!contributions) return null;
+    if (!contributions) {
+      return null;
+    }
     return createSprintData(contributions, new Date());
   }, [contributions]);
 

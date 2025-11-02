@@ -82,7 +82,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   const login = () => {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined") {
+      return;
+    }
 
     const redirectUri =
       "https://frontend-fundamentals.com/api/github/login-callback";

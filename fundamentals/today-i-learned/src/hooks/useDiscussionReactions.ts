@@ -5,9 +5,12 @@ import {
   getHeartAndUpvoteCounts,
   getUserReactionStates
 } from "@/utils/reactions";
+import { handleApiError } from "@/utils/errors";
 import type { GitHubDiscussionDetail } from "@/api/remote/discussions";
 
-export function useDiscussionReactions(discussionDetail: GitHubDiscussionDetail) {
+export function useDiscussionReactions(
+  discussionDetail: GitHubDiscussionDetail
+) {
   const { user } = useAuth();
   const { handleLike, handleUpvote } = usePostReactions({
     discussion: discussionDetail
@@ -40,7 +43,7 @@ export function useDiscussionReactions(discussionDetail: GitHubDiscussionDetail)
         handleUpvote(discussionDetail.id);
       }
     } catch (error) {
-      console.error("반응 처리 실패:", error);
+      handleApiError(error);
     }
   };
 

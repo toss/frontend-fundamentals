@@ -15,7 +15,9 @@ type DayStatus =
   | "past-without-contribution";
 
 function getDayStatus(day: SprintDay): DayStatus {
-  if (day.isFuture) return "future";
+  if (day.isFuture) {
+    return "future";
+  }
   if (day.isToday) {
     return day.hasContribution
       ? "today-with-contribution"
@@ -27,7 +29,9 @@ function getDayStatus(day: SprintDay): DayStatus {
 }
 
 function getDisplayText(day: SprintDay): string {
-  if (day.isToday) return "오늘";
+  if (day.isToday) {
+    return "오늘";
+  }
   return format(day.date, "E", { locale: ko });
 }
 

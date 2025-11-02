@@ -3,6 +3,7 @@ import { Avatar } from "@/components/shared/ui/Avatar";
 import { useAddDiscussionComment } from "@/api/hooks/useDiscussions";
 import { useAuth } from "@/contexts/AuthContext";
 import { css } from "@styled-system/css";
+import { handleApiError } from "@/utils/errors";
 
 interface CommentInputProps {
   discussionId: string;
@@ -22,7 +23,7 @@ export function CommentInput({ discussionId }: CommentInputProps) {
         });
         setCommentText("");
       } catch (error) {
-        console.error("댓글 작성 실패:", error);
+        handleApiError(error);
       }
     }
   };
