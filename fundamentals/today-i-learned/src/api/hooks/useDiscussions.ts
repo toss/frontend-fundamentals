@@ -5,7 +5,8 @@ import {
   useMutation,
   useQuery,
   useQueryClient,
-  useSuspenseInfiniteQuery
+  useSuspenseInfiniteQuery,
+  useSuspenseQuery
 } from "@tanstack/react-query";
 import {
   createDiscussion,
@@ -232,6 +233,31 @@ export function useMyContributions({
       });
     },
     enabled: enabled && !!user?.accessToken && !!user?.login,
+    staleTime: 1000 * 60 * 10, // 10분
+    gcTime: 1000 * 60 * 30, // 30분
+    retry: 2
+  });
+}
+
+export function useSuspendedMyContributions({
+  owner = ENV_CONFIG.GITHUB_OWNER,
+  repo = ENV_CONFIG.GITHUB_REPO
+}: Omit<UseDiscussionsParams, "categoryName" | "enabled"> = {}) {
+  const { user } = useAuth();
+
+  return useSuspenseQuery({
+    queryKey: DISCUSSIONS_QUERY_KEYS.contributions(user?.login || "anonymous"),
+    queryFn: async () => {
+      if (!user?.accessToken || !user?.login) {
+        return [];
+      }
+      return fetchMyContributions({
+        owner,
+        repo,
+        accessToken: user.accessToken,
+        authorLogin: user.login
+      });
+    },
     staleTime: 1000 * 60 * 10, // 10분
     gcTime: 1000 * 60 * 30, // 30분
     retry: 2
@@ -502,7 +528,7 @@ export function useSuspendedInfiniteDiscussions({
   filterBy
 }: Omit<UseInfiniteDiscussionsParams, "enabled"> = {}) {
   const { user } = useAuth();
-  
+
   return useSuspenseInfiniteQuery({
     queryKey: DISCUSSIONS_QUERY_KEYS.infinite({
       owner,

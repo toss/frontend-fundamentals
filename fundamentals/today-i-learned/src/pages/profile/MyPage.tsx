@@ -10,9 +10,11 @@ import {
   HallOfFameLoadingState,
   HallOfFameErrorState,
   ActivityLoadingState,
-  ActivityErrorState
+  ActivityErrorState,
+  ChallengeErrorState
 } from "./components/ProfileLoadingStates";
 import { css } from "@styled-system/css";
+import { ChallengeHeader } from "@/components/features/challenge/ChallengeHeader";
 
 export function MyPage() {
   return (
@@ -48,7 +50,20 @@ export function MyPage() {
       </section>
 
       <section className={rightContent}>
-        <MonthlyChallenge />
+        <ErrorBoundary fallback={ChallengeErrorState}>
+          <Suspense
+            fallback={
+              <div className={challengeContainer}>
+                <ChallengeHeader
+                  year={new Date().getFullYear()}
+                  month={new Date().getMonth() + 1}
+                />
+              </div>
+            }
+          >
+            <MonthlyChallenge />
+          </Suspense>
+        </ErrorBoundary>
       </section>
     </div>
   );
@@ -102,4 +117,11 @@ const sectionDividerLine = css({
   width: "100%",
   height: 0,
   borderBottom: "1px solid rgba(201, 201, 201, 0.4)"
+});
+
+export const challengeContainer = css({
+  display: "flex",
+  flexDirection: "column",
+  padding: "1rem",
+  gap: "1.5rem"
 });

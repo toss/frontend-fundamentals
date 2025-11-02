@@ -64,6 +64,33 @@ export function ActivityErrorState() {
   );
 }
 
+export function ChallengeLoadingState() {
+  return (
+    <div className={challengeLoading}>
+      <div className={challengeHeaderSkeleton}>
+        <div className={challengeTitleSkeleton} />
+        <div className={challengeSubtitleSkeleton} />
+      </div>
+      <div className={challengeCalendarSkeleton}>
+        {Array.from({ length: 7 }).map((_, index) => (
+          <div key={index} className={challengeDaySkeleton}>
+            <div />
+            <div />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function ChallengeErrorState() {
+  return (
+    <div className={errorState}>
+      <h3>월간 기록을 불러올 수 없습니다</h3>
+    </div>
+  );
+}
+
 // 스타일 정의
 const profileInfoLoading = css({
   display: "flex",
@@ -140,6 +167,64 @@ const postsListSkeleton = css({
   gap: "1rem"
 });
 
+const challengeLoading = css({
+  display: "flex",
+  flexDirection: "column",
+  gap: "1.5rem",
+  padding: "1rem",
+  animation: "pulse 2s infinite"
+});
+
+const challengeHeaderSkeleton = css({
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.5rem",
+  marginTop: "1.25rem"
+});
+
+const challengeTitleSkeleton = css({
+  width: "120px",
+  height: "32px",
+  backgroundColor: "#e5e7eb",
+  borderRadius: "4px"
+});
+
+const challengeSubtitleSkeleton = css({
+  width: "180px",
+  height: "20px",
+  backgroundColor: "#e5e7eb",
+  borderRadius: "4px"
+});
+
+const challengeCalendarSkeleton = css({
+  display: "grid",
+  gridTemplateColumns: "repeat(7, 1fr)",
+  gap: "0.75rem",
+  maxWidth: "32rem",
+  padding: "1rem",
+  border: "1px solid #e5e7eb",
+  borderRadius: "8px"
+});
+
+const challengeDaySkeleton = css({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: "0.5rem",
+  "& > div:first-child": {
+    width: "1.5rem",
+    height: "1.5rem",
+    backgroundColor: "#e5e7eb",
+    borderRadius: "50%"
+  },
+  "& > div:last-child": {
+    width: "24px",
+    height: "16px",
+    backgroundColor: "#e5e7eb",
+    borderRadius: "4px"
+  }
+});
+
 const errorState = css({
   display: "flex",
   flexDirection: "column",
@@ -149,7 +234,6 @@ const errorState = css({
   textAlign: "center",
   "& h3": {
     fontWeight: "600",
-    fontSize: "18px",
-    color: "#ef4444"
+    fontSize: "14px"
   }
 });
