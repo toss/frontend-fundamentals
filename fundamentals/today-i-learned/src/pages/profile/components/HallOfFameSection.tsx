@@ -1,4 +1,3 @@
-import { useErrorHandler } from "@/hooks/useErrorHandler";
 import { useUserHallOfFame } from "@/pages/profile/hooks/useUserHallOfFame";
 import {
   PostCard,
@@ -15,62 +14,28 @@ interface BaseComponentProps {
 interface HallOfFameSectionProps extends BaseComponentProps {}
 
 export function HallOfFameSection({ className }: HallOfFameSectionProps) {
-  const { handleApiError } = useErrorHandler();
-
   const {
     userProfile,
     displayedPosts,
-    isLoading,
-    error,
     isExpanded,
     showToggleButton,
     isFetchingNextPage,
-    handleToggleExpand,
-    refetch
+    handleToggleExpand
   } = useUserHallOfFame();
 
-  const renderContent = () => {
-    if (isLoading) {
-      return (
-        <div className={postsGrid}>
-          {Array.from({ length: 6 }).map((_, index) => (
-            <PostCardSkeleton key={index} />
-          ))}
-        </div>
-      );
-    }
+  return (
+    <div className={cx(sectionContainer, className)}>
+      <div className={headerSection}>
+        <h2 className={sectionTitle}>명예의 전당</h2>
+      </div>
 
-    if (error) {
-      return (
-        <div className={errorContainer}>
-          <h3 className={errorTitle}>명예의 전당을 불러올 수 없습니다</h3>
-          <p className={errorMessage}>{error.message}</p>
-          <button
-            onClick={() => {
-              refetch().catch((error) =>
-                handleApiError(error, "명예의 전당 재시도")
-              );
-            }}
-            className={retryButton}
-          >
-            다시 시도
-          </button>
-        </div>
-      );
-    }
-
-    if (!isLoading && userProfile && displayedPosts.length === 0) {
-      return (
-        <div className={emptyStateContainer}>
-          <p className={emptyStateMessage}>
-            아직 명예의 전당에 등록된 글이 없습니다.
+      {displayedPosts.length === 0 ? (
+        <div className={emptyState}>
+          <p className={emptyStateText}>
+            아직 명예의 전당에 올라간 글이 없습니다.
           </p>
         </div>
-      );
-    }
-
-    if (displayedPosts.length > 0) {
-      return (
+      ) : (
         <>
           <div className={postsGrid}>
             {displayedPosts.map((discussion) => (
@@ -84,41 +49,27 @@ export function HallOfFameSection({ className }: HallOfFameSectionProps) {
             ))}
           </div>
 
-          {showToggleButton && (
-            <button
-              onClick={handleToggleExpand}
-              disabled={isFetchingNextPage}
-              className={toggleButton}
-            >
-              <span className={toggleButtonText}>
-                {isExpanded ? "접기" : "더보기"}
-              </span>
-            </button>
-          )}
-
           {isFetchingNextPage && (
-            <div className={cx(postsGrid, loadingGrid)}>
-              {Array.from({ length: 2 }).map((_, index) => (
+            <div className={loadingSkeletonGrid}>
+              {Array.from({ length: 3 }).map((_, index) => (
                 <PostCardSkeleton key={`loading-${index}`} />
               ))}
             </div>
           )}
+
+          {showToggleButton && (
+            <div className={toggleButtonContainer}>
+              <button
+                onClick={handleToggleExpand}
+                disabled={isFetchingNextPage}
+                className={toggleButton}
+              >
+                {isExpanded ? "간략히 보기" : "더 보기"}
+              </button>
+            </div>
+          )}
         </>
-      );
-    }
-
-    return (
-      <div className={emptyStateContainer}>
-        <p className={emptyStateMessage}>명예의 전당을 불러오는 중...</p>
-      </div>
-    );
-  };
-
-  return (
-    <div className={cx(sectionContainer, className)}>
-      <h2 className={sectionTitle}>명예의 전당</h2>
-
-      {renderContent()}
+      )}
     </div>
   );
 }
@@ -127,8 +78,13 @@ export function HallOfFameSection({ className }: HallOfFameSectionProps) {
 const sectionContainer = css({
   display: "flex",
   flexDirection: "column",
-  alignItems: "flex-start",
   gap: "1rem"
+});
+
+const headerSection = css({
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.5rem"
 });
 
 const sectionTitle = css({
@@ -139,86 +95,51 @@ const sectionTitle = css({
   color: "#0F0F0F"
 });
 
-// Grid Layout
 const postsGrid = css({
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fill, minmax(400px, 1fr))",
-  gap: "0.5rem",
-  width: "100%"
+  gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+  gap: "1rem"
 });
 
-const loadingGrid = css({
+const emptyState = css({
+  textAlign: "center",
+  paddingY: "3rem"
+});
+
+const emptyStateText = css({
+  color: "rgba(0, 0, 0, 0.6)",
+  fontWeight: "500"
+});
+
+const toggleButtonContainer = css({
+  display: "flex",
+  justifyContent: "center",
+  paddingTop: "1rem"
+});
+
+const loadingSkeletonGrid = css({
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+  gap: "1rem",
   marginTop: "1rem"
 });
 
-// Error States
-const errorContainer = css({
-  textAlign: "center",
-  paddingY: "2rem",
-  width: "100%"
-});
-
-const errorTitle = css({
-  fontSize: "18px",
-  fontWeight: "semibold",
-  color: "rgb(153, 27, 27)",
-  marginBottom: "0.5rem"
-});
-
-const errorMessage = css({
-  color: "rgb(220, 38, 38)",
-  marginBottom: "1rem"
-});
-
-const retryButton = css({
-  paddingX: "1rem",
-  paddingY: "0.5rem",
-  backgroundColor: "rgb(59, 130, 246)",
-  color: "white",
-  borderRadius: "0.5rem",
-  transition: "background-color 0.2s",
-  _hover: {
-    backgroundColor: "rgb(37, 99, 235)"
-  }
-});
-
-// Empty State
-const emptyStateContainer = css({
-  textAlign: "center",
-  paddingY: "3rem",
-  width: "100%"
-});
-
-const emptyStateMessage = css({
-  color: "rgba(0, 0, 0, 0.6)",
-  fontWeight: "medium"
-});
-
-// Toggle Button
 const toggleButton = css({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  paddingX: "1rem",
-  paddingY: "18px",
-  width: "100%",
-  height: "60px",
-  border: "1px solid rgba(201, 201, 201, 0.5)",
-  borderRadius: "12px",
-  backgroundColor: "white",
+  paddingX: "2rem",
+  paddingY: "0.75rem",
+  backgroundColor: "#0F0F0F",
+  color: "white",
+  border: "none",
+  borderRadius: "0.5rem",
+  fontWeight: "600",
+  fontSize: "14px",
+  cursor: "pointer",
   transition: "background-color 0.2s",
-  boxSizing: "border-box",
   _hover: {
-    backgroundColor: "rgba(0, 0, 0, 0.05)"
+    backgroundColor: "#333333"
   },
   _disabled: {
-    opacity: 0.5
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
+    cursor: "not-allowed"
   }
-});
-
-const toggleButtonText = css({
-  fontWeight: "bold",
-  fontSize: "18px",
-  lineHeight: "22px",
-  color: "#0F0F0F"
 });

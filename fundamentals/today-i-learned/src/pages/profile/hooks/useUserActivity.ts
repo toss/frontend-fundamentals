@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
-import { useUserProfile } from "@/api/hooks/useUser";
-import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
+import { useSuspendedUserProfile } from "@/api/hooks/useUser";
+import { useSuspendedInfiniteDiscussions } from "@/api/hooks/useDiscussions";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { processUserPosts } from "@/utils/postFilters";
 import { PAGE_SIZE } from "@/constants/github";
@@ -8,18 +8,15 @@ import { PAGE_SIZE } from "@/constants/github";
 type SortFilter = "created" | "lastActivity";
 
 export function useUserActivity() {
-  const { data: userProfile } = useUserProfile();
+  const { data: userProfile } = useSuspendedUserProfile();
   const [sortFilter, setSortFilter] = useState<SortFilter>("created");
 
   const {
     data,
     fetchNextPage,
     hasNextPage,
-    isFetchingNextPage,
-    isLoading,
-    error,
-    refetch
-  } = useInfiniteDiscussions({
+    isFetchingNextPage
+  } = useSuspendedInfiniteDiscussions({
     categoryName: "Today I Learned",
     pageSize: PAGE_SIZE.DEFAULT
   });
@@ -54,14 +51,11 @@ export function useUserActivity() {
   return {
     userProfile,
     userPosts,
-    isLoading,
-    error,
     sortFilter,
     hasNextPage,
     isFetchingNextPage,
     elementRef,
     handleFilterToggle,
-    handleComment,
-    refetch
+    handleComment
   };
 }

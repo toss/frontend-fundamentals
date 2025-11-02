@@ -13,14 +13,11 @@ export function ActivitySection({ className }: ActivitySectionProps) {
   const {
     userProfile,
     userPosts,
-    isLoading,
-    error,
     sortFilter,
     hasNextPage,
     isFetchingNextPage,
     elementRef,
-    handleFilterToggle,
-    refetch
+    handleFilterToggle
   } = useUserActivity();
 
   return (
@@ -45,14 +42,11 @@ export function ActivitySection({ className }: ActivitySectionProps) {
       </div>
 
       <ActivityContent
-        isLoading={isLoading}
-        error={error}
         userProfile={userProfile}
         userPosts={userPosts}
         hasNextPage={hasNextPage}
         isFetchingNextPage={isFetchingNextPage}
         elementRef={elementRef}
-        refetch={refetch}
       />
     </div>
   );

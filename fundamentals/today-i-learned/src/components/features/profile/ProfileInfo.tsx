@@ -1,4 +1,4 @@
-import { useUserProfile } from "@/api/hooks/useUser";
+import { useSuspendedUserProfile } from "@/api/hooks/useUser";
 import { UserAvatar } from "@/components/shared/common/UserAvatar";
 import { css, cx } from "@styled-system/css";
 
@@ -7,66 +7,10 @@ interface BaseComponentProps {
   children?: React.ReactNode;
 }
 
-interface ProfileInfoProps extends BaseComponentProps {
-  showLoadingSkeleton?: boolean;
-}
+interface ProfileInfoProps extends BaseComponentProps {}
 
-export function ProfileInfo({
-  className,
-  showLoadingSkeleton = true
-}: ProfileInfoProps) {
-  const { data: userProfile, isLoading } = useUserProfile();
-
-  if (isLoading && showLoadingSkeleton) {
-    return (
-      <div
-        className={cx(
-          css({
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "24px",
-            animation: "pulse 2s infinite"
-          }),
-          className
-        )}
-      >
-        <div
-          className={css({
-            width: "100px",
-            height: "100px",
-            backgroundColor: "gray.200",
-            borderRadius: "50%"
-          })}
-        />
-        <div
-          className={css({
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "16px"
-          })}
-        >
-          <div
-            className={css({
-              height: "32px",
-              backgroundColor: "gray.200",
-              borderRadius: "4px",
-              width: "128px"
-            })}
-          />
-          <div
-            className={css({
-              height: "20px",
-              backgroundColor: "gray.200",
-              borderRadius: "4px",
-              width: "96px"
-            })}
-          />
-        </div>
-      </div>
-    );
-  }
+export function ProfileInfo({ className }: ProfileInfoProps) {
+  const { data: userProfile } = useSuspendedUserProfile();
 
   return (
     <div
@@ -93,7 +37,7 @@ export function ProfileInfo({
             })}
           />
         ) : (
-          <UserAvatar user={userProfile} isLoading={isLoading} />
+          <UserAvatar user={userProfile} />
         )}
       </div>
 

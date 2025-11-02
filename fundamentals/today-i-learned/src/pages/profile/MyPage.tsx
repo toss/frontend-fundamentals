@@ -1,7 +1,17 @@
-import { ProfileHeader } from "./components/ProfileHeader";
+import { ProfileInfo } from "@/components/features/profile/ProfileInfo";
 import { HallOfFameSection } from "./components/HallOfFameSection";
 import { ActivitySection } from "./components/ActivitySection";
 import { MonthlyChallenge } from "@/components/features/challenge/MonthlyChallenge";
+import { ErrorBoundary } from "@/components/shared/ErrorBoundary";
+import { Suspense } from "react";
+import {
+  ProfileInfoLoadingState,
+  ProfileInfoErrorState,
+  HallOfFameLoadingState,
+  HallOfFameErrorState,
+  ActivityLoadingState,
+  ActivityErrorState
+} from "./components/ProfileLoadingStates";
 import { css } from "@styled-system/css";
 
 export function MyPage() {
@@ -9,19 +19,31 @@ export function MyPage() {
     <div className={gridLayout}>
       <section className={leftContent}>
         <div className={profileSection}>
-          <ProfileHeader />
+          <ErrorBoundary fallback={ProfileInfoErrorState}>
+            <Suspense fallback={<ProfileInfoLoadingState />}>
+              <ProfileInfo />
+            </Suspense>
+          </ErrorBoundary>
         </div>
 
         <SectionDivider />
 
         <div className={hallOfFameSection}>
-          <HallOfFameSection />
+          <ErrorBoundary fallback={HallOfFameErrorState}>
+            <Suspense fallback={<HallOfFameLoadingState />}>
+              <HallOfFameSection />
+            </Suspense>
+          </ErrorBoundary>
         </div>
 
         <SectionDivider />
 
         <div className={activitySection}>
-          <ActivitySection />
+          <ErrorBoundary fallback={ActivityErrorState}>
+            <Suspense fallback={<ActivityLoadingState />}>
+              <ActivitySection />
+            </Suspense>
+          </ErrorBoundary>
         </div>
       </section>
 

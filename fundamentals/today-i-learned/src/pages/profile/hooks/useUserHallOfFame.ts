@@ -1,24 +1,21 @@
 import { useState, useMemo } from "react";
-import { useUserProfile } from "@/api/hooks/useUser";
-import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
+import { useSuspendedUserProfile } from "@/api/hooks/useUser";
+import { useSuspendedInfiniteDiscussions } from "@/api/hooks/useDiscussions";
 import { filterUserPosts } from "@/utils/postFilters";
 import { PAGE_SIZE } from "@/constants/github";
 
 const INITIAL_DISPLAY_COUNT = 6;
 
 export function useUserHallOfFame() {
-  const { data: userProfile } = useUserProfile();
+  const { data: userProfile } = useSuspendedUserProfile();
   const [isExpanded, setIsExpanded] = useState(false);
 
   const {
     data,
-    isLoading,
     fetchNextPage,
     hasNextPage,
-    isFetchingNextPage,
-    error,
-    refetch
-  } = useInfiniteDiscussions({
+    isFetchingNextPage
+  } = useSuspendedInfiniteDiscussions({
     categoryName: "Today I Learned",
     filterBy: { label: "성지 ⛲" },
     pageSize: PAGE_SIZE.DEFAULT
@@ -54,12 +51,9 @@ export function useUserHallOfFame() {
   return {
     userProfile,
     displayedPosts,
-    isLoading,
-    error,
     isExpanded,
     showToggleButton,
     isFetchingNextPage,
-    handleToggleExpand,
-    refetch
+    handleToggleExpand
   };
 }

@@ -1,75 +1,35 @@
-import { useErrorHandler } from "@/hooks/useErrorHandler";
 import {
   PostCard,
   PostCardSkeleton
 } from "@/components/features/discussions/PostCard";
-interface BaseComponentProps {
-  className?: string;
-  children?: React.ReactNode;
-}
 import type { GitHubUser } from "@/api/remote/user";
 import type { GitHubDiscussion } from "@/api/remote/discussions";
 import { css } from "@styled-system/css";
 
+interface BaseComponentProps {
+  className?: string;
+  children?: React.ReactNode;
+}
+
 interface ActivityContentProps extends BaseComponentProps {
-  isLoading: boolean;
-  error: Error | null;
   userProfile: GitHubUser | null | undefined;
   userPosts: GitHubDiscussion[];
   hasNextPage: boolean;
   isFetchingNextPage: boolean;
   elementRef: React.RefObject<HTMLDivElement>;
-  refetch: () => Promise<any>;
 }
 
-// FIXME: infinity data fetching이 3번 반복되는 문제
 export function ActivityContent({
-  isLoading,
-  error,
   userProfile,
   userPosts,
   hasNextPage,
   isFetchingNextPage,
-  elementRef,
-  refetch
+  elementRef
 }: ActivityContentProps) {
-  const { handleApiError } = useErrorHandler();
-
-  if (isLoading) {
+  if (userProfile && userPosts.length === 0) {
     return (
-      <div className="space-y-4">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <PostCardSkeleton key={index} />
-        ))}
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="text-center py-8">
-        <h3 className="text-lg font-semibold text-red-800 dark:text-red-200 mb-2">
-          글을 불러올 수 없습니다
-        </h3>
-        <p className="text-red-600 dark:text-red-400 mb-4">{error.message}</p>
-        <button
-          onClick={() => {
-            refetch().catch((error) =>
-              handleApiError(error, "활동 목록 재시도")
-            );
-          }}
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-        >
-          다시 시도
-        </button>
-      </div>
-    );
-  }
-
-  if (!isLoading && userProfile && userPosts.length === 0) {
-    return (
-      <div className="text-center py-12">
-        <p className="text-black/60 font-medium">아직 작성한 글이 없습니다.</p>
+      <div className={emptyStateContainer}>
+        <p className={emptyStateText}>아직 작성한 글이 없습니다.</p>
       </div>
     );
   }
@@ -90,40 +50,76 @@ export function ActivityContent({
         </div>
 
         {hasNextPage && (
-          <div
-            ref={elementRef}
-            className="flex items-center justify-center py-4"
-          >
-            {isFetchingNextPage && (
-              <div className={activityContentContainer}>
-                {Array.from({ length: 3 }).map((_, index) => (
-                  <PostCardSkeleton key={`loading-${index}`} />
-                ))}
+          <div ref={elementRef} className={infiniteScrollTrigger}>
+            {isFetchingNextPage ? (
+              <div className={loadingMoreContainer}>
+                <div className={activityContentContainer}>
+                  {Array.from({ length: 3 }).map((_, index) => (
+                    <PostCardSkeleton key={`loading-${index}`} />
+                  ))}
+                </div>
               </div>
+            ) : (
+              <div className={loadMoreTrigger} />
             )}
           </div>
         )}
 
         {!hasNextPage && userPosts.length > 0 && (
-          <div className="text-center py-8">
-            <p className="text-black/40 font-medium text-sm">
-              모든 글을 불러왔습니다.
-            </p>
+          <div className={endStateContainer}>
+            <p className={endStateText}>모든 글을 불러왔습니다.</p>
           </div>
         )}
       </>
     );
   }
 
-  return (
-    <div className="text-center py-12">
-      <p className="text-black/60 font-medium">글을 불러오는 중...</p>
-    </div>
-  );
+  return null;
 }
 
 const activityContentContainer = css({
   display: "flex",
   flexDirection: "column",
   gap: "0.5rem"
+});
+
+const emptyStateContainer = css({
+  textAlign: "center",
+  paddingY: "3rem"
+});
+
+const emptyStateText = css({
+  color: "rgba(0, 0, 0, 0.6)",
+  fontWeight: "500"
+});
+
+const infiniteScrollTrigger = css({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  paddingY: "1rem"
+});
+
+const loadingMoreContainer = css({
+  display: "flex",
+  flexDirection: "column",
+  gap: "1rem",
+  width: "100%"
+});
+
+const loadMoreTrigger = css({
+  height: "20px",
+  width: "100%"
+});
+
+const endStateContainer = css({
+  textAlign: "center",
+  paddingY: "2rem"
+});
+
+const endStateText = css({
+  color: "rgba(0, 0, 0, 0.4)",
+  fontWeight: "500",
+  fontSize: "14px"
 });

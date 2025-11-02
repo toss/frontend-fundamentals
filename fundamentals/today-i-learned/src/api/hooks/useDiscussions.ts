@@ -4,7 +4,8 @@ import {
   useInfiniteQuery,
   useMutation,
   useQuery,
-  useQueryClient
+  useQueryClient,
+  useSuspenseInfiniteQuery
 } from "@tanstack/react-query";
 import {
   createDiscussion,
@@ -488,5 +489,42 @@ export function useDeleteDiscussion() {
         queryKey: DISCUSSIONS_QUERY_KEYS.detail(deletedDiscussion.id)
       });
     }
+  });
+}
+
+// Suspense를 사용하는 무한 스크롤 Discussions 조회
+export function useSuspendedInfiniteDiscussions({
+  owner = ENV_CONFIG.GITHUB_OWNER,
+  repo = ENV_CONFIG.GITHUB_REPO,
+  categoryName,
+  pageSize = 5,
+  sortBy = "latest",
+  filterBy
+}: Omit<UseInfiniteDiscussionsParams, "enabled"> = {}) {
+  const { user } = useAuth();
+  
+  return useSuspenseInfiniteQuery({
+    queryKey: DISCUSSIONS_QUERY_KEYS.infinite({
+      owner,
+      repo,
+      categoryName,
+      sortBy,
+      filterBy
+    }),
+    queryFn: ({ pageParam }) =>
+      fetchInfiniteDiscussions({
+        owner,
+        repo,
+        first: pageSize,
+        after: pageParam,
+        sortBy,
+        filterBy,
+        accessToken: user?.accessToken
+      }),
+    getNextPageParam: (lastPage) =>
+      lastPage.pageInfo.hasNextPage ? lastPage.pageInfo.endCursor : undefined,
+    initialPageParam: undefined as string | undefined,
+    staleTime: 1000 * 60 * 5, // 5분
+    gcTime: 1000 * 60 * 30 // 30분
   });
 }
