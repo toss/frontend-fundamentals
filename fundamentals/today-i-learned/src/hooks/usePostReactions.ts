@@ -55,7 +55,9 @@ export function usePostReactions({ discussion }: UsePostReactionsParams = {}) {
           DISCUSSIONS_QUERY_KEYS.detail(targetId)
         );
 
-      if (!currentData) {return;}
+      if (!currentData) {
+        return;
+      }
 
       const isCurrentlyReacted = hasUserReacted(currentData, "HEART");
 
@@ -134,7 +136,9 @@ export function usePostReactions({ discussion }: UsePostReactionsParams = {}) {
           DISCUSSIONS_QUERY_KEYS.detail(targetId)
         );
 
-      if (!currentData) {return;}
+      if (!currentData) {
+        return;
+      }
 
       const isCurrentlyReacted = hasUserReacted(currentData, "THUMBS_UP");
 

@@ -7,7 +7,10 @@ interface CommentsSectionProps {
   discussionId: string;
 }
 
-export function CommentsSection({ comments, discussionId }: CommentsSectionProps) {
+export function CommentsSection({
+  comments,
+  discussionId
+}: CommentsSectionProps) {
   return (
     <div className={commentsSection}>
       <CommentList comments={comments} discussionId={discussionId} />

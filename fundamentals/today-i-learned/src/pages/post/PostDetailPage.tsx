@@ -32,7 +32,6 @@ export function PostDetailPage() {
   );
 }
 
-
 const gridLayout = css({
   display: "grid",
   gridTemplateColumns: { base: "1fr", lg: "5fr 3fr" },
