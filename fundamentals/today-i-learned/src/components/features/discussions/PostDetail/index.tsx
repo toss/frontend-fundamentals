@@ -24,6 +24,10 @@ export function PostDetail() {
 
       <CommentInput discussionId={discussionDetail.id} />
 
+      <div className={dividerContainer}>
+        <div className={dividerLine} />
+      </div>
+
       <CommentsSection comments={comments} discussionId={discussionDetail.id} />
     </div>
   );
