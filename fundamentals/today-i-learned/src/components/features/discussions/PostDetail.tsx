@@ -18,39 +18,19 @@ import {
 } from "@/utils/reactions";
 import type { GitHubComment } from "@/api/remote/discussions";
 import { css } from "@styled-system/css";
+import { usePostReactions } from "@/hooks/usePostReactions";
+import { useParams } from "react-router-dom";
 
-interface PostDetailProps {
-  discussion: GitHubDiscussion;
-  onLike?: (postId: string) => void;
-  onUpvote?: (postId: string) => void;
-  showComments?: boolean;
-}
-
-function formatTimeAgo(dateString: string): string {
-  const now = new Date();
-  const date = new Date(dateString);
-  const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
-
-  if (diffInSeconds < 60) {
-    return "방금 전";
-  }
-  if (diffInSeconds < 3600) {
-    return `${Math.floor(diffInSeconds / 60)}분 전`;
-  }
-  if (diffInSeconds < 86400) {
-    return `${Math.floor(diffInSeconds / 3600)}시간 전`;
-  }
-  return `${Math.floor(diffInSeconds / 86400)}일 전`;
-}
-
-export function PostDetail({
-  discussion,
-  onLike,
-  onUpvote,
-  showComments = true
-}: PostDetailProps) {
-  const [commentText, setCommentText] = useState("");
+export function PostDetail() {
   const { user } = useAuth();
+  const [commentText, setCommentText] = useState("");
+  const { id } = useParams<{ id: string }>();
+
+  const { data: discussion } = useDiscussionDetail(id || "");
+
+  const { handleLike, handleUpvote } = usePostReactions({
+    discussion: discussion || undefined
+  });
 
   const { data: discussionDetail, isLoading: isDetailLoading } =
     useDiscussionDetail(discussion.id);
@@ -117,11 +97,11 @@ export function PostDetail({
         content: reactionContent
       });
 
-      if (type === "like" && onLike) {
-        onLike(discussion.id);
+      if (type === "like") {
+        handleLike(discussion.id);
       }
-      if (type === "upvote" && onUpvote) {
-        onUpvote(discussion.id);
+      if (type === "upvote") {
+        handleUpvote(discussion.id);
       }
     } catch (error) {
       console.error("반응 처리 실패:", error);
@@ -240,14 +220,13 @@ export function PostDetail({
       />
 
       {/* 구분선 */}
-      {showComments && (
-        <div className={dividerContainer}>
-          <div className={dividerLine} />
-        </div>
-      )}
+
+      <div className={dividerContainer}>
+        <div className={dividerLine} />
+      </div>
 
       {/* 댓글 입력 */}
-      {showComments && user && (
+      {user && (
         <div className={commentInputSection}>
           <div className={commentInputContainer}>
             <Avatar
@@ -289,30 +268,21 @@ export function PostDetail({
         </div>
       )}
 
-      {/* 구분선 */}
-      {showComments && (
-        <div className={dividerContainerSmall}>
-          <div className={dividerLine} />
-        </div>
-      )}
-
       {/* 댓글들 */}
-      {showComments && (
-        <div className={commentsSection}>
-          {isDetailLoading ? (
-            <div className={loadingCommentsContainer}>
-              <p className={loadingCommentsText}>댓글을 불러오는 중...</p>
-            </div>
-          ) : (
-            <CommentList
-              comments={comments}
-              onUpvote={handleCommentUpvote}
-              onLike={handleCommentLike}
-              onReply={handleCommentReply}
-            />
-          )}
-        </div>
-      )}
+      <div className={commentsSection}>
+        {isDetailLoading ? (
+          <div className={loadingCommentsContainer}>
+            <p className={loadingCommentsText}>댓글을 불러오는 중...</p>
+          </div>
+        ) : (
+          <CommentList
+            comments={comments}
+            onUpvote={handleCommentUpvote}
+            onLike={handleCommentLike}
+            onReply={handleCommentReply}
+          />
+        )}
+      </div>
     </div>
   );
 }
@@ -510,3 +480,20 @@ const loadingCommentsText = css({
   letterSpacing: "-0.4px",
   color: "rgba(0, 0, 0, 0.4)"
 });
+
+function formatTimeAgo(dateString: string): string {
+  const now = new Date();
+  const date = new Date(dateString);
+  const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+
+  if (diffInSeconds < 60) {
+    return "방금 전";
+  }
+  if (diffInSeconds < 3600) {
+    return `${Math.floor(diffInSeconds / 60)}분 전`;
+  }
+  if (diffInSeconds < 86400) {
+    return `${Math.floor(diffInSeconds / 3600)}시간 전`;
+  }
+  return `${Math.floor(diffInSeconds / 86400)}일 전`;
+}

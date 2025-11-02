@@ -3,6 +3,45 @@ import { Avatar } from "@/components/shared/ui/Avatar";
 import { useWeeklyTopDiscussions } from "@/api/hooks/useDiscussions";
 import { css } from "@styled-system/css";
 
+export function WeeklyTop5() {
+  const { data: discussions } = useWeeklyTopDiscussions({
+    limit: 5
+  });
+
+  const weekText = getWeekLabel();
+
+  if (!discussions?.length) {
+    return (
+      <div className={weeklyTop5Container}>
+        <div className={headerSection}>
+          <h3 className={mainTitle}>주간 TOP 5</h3>
+          <p className={subtitle}>{weekText}</p>
+        </div>
+        <div className={emptyState}>이번주 인기글이 없습니다</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={weeklyTop5Container}>
+      <div className={headerSection}>
+        <h3 className={mainTitle}>주간 TOP 5</h3>
+        <p className={subtitle}>{weekText}</p>
+      </div>
+
+      <div className={contentSection}>
+        {discussions.map((discussion, index) => (
+          <PopularPostItem
+            key={discussion.id}
+            post={discussion}
+            rank={index + 1}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function getWeekLabel(): string {
   const now = new Date();
   const dayOfWeek = now.getDay();
@@ -44,61 +83,6 @@ function PopularPostItem({ post, rank }: { post: any; rank: number }) {
         <h4 className={postTitle}>{post.title}</h4>
         <p className={contentPreview}>{post.body}</p>
       </button>
-    </div>
-  );
-}
-
-export function WeeklyTop5() {
-  const { data: discussions, isLoading } = useWeeklyTopDiscussions({
-    limit: 5
-  });
-
-  const weekText = getWeekLabel();
-
-  if (isLoading) {
-    return (
-      <div className={weeklyTop5Container}>
-        <div className={headerSection}>
-          <h3 className={mainTitle}>주간 TOP 5</h3>
-          <p className={subtitle}>{weekText}</p>
-        </div>
-        <div className={contentSection}>
-          {[...new Array(5)].map((_, index) => (
-            <div key={index} className={skeletonItem} />
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  if (!discussions?.length) {
-    return (
-      <div className={weeklyTop5Container}>
-        <div className={headerSection}>
-          <h3 className={mainTitle}>주간 TOP 5</h3>
-          <p className={subtitle}>{weekText}</p>
-        </div>
-        <div className={emptyState}>이번주 인기글이 없습니다</div>
-      </div>
-    );
-  }
-
-  return (
-    <div className={weeklyTop5Container}>
-      <div className={headerSection}>
-        <h3 className={mainTitle}>주간 TOP 5</h3>
-        <p className={subtitle}>{weekText}</p>
-      </div>
-
-      <div className={contentSection}>
-        {discussions.map((discussion, index) => (
-          <PopularPostItem
-            key={discussion.id}
-            post={discussion}
-            rank={index + 1}
-          />
-        ))}
-      </div>
     </div>
   );
 }

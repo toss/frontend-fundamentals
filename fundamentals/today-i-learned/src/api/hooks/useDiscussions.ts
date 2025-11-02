@@ -2,6 +2,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { ENV_CONFIG } from "@/utils/env";
 import {
   useInfiniteQuery,
+  useSuspenseQuery,
   useMutation,
   useQuery,
   useQueryClient
@@ -122,12 +123,11 @@ export function useInfiniteDiscussions({
 export function useWeeklyTopDiscussions({
   owner = ENV_CONFIG.GITHUB_OWNER,
   repo = ENV_CONFIG.GITHUB_REPO,
-  limit,
-  enabled = true
+  limit
 }: Omit<UseDiscussionsParams, "categoryName"> & { limit?: number } = {}) {
   const { user } = useAuth();
 
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: DISCUSSIONS_QUERY_KEYS.weekly(),
     queryFn: async () => {
       const discussions = await fetchWeeklyTopDiscussions({
@@ -137,7 +137,6 @@ export function useWeeklyTopDiscussions({
       });
       return limit ? discussions.slice(0, limit) : discussions;
     },
-    enabled,
     staleTime: 1000 * 60 * 30, // 30분
     gcTime: 1000 * 60 * 60, // 1시간
     retry: 1
@@ -240,14 +239,13 @@ export function useMyContributions({
 export function useDiscussionDetail(id: string) {
   const { user } = useAuth();
 
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: DISCUSSIONS_QUERY_KEYS.detail(id),
     queryFn: () =>
       fetchDiscussionDetail({
         id,
         accessToken: user?.accessToken
       }),
-    enabled: !!id,
     staleTime: 1000 * 60 * 5, // 5분
     gcTime: 1000 * 60 * 30, // 30분
     retry: 2

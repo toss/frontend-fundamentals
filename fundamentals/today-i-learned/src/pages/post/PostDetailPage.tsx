@@ -1,49 +1,32 @@
-import { useDiscussionDetail } from "@/api/hooks/useDiscussions";
 import { PostDetail } from "@/components/features/discussions/PostDetail";
 import { WeeklyTop5 } from "@/components/features/discussions/WeeklyTop5";
-import { usePostReactions } from "@/hooks/usePostReactions";
-import { useParams } from "react-router-dom";
 import { css } from "@styled-system/css";
+import { ErrorBoundary } from "@/components/shared/ErrorBoundary";
+import { Suspense } from "react";
 
 export function PostDetailPage() {
-  const { id } = useParams<{ id: string }>();
-  const { data: discussion, isLoading, error } = useDiscussionDetail(id || "");
-
-  const { handleLike, handleUpvote } = usePostReactions({
-    discussion: discussion || undefined
-  });
-
   return (
     <div className={gridLayout}>
       <section className={mainContentColumn}>
-        {(() => {
-          if (isLoading) {
-            return <LoadingState />;
-          }
-
-          if (error || !discussion) {
-            return <ErrorState />;
-          }
-
-          return (
-            <PostDetail
-              discussion={discussion as any}
-              onLike={handleLike}
-              onUpvote={handleUpvote}
-              showComments={true}
-            />
-          );
-        })()}
+        <ErrorBoundary fallback={() => <PostDetailErrorState />}>
+          <Suspense fallback={<PostDetailLoadingState />}>
+            <PostDetail />
+          </Suspense>
+        </ErrorBoundary>
       </section>
 
       <section className={sidebarColumn}>
-        <WeeklyTop5 />
+        <ErrorBoundary fallback={() => <WeeklyTop5ErrorState />}>
+          <Suspense fallback={<WeeklyTop5LoadingState />}>
+            <WeeklyTop5 />
+          </Suspense>
+        </ErrorBoundary>
       </section>
     </div>
   );
 }
 
-function LoadingState() {
+function PostDetailLoadingState() {
   return (
     <div className={loadingContainer}>
       <div className={loadingTitle}></div>
@@ -57,15 +40,30 @@ function LoadingState() {
   );
 }
 
-function ErrorState() {
+function PostDetailErrorState() {
+  return <div>포스트를 찾을 수 없습니다.</div>;
+}
+
+function WeeklyTop5LoadingState() {
   return (
-    <div className={errorContainer}>
-      <div className={errorMessage}>포스트를 찾을 수 없습니다.</div>
+    <div className={weeklyTop5Container}>
+      <div className={headerSection}>
+        <h3 className={mainTitle}>주간 TOP 5</h3>
+        <p className={subtitle}>{weekText}</p>
+      </div>
+      <div className={contentSection}>
+        {[...new Array(5)].map((_, index) => (
+          <div key={index} className={skeletonItem} />
+        ))}
+      </div>
     </div>
   );
 }
 
-// Semantic style definitions
+function WeeklyTop5ErrorState() {
+  return <div>주간 TOP 5를 찾을 수 없습니다.</div>;
+}
+
 const gridLayout = css({
   display: "grid",
   gridTemplateColumns: { base: "1fr", lg: "5fr 3fr" },
@@ -139,13 +137,14 @@ const loadingLineShort = css({
   width: "80%"
 });
 
-const errorContainer = css({
+const weeklyTop5Container = css({
   display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  paddingY: "5rem"
+  flexDirection: "column",
+  gap: "1rem"
 });
 
-const errorMessage = css({
-  color: "#6b7280"
+const headerSection = css({
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.5rem"
 });
