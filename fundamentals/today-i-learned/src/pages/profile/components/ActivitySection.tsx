@@ -1,24 +1,54 @@
-import { useUserActivity } from "@/pages/profile/hooks/useUserActivity";
 import { ActivityContent } from "./ActivityContent";
 import { ChevronDown } from "lucide-react";
+import { PAGE_SIZE } from "@/constants/github";
+
 interface BaseComponentProps {
   className?: string;
   children?: React.ReactNode;
 }
 import { css, cx } from "@styled-system/css";
+import { useSuspendedUserProfile } from "@/api/hooks/useUser";
+import { useEffect, useMemo, useState } from "react";
+import { useSuspendedInfiniteDiscussions } from "@/api/hooks/useDiscussions";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { processUserPosts } from "@/utils/postFilters";
+
+type SortFilter = "created" | "lastActivity";
 
 interface ActivitySectionProps extends BaseComponentProps {}
 
 export function ActivitySection({ className }: ActivitySectionProps) {
-  const {
-    userProfile,
-    userPosts,
-    sortFilter,
-    hasNextPage,
-    isFetchingNextPage,
-    elementRef,
-    handleFilterToggle
-  } = useUserActivity();
+  const { data: userProfile } = useSuspendedUserProfile();
+  const [sortFilter, setSortFilter] = useState<SortFilter>("created");
+
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useSuspendedInfiniteDiscussions({
+      categoryName: "Today I Learned",
+      pageSize: PAGE_SIZE.DEFAULT
+    });
+
+  const { elementRef, isIntersecting } = useIntersectionObserver({
+    enabled: hasNextPage && !isFetchingNextPage
+  });
+
+  useEffect(() => {
+    if (isIntersecting && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [isIntersecting, hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  const userPosts = useMemo(() => {
+    if (!userProfile?.login || !data) {
+      return [];
+    }
+
+    return processUserPosts(data.pages, userProfile.login, sortFilter);
+  }, [data, userProfile?.login, sortFilter]);
+
+  const handleFilterToggle = () => {
+    const newFilter = sortFilter === "created" ? "lastActivity" : "created";
+    setSortFilter(newFilter);
+  };
 
   return (
     <div className={cx(sectionContainer, className)}>

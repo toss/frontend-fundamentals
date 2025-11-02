@@ -1,4 +1,3 @@
-import { css } from "@styled-system/css";
 import type { MonthlyChallenge } from "./types";
 import { ChallengeHeader } from "./ChallengeHeader";
 import { ChallengeCalendar } from "./ChallengeCalendar";
