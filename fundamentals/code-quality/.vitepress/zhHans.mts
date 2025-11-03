@@ -98,6 +98,10 @@ function sidebar(): DefaultTheme.Sidebar {
                 {
                   text: "B. 简化三元运算符",
                   link: "/zh-hans/code/examples/ternary-operator"
+                },
+                {
+                  text: "C. 从左到右阅读",
+                  link: "/zh-hans/code/examples/comparison-order"
                 }
               ],
               collapsed: true
