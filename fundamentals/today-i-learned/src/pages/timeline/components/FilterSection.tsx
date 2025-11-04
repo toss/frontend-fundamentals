@@ -1,10 +1,6 @@
+import { useSearchParams } from "react-router-dom";
 import type { SortOption } from "../types";
 import { css, cx } from "@styled-system/css";
-
-interface FilterSectionProps {
-  sortOption: SortOption;
-  onSortChange: (option: SortOption) => void;
-}
 
 interface SortTab {
   value: SortOption;
@@ -17,10 +13,14 @@ const sortTabs: SortTab[] = [
   { value: "hall-of-fame", label: "명예의 전당" }
 ];
 
-export function FilterSection({
-  sortOption,
-  onSortChange
-}: FilterSectionProps) {
+export function FilterSection() {
+  const [searchParams, setSearchParams] = useSearchParams({ sort: "newest" });
+
+  const sortOption = searchParams.get("sort") as SortOption;
+  const onSortChange = (option: SortOption) => {
+    setSearchParams({ sort: option });
+  };
+
   return (
     <div className={filterContainer}>
       {sortTabs.map((tab) => (
