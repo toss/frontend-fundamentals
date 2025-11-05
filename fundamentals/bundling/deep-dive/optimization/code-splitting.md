@@ -92,7 +92,7 @@ function App() {
 
 [`SplitChunksPlugin`](https://webpack.kr/plugins/split-chunks-plugin/)을 사용하면 웹팩에서 코드 스플리팅을 자동화할 수 있어요. 이 플러그인을 활용하면 중복되는 모듈을 하나의 청크로 분리하거나, 특정 크기 이상의 파일을 자동으로 나눠 번들 크기를 최적화할 수 있어요.
 
-Webpack 5부터 name 값을 `false` | `string` | `function` 만 받을 수 있돋록 더 strict하게 강화되었어요.
+Webpack 5부터 name 값을 `false` | `string` | `function` 만 받을 수 있도록 더 strict하게 강화되었어요.
 각각을 좀 더 자세하게 살펴볼게요.
 
 ::: 실습 전에 번들 파일의 이름을 동적으로 설정해주세요!
