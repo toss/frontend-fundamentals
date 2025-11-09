@@ -270,13 +270,28 @@ export async function fetchRepositoryInfo({
 export async function fetchInfiniteDiscussions({
   owner,
   repo,
+  categoryName = "Today I Learned",
   first = PAGE_SIZE.INFINITE_SCROLL,
   after,
   sortBy = "latest",
   filterBy,
   accessToken
 }: InfiniteDiscussionsParams): Promise<DiscussionsResponse> {
-  // Search API를 사용해야 하는 경우: 라벨 필터링 또는 popularity 정렬
+  const repoInfo = await fetchRepositoryInfo({
+    owner,
+    repo,
+    accessToken
+  });
+
+  const tilCategory = repoInfo.categories.find(
+    (cat) => cat.name === categoryName
+  );
+
+  if (!tilCategory) {
+    throw new Error("Today I Learned category not found");
+  }
+
+  // 라벨 필터링이나 popularity 정렬이 필요한 경우 Search API 사용
   if (filterBy?.label || sortBy === "popularity") {
     const getSortQuery = (sort: string) => {
       switch (sort) {
@@ -337,7 +352,8 @@ export async function fetchInfiniteDiscussions({
       repo,
       first,
       after: after || null,
-      orderBy: getOrderBy(sortBy)
+      orderBy: getOrderBy(sortBy),
+      categoryId: tilCategory.id
     },
     accessToken
   );
