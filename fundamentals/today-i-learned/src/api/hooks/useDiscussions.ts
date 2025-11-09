@@ -86,7 +86,7 @@ export function useAllDiscussionsWithFullData({
 export function useInfiniteDiscussions({
   owner = ENV_CONFIG.GITHUB_OWNER,
   repo = ENV_CONFIG.GITHUB_REPO,
-  categoryName,
+  categoryName = "Today I Learned",
   pageSize = 5,
   sortBy = "latest",
   filterBy,
@@ -106,6 +106,7 @@ export function useInfiniteDiscussions({
       fetchInfiniteDiscussions({
         owner,
         repo,
+        categoryName,
         first: pageSize,
         after: pageParam,
         sortBy,
