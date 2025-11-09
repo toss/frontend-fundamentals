@@ -146,12 +146,13 @@ export const GET_REPOSITORY_INFO_QUERY = `
 `;
 
 export const GET_INFINITE_DISCUSSIONS_QUERY = `
-  query GetInfiniteDiscussions($owner: String!, $repo: String!, $first: Int!, $after: String, $orderBy: DiscussionOrder) {
+  query GetInfiniteDiscussions($owner: String!, $repo: String!, $first: Int!, $after: String, $orderBy: DiscussionOrder, $categoryId: ID) {
     repository(owner: $owner, name: $repo) {
       discussions(
         first: $first
         after: $after
         orderBy: $orderBy
+        categoryId: $categoryId
       ) {
         pageInfo {
           hasNextPage
