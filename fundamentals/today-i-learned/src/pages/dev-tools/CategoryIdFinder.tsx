@@ -28,13 +28,15 @@ export function CategoryIdFinder() {
   };
 
   return (
-    <div style={{
-      padding: "2rem",
-      maxWidth: "800px",
-      margin: "0 auto",
-      height: "100%",
-      overflow: "auto"
-    }}>
+    <div
+      style={{
+        padding: "2rem",
+        maxWidth: "800px",
+        margin: "0 auto",
+        height: "100%",
+        overflow: "auto"
+      }}
+    >
       <h1>🔍 GitHub Discussion Category ID Finder</h1>
       <p style={{ color: "#666", marginBottom: "2rem" }}>
         Repository: {ENV_CONFIG.GITHUB_OWNER}/{ENV_CONFIG.GITHUB_REPO}
@@ -60,15 +62,13 @@ export function CategoryIdFinder() {
                 padding: "0.75rem",
                 fontSize: "1rem",
                 border: "2px solid #ddd",
-                borderRadius: "8px",
+                borderRadius: "8px"
               }}
             />
           </div>
 
           <div>
-            <h2>
-              Categories ({filteredCategories?.length || 0})
-            </h2>
+            <h2>Categories ({filteredCategories?.length || 0})</h2>
             {filteredCategories?.map((category) => (
               <div
                 key={category.id}
@@ -77,7 +77,7 @@ export function CategoryIdFinder() {
                   borderRadius: "8px",
                   padding: "1rem",
                   marginBottom: "1rem",
-                  background: "#f9f9f9",
+                  background: "#f9f9f9"
                 }}
               >
                 <div
@@ -85,15 +85,15 @@ export function CategoryIdFinder() {
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "start",
-                    marginBottom: "0.5rem",
+                    marginBottom: "0.5rem"
                   }}
                 >
                   <div>
-                    <h3 style={{ margin: "0 0 0.5rem 0" }}>
-                      {category.name}
-                    </h3>
+                    <h3 style={{ margin: "0 0 0.5rem 0" }}>{category.name}</h3>
                     {category.description && (
-                      <p style={{ margin: 0, color: "#666", fontSize: "0.9rem" }}>
+                      <p
+                        style={{ margin: 0, color: "#666", fontSize: "0.9rem" }}
+                      >
                         {category.description}
                       </p>
                     )}
@@ -107,7 +107,7 @@ export function CategoryIdFinder() {
                       border: "none",
                       borderRadius: "4px",
                       cursor: "pointer",
-                      fontSize: "0.9rem",
+                      fontSize: "0.9rem"
                     }}
                   >
                     Copy ID
@@ -121,7 +121,7 @@ export function CategoryIdFinder() {
                     borderRadius: "4px",
                     fontFamily: "monospace",
                     fontSize: "0.85rem",
-                    wordBreak: "break-all",
+                    wordBreak: "break-all"
                   }}
                 >
                   {category.id}
@@ -136,7 +136,7 @@ export function CategoryIdFinder() {
               padding: "1rem",
               background: "#ffe",
               border: "1px solid #ee6",
-              borderRadius: "8px",
+              borderRadius: "8px"
             }}
           >
             <h3>💡 사용 방법</h3>
@@ -153,7 +153,7 @@ export function CategoryIdFinder() {
               padding: "1rem",
               background: "#eef",
               border: "1px solid #99c",
-              borderRadius: "8px",
+              borderRadius: "8px"
             }}
           >
             <h4>📝 코드 예시</h4>
@@ -163,14 +163,14 @@ export function CategoryIdFinder() {
                 color: "#0f0",
                 padding: "1rem",
                 borderRadius: "4px",
-                overflow: "auto",
+                overflow: "auto"
               }}
             >
-{`// src/constants/categories.ts
+              {`// src/constants/categories.ts
 export const DISCUSSION_CATEGORIES = {
   TODAY_I_LEARNED: {
     name: "Today I Learned",
-    id: "${filteredCategories?.[0]?.id || 'CATEGORY_ID_HERE'}"
+    id: "${filteredCategories?.[0]?.id || "CATEGORY_ID_HERE"}"
   }
 } as const;`}
             </pre>
