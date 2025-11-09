@@ -1,12 +1,13 @@
 // GitHub Discussions 관련 GraphQL 쿼리 정의
 
 export const GET_DISCUSSIONS_QUERY = `
-  query GetDiscussions($owner: String!, $repo: String!, $first: Int!, $after: String) {
+  query GetDiscussions($owner: String!, $repo: String!, $first: Int!, $after: String, $categoryId: ID) {
     repository(owner: $owner, name: $repo) {
       discussions(
         first: $first
         after: $after
         orderBy: { field: CREATED_AT, direction: DESC }
+        categoryId: $categoryId
       ) {
         pageInfo {
           hasNextPage
