@@ -14,6 +14,8 @@ import { TimelinePage } from "./pages/timeline/TimelinePage";
 import { QueryProvider } from "./providers/QueryProvider.tsx";
 import { ToastProvider } from "./contexts/ToastContext";
 import { RootLayout } from "./components/shared/layout/RootLayout.tsx";
+import { CategoryIdFinder } from "./pages/dev-tools/CategoryIdFinder";
+import { isDevelopment } from "./utils/env.ts";
 
 const router = createBrowserRouter(
   [
@@ -36,7 +38,16 @@ const router = createBrowserRouter(
         {
           path: "post/:id",
           element: <PostDetailPage />
-        }
+        },
+        // 개발 환경에서만 표시
+        ...(isDevelopment()
+          ? [
+              {
+                path: "dev-tools/category-id",
+                element: <CategoryIdFinder />
+              }
+            ]
+          : [])
       ]
     }
   ],
