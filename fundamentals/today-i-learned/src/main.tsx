@@ -1,7 +1,7 @@
 import { OverlayProvider } from "overlay-kit";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import SearchPage from "./pages/search/SearchPage.tsx";
 import { ErrorBoundary } from "./components/shared/ErrorBoundary.tsx";

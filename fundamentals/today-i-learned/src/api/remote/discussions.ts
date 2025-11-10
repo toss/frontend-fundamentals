@@ -335,7 +335,7 @@ export async function fetchInfiniteDiscussions({
       first,
       after: after || null,
       orderBy: getOrderBy(sortBy),
-      categoryId: CATEGORY_ID.TODAY_I_LEARNED
+      categoryId
     },
     accessToken
   );

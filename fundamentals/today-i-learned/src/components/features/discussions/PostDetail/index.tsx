@@ -4,12 +4,13 @@ import { useParams } from "react-router-dom";
 import { ContentBody } from "./ContentBody";
 import { CommentInput } from "./CommentInput";
 import { CommentsSection } from "./CommentsSection";
-import { invariant } from "es-toolkit";
 
 export function PostDetail() {
   const { id } = useParams<{ id: string }>();
 
-  invariant(id != null, "게시물이 존재하지 않아요.");
+  if (!id) {
+    throw new Error("게시물이 존재하지 않아요.");
+  }
 
   const { data: discussionDetail } = useDiscussionDetail(id);
   const comments = discussionDetail?.comments?.nodes || [];
