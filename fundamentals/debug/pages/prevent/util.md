@@ -78,7 +78,7 @@ UI 개발 도중 사용한 더미 이름, 가짜 텍스트(“김토스님”, �
 
 ### 해결방법
 
-ESLint로 특정 문자열(“김토스”, “홍길동”, “테스트용” 등) 포함 시 에러 발생하도록 설정해요. `no-restricted-syntax`는특정 구문(Syntax)을 아예 사용하지 못하도록 제한하는 ESLint 규칙이에요.
+ESLint로 특정 문자열(“김토스”, “홍길동”, “테스트용” 등) 포함 시 에러 발생하도록 설정해요. `no-restricted-syntax`는 특정 구문(Syntax)을 아예 사용하지 못하도록 제한하는 ESLint 규칙이에요.
 
 ```js 6
 module.exports = {

@@ -54,7 +54,7 @@ console.log(selectedUser?.name ?? "사용자 없음");
 ```tsx
 function SearchBox() {
   const [query, setQuery] = useState("");
-  const [result, setResult] = useState("");
+  const [results, setResults] = useState([]);
 
   useEffect(() => {
     if (!query) return;
@@ -62,7 +62,7 @@ function SearchBox() {
     fetch(`/api/search?q=${query}`)
       .then((res) => res.json())
       .then((data) => {
-        setResult(data);
+        setResults(data);
       });
   }, [query]);
 
