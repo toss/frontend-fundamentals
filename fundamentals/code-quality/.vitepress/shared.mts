@@ -19,11 +19,11 @@ export const shared = defineConfig({
       {
         rel: "icon",
         type: "image/x-icon",
-        href: "/code-quality/images/favicon.ico"
+        href: "images/favicon.ico"
       }
     ],
-    ["link", { rel: "manifest", href: "/images/site.webmanifest" }],
-    ["link", { rel: "apple-touch-icon", href: "/images/apple-touch-icon.png" }],
+    ["link", { rel: "manifest", href: "images/site.webmanifest" }],
+    ["link", { rel: "apple-touch-icon", href: "images/apple-touch-icon.png" }],
     [
       "link",
       {
@@ -85,7 +85,7 @@ export const shared = defineConfig({
   },
 
   themeConfig: {
-    logo: "/images/ff-symbol.svg",
+    logo: "images/ff-symbol.svg",
     editLink: {
       pattern:
         "https://github.com/toss/frontend-fundamentals/edit/main/fundamentals/code-quality/:path"
