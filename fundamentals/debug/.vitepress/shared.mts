@@ -72,6 +72,7 @@ export const sharedConfig = defineConfig({
   },
 
   themeConfig: {
+    logo: "/images/ff-symbol.svg",
     socialLinks: [
       { icon: "github", link: "https://github.com/toss/frontend-fundamentals" }
     ],
