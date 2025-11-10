@@ -9,6 +9,7 @@ import { useUserProfile } from "@/api/hooks/useUser";
 import { css } from "@styled-system/css";
 import { SortOption } from "../types";
 import { useSearchParams } from "react-router-dom";
+import { CATEGORY_ID } from "@/constants";
 
 export function PostList() {
   const [searchParams] = useSearchParams({ sort: "newest" });
@@ -99,23 +100,23 @@ const getPostListProps = (sortOption: SortOption) => {
   switch (sortOption) {
     case "newest":
       return {
-        categoryName: "Today I Learned",
+        categoryId: CATEGORY_ID.TODAY_I_LEARNED,
         sortBy: "latest" as const
       };
     case "realtime":
       return {
-        categoryName: "Today I Learned",
+        categoryId: CATEGORY_ID.TODAY_I_LEARNED,
         sortBy: "lastActivity" as const
       };
     case "hall-of-fame":
       return {
-        categoryName: "Today I Learned",
+        categoryId: CATEGORY_ID.TODAY_I_LEARNED,
         sortBy: "latest" as const,
         filterBy: { label: "성지 ⛲" }
       };
     default:
       return {
-        categoryName: "Today I Learned",
+        categoryId: CATEGORY_ID.TODAY_I_LEARNED,
         sortBy: "latest" as const
       };
   }

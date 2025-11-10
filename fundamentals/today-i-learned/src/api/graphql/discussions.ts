@@ -1,12 +1,13 @@
 // GitHub Discussions 관련 GraphQL 쿼리 정의
 
 export const GET_DISCUSSIONS_QUERY = `
-  query GetDiscussions($owner: String!, $repo: String!, $first: Int!, $after: String) {
+  query GetDiscussions($owner: String!, $repo: String!, $first: Int!, $after: String, $categoryId: ID) {
     repository(owner: $owner, name: $repo) {
       discussions(
         first: $first
         after: $after
         orderBy: { field: CREATED_AT, direction: DESC }
+        categoryId: $categoryId
       ) {
         pageInfo {
           hasNextPage
@@ -146,12 +147,13 @@ export const GET_REPOSITORY_INFO_QUERY = `
 `;
 
 export const GET_INFINITE_DISCUSSIONS_QUERY = `
-  query GetInfiniteDiscussions($owner: String!, $repo: String!, $first: Int!, $after: String, $orderBy: DiscussionOrder) {
+  query GetInfiniteDiscussions($owner: String!, $repo: String!, $first: Int!, $after: String, $orderBy: DiscussionOrder, $categoryId: ID) {
     repository(owner: $owner, name: $repo) {
       discussions(
         first: $first
         after: $after
         orderBy: $orderBy
+        categoryId: $categoryId
       ) {
         pageInfo {
           hasNextPage

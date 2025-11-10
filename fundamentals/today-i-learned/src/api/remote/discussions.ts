@@ -1,5 +1,6 @@
 import { graphqlRequest } from "@/api/client";
 import { PAGE_SIZE } from "@/constants/github";
+import { CATEGORY_ID } from "@/constants";
 import {
   GET_DISCUSSIONS_QUERY,
   CREATE_DISCUSSION_MUTATION,
@@ -63,13 +64,14 @@ export interface CreatePostResponse extends GitHubDiscussion {}
 export interface DiscussionsApiParams {
   owner: string;
   repo: string;
-  categoryName?: string;
+  categoryId?: string;
   accessToken?: string;
 }
 
 export interface PaginatedDiscussionsParams extends DiscussionsApiParams {
   first?: number;
   after?: string | null;
+  categoryId?: string;
 }
 
 export interface CreateDiscussionParams {
@@ -115,6 +117,7 @@ export async function fetchDiscussionsPage({
   repo,
   first = PAGE_SIZE.DEFAULT,
   after,
+  categoryId,
   accessToken
 }: PaginatedDiscussionsParams): Promise<{
   discussions: GitHubDiscussion[];
@@ -125,7 +128,7 @@ export async function fetchDiscussionsPage({
 }> {
   const data = await graphqlRequest(
     GET_DISCUSSIONS_QUERY,
-    { owner, repo, first, after },
+    { owner, repo, first, after, categoryId },
     accessToken
   );
 
@@ -151,7 +154,6 @@ export async function fetchDiscussionsPage({
 export async function fetchAllDiscussions({
   owner,
   repo,
-  categoryName,
   accessToken
 }: DiscussionsApiParams): Promise<GitHubDiscussion[]> {
   const allDiscussions: GitHubDiscussion[] = [];
@@ -165,17 +167,11 @@ export async function fetchAllDiscussions({
         owner,
         repo,
         after: cursor,
+        categoryId: CATEGORY_ID.TODAY_I_LEARNED,
         accessToken
       });
 
-      // 클라이언트 사이드 카테고리 필터링
-      const filteredDiscussions = categoryName
-        ? discussions.filter(
-            (discussion) => discussion.category?.name === categoryName
-          )
-        : discussions;
-
-      allDiscussions.push(...filteredDiscussions);
+      allDiscussions.push(...discussions);
 
       hasNextPage = pageInfo.hasNextPage;
       cursor = pageInfo.endCursor;
@@ -194,7 +190,7 @@ export async function fetchWeeklyTopDiscussions({
   owner,
   repo,
   accessToken
-}: Omit<DiscussionsApiParams, "categoryName">): Promise<GitHubDiscussion[]> {
+}: Omit<DiscussionsApiParams, "categoryId">): Promise<GitHubDiscussion[]> {
   const oneWeekAgo = new Date();
   oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
@@ -244,7 +240,7 @@ export async function fetchRepositoryInfo({
   owner,
   repo,
   accessToken
-}: Omit<DiscussionsApiParams, "categoryName">): Promise<{
+}: Omit<DiscussionsApiParams, "categoryId">): Promise<{
   repositoryId: string;
   categories: Array<{ id: string; name: string; description?: string }>;
 }> {
@@ -270,13 +266,14 @@ export async function fetchRepositoryInfo({
 export async function fetchInfiniteDiscussions({
   owner,
   repo,
+  categoryId = CATEGORY_ID.TODAY_I_LEARNED,
   first = PAGE_SIZE.INFINITE_SCROLL,
   after,
   sortBy = "latest",
   filterBy,
   accessToken
 }: InfiniteDiscussionsParams): Promise<DiscussionsResponse> {
-  // Search API를 사용해야 하는 경우: 라벨 필터링 또는 popularity 정렬
+  // 라벨 필터링이나 popularity 정렬이 필요한 경우 Search API 사용
   if (filterBy?.label || sortBy === "popularity") {
     const getSortQuery = (sort: string) => {
       switch (sort) {
@@ -337,7 +334,8 @@ export async function fetchInfiniteDiscussions({
       repo,
       first,
       after: after || null,
-      orderBy: getOrderBy(sortBy)
+      orderBy: getOrderBy(sortBy),
+      categoryId: CATEGORY_ID.TODAY_I_LEARNED
     },
     accessToken
   );
@@ -368,7 +366,7 @@ export async function fetchMyContributions({
   repo,
   accessToken,
   authorLogin
-}: Omit<DiscussionsApiParams, "categoryName"> & {
+}: Omit<DiscussionsApiParams, "categoryId"> & {
   authorLogin: string;
 }): Promise<ContributionData[]> {
   const allContributions: ContributionData[] = [];

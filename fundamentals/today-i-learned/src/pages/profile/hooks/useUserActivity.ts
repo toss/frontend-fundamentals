@@ -4,6 +4,7 @@ import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { processUserPosts } from "@/utils/postFilters";
 import { PAGE_SIZE } from "@/constants/github";
+import { CATEGORY_ID } from "@/constants";
 
 type SortFilter = "created" | "lastActivity";
 
@@ -20,7 +21,7 @@ export function useUserActivity() {
     error,
     refetch
   } = useInfiniteDiscussions({
-    categoryName: "Today I Learned",
+    categoryId: CATEGORY_ID.TODAY_I_LEARNED,
     pageSize: PAGE_SIZE.DEFAULT
   });
 
