@@ -1,20 +1,21 @@
+import {
+  useAddDiscussionCommentReply,
+  useToggleDiscussionReaction
+} from "@/api/hooks/useDiscussions";
 import { Comment } from "./Comment";
 import type { GitHubComment } from "@/api/remote/discussions";
 import { css } from "@styled-system/css";
+import { hasUserReacted } from "@/utils/reactions";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface CommentListProps {
   comments: GitHubComment[];
-  onUpvote: (commentId: string) => void;
-  onLike: (commentId: string) => void;
-  onReply: (commentId: string, content: string) => void;
+  discussionId: string;
 }
 
-export function CommentList({
-  comments,
-  onUpvote,
-  onLike,
-  onReply
-}: CommentListProps) {
+export function CommentList({ comments, discussionId }: CommentListProps) {
+  const { user } = useAuth();
+
   if (comments.length === 0) {
     return (
       <div className={emptyState}>
@@ -25,15 +26,76 @@ export function CommentList({
     );
   }
 
+  const addCommentReplyMutation = useAddDiscussionCommentReply();
+  const toggleReactionMutation = useToggleDiscussionReaction();
+
+  const handleCommentUpvote = async (commentId: string) => {
+    if (!user?.accessToken || !user?.login) {
+      return;
+    }
+
+    try {
+      const comment = findCommentById(comments, commentId);
+      const isCurrentlyReacted = comment
+        ? hasUserReacted(comment.reactions, user.login, "THUMBS_UP")
+        : false;
+
+      await toggleReactionMutation.mutateAsync({
+        subjectId: commentId,
+        isReacted: isCurrentlyReacted,
+        content: "THUMBS_UP"
+      });
+    } catch (error) {
+      console.error("댓글 업보트 실패:", error);
+    }
+  };
+
+  const handleCommentReply = async (commentId: string, content: string) => {
+    if (!user?.accessToken) {
+      return;
+    }
+
+    try {
+      await addCommentReplyMutation.mutateAsync({
+        discussionId,
+        replyToId: commentId,
+        body: content
+      });
+    } catch (error) {
+      console.error("댓글 답글 실패:", error);
+    }
+  };
+
+  const handleCommentLike = async (commentId: string) => {
+    if (!user?.accessToken || !user?.login) {
+      return;
+    }
+
+    try {
+      const comment = findCommentById(comments, commentId);
+      const isCurrentlyReacted = comment
+        ? hasUserReacted(comment.reactions, user.login, "HEART")
+        : false;
+
+      await toggleReactionMutation.mutateAsync({
+        subjectId: commentId,
+        isReacted: isCurrentlyReacted,
+        content: "HEART"
+      });
+    } catch (error) {
+      console.error("댓글 좋아요 실패:", error);
+    }
+  };
+
   return (
     <div className={commentListContainer}>
       {comments.map((comment, index) => (
         <div key={comment.id} className={commentItemContainer}>
           <Comment
             comment={comment}
-            onUpvote={onUpvote}
-            onLike={onLike}
-            onReply={onReply}
+            onUpvote={handleCommentUpvote}
+            onLike={handleCommentLike}
+            onReply={handleCommentReply}
           />
 
           {/* Border - 댓글 사이 경계선 */}
@@ -47,6 +109,24 @@ export function CommentList({
     </div>
   );
 }
+
+const findCommentById = (
+  comments: GitHubComment[],
+  id: string
+): GitHubComment | null => {
+  for (const comment of comments) {
+    if (comment.id === id) {
+      return comment;
+    }
+    if (comment.replies?.nodes) {
+      const found = findCommentById(comment.replies.nodes, id);
+      if (found) {
+        return found;
+      }
+    }
+  }
+  return null;
+};
 
 // Semantic style definitions
 const emptyState = css({

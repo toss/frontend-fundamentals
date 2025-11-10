@@ -3,6 +3,7 @@ import { useUserProfile } from "@/api/hooks/useUser";
 import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
 import { filterUserPosts } from "@/utils/postFilters";
 import { PAGE_SIZE } from "@/constants/github";
+import { CATEGORY_ID } from "@/constants";
 
 const INITIAL_DISPLAY_COUNT = 6;
 
@@ -19,7 +20,7 @@ export function useUserHallOfFame() {
     error,
     refetch
   } = useInfiniteDiscussions({
-    categoryName: "Today I Learned",
+    categoryId: CATEGORY_ID.TODAY_I_LEARNED,
     filterBy: { label: "성지 ⛲" },
     pageSize: PAGE_SIZE.DEFAULT
   });

@@ -1,108 +1,41 @@
 import { css } from "@styled-system/css";
-import * as React from "react";
-import { useNavigate } from "react-router-dom";
-import { useCreateDiscussion } from "@/api/hooks/useDiscussions";
-import { UnauthenticatedState } from "@/components/features/auth/UnauthenticatedState";
+
+import { GoToLogin } from "@/components/features/auth/UnauthenticatedState";
 import { WeeklyTop5 } from "@/components/features/discussions/WeeklyTop5";
 import { useAuth } from "@/contexts/AuthContext";
-import { useToast } from "@/contexts/ToastContext";
-import { useErrorHandler } from "@/hooks/useErrorHandler";
 import { FilterSection } from "./components/FilterSection";
-import { PostInput } from "./components/PostInput";
+import { PostWriteSection } from "./components/PostInput";
 import { PostList } from "./components/PostList";
 import { SprintChallenge } from "./components/SprintChallenge";
-import type { SortOption } from "./types";
 
 export function TimelinePage() {
-  const { user } = useAuth();
-  const navigate = useNavigate();
-  const [sortOption, setSortOption] = React.useState<SortOption>("newest");
-
-  const createPostMutation = useCreateDiscussion();
-  const { handleApiError } = useErrorHandler();
-  const { success: showSuccessToast } = useToast();
-
-  const getPostListProps = () => {
-    switch (sortOption) {
-      case "newest":
-        return {
-          categoryName: "Today I Learned",
-          sortBy: "latest" as const
-        };
-      case "realtime":
-        return {
-          categoryName: "Today I Learned",
-          sortBy: "lastActivity" as const
-        };
-      case "hall-of-fame":
-        return {
-          categoryName: "Today I Learned",
-          sortBy: "latest" as const,
-          filterBy: { label: "성지 ⛲" }
-        };
-      default:
-        return {
-          categoryName: "Today I Learned",
-          sortBy: "latest" as const
-        };
-    }
-  };
-
-  const handlePostSubmit = async (data: { title: string; content: string }) => {
-    try {
-      const newPost = await createPostMutation.mutateAsync({
-        title: data.title,
-        body: data.content
-      });
-      showSuccessToast("포스트 작성 완료", "성공적으로 게시되었습니다.", {
-        label: "보러가기",
-        onClick: () => navigate(`/post/${newPost.id}`)
-      });
-    } catch (error) {
-      handleApiError(error, "포스트 작성");
-    }
-  };
-
-  const handleSortChange = (option: SortOption) => {
-    setSortOption(option);
-  };
+  const { isAuthenticated } = useAuth();
 
   return (
     <div className={gridLayout}>
       <section className={mainContentColumn}>
-        {user ? (
+        {isAuthenticated ? (
           <>
             <div className={sprintChallengeSection}>
               <SprintChallenge />
             </div>
             <SectionDivider />
             <div className={postInputSection}>
-              <PostInput
-                user={{
-                  login: user.login,
-                  avatarUrl: user.avatar_url
-                }}
-                onSubmit={handlePostSubmit}
-                isError={createPostMutation.isError}
-                isLoading={createPostMutation.isPending}
-              />
+              <PostWriteSection />
             </div>
           </>
         ) : (
-          <UnauthenticatedState />
+          <GoToLogin />
         )}
 
         <SectionDivider />
 
         <div className={filterSection}>
-          <FilterSection
-            sortOption={sortOption}
-            onSortChange={handleSortChange}
-          />
+          <FilterSection />
         </div>
 
         <div className={postListSection}>
-          <PostList {...getPostListProps()} />
+          <PostList />
         </div>
       </section>
 

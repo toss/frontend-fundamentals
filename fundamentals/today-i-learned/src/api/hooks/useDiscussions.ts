@@ -2,6 +2,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { ENV_CONFIG } from "@/utils/env";
 import {
   useInfiniteQuery,
+  useSuspenseQuery,
   useMutation,
   useQuery,
   useQueryClient
@@ -22,7 +23,9 @@ import {
   removeDiscussionReaction,
   type DiscussionsApiParams
 } from "@/api/remote/discussions";
+import { CATEGORY_ID } from "@/constants";
 
+// NOTE: 만약 쿼리 옵션으로 분리된다면 각각의 쿼리 옵션에서 인라인하기 (중앙 집권형 쿼리 키 x)
 export const DISCUSSIONS_QUERY_KEYS = {
   all: ["discussions"] as const,
   lists: () => [...DISCUSSIONS_QUERY_KEYS.all, "list"] as const,
@@ -41,14 +44,14 @@ export const DISCUSSIONS_QUERY_KEYS = {
 interface UseDiscussionsParams {
   owner?: string;
   repo?: string;
-  categoryName?: string;
+  categoryId?: string;
   enabled?: boolean;
 }
 
 interface UseInfiniteDiscussionsParams {
   owner?: string;
   repo?: string;
-  categoryName?: string;
+  categoryId?: string;
   pageSize?: number;
   sortBy?: "latest" | "lastActivity" | "created" | "popularity";
   filterBy?: {
@@ -60,18 +63,18 @@ interface UseInfiniteDiscussionsParams {
 export function useAllDiscussionsWithFullData({
   owner = ENV_CONFIG.GITHUB_OWNER,
   repo = ENV_CONFIG.GITHUB_REPO,
-  categoryName = "Today I Learned",
+  categoryId = CATEGORY_ID.TODAY_I_LEARNED,
   enabled = true
 }: UseDiscussionsParams = {}) {
   const { user } = useAuth();
 
   return useQuery({
-    queryKey: DISCUSSIONS_QUERY_KEYS.list({ owner, repo, categoryName }),
+    queryKey: DISCUSSIONS_QUERY_KEYS.list({ owner, repo, categoryId }),
     queryFn: () =>
       fetchAllDiscussions({
         owner,
         repo,
-        categoryName,
+        categoryId,
         accessToken: user?.accessToken
       }),
     enabled,
@@ -84,7 +87,7 @@ export function useAllDiscussionsWithFullData({
 export function useInfiniteDiscussions({
   owner = ENV_CONFIG.GITHUB_OWNER,
   repo = ENV_CONFIG.GITHUB_REPO,
-  categoryName,
+  categoryId = CATEGORY_ID.TODAY_I_LEARNED,
   pageSize = 5,
   sortBy = "latest",
   filterBy,
@@ -96,7 +99,7 @@ export function useInfiniteDiscussions({
     queryKey: DISCUSSIONS_QUERY_KEYS.infinite({
       owner,
       repo,
-      categoryName,
+      categoryId,
       sortBy,
       filterBy
     }),
@@ -104,6 +107,7 @@ export function useInfiniteDiscussions({
       fetchInfiniteDiscussions({
         owner,
         repo,
+        categoryId,
         first: pageSize,
         after: pageParam,
         sortBy,
@@ -122,12 +126,11 @@ export function useInfiniteDiscussions({
 export function useWeeklyTopDiscussions({
   owner = ENV_CONFIG.GITHUB_OWNER,
   repo = ENV_CONFIG.GITHUB_REPO,
-  limit,
-  enabled = true
-}: Omit<UseDiscussionsParams, "categoryName"> & { limit?: number } = {}) {
+  limit
+}: Omit<UseDiscussionsParams, "categoryId"> & { limit?: number } = {}) {
   const { user } = useAuth();
 
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: DISCUSSIONS_QUERY_KEYS.weekly(),
     queryFn: async () => {
       const discussions = await fetchWeeklyTopDiscussions({
@@ -137,7 +140,6 @@ export function useWeeklyTopDiscussions({
       });
       return limit ? discussions.slice(0, limit) : discussions;
     },
-    enabled,
     staleTime: 1000 * 60 * 30, // 30분
     gcTime: 1000 * 60 * 60, // 1시간
     retry: 1
@@ -148,7 +150,7 @@ export function useRepositoryInfo({
   owner = ENV_CONFIG.GITHUB_OWNER,
   repo = ENV_CONFIG.GITHUB_REPO,
   enabled = true
-}: Omit<UseDiscussionsParams, "categoryName"> = {}) {
+}: Omit<UseDiscussionsParams, "categoryId"> = {}) {
   const { user } = useAuth();
 
   return useQuery({
@@ -210,11 +212,14 @@ export function useCreateDiscussion() {
   });
 }
 
+// TODO: queryOptions로 분리 + 사용처에서 useQuery를 드러낼 수 있으면 좋겠다
+// NOTE: 다른 remote fetching 훅들도 useQuery + queryOptions로 만들 수 있기를 희망
 export function useMyContributions({
+  // FIXME: 외부에서 주입하는 의존성 어떻게 처리할지 고민해보기
   owner = ENV_CONFIG.GITHUB_OWNER,
   repo = ENV_CONFIG.GITHUB_REPO,
   enabled = true
-}: Omit<UseDiscussionsParams, "categoryName"> = {}) {
+}: Omit<UseDiscussionsParams, "categoryId"> = {}) {
   const { user } = useAuth();
 
   return useQuery({
@@ -230,6 +235,7 @@ export function useMyContributions({
         authorLogin: user.login
       });
     },
+    // NOTE: (잡초?) enabled 너 꼭 필요해?
     enabled: enabled && !!user?.accessToken && !!user?.login,
     staleTime: 1000 * 60 * 10, // 10분
     gcTime: 1000 * 60 * 30, // 30분
@@ -240,14 +246,13 @@ export function useMyContributions({
 export function useDiscussionDetail(id: string) {
   const { user } = useAuth();
 
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: DISCUSSIONS_QUERY_KEYS.detail(id),
     queryFn: () =>
       fetchDiscussionDetail({
         id,
         accessToken: user?.accessToken
       }),
-    enabled: !!id,
     staleTime: 1000 * 60 * 5, // 5분
     gcTime: 1000 * 60 * 30, // 30분
     retry: 2

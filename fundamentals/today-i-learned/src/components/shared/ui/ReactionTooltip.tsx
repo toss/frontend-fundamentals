@@ -31,7 +31,9 @@ export function ReactionTooltip({
   children,
   className
 }: ReactionTooltipProps) {
-  if (!isVisible) return null;
+  if (!isVisible) {
+    return null;
+  }
 
   return <div className={cx(tooltipStyles, className)}>{children}</div>;
 }

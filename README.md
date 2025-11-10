@@ -20,6 +20,7 @@ https://frontend-fundamentals.com/code-quality/en/
 - [Code Quality Fundamentals](https://frontend-fundamentals.com/code-quality/)
 - [Bundling Fundamentals](https://frontend-fundamentals.com/bundling/)
 - [A11y Fundamentals](https://frontend-fundamentals.com/a11y/)
+- [Debug Fundamentals](https://frontend-fundamentals.com/debug/)
 
 ## Contributing
 
