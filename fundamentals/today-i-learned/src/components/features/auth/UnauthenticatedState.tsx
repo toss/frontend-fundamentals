@@ -2,7 +2,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/shared/ui/Button";
 import { css } from "@styled-system/css";
 
-export function UnauthenticatedState() {
+export function GoToLogin() {
   const { login } = useAuth();
 
   return (

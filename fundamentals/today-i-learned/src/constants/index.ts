@@ -167,3 +167,19 @@ export const STORAGE_KEYS = {
   USER_PREFERENCES: "til-user-preferences",
   DRAFT_POST: "til-draft-post"
 } as const;
+
+// === github discussions Category IDs ===
+/**
+ * GitHub Discussion 카테고리 정보
+ *
+ * 카테고리 ID는 변경되지 않는 고정값입니다.
+ *
+ * 새로운 카테고리 추가 방법:
+ * 1. 개발 서버 실행: yarn dev
+ * 2. http://localhost:5173/today-i-learned/dev-tools/category-id 접속
+ * 3. 카테고리 목록에서 원하는 카테고리의 ID를 복사
+ * 4. 아래 객체에 새로운 항목 추가
+ */
+export const CATEGORY_ID = {
+  TODAY_I_LEARNED: "DIC_kwDONfHk5s4CuCWu"
+} as const;

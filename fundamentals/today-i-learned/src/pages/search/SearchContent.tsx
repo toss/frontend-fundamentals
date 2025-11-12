@@ -55,7 +55,7 @@ export function SearchContent({ query }: SearchContentProps) {
       <div className={searchResultsContainer}>
         <h1 className={searchResultsTitle}>"{query}" 검색 결과</h1>
         <div className={resultsWrapper}>
-          {[...new Array(3)].map((_, index) => (
+          {new Array(3).fill(null).map((_, index) => (
             <div key={index} className={index < 2 ? skeletonWithMargin : ""}>
               <PostCardSkeleton />
             </div>

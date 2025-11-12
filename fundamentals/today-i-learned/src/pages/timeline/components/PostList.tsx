@@ -7,24 +7,15 @@ import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { useUserProfile } from "@/api/hooks/useUser";
 import { css } from "@styled-system/css";
+import { SortOption } from "../types";
+import { useSearchParams } from "react-router-dom";
+import { CATEGORY_ID } from "@/constants";
 
-interface PostListProps {
-  owner?: string;
-  repo?: string;
-  categoryName?: string;
-  sortBy?: "latest" | "lastActivity" | "created" | "popularity";
-  filterBy?: {
-    label?: string;
-  };
-}
+export function PostList() {
+  const [searchParams] = useSearchParams({ sort: "newest" });
 
-export function PostList({
-  owner,
-  repo,
-  categoryName,
-  sortBy = "latest",
-  filterBy
-}: PostListProps) {
+  const sortOption = searchParams.get("sort") as SortOption;
+
   const { data: userProfile } = useUserProfile();
   const {
     data: postsData,
@@ -32,13 +23,7 @@ export function PostList({
     hasNextPage,
     isFetchingNextPage,
     isLoading
-  } = useInfiniteDiscussions({
-    owner,
-    repo,
-    categoryName,
-    sortBy,
-    filterBy
-  });
+  } = useInfiniteDiscussions({ ...getPostListProps(sortOption) });
 
   const handleLoadMore = useCallback(() => {
     if (hasNextPage && !isFetchingNextPage) {
@@ -110,6 +95,32 @@ export function PostList({
     </div>
   );
 }
+
+const getPostListProps = (sortOption: SortOption) => {
+  switch (sortOption) {
+    case "newest":
+      return {
+        categoryId: CATEGORY_ID.TODAY_I_LEARNED,
+        sortBy: "latest" as const
+      };
+    case "realtime":
+      return {
+        categoryId: CATEGORY_ID.TODAY_I_LEARNED,
+        sortBy: "lastActivity" as const
+      };
+    case "hall-of-fame":
+      return {
+        categoryId: CATEGORY_ID.TODAY_I_LEARNED,
+        sortBy: "latest" as const,
+        filterBy: { label: "성지 ⛲" }
+      };
+    default:
+      return {
+        categoryId: CATEGORY_ID.TODAY_I_LEARNED,
+        sortBy: "latest" as const
+      };
+  }
+};
 
 // Container Styles
 const postListContainer = css({

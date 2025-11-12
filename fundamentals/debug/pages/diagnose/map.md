@@ -31,25 +31,25 @@
 아래 코드에는 치명적인 오류가 있는데요, 작업 지도를 하나씩 검증하며 어디에 문제가 발생하는지 살펴보아요.
 
 ```tsx 8,15,19,26
-import React, { useState } from "react";
+import { useState } from "react";
 
-const ValidatedInput = () => {
+function ValidatedInput() {
   const [input, setInput] = useState("");
   const [isValid, setIsValid] = useState(true);
 
   const validate = (value) => {
-    //2. 입력이 바뀔 때마다 유효성 검사 함수가 실행돼요:"
+    // 2. 입력이 바뀔 때마다 유효성 검사 함수가 실행돼요
     const valid = value.length < 5;
     return valid;
   };
 
   const handleChange = (e) => {
     const value = e.target.value;
-    //1. 사용자가 검색 입력창에 키워드를 입력해요
+    // 1. 사용자가 검색 입력창에 키워드를 입력해요
     setInput(value);
 
     const result = validate(value);
-    //3. 검사 결과에 따라 true/false를 반환해요
+    // 3. 검사 결과에 따라 true/false를 반환해요
     setIsValid(result);
   };
 
@@ -60,7 +60,7 @@ const ValidatedInput = () => {
       {isValid && <div style={{ color: "red" }}>Error message</div>}
     </div>
   );
-};
+}
 export default ValidatedInput;
 ```
 
@@ -68,7 +68,7 @@ export default ValidatedInput;
 
 ## 에러 도출
 
-검증 결과, `isValid &&` 조건으로 작성된 에러 UI 렌더링 부분에 **논리 오류**가 있었어요.`isValid === false`로 작성해야 하는데, `isValid &&`로 되어 있어서, **정상적인 UI가 아닌, 잘못된 조건에 의해 오류 메시지가 렌더링**되고 있었어요.
+검증 결과, `isValid &&` 조건으로 작성된 에러 UI 렌더링 부분에 **논리 오류**가 있었어요.`isValid === false &&`로 작성해야 하는데, `isValid &&`로 되어 있어서, **정상적인 UI가 아닌, 잘못된 조건에 의해 오류 메시지가 렌더링**되고 있었어요.
 
 ```tsx 4
   return (

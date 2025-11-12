@@ -46,7 +46,9 @@ interface UserDropdownProps {
 }
 
 export function UserDropdown({ isOpen, onClose, onLogout }: UserDropdownProps) {
-  if (!isOpen) return null;
+  if (!isOpen) {
+    return null;
+  }
 
   return (
     <div className={css(dropdownContainer)}>
