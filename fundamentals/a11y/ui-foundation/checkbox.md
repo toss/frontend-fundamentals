@@ -4,35 +4,35 @@
 
 **선택 가능한 옵션들과 현재 선택 상태를 바로 이해하고 조작**할 수 있도록 구현하는 게 핵심이에요.
 
-아래 내용은 특히 `aria-checked`, `role="checkbox"` 같은 상태 속성과 레이블 처리, 포커스 관리 등 실무에서 실수하기 쉬운 부분을 구체적으로 다뤄요.
+아래 내용은 `<input type="checkbox">` 를 사용하는 방법과 `<input>` 이 아닌 요소에서 체크박스를 표현하기 위해 `aria-checked`, `role="checkbox"` 같은 상태 속성과 레이블 처리, 포커스 관리 등 실무에서 실수하기 쉬운 부분을 구체적으로 다뤄요.
 
-## 이런 체크박스를 보여주려면 어떻게 구현해야 할까요?
+## 체크박스를 구현하기
 
-![체크박스 예시](../images/checkbox.jpg)
+<img style="max-width: 375px; width: 100%;" src="../images/checkbox.jpg" alt="체크박스 예시">
 
-이 코드는 `fieldset`과 `legend`를 사용하지 않아 체크박스들이 그룹으로 묶이지 않았고, `label`과 `input`이 연결되지 않아 스크린리더가 정확한 정보를 전달하지 못해요.
+아래 코드는 체크박스에 레이블이 없어 스크린리더가 정확한 정보를 전달하지 못해요.
 
 ```tsx
 <div>
   <div>
-    <input type="radio" /> 이메일 수신 동의
+    <input type="checkbox" /> 이메일 수신 동의
   </div>
   <div>
-    <input type="radio" /> 문자 수신 동의
+    <input type="checkbox" /> 문자 수신 동의
   </div>
   <div>
-    <input type="radio" /> 마케팅 수신 동의
+    <input type="checkbox" /> 마케팅 수신 동의
   </div>
 </div>
 ```
 
 ::: danger ❌ 접근성을 지키지 않으면 이렇게 들려요.
 
-라디오<br />
+체크박스<br />
 이메일 수신 동의<br />
-라디오<br />
+체크박스<br />
 문자 수신 동의<br />
-라디오<br />
+체크박스<br />
 마케팅 수신 동의<br />
 
 :::
@@ -44,10 +44,10 @@
 `fieldset`과 `legend`로 체크박스 그룹을 묶고, 각 `input`과 `label`을 `id`와 `htmlFor`로 연결하여 접근성을 개선할 수 있어요.
 
 ```tsx
-<fieldset aria-labelledby="consent-title">
-  <legend id="consent-title">수신 동의 설정</legend>
+<fieldset>
+  <legend>수신 동의 설정</legend>
   <div>
-    <input type="checkbox" id="email" defaultChecked />
+    <input type="checkbox" id="email" checked />
     <label htmlFor="email">이메일 수신 동의</label>
   </div>
   <div>
@@ -77,9 +77,9 @@
 
 :::
 
-### input을 쓰지 않고 aria로만 구현해야 하는 경우엔 어떻게 해야할까요?
+## `<input>` 을 쓰지 않고 체크박스를 구현하기
 
-디자인적으로 기본 `<input type="checkbox">`를 사용할 수 없을 때는 `role="checkbox"`와 `aria-checked`를 사용해요.
+디자인적으로 기본 `<input type="checkbox">`를 사용할 수 없을 때는 `role="checkbox"`와 `aria-checked`를 사용해야해요.
 
 핵심은 `role="checkbox"`, `aria-checked`, `tabIndex={0}`과 Space 키 처리예요.
 
@@ -107,7 +107,7 @@ const [checked, setChecked] = useState(false);
 
 :::: info 예제 코드 해설
 
-- `role="checkbox"`/`aria-checked`: 커스텀 요소를 체크박스로 인식시키고 상태를 전달해요.
+- `role="checkbox"`/`aria-checked`: 커스텀 요소를 체크박스로 인식시키고 체크 여부 상태를 전달해요.
 - `tabIndex={0}`: 키보드 포커스를 받을 수 있게 해요.
 - `Space` 키 처리: 키보드만으로도 상태를 토글할 수 있게 해요.
   ::::

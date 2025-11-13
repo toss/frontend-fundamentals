@@ -178,12 +178,12 @@ export default defineConfig({
                 link: "/ui-foundation/modal"
               },
               {
-                text: "체크박스",
-                link: "/ui-foundation/checkbox"
-              },
-              {
                 text: "라디오",
                 link: "/ui-foundation/radio"
+              },
+              {
+                text: "체크박스",
+                link: "/ui-foundation/checkbox"
               },
               {
                 text: "스위치",

@@ -8,7 +8,7 @@
 
 ### 어떤 것을 입력해야 하는지 레이블에 추가해 주세요.
 
-<img width="500" src="../images/address-text-field.png" alt="입력창 예시">
+<img style="max-width: 375px; width: 100%;" src="../images/address-text-field.png" alt="입력창 예시">
 
 ```js
 <form>
@@ -40,7 +40,7 @@
 
 ### 입력창이 여러 개라면, 각 영역을 구분해서 써주세요.
 
-<img width="500" src="../images/card-text-field.png" alt="여러 개 입력창 예시">
+<img style="max-width: 375px; width: 100%;" src="../images/card-text-field.png" alt="여러 개 입력창 예시">
 
 ```html
 <form>
@@ -117,7 +117,7 @@
 
 ### **텍스트 없는 아이콘 버튼일 때** 어떤 동작을 하는지 설명해주세요.
 
-<img width="500" src="../images/buttons-without-text.png" alt="텍스트 없는 아이콘 버튼 예시">
+<img  style="max-width: 375px; width: 100%;" src="../images/buttons-without-text.png" alt="텍스트 없는 아이콘 버튼 예시">
 
 ```js
 <div>
@@ -154,7 +154,7 @@
 
 :::
 
-<img width="500" src="../images/arrow-button-without-text.png" alt="텍스트 없는 화살표 버튼 예시" />
+<img  style="max-width: 375px; width: 100%;" src="../images/arrow-button-without-text.png" alt="텍스트 없는 화살표 버튼 예시" />
 
 ```js
 <div>
@@ -194,7 +194,7 @@
 
 :::
 
-<img width="500" src="../images/comment-button-without-text.png" alt="텍스트 없는 댓글 버튼 예시" />
+<img  style="max-width: 375px; width: 100%;" src="../images/comment-button-without-text.png" alt="텍스트 없는 댓글 버튼 예시" />
 
 ```js
 <div>
@@ -229,10 +229,10 @@
 ::: details _텍스트로 의미 전달이 충분히 되고 있다면 생략해도 돼요_
 
 1. 텍스트 버튼일 때
-   <img width="500" src="../images/button-with-text.png" alt="텍스트 버튼 예시" />
+   <img  style="max-width: 375px; width: 100%;" src="../images/button-with-text.png" alt="텍스트 버튼 예시" />
 
 2. 아이콘과 동일한 의미가 텍스트로 전달되고 있을 때
-   <img width="500" src="../images/icon-button-with-text.png" alt="버튼에 아이콘과 텍스트가 함께 있는 예시">
+   <img  style="max-width: 375px; width: 100%;" src="../images/icon-button-with-text.png" alt="버튼에 아이콘과 텍스트가 함께 있는 예시">
 
 :::
 
@@ -242,7 +242,7 @@
 
 브랜드 로고가 서비스를 식별하기 위해 꼭 필요하고, 텍스트로 설명되고 있지 않을 때 레이블을 사용해야 해요.
 
-<img width="500" src="../images/logo-without-text.png" alt="로고에 텍스트 설명이 없는 예시">
+<img  style="max-width: 375px; width: 100%;" src="../images/logo-without-text.png" alt="로고에 텍스트 설명이 없는 예시">
 
 ::: danger ❌ 안 쓰면 이렇게 들려요
 
@@ -262,13 +262,13 @@
 
 로고명이 텍스트로 이미 적혀 있다면 레이블을 사용하지 않아도 돼요.
 
-<img width="500" src="../images/logo-with-text.png" alt="로고에 텍스트 설명이 있는 예시">
+<img  style="max-width: 375px; width: 100%;" src="../images/logo-with-text.png" alt="로고에 텍스트 설명이 있는 예시">
 
 ### 콘텐츠 이미지
 
 콘텐츠를 구분하거나 선택하는 데 **사진이 핵심 정보**일 때 레이블을 사용해야 해요.
 
-<img width="500" src="../images/useful-content-image.png" alt="핵심 정보인 콘텐츠 이미지 예시">
+<img  style="max-width: 375px; width: 100%;" src="../images/useful-content-image.png" alt="핵심 정보인 콘텐츠 이미지 예시">
 
 ::: info ✅ 어떤 카드인지 알 수 있게 해주세요
 
@@ -281,13 +281,13 @@
 
 이미지가 단순 시각 보조이거나 장식 요소라면 레이블을 사용하지 않아도 돼요.
 
-<img width="500" src="../images/useless-content-image.jpeg" alt="장식 요소인 콘텐츠 이미지 예시">
+<img  style="max-width: 375px; width: 100%;" src="../images/useless-content-image.jpeg" alt="장식 요소인 콘텐츠 이미지 예시">
 
 ### 상품 이미지
 
 텍스트만으로는 **어떤 상품인지 알 수 없을 때** 레이블을 사용해야 해요.
 
-<img width="500" src="../images/lack-of-description.png" alt="텍스트만으로는 어떤 상품인지 알 수 없는 콘텐츠 이미지 예시">
+<img  style="max-width: 375px; width: 100%;" src="../images/lack-of-description.png" alt="텍스트만으로는 어떤 상품인지 알 수 없는 콘텐츠 이미지 예시">
 
 ::: danger ❌ 안 쓰면 이렇게 들려요
 
@@ -305,13 +305,13 @@
 
 텍스트에 상품명이 나와있을 때 레이블을 사용하지 않아도 돼요.
 
-<img width="500" src="../images/product-image-with-text.png" alt="텍스트에 상품명이 있는 콘텐츠 이미지 예시">
+<img  style="max-width: 375px; width: 100%;" src="../images/product-image-with-text.png" alt="텍스트에 상품명이 있는 콘텐츠 이미지 예시">
 
 ### 그래픽
 
 텍스트 없이 그래픽으로만 정보를 전달하는 상황이라면 꼭 레이블을 작성해주세요.
 
-<img width="500" src="../images/chat-loading.png" alt="채팅 예시">
+<img  style="max-width: 375px; width: 100%;" src="../images/chat-loading.png" alt="채팅 예시">
 
 ::: danger ❌ 레이블을 안쓰면
 
@@ -325,7 +325,7 @@
 
 :::
 
-<img width="500" src="../images/chart-graphic.png" alt="차트 예시">
+<img  style="max-width: 375px; width: 100%;" src="../images/chart-graphic.png" alt="차트 예시">
 
 ::: danger ❌ 레이블을 안쓰면
 
@@ -339,7 +339,7 @@
 
 :::
 
-<img width="500" src="../images/mydata-progress-bar.png" alt="프로그레스 예시">
+<img  style="max-width: 375px; width: 100%;" src="../images/mydata-progress-bar.png" alt="프로그레스 예시">
 
 ::: danger ❌ 레이블을 안쓰면 이렇게 들려요
 
@@ -357,7 +357,7 @@
 
 무엇을 선택하는지 적어주세요. 옆에 글자가 있더라도 해당 컴포넌트와 정확히 연결되지 않으면, 사용자는 이 컴포넌트가 어떤 의미인지 추측해야 하고 명확하게 이해하기 어려워요.
 
-<img width="500" src="../images/checkbox-noti-agreement.png" alt="체크박스 예시">
+<img  style="max-width: 375px; width: 100%;" src="../images/checkbox-noti-agreement.png" alt="체크박스 예시">
 
 ::: danger ❌ 레이블을 안쓰면 이렇게 들려요
 
@@ -371,7 +371,7 @@
 
 :::
 
-<img width="500" src="../images/radio-payment.png" alt="라디오 예시">
+<img  style="max-width: 375px; width: 100%;" src="../images/radio-payment.png" alt="라디오 예시">
 
 ::: danger ❌ 레이블을 안쓰면 이렇게 들려요
 
@@ -385,7 +385,7 @@
 
 :::
 
-<img width="500" src="../images/switch-event-noti.png" alt="스위치 예시">
+<img  style="max-width: 375px; width: 100%;" src="../images/switch-event-noti.png" alt="스위치 예시">
 
 ::: danger ❌ 레이블을 안쓰면 이렇게 들려요
 

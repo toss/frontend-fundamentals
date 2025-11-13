@@ -8,7 +8,7 @@
 
 ## 예시: 스크린리더가 잘 읽는 탭 만들기
 
-![탭 예시](../images/tab.png)
+<img style="max-width: 375px; width: 100%;" src="../images/tab.png" alt="탭 예시">
 
 ```tsx
 <div>

@@ -8,7 +8,7 @@
 
 ## 이런 라디오 버튼을 보여주려면 어떻게 구현해야 할까요?
 
-![라디오 예시](../images/radio.png)
+<img style="max-width: 375px; width: 100%;" src="../images/radio.png" alt="라디오 예시">
 
 ```tsx
 <div>
@@ -176,3 +176,38 @@
    - 선택된 라디오 버튼의 값만 서버로 전송돼요
 
 :::
+
+## `<input>` 을 쓰지 않고 라디오 버튼을 구현하기
+
+디자인적으로 기본 `<input type="radio">`를 사용할 수 없을 때는 `role="radio"`와 `aria-checked`를 사용해야해요.
+
+핵심은 `role="radio"`, `aria-checked`, `tabIndex={0}`과 Space 키 처리예요.
+
+특히, `tabIndex={0}`를 지정해 키보드나 스크린리더가 포커스할 수 있게 해야 해요, 또한 Space 키를 눌렀을 때 라디오 버튼 상태가 전환되도록 `onKeyDown`에 핸들러를 등록해야 해요.
+
+```tsx
+const [checked, setChecked] = useState(false);
+
+<div
+  role="radio"
+  aria-checked={checked}
+  tabIndex={0}
+  onClick={() => setChecked(!checked)}
+  onKeyDown={(e) => {
+    if (e.key === " ") {
+      e.preventDefault();
+      setChecked(!checked);
+    }
+  }}
+>
+  <span>커스텀 라디오 버튼</span>
+  {checked && <span>✓</span>}
+</div>;
+```
+
+:::: info 예제 코드 해설
+
+- `role="radio"`/`aria-checked`: 커스텀 요소를 라디오 버튼으로 인식시키고 선택 여부 상태를 전달해요.
+- `tabIndex={0}`: 키보드 포커스를 받을 수 있게 해요.
+- `Space` 키 처리: 키보드만으로도 상태를 토글할 수 있게 해요.
+  ::::
