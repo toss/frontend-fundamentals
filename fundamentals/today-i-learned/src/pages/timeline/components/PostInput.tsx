@@ -102,11 +102,11 @@ export function PostWriteSection() {
         <Button
           type="submit"
           disabled={
-            !title.trim() || !content.trim() || createPostMutation.isError
+            !title.trim() || !content.trim() || createPostMutation.isPending
           }
           className={submitButton}
         >
-          {createPostMutation.isError ? "작성중..." : "작성하기"}
+          {createPostMutation.isPending ? "작성중..." : "작성하기"}
         </Button>
       </div>
 
