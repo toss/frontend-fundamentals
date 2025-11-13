@@ -16,17 +16,17 @@
 
 ```tsx
 <div>
-  <button onClick={handleClickAccordion}>
+  <button onClick={handleClickAccordion1}>
     토스뱅크의 한도제한계좌는 어떻게 해제할 수 있나요?
   </button>
-  <div hidden={!isOpen}>
+  <div hidden={!isOpen1}>
     금융거래목적을 확인할 수 있는 증빙서류를 제출하여 한도 계좌 해제 신청을 할
     수 있어요. 단, 증빙서류 직접 제출 시에는 영업일 기준 2~3일 소요될 수 있어요.
   </div>
-  <button onClick={handleClickAccordion}>
+  <button onClick={handleClickAccordion2}>
     토스증권 수수료와 세금이 궁금해요!
   </button>
-  <div hidden={!isOpen}>
+  <div hidden={!isOpen2}>
     토스증권에서 국내 주식 거래 시 수수료는 0.015%, 제세금은 0.20%가 부과됩니다.
   </div>
   {/* 이하 생략 */}
@@ -42,8 +42,8 @@
 
 :::
 
-아코디언의 경우 각각의 개별적인 요소들로 이루어진 것이 아닌, 펼쳐짐/접힘 상태를 가진 하나의 그룹이에요.
-때문에 어떤 요소가 현재 펼쳐져 있는지, 어떤 내용을 담고 있는지 사용자가 이해할 수 있어야 해요.
+아코디언은 여러 개의 독립된 요소가 모여 있는 구조가 아니라, 펼쳐짐과 접힘 상태를 함께 관리하는 하나의 그룹이에요.
+따라서 사용자가 현재 어떤 항목이 펼쳐져 있는지, 그 안에 어떤 내용이 있는지를 쉽게 이해할 수 있어야 해요.
 
 `aria-expanded`, `aria-controls`, `aria-labelledby` 속성을 사용하여 아코디언의 상태와 구조를 명확히 전달할 수 있어요.
 
@@ -75,6 +75,14 @@
 </div>
 ```
 
+:::: info 예제 코드 해설
+
+- `aria-expanded`: 버튼이 제어하는 패널의 펼침 상태를 알려요.
+- `aria-controls`: 버튼과 연결된 패널의 `id`를 가리켜요.
+- `aria-labelledby`: 패널이 어떤 버튼(헤더)에 의해 제목이 제공되는지 알려요.
+- `hidden`: 패널 표시 여부를 실제 DOM 가시성과 동기화해요.
+  ::::
+
 ::: tip ✅ 접근성을 지키면 이렇게 들려요.
 
 토스뱅크의 한도제한계좌는 어떻게 해제할 수 있나요?, **버튼**, **펼쳐짐**<br />
@@ -83,7 +91,7 @@
 
 :::
 
-### 이런 것들을 지켜야 해요
+### 체크리스트
 
 - **역할:** 패널에는 `role="region"`(선택)과 `aria-labelledby`로 버튼 id를 참조하면 문맥이 좋아요. 버튼의 `aria-controls`는 연관된 패널의 `id`로 연결해요.
 - **상태:** 헤더는 **버튼**으로 구현한 뒤 `aria-expanded`로 열림/닫힘 상태를 전달해요.

@@ -138,10 +138,27 @@ export default defineConfig({
               {
                 text: "주요 원칙",
                 link: "/principles"
+              }
+            ]
+          },
+          {
+            text: "접근성 개발 입문하기",
+            items: [
+              {
+                text: "시작하기",
+                link: "/basic-guide/overview"
               },
               {
-                text: "접근성 개발 입문 가이드",
-                link: "/basic-guide"
+                text: "역할",
+                link: "/basic-guide/role"
+              },
+              {
+                text: "레이블",
+                link: "/basic-guide/label"
+              },
+              {
+                text: "상태",
+                link: "/basic-guide/state"
               }
             ]
           },

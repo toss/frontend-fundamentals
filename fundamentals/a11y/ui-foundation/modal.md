@@ -6,7 +6,6 @@
 
 ## 이런 모달을 보여주려면 어떻게 구현해야 할까요?
 
-<img width="500" >
 ![모달 예시](../images/modal.png)
 
 모달의 경우 일반적인 페이지 콘텐츠와 분리된 독립적인 영역이에요.
@@ -21,6 +20,13 @@
   <button onClick={closeModal}>확인</button>
 </div>
 ```
+
+:::: info 예제 코드 해설
+
+- `role="dialog"`: 이 영역이 대화상자(모달)임을 알려요.
+- `aria-modal="true"`: 모달이 떠 있는 동안 배경과의 상호작용을 차단해야 함을 나타내요.
+- `aria-labelledby`/`aria-label`(추가 가능): 모달의 제목을 스크린리더에 전달해요.
+  ::::
 
 ::: danger ❌ 접근성을 지키지 않으면 이렇게 들려요.
 
@@ -45,7 +51,7 @@
 
 :::
 
-### 이런 것들을 지켜야 해요
+### 체크리스트
 
 - 모달은 `role="dialog"`와 `aria-modal="true"`로 구현해요.
 - 모달 제목은 `aria-labelledby`로 연결하거나 `aria-label`로 제공해요.
@@ -215,6 +221,13 @@ function Modal({ isOpen, onClose, children, title }) {
   );
 }
 ```
+
+:::: info 예제 코드 해설
+
+- 모달 열림 시: 이전 포커스 저장 → `aria-hidden="true"`로 배경 숨김 → body 스크롤 락.
+- 모달 닫힘 시: 이벤트 정리 → 배경 `aria-hidden` 제거/스크롤 복원 → 저장한 포커스로 복귀.
+- `role="dialog"`/`aria-modal`: 모달 영역과 배경 차단을 명시해요.
+  ::::
 
 ### 핵심 요약
 
