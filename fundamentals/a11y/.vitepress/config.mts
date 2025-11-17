@@ -142,6 +142,56 @@ export default defineConfig({
             ]
           },
           {
+            text: "접근성 개발 입문하기",
+            items: [
+              {
+                text: "시작하기",
+                link: "/basic-guide/overview"
+              },
+              {
+                text: "역할",
+                link: "/basic-guide/role"
+              },
+              {
+                text: "레이블",
+                link: "/basic-guide/label"
+              },
+              {
+                text: "상태",
+                link: "/basic-guide/state"
+              }
+            ]
+          },
+          {
+            text: "UI 요소 별 접근성 기초",
+            items: [
+              {
+                text: "탭",
+                link: "/ui-foundation/tab"
+              },
+              {
+                text: "아코디언",
+                link: "/ui-foundation/accordion"
+              },
+              {
+                text: "모달",
+                link: "/ui-foundation/modal"
+              },
+              {
+                text: "라디오",
+                link: "/ui-foundation/radio"
+              },
+              {
+                text: "체크박스",
+                link: "/ui-foundation/checkbox"
+              },
+              {
+                text: "스위치",
+                link: "/ui-foundation/switch"
+              }
+            ]
+          },
+          {
             text: "실전 가이드",
             items: [
               {
@@ -279,7 +329,7 @@ export default defineConfig({
       ]
     },
     ssr: {
-      noExternal: ['vitepress-plugin-tabs']
+      noExternal: ["vitepress-plugin-tabs"]
     }
   }
 });
