@@ -10,7 +10,7 @@
 
 <img style="max-width: 375px; width: 100%;" src="../images/checkbox.jpg" alt="체크박스 예시">
 
-아래 코드는 체크박스에 레이블이 없어 스크린리더가 정확한 정보를 전달하지 못해요.
+아래 코드는 체크박스에 레이블이 없어 스크린 리더가 정확한 정보를 전달하지 못해요.
 
 ```tsx
 <div>
@@ -83,7 +83,7 @@
 
 핵심은 `role="checkbox"`, `aria-checked`, `tabIndex={0}`과 Space 키 처리예요.
 
-특히, `tabIndex={0}`를 지정해 키보드나 스크린리더가 포커스할 수 있게 해야 해요, 또한 Space 키를 눌렀을 때 체크 상태가 전환되도록 `onKeyDown`에 핸들러를 등록해야 해요.
+특히, `tabIndex={0}`를 지정해 키보드나 스크린 리더가 포커스할 수 있게 해야 해요, 또한 Space 키를 눌렀을 때 체크 상태가 전환되도록 `onKeyDown`에 핸들러를 등록해야 해요.
 
 ```tsx
 const [checked, setChecked] = useState(false);
