@@ -17,4 +17,4 @@ HTML의 기본 요소(`<button>`, `<input>`, `<a>` 등)는 이름에서 이미 �
 | 다이얼로그(Dialog)  | `<dialog>`                | `role="dialog"`                     | 다이얼로그                                    |
 | 아코디언(Accordion) | `<details>` `<summary>`   | `role="group"`                      | 아코디언                                      |
 
-[^1]: 명시적으로 `role="generic"` 이 선언되어 있지만 접근성 트리에서는 기본 텍스트로 인식되어요.
+[^1]: 명시적으로 `role="generic"` 이 선언되어 있지만 접근성 트리에서는 기본 텍스트로 인식돼요.
