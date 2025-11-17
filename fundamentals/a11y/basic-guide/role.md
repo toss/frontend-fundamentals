@@ -6,15 +6,15 @@ HTML의 기본 요소(`<button>`, `<input>`, `<a>` 등)는 이름에서 이미 �
 
 아래 예시를 보면 각 UI 컴포넌트가 어떤 HTML 요소와 역할을 가지는지 자연스럽게 확인할 수 있어요.
 
-| 컴포넌트                    | HTML 요소                 | role 속성                           | 설명                                          |
-| --------------------------- | ------------------------- | ----------------------------------- | --------------------------------------------- |
-| 텍스트, 아이콘 등 장식 요소 | `<span>`, `<div>`         | 없음[^1]                            | **정보를 전달할 때 그에 맞는 역할 지정 필요** |
-| 입력창(Input)               | `<input>`                 | `role="textbox"`                    | 사용자가 텍스트를 입력하는 요소               |
-| 체크박스(Checkbox)          | `<input type="checkbox">` | `role="checkbox"`                   | 여러 옵션 중 원하는 항목을 모두 선택하는 요소 |
-| 라디오 버튼(Radio)          | `<input type="radio">`    | `role="radiogroup"`, `role="radio"` | 여러 옵션 중 하나 선택하는 요소               |
-| 링크(Link)                  | `<a>`                     | `role="link"`                       | 페이지 이동 요소                              |
-| 버튼(Button)                | `<button>`                | `role="button"`                     | 실행 동작을 수행하는 요소                     |
-| 다이얼로그(Dialog)          | `<dialog>`                | `role="dialog"`                     | 다이얼로그                                    |
-| 아코디언(Accordion)         | `<details>` `<summary>`   | `role="group"`                      | 아코디언                                      |
+| 컴포넌트            | HTML 요소                 | role 속성                           | 설명                                          |
+| ------------------- | ------------------------- | ----------------------------------- | --------------------------------------------- |
+| 텍스트              | `<span>`, `<div>`         | 없음[^1]                            | **정보를 전달할 때 그에 맞는 역할 지정 필요** |
+| 입력창(Input)       | `<input>`                 | `role="textbox"`                    | 사용자가 텍스트를 입력하는 요소               |
+| 체크박스(Checkbox)  | `<input type="checkbox">` | `role="checkbox"`                   | 여러 옵션 중 원하는 항목을 모두 선택하는 요소 |
+| 라디오 버튼(Radio)  | `<input type="radio">`    | `role="radiogroup"`, `role="radio"` | 여러 옵션 중 하나 선택하는 요소               |
+| 링크(Link)          | `<a>`                     | `role="link"`                       | 페이지 이동 요소                              |
+| 버튼(Button)        | `<button>`                | `role="button"`                     | 실행 동작을 수행하는 요소                     |
+| 다이얼로그(Dialog)  | `<dialog>`                | `role="dialog"`                     | 다이얼로그                                    |
+| 아코디언(Accordion) | `<details>` `<summary>`   | `role="group"`                      | 아코디언                                      |
 
-[^1]: 명시적으로 `role="generic"` 이 선언되어 있지만 접근성 트리에서는 인지하지 않습니다.
+[^1]: 명시적으로 `role="generic"` 이 선언되어 있지만 접근성 트리에서는 기본 텍스트로 인식되어요.
