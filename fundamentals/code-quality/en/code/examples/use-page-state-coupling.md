@@ -78,7 +78,11 @@ This hook can also be analyzed from a [readability](./use-page-state-readability
 You can create separate hooks for each query parameter, as shown in the following code.
 
 ```typescript
-import { useQueryParam } from "use-query-params";
+import { useCallback } from "react";
+import { 
+  NumberParam,
+  useQueryParam 
+} from "use-query-params";
 
 export function useCardIdQueryParam() {
   const [cardId, _setCardId] = useQueryParam("cardId", NumberParam);
