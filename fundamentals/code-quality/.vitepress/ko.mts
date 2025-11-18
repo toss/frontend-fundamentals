@@ -98,6 +98,10 @@ function sidebar(): DefaultTheme.Sidebar {
                 {
                   text: "B. 삼항 연산자 단순하게 하기",
                   link: "/code/examples/ternary-operator"
+                },
+                {
+                  text: "C. 왼쪽에서 오른쪽으로 읽히게 하기",
+                  link: "/code/examples/comparison-order"
                 }
               ],
               collapsed: true
