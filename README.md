@@ -1,10 +1,14 @@
 ![Frontend Fundamentals](./images/ff-meta.png)
 
+English | [한국어](https://github.com/toss/frontend-fundamentals/blob/main/README-ko_kr.md)
+
 # Frontend Fundamentals
 
 > Essential principles for frontend development
 
-**Frontend Fundamentals (FF)** is a growing collection of essential principles for building reliable, maintainable, and accessible frontend applications. It helps you answer common but tricky questions like how to judge code quality, why bundling behaves differently in dev vs. production, how screen readers interpret your UI, and how to debug efficiently.
+**Frontend Fundamentals (FF)** is a growing collection of essential principles for building reliable, maintainable, and accessible frontend applications. 
+
+It helps you answer common but tricky questions like how to judge code quality, why bundling behaves differently in dev vs. production, how screen readers interpret your UI, and how to debug efficiently.
 
 https://frontend-fundamentals.com/code-quality/en/
 
