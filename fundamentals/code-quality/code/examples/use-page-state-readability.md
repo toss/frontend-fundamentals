@@ -89,9 +89,12 @@ import { NumberParam, useQueryParam } from "use-query-params";
 export function useCardIdQueryParam() {
   const [cardId, _setCardId] = useQueryParam("cardId", NumberParam);
 
-  const setCardId = useCallback((cardId: number) => {
-    _setCardId({ cardId }, "replaceIn");
-  }, []);
+  const setCardId = useCallback(
+    (cardId: number) => {
+      _setCardId(cardId, "replaceIn");
+    },
+    [_setCardId]
+  );
 
   return [cardId ?? undefined, setCardId] as const;
 }
