@@ -1,8 +1,27 @@
+---
+head:
+  - [
+      meta,
+      {
+        property: "og:image",
+        content: "https://static.toss.im/illusts/debug_x_1200x627_event.png"
+      }
+    ]
+  - [
+      meta,
+      {
+        name: "twitter:image",
+        content: "https://static.toss.im/illusts/debug_x_1200x627_event.png"
+      }
+    ]
+  - [meta, { name: "twitter:card", content: "summary_large_image" }]
+---
+
 # 참여 이벤트
 
 자신의 디버깅 사례를 정리하는 시간을 가져보세요! 디버깅 실무 사례를 올려주신 분들 중 5분을 추첨하여 디버깅 티셔츠를 드려요!
 
-![](../images/event/t-shirt.png){width=400}
+![](../images/event/t-shirt.jpeg){width=400}
 
 ## 참여 방법
 
