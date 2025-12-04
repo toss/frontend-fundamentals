@@ -3,9 +3,37 @@ import DefaultTheme from "vitepress/theme";
 import Comments from "./components/Comments.vue";
 import OneNavigation from "@shared/components/OneNavigation.vue";
 import { useLocale } from "./hooks";
+import { onMounted } from "vue";
+import { useRoute } from "vitepress";
 
 const { Layout } = DefaultTheme;
 const { isKorean } = useLocale();
+const route = useRoute();
+
+onMounted(() => {
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    const link = target.closest('a[href^="/a11y/"]');
+
+    if (link?.classList.value === "VPLink link") {
+      e.preventDefault();
+
+      const href = link.getAttribute("href");
+      const targetLangMatch = href?.match(/^\/a11y\/(en|ja|zh-hans)\//);
+      const targetLang = targetLangMatch ? targetLangMatch[1] : "ko";
+
+      const pathWithoutLang = route.path
+        .replace(/^\/a11y\/(en|ja|zh-hans)\//, "/a11y/")
+        .replace(/^\/a11y\//, "");
+      const newPath =
+        targetLang === "ko"
+          ? `/a11y/${pathWithoutLang}`
+          : `/a11y/${targetLang}/${pathWithoutLang}`;
+
+      window.location.href = newPath;
+    }
+  });
+});
 </script>
 
 <template>
