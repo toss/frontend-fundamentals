@@ -52,7 +52,8 @@ export function PostWriteSection() {
     >
       <div className={inputContentArea}>
         <div className={avatarSection}>
-          <UserAvatar user={user} size="60" linkToProfile={false} />
+          {/* NOTE: 상위 컴포넌트에서 authenticate를 검증한 상태만 들어오지만 현재는 auth 상태를 타입으로 검증할 수 없음. 개선 필요함. */}
+          {user && <UserAvatar user={user} size="60" linkToProfile={false} />}
         </div>
 
         <div className={inputFieldsArea}>
