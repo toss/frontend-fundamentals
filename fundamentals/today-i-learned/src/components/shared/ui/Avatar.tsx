@@ -1,5 +1,5 @@
 import * as React from "react";
-import { css, cx } from "@styled-system/css";
+import { css, cx, Styles } from "@styled-system/css";
 
 const avatarBase = {
   position: "relative",
@@ -10,12 +10,14 @@ const avatarBase = {
   backgroundColor: "rgb(243, 244, 246)"
 };
 
-const avatarSizes = {
+const avatarSizes: Record<AvatarSize, Styles> = {
   "20": { height: "20px", width: "20px" },
   "32": { height: "32px", width: "32px" },
   "40": { height: "40px", width: "40px" },
+  "44": { height: "44px", width: "44px" },
   "48": { height: "48px", width: "48px" },
-  "60": { height: "60px", width: "60px" }
+  "60": { height: "60px", width: "60px" },
+  "100": { height: "100px", width: "100px" }
 };
 
 const avatarImage = {
@@ -36,15 +38,17 @@ const avatarFallbackBase = {
   color: "rgb(75, 85, 99)"
 };
 
-const fallbackTextSizes = {
+const fallbackTextSizes: Record<AvatarSize, Styles> = {
   "20": { fontSize: "12px" },
   "32": { fontSize: "14px" },
   "40": { fontSize: "16px" },
+  "44": { fontSize: "17px" },
   "48": { fontSize: "18px" },
-  "60": { fontSize: "24px" }
+  "60": { fontSize: "24px" },
+  "100": { fontSize: "40px" }
 };
 
-type AvatarSize = "20" | "32" | "40" | "48" | "60";
+type AvatarSize = "20" | "32" | "40" | "44" | "48" | "60" | "100";
 
 export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
   src?: string;

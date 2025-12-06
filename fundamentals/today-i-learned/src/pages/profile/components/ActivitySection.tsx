@@ -7,9 +7,11 @@ interface BaseComponentProps {
 }
 import { css, cx } from "@styled-system/css";
 
-interface ActivitySectionProps extends BaseComponentProps {}
+interface ActivitySectionProps extends BaseComponentProps {
+  username: string;
+}
 
-export function ActivitySection({ className }: ActivitySectionProps) {
+export function ActivitySection({ className, username }: ActivitySectionProps) {
   const {
     userProfile,
     userPosts,
@@ -21,7 +23,7 @@ export function ActivitySection({ className }: ActivitySectionProps) {
     elementRef,
     handleFilterToggle,
     refetch
-  } = useUserActivity();
+  } = useUserActivity({ username });
 
   return (
     <div className={cx(sectionContainer, className)}>

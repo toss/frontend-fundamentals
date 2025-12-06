@@ -4,6 +4,7 @@ import ffSymbolUrl from "@/assets/ff-symbol.svg";
 import { useAuth } from "@/contexts/AuthContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import { Button } from "@/components/shared/ui/Button";
+import { UserAvatar } from "@/components/shared/common/UserAvatar";
 import { css } from "@styled-system/css";
 import { cx } from "@styled-system/css";
 
@@ -59,7 +60,6 @@ export function Header() {
               마이페이지
             </Link>
           </nav>
-
           {/* Theme toggle */}
           <Button
             variant="ghost"
@@ -70,19 +70,13 @@ export function Header() {
             <Sun className={sunIcon} />
             <Moon className={moonIcon} />
           </Button>
-
           {/* Login/Profile area */}
           <div className={authSection}>
             {isLoading ? (
               <div className={loadingSkeleton} />
             ) : isAuthenticated && user ? (
               <div className={userProfile}>
-                <img
-                  src={user.avatar_url}
-                  alt={`${user.login} avatar`}
-                  className={userAvatar}
-                  style={{ aspectRatio: "1 / 1" }}
-                />
+                <UserAvatar user={user} size="32" linkToProfile={true} />
                 <span className={userName}>{user.login}</span>
                 <Button
                   variant="ghost"
@@ -277,13 +271,6 @@ const userProfile = css({
   display: "flex",
   alignItems: "center",
   gap: "0.5rem"
-});
-
-const userAvatar = css({
-  width: "2rem",
-  height: "2rem",
-  borderRadius: "50%",
-  objectFit: "cover"
 });
 
 const userName = css({

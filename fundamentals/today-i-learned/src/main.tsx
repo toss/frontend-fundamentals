@@ -10,6 +10,7 @@ import { ThemeProvider } from "./contexts/ThemeContext.tsx";
 import "./index.css";
 import { PostDetailPage } from "./pages/post/PostDetailPage";
 import { MyPage } from "./pages/profile/MyPage";
+import { UserProfilePage } from "./pages/profile/UserProfilePage";
 import { TimelinePage } from "./pages/timeline/TimelinePage";
 import { QueryProvider } from "./providers/QueryProvider.tsx";
 import { ToastProvider } from "./contexts/ToastContext";
@@ -34,6 +35,10 @@ const router = createBrowserRouter(
         {
           path: "profile",
           element: <MyPage />
+        },
+        {
+          path: "profile/:username",
+          element: <UserProfilePage />
         },
         {
           path: "post/:id",

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Avatar } from "@/components/shared/ui/Avatar";
+import { UserAvatar } from "@/components/shared/common/UserAvatar";
 import { Card } from "@/components/shared/ui/Card";
 import { MarkdownRenderer } from "@/components/shared/ui/MarkdownRenderer";
 import { InteractionButtons } from "@/components/shared/ui/InteractionButtons";
@@ -81,12 +81,11 @@ export function PostCard({
         {/* 헤더: 사용자 정보 */}
         <div className={headerSection}>
           <div className={userInfoContainer}>
-            <Avatar
+            <UserAvatar
+              username={discussion.author.login}
+              avatarUrl={discussion.author.avatarUrl}
               size="40"
-              src={discussion.author.avatarUrl}
-              alt={discussion.author.login}
-              fallback={discussion.author.login}
-              className={avatarStyles}
+              linkToProfile={true}
             />
             <div className={userDetailsContainer}>
               <div className={userMetaContainer}>
@@ -180,10 +179,6 @@ const userInfoContainer = css({
   gap: "0.75rem",
   minWidth: "0",
   flex: "1"
-});
-
-const avatarStyles = css({
-  flexShrink: "0"
 });
 
 const userDetailsContainer = css({

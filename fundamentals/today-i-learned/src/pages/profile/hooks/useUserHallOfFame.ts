@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { useUserProfile } from "@/api/hooks/useUser";
+import { usePublicUserProfile } from "@/api/hooks/useUser";
 import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
 import { filterUserPosts } from "@/utils/postFilters";
 import { PAGE_SIZE } from "@/constants/github";
@@ -7,8 +7,12 @@ import { CATEGORY_ID } from "@/constants";
 
 const INITIAL_DISPLAY_COUNT = 6;
 
-export function useUserHallOfFame() {
-  const { data: userProfile } = useUserProfile();
+interface UseUserHallOfFameOptions {
+  username: string;
+}
+
+export function useUserHallOfFame({ username }: UseUserHallOfFameOptions) {
+  const { data: userProfile } = usePublicUserProfile(username);
   const [isExpanded, setIsExpanded] = useState(false);
 
   const {
@@ -26,13 +30,13 @@ export function useUserHallOfFame() {
   });
 
   const userHallOfFamePosts = useMemo(() => {
-    if (!userProfile?.login || !data) {
+    if (!data) {
       return [];
     }
 
     const allDiscussions = data.pages.flatMap((page) => page.discussions);
-    return filterUserPosts(allDiscussions, userProfile.login);
-  }, [data, userProfile?.login]);
+    return filterUserPosts(allDiscussions, username);
+  }, [data, username]);
 
   const handleToggleExpand = () => {
     setIsExpanded(!isExpanded);

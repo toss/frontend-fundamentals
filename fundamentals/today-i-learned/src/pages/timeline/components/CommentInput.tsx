@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Avatar } from "@/components/shared/ui/Avatar";
+import { UserAvatar } from "@/components/shared/common/UserAvatar";
 import { useAuth } from "@/contexts/AuthContext";
 import { css } from "@styled-system/css";
 
@@ -39,13 +39,7 @@ export function CommentInput({
   return (
     <div className={commentInputContainer}>
       <div className={inputWrapper}>
-        <Avatar
-          size="40"
-          src={user.avatar_url}
-          alt={user.login}
-          fallback={user.login}
-          className={avatarStyle}
-        />
+        <UserAvatar user={user} size="40" linkToProfile={false} />
         <textarea
           value={commentText}
           onChange={(e) => setCommentText(e.target.value)}
@@ -92,10 +86,6 @@ const inputWrapper = css({
   display: "flex",
   alignItems: "center",
   gap: "1rem"
-});
-
-const avatarStyle = css({
-  flexShrink: "0"
 });
 
 const textareaStyle = css({

@@ -12,9 +12,14 @@ interface BaseComponentProps {
   children?: React.ReactNode;
 }
 
-interface HallOfFameSectionProps extends BaseComponentProps {}
+interface HallOfFameSectionProps extends BaseComponentProps {
+  username: string;
+}
 
-export function HallOfFameSection({ className }: HallOfFameSectionProps) {
+export function HallOfFameSection({
+  className,
+  username
+}: HallOfFameSectionProps) {
   const { handleApiError } = useErrorHandler();
 
   const {
@@ -27,7 +32,7 @@ export function HallOfFameSection({ className }: HallOfFameSectionProps) {
     isFetchingNextPage,
     handleToggleExpand,
     refetch
-  } = useUserHallOfFame();
+  } = useUserHallOfFame({ username });
 
   const renderContent = () => {
     if (isLoading) {

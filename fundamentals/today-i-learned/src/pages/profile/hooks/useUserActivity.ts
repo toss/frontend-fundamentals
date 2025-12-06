@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
-import { useUserProfile } from "@/api/hooks/useUser";
+import { usePublicUserProfile } from "@/api/hooks/useUser";
 import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { processUserPosts } from "@/utils/postFilters";
@@ -8,8 +8,12 @@ import { CATEGORY_ID } from "@/constants";
 
 type SortFilter = "created" | "lastActivity";
 
-export function useUserActivity() {
-  const { data: userProfile } = useUserProfile();
+interface UseUserActivityOptions {
+  username: string;
+}
+
+export function useUserActivity({ username }: UseUserActivityOptions) {
+  const { data: userProfile } = usePublicUserProfile(username);
   const [sortFilter, setSortFilter] = useState<SortFilter>("created");
 
   const {
@@ -36,12 +40,12 @@ export function useUserActivity() {
   }, [isIntersecting, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   const userPosts = useMemo(() => {
-    if (!userProfile?.login || !data) {
+    if (!data) {
       return [];
     }
 
-    return processUserPosts(data.pages, userProfile.login, sortFilter);
-  }, [data, userProfile?.login, sortFilter]);
+    return processUserPosts(data.pages, username, sortFilter);
+  }, [data, username, sortFilter]);
 
   const handleFilterToggle = () => {
     const newFilter = sortFilter === "created" ? "lastActivity" : "created";

@@ -1,4 +1,4 @@
-import { Avatar } from "@/components/shared/ui/Avatar";
+import { UserAvatar } from "@/components/shared/common/UserAvatar";
 import { css } from "@styled-system/css";
 import { formatTimeAgo } from "@/utils/formatTimeAgo";
 
@@ -13,12 +13,11 @@ interface PostHeaderProps {
 export function PostHeader({ author, createdAt }: PostHeaderProps) {
   return (
     <div className={headerSection}>
-      <Avatar
+      <UserAvatar
+        username={author.login}
+        avatarUrl={author.avatarUrl}
         size="40"
-        src={author.avatarUrl}
-        alt={author.login}
-        fallback={author.login}
-        className={avatarStyles}
+        linkToProfile={true}
       />
       <div className={authorInfoContainer}>
         <h4 className={authorName}>{author.login}</h4>
@@ -36,10 +35,6 @@ const headerSection = css({
   display: "flex",
   alignItems: "center",
   gap: "0.75rem"
-});
-
-const avatarStyles = css({
-  flexShrink: "0"
 });
 
 const authorInfoContainer = css({

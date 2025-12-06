@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useUserProfile } from "@/api/hooks/useUser";
 import { UserDropdown } from "@/components/shared/common/UserDropdown";
+import { UserAvatar } from "@/components/shared/common/UserAvatar";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import { css } from "@styled-system/css";
 
@@ -56,12 +57,6 @@ const chevronIcon = {
   color: "rgb(156, 163, 175)"
 };
 
-const avatarImage = {
-  width: "30px",
-  height: "30px",
-  borderRadius: "9999px"
-};
-
 const profileName = {
   fontSize: "16px",
   fontWeight: "600",
@@ -73,12 +68,6 @@ const chevronIconUser = {
   width: "20px",
   height: "20px",
   color: "rgb(75, 85, 99)"
-};
-
-const fallbackAvatar = {
-  width: "40px",
-  height: "40px",
-  borderRadius: "9999px"
 };
 
 const fallbackName = {
@@ -120,10 +109,11 @@ export function UserProfile() {
           </>
         ) : userProfile ? (
           <>
-            <img
-              src={userProfile.avatar_url}
-              alt={userProfile.name || userProfile.login}
-              className={css(avatarImage)}
+            <UserAvatar
+              username={userProfile.login}
+              avatarUrl={userProfile.avatar_url}
+              size="32"
+              linkToProfile={false}
             />
             <div className={css(profileContent)}>
               <span className={css(profileName)}>
@@ -134,11 +124,7 @@ export function UserProfile() {
           </>
         ) : user ? (
           <>
-            <img
-              src={user.avatar_url}
-              alt={user.login}
-              className={css(fallbackAvatar)}
-            />
+            <UserAvatar user={user} size="40" linkToProfile={false} />
             <div className={css(profileContent)}>
               <span className={css(fallbackName)}>{user.login}</span>
               <ChevronDown className={css(chevronIconUser)} />
