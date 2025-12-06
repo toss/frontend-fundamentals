@@ -84,21 +84,16 @@ export function ProfileInfo({
     >
       <div className={css({ position: "relative" })}>
         {userProfile?.avatar_url ? (
-          <img
-            src={userProfile.avatar_url}
-            alt={`${userProfile.login} avatar`}
-            className={css({
-              width: "100px",
-              height: "100px",
-              borderRadius: "50%",
-              objectFit: "cover"
-            })}
+          <UserAvatar
+            username={userProfile?.login || username}
+            avatarUrl={userProfile?.avatar_url || ""}
+            size="100"
+            linkToProfile={false}
           />
         ) : (
-          <UserAvatar user={userProfile} isLoading={isLoading} />
+          <UserAvatar size="100" isFallback={true} linkToProfile={false} />
         )}
       </div>
-
       <div
         className={css({
           display: "flex",
