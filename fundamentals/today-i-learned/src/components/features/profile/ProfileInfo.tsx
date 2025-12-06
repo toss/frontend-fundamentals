@@ -1,4 +1,4 @@
-import { useUserProfile } from "@/api/hooks/useUser";
+import { usePublicUserProfile } from "@/api/hooks/useUser";
 import { UserAvatar } from "@/components/shared/common/UserAvatar";
 import { css, cx } from "@styled-system/css";
 
@@ -9,13 +9,15 @@ interface BaseComponentProps {
 
 interface ProfileInfoProps extends BaseComponentProps {
   showLoadingSkeleton?: boolean;
+  username: string;
 }
 
 export function ProfileInfo({
   className,
-  showLoadingSkeleton = true
+  showLoadingSkeleton = true,
+  username
 }: ProfileInfoProps) {
-  const { data: userProfile, isLoading } = useUserProfile();
+  const { data: userProfile, isLoading } = usePublicUserProfile(username);
 
   if (isLoading && showLoadingSkeleton) {
     return (

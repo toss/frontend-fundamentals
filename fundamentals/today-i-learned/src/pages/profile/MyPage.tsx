@@ -1,83 +1,62 @@
-import { ProfileHeader } from "./components/ProfileHeader";
-import { HallOfFameSection } from "./components/HallOfFameSection";
-import { ActivitySection } from "./components/ActivitySection";
-import { MonthlyChallenge } from "@/components/features/challenge/MonthlyChallenge";
+import { useAuth } from "@/contexts/AuthContext";
+import { ProfileLayout } from "./components/ProfileLayout";
 import { css } from "@styled-system/css";
 
 export function MyPage() {
-  return (
-    <div className={gridLayout}>
-      <section className={leftContent}>
-        <div className={profileSection}>
-          <ProfileHeader />
-        </div>
+  const { user, isLoading } = useAuth();
 
-        <SectionDivider />
+  if (isLoading) {
+    return (
+      <div className={loadingContainer}>
+        <p className={loadingText}>로딩 중...</p>
+      </div>
+    );
+  }
 
-        <div className={hallOfFameSection}>
-          <HallOfFameSection />
-        </div>
+  if (!user) {
+    return (
+      <div className={errorContainer}>
+        <h2 className={errorTitle}>로그인이 필요합니다</h2>
+        <p className={errorMessage}>프로필을 보려면 로그인해주세요.</p>
+      </div>
+    );
+  }
 
-        <SectionDivider />
-
-        <div className={activitySection}>
-          <ActivitySection />
-        </div>
-      </section>
-
-      <section className={rightContent}>
-        <MonthlyChallenge />
-      </section>
-    </div>
-  );
+  return <ProfileLayout username={user.login} />;
 }
 
-const gridLayout = css({
-  display: "grid",
-  gridTemplateColumns: { base: "1fr", lg: "5fr 3fr" },
+const loadingContainer = css({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
   height: "100%",
-  backgroundColor: "white",
-  overflow: "hidden"
+  backgroundColor: "white"
 });
 
-const leftContent = css({
+const loadingText = css({
+  color: "rgba(0, 0, 0, 0.6)",
+  fontSize: "16px"
+});
+
+const errorContainer = css({
   display: "flex",
   flexDirection: "column",
-  borderLeft: { lg: "1px solid rgba(201, 201, 201, 0.4)" },
-  borderRight: { lg: "1px solid rgba(201, 201, 201, 0.4)" },
+  alignItems: "center",
+  justifyContent: "center",
   height: "100%",
-  overflowY: "auto",
-  scrollbarWidth: "none"
+  backgroundColor: "white",
+  gap: "1rem",
+  padding: "2rem"
 });
 
-const profileSection = css({
-  paddingY: "2rem"
+const errorTitle = css({
+  fontSize: "24px",
+  fontWeight: "bold",
+  color: "#0F0F0F"
 });
 
-const hallOfFameSection = css({
-  padding: "1rem",
-  paddingBottom: "2rem"
-});
-
-const activitySection = css({
-  padding: "1rem",
-  paddingBottom: "2rem"
-});
-
-const rightContent = css({
-  display: { base: "none", lg: "block" },
-  paddingBottom: "2rem",
-  overflowY: "auto",
-  scrollbarWidth: "none"
-});
-
-// Section Divider Component
-function SectionDivider() {
-  return <div className={sectionDividerLine} />;
-}
-
-const sectionDividerLine = css({
-  width: "100%",
-  height: 0,
-  borderBottom: "1px solid rgba(201, 201, 201, 0.4)"
+const errorMessage = css({
+  color: "rgba(0, 0, 0, 0.6)",
+  fontSize: "16px",
+  textAlign: "center"
 });
