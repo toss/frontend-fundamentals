@@ -16,7 +16,10 @@ interface HallOfFameSectionProps extends BaseComponentProps {
   username: string;
 }
 
-export function HallOfFameSection({ className, username }: HallOfFameSectionProps) {
+export function HallOfFameSection({
+  className,
+  username
+}: HallOfFameSectionProps) {
   const { handleApiError } = useErrorHandler();
 
   const {

@@ -5,7 +5,11 @@ import { css } from "@styled-system/css";
 
 export function UserProfilePage() {
   const { username } = useParams<{ username: string }>();
-  const { data: userProfile, isLoading, error } = usePublicUserProfile(username);
+  const {
+    data: userProfile,
+    isLoading,
+    error
+  } = usePublicUserProfile(username);
 
   if (!username) {
     return (

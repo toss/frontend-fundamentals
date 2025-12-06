@@ -124,11 +124,7 @@ export function UserProfile() {
           </>
         ) : user ? (
           <>
-            <UserAvatar
-              user={user}
-              size="40"
-              linkToProfile={false}
-            />
+            <UserAvatar user={user} size="40" linkToProfile={false} />
             <div className={css(profileContent)}>
               <span className={css(fallbackName)}>{user.login}</span>
               <ChevronDown className={css(chevronIconUser)} />
