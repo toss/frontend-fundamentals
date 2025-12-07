@@ -26,8 +26,8 @@ export function calculateStreak(
   let currentStreak = 0;
   let streakStartDate = new Date(today);
 
-  // 오늘부터 거꾸로 가면서 연속 일수 계산
-  for (let i = 0; i >= -30; i--) {
+  // 오늘부터 과거로 거슬러 가면서 연속 일수 계산
+  for (let i = 0; i <= 30; i++) {
     const checkDate = new Date(today);
     checkDate.setDate(today.getDate() - i);
 
@@ -49,9 +49,11 @@ export function calculateStreak(
 
 /**
  * 스프린트 타입을 결정합니다.
+ * 항상 3일 챌린지만 표시합니다.
  */
-export function determineSprintType(streakInfo: StreakInfo): SprintType {
-  return streakInfo.currentStreak >= 3 ? "weekly" : "3-day";
+export function determineSprintType(_streakInfo: StreakInfo): SprintType {
+  // TODO: 추후 월 챌린지 기능 추가 예정
+  return "3-day";
 }
 
 /**
@@ -62,15 +64,23 @@ export function getSprintTitle(type: SprintType, today: Date): string {
     return "3일 챌린지";
   }
 
+  // TODO: 추후 월 챌린지 기능 추가 예정
   const currentMonth = today.getMonth() + 1;
   const weekOfMonth = getWeekOfMonth(today, { locale: ko });
   return `${currentMonth}월 ${weekOfMonth}주차 스프린트`;
 }
 
 /**
- * 스프린트 타입과 streak에 따른 메시지를 생성합니다.
+ * 스프린트 타입과 완료 여부에 따른 메시지를 생성합니다.
  */
-export function getSprintMessage(type: SprintType): string {
+export function getSprintMessage(
+  type: SprintType,
+  isCompleted: boolean
+): string {
+  if (type === "3-day" && isCompleted) {
+    return "축하해요, 3일 챌린지를 완료 했어요!";
+  }
+
   if (type === "weekly") {
     return "매일의 작은 기록이, 성장의 시작이에요";
   }
@@ -135,7 +145,7 @@ function createSprintDays(
   contributions: ContributionData[],
   today: Date
 ): SprintDay[] {
-  return dates.map((date) => {
+  return dates.map((date, index) => {
     const hasContribution = contributions.some((contribution) => {
       const contributionDate = new Date(contribution.createdAt);
       return isSameDay(contributionDate, date);
@@ -148,6 +158,7 @@ function createSprintDays(
       date,
       dayOfWeek: format(date, "EEEE", { locale: ko }),
       dayOfMonth: getDate(date),
+      dayIndex: index + 1,
       hasContribution: isFuture ? false : hasContribution,
       isToday,
       isFuture
@@ -165,7 +176,6 @@ export function createSprintData(
   const streakInfo = calculateStreak(contributions, today);
   const type = determineSprintType(streakInfo);
   const title = getSprintTitle(type, today);
-  const message = getSprintMessage(type);
 
   const dates =
     type === "3-day"
@@ -174,10 +184,17 @@ export function createSprintData(
 
   const days = createSprintDays(dates, contributions, today);
 
+  // 3일 챌린지 완료 여부: 모든 날짜에 기여가 있는지 확인
+  const isCompleted =
+    type === "3-day" && days.every((day) => day.hasContribution);
+
+  const message = getSprintMessage(type, isCompleted);
+
   return {
     type,
     title,
     message,
-    days
+    days,
+    isCompleted
   };
 }
