@@ -9,13 +9,17 @@ interface PostMoreMenuProps {
   onDelete: () => void;
   isLoading?: boolean;
   isDeleteError?: boolean;
+  deleteDialogTitle: string;
+  deleteDialogDescription: string;
 }
 
 export function PostMoreMenu({
   onEdit,
   onDelete,
   isLoading = false,
-  isDeleteError = false
+  isDeleteError = false,
+  deleteDialogTitle,
+  deleteDialogDescription
 }: PostMoreMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -204,7 +208,7 @@ export function PostMoreMenu({
                 color: "#0F0F0F"
               })}
             >
-              글을 삭제하시겠습니까?
+              {deleteDialogTitle}
             </h2>
             <p
               className={css({
@@ -216,7 +220,7 @@ export function PostMoreMenu({
                 textAlign: "center"
               })}
             >
-              댓글과 반응도 함께 삭제됩니다.
+              {deleteDialogDescription}
               <br />
               삭제 후에는 복구할 수 없습니다.
             </p>
