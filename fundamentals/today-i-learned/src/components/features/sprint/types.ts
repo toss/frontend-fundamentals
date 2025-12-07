@@ -2,6 +2,7 @@ export interface SprintDay {
   date: Date;
   dayOfWeek: string;
   dayOfMonth: number;
+  dayIndex: number; // 1일차, 2일차, 3일차 등
   hasContribution: boolean;
   isToday: boolean;
   isFuture?: boolean;
@@ -19,4 +20,5 @@ export interface SprintData {
   title: string;
   message: string;
   days: SprintDay[];
+  isCompleted: boolean;
 }
