@@ -24,28 +24,18 @@ function getCircleText(day: SprintDay): string {
   return `${day.dayIndex}일차`;
 }
 
-/**
- * 원 아래에 표시되는 텍스트 (17일, 18일 등)
- */
-function getLabelText(day: SprintDay): string {
-  return `${day.dayOfMonth}일`;
-}
-
 // 완료된 날 파란색
 const COMPLETED_COLOR = "#67A4FF";
 
 export function SprintDayItem({ day }: SprintDayItemProps) {
   const circleText = getCircleText(day);
-  const labelText = getLabelText(day);
 
-  // 배경색 결정: 기여가 있으면 파란색, 없으면 회색
-  const getCircleBackground = () => {
-    if (day.hasContribution) {
-      return "rgb(227, 238, 255)"; // 완료된 날: 연한 파란색
-    }
-    // 미완료: 오늘은 진한 회색, 나머지는 연한 회색
-    return day.dayIndex === 1 ? "rgba(0, 0, 0, 0.2)" : "rgba(0, 0, 0, 0.1)";
-  };
+  // 배경색 결정: 기여가 있으면 연한 파란색, 없으면 회색
+  const backgroundColor = day.hasContribution
+    ? "rgb(227, 238, 255)"
+    : day.dayIndex === 1
+      ? "rgba(0, 0, 0, 0.2)"
+      : "rgba(0, 0, 0, 0.1)";
 
   // 텍스트 색상: 기여가 있으면 파란색, 없으면 흰색
   const textColor = day.hasContribution ? COMPLETED_COLOR : "#FCFCFC";
@@ -54,17 +44,14 @@ export function SprintDayItem({ day }: SprintDayItemProps) {
 
   return (
     <div className={css(containerStyle)}>
-      <div
-        className={css(circleBaseStyle)}
-        style={{ backgroundColor: getCircleBackground() }}
-      >
+      <div className={css(circleBaseStyle)} style={{ backgroundColor }}>
         <span className={css(dayTextStyle)} style={{ color: textColor }}>
           {circleText}
         </span>
       </div>
 
       <span className={css(labelTextStyle)} style={{ color: labelColor }}>
-        {labelText}
+        {`${day.dayOfMonth}일`}
       </span>
     </div>
   );
