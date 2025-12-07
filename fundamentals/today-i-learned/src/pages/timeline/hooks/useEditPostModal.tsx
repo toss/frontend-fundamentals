@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { X } from "lucide-react";
 import { AlertDialog } from "@/components/shared/ui/AlertDialog";
+import { MarkdownRenderer } from "@/components/shared/ui/MarkdownRenderer";
 import { useUserProfile } from "@/api/hooks/useUser";
 import { useMutation } from "@tanstack/react-query";
-import { css } from "@styled-system/css";
+import { css, cx } from "@styled-system/css";
+
+type EditorMode = "write" | "preview";
 
 const contentWrapper = {
   flex: "1",
@@ -170,6 +173,64 @@ const errorText = {
   fontWeight: "500"
 };
 
+// Tab Styles
+const tabContainer = {
+  display: "flex",
+  gap: "4px",
+  marginBottom: "12px",
+  borderBottom: "1px solid rgba(0, 0, 0, 0.1)",
+  width: "100%"
+};
+
+const tabButton = {
+  padding: "8px 16px",
+  fontSize: "14px",
+  fontWeight: "500",
+  color: "rgba(0, 0, 0, 0.5)",
+  backgroundColor: "transparent",
+  border: "none",
+  borderBottom: "2px solid transparent",
+  cursor: "pointer",
+  transition: "all 0.2s ease",
+  marginBottom: "-1px",
+  _hover: {
+    color: "rgba(0, 0, 0, 0.8)"
+  },
+  _disabled: {
+    opacity: 0.4,
+    cursor: "not-allowed"
+  }
+};
+
+const tabButtonActive = {
+  color: "black",
+  fontWeight: "700",
+  borderBottomColor: "black"
+};
+
+// Preview Styles
+const previewContainer = {
+  flex: "1",
+  marginBottom: "24px",
+  maxHeight: "400px",
+  overflowY: "auto"
+};
+
+const previewTitle = {
+  fontSize: "22px",
+  fontWeight: "700",
+  lineHeight: "130%",
+  color: "rgb(15, 15, 15)",
+  letterSpacing: "-0.4px",
+  marginBottom: "16px"
+};
+
+const previewPlaceholder = {
+  color: "rgba(0, 0, 0, 0.3)",
+  fontSize: "14px",
+  fontStyle: "italic"
+};
+
 interface UseWritePostModalOptions {
   onSubmit?: (title: string, content: string) => void;
   isEdit?: boolean;
@@ -181,12 +242,14 @@ export function useEditPostModal(options: UseWritePostModalOptions = {}) {
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState(options.initialTitle || "");
   const [content, setContent] = useState(options.initialContent || "");
+  const [editorMode, setEditorMode] = useState<EditorMode>("write");
   const { data: userProfile } = useUserProfile();
 
   const openModal = () => {
     // 모달을 열 때 초기값 설정
     setTitle(options.initialTitle || "");
     setContent(options.initialContent || "");
+    setEditorMode("write");
     setIsOpen(true);
   };
 
@@ -232,40 +295,75 @@ export function useEditPostModal(options: UseWritePostModalOptions = {}) {
 
           {/* Content area */}
           <div className={css(contentArea)}>
-            {/* Title */}
-            <div className={css(titleContainer)}>
-              {options.isEdit ? (
-                <input
-                  type="text"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  placeholder="제목을 입력하세요"
-                  className={css(titleInput)}
-                  style={{
-                    fontFamily:
-                      "'Toss Product Sans OTF', ui-sans-serif, system-ui, sans-serif"
-                  }}
-                />
-              ) : (
-                <AlertDialog.Title className={css(dialogTitle)}>
-                  오늘 배운 내용을 기록해 보세요
-                </AlertDialog.Title>
-              )}
+            {/* 작성/미리보기 탭 */}
+            <div className={css(tabContainer)}>
+              <button
+                type="button"
+                className={cx(css(tabButton), editorMode === "write" && css(tabButtonActive))}
+                onClick={() => setEditorMode("write")}
+              >
+                작성
+              </button>
+              <button
+                type="button"
+                className={cx(css(tabButton), editorMode === "preview" && css(tabButtonActive))}
+                onClick={() => setEditorMode("preview")}
+                disabled={!content.trim()}
+              >
+                미리보기
+              </button>
             </div>
 
-            {/* Text area - 본문만 입력 */}
-            <div className={css(contentWrapper)}>
-              <textarea
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-                placeholder="## 오늘 한 일&#10;- [X] 블로그 초안 쓰기&#10;- [ ] 커밋 푸시하기&#10;&#10;오늘 이만큼이나 했어요! 짱이죠?"
-                className={css(textArea)}
-                style={{
-                  fontFamily:
-                    "'Toss Product Sans OTF', ui-sans-serif, system-ui, sans-serif"
-                }}
-              />
-            </div>
+            {editorMode === "write" ? (
+              <>
+                {/* Title */}
+                <div className={css(titleContainer)}>
+                  {options.isEdit ? (
+                    <input
+                      type="text"
+                      value={title}
+                      onChange={(e) => setTitle(e.target.value)}
+                      placeholder="제목을 입력하세요"
+                      className={css(titleInput)}
+                      style={{
+                        fontFamily:
+                          "'Toss Product Sans OTF', ui-sans-serif, system-ui, sans-serif"
+                      }}
+                    />
+                  ) : (
+                    <AlertDialog.Title className={css(dialogTitle)}>
+                      오늘 배운 내용을 기록해 보세요
+                    </AlertDialog.Title>
+                  )}
+                </div>
+
+                {/* Text area - 본문만 입력 */}
+                <div className={css(contentWrapper)}>
+                  <textarea
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                    placeholder="## 오늘 한 일&#10;- [X] 블로그 초안 쓰기&#10;- [ ] 커밋 푸시하기&#10;&#10;오늘 이만큼이나 했어요! 짱이죠?"
+                    className={css(textArea)}
+                    style={{
+                      fontFamily:
+                        "'Toss Product Sans OTF', ui-sans-serif, system-ui, sans-serif"
+                    }}
+                  />
+                </div>
+              </>
+            ) : (
+              /* Preview 모드 */
+              <div className={css(previewContainer)}>
+                {title.trim() && (
+                  <h1 className={css(previewTitle)}>{title}</h1>
+                )}
+                {content.trim() ? (
+                  <MarkdownRenderer content={content} />
+                ) : (
+                  <p className={css(previewPlaceholder)}>미리볼 내용이 없습니다.</p>
+                )}
+              </div>
+            )}
 
             {/* Submit button */}
             <div className={css(submitButtonWrapper)}>
