@@ -14,7 +14,9 @@ import {
   ADD_DISCUSSION_COMMENT_MUTATION,
   ADD_DISCUSSION_COMMENT_REPLY_MUTATION,
   ADD_DISCUSSION_REACTION_MUTATION,
-  REMOVE_DISCUSSION_REACTION_MUTATION
+  REMOVE_DISCUSSION_REACTION_MUTATION,
+  UPDATE_DISCUSSION_COMMENT_MUTATION,
+  DELETE_DISCUSSION_COMMENT_MUTATION
 } from "@/api/graphql/discussions";
 
 export interface GitHubAuthor {
@@ -91,6 +93,17 @@ export interface UpdateDiscussionParams {
 
 export interface DeleteDiscussionParams {
   discussionId: string;
+  accessToken: string;
+}
+
+export interface UpdateDiscussionCommentParams {
+  commentId: string;
+  body: string;
+  accessToken: string;
+}
+
+export interface DeleteDiscussionCommentParams {
+  commentId: string;
   accessToken: string;
 }
 
@@ -644,4 +657,43 @@ export async function searchDiscussions({
       endCursor: searchData?.pageInfo?.endCursor || null
     }
   };
+}
+
+export async function updateDiscussionComment({
+  commentId,
+  body,
+  accessToken
+}: UpdateDiscussionCommentParams): Promise<GitHubComment> {
+  const data = await graphqlRequest(
+    UPDATE_DISCUSSION_COMMENT_MUTATION,
+    { commentId, body },
+    accessToken
+  );
+
+  const comment = data.data?.updateDiscussionComment?.comment;
+
+  if (!comment) {
+    throw new Error("Failed to update comment");
+  }
+
+  return comment;
+}
+
+export async function deleteDiscussionComment({
+  commentId,
+  accessToken
+}: DeleteDiscussionCommentParams): Promise<{ id: string }> {
+  const data = await graphqlRequest(
+    DELETE_DISCUSSION_COMMENT_MUTATION,
+    { id: commentId },
+    accessToken
+  );
+
+  const comment = data.data?.deleteDiscussionComment?.comment;
+
+  if (!comment) {
+    throw new Error("Failed to delete comment");
+  }
+
+  return { id: comment.id };
 }
