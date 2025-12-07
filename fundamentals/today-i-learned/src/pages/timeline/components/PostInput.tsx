@@ -1,14 +1,17 @@
-import { css } from "@styled-system/css";
+import { css, cx } from "@styled-system/css";
 import MDEditor from "@uiw/react-md-editor";
 import * as React from "react";
 import { Avatar } from "@/components/shared/ui/Avatar";
 import { Button } from "@/components/shared/ui/Button";
 import { Input } from "@/components/shared/ui/Input";
+import { MarkdownRenderer } from "@/components/shared/ui/MarkdownRenderer";
 import { useNavigate } from "react-router-dom";
 import { useCreateDiscussion } from "@/api/hooks/useDiscussions";
 import { useErrorHandler } from "@/hooks/useErrorHandler";
 import { useToast } from "@/contexts/ToastContext";
 import { useAuth } from "@/contexts/AuthContext";
+
+type EditorMode = "write" | "preview";
 
 // FIXME: UI 대비 코드가 복잡해서 1:1 매칭이 안된다고 느껴짐 -> 어떻게 하지?
 export function PostWriteSection() {
@@ -22,6 +25,7 @@ export function PostWriteSection() {
   const [title, setTitle] = React.useState("");
   const [content, setContent] = React.useState("");
   const [editorHeight, setEditorHeight] = React.useState(100);
+  const [editorMode, setEditorMode] = React.useState<EditorMode>("write");
 
   // TODO: react-hook-form + zod 사용하기
   return (
@@ -55,46 +59,81 @@ export function PostWriteSection() {
         </div>
 
         <div className={inputFieldsArea}>
-          <Input
-            value={title}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setTitle(e.target.value);
-            }}
-            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-                // Focus the markdown editor when Enter is pressed on title
-                const editorElement = document.querySelector(
-                  "[data-md-editor] .cm-editor"
-                );
-                if (editorElement) {
-                  (editorElement as HTMLElement).focus();
-                }
-              }
-            }}
-            placeholder={"오늘 배운 내용을 기록해 보세요"}
-            className={titleInputStyle}
-          />
-          <div className={editorWrapper} data-color-mode="light">
-            <MDEditor
-              value={content}
-              style={{ boxShadow: "none" }}
-              onChange={(value: string | undefined) => {
-                setContent(value || "");
-                setEditorHeight(calculateEditorHeight(value));
-              }}
-              preview="edit"
-              hideToolbar={true}
-              visibleDragbar={false}
-              defaultTabEnable={true}
-              textareaProps={{
-                placeholder:
-                  "작은 기록이 모여 큰 성장이 됩니다.\nTIL은 Frontend Fundamentals Discussion에 여러분의 GitHub 계정으로 저장돼요.\n하루에 한 줄씩, 함께 성장해봐요.",
-                style: { backgroundColor: "red !important" }
-              }}
-              height={editorHeight}
-            />
+          {/* Write/Preview 탭 토글 - 제목 위에 배치 */}
+          <div className={tabContainer}>
+            <button
+              type="button"
+              className={cx(tabButton, editorMode === "write" && tabButtonActive)}
+              onClick={() => setEditorMode("write")}
+            >
+              작성
+            </button>
+            <button
+              type="button"
+              className={cx(tabButton, editorMode === "preview" && tabButtonActive)}
+              onClick={() => setEditorMode("preview")}
+              disabled={!content.trim()}
+            >
+              미리보기
+            </button>
           </div>
+
+          {/* Write 모드: 제목 입력 + 에디터 */}
+          {editorMode === "write" ? (
+            <>
+              <Input
+                value={title}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setTitle(e.target.value);
+                }}
+                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    const editorElement = document.querySelector(
+                      "[data-md-editor] .cm-editor"
+                    );
+                    if (editorElement) {
+                      (editorElement as HTMLElement).focus();
+                    }
+                  }
+                }}
+                placeholder={"오늘 배운 내용을 기록해 보세요"}
+                className={titleInputStyle}
+              />
+              <div className={editorWrapper} data-color-mode="light">
+                <MDEditor
+                  value={content}
+                  style={{ boxShadow: "none" }}
+                  onChange={(value: string | undefined) => {
+                    setContent(value || "");
+                    setEditorHeight(calculateEditorHeight(value));
+                  }}
+                  preview="edit"
+                  hideToolbar={true}
+                  visibleDragbar={false}
+                  defaultTabEnable={true}
+                  textareaProps={{
+                    placeholder:
+                      "작은 기록이 모여 큰 성장이 됩니다.\nTIL은 Frontend Fundamentals Discussion에 여러분의 GitHub 계정으로 저장돼요.\n하루에 한 줄씩, 함께 성장해봐요.",
+                    style: { backgroundColor: "red !important" }
+                  }}
+                  height={editorHeight}
+                />
+              </div>
+            </>
+          ) : (
+            /* Preview 모드: 제목 + 본문 미리보기 */
+            <div className={previewContainer}>
+              {title.trim() && (
+                <h1 className={previewTitle}>{title}</h1>
+              )}
+              {content.trim() ? (
+                <MarkdownRenderer content={content} />
+              ) : (
+                <p className={previewPlaceholder}>미리볼 내용이 없습니다.</p>
+              )}
+            </div>
+          )}
         </div>
       </div>
 
@@ -234,9 +273,68 @@ const titleInputStyle = css({
   }
 });
 
+// Tab Styles
+const tabContainer = css({
+  display: "flex",
+  gap: "4px",
+  marginBottom: "12px",
+  borderBottom: "1px solid rgba(0, 0, 0, 0.1)",
+  width: "100%"
+});
+
+const tabButton = css({
+  padding: "8px 16px",
+  fontSize: "14px",
+  fontWeight: "500",
+  color: "rgba(0, 0, 0, 0.5)",
+  backgroundColor: "transparent",
+  border: "none",
+  borderBottom: "2px solid transparent",
+  cursor: "pointer",
+  transition: "all 0.2s ease",
+  marginBottom: "-1px",
+  _hover: {
+    color: "rgba(0, 0, 0, 0.8)"
+  },
+  _disabled: {
+    opacity: 0.4,
+    cursor: "not-allowed"
+  }
+});
+
+const tabButtonActive = css({
+  color: "black",
+  fontWeight: "bold",
+  borderBottomColor: "black"
+});
+
 // Editor Styles
 const editorWrapper = css({
   width: "100%"
+});
+
+// Preview Styles
+const previewContainer = css({
+  width: "100%",
+  minHeight: "100px",
+  maxHeight: "400px",
+  overflowY: "auto",
+  padding: "12px 0"
+});
+
+const previewTitle = css({
+  fontSize: "22px",
+  fontWeight: "bold",
+  lineHeight: "130%",
+  color: "black",
+  letterSpacing: "-0.4px",
+  marginBottom: "16px"
+});
+
+const previewPlaceholder = css({
+  color: "rgba(0, 0, 0, 0.3)",
+  fontSize: "14px",
+  fontStyle: "italic"
 });
 
 // Action Area
