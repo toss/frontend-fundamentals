@@ -112,7 +112,10 @@ const getPostListProps = (sortOption: SortOption) => {
       return {
         categoryId: CATEGORY_ID.TODAY_I_LEARNED,
         sortBy: "latest" as const,
-        filterBy: { label: "성지 ⛲" }
+        filterBy: { label: "성지 ⛲" },
+        // GitHub Search API가 discussions 정렬을 지원하지 않아 클라이언트에서 정렬
+        // 한 달 기간 제한 + 100건(API 최대치)으로 데이터를 가져온 후 정렬
+        pageSize: 100
       };
     default:
       return {

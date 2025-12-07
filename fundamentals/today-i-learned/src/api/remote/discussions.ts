@@ -303,8 +303,17 @@ export async function fetchInfiniteDiscussions({
     };
 
     const labelFilter = filterBy?.label ? `label:"${filterBy.label}"` : "";
+
+    // 라벨 필터링 시 한 달 기간 제한 추가 (GitHub Search API가 discussions 정렬을 지원하지 않아 클라이언트 정렬 필요)
+    let dateFilter = "";
+    if (filterBy?.label) {
+      const oneMonthAgo = new Date();
+      oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+      dateFilter = `created:>=${oneMonthAgo.toISOString().split("T")[0]}`;
+    }
+
     const searchQuery =
-      `repo:${owner}/${repo} is:discussion ${labelFilter} ${getSortQuery(sortBy)}`.trim();
+      `repo:${owner}/${repo} is:discussion ${labelFilter} ${dateFilter} ${getSortQuery(sortBy)}`.trim();
 
     const data = await graphqlRequest(
       SEARCH_DISCUSSIONS_QUERY,
@@ -317,9 +326,19 @@ export async function fetchInfiniteDiscussions({
     );
 
     const searchData = data.data?.search;
+    let discussions = searchData?.nodes || [];
+
+    // 라벨 필터링(명예의 전당)일 때만 클라이언트 정렬 수행
+    // GitHub Search API가 discussions 정렬을 지원하지 않음
+    if (filterBy?.label) {
+      discussions = [...discussions].sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
+    }
 
     return {
-      discussions: searchData?.nodes || [],
+      discussions,
       pageInfo: {
         hasNextPage: searchData?.pageInfo?.hasNextPage || false,
         endCursor: searchData?.pageInfo?.endCursor || null
