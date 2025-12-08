@@ -11,7 +11,7 @@ const require = createRequire(import.meta.url);
 export default defineConfig({
   ...sharedConfig,
   title: "Debug Fundamentals",
-  description: "프론트엔드 접근성의 모든 것",
+  description: "프론트엔드 디버깅의 모든 것",
   ignoreDeadLinks: false,
   base: "/debug/",
   lastUpdated: true,
@@ -81,7 +81,10 @@ export default defineConfig({
                     text: "최대한 간단하게 재현하기",
                     link: "/pages/reproduce/simply.md"
                   },
-                  { text: "디버거와 콘솔로그 활용하기", link: "/pages/reproduce/debugger.md" },
+                  {
+                    text: "디버거와 콘솔로그 활용하기",
+                    link: "/pages/reproduce/debugger.md"
+                  },
                   {
                     text: "일반적인 범위에서 벗어난 값 재현하기",
                     link: "/pages/reproduce/out-range.md"
@@ -131,16 +134,17 @@ export default defineConfig({
             text: "디버깅 실무 사례",
             items: [
               {
-                text:"javascript",
-                items:[
+                text: "javascript",
+                items: [
                   {
-                  text: "MAX_SAFE_INTEGER 정밀도 손실",
-                  link: "/pages/contribute/javascript/javascript_max_number_error_debug.md"
-                }]
+                    text: "MAX_SAFE_INTEGER 정밀도 손실",
+                    link: "/pages/contribute/javascript/javascript_max_number_error_debug.md"
+                  }
+                ]
               },
               {
-                text:"react",
-                items:[
+                text: "react",
+                items: [
                   {
                     text: "BroadcastQueryClient SuspenseError",
                     link: "/pages/contribute/react/broadcast_suspense_error_debug.md"
@@ -152,8 +156,8 @@ export default defineConfig({
                 ]
               },
               {
-                text:'ios',
-                items:[
+                text: "ios",
+                items: [
                   {
                     text: "iOS 웹뷰 이미지 업로드 시 페이지가 새로고침 되는 현상",
                     link: "/pages/contribute/ios/ios_webview_image_upload_refresh_debug.md"
@@ -168,26 +172,27 @@ export default defineConfig({
                   }
                 ]
               },
-              {text:'android',
-                items:[
+              {
+                text: "android",
+                items: [
                   {
                     text: "Android에서 React Native 번들 로딩 시 SIGBUS 크래시",
                     link: "/pages/contribute/android/android_react_native_bundle_loading_sigbus_crash_debug.md"
-                  },
+                  }
                 ]
               },
               {
-                text:'public',
-                items:[
+                text: "public",
+                items: [
                   {
                     text: "토스아이디 OG 이미지에 타인의 프로필이 표시되는 현상",
                     link: "/pages/contribute/public/tossid_og_image_other_profile_debug.md"
-                  },
+                  }
                 ]
               },
               {
-                text:'compile',
-                items:[
+                text: "compile",
+                items: [
                   {
                     text: "ESLint/TSC 파싱 콜스택 오버플로우",
                     link: "/pages/contribute/compile/codegen_callstack_overflow_debug.md"
@@ -195,17 +200,17 @@ export default defineConfig({
                 ]
               },
               {
-                text:'yarn',
-                items:[
+                text: "yarn",
+                items: [
                   {
                     text: "Yarn Workspace에서 HMR이 동작하지 않는 현상",
                     link: "/pages/contribute/yarn/yarn_workspace_hmr_debug.md"
-                  },
+                  }
                 ]
               },
               {
-                text:'cursor',
-                items:[
+                text: "cursor",
+                items: [
                   {
                     text: "Cursor에서 Biome 포맷팅이 동작하지 않는 현상",
                     link: "/pages/contribute/cursor/cursor_biome_formatting_debug.md"
@@ -216,7 +221,7 @@ export default defineConfig({
             ]
           }
         ]
-      },
+      }
     }
   },
   markdown: {
