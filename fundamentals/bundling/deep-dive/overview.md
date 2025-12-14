@@ -38,4 +38,4 @@
 
 2. [트리셰이킹](../deep-dive/optimization/tree-shaking): 실제로 사용하지 않는 코드를 분석하고 제거하여 번들 크기를 줄여요.
 
-3. [번들 분석](../deep-dive/optimization/code-splitting): 번들 결과물을 시각적으로 분석하여 어떤 모듈이 용량을 많이 차지하는지 파악하고 개선 방향을 찾아요.
+3. [번들 분석](../deep-dive/optimization/bundle-analyzer): 번들 결과물을 시각적으로 분석하여 어떤 모듈이 용량을 많이 차지하는지 파악하고 개선 방향을 찾아요.
