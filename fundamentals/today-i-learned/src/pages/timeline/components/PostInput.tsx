@@ -53,31 +53,31 @@ export function PostWriteSection() {
         }
       }}
     >
+      {/* Write/Preview 탭 토글 - 글 작성 영역 위에 배치 */}
+      <div className={tabContainer}>
+        <button
+          type="button"
+          className={cx(tabButton, editorMode === "write" && tabButtonActive)}
+          onClick={() => setEditorMode("write")}
+        >
+          작성
+        </button>
+        <button
+          type="button"
+          className={cx(tabButton, editorMode === "preview" && tabButtonActive)}
+          onClick={() => setEditorMode("preview")}
+          disabled={!content.trim()}
+        >
+          미리보기
+        </button>
+      </div>
+
       <div className={inputContentArea}>
         <div className={avatarSection}>
           <UserAvatar />
         </div>
 
         <div className={inputFieldsArea}>
-          {/* Write/Preview 탭 토글 - 제목 위에 배치 */}
-          <div className={tabContainer}>
-            <button
-              type="button"
-              className={cx(tabButton, editorMode === "write" && tabButtonActive)}
-              onClick={() => setEditorMode("write")}
-            >
-              작성
-            </button>
-            <button
-              type="button"
-              className={cx(tabButton, editorMode === "preview" && tabButtonActive)}
-              onClick={() => setEditorMode("preview")}
-              disabled={!content.trim()}
-            >
-              미리보기
-            </button>
-          </div>
-
           {/* Write 모드: 제목 입력 + 에디터 */}
           {editorMode === "write" ? (
             <>
@@ -214,7 +214,7 @@ const postInputContainer = css({
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",
-  gap: "10px",
+  gap: "8px",
   width: "100%",
   marginY: "24px"
 });
@@ -223,8 +223,9 @@ const postInputContainer = css({
 const inputContentArea = css({
   display: "flex",
   flexDirection: "row",
-  gap: "1.5rem",
-  alignSelf: "stretch"
+  gap: "24px",
+  alignSelf: "stretch",
+  paddingY: "16px"
 });
 
 const avatarSection = css({
@@ -277,24 +278,26 @@ const titleInputStyle = css({
 const tabContainer = css({
   display: "flex",
   gap: "4px",
-  marginBottom: "12px",
-  borderBottom: "1px solid rgba(0, 0, 0, 0.1)",
-  width: "100%"
+  padding: "3px",
+  backgroundColor: "rgba(0, 0, 0, 0.05)",
+  borderRadius: "8px",
+  width: "fit-content"
 });
 
 const tabButton = css({
-  padding: "8px 16px",
+  padding: "4px 10px",
   fontSize: "14px",
-  fontWeight: "500",
-  color: "rgba(0, 0, 0, 0.5)",
+  fontWeight: "bold",
+  color: "rgba(0, 0, 0, 0.4)",
   backgroundColor: "transparent",
   border: "none",
-  borderBottom: "2px solid transparent",
+  borderRadius: "6px",
   cursor: "pointer",
   transition: "all 0.2s ease",
-  marginBottom: "-1px",
+  letterSpacing: "-0.4px",
+  lineHeight: "1.6",
   _hover: {
-    color: "rgba(0, 0, 0, 0.8)"
+    color: "rgba(0, 0, 0, 0.6)"
   },
   _disabled: {
     opacity: 0.4,
@@ -303,9 +306,8 @@ const tabButton = css({
 });
 
 const tabButtonActive = css({
-  color: "black",
-  fontWeight: "bold",
-  borderBottomColor: "black"
+  color: "rgba(0, 0, 0, 0.8)",
+  backgroundColor: "#fcfcfc"
 });
 
 // Editor Styles

@@ -174,27 +174,34 @@ const errorText = {
 };
 
 // Tab Styles
+const tabWrapper = {
+  paddingX: "24px",
+  paddingBottom: "24px"
+};
+
 const tabContainer = {
   display: "flex",
   gap: "4px",
-  marginBottom: "12px",
-  borderBottom: "1px solid rgba(0, 0, 0, 0.1)",
-  width: "100%"
+  padding: "3px",
+  backgroundColor: "rgba(0, 0, 0, 0.05)",
+  borderRadius: "8px",
+  width: "fit-content"
 };
 
 const tabButton = {
-  padding: "8px 16px",
+  padding: "4px 10px",
   fontSize: "14px",
-  fontWeight: "500",
-  color: "rgba(0, 0, 0, 0.5)",
+  fontWeight: "700",
+  color: "rgba(0, 0, 0, 0.4)",
   backgroundColor: "transparent",
   border: "none",
-  borderBottom: "2px solid transparent",
+  borderRadius: "6px",
   cursor: "pointer",
   transition: "all 0.2s ease",
-  marginBottom: "-1px",
+  letterSpacing: "-0.4px",
+  lineHeight: "1.6",
   _hover: {
-    color: "rgba(0, 0, 0, 0.8)"
+    color: "rgba(0, 0, 0, 0.6)"
   },
   _disabled: {
     opacity: 0.4,
@@ -203,9 +210,8 @@ const tabButton = {
 };
 
 const tabButtonActive = {
-  color: "black",
-  fontWeight: "700",
-  borderBottomColor: "black"
+  color: "rgba(0, 0, 0, 0.8)",
+  backgroundColor: "#fcfcfc"
 };
 
 // Preview Styles
@@ -279,6 +285,27 @@ export function useEditPostModal(options: UseWritePostModalOptions = {}) {
           </AlertDialog.Cancel>
         </div>
 
+        {/* 작성/미리보기 탭 - 아바타 위에 배치 */}
+        <div className={css(tabWrapper)}>
+          <div className={css(tabContainer)}>
+            <button
+              type="button"
+              className={cx(css(tabButton), editorMode === "write" && css(tabButtonActive))}
+              onClick={() => setEditorMode("write")}
+            >
+              작성
+            </button>
+            <button
+              type="button"
+              className={cx(css(tabButton), editorMode === "preview" && css(tabButtonActive))}
+              onClick={() => setEditorMode("preview")}
+              disabled={!content.trim()}
+            >
+              미리보기
+            </button>
+          </div>
+        </div>
+
         {/* Main content */}
         <div className={css(mainContent)}>
           {/* Profile Avatar */}
@@ -295,25 +322,6 @@ export function useEditPostModal(options: UseWritePostModalOptions = {}) {
 
           {/* Content area */}
           <div className={css(contentArea)}>
-            {/* 작성/미리보기 탭 */}
-            <div className={css(tabContainer)}>
-              <button
-                type="button"
-                className={cx(css(tabButton), editorMode === "write" && css(tabButtonActive))}
-                onClick={() => setEditorMode("write")}
-              >
-                작성
-              </button>
-              <button
-                type="button"
-                className={cx(css(tabButton), editorMode === "preview" && css(tabButtonActive))}
-                onClick={() => setEditorMode("preview")}
-                disabled={!content.trim()}
-              >
-                미리보기
-              </button>
-            </div>
-
             {editorMode === "write" ? (
               <>
                 {/* Title */}
