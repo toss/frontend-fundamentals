@@ -21,6 +21,7 @@ HTML 要素を正しくラップし、適切に配置することがアクセシ
 見た目と実際の動作が一致している必要があります。
 
 - [ボタンの役割と動作を一致させる](./predictability/fake-button.md)
+- [入力要素は&lt &lt;form&gt; で包む](./predictability/form.md)
 
 ## 4. 🌈 視覚情報だけに依存しない
 

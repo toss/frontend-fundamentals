@@ -167,7 +167,7 @@ function sidebar(): DefaultTheme.Sidebar {
         },
         {
           text: "토론하기",
-          link: "/code/dicussions"
+          link: "/code/discussions"
         }
       ]
     }

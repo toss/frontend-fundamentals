@@ -72,7 +72,7 @@
   <div>
     <input id="login-id" name="id" type="text" />
     <!-- 입력값이 있을 때만 보이는 삭제 버튼 -->
-    <button type="button" tabindex="{-1}" aria-label="아이디 입력값 삭제">
+    <button type="button" tabindex="-1" aria-label="아이디 입력값 삭제">
       ❌
     </button>
   </div>
