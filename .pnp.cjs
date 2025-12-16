@@ -31,6 +31,10 @@ const RAW_RUNTIME_STATE =
       "reference": "workspace:fundamentals/debug"\
     },\
     {\
+      "name": "@frontend-fundamentals/debugg",\
+      "reference": "workspace:fundamentals/debugg"\
+    },\
+    {\
       "name": "@frontend-fundamentals/shared",\
       "reference": "workspace:fundamentals/shared"\
     },\
@@ -46,6 +50,7 @@ const RAW_RUNTIME_STATE =
     ["@frontend-fundamentals/bundling", ["workspace:fundamentals/bundling"]],\
     ["@frontend-fundamentals/code-quality", ["workspace:fundamentals/code-quality"]],\
     ["@frontend-fundamentals/debug", ["workspace:fundamentals/debug"]],\
+    ["@frontend-fundamentals/debugg", ["workspace:fundamentals/debugg"]],\
     ["@frontend-fundamentals/shared", ["workspace:fundamentals/shared"]],\
     ["@frontend-fundamentals/today-i-learned", ["workspace:fundamentals/today-i-learned"]],\
     ["frontend-fundamentals", ["workspace:."]]\
@@ -2089,6 +2094,21 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./fundamentals/debug/",\
         "packageDependencies": [\
           ["@frontend-fundamentals/debug", "workspace:fundamentals/debug"],\
+          ["@amplitude/analytics-browser", "npm:2.24.1"],\
+          ["markdown-it-footnote", "npm:4.0.0"],\
+          ["typescript", "patch:typescript@npm%3A5.9.2#optional!builtin<compat/typescript>::version=5.9.2&hash=5786d5"],\
+          ["vitepress", "virtual:8c216222b1c54af74596de40aa0c4810fe1d1325c40a0af73c97f9cabeb3af3b5880f8d7761d3e9ca53e11510ac980848036cc6bd0f80a6d61c9a5de5a9d6805#npm:1.6.4"],\
+          ["vitepress-plugin-tabs", "virtual:88dd596434121ca52e83acf1605e629b5dee0f0009464fe66a58d8dda13a773912568c4269d5ea4c5d64f9e2189898420c180c8e837f6ef7e40dde4d2abef475#npm:0.7.3"],\
+          ["vue", "virtual:88dd596434121ca52e83acf1605e629b5dee0f0009464fe66a58d8dda13a773912568c4269d5ea4c5d64f9e2189898420c180c8e837f6ef7e40dde4d2abef475#npm:3.5.21"]\
+        ],\
+        "linkType": "SOFT"\
+      }]\
+    ]],\
+    ["@frontend-fundamentals/debugg", [\
+      ["workspace:fundamentals/debugg", {\
+        "packageLocation": "./fundamentals/debugg/",\
+        "packageDependencies": [\
+          ["@frontend-fundamentals/debugg", "workspace:fundamentals/debugg"],\
           ["@amplitude/analytics-browser", "npm:2.24.1"],\
           ["markdown-it-footnote", "npm:4.0.0"],\
           ["typescript", "patch:typescript@npm%3A5.9.2#optional!builtin<compat/typescript>::version=5.9.2&hash=5786d5"],\

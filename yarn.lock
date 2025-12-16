@@ -1325,6 +1325,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@frontend-fundamentals/debugg@workspace:fundamentals/debugg":
+  version: 0.0.0-use.local
+  resolution: "@frontend-fundamentals/debugg@workspace:fundamentals/debugg"
+  dependencies:
+    "@amplitude/analytics-browser": "npm:^2.11.11"
+    markdown-it-footnote: "npm:^4.0.0"
+    typescript: "npm:^5.6.3"
+    vitepress: "npm:^1.4.1"
+    vitepress-plugin-tabs: "npm:^0.7.1"
+    vue: "npm:^3.5.0"
+  languageName: unknown
+  linkType: soft
+
 "@frontend-fundamentals/shared@workspace:fundamentals/shared":
   version: 0.0.0-use.local
   resolution: "@frontend-fundamentals/shared@workspace:fundamentals/shared"
