@@ -8,11 +8,11 @@
     <div class="ff-debugg-404__body">
       <div class="ff-debugg-404__row">
         <span class="ff-debugg-404__key">Code:</span>
-        <code class="ff-debugg-404__mono">나는 디버깅 고수</code>
+        <code class="ff-debugg-404__mono">NOT_FOUND</code>
       </div>
       <div class="ff-debugg-404__row">
         <span class="ff-debugg-404__key">ID:</span>
-        <code class="ff-debugg-404__mono">I CAN DO IT</code>
+        <code class="ff-debugg-404__mono">ff-debug</code>
       </div>
     </div>
     <div class="ff-debugg-404__question">
