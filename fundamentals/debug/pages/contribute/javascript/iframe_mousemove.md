@@ -7,6 +7,9 @@
   date="2025.11.21"
 />
 
+## 증상 
+![](../../../images/contribute/javascript/iframe_mousemove/1.gif)
+
 좌측 채팅 리스트 영역은 JSP로, 우측 채팅 입력 영역은 React로 구성되어 있었어요. 원래는 전체 페이지를 React로 통합하고 싶었지만 내부 사정으로 인해 우측 영역만 iframe 형태로 먼저 삽입하게 되었어요. 이후 가운데에 구분 바를 두고 width를 드래그로 조절하는 기능을 구현했는데, 드래그 도중 마우스가 iframe 위로 올라가면 더 이상 크기 조절이 되지 않는 문제가 발생했어요.
 
 즉, mousedown → mousemove → mouseup 흐름에서 mousemove 이벤트가 iframe에 의해 끊겨버리는 상황이었어요.
@@ -84,6 +87,8 @@ stopResizing() {
 }
 ```
 이 방법으로 iframe이 있는 화면에서도 드래그 조절이 정상적으로 동작하게 되었어요.
+
+![](../../../images/contribute/javascript/iframe_mousemove/2.gif)
 
 
 
