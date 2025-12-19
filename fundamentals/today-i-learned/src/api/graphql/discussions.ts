@@ -562,3 +562,64 @@ export const REMOVE_DISCUSSION_REACTION_MUTATION = `
     }
   }
 `;
+
+export const UPDATE_DISCUSSION_COMMENT_MUTATION = `
+  mutation UpdateDiscussionComment($commentId: ID!, $body: String!) {
+    updateDiscussionComment(input: {
+      commentId: $commentId
+      body: $body
+    }) {
+      comment {
+        id
+        body
+        createdAt
+        author {
+          login
+          avatarUrl
+        }
+        reactions(first: 50) {
+          totalCount
+          nodes {
+            content
+            user {
+              login
+            }
+          }
+        }
+        replies(first: 10) {
+          totalCount
+          nodes {
+            id
+            body
+            createdAt
+            author {
+              login
+              avatarUrl
+            }
+            reactions(first: 50) {
+              totalCount
+              nodes {
+                content
+                user {
+                  login
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const DELETE_DISCUSSION_COMMENT_MUTATION = `
+  mutation DeleteDiscussionComment($id: ID!) {
+    deleteDiscussionComment(input: {
+      id: $id
+    }) {
+      comment {
+        id
+      }
+    }
+  }
+`;

@@ -14,7 +14,9 @@ import {
   ADD_DISCUSSION_COMMENT_MUTATION,
   ADD_DISCUSSION_COMMENT_REPLY_MUTATION,
   ADD_DISCUSSION_REACTION_MUTATION,
-  REMOVE_DISCUSSION_REACTION_MUTATION
+  REMOVE_DISCUSSION_REACTION_MUTATION,
+  UPDATE_DISCUSSION_COMMENT_MUTATION,
+  DELETE_DISCUSSION_COMMENT_MUTATION
 } from "@/api/graphql/discussions";
 
 export interface GitHubAuthor {
@@ -91,6 +93,17 @@ export interface UpdateDiscussionParams {
 
 export interface DeleteDiscussionParams {
   discussionId: string;
+  accessToken: string;
+}
+
+export interface UpdateDiscussionCommentParams {
+  commentId: string;
+  body: string;
+  accessToken: string;
+}
+
+export interface DeleteDiscussionCommentParams {
+  commentId: string;
   accessToken: string;
 }
 
@@ -290,8 +303,17 @@ export async function fetchInfiniteDiscussions({
     };
 
     const labelFilter = filterBy?.label ? `label:"${filterBy.label}"` : "";
+
+    // 라벨 필터링 시 한 달 기간 제한 추가 (GitHub Search API가 discussions 정렬을 지원하지 않아 클라이언트 정렬 필요)
+    let dateFilter = "";
+    if (filterBy?.label) {
+      const oneMonthAgo = new Date();
+      oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+      dateFilter = `created:>=${oneMonthAgo.toISOString().split("T")[0]}`;
+    }
+
     const searchQuery =
-      `repo:${owner}/${repo} is:discussion ${labelFilter} ${getSortQuery(sortBy)}`.trim();
+      `repo:${owner}/${repo} is:discussion ${labelFilter} ${dateFilter} ${getSortQuery(sortBy)}`.trim();
 
     const data = await graphqlRequest(
       SEARCH_DISCUSSIONS_QUERY,
@@ -304,9 +326,19 @@ export async function fetchInfiniteDiscussions({
     );
 
     const searchData = data.data?.search;
+    let discussions = searchData?.nodes || [];
+
+    // 라벨 필터링(명예의 전당)일 때만 클라이언트 정렬 수행
+    // GitHub Search API가 discussions 정렬을 지원하지 않음
+    if (filterBy?.label) {
+      discussions = [...discussions].sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
+    }
 
     return {
-      discussions: searchData?.nodes || [],
+      discussions,
       pageInfo: {
         hasNextPage: searchData?.pageInfo?.hasNextPage || false,
         endCursor: searchData?.pageInfo?.endCursor || null
@@ -644,4 +676,43 @@ export async function searchDiscussions({
       endCursor: searchData?.pageInfo?.endCursor || null
     }
   };
+}
+
+export async function updateDiscussionComment({
+  commentId,
+  body,
+  accessToken
+}: UpdateDiscussionCommentParams): Promise<GitHubComment> {
+  const data = await graphqlRequest(
+    UPDATE_DISCUSSION_COMMENT_MUTATION,
+    { commentId, body },
+    accessToken
+  );
+
+  const comment = data.data?.updateDiscussionComment?.comment;
+
+  if (!comment) {
+    throw new Error("Failed to update comment");
+  }
+
+  return comment;
+}
+
+export async function deleteDiscussionComment({
+  commentId,
+  accessToken
+}: DeleteDiscussionCommentParams): Promise<{ id: string }> {
+  const data = await graphqlRequest(
+    DELETE_DISCUSSION_COMMENT_MUTATION,
+    { id: commentId },
+    accessToken
+  );
+
+  const comment = data.data?.deleteDiscussionComment?.comment;
+
+  if (!comment) {
+    throw new Error("Failed to delete comment");
+  }
+
+  return { id: comment.id };
 }

@@ -118,6 +118,9 @@
     --vp-c-brand-darker: #454ce1;
     --vp-c-brand-dimm: rgba(100, 108, 255, 0.08);
 
+    /* 네비게이션 높이 */
+    --vp-nav-height: 64px;
+
     /* 타이포그래피 */
     --vp-font-family-base:
       "Toss Product Sans", ui-sans-serif, system-ui, sans-serif;

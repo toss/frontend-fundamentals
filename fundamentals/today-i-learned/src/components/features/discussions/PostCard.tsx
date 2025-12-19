@@ -107,6 +107,8 @@ export function PostCard({
                 onDelete={() => handleDelete(discussion)}
                 isLoading={isUpdating || isDeleting}
                 isDeleteError={isDeleteError}
+                deleteDialogTitle="글을 삭제하시겠습니까?"
+                deleteDialogDescription="댓글과 반응도 함께 삭제됩니다."
               />
             </div>
           )}

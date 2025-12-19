@@ -47,7 +47,7 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  color: var(--vp-c-text-2);
+  color: rgb(60, 60, 67);
   transition: color 0.2s;
   background: none;
   border: none;
@@ -62,10 +62,6 @@
 
 .nav-item:hover .nav-button {
   color: var(--vp-c-text-1);
-}
-
-.nav-item.active .nav-button {
-  color: var(--vp-c-brand);
 }
 
 .nav-item.active::before {
