@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Avatar } from "@/components/shared/ui/Avatar";
+import { UserAvatar } from "@/components/shared/common/UserAvatar";
 import { useWeeklyTopDiscussions } from "@/api/hooks/useDiscussions";
 import { css } from "@styled-system/css";
 
@@ -70,12 +70,11 @@ function PopularPostItem({ post, rank }: { post: any; rank: number }) {
 
       <button type="button" onClick={handleClick} className={postButton}>
         <div className={authorSection}>
-          <Avatar
+          <UserAvatar
+            username={post.author.login}
+            avatarUrl={post.author.avatarUrl}
             size="20"
-            src={post.author.avatarUrl}
-            alt={post.author.login}
-            fallback={post.author.login}
-            className={avatarStyle}
+            linkToProfile={true}
           />
           <span className={authorName}>{post.author.login}</span>
         </div>
@@ -170,10 +169,6 @@ const authorSection = css({
   alignItems: "center",
   gap: "0.375rem",
   marginBottom: "1rem"
-});
-
-const avatarStyle = css({
-  flexShrink: 0
 });
 
 const authorName = css({

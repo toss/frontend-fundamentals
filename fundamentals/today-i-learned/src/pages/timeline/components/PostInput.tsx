@@ -1,7 +1,7 @@
 import { css, cx } from "@styled-system/css";
 import MDEditor from "@uiw/react-md-editor";
 import * as React from "react";
-import { Avatar } from "@/components/shared/ui/Avatar";
+import { UserAvatar } from "@/components/shared/common/UserAvatar";
 import { Button } from "@/components/shared/ui/Button";
 import { Input } from "@/components/shared/ui/Input";
 import { MarkdownRenderer } from "@/components/shared/ui/MarkdownRenderer";
@@ -16,6 +16,7 @@ type EditorMode = "write" | "preview";
 // FIXME: UI 대비 코드가 복잡해서 1:1 매칭이 안된다고 느껴짐 -> 어떻게 하지?
 export function PostWriteSection() {
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const createPostMutation = useCreateDiscussion();
   const { handleApiError } = useErrorHandler();
@@ -74,7 +75,8 @@ export function PostWriteSection() {
 
       <div className={inputContentArea}>
         <div className={avatarSection}>
-          <UserAvatar />
+          {/* NOTE: 상위 컴포넌트에서 authenticate를 검증한 상태만 들어오지만 현재는 auth 상태를 타입으로 검증할 수 없음. 개선 필요함. */}
+          {user && <UserAvatar user={user} size="60" linkToProfile={false} />}
         </div>
 
         <div className={inputFieldsArea}>
@@ -160,24 +162,6 @@ export function PostWriteSection() {
   );
 }
 
-const UserAvatar = () => {
-  const { user } = useAuth();
-
-  if (!user) {
-    // FIXME: 유저 정보가 없을 때의 처리 필요
-    return null;
-  }
-  return (
-    <Avatar
-      size="60"
-      src={user.avatar_url}
-      alt={user.login}
-      fallback={user.login}
-      className={avatarStyle}
-    />
-  );
-};
-
 const DEFAULT_CONFIG = {
   minHeight: 100,
   maxHeight: 400,
@@ -234,13 +218,6 @@ const avatarSection = css({
   alignItems: "flex-start",
   gap: "10px",
   width: "60px"
-});
-
-const avatarStyle = css({
-  flexShrink: 0,
-  width: "60px",
-  height: "60px",
-  borderRadius: "150px"
 });
 
 const inputFieldsArea = css({

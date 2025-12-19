@@ -75,7 +75,7 @@
   <div>
     <input id="login-id" name="id" type="text" />
     <!-- 入力値があるときだけ表示される削除ボタン -->
-    <button type="button" tabindex="{-1}" aria-label="ID の入力値を削除">
+    <button type="button" tabindex="-1" aria-label="ID の入力値を削除">
       ❌
     </button>
   </div>

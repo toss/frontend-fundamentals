@@ -1,5 +1,5 @@
 import { ChevronUp, MessageCircle, Heart } from "lucide-react";
-import { Avatar } from "@/components/shared/ui/Avatar";
+import { UserAvatar } from "@/components/shared/common/UserAvatar";
 import { MarkdownRenderer } from "@/components/shared/ui/MarkdownRenderer";
 import { CommentInput } from "./CommentInput";
 import { PostMoreMenu } from "@/components/features/discussions/PostMoreMenu";
@@ -139,12 +139,11 @@ export function Comment({ comment, discussionId, depth = 0 }: CommentProps) {
         {/* 헤더: 프로필 + 더보기 메뉴 */}
         <div className={styles.header}>
           <div className={styles.profileInfo}>
-            <Avatar
+            <UserAvatar
               size="40"
-              src={comment.author.avatarUrl || "/api/placeholder/40/40"}
-              alt={comment.author.login}
-              fallback={comment.author.login}
-              className={styles.avatar}
+              username={comment.author.login}
+              avatarUrl={comment.author.avatarUrl}
+              linkToProfile={true}
             />
             <div className={styles.userInfo}>
               <span className={styles.userName}>{comment.author.login}</span>

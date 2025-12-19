@@ -1,4 +1,4 @@
-import { Avatar } from "@/components/shared/ui/Avatar";
+import { UserAvatar } from "@/components/shared/common/UserAvatar";
 import { css } from "@styled-system/css";
 import { formatTimeAgo } from "@/utils/formatTimeAgo";
 import { PostMoreMenu } from "../PostMoreMenu";
@@ -37,10 +37,10 @@ export function PostHeader({
 
   const { openModal, EditPostModal } = useEditPostModal({
     onSubmit: async (title, content) => {
-      await handleEdit(
-        { id: discussionId, author } as any,
-        { title, body: content }
-      );
+      await handleEdit({ id: discussionId, author } as any, {
+        title,
+        body: content
+      });
     },
     isEdit: true,
     initialTitle: discussionTitle,
@@ -53,12 +53,11 @@ export function PostHeader({
     <>
       <div className={headerSection}>
         <div className={authorSection}>
-          <Avatar
+          <UserAvatar
             size="40"
-            src={author.avatarUrl}
-            alt={author.login}
-            fallback={author.login}
-            className={avatarStyles}
+            username={author.login}
+            avatarUrl={author.avatarUrl}
+            linkToProfile={true}
           />
           <div className={authorInfoContainer}>
             <h4 className={authorName}>{author.login}</h4>
@@ -73,9 +72,7 @@ export function PostHeader({
         {isOwnPost && (
           <PostMoreMenu
             onEdit={openModal}
-            onDelete={() =>
-              handleDelete({ id: discussionId, author } as any)
-            }
+            onDelete={() => handleDelete({ id: discussionId, author } as any)}
             isLoading={isUpdating || isDeleting}
             isDeleteError={isDeleteError}
             deleteDialogTitle="글을 삭제하시겠습니까?"
@@ -98,10 +95,6 @@ const authorSection = css({
   display: "flex",
   alignItems: "center",
   gap: "0.75rem"
-});
-
-const avatarStyles = css({
-  flexShrink: "0"
 });
 
 const authorInfoContainer = css({
