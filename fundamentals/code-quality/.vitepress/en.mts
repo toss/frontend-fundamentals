@@ -86,6 +86,10 @@ function sidebar(): DefaultTheme.Sidebar {
                 {
                   text: "B. Simplifying Ternary Operators",
                   link: "/en/code/examples/ternary-operator"
+                },
+                {
+                  text: "C. Reading from Left to Right",
+                  link: "/en/code/examples/comparison-order"
                 }
               ],
               collapsed: true

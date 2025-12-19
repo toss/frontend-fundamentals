@@ -104,6 +104,10 @@ function sidebar(): DefaultTheme.Sidebar {
                 {
                   text: "B. 三項演算子をシンプルにする",
                   link: "/ja/code/examples/ternary-operator"
+                },
+                {
+                  text: "C. 左から右へ読めるようにする",
+                  link: "/ja/code/examples/comparison-order"
                 }
               ],
               collapsed: true
