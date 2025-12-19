@@ -4,18 +4,19 @@ import Comments from "./components/Comments.vue";
 import OneNavigation from "@shared/components/OneNavigation.vue";
 import { useLocale } from "./hooks";
 import { onMounted } from "vue";
-import { useRoute } from "vitepress";
+import { useRoute, useRouter } from "vitepress";
 
 const { Layout } = DefaultTheme;
 const { isKorean } = useLocale();
 const route = useRoute();
+const router = useRouter();
 
 onMounted(() => {
   document.addEventListener("click", (e) => {
     const target = e.target as HTMLElement;
     const link = target.closest('a[href^="/a11y/"]');
 
-    if (link?.classList.value === "VPLink link") {
+    if (link?.classList.value.startsWith("VPLink link")) {
       e.preventDefault();
 
       const href = link.getAttribute("href");
@@ -30,7 +31,10 @@ onMounted(() => {
           ? `/a11y/${pathWithoutLang}`
           : `/a11y/${targetLang}/${pathWithoutLang}`;
 
-      window.location.href = newPath;
+      // VitePress needs time to clear its internal 404 state before routing to the new path
+      setTimeout(() => {
+        router.go(newPath);
+      }, 100);
     }
   });
 });
