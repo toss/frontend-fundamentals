@@ -1,6 +1,6 @@
 import { Heart, MessageCircle, ArrowUp } from "lucide-react";
 import { useState, useCallback, useEffect } from "react";
-import { Avatar } from "@/components/shared/ui/Avatar";
+import { UserAvatar } from "@/components/shared/common/UserAvatar";
 import { ReactionTooltip } from "@/components/shared/ui/ReactionTooltip";
 import { ShareLinkButton } from "@/components/shared/ShareLinkButton";
 import { formatNumber } from "@/pages/timeline/utils/formatters";
@@ -277,10 +277,11 @@ export function InteractionButtons({
                     className={css(avatarItem)}
                     style={{ marginLeft: index > 0 ? "-8px" : "0" }}
                   >
-                    <Avatar
-                      src={`https://github.com/${reaction.user.login}.png`}
-                      alt={reaction.user.login}
+                    <UserAvatar
+                      username={reaction.user.login}
+                      avatarUrl={`https://github.com/${reaction.user.login}.png`}
                       size="20"
+                      linkToProfile={true}
                     />
                   </div>
                 ))}
@@ -347,10 +348,11 @@ export function InteractionButtons({
                     className={css(avatarItem)}
                     style={{ marginLeft: index > 0 ? "-8px" : "0" }}
                   >
-                    <Avatar
-                      src={`https://github.com/${reaction.user.login}.png`}
-                      alt={reaction.user.login}
+                    <UserAvatar
+                      username={reaction.user.login}
+                      avatarUrl={`https://github.com/${reaction.user.login}.png`}
                       size="20"
+                      linkToProfile={true}
                     />
                   </div>
                 ))}
@@ -398,13 +400,14 @@ export function InteractionButtons({
               discussion.comments.nodes.length > 0 ? (
                 <>
                   <div className={css(commentAvatar)}>
-                    <Avatar
-                      src={
+                    <UserAvatar
+                      username={discussion.comments.nodes[0].author.login}
+                      avatarUrl={
                         discussion.comments.nodes[0].author.avatarUrl ||
                         `https://github.com/${discussion.comments.nodes[0].author.login}.png`
                       }
-                      alt={discussion.comments.nodes[0].author.login}
                       size="20"
+                      linkToProfile={true}
                     />
                   </div>
                   <span className={css(commentText)}>

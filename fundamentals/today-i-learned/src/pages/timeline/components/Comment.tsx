@@ -1,5 +1,5 @@
 import { ChevronUp, MessageCircle, Heart } from "lucide-react";
-import { Avatar } from "@/components/shared/ui/Avatar";
+import { UserAvatar } from "@/components/shared/common/UserAvatar";
 import { MarkdownRenderer } from "@/components/shared/ui/MarkdownRenderer";
 import { CommentInput } from "./CommentInput";
 import type { GitHubComment } from "@/api/remote/discussions";
@@ -44,11 +44,11 @@ function CommentHeader({ comment }: { comment: CommentProps["comment"] }) {
     <div className={headerContainer}>
       {/* Profile Info */}
       <div className={profileInfoContainer}>
-        <Avatar
+        <UserAvatar
+          username={comment.author.login}
+          avatarUrl={comment.author.avatarUrl}
           size="40"
-          src={comment.author.avatarUrl || "/api/placeholder/40/40"}
-          alt={comment.author.login}
-          fallback={comment.author.login}
+          linkToProfile={true}
           className={avatarStyle}
         />
         <div className={userInfoContainer}>

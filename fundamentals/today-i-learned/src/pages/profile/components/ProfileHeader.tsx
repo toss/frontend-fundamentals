@@ -5,12 +5,14 @@ interface BaseComponentProps {
   children?: React.ReactNode;
 }
 
-interface ProfileHeaderProps extends BaseComponentProps {}
+interface ProfileHeaderProps extends BaseComponentProps {
+  username: string;
+}
 
-export function ProfileHeader({ className }: ProfileHeaderProps) {
+export function ProfileHeader({ className, username }: ProfileHeaderProps) {
   return (
     <div className={cx(profileHeaderContainer, className)}>
-      <ProfileInfo />
+      <ProfileInfo username={username} />
     </div>
   );
 }

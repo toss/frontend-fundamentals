@@ -1,4 +1,4 @@
-import { useUserProfile } from "@/api/hooks/useUser";
+import { usePublicUserProfile } from "@/api/hooks/useUser";
 import { UserAvatar } from "@/components/shared/common/UserAvatar";
 import { css, cx } from "@styled-system/css";
 
@@ -9,13 +9,15 @@ interface BaseComponentProps {
 
 interface ProfileInfoProps extends BaseComponentProps {
   showLoadingSkeleton?: boolean;
+  username: string;
 }
 
 export function ProfileInfo({
   className,
-  showLoadingSkeleton = true
+  showLoadingSkeleton = true,
+  username
 }: ProfileInfoProps) {
-  const { data: userProfile, isLoading } = useUserProfile();
+  const { data: userProfile, isLoading } = usePublicUserProfile(username);
 
   if (isLoading && showLoadingSkeleton) {
     return (
@@ -82,21 +84,16 @@ export function ProfileInfo({
     >
       <div className={css({ position: "relative" })}>
         {userProfile?.avatar_url ? (
-          <img
-            src={userProfile.avatar_url}
-            alt={`${userProfile.login} avatar`}
-            className={css({
-              width: "100px",
-              height: "100px",
-              borderRadius: "50%",
-              objectFit: "cover"
-            })}
+          <UserAvatar
+            username={userProfile?.login || username}
+            avatarUrl={userProfile?.avatar_url || ""}
+            size="100"
+            linkToProfile={false}
           />
         ) : (
-          <UserAvatar user={userProfile} isLoading={isLoading} />
+          <UserAvatar size="100" isFallback={true} linkToProfile={false} />
         )}
       </div>
-
       <div
         className={css({
           display: "flex",
