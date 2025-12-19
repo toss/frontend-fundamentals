@@ -70,14 +70,20 @@ export function useEditCommentModal(options: UseEditCommentModalOptions = {}) {
             <div className={css(tabContainer)}>
               <button
                 type="button"
-                className={cx(css(tabButton), editorMode === "write" && css(tabButtonActive))}
+                className={cx(
+                  css(tabButton),
+                  editorMode === "write" && css(tabButtonActive)
+                )}
                 onClick={() => setEditorMode("write")}
               >
                 작성
               </button>
               <button
                 type="button"
-                className={cx(css(tabButton), editorMode === "preview" && css(tabButtonActive))}
+                className={cx(
+                  css(tabButton),
+                  editorMode === "preview" && css(tabButtonActive)
+                )}
                 onClick={() => setEditorMode("preview")}
                 disabled={!content.trim()}
               >
@@ -105,7 +111,9 @@ export function useEditCommentModal(options: UseEditCommentModalOptions = {}) {
                 {content.trim() ? (
                   <MarkdownRenderer content={content} />
                 ) : (
-                  <p className={css(previewPlaceholder)}>미리볼 내용이 없습니다.</p>
+                  <p className={css(previewPlaceholder)}>
+                    미리볼 내용이 없습니다.
+                  </p>
                 )}
               </div>
             )}

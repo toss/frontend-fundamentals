@@ -126,9 +126,7 @@ export function PostWriteSection() {
           ) : (
             /* Preview 모드: 제목 + 본문 미리보기 */
             <div className={previewContainer}>
-              {title.trim() && (
-                <h1 className={previewTitle}>{title}</h1>
-              )}
+              {title.trim() && <h1 className={previewTitle}>{title}</h1>}
               {content.trim() ? (
                 <MarkdownRenderer content={content} />
               ) : (

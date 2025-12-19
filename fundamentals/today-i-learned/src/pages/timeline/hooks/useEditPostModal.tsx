@@ -290,14 +290,20 @@ export function useEditPostModal(options: UseWritePostModalOptions = {}) {
           <div className={css(tabContainer)}>
             <button
               type="button"
-              className={cx(css(tabButton), editorMode === "write" && css(tabButtonActive))}
+              className={cx(
+                css(tabButton),
+                editorMode === "write" && css(tabButtonActive)
+              )}
               onClick={() => setEditorMode("write")}
             >
               작성
             </button>
             <button
               type="button"
-              className={cx(css(tabButton), editorMode === "preview" && css(tabButtonActive))}
+              className={cx(
+                css(tabButton),
+                editorMode === "preview" && css(tabButtonActive)
+              )}
               onClick={() => setEditorMode("preview")}
               disabled={!content.trim()}
             >
@@ -362,13 +368,13 @@ export function useEditPostModal(options: UseWritePostModalOptions = {}) {
             ) : (
               /* Preview 모드 */
               <div className={css(previewContainer)}>
-                {title.trim() && (
-                  <h1 className={css(previewTitle)}>{title}</h1>
-                )}
+                {title.trim() && <h1 className={css(previewTitle)}>{title}</h1>}
                 {content.trim() ? (
                   <MarkdownRenderer content={content} />
                 ) : (
-                  <p className={css(previewPlaceholder)}>미리볼 내용이 없습니다.</p>
+                  <p className={css(previewPlaceholder)}>
+                    미리볼 내용이 없습니다.
+                  </p>
                 )}
               </div>
             )}

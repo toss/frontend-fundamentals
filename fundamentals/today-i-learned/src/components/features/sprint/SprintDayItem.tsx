@@ -40,7 +40,9 @@ export function SprintDayItem({ day }: SprintDayItemProps) {
   // 텍스트 색상: 기여가 있으면 파란색, 없으면 흰색
   const textColor = day.hasContribution ? COMPLETED_COLOR : "#FCFCFC";
   // 라벨 색상: 기여가 있으면 파란색, 없으면 회색
-  const labelColor = day.hasContribution ? COMPLETED_COLOR : "rgba(0, 0, 0, 0.2)";
+  const labelColor = day.hasContribution
+    ? COMPLETED_COLOR
+    : "rgba(0, 0, 0, 0.2)";
 
   return (
     <div className={css(containerStyle)}>
