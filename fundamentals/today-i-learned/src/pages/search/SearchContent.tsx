@@ -1,6 +1,6 @@
 import { useSearchDiscussions } from "@/api/hooks/useSearchDiscussions";
 import { Search } from "lucide-react";
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import {
   PostCard,
@@ -37,6 +37,14 @@ export function SearchContent({ query }: SearchContentProps) {
     onIntersect: handleLoadMore,
     rootMargin: "300px"
   });
+
+  const resultsWrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (resultsWrapperRef.current) {
+      resultsWrapperRef.current.scrollTo({ top: 0 });
+    }
+  }, [query]);
 
   if (!query) {
     return (
@@ -96,7 +104,7 @@ export function SearchContent({ query }: SearchContentProps) {
         <span className={resultCount}>({discussions.length}개)</span>
       </h1>
 
-      <div className={resultsWrapper}>
+      <div className={resultsWrapper} ref={resultsWrapperRef}>
         {discussions.map((discussion, index) => (
           <div
             key={discussion.id}
@@ -177,7 +185,18 @@ const resultCount = css({
 });
 
 const resultsWrapper = css({
-  width: "100%"
+  width: "100%",
+  height: "100vh",
+  overflowY: "auto",
+  // 1024px 이하 하단 nav바 높이 고려
+  paddingBottom: "240px",
+  lg: {
+    paddingBottom: "180px"
+  },
+  scrollbarWidth: "none",
+  "&::-webkit-scrollbar": {
+    display: "none"
+  }
 });
 
 const skeletonWithMargin = css({
