@@ -102,6 +102,10 @@ function sidebar(): DefaultTheme.Sidebar {
                 {
                   text: "C. 왼쪽에서 오른쪽으로 읽히게 하기",
                   link: "/code/examples/comparison-order"
+                },
+                {
+                  text: "D. 부정 조건문 피하기",
+                  link: "/code/examples/avoid-negative-conditionals"
                 }
               ],
               collapsed: true

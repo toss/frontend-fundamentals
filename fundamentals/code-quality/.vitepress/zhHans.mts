@@ -102,6 +102,10 @@ function sidebar(): DefaultTheme.Sidebar {
                 {
                   text: "C. 从左到右阅读",
                   link: "/zh-hans/code/examples/comparison-order"
+                },
+                {
+                  text: "D. 避免否定条件",
+                  link: "/zh-hans/code/examples/avoid-negative-conditionals"
                 }
               ],
               collapsed: true
