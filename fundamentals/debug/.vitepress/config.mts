@@ -255,7 +255,6 @@ export default defineConfig({
                   {
                     text:"Radix UI Dialog 내 Select 컴포넌트 ESC 키 충돌 버그 사례",
                     link: "/pages/contribute/package/radix_ui_dialog_select_esc.md"
-                 
                   }
                 ]
               },
