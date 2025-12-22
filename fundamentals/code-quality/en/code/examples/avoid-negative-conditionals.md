@@ -229,4 +229,3 @@ if (user.enabled) {
   // "Is enabled" - immediately understood
 }
 ```
-
