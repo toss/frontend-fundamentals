@@ -27,6 +27,7 @@ Readable code has fewer contexts for the reader to consider at once and flows na
 - **Reading from Top to Bottom**
   - [Reduce context switching](./examples/user-policy.md)
   - [Simplify ternary operators](./examples/ternary-operator.md)
+  - [Reading from Left to Right](./examples/comparison-order.md)
 
 ## 2. Predictability
 

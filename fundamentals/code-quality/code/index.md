@@ -27,6 +27,7 @@ comments: false
 - **위에서 아래로 읽히게 하기**
   - [시점 이동 줄이기](./examples/user-policy.md)
   - [삼항 연산자 단순하게 하기](./examples/ternary-operator.md)
+  - [왼쪽에서 오른쪽으로 읽히게 하기](./examples/comparison-order.md)
 
 ## 2. 예측 가능성
 
