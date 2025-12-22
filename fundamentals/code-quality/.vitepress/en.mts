@@ -6,6 +6,7 @@ export const en = defineConfig({
   description: "A guide for easily modifiable frontend code",
   lastUpdated: true,
   themeConfig: {
+    logo: "/images/ff-symbol.svg",
     nav: nav(),
     editLink: {
       pattern:
