@@ -106,7 +106,7 @@ export default [
 
 인터랙티브 요소(입력 필드, 버튼, 선택 상자 등)에는 반드시 사용자에게 그 목적을 명확히 알려주는 이름이 필요해요. 이름이 없거나 불명확한 요소는 스크린 리더 사용자나 음성 지원 사용자에게 큰 불편을 줄 수 있어요. 자세한 내용은 [인터랙티브 요소에 이름 넣기](../semantic/required-label) 문서에서 확인해 보세요.
 
-`eslint-plugin-jsx-ally` 의 recommended 룰에 기본적으로 비활성화되어 있으니, 다음과 같이 `rules` 에 직접 추가해서 활성화 해줘야 해요.
+`eslint-plugin-jsx-a11y` 의 recommended 룰에 기본적으로 비활성화되어 있으니, 다음과 같이 `rules` 에 직접 추가해서 활성화 해줘야 해요.
 
 :::tabs key:bundler-object-entry
 == flat config
