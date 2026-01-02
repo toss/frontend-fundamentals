@@ -282,6 +282,7 @@ export default defineConfig({
     }
   },
   head: [
+    ...(sharedConfig.head ?? []),
     [
       "link",
       {
