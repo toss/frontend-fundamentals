@@ -11,8 +11,8 @@ When double negatives are used, it becomes even harder to understand the code's 
 
 The following code is a component that displays a purchase button based on product stock status.
 
-```tsx
-function CheckoutButton({ product }: { product: Product }) {
+```jsx
+function CheckoutButton({ product }) {
   const isOutOfStock = product.stock === 0;
 
   if (!isOutOfStock) {

@@ -11,8 +11,8 @@
 
 次のコードは、商品の在庫状態に応じて購入ボタンを表示するコンポーネントです。
 
-```tsx
-function CheckoutButton({ product }: { product: Product }) {
+```jsx
+function CheckoutButton({ product }) {
   const isOutOfStock = product.stock === 0;
 
   if (!isOutOfStock) {

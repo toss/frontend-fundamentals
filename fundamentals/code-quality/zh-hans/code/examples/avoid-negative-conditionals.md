@@ -11,8 +11,8 @@
 
 以下代码是根据商品库存状态显示购买按钮的组件。
 
-```tsx
-function CheckoutButton({ product }: { product: Product }) {
+```jsx
+function CheckoutButton({ product }) {
   const isOutOfStock = product.stock === 0;
 
   if (!isOutOfStock) {

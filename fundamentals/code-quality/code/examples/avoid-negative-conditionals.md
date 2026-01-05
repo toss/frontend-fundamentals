@@ -11,8 +11,8 @@
 
 다음 코드는 상품의 재고 상태에 따라 구매 버튼을 표시하는 컴포넌트예요.
 
-```tsx
-function CheckoutButton({ product }: { product: Product }) {
+```jsx
+function CheckoutButton({ product }) {
   const isOutOfStock = product.stock === 0;
 
   if (!isOutOfStock) {
