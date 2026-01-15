@@ -1,8 +1,11 @@
 import { css } from "@styled-system/css";
 import { Outlet, ScrollRestoration } from "react-router-dom";
 import { LayoutNavigation } from "./LayoutNavigation";
+import { useScrollTop } from "@/hooks/useScrollTop";
 
 export const RootLayout = () => {
+  useScrollTop();
+
   return (
     <div className={layoutContainer}>
       <LayoutNavigation />
