@@ -11,7 +11,7 @@ interface ProfileLayoutProps {
 export function ProfileLayout({ username }: ProfileLayoutProps) {
   return (
     <div className={gridLayout}>
-      <section className={leftContent}>
+      <section className={leftContent} data-scroll-container>
         <div className={profileSection}>
           <ProfileHeader username={username} />
         </div>
