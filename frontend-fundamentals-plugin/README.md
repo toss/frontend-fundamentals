@@ -13,11 +13,22 @@
 
 ## 📦 Installation
 
+### From GitHub (Recommended)
+
+**Step 1:** Add the marketplace
 ```bash
-claude plugin add https://github.com/toss/frontend-fundamentals
+/plugin marketplace add toss/frontend-fundamentals
 ```
 
-Or clone manually:
+**Step 2:** Install the plugin
+```bash
+/plugin install frontend-fundamentals@toss-frontend-fundamentals
+```
+
+Or use the interactive UI: run `/plugin`, go to **Discover** tab, and select the plugin.
+
+### From Local Clone
+
 ```bash
 git clone https://github.com/toss/frontend-fundamentals.git
 claude --plugin ./frontend-fundamentals/frontend-fundamentals-plugin
@@ -28,7 +39,7 @@ claude --plugin ./frontend-fundamentals/frontend-fundamentals-plugin
 ### Review After Coding
 
 ```
-/review
+/frontend-fundamentals:review
 ```
 
 Reviews your branch diff against `main` and outputs findings as Critical / Warnings / Suggestions.
@@ -38,7 +49,7 @@ Reviews your branch diff against `main` and outputs findings as Critical / Warni
 Ask Claude to keep improving until the review passes:
 
 ```
-Review my code with /review and fix any issues found.
+Review my code with /frontend-fundamentals:review and fix any issues found.
 Repeat until no critical issues remain.
 ```
 
@@ -47,7 +58,7 @@ This creates a feedback loop: review → fix → re-review → repeat until clea
 ### Review Specific Files
 
 ```
-/review src/components/UserForm.tsx
+/frontend-fundamentals:review src/components/UserForm.tsx
 ```
 
 ## 📚 Code Quality Principles
