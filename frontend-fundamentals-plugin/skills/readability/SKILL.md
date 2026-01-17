@@ -1,65 +1,78 @@
 ---
 name: readability
-description: Use when reviewing or writing code where logic is hard to follow, conditions are complex, or magic numbers appear.
+description: 코드 리뷰나 작성 시 조건문이 복잡하거나, 매직 넘버가 있거나, 한 번에 이해해야 하는 맥락이 많을 때 사용하세요.
 ---
 
-# Readability
+# 가독성
 
-Code should be easy to read and understand. Readers should grasp intent without mental gymnastics.
+코드는 읽기 쉬워야 해요. 읽는 사람이 코드의 의도를 빠르게 파악할 수 있어야 해요.
 
-## When to Apply
+## 적용 시점
 
-- Complex conditionals that require tracing multiple paths
-- Magic numbers without semantic meaning
-- Nested ternaries that obscure logic
-- Components mixing unrelated execution paths
-- Implementation details leaking into high-level code
+- 동시에 실행되지 않는 코드가 하나의 함수에 섞여 있을 때
+- 정확한 뜻을 밝히지 않은 숫자 값(매직 넘버)이 있을 때
+- 삼항 연산자가 중첩되어 조건 구조가 명확하지 않을 때
+- 복잡한 조건식이 이름 없이 사용될 때
+- 코드를 위아래로 왔다갔다 하며 읽어야 할 때
 
-## Key Pattern: Separate Code That Doesn't Run Together
+## 핵심 패턴: 같이 실행되지 않는 코드 분리하기
 
-When a component has branches for completely different user types, split it:
+동시에 실행되지 않는 코드가 하나의 컴포넌트에 있으면, 동작을 한눈에 파악하기 어려워요.
 
-❌ Bad:
+❌ 개선 전:
 ```tsx
 function SubmitButton() {
-  const isAdmin = useRole() === 'admin';
-  useEffect(() => { if (!isAdmin) return; showAnimation(); }, [isAdmin]);
-  return isAdmin ? <AdminBtn onClick={approve} /> : <UserBtn disabled />;
+  const isViewer = useRole() === "viewer";
+
+  useEffect(() => {
+    if (isViewer) {
+      return;
+    }
+    showButtonAnimation();
+  }, [isViewer]);
+
+  return isViewer ? (
+    <TextButton disabled>Submit</TextButton>
+  ) : (
+    <Button type="submit">Submit</Button>
+  );
 }
 ```
 
-✅ Good:
+✅ 개선 후:
 ```tsx
 function SubmitButton() {
-  const role = useRole();
-  if (role === 'admin') return <AdminSubmitButton />;
-  return <UserSubmitButton />;
+  const isViewer = useRole() === "viewer";
+  return isViewer ? <ViewerSubmitButton /> : <AdminSubmitButton />;
+}
+
+function ViewerSubmitButton() {
+  return <TextButton disabled>Submit</TextButton>;
 }
 
 function AdminSubmitButton() {
-  useEffect(() => { showAnimation(); }, []);
-  return <button onClick={approve}>Approve & Submit</button>;
-}
-
-function UserSubmitButton() {
-  return <button disabled={!canSubmit}>Submit for Review</button>;
+  useEffect(() => {
+    showButtonAnimation();
+  }, []);
+  return <Button type="submit">Submit</Button>;
 }
 ```
 
-## Quick Reference
+## 빠른 참조
 
-| Smell | Fix |
-|-------|-----|
-| Nested ternary `a ? b ? c : d : e` | Early returns or if/else blocks |
-| Magic number `if (x > 86400)` | Named constant `const SECONDS_PER_DAY = 86400` |
-| Complex condition `if (a && !b \|\| c)` | Extract to named boolean `const canProceed = ...` |
-| Mixed branches for different users | Split into separate components per user type |
-| Low-level details in component | Extract to well-named helper function |
+| 코드 냄새 | 개선 방법 |
+|----------|----------|
+| 중첩된 삼항 연산자 | `if` 문이나 early return으로 풀어서 사용 |
+| 매직 넘버 `delay(300)` | 이름 있는 상수로 선언 `ANIMATION_DELAY_MS = 300` |
+| 복잡한 조건 `a && !b \|\| c` | 명시적인 이름 붙이기 `const canProceed = ...` |
+| 여러 분기가 교차됨 | 분기별로 별도 컴포넌트로 분리 |
+| 시점 이동이 많음 | 조건을 한눈에 볼 수 있는 객체로 관리 |
+| 구현 상세가 노출됨 | HOC나 Wrapper 컴포넌트로 추상화 |
 
-## Anti-Patterns to Avoid
+## 피해야 할 것
 
-- Don't over-abstract: 3 similar lines is better than premature abstraction
-- Don't add comments to explain bad code; fix the code instead
-- Don't create deep component hierarchies for "flexibility"
+- 간단한 로직까지 과도하게 추상화하지 마세요
+- 나쁜 코드에 주석을 다는 대신, 코드 자체를 개선하세요
+- "미래의 유연성"을 위해 깊은 컴포넌트 계층을 만들지 마세요
 
-Reference: https://frontend-fundamentals.com/code-quality/readable/
+참고: https://frontend-fundamentals.com/code-quality/readable/
