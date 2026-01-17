@@ -89,6 +89,40 @@ Props drilling through 3 layers and inconsistent validation return types.
   → Use ValidationResult type for all validators
 ```
 
+## 🧪 For Contributors: Evaluation System
+
+The `/eval` directory contains test tasks and grading criteria to verify skills work correctly.
+
+### When to Run Evaluations
+
+- 📝 After modifying any skill file
+- 🆕 When adding new code patterns to detect
+- 🐛 When fixing false positives/negatives in reviews
+
+### Structure
+
+```
+eval/
+├── tasks/           # Test code with seeded issues
+│   ├── cohesion/
+│   ├── coupling/
+│   ├── predictability/
+│   └── readability/
+├── graders/         # Grading criteria (PASS/PARTIAL/FAIL)
+│   └── grader.md
+├── results/         # Evaluation results by date
+└── run-eval.md      # How to run evaluations
+```
+
+### Quick Start
+
+1. Run baseline (without skill) to establish comparison
+2. Run with skill loaded
+3. Grade using `eval/graders/grader.md` criteria
+4. Skill passes if ≥2/3 trials achieve PASS
+
+See `eval/run-eval.md` for detailed instructions.
+
 ## License
 
 MIT © Viva Republica, Inc. See [LICENSE](../LICENSE.md) for details.
