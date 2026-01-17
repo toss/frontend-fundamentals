@@ -1,0 +1,11 @@
+{
+  "name": "frontend-fundamentals",
+  "description": "Frontend development best practices: code quality principles (readability, predictability, cohesion, coupling) and accessibility guidelines by Toss",
+  "version": "1.0.0",
+  "author": {
+    "name": "Toss"
+  },
+  "homepage": "https://frontend-fundamentals.com",
+  "repository": "https://github.com/toss/frontend-fundamentals",
+  "license": "MIT"
+}
