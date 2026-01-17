@@ -1,9 +1,12 @@
 ---
-description: Review code against Frontend Fundamentals principles
+description: Review current branch diff against code quality principles
 ---
 
-Review the provided code or file against Frontend Fundamentals principles:
-- Code quality (readability, predictability, cohesion, coupling)
-- Accessibility best practices
+Dispatch the `reviewer` subagent to review the code diff of the current branch.
+
+The reviewer will:
+1. Get diff between current branch and main
+2. Analyze changes against cohesion, coupling, predictability, readability principles
+3. Output categorized findings with specific suggestions
 
 $ARGUMENTS
