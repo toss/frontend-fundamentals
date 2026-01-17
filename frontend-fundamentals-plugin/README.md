@@ -1,19 +1,17 @@
 # Frontend Fundamentals Plugin
 
-A Claude Code plugin that reviews your code against [Frontend Fundamentals](https://frontend-fundamentals.com) principles by Toss.
+> Claude Code plugin for automated code quality review
 
-## What It Does
+**Frontend Fundamentals Plugin** brings [Frontend Fundamentals](https://frontend-fundamentals.com) code quality principles directly into your Claude Code workflow. It automatically reviews your code against 4 core principles and suggests improvements.
 
-This plugin helps you write better frontend code by checking for:
+## 🧭 When to Use
 
-| Principle | What It Checks |
-|-----------|----------------|
-| **Cohesion** | Are related things together? (scattered files, magic numbers) |
-| **Coupling** | Is change impact minimized? (props drilling, god hooks) |
-| **Predictability** | Does code do what the name says? (hidden side effects) |
-| **Readability** | Is code easy to follow? (nested ternaries, complex conditions) |
+- 🔍 When you've finished coding and want a quick quality check
+- 🔄 When you want Claude to iteratively improve code until it meets standards
+- 👥 When you're reviewing a PR and want consistent quality criteria
+- 🛠️ When your team wants to enforce shared code quality standards
 
-## Installation
+## 📦 Installation
 
 ```bash
 claude plugin add https://github.com/toss/frontend-fundamentals
@@ -25,22 +23,17 @@ git clone https://github.com/toss/frontend-fundamentals.git
 claude --plugin ./frontend-fundamentals/frontend-fundamentals-plugin
 ```
 
-## Usage
+## 🚀 Usage
 
-### Option 1: Review After Coding
-
-After you finish writing code, run the review command:
+### Review After Coding
 
 ```
 /review
 ```
 
-The reviewer will:
-1. Check your branch diff against `main`
-2. Analyze code against the 4 principles
-3. Output categorized findings (Critical / Warnings / Suggestions)
+Reviews your branch diff against `main` and outputs findings as Critical / Warnings / Suggestions.
 
-### Option 2: Iterative Improvement (Recommended)
+### Iterative Improvement (Recommended)
 
 Ask Claude to keep improving until the review passes:
 
@@ -49,28 +42,26 @@ Review my code with /review and fix any issues found.
 Repeat until no critical issues remain.
 ```
 
-Or be more specific:
+This creates a feedback loop: review → fix → re-review → repeat until clean.
 
-```
-1. Run /review on my changes
-2. Fix all Critical and Warning issues
-3. Run /review again to verify
-4. Continue until clean
-```
-
-This creates a feedback loop where Claude:
-1. Reviews your code
-2. Fixes identified issues
-3. Re-reviews to confirm fixes
-4. Repeats until quality standards are met
-
-### Option 3: Review Specific Files
+### Review Specific Files
 
 ```
 /review src/components/UserForm.tsx
 ```
 
-## Example Output
+## 📚 Code Quality Principles
+
+| Principle | What It Checks |
+|-----------|----------------|
+| **Cohesion** | Are related things together? (scattered files, magic numbers) |
+| **Coupling** | Is change impact minimized? (props drilling, god hooks) |
+| **Predictability** | Does code do what the name says? (hidden side effects) |
+| **Readability** | Is code easy to follow? (nested ternaries, complex conditions) |
+
+Learn more at [frontend-fundamentals.com/code-quality](https://frontend-fundamentals.com/code-quality/)
+
+## 📝 Example Output
 
 ```markdown
 # Code Review: feature/user-form
@@ -79,35 +70,21 @@ This creates a feedback loop where Claude:
 Props drilling through 3 layers and inconsistent validation return types.
 
 ## Critical (must fix)
-- **Coupling** `UserForm.tsx:L42` - Issue: `user` prop passes through
-  Form → FormBody → FormFields without being used - Fix: Use composition
-  pattern with children
+- **Coupling** `UserForm.tsx:L42` - Props pass through 3 layers unused
+  → Use composition pattern with children
 
 ## Warnings (should fix)
-- **Predictability** `validators.ts:L15` - Issue: `validateName` returns
-  boolean but `validateAge` returns object - Fix: Use consistent
-  ValidationResult type
-
-## Suggestions
-- **Readability** `UserForm.tsx:L67` - Issue: Nested ternary for
-  button state - Fix: Extract to named variable `const canSubmit = ...`
+- **Predictability** `validators.ts:L15` - Inconsistent return types
+  → Use ValidationResult type for all validators
 ```
 
-## Skills Reference
+## License
 
-The plugin includes 4 skills you can also use directly:
+MIT © Viva Republica, Inc. See [LICENSE](../LICENSE.md) for details.
 
-- `cohesion` - Code organization and magic number patterns
-- `coupling` - Component dependencies and props drilling
-- `predictability` - Function naming and return type consistency
-- `readability` - Code clarity and condition complexity
-
-Load a skill directly:
-```
-Load the coupling skill and review this component
-```
-
-## Learn More
-
-- [Frontend Fundamentals](https://frontend-fundamentals.com) - Full documentation
-- [GitHub](https://github.com/toss/frontend-fundamentals) - Source code
+<a title="Toss" href="https://toss.im">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://static.toss.im/logos/png/4x/logo-toss-reverse.png">
+    <img alt="Toss" src="https://static.toss.im/logos/png/4x/logo-toss.png" width="100">
+  </picture>
+</a>
