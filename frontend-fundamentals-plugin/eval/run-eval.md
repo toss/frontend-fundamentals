@@ -66,6 +66,18 @@ Record results in `eval/results/with-skill-{date}.md`
    [paste code]
    ```
 
+4. **checkout-summary.tsx** ⭐ NEW
+   ```
+   Review this e-commerce checkout component for readability issues:
+   [paste code]
+   ```
+
+5. **notification-badge.tsx** ⭐ NEW
+   ```
+   Review this notification badge component for readability issues:
+   [paste code]
+   ```
+
 ### Predictability Tasks
 
 1. **hidden-side-effects.tsx**
@@ -77,6 +89,18 @@ Record results in `eval/results/with-skill-{date}.md`
 2. **inconsistent-returns.tsx**
    ```
    Review these validation functions for predictability issues:
+   [paste code]
+   ```
+
+3. **use-cart.tsx** ⭐ NEW
+   ```
+   Review this cart hook for predictability issues:
+   [paste code]
+   ```
+
+4. **api-client.ts** ⭐ NEW
+   ```
+   Review this API client module for predictability issues:
    [paste code]
    ```
 
@@ -94,6 +118,21 @@ Record results in `eval/results/with-skill-{date}.md`
    [paste code]
    ```
 
+3. **payment-flow/** ⭐ NEW
+   ```
+   Review these payment feature files for cohesion issues.
+   The files are currently organized as:
+   - src/components/common/PaymentMethodSelector.tsx
+   - src/components/forms/CreditCardForm.tsx
+   - src/types/payment-types.ts
+   - src/constants/payment-config.ts
+   - src/utils/pricing.ts (contains payment-utils)
+   - src/hooks/usePaymentValidation.ts
+   - src/services/payment-api.ts
+
+   [paste all files]
+   ```
+
 ### Coupling Tasks
 
 1. **props-drilling.tsx**
@@ -105,6 +144,18 @@ Record results in `eval/results/with-skill-{date}.md`
 2. **god-hook.tsx**
    ```
    Review this React hook for coupling issues:
+   [paste code]
+   ```
+
+3. **dashboard-layout.tsx** ⭐ NEW
+   ```
+   Review this dashboard layout for coupling issues:
+   [paste code]
+   ```
+
+4. **use-dashboard.tsx** ⭐ NEW
+   ```
+   Review this dashboard hook for coupling issues:
    [paste code]
    ```
 
@@ -129,6 +180,7 @@ Create file: `eval/results/{baseline|with-skill}-{YYYY-MM-DD}.md`
 | Principle | Task | Pass Rate | Notes |
 |-----------|------|-----------|-------|
 | readability | mixed-branches | 0/3 | ... |
+| readability | checkout-summary | 0/3 | ... |
 | ... | ... | ... | ... |
 
 ## Detailed Results
@@ -140,6 +192,27 @@ Create file: `eval/results/{baseline|with-skill}-{YYYY-MM-DD}.md`
 
 ...
 ```
+
+## Task Inventory
+
+| Principle | Task | Domain | Difficulty |
+|-----------|------|--------|------------|
+| readability | mixed-branches.tsx | Generic | Basic |
+| readability | nested-ternary.tsx | Generic | Basic |
+| readability | magic-numbers.tsx | Generic | Basic |
+| readability | checkout-summary.tsx | E-commerce | Advanced |
+| readability | notification-badge.tsx | SaaS | Advanced |
+| predictability | hidden-side-effects.tsx | Generic | Basic |
+| predictability | inconsistent-returns.tsx | Generic | Basic |
+| predictability | use-cart.tsx | E-commerce | Advanced |
+| predictability | api-client.ts | Generic | Advanced |
+| cohesion | scattered-files.md | Generic | Basic |
+| cohesion | magic-number-duplication.tsx | Generic | Basic |
+| cohesion | payment-flow/ | Fintech | Advanced |
+| coupling | props-drilling.tsx | Generic | Basic |
+| coupling | god-hook.tsx | Generic | Basic |
+| coupling | dashboard-layout.tsx | SaaS | Advanced |
+| coupling | use-dashboard.tsx | SaaS | Advanced |
 
 ## Iterating on Skills
 
