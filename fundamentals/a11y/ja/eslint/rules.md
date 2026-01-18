@@ -106,7 +106,7 @@ export default [
 
 インタラクティブ要素（入力フィールド、ボタン、セレクトなど）には、目的をユーザーに明確に伝える名前が必須です。名前がない／不明確な要素は、スクリーンリーダー利用者や音声アシスタント利用者に大きな不便を与えます。詳しくは[インタラクティブ要素に名前を付ける](../semantic/required-label)を参照してください。
 
-`eslint-plugin-jsx-ally`の recommendedではこのルールは既定で無効なので、次のように`rules`に明示的に追加して有効化してください。
+`eslint-plugin-jsx-a11y`の recommendedではこのルールは既定で無効なので、次のように`rules`に明示的に追加して有効化してください。
 
 :::tabs key:bundler-object-entry
 == flat config
