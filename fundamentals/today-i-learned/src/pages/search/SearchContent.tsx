@@ -90,30 +90,34 @@ export function SearchContent({ query }: SearchContentProps) {
   }
 
   return (
-    <div className={searchResultsContainer}>
-      <h1 className={searchResultsTitle}>
-        "{query}" 검색 결과
-        <span className={resultCount}>({discussions.length}개)</span>
-      </h1>
+    <div className={scrollWrapper}>
+      <div className={searchResultsContainer}>
+        <h1 className={searchResultsTitle}>
+          "{query}" 검색 결과
+          <span className={resultCount}>({discussions.length}개)</span>
+        </h1>
 
-      <div className={resultsWrapper}>
-        {discussions.map((discussion, index) => (
-          <div
-            key={discussion.id}
-            className={index < discussions.length - 1 ? postCardWithMargin : ""}
-          >
-            <PostCard
-              discussion={discussion}
-              currentUserLogin={userProfile?.login}
-            />
-          </div>
-        ))}
+        <div className={resultsWrapper}>
+          {discussions.map((discussion, index) => (
+            <div
+              key={discussion.id}
+              className={
+                index < discussions.length - 1 ? postCardWithMargin : ""
+              }
+            >
+              <PostCard
+                discussion={discussion}
+                currentUserLogin={userProfile?.login}
+              />
+            </div>
+          ))}
 
-        {hasNextPage && (
-          <div ref={elementRef} className={loadMoreContainer}>
-            {isFetchingNextPage ? <PostCardSkeleton /> : null}
-          </div>
-        )}
+          {hasNextPage && (
+            <div ref={elementRef} className={loadMoreContainer}>
+              {isFetchingNextPage ? <PostCardSkeleton /> : null}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -152,6 +156,12 @@ const errorTitle = css({
   fontWeight: "600",
   color: "#dc2626",
   marginBottom: "0.5rem"
+});
+
+const scrollWrapper = css({
+  height: "100%",
+  width: "100%",
+  overflowY: "auto"
 });
 
 const searchResultsContainer = css({
