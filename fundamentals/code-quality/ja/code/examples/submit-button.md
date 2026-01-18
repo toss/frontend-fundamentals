@@ -41,8 +41,24 @@ function SubmitButton() {
 
 例えば、次のコードで青色の部分はユーザーが閲覧専用権限（`'viewer'`）を持っているときに実行されるコードで、赤色の部分は一般ユーザーの場合に実行されるコードです。同時に実行されないコードが交差して現れるため、コードを理解するのが難しくなってしまっています。
 
-![](../../../images/examples/submit-button.png){.light-only}
-![](../../../images/examples/submit-button-dark.png){.dark-only}
+```typescript 8,14
+function SubmitButton() {
+  const isViewer = useRole() === "viewer";
+
+  useEffect(() => {
+    if (isViewer) {
+      return;
+    }
+    showButtonAnimation();
+  }, [isViewer]);
+
+  return isViewer ? (
+    <TextButton disabled>Submit</TextButton>
+  ) : (
+    <Button type="submit">Submit</Button>
+  );
+}
+```
 
 ## ✏️ リファクタリングしてみる
 
