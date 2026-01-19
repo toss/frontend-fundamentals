@@ -24,6 +24,7 @@ comments: false
 - **上から下へ読めるようにする**
   - [視点の移動を減らす](./examples/user-policy.md)
   - [三項演算子をシンプルにする](./examples/ternary-operator.md)
+  - [左から右へ読めるようにする](./examples/comparison-order.md)
 
 ## 2. 予測可能性
 
