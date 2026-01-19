@@ -179,7 +179,7 @@
 
 ## `<input>` 을 쓰지 않고 라디오 버튼을 구현하기
 
-디자인적으로 기본 `<input type="radio">`를 사용할 수 없을 때는 `role="radio"`와 `aria-checked`를 사용해야해요.
+디자인적으로 기본 `<input type="radio">`를 사용할 수 없을 때는 `role="radio"`와 `aria-checked`를 사용해야 해요.
 
 핵심은 `role="radio"`, `aria-checked`, `tabIndex={0}`과 Space 키 처리예요.
 

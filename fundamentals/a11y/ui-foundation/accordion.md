@@ -70,7 +70,7 @@
 
 ## 커스텀 컴포넌트로 아코디언 구현하기
 
-`<details>`와 `<summary>` 요소를 사용하여 아코디언을 구현할 수 없다면, `aria-expanded`, `aria-controls`, `aria-labelledby` 속성을 사용하여 아코디언의 상태와 구조를 명확히 전달해야해요.
+`<details>`와 `<summary>` 요소를 사용하여 아코디언을 구현할 수 없다면, `aria-expanded`, `aria-controls`, `aria-labelledby` 속성을 사용하여 아코디언의 상태와 구조를 명확히 전달해야 해요.
 
 ```tsx{3-4,9,15-16,21}
 <div>
