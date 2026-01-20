@@ -146,6 +146,20 @@ npm dedupe
 yarn dedupe
 ```
 
+#### 사용되지 않는 라이브러리 제거하기
+
+실제 코드에서 사용되지 않는 라이브러리를 제거해 번들 크기를 줄이세요.
+
+```bash
+npm install --save-dev depcheck
+
+npx depcheck
+```
+
+::: warning depcheck 사용 시 주의할 점
+depcheck는 설정 파일에서 사용하는 패키지를 정확히 감지하지 못할 수 있으므로, 제거 전 실제 사용 여부를 반드시 확인하세요.
+:::
+
 #### 설치 전 패키지 크기 확인하기
 
 [Bundle Phobia](https://bundlephobia.com/)에서 패키지 크기를 확인하고 설치를 결정하세요.
