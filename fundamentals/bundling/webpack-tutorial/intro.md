@@ -29,7 +29,7 @@
 
 ## 예제 프로젝트 세팅하기
 
-1. [오늘의 이모지 예제 프로젝트 ZIP 파일](https://github.com/toss/frontend-fundamentals/blob/main/public/files/bundling-example-project.zip)를 다운로드하고 압축을 풀어주세요.
+1. [오늘의 이모지 예제 프로젝트 ZIP 파일](https://github.com/toss/frontend-fundamentals/blob/main/public/files/bundling-example-project.zip)을 다운로드하고 압축을 풀어주세요.
 2. 압축을 풀면 이런 폴더 구조가 보여요.
    ```
    example-project/
