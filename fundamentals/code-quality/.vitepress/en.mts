@@ -12,7 +12,8 @@ export const en = defineConfig({
       pattern:
         "https://github.com/toss/frontend-fundamentals/edit/main/fundamentals/code-quality/:path"
     },
-    sidebar: sidebar()
+    sidebar: sidebar(),
+    darkModeSwitchLabel: "Appearance"
   }
 });
 
