@@ -19,7 +19,10 @@ export default defineConfig({
     en: {
       label: "English",
       lang: "en",
-      themeConfig: { nav: [{ text: "Home", link: "/en/" }] }
+      themeConfig: {
+        nav: [{ text: "Home", link: "/en/" }],
+        darkModeSwitchLabel: "Appearance"
+      }
     },
     ja: {
       label: "日本語",
@@ -104,13 +107,17 @@ export default defineConfig({
               }
             ]
           }
-        ]
+        ],
+        darkModeSwitchLabel: "テーマ"
       }
     },
     "zh-hans": {
       label: "简体中文",
       lang: "zh-hans",
-      themeConfig: { nav: [{ text: "首页", link: "/zh-hans" }] }
+      themeConfig: {
+        nav: [{ text: "首页", link: "/zh-hans" }],
+        darkModeSwitchLabel: "外观"
+      }
     },
     root: {
       label: "한국어",
@@ -262,7 +269,8 @@ export default defineConfig({
               }
             ]
           }
-        ]
+        ],
+        darkModeSwitchLabel: "테마"
       }
     }
   },
