@@ -141,4 +141,17 @@
     height: 2px;
     width: calc(100% - 16px);
   }
+
+  .nav-item[data-tooltip]::after {
+    left: 50%;
+    top: auto;
+    bottom: 100%;
+    transform: translateX(-50%);
+    margin-bottom: 8px;
+  }
+
+  .nav-item[data-tooltip]:hover::after {
+    left: 50%;
+    bottom: calc(100% + 8px);
+  }
 }
