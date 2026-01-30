@@ -58,6 +58,15 @@ export default defineConfig({
             ]
           },
           {
+            text: "이벤트",
+            items: [
+              {
+                text: "디버거스클럽 사전이벤트",
+                link: "/pages/event/debugers-club.md"
+              }
+            ]
+          },
+          {
             text: "실전 가이드",
             items: [
               {
@@ -165,7 +174,8 @@ export default defineConfig({
                   {
                     text: "React Query 사용 중 반환 타입 단언 오류",
                     link: "/pages/contribute/typescript/react_query_refetch_typescript.md"
-                  }                ]
+                  }
+                ]
               },
               {
                 text: "react",
@@ -250,10 +260,10 @@ export default defineConfig({
                 ]
               },
               {
-                text:"package",
-                items:[
+                text: "package",
+                items: [
                   {
-                    text:"Radix UI Dialog 내 Select 컴포넌트 ESC 키 충돌 버그 사례",
+                    text: "Radix UI Dialog 내 Select 컴포넌트 ESC 키 충돌 버그 사례",
                     link: "/pages/contribute/package/radix_ui_dialog_select_esc.md"
                   }
                 ]
