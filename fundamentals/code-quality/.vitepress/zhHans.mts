@@ -23,7 +23,8 @@ export const zhHans = defineConfig({
     lastUpdated: {
       text: "最后更新"
     },
-    sidebar: sidebar()
+    sidebar: sidebar(),
+    darkModeSwitchLabel: "外观"
   }
 });
 
