@@ -20,17 +20,26 @@ export default defineConfig({
     en: {
       label: "English",
       lang: "en",
-      themeConfig: { nav: [{ text: "Home", link: "/en/" }] }
+      themeConfig: {
+        nav: [{ text: "Home", link: "/en/" }],
+        darkModeSwitchLabel: "Appearance"
+      }
     },
     ja: {
       label: "日本語",
       lang: "ja",
-      themeConfig: { nav: [{ text: "ホーム", link: "/ja/" }] }
+      themeConfig: {
+        nav: [{ text: "ホーム", link: "/ja/" }],
+        darkModeSwitchLabel: "テーマ"
+      }
     },
     "zh-hans": {
       label: "简体中文",
       lang: "zh-hans",
-      themeConfig: { nav: [{ text: "首页", link: "/zh-hans" }] }
+      themeConfig: {
+        nav: [{ text: "首页", link: "/zh-hans" }],
+        darkModeSwitchLabel: "外观"
+      }
     },
     root: {
       label: "한국어",
@@ -165,7 +174,8 @@ export default defineConfig({
                   {
                     text: "React Query 사용 중 반환 타입 단언 오류",
                     link: "/pages/contribute/typescript/react_query_refetch_typescript.md"
-                  }                ]
+                  }
+                ]
               },
               {
                 text: "react",
@@ -250,10 +260,10 @@ export default defineConfig({
                 ]
               },
               {
-                text:"package",
-                items:[
+                text: "package",
+                items: [
                   {
-                    text:"Radix UI Dialog 내 Select 컴포넌트 ESC 키 충돌 버그 사례",
+                    text: "Radix UI Dialog 내 Select 컴포넌트 ESC 키 충돌 버그 사례",
                     link: "/pages/contribute/package/radix_ui_dialog_select_esc.md"
                   }
                 ]
@@ -270,7 +280,8 @@ export default defineConfig({
               { text: "기여하기 탬플릿", link: "/pages/contribute/template.md" }
             ]
           }
-        ]
+        ],
+        darkModeSwitchLabel: "테마"
       }
     }
   },
