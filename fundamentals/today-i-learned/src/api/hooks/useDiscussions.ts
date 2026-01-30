@@ -21,6 +21,8 @@ import {
   addDiscussionCommentReply,
   addDiscussionReaction,
   removeDiscussionReaction,
+  updateDiscussionComment,
+  deleteDiscussionComment,
   type DiscussionsApiParams
 } from "@/api/remote/discussions";
 import { CATEGORY_ID } from "@/constants";
@@ -491,6 +493,66 @@ export function useDeleteDiscussion() {
 
       queryClient.removeQueries({
         queryKey: DISCUSSIONS_QUERY_KEYS.detail(deletedDiscussion.id)
+      });
+    }
+  });
+}
+
+// 댓글 수정을 위한 인터페이스
+interface UpdateCommentParams {
+  commentId: string;
+  body: string;
+}
+
+// 댓글 수정 Mutation
+export function useUpdateDiscussionComment() {
+  const queryClient = useQueryClient();
+  const { user } = useAuth();
+
+  return useMutation({
+    mutationFn: async (params: UpdateCommentParams) => {
+      if (!user?.accessToken) {
+        throw new Error("Authentication required");
+      }
+
+      return updateDiscussionComment({
+        commentId: params.commentId,
+        body: params.body,
+        accessToken: user.accessToken
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: DISCUSSIONS_QUERY_KEYS.all
+      });
+    }
+  });
+}
+
+// 댓글 삭제를 위한 인터페이스
+interface DeleteCommentParams {
+  commentId: string;
+}
+
+// 댓글 삭제 Mutation
+export function useDeleteDiscussionComment() {
+  const queryClient = useQueryClient();
+  const { user } = useAuth();
+
+  return useMutation({
+    mutationFn: async (params: DeleteCommentParams) => {
+      if (!user?.accessToken) {
+        throw new Error("Authentication required");
+      }
+
+      return deleteDiscussionComment({
+        commentId: params.commentId,
+        accessToken: user.accessToken
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: DISCUSSIONS_QUERY_KEYS.all
       });
     }
   });

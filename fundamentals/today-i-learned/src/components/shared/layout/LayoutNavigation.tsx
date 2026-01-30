@@ -23,11 +23,7 @@ export const LayoutNavigation: React.FC = () => {
   return (
     <>
       <NavigationBar />
-      <OneNavigationReact
-        lang={lang}
-        isKorean={isKorean}
-        pathname={location.pathname}
-      />
+      <OneNavigationReact lang={lang} isKorean={isKorean} />
     </>
   );
 };

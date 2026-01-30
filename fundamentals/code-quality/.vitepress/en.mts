@@ -6,6 +6,7 @@ export const en = defineConfig({
   description: "A guide for easily modifiable frontend code",
   lastUpdated: true,
   themeConfig: {
+    logo: "/images/ff-symbol.svg",
     nav: nav(),
     editLink: {
       pattern:
@@ -86,6 +87,10 @@ function sidebar(): DefaultTheme.Sidebar {
                 {
                   text: "B. Simplifying Ternary Operators",
                   link: "/en/code/examples/ternary-operator"
+                },
+                {
+                  text: "C. Reading from Left to Right",
+                  link: "/en/code/examples/comparison-order"
                 }
               ],
               collapsed: true

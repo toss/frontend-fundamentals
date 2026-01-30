@@ -134,13 +134,38 @@ export default defineConfig({
             text: "디버깅 실무 사례",
             items: [
               {
+                text: "css",
+                items: [
+                  {
+                    text: "고주사율 모니터에서만 깜빡이던 시간표 셀을 잡기까지",
+                    link: "/pages/contribute/css/css_backspace_opacity.md"
+                  }
+                ]
+              },
+              {
                 text: "javascript",
                 items: [
                   {
                     text: "MAX_SAFE_INTEGER 정밀도 손실",
                     link: "/pages/contribute/javascript/javascript_max_number_error_debug.md"
+                  },
+                  {
+                    text: "THREE.Cache.enabled로 인한 메모리 누수",
+                    link: "/pages/contribute/javascript/three_cache_enabled_memory_leak.md"
+                  },
+                  {
+                    text: "Iframe에서 mousemove가 동작하지 않는 이슈",
+                    link: "/pages/contribute/javascript/iframe_mousemove.md"
                   }
                 ]
+              },
+              {
+                text: "typescript",
+                items: [
+                  {
+                    text: "React Query 사용 중 반환 타입 단언 오류",
+                    link: "/pages/contribute/typescript/react_query_refetch_typescript.md"
+                  }                ]
               },
               {
                 text: "react",
@@ -152,6 +177,22 @@ export default defineConfig({
                   {
                     text: "React Suspense와 framer-motion UI 충돌",
                     link: "/pages/contribute/react/react_suspense_and_framer_motion_ui_debug.md"
+                  },
+                  {
+                    text: "실시간 차트 페이지 만들다가 메모리 터져서 브라우저 죽은 이야기",
+                    link: "/pages/contribute/react/react_unmount_cleanup.md"
+                  },
+                  {
+                    text: "React Hook Form + Zod 유효성 검증 실패 시 무반응 문제 디버깅",
+                    link: "/pages/contribute/react/react_hook_form_zod.md"
+                  },
+                  {
+                    text: "React Rerendering 퍼포먼스 문제 디버깅",
+                    link: "/pages/contribute/react/react_rerendering_performance.md"
+                  },
+                  {
+                    text: "React State Update의 비동기성과 Closure 관련 이슈 디버깅",
+                    link: "/pages/contribute/react/react_state_closure.md"
                   }
                 ]
               },
@@ -205,6 +246,15 @@ export default defineConfig({
                   {
                     text: "Yarn Workspace에서 HMR이 동작하지 않는 현상",
                     link: "/pages/contribute/yarn/yarn_workspace_hmr_debug.md"
+                  }
+                ]
+              },
+              {
+                text:"package",
+                items:[
+                  {
+                    text:"Radix UI Dialog 내 Select 컴포넌트 ESC 키 충돌 버그 사례",
+                    link: "/pages/contribute/package/radix_ui_dialog_select_esc.md"
                   }
                 ]
               },

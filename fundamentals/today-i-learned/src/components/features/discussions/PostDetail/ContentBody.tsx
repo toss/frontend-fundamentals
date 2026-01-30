@@ -13,6 +13,9 @@ export function ContentBody({
       <PostHeader
         author={discussionDetail.author}
         createdAt={discussionDetail.createdAt}
+        discussionId={discussionDetail.id}
+        discussionTitle={discussionDetail.title}
+        discussionBody={discussionDetail.body}
       />
 
       <PostContent

@@ -5,14 +5,9 @@ import "../styles/OneNavigation.css";
 interface OneNavigationProps {
   lang: string;
   isKorean: boolean;
-  pathname: string;
 }
 
-export const OneNavigationReact = ({
-  lang,
-  isKorean,
-  pathname
-}: OneNavigationProps) => {
+export const OneNavigationReact = ({ lang, isKorean }: OneNavigationProps) => {
   const [locationOrigin, setLocationOrigin] = useState("");
 
   useEffect(() => {
@@ -27,7 +22,7 @@ export const OneNavigationReact = ({
   }));
 
   const isActive = (path: string): boolean => {
-    return pathname.startsWith(path);
+    return window.location.pathname.startsWith(path);
   };
 
   const handleNavigation = (href: string): void => {
