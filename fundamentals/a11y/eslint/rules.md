@@ -167,27 +167,29 @@ export default [
 인터랙티브 요소가 아닌 (`<div>`, `<span>` 등)에 클릭 이벤트 핸들러를 추가할 때는 반드시 `role` 속성 등으로 상호작용 요소임을 명시해야 해요.
 
 ::: details 인터랙티브 요소 목록
-| 요소 | 조건 |
-|------|------|
-| `<a>` | - |
-| `<audio>` | controls 속성이 있는 경우 |
-| `<button>` | - |
-| `<details>` | - |
-| `<embed>` | - |
-| `<iframe>` | - |
-| `<img>` | usemap 속성이 있는 경우 |
-| `<input>` | type 속성이 Hidden state가 아닌 경우 |
-| `<keygen>` | - |
-| `<label>` | - |
-| `<menu>` | type 속성이 toolbar state인 경우 |
-| `<object>` | usemap 속성이 있는 경우 |
-| `<select>` | - |
-| `<textarea>` | - |
-| `<video>` | controls 속성이 있는 경우 |
+
+| 요소         | 조건                                 |
+| ------------ | ------------------------------------ |
+| `<a>`        | -                                    |
+| `<audio>`    | controls 속성이 있는 경우            |
+| `<button>`   | -                                    |
+| `<details>`  | -                                    |
+| `<embed>`    | -                                    |
+| `<iframe>`   | -                                    |
+| `<img>`      | usemap 속성이 있는 경우              |
+| `<input>`    | type 속성이 Hidden state가 아닌 경우 |
+| `<keygen>`   | -                                    |
+| `<label>`    | -                                    |
+| `<menu>`     | type 속성이 toolbar state인 경우     |
+| `<object>`   | usemap 속성이 있는 경우              |
+| `<select>`   | -                                    |
+| `<textarea>` | -                                    |
+| `<video>`    | controls 속성이 있는 경우            |
+
 :::
 
 ::: info 왜 `role` 속성이 없는 비상호작용 요소에 클릭 이벤트 핸들러를 추가할 수 없나요?
-비상호작용 요소에 클릭 이벤트 핸들러를 추가하면, 스크린 리더 등 보조기기가 해당 요소를 인식하지 못해 스크린 리더, 키보드 사용자 등에게 혼란을 줄 수 있어요.
+비상호작용 요소에 클릭 이벤트 핸들러를 추가하면, 스크린 리더 등 보조 기기가 해당 요소를 인식하지 못해 스크린 리더, 키보드 사용자 등에게 혼란을 줄 수 있어요.
 :::
 
 **❌ 잘못된 예시**
