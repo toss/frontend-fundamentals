@@ -32,6 +32,36 @@ export const sharedConfig = defineConfig({
   head: [
     [
       "link",
+      {
+        rel: "preconnect",
+        href: "https://static.toss.im",
+        crossorigin: "anonymous"
+      }
+    ],
+    [
+      "link",
+      {
+        rel: "stylesheet",
+        fetchpriority: "low",
+        href: "https://static.toss.im/tps/main.css",
+        media: "none",
+        onload: "this.onload=null; this.media='all'",
+        crossorigin: "anonymous"
+      }
+    ],
+    [
+      "link",
+      {
+        rel: "stylesheet",
+        fetchpriority: "low",
+        href: "https://static.toss.im/tps/others.css",
+        media: "none",
+        onload: "this.onload=null; this.media='all'",
+        crossorigin: "anonymous"
+      }
+    ],
+    [
+      "link",
       { rel: "icon", type: "image/x-icon", href: "/images/favicon.ico" }
     ],
     [
