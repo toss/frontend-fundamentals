@@ -79,7 +79,11 @@ export function usePageState() {
 次のコードのように、各クエリパラメータごとに別々のHookを作成することができます。
 
 ```typescript
-import { useQueryParam } from "use-query-params";
+import { useCallback } from "react";
+import { 
+  NumberParam,
+  useQueryParam 
+} from "use-query-params";
 
 export function useCardIdQueryParam() {
   const [cardId, _setCardId] = useQueryParam("cardId", NumberParam);
