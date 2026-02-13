@@ -108,6 +108,10 @@ function sidebar(): DefaultTheme.Sidebar {
                 {
                   text: "C. 左から右へ読めるようにする",
                   link: "/ja/code/examples/comparison-order"
+                },
+                {
+                  text: "D. 否定条件文を避ける",
+                  link: "/ja/code/examples/avoid-negative-conditionals"
                 }
               ],
               collapsed: true
