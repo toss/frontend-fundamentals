@@ -45,13 +45,12 @@ export default defineConfig({
       ]
     },
     ssr: {
-      noExternal: ['vitepress-plugin-tabs']
+      noExternal: ["vitepress-plugin-tabs"]
     }
   },
   markdown: {
     config: (md) => {
       md.use(footnote);
     }
-  },
-  titleTemplate: ":title"
+  }
 });
