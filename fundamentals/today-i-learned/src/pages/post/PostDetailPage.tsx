@@ -13,7 +13,7 @@ import {
 export function PostDetailPage() {
   return (
     <div className={gridLayout}>
-      <section className={mainContentColumn}>
+      <section className={mainContentColumn} data-scroll-container>
         <ErrorBoundary fallback={PostDetailErrorState}>
           <Suspense fallback={<PostDetailLoadingState />}>
             <PostDetail />

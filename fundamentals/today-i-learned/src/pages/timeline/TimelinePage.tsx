@@ -13,7 +13,7 @@ export function TimelinePage() {
 
   return (
     <div className={gridLayout}>
-      <section className={mainContentColumn}>
+      <section className={mainContentColumn} data-scroll-container>
         {isAuthenticated ? (
           <>
             <div className={sprintChallengeSection}>
