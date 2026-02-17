@@ -27,6 +27,7 @@ comments: false
 - **使其从上到下顺利阅读**
   - [减少视点转移](./examples/user-policy.md)
   - [简化三元运算符](./examples/ternary-operator.md)
+  - [从左到右阅读](./examples/comparison-order.md)
 
 ## 2. 可预测性
 
