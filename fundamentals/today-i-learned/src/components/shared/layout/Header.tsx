@@ -76,7 +76,7 @@ export function Header() {
               <div className={loadingSkeleton} />
             ) : isAuthenticated && user ? (
               <div className={userProfile}>
-                <UserAvatar user={user} size="32" linkToProfile={true} />
+                <UserAvatar user={user} size="24" linkToProfile={true} />
                 <span className={userName}>{user.login}</span>
                 <Button
                   variant="ghost"

@@ -112,7 +112,7 @@ export function UserProfile() {
             <UserAvatar
               username={userProfile.login}
               avatarUrl={userProfile.avatar_url}
-              size="32"
+              size="24"
               linkToProfile={false}
             />
             <div className={css(profileContent)}>
