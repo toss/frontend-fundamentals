@@ -40,11 +40,26 @@ function SubmitButton() {
 `<SubmitButton />` 컴포넌트에서는 사용자가 가질 수 있는 2가지의 권한 상태를 하나의 컴포넌트 안에서 한 번에 처리하고 있어요.
 그래서 코드를 읽는 사람이 한 번에 고려해야 하는 맥락이 많아요.
 
-예를 들어, 다음 코드에서 파란색은 사용자가 보기 전용 권한(`'viewer'`)을 가지고 있을 때, 빨간색은 일반 사용자일 때 실행되는 코드예요.
-동시에 실행되지 않는 코드가 교차되어서 나타나서 코드를 이해할 때 부담을 줘요.
+예를 들어, 다음 코드는 일반 사용자일 때만 실행되는 코드예요. 동시에 실행되지 않는 코드가 교차되어 나타나서 코드를 이해할 때 부담을 줘요.
 
-![](../../images/examples/submit-button.png){.light-only}
-![](../../images/examples/submit-button-dark.png){.dark-only}
+```typescript 8,14
+function SubmitButton() {
+  const isViewer = useRole() === "viewer";
+
+  useEffect(() => {
+    if (isViewer) {
+      return;
+    }
+    showButtonAnimation();
+  }, [isViewer]);
+
+  return isViewer ? (
+    <TextButton disabled>Submit</TextButton>
+  ) : (
+    <Button type="submit">Submit</Button>
+  );
+}
+```
 
 ## ✏️ 개선해보기
 

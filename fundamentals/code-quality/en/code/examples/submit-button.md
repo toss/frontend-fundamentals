@@ -43,8 +43,24 @@ As a result, there are too many contexts for the reader to consider at once.
 For example, in the following code, the blue parts are executed when the user has read-only permissions (`'viewer'`), while the red parts are executed for regular users.
 Intermixed code that doesn't execute simultaneously creates confusion and makes it harder to understand the logic.
 
-![](../../../images/examples/submit-button.png){.light-only}
-![](../../../images/examples/submit-button-dark.png){.dark-only}
+```typescript 8,14
+function SubmitButton() {
+  const isViewer = useRole() === "viewer";
+
+  useEffect(() => {
+    if (isViewer) {
+      return;
+    }
+    showButtonAnimation();
+  }, [isViewer]);
+
+  return isViewer ? (
+    <TextButton disabled>Submit</TextButton>
+  ) : (
+    <Button type="submit">Submit</Button>
+  );
+}
+```
 
 ## ✏️ Work on Improving
 
