@@ -1,0 +1,8 @@
+{
+  "plugins": [
+    {
+      "name": "frontend-fundamentals",
+      "path": "./frontend-fundamentals-plugin"
+    }
+  ]
+}
