@@ -1,8 +1,18 @@
 {
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "toss",
+  "owner": {
+    "name": "Toss"
+  },
   "plugins": [
     {
       "name": "frontend-fundamentals",
-      "path": "./frontend-fundamentals-plugin"
+      "source": "./frontend-fundamentals-plugin",
+      "description": "Frontend development best practices: code quality principles (readability, predictability, cohesion, coupling) and accessibility guidelines by Toss",
+      "version": "1.0.0",
+      "author": {
+        "name": "Toss"
+      }
     }
   ]
 }
