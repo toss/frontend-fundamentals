@@ -17,6 +17,7 @@ import { ToastProvider } from "./contexts/ToastContext";
 import { RootLayout } from "./components/shared/layout/RootLayout.tsx";
 import { CategoryIdFinder } from "./pages/dev-tools/CategoryIdFinder";
 import { isDevelopment } from "./utils/env.ts";
+import { NotFoundPage } from './pages/error/NotFoundPage.tsx';
 
 const router = createBrowserRouter(
   [
@@ -43,6 +44,10 @@ const router = createBrowserRouter(
         {
           path: "post/:id",
           element: <PostDetailPage />
+        },
+        {
+          path: "*",
+          element: <NotFoundPage />
         },
         // 개발 환경에서만 표시
         ...(isDevelopment()
