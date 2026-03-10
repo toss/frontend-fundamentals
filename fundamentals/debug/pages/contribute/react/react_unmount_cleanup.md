@@ -76,9 +76,13 @@ AbortController로 API 요청도 취소되게 처리하고, `React.memo`로 쓸�
 useEffect에서의 "끄기 행동"은 중요하다
 
 `setInterval` 했으면 `clearInterval` 꼭
+
 `addEventListener` 했으면 `removeEventListener` 꼭
+
 WebSocket 열었으면 `close()` 꼭
+
 API 호출했으면 `AbortController` 써서 취소 처리
+
 ESLint에 react-hooks/exhaustive-deps 켜놓으면 빼먹으면 잔소리해줘서 좋아요.
 
 실시간 데이터 다루는 페이지는 꼭 30분은 켜놓고 테스트해보세요. 안 그러면 또 QA팀한테 혼나요!
