@@ -9,6 +9,7 @@ type AvatarSize = NonNullable<ComponentPropsWithoutRef<typeof Avatar>["size"]>;
 
 const sizeMap: Record<AvatarSize, { size: string; userIconSize: string }> = {
   "20": { size: "20px", userIconSize: "12px" },
+  "24": { size: "24px", userIconSize: "14px" },
   "32": { size: "32px", userIconSize: "16px" },
   "40": { size: "40px", userIconSize: "20px" },
   "44": { size: "44px", userIconSize: "20px" },

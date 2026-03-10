@@ -12,6 +12,7 @@ const avatarBase = {
 
 const avatarSizes: Record<AvatarSize, Styles> = {
   "20": { height: "20px", width: "20px" },
+  "24": { height: "24px", width: "24px" },
   "32": { height: "32px", width: "32px" },
   "40": { height: "40px", width: "40px" },
   "44": { height: "44px", width: "44px" },
@@ -40,6 +41,7 @@ const avatarFallbackBase = {
 
 const fallbackTextSizes: Record<AvatarSize, Styles> = {
   "20": { fontSize: "12px" },
+  "24": { fontSize: "13px" },
   "32": { fontSize: "14px" },
   "40": { fontSize: "16px" },
   "44": { fontSize: "17px" },
@@ -48,7 +50,7 @@ const fallbackTextSizes: Record<AvatarSize, Styles> = {
   "100": { fontSize: "40px" }
 };
 
-type AvatarSize = "20" | "32" | "40" | "44" | "48" | "60" | "100";
+type AvatarSize = "20" | "24" | "32" | "40" | "44" | "48" | "60" | "100";
 
 export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
   src?: string;
