@@ -29,7 +29,8 @@ export const ja = defineConfig({
         link: "https://github.com/toss/frontend-fundamentals"
       }
     ],
-    sidebar: sidebar()
+    sidebar: sidebar(),
+    darkModeSwitchLabel: "テーマ"
   }
 });
 

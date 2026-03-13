@@ -23,7 +23,8 @@ export const ko = defineConfig({
     lastUpdated: {
       text: "마지막 업데이트"
     },
-    sidebar: sidebar()
+    sidebar: sidebar(),
+    darkModeSwitchLabel: "테마"
   }
 });
 
