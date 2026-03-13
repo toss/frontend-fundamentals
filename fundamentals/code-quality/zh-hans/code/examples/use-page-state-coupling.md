@@ -78,7 +78,11 @@ export function usePageState() {
 可以像下列代码一样，将每个查询参数分别编写单独的 Hook。
 
 ```typescript
-import { useQueryParam } from "use-query-params";
+import { useCallback } from "react";
+import { 
+  NumberParam,
+  useQueryParam 
+} from "use-query-params";
 
 export function useCardIdQueryParam() {
   const [cardId, _setCardId] = useQueryParam("cardId", NumberParam);
