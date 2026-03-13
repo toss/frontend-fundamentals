@@ -91,6 +91,10 @@ function sidebar(): DefaultTheme.Sidebar {
                 {
                   text: "C. Reading from Left to Right",
                   link: "/en/code/examples/comparison-order"
+                },
+                {
+                  text: "D. Avoid Negative Conditionals",
+                  link: "/en/code/examples/avoid-negative-conditionals"
                 }
               ],
               collapsed: true
