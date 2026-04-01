@@ -31,15 +31,27 @@ function Layout({ user, children }: { user: User; children: React.ReactNode }) {
 }
 
 function Header({ user }: { user: User }) {
-  return <header><UserMenu user={user} /></header>;
+  return (
+    <header>
+      <UserMenu user={user} />
+    </header>
+  );
 }
 
 function Sidebar({ user }: { user: User }) {
-  return <aside><Avatar user={user} /></aside>;
+  return (
+    <aside>
+      <Avatar user={user} />
+    </aside>
+  );
 }
 
 function Content({ user }: { user: User }) {
-  return <main><UserProfile user={user} /></main>;
+  return (
+    <main>
+      <UserProfile user={user} />
+    </main>
+  );
 }
 
 function Avatar({ user }: { user: User }) {

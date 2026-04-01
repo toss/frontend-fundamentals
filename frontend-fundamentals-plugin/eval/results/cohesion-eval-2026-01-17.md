@@ -5,11 +5,11 @@
 
 ## Summary
 
-| Task | Grade | Issue Found | Fix Suggested |
-|------|-------|-------------|---------------|
-| scattered-files.md | PASS | User-related files scattered across 5 directories | Colocate in `features/user/` |
-| magic-number-duplication.tsx | PASS | Same magic number (20) duplicated in 3 files | Create single source of truth constant `PAGE_SIZE` |
-| payment-flow/ | PASS | Payment feature code scattered across 7 directories | Colocate all payment code in `features/payment/` |
+| Task                         | Grade | Issue Found                                         | Fix Suggested                                      |
+| ---------------------------- | ----- | --------------------------------------------------- | -------------------------------------------------- |
+| scattered-files.md           | PASS  | User-related files scattered across 5 directories   | Colocate in `features/user/`                       |
+| magic-number-duplication.tsx | PASS  | Same magic number (20) duplicated in 3 files        | Create single source of truth constant `PAGE_SIZE` |
+| payment-flow/                | PASS  | Payment feature code scattered across 7 directories | Colocate all payment code in `features/payment/`   |
 
 **Overall Result: 3/3 PASS**
 
@@ -33,6 +33,7 @@ src/
 ```
 
 The context explicitly states:
+
 - UserForm.tsx imports useUserValidation
 - useUserValidation imports userTypes
 - userHelpers is only used by UserForm
@@ -65,6 +66,7 @@ src/
 ```
 
 This structure:
+
 - Groups related code by domain/feature
 - Makes the user feature self-contained and easy to understand
 - Simplifies imports (shorter relative paths)
@@ -108,20 +110,21 @@ Then import and use this constant everywhere:
 
 ```typescript
 // components/Pagination.tsx
-import { PAGE_SIZE } from '../constants/pagination';
+import { PAGE_SIZE } from "../constants/pagination";
 const pages = Math.ceil(total / PAGE_SIZE);
 
 // hooks/useItems.ts
-import { PAGE_SIZE } from '../constants/pagination';
+import { PAGE_SIZE } from "../constants/pagination";
 const offset = (page - 1) * PAGE_SIZE;
 return fetchItems({ offset, limit: PAGE_SIZE });
 
 // api/items.ts
-import { PAGE_SIZE } from '../constants/pagination';
+import { PAGE_SIZE } from "../constants/pagination";
 const limit = params.limit || PAGE_SIZE;
 ```
 
 This provides:
+
 - Single source of truth
 - Semantic meaning through the constant name
 - Explicit coupling via imports
@@ -140,6 +143,7 @@ This provides:
 This task contains 7 payment-related files spread across what would be 7 different directories in the problematic structure:
 
 **Simulated file locations:**
+
 - `src/components/common/PaymentMethodSelector.tsx`
 - `src/components/forms/CreditCardForm.tsx`
 - `src/hooks/usePaymentValidation.ts`
@@ -151,20 +155,30 @@ This task contains 7 payment-related files spread across what would be 7 differe
 **Evidence of scattered code from file imports:**
 
 `PaymentMethodSelector.tsx` imports from 5 different locations:
+
 ```typescript
-import { PaymentMethod, PaymentConfig } from '../../../types/payment';
-import { usePaymentValidation } from '../../../hooks/usePaymentValidation';
-import { formatCardNumber, maskCardNumber } from '../../../utils/pricing';
-import { SUPPORTED_CARD_TYPES, PAYMENT_ERRORS, MIN_PAYMENT_AMOUNT } from '../../../constants/payment-config';
-import { validatePaymentMethod } from '../../../services/payment-api';
-import CreditCardForm from '../../forms/CreditCardForm';
+import { PaymentMethod, PaymentConfig } from "../../../types/payment";
+import { usePaymentValidation } from "../../../hooks/usePaymentValidation";
+import { formatCardNumber, maskCardNumber } from "../../../utils/pricing";
+import {
+  SUPPORTED_CARD_TYPES,
+  PAYMENT_ERRORS,
+  MIN_PAYMENT_AMOUNT
+} from "../../../constants/payment-config";
+import { validatePaymentMethod } from "../../../services/payment-api";
+import CreditCardForm from "../../forms/CreditCardForm";
 ```
 
 `CreditCardForm.tsx` has similar scattered imports:
+
 ```typescript
-import { CreditCardData, CardValidationResult } from '../../../types/payment';
-import { detectCardType, validateLuhn } from '../../../utils/pricing';
-import { CARD_NUMBER_LENGTH, CVV_LENGTH, EXPIRY_FORMAT_REGEX } from '../../../constants/payment-config';
+import { CreditCardData, CardValidationResult } from "../../../types/payment";
+import { detectCardType, validateLuhn } from "../../../utils/pricing";
+import {
+  CARD_NUMBER_LENGTH,
+  CVV_LENGTH,
+  EXPIRY_FORMAT_REGEX
+} from "../../../constants/payment-config";
 ```
 
 **Issue Identified:**
@@ -217,6 +231,7 @@ src/
 ```
 
 Benefits:
+
 - All payment code in one place - easy to understand the feature as a whole
 - Short, simple imports within the feature
 - Clear boundary between payment and other features
@@ -224,6 +239,7 @@ Benefits:
 - When payment requirements change, all changes are localized
 
 **What NOT to do:**
+
 - Do NOT create abstract "shared" modules that increase indirection
 - Do NOT create deep folder hierarchies (payment/validation/card/helpers/...)
 - Do NOT force unrelated code together
@@ -238,15 +254,16 @@ Benefits:
 
 All three cohesion tasks were evaluated successfully:
 
-| Task | Expected Issue | Issue Identified | Expected Fix | Fix Suggested | Grade |
-|------|---------------|------------------|--------------|---------------|-------|
-| scattered-files.md | Files spread across directories | YES - user files in 5 dirs | Colocate by feature | YES - features/user/ | PASS |
-| magic-number-duplication.tsx | Same magic number in multiple files | YES - value 20 in 3 files | Single source of truth constant | YES - PAGE_SIZE constant | PASS |
-| payment-flow/ | Payment code scattered across 7 directories | YES - 7 dirs identified | Colocate in features/payment/ | YES - features/payment/ | PASS |
+| Task                         | Expected Issue                              | Issue Identified           | Expected Fix                    | Fix Suggested            | Grade |
+| ---------------------------- | ------------------------------------------- | -------------------------- | ------------------------------- | ------------------------ | ----- |
+| scattered-files.md           | Files spread across directories             | YES - user files in 5 dirs | Colocate by feature             | YES - features/user/     | PASS  |
+| magic-number-duplication.tsx | Same magic number in multiple files         | YES - value 20 in 3 files  | Single source of truth constant | YES - PAGE_SIZE constant | PASS  |
+| payment-flow/                | Payment code scattered across 7 directories | YES - 7 dirs identified    | Colocate in features/payment/   | YES - features/payment/  | PASS  |
 
 **Final Result: 3/3 PASS (100%)**
 
 The cohesion skill evaluation demonstrates correct identification of:
+
 1. Feature-related files scattered by type rather than domain
 2. Magic number duplication requiring centralized constants
 3. Complex feature code spread across multiple unrelated directories

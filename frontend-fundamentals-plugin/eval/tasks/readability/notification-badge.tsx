@@ -2,12 +2,12 @@
 // Expected: Identify that deeply nested ternaries and conditions make the logic hard to follow; should extract to helper functions or early returns
 // Domain: SaaS notification system
 
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
 interface Notification {
   id: string;
-  type: 'message' | 'alert' | 'update' | 'mention' | 'system';
-  priority: 'low' | 'medium' | 'high' | 'critical';
+  type: "message" | "alert" | "update" | "mention" | "system";
+  priority: "low" | "medium" | "high" | "critical";
   read: boolean;
   muted: boolean;
   createdAt: Date;
@@ -23,21 +23,29 @@ interface NotificationBadgeProps {
   isOnline: boolean;
 }
 
-function NotificationBadge({ notifications, userSettings, isOnline }: NotificationBadgeProps) {
+function NotificationBadge({
+  notifications,
+  userSettings,
+  isOnline
+}: NotificationBadgeProps) {
   const badgeContent = useMemo(() => {
-    const activeNotifications = notifications.filter(n =>
-      !n.read &&
-      !n.muted &&
-      !userSettings.mutedTypes.includes(n.type) &&
-      (userSettings.showOnlyHighPriority ? n.priority === 'high' || n.priority === 'critical' : true)
+    const activeNotifications = notifications.filter(
+      (n) =>
+        !n.read &&
+        !n.muted &&
+        !userSettings.mutedTypes.includes(n.type) &&
+        (userSettings.showOnlyHighPriority
+          ? n.priority === "high" || n.priority === "critical"
+          : true)
     );
 
     const count = activeNotifications.length;
-    const hasCritical = activeNotifications.some(n => n.priority === 'critical');
-    const hasHigh = activeNotifications.some(n => n.priority === 'high');
-    const hasRecentMention = activeNotifications.some(n =>
-      n.type === 'mention' &&
-      Date.now() - n.createdAt.getTime() < 300000
+    const hasCritical = activeNotifications.some(
+      (n) => n.priority === "critical"
+    );
+    const hasHigh = activeNotifications.some((n) => n.priority === "high");
+    const hasRecentMention = activeNotifications.some(
+      (n) => n.type === "mention" && Date.now() - n.createdAt.getTime() < 300000
     );
 
     // This is where it gets messy...
@@ -45,7 +53,7 @@ function NotificationBadge({ notifications, userSettings, isOnline }: Notificati
       count,
       hasCritical,
       hasHigh,
-      hasRecentMention,
+      hasRecentMention
     };
   }, [notifications, userSettings]);
 
@@ -60,35 +68,35 @@ function NotificationBadge({ notifications, userSettings, isOnline }: Notificati
             <span
               className={`badge ${
                 hasCritical
-                  ? 'critical'
+                  ? "critical"
                   : hasHigh
-                    ? 'high'
+                    ? "high"
                     : hasRecentMention
-                      ? 'mention'
-                      : 'default'
+                      ? "mention"
+                      : "default"
               }`}
               style={{
                 animation: hasCritical
-                  ? 'pulse-critical 0.5s infinite'
+                  ? "pulse-critical 0.5s infinite"
                   : hasHigh
-                    ? 'pulse-high 1s infinite'
+                    ? "pulse-high 1s infinite"
                     : hasRecentMention
-                      ? 'bounce 0.3s ease-out'
-                      : 'none',
+                      ? "bounce 0.3s ease-out"
+                      : "none",
                 backgroundColor: hasCritical
-                  ? '#dc2626'
+                  ? "#dc2626"
                   : hasHigh
-                    ? '#ea580c'
+                    ? "#ea580c"
                     : hasRecentMention
-                      ? '#2563eb'
-                      : '#6b7280',
+                      ? "#2563eb"
+                      : "#6b7280"
               }}
             >
               {count > 99
-                ? '99+'
+                ? "99+"
                 : count > 9
                   ? hasCritical
-                    ? '!'
+                    ? "!"
                     : count
                   : count}
             </span>
@@ -97,9 +105,7 @@ function NotificationBadge({ notifications, userSettings, isOnline }: Notificati
           )
         ) : (
           <span className="dnd-indicator">
-            {hasCritical ? (
-              <span className="critical-override">!</span>
-            ) : null}
+            {hasCritical ? <span className="critical-override">!</span> : null}
           </span>
         )}
       </button>
@@ -107,59 +113,66 @@ function NotificationBadge({ notifications, userSettings, isOnline }: Notificati
       <span className="sr-only">
         {userSettings.doNotDisturb
           ? hasCritical
-            ? `Do not disturb active, but ${count} critical notification${count !== 1 ? 's' : ''} require attention`
-            : 'Do not disturb active'
+            ? `Do not disturb active, but ${count} critical notification${count !== 1 ? "s" : ""} require attention`
+            : "Do not disturb active"
           : count > 0
-            ? `${count} unread notification${count !== 1 ? 's' : ''}${
+            ? `${count} unread notification${count !== 1 ? "s" : ""}${
                 hasCritical
-                  ? ', including critical alerts'
+                  ? ", including critical alerts"
                   : hasHigh
-                    ? ', including high priority'
+                    ? ", including high priority"
                     : hasRecentMention
-                      ? ', including recent mentions'
-                      : ''
+                      ? ", including recent mentions"
+                      : ""
               }`
             : isOnline
-              ? 'No new notifications'
-              : 'Offline - notifications paused'}
+              ? "No new notifications"
+              : "Offline - notifications paused"}
       </span>
     </div>
   );
 }
 
 // Separate component with similar issues
-function NotificationItem({ notification, settings }: {
+function NotificationItem({
+  notification,
+  settings
+}: {
   notification: Notification;
-  settings: NotificationBadgeProps['userSettings'];
+  settings: NotificationBadgeProps["userSettings"];
 }) {
-  const icon = notification.type === 'message'
-    ? <MessageIcon />
-    : notification.type === 'alert'
-      ? <AlertIcon />
-      : notification.type === 'mention'
-        ? <MentionIcon />
-        : notification.type === 'update'
-          ? <UpdateIcon />
-          : <SystemIcon />;
+  const icon =
+    notification.type === "message" ? (
+      <MessageIcon />
+    ) : notification.type === "alert" ? (
+      <AlertIcon />
+    ) : notification.type === "mention" ? (
+      <MentionIcon />
+    ) : notification.type === "update" ? (
+      <UpdateIcon />
+    ) : (
+      <SystemIcon />
+    );
 
-  const priorityLabel = notification.priority === 'critical'
-    ? 'Critical'
-    : notification.priority === 'high'
-      ? 'Important'
-      : notification.priority === 'medium'
-        ? 'Normal'
-        : 'Low priority';
+  const priorityLabel =
+    notification.priority === "critical"
+      ? "Critical"
+      : notification.priority === "high"
+        ? "Important"
+        : notification.priority === "medium"
+          ? "Normal"
+          : "Low priority";
 
   return (
     <div
-      className={`notification-item ${notification.read ? 'read' : 'unread'} ${
+      className={`notification-item ${notification.read ? "read" : "unread"} ${
         notification.muted || settings.mutedTypes.includes(notification.type)
-          ? 'muted'
-          : notification.priority === 'critical'
-            ? 'critical'
-            : notification.priority === 'high'
-              ? 'high'
-              : ''
+          ? "muted"
+          : notification.priority === "critical"
+            ? "critical"
+            : notification.priority === "high"
+              ? "high"
+              : ""
       }`}
     >
       {icon}

@@ -3,15 +3,15 @@
 // Domain: E-commerce payment processing
 // Simulated path: src/components/forms/CreditCardForm.tsx
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from "react";
 // More scattered imports
-import { CreditCardData, CardValidationResult } from '../../../types/payment';
-import { detectCardType, validateLuhn } from '../../../utils/pricing';
+import { CreditCardData, CardValidationResult } from "../../../types/payment";
+import { detectCardType, validateLuhn } from "../../../utils/pricing";
 import {
   CARD_NUMBER_LENGTH,
   CVV_LENGTH,
   EXPIRY_FORMAT_REGEX
-} from '../../../constants/payment-config';
+} from "../../../constants/payment-config";
 
 interface CreditCardFormProps {
   onSubmit: (data: CreditCardData) => Promise<CardValidationResult>;
@@ -24,10 +24,10 @@ export function CreditCardForm({
   formatCardNumber,
   errors
 }: CreditCardFormProps) {
-  const [cardNumber, setCardNumber] = useState('');
-  const [expiry, setExpiry] = useState('');
-  const [cvv, setCvv] = useState('');
-  const [cardholderName, setCardholderName] = useState('');
+  const [cardNumber, setCardNumber] = useState("");
+  const [expiry, setExpiry] = useState("");
+  const [cvv, setCvv] = useState("");
+  const [cardholderName, setCardholderName] = useState("");
   const [detectedType, setDetectedType] = useState<string | null>(null);
 
   const cardInputRef = useRef<HTMLInputElement>(null);
@@ -41,16 +41,16 @@ export function CreditCardForm({
   }, [cardNumber]);
 
   const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const raw = e.target.value.replace(/\D/g, '');
+    const raw = e.target.value.replace(/\D/g, "");
     if (raw.length <= CARD_NUMBER_LENGTH) {
       setCardNumber(formatCardNumber(raw));
     }
   };
 
   const handleExpiryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value.replace(/\D/g, '');
+    let value = e.target.value.replace(/\D/g, "");
     if (value.length >= 2) {
-      value = value.slice(0, 2) + '/' + value.slice(2, 4);
+      value = value.slice(0, 2) + "/" + value.slice(2, 4);
     }
     setExpiry(value);
   };
@@ -58,7 +58,7 @@ export function CreditCardForm({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const cleanCardNumber = cardNumber.replace(/\s/g, '');
+    const cleanCardNumber = cardNumber.replace(/\s/g, "");
 
     if (!validateLuhn(cleanCardNumber)) {
       return;
@@ -73,15 +73,15 @@ export function CreditCardForm({
       expiry,
       cvv,
       cardholderName,
-      cardType: detectedType || 'unknown',
+      cardType: detectedType || "unknown"
     });
 
     if (result.success) {
       // Clear form on success
-      setCardNumber('');
-      setExpiry('');
-      setCvv('');
-      setCardholderName('');
+      setCardNumber("");
+      setExpiry("");
+      setCvv("");
+      setCardholderName("");
     }
   };
 
@@ -100,9 +100,13 @@ export function CreditCardForm({
             maxLength={19}
             autoComplete="cc-number"
           />
-          {detectedType && <span className={`card-type-icon ${detectedType}`} />}
+          {detectedType && (
+            <span className={`card-type-icon ${detectedType}`} />
+          )}
         </div>
-        {errors.cardNumber && <span className="error">{errors.cardNumber}</span>}
+        {errors.cardNumber && (
+          <span className="error">{errors.cardNumber}</span>
+        )}
       </div>
 
       <div className="form-row">
@@ -126,7 +130,9 @@ export function CreditCardForm({
             id="cvv"
             type="text"
             value={cvv}
-            onChange={(e) => setCvv(e.target.value.replace(/\D/g, '').slice(0, CVV_LENGTH))}
+            onChange={(e) =>
+              setCvv(e.target.value.replace(/\D/g, "").slice(0, CVV_LENGTH))
+            }
             placeholder="123"
             maxLength={CVV_LENGTH}
             autoComplete="cc-csc"
@@ -145,7 +151,9 @@ export function CreditCardForm({
           placeholder="John Doe"
           autoComplete="cc-name"
         />
-        {errors.cardholderName && <span className="error">{errors.cardholderName}</span>}
+        {errors.cardholderName && (
+          <span className="error">{errors.cardholderName}</span>
+        )}
       </div>
 
       <button type="submit" className="submit-btn">

@@ -12,6 +12,7 @@ description: Use when 삼항 연산자가 중첩되거나, 복잡한 조건식 `
 ### 동시에 실행되지 않는 코드 분리
 
 ❌ viewer/admin 로직이 한 컴포넌트에 섞임:
+
 ```tsx
 function SubmitButton() {
   const isViewer = useRole() === "viewer";
@@ -28,6 +29,7 @@ function SubmitButton() {
 ```
 
 ✅ 분기별로 분리:
+
 ```tsx
 function SubmitButton() {
   const isViewer = useRole() === "viewer";
@@ -37,7 +39,9 @@ function ViewerSubmitButton() {
   return <TextButton disabled>Submit</TextButton>;
 }
 function AdminSubmitButton() {
-  useEffect(() => { showButtonAnimation(); }, []);
+  useEffect(() => {
+    showButtonAnimation();
+  }, []);
   return <Button type="submit">Submit</Button>;
 }
 ```
@@ -45,11 +49,13 @@ function AdminSubmitButton() {
 ### 복잡한 조건에 이름 붙이기
 
 ❌ 조건이 무슨 뜻인지 바로 안 보임:
+
 ```tsx
 if (user.age >= 18 && !user.isBanned && user.emailVerified) { ... }
 ```
 
 ✅ 의도를 이름으로 표현:
+
 ```tsx
 const canPurchase = user.age >= 18 && !user.isBanned && user.emailVerified;
 if (canPurchase) { ... }
@@ -57,12 +63,12 @@ if (canPurchase) { ... }
 
 ## 빠른 참조
 
-| 코드 냄새 | 개선 방법 |
-|----------|----------|
-| 중첩된 삼항 연산자 | `if`문이나 early return 사용 |
+| 코드 냄새                    | 개선 방법                                      |
+| ---------------------------- | ---------------------------------------------- |
+| 중첩된 삼항 연산자           | `if`문이나 early return 사용                   |
 | 복잡한 조건 `a && !b \|\| c` | 의미있는 이름 붙이기: `const canProceed = ...` |
-| 여러 분기가 교차됨 | 분기별로 별도 컴포넌트 분리 |
-| 코드 위아래로 왔다갔다 | 조건을 한눈에 볼 수 있는 객체로 관리 |
+| 여러 분기가 교차됨           | 분기별로 별도 컴포넌트 분리                    |
+| 코드 위아래로 왔다갔다       | 조건을 한눈에 볼 수 있는 객체로 관리           |
 
 ## 주의사항
 

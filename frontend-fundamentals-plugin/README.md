@@ -16,11 +16,13 @@
 ### From GitHub (Recommended)
 
 **Step 1:** Add the marketplace
+
 ```bash
 /plugin marketplace add toss/frontend-fundamentals
 ```
 
 **Step 2:** Install the plugin
+
 ```bash
 /plugin install frontend-fundamentals@toss-frontend-fundamentals
 ```
@@ -63,12 +65,12 @@ This creates a feedback loop: review → fix → re-review → repeat until clea
 
 ## 📚 Code Quality Principles
 
-| Principle | What It Checks |
-|-----------|----------------|
-| **Cohesion** | Are related things together? (scattered files, magic numbers) |
-| **Coupling** | Is change impact minimized? (props drilling, god hooks) |
-| **Predictability** | Does code do what the name says? (hidden side effects) |
-| **Readability** | Is code easy to follow? (nested ternaries, complex conditions) |
+| Principle          | What It Checks                                                 |
+| ------------------ | -------------------------------------------------------------- |
+| **Cohesion**       | Are related things together? (scattered files, magic numbers)  |
+| **Coupling**       | Is change impact minimized? (props drilling, god hooks)        |
+| **Predictability** | Does code do what the name says? (hidden side effects)         |
+| **Readability**    | Is code easy to follow? (nested ternaries, complex conditions) |
 
 Learn more at [frontend-fundamentals.com/code-quality](https://frontend-fundamentals.com/code-quality/)
 
@@ -78,13 +80,16 @@ Learn more at [frontend-fundamentals.com/code-quality](https://frontend-fundamen
 # Code Review: feature/user-form
 
 ## Summary
+
 Props drilling through 3 layers and inconsistent validation return types.
 
 ## Critical (must fix)
+
 - **Coupling** `UserForm.tsx:L42` - Props pass through 3 layers unused
   → Use composition pattern with children
 
 ## Warnings (should fix)
+
 - **Predictability** `validators.ts:L15` - Inconsistent return types
   → Use ValidationResult type for all validators
 ```

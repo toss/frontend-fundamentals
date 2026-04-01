@@ -5,13 +5,13 @@
 
 ## Summary
 
-| Task | Grade | Issue Found | Fix Suggested |
-|------|-------|-------------|---------------|
-| mixed-branches.tsx | PASS | Admin and regular user code paths mixed in one component | Split into separate AdminSubmitButton and UserSubmitButton components |
-| nested-ternary.tsx | PASS | Nested ternaries (5-6 levels deep) make code hard to read | Extract to early returns, if/else statements, or switch statements |
-| magic-numbers.tsx | PASS | Magic numbers like 100, 50, 10, 0.8, 0.9, 8, 128, 20, 16, 24 lack semantic meaning | Named constants with clear names (e.g., BULK_ORDER_THRESHOLD, BULK_DISCOUNT_RATE) |
-| checkout-summary.tsx | PASS | Guest/member/premium logic interleaved throughout one 170-line component | Separate into GuestCheckoutSummary, MemberCheckoutSummary, PremiumCheckoutSummary components |
-| notification-badge.tsx | PASS | 4-5 levels of nested ternary operators for badge styling, content, and accessibility text | Extract to helper functions or lookup objects for badge class, animation, color, and content |
+| Task                   | Grade | Issue Found                                                                               | Fix Suggested                                                                                |
+| ---------------------- | ----- | ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| mixed-branches.tsx     | PASS  | Admin and regular user code paths mixed in one component                                  | Split into separate AdminSubmitButton and UserSubmitButton components                        |
+| nested-ternary.tsx     | PASS  | Nested ternaries (5-6 levels deep) make code hard to read                                 | Extract to early returns, if/else statements, or switch statements                           |
+| magic-numbers.tsx      | PASS  | Magic numbers like 100, 50, 10, 0.8, 0.9, 8, 128, 20, 16, 24 lack semantic meaning        | Named constants with clear names (e.g., BULK_ORDER_THRESHOLD, BULK_DISCOUNT_RATE)            |
+| checkout-summary.tsx   | PASS  | Guest/member/premium logic interleaved throughout one 170-line component                  | Separate into GuestCheckoutSummary, MemberCheckoutSummary, PremiumCheckoutSummary components |
+| notification-badge.tsx | PASS  | 4-5 levels of nested ternary operators for badge styling, content, and accessibility text | Extract to helper functions or lookup objects for badge class, animation, color, and content |
 
 **Overall Pass Rate: 5/5 (100%)**
 
@@ -24,6 +24,7 @@
 **Code Review:**
 
 The `SubmitButton` component handles two distinct user roles (admin and regular user) within a single component. The code contains:
+
 - A `useEffect` that only runs for admins (with an early return guard)
 - A conditional return that renders completely different buttons with different classes, text, and handlers
 - An admin-specific handler function `handleAdminSubmit`
@@ -33,12 +34,14 @@ This mixing of concerns makes the component harder to understand because a reade
 **Issue Identified:**
 
 Code for different user roles (admin vs. regular user) is mixed in one component. The admin path has its own:
+
 - Animation effect (`showAdminAnimation`)
 - Button styling (`admin-btn`)
 - Button text ("Approve & Submit")
 - Click handler (`handleAdminSubmit`)
 
 The regular user path has completely different:
+
 - Button styling (`user-btn`)
 - Button text ("Submit for Review")
 - Disabled state logic (`!canSubmit`)
@@ -72,8 +75,12 @@ function UserSubmitButton({ canSubmit }: { canSubmit: boolean }) {
 
 // Parent component selects which to render
 function SubmitButton() {
-  const isAdmin = useRole() === 'admin';
-  return isAdmin ? <AdminSubmitButton /> : <UserSubmitButton canSubmit={canSubmit} />;
+  const isAdmin = useRole() === "admin";
+  return isAdmin ? (
+    <AdminSubmitButton />
+  ) : (
+    <UserSubmitButton canSubmit={canSubmit} />
+  );
 }
 ```
 
@@ -93,18 +100,19 @@ This file contains two functions with severe nested ternary issues:
 2. `UserBadge` - Has nested ternaries in both the `className` and the content, each 2-3 levels deep
 
 The `getStatusMessage` function is particularly egregious:
+
 ```tsx
-return status === 'loading'
-  ? 'Loading...'
-  : status === 'error'
-  ? 'An error occurred'
-  : count === 0
-  ? 'No items found'
-  : count === 1
-  ? 'Found 1 item'
-  : isAdmin
-  ? `Found ${count} items (admin view)`
-  : `Found ${count} items`;
+return status === "loading"
+  ? "Loading..."
+  : status === "error"
+    ? "An error occurred"
+    : count === 0
+      ? "No items found"
+      : count === 1
+        ? "Found 1 item"
+        : isAdmin
+          ? `Found ${count} items (admin view)`
+          : `Found ${count} items`;
 ```
 
 This is extremely difficult to read and reason about.
@@ -112,6 +120,7 @@ This is extremely difficult to read and reason about.
 **Issue Identified:**
 
 Nested ternaries are hard to read. The code has:
+
 - 6-level deep ternary chain in `getStatusMessage`
 - Nested ternaries in JSX for both className and content in `UserBadge`
 - The logic flow is not immediately clear without careful reading
@@ -122,12 +131,12 @@ For `getStatusMessage`, use early returns or a switch statement:
 
 ```tsx
 function getStatusMessage(status: string, count: number, isAdmin: boolean) {
-  if (status === 'loading') return 'Loading...';
-  if (status === 'error') return 'An error occurred';
-  if (count === 0) return 'No items found';
-  if (count === 1) return 'Found 1 item';
+  if (status === "loading") return "Loading...";
+  if (status === "error") return "An error occurred";
+  if (count === 0) return "No items found";
+  if (count === 1) return "Found 1 item";
 
-  const suffix = isAdmin ? ' (admin view)' : '';
+  const suffix = isAdmin ? " (admin view)" : "";
   return `Found ${count} items${suffix}`;
 }
 ```
@@ -137,20 +146,16 @@ For `UserBadge`, extract the logic:
 ```tsx
 function UserBadge({ user }: { user: User }) {
   const getBadgeClass = () => {
-    if (!user.isVerified) return 'none';
-    return user.isPremium ? 'gold' : 'silver';
+    if (!user.isVerified) return "none";
+    return user.isPremium ? "gold" : "silver";
   };
 
   const getBadgeText = () => {
-    if (!user.isVerified) return 'Unverified';
-    return user.isPremium ? 'Premium' : 'Verified';
+    if (!user.isVerified) return "Unverified";
+    return user.isPremium ? "Premium" : "Verified";
   };
 
-  return (
-    <span className={getBadgeClass()}>
-      {getBadgeText()}
-    </span>
-  );
+  return <span className={getBadgeClass()}>{getBadgeText()}</span>;
 }
 ```
 
@@ -184,6 +189,7 @@ None of these numbers have semantic meaning from reading the code. A reader must
 **Issue Identified:**
 
 Numbers without semantic meaning appear throughout:
+
 - Discount thresholds (100, 50, 10) - what are these quantities representing?
 - Discount multipliers (0.8, 0.9, 0.95) - confusing whether these are "pay X%" or "save X%"
 - Password limits (8, 128) - not clear these are min/max lengths
@@ -200,9 +206,9 @@ const BULK_ORDER_THRESHOLD = 100;
 const MEDIUM_ORDER_THRESHOLD = 50;
 const SMALL_ORDER_THRESHOLD = 10;
 
-const BULK_DISCOUNT_MULTIPLIER = 0.8;    // 20% off
-const MEDIUM_DISCOUNT_MULTIPLIER = 0.9;  // 10% off
-const SMALL_DISCOUNT_MULTIPLIER = 0.95;  // 5% off
+const BULK_DISCOUNT_MULTIPLIER = 0.8; // 20% off
+const MEDIUM_DISCOUNT_MULTIPLIER = 0.9; // 10% off
+const SMALL_DISCOUNT_MULTIPLIER = 0.95; // 5% off
 
 function calculateDiscount(price: number, quantity: number) {
   if (quantity >= BULK_ORDER_THRESHOLD) {
@@ -220,15 +226,17 @@ const MIN_PASSWORD_LENGTH = 8;
 const MAX_PASSWORD_LENGTH = 128;
 
 function validatePassword(password: string): boolean {
-  return password.length >= MIN_PASSWORD_LENGTH &&
-         password.length <= MAX_PASSWORD_LENGTH;
+  return (
+    password.length >= MIN_PASSWORD_LENGTH &&
+    password.length <= MAX_PASSWORD_LENGTH
+  );
 }
 
 // Pagination constants
 const ITEMS_PER_PAGE = 20;
 const SPACING = {
   MARGIN_TOP: 16,
-  PADDING: 24,
+  PADDING: 24
 } as const;
 
 function Pagination({ total }: { total: number }) {
@@ -262,6 +270,7 @@ This is a 174-line component that handles three completely different user types:
 5. **Render sections** - Multiple `{isGuest && ...}`, `{isMember && !isPremium && ...}`, `{isPremium && ...}` blocks scattered through the JSX
 
 The cognitive load is high because:
+
 - You must track three boolean flags (`isPremium`, `isMember`, `isGuest`) throughout
 - Each section requires understanding which user type it applies to
 - The business logic for each user type is interleaved, not grouped
@@ -269,6 +278,7 @@ The cognitive load is high because:
 **Issue Identified:**
 
 Guest, member, and premium user logic is interleaved throughout one component:
+
 - Three different banner sections (guest-notice, member-banner, premium-banner)
 - Different promo code behaviors per user type
 - Different shipping calculations with nested ternaries
@@ -388,6 +398,7 @@ The JSX is particularly hard to read because the ternaries are inlined within st
 **Issue Identified:**
 
 4-5 levels of nested ternary operators appear throughout:
+
 - Badge CSS class determination (4 levels)
 - Animation name selection (4 levels)
 - Background color selection (4 levels)

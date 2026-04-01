@@ -1,6 +1,7 @@
 # EVAL TASK: Cohesion - Scattered Files
 
 ## Expected Issue
+
 Identify that user-related files are scattered across the codebase, making it hard to understand and modify user features as a unit.
 
 ## Current Structure (problematic)
@@ -20,9 +21,11 @@ src/
 ```
 
 ## Problem
+
 When modifying user features, you need to touch 5 different directories. Changes to user logic require understanding relationships across scattered files.
 
 ## Expected Suggestion
+
 Colocate user-related files:
 
 ```
@@ -37,6 +40,7 @@ src/
 ```
 
 ## Context
+
 - UserForm.tsx imports useUserValidation
 - useUserValidation imports userTypes
 - userHelpers is only used by UserForm

@@ -16,14 +16,17 @@ type Response<T> = {
 };
 
 // This shadows the global fetch and behaves very differently
-export async function fetch<T>(url: string, config?: RequestConfig): Promise<T> {
+export async function fetch<T>(
+  url: string,
+  config?: RequestConfig
+): Promise<T> {
   // Unlike native fetch, this returns data directly, not a Response object
   // This is confusing because developers expect fetch() to return Response
   const response = await window.fetch(url, {
     headers: {
-      'Content-Type': 'application/json',
-      ...config?.headers,
-    },
+      "Content-Type": "application/json",
+      ...config?.headers
+    }
   });
 
   // Auto-parses JSON unlike native fetch
@@ -31,7 +34,7 @@ export async function fetch<T>(url: string, config?: RequestConfig): Promise<T> 
 
   // Throws on non-2xx unlike native fetch which only throws on network errors
   if (!response.ok) {
-    throw new Error(data.message || 'Request failed');
+    throw new Error(data.message || "Request failed");
   }
 
   // Also does automatic caching which native fetch doesn't do
@@ -43,9 +46,12 @@ export async function fetch<T>(url: string, config?: RequestConfig): Promise<T> 
 }
 
 // This shadows common HTTP method names but has unexpected behavior
-export async function get<T>(url: string, params?: Record<string, string>): Promise<T> {
+export async function get<T>(
+  url: string,
+  params?: Record<string, string>
+): Promise<T> {
   // Unexpected: automatically adds auth header from localStorage
-  const token = localStorage.getItem('authToken');
+  const token = localStorage.getItem("authToken");
 
   // Unexpected: modifies the URL by adding a timestamp for cache busting
   const timestamp = Date.now();
@@ -57,11 +63,11 @@ export async function get<T>(url: string, params?: Record<string, string>): Prom
   for (let i = 0; i < 3; i++) {
     try {
       return await fetch<T>(fullUrl, {
-        headers: token ? { Authorization: `Bearer ${token}` } : {},
+        headers: token ? { Authorization: `Bearer ${token}` } : {}
       });
     } catch (err) {
       lastError = err as Error;
-      await new Promise(r => setTimeout(r, 1000 * (i + 1))); // exponential backoff
+      await new Promise((r) => setTimeout(r, 1000 * (i + 1))); // exponential backoff
     }
   }
   throw lastError;
@@ -72,31 +78,33 @@ export async function post<T, D = unknown>(url: string, data: D): Promise<T> {
   // Unexpected: validates data against a schema if it exists
   const schema = (window as any).__API_SCHEMAS__?.[url];
   if (schema && !schema.validate(data)) {
-    throw new Error('Validation failed');
+    throw new Error("Validation failed");
   }
 
   // Unexpected: adds CSRF token automatically
-  const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+  const csrfToken = document
+    .querySelector('meta[name="csrf-token"]')
+    ?.getAttribute("content");
 
   // Unexpected: logs all POST requests to console in non-production
-  if (process.env.NODE_ENV !== 'production') {
-    console.log('[API POST]', url, data);
+  if (process.env.NODE_ENV !== "production") {
+    console.log("[API POST]", url, data);
   }
 
   const response = await window.fetch(url, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'X-CSRF-Token': csrfToken || '',
-      Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+      "Content-Type": "application/json",
+      "X-CSRF-Token": csrfToken || "",
+      Authorization: `Bearer ${localStorage.getItem("authToken")}`
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(data)
   });
 
   // Unexpected: automatically refreshes auth token if response includes new one
-  const newToken = response.headers.get('X-New-Token');
+  const newToken = response.headers.get("X-New-Token");
   if (newToken) {
-    localStorage.setItem('authToken', newToken);
+    localStorage.setItem("authToken", newToken);
   }
 
   return response.json();
@@ -115,7 +123,7 @@ export async function request<T>(
   data?: unknown
 ): Promise<Response<T>> {
   // Check cache first for GET requests
-  if (method === 'GET') {
+  if (method === "GET") {
     const cached = sessionStorage.getItem(`cache_${url}`);
     if (cached) {
       const parsed = JSON.parse(cached);
@@ -123,7 +131,7 @@ export async function request<T>(
       return {
         data: parsed,
         status: 200,
-        headers: { 'X-Cache': 'HIT' },
+        headers: { "X-Cache": "HIT" }
       };
     }
   }
@@ -131,8 +139,8 @@ export async function request<T>(
   // Unexpected: transforms snake_case to camelCase in response
   const response = await window.fetch(url, {
     method,
-    headers: { 'Content-Type': 'application/json' },
-    body: data ? JSON.stringify(data) : undefined,
+    headers: { "Content-Type": "application/json" },
+    body: data ? JSON.stringify(data) : undefined
   });
 
   const json = await response.json();
@@ -141,7 +149,7 @@ export async function request<T>(
   return {
     data: transformed as T,
     status: response.status,
-    headers: Object.fromEntries(response.headers.entries()),
+    headers: Object.fromEntries(response.headers.entries())
   };
 }
 
@@ -150,11 +158,11 @@ function transformKeys(obj: any): any {
   if (Array.isArray(obj)) {
     return obj.map(transformKeys);
   }
-  if (obj !== null && typeof obj === 'object') {
+  if (obj !== null && typeof obj === "object") {
     return Object.fromEntries(
       Object.entries(obj).map(([key, value]) => [
         key.replace(/_([a-z])/g, (_, c) => c.toUpperCase()),
-        transformKeys(value),
+        transformKeys(value)
       ])
     );
   }
@@ -166,5 +174,5 @@ export default {
   get,
   post,
   delete: remove, // confusingly named
-  request,
+  request
 };

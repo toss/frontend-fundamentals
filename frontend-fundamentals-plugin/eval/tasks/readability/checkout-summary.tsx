@@ -2,10 +2,10 @@
 // Expected: Identify that guest, member, and premium user logic should be separated into different components
 // Domain: E-commerce checkout flow
 
-import { useState, useEffect } from 'react';
-import { useAuth } from '@/hooks/useAuth';
-import { useCart } from '@/hooks/useCart';
-import { applyDiscount, calculateShipping } from '@/utils/pricing';
+import { useState, useEffect } from "react";
+import { useAuth } from "@/hooks/useAuth";
+import { useCart } from "@/hooks/useCart";
+import { applyDiscount, calculateShipping } from "@/utils/pricing";
 
 interface CheckoutSummaryProps {
   onCheckout: () => void;
@@ -14,36 +14,42 @@ interface CheckoutSummaryProps {
 function CheckoutSummary({ onCheckout }: CheckoutSummaryProps) {
   const { user, membership } = useAuth();
   const { items, subtotal } = useCart();
-  const [promoCode, setPromoCode] = useState('');
-  const [guestEmail, setGuestEmail] = useState('');
+  const [promoCode, setPromoCode] = useState("");
+  const [guestEmail, setGuestEmail] = useState("");
   const [saveForLater, setSaveForLater] = useState(false);
 
-  const isPremium = membership === 'premium';
+  const isPremium = membership === "premium";
   const isMember = !!user;
   const isGuest = !user;
 
   // Premium members get free shipping over $50, regular members over $100, guests always pay
   const shippingThreshold = isPremium ? 50 : isMember ? 100 : Infinity;
   const freeShipping = subtotal >= shippingThreshold;
-  const shippingCost = freeShipping ? 0 : isPremium ? 4.99 : isMember ? 7.99 : 12.99;
+  const shippingCost = freeShipping
+    ? 0
+    : isPremium
+      ? 4.99
+      : isMember
+        ? 7.99
+        : 12.99;
 
   // Different discount rates
   const memberDiscount = isPremium ? 0.15 : isMember ? 0.05 : 0;
   const discountAmount = subtotal * memberDiscount;
 
   // Premium gets express, member gets standard, guest gets economy
-  const estimatedDays = isPremium ? '1-2' : isMember ? '3-5' : '7-10';
+  const estimatedDays = isPremium ? "1-2" : isMember ? "3-5" : "7-10";
 
   useEffect(() => {
     if (isPremium) {
       // Track premium checkout views for analytics
-      window.analytics?.track('premium_checkout_view', { subtotal });
+      window.analytics?.track("premium_checkout_view", { subtotal });
     }
   }, [isPremium, subtotal]);
 
   const handleApplyPromo = () => {
     if (isGuest) {
-      alert('Please sign in to use promo codes');
+      alert("Please sign in to use promo codes");
       return;
     }
     if (isPremium) {
@@ -102,7 +108,10 @@ function CheckoutSummary({ onCheckout }: CheckoutSummaryProps) {
 
         {memberDiscount > 0 && (
           <div className="row discount">
-            <span>{isPremium ? 'Premium' : 'Member'} Discount ({(memberDiscount * 100).toFixed(0)}%)</span>
+            <span>
+              {isPremium ? "Premium" : "Member"} Discount (
+              {(memberDiscount * 100).toFixed(0)}%)
+            </span>
             <span>-${discountAmount.toFixed(2)}</span>
           </div>
         )}
@@ -112,12 +121,13 @@ function CheckoutSummary({ onCheckout }: CheckoutSummaryProps) {
             Shipping ({estimatedDays} days)
             {freeShipping && <span className="free-tag">FREE</span>}
           </span>
-          <span>{freeShipping ? '$0.00' : `$${shippingCost.toFixed(2)}`}</span>
+          <span>{freeShipping ? "$0.00" : `$${shippingCost.toFixed(2)}`}</span>
         </div>
 
         {!freeShipping && isMember && (
           <p className="shipping-hint">
-            Add ${(shippingThreshold - subtotal).toFixed(2)} more for free shipping!
+            Add ${(shippingThreshold - subtotal).toFixed(2)} more for free
+            shipping!
           </p>
         )}
       </div>
@@ -126,7 +136,9 @@ function CheckoutSummary({ onCheckout }: CheckoutSummaryProps) {
         <div className="promo-section">
           <input
             type="text"
-            placeholder={isPremium ? "Stack another promo code" : "Enter promo code"}
+            placeholder={
+              isPremium ? "Stack another promo code" : "Enter promo code"
+            }
             value={promoCode}
             onChange={(e) => setPromoCode(e.target.value)}
           />
@@ -134,9 +146,7 @@ function CheckoutSummary({ onCheckout }: CheckoutSummaryProps) {
         </div>
       )}
 
-      {isGuest && (
-        <p className="promo-hint">Sign in to use promo codes</p>
-      )}
+      {isGuest && <p className="promo-hint">Sign in to use promo codes</p>}
 
       <div className="total-row">
         <span>Total</span>
@@ -155,15 +165,22 @@ function CheckoutSummary({ onCheckout }: CheckoutSummaryProps) {
       )}
 
       <button
-        className={`checkout-btn ${isPremium ? 'premium' : isMember ? 'member' : 'guest'}`}
+        className={`checkout-btn ${isPremium ? "premium" : isMember ? "member" : "guest"}`}
         onClick={onCheckout}
         disabled={isGuest && !guestEmail}
       >
-        {isPremium ? 'Express Checkout' : isMember ? 'Checkout' : 'Continue as Guest'}
+        {isPremium
+          ? "Express Checkout"
+          : isMember
+            ? "Checkout"
+            : "Continue as Guest"}
       </button>
 
       {isGuest && (
-        <button className="secondary-btn" onClick={() => window.location.href = '/login'}>
+        <button
+          className="secondary-btn"
+          onClick={() => (window.location.href = "/login")}
+        >
           Sign in for faster checkout
         </button>
       )}

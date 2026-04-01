@@ -5,12 +5,12 @@
 
 ## Summary
 
-| Task | Grade | Issue Found | Fix Suggested |
-|------|-------|-------------|---------------|
-| `hidden-side-effects.tsx` | PASS | Side effects in getter/calculator functions | Rename functions or move side effects to dedicated functions |
-| `inconsistent-returns.tsx` | PASS | Functions return different types (string, boolean, objects with varying shapes) | Use discriminated union with consistent return shape |
-| `use-cart.tsx` | PASS | Hidden analytics/localStorage in pure-looking functions (`getItemById`, `calculateShipping`, `isEligibleForFreeShipping`, `itemCount`, `subtotal`) | Separate pure calculations from side effects; make effects explicit |
-| `api-client.ts` | PASS | Functions named `fetch`, `get`, `post`, `remove` shadow standard APIs and behave unexpectedly | Rename to distinctive names like `fetchWithAuth`, `getJSON`, `postWithRetry` |
+| Task                       | Grade | Issue Found                                                                                                                                        | Fix Suggested                                                                |
+| -------------------------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `hidden-side-effects.tsx`  | PASS  | Side effects in getter/calculator functions                                                                                                        | Rename functions or move side effects to dedicated functions                 |
+| `inconsistent-returns.tsx` | PASS  | Functions return different types (string, boolean, objects with varying shapes)                                                                    | Use discriminated union with consistent return shape                         |
+| `use-cart.tsx`             | PASS  | Hidden analytics/localStorage in pure-looking functions (`getItemById`, `calculateShipping`, `isEligibleForFreeShipping`, `itemCount`, `subtotal`) | Separate pure calculations from side effects; make effects explicit          |
+| `api-client.ts`            | PASS  | Functions named `fetch`, `get`, `post`, `remove` shadow standard APIs and behave unexpectedly                                                      | Rename to distinctive names like `fetchWithAuth`, `getJSON`, `postWithRetry` |
 
 **Overall Result: 4/4 PASS**
 
@@ -36,6 +36,7 @@ The file contains three functions with names that suggest pure operations but co
 **Issue Identified:**
 
 All three functions violate the principle of least surprise. Their names suggest they are pure functions (getters, calculators, formatters) but they contain hidden side effects:
+
 - `getUser` tracks analytics
 - `calculateTotal` persists to localStorage
 - `formatDate` logs to console
@@ -45,30 +46,32 @@ Callers have no way to know these side effects occur just by looking at the func
 **Suggested Fix:**
 
 1. **Option A: Rename functions to include action verbs that indicate side effects:**
+
    ```typescript
    function fetchAndTrackUser() {
-     const user = cache.get('user');
-     analytics.track('user_fetched');
+     const user = cache.get("user");
+     analytics.track("user_fetched");
      return user;
    }
 
    function calculateAndPersistTotal(items: Item[]) {
      const total = items.reduce((sum, item) => sum + item.price, 0);
-     localStorage.setItem('lastTotal', String(total));
+     localStorage.setItem("lastTotal", String(total));
      return total;
    }
    ```
 
 2. **Option B: Move side effects to dedicated functions and keep pure functions pure:**
+
    ```typescript
    // Pure getter
    function getUser() {
-     return cache.get('user');
+     return cache.get("user");
    }
 
    // Dedicated side effect function
    function trackUserFetched() {
-     analytics.track('user_fetched');
+     analytics.track("user_fetched");
    }
 
    // Pure calculation
@@ -113,6 +116,7 @@ The file contains three validation functions that all serve a similar purpose (v
 **Issue Identified:**
 
 The validation functions have inconsistent return types making them unpredictable to use:
+
 - `validateEmail`: Returns `string | boolean` - completely mixed types
 - `validatePassword`: Uses `valid` and `error` fields with inconsistent presence
 - `validateUsername`: Uses `isValid` and `message` fields with inconsistent presence
@@ -124,36 +128,38 @@ This forces consumers to write complex type guards and makes the API confusing.
 Use a discriminated union type with a consistent return shape across all validators:
 
 ```typescript
-type ValidationResult =
-  | { isValid: true }
-  | { isValid: false; message: string };
+type ValidationResult = { isValid: true } | { isValid: false; message: string };
 
 function validateEmail(email: string): ValidationResult {
   if (!email) {
-    return { isValid: false, message: 'Email is required' };
+    return { isValid: false, message: "Email is required" };
   }
-  if (!email.includes('@')) {
-    return { isValid: false, message: 'Invalid email format' };
+  if (!email.includes("@")) {
+    return { isValid: false, message: "Invalid email format" };
   }
   return { isValid: true };
 }
 
 function validatePassword(password: string): ValidationResult {
   if (password.length < 8) {
-    return { isValid: false, message: 'Password must be at least 8 characters' };
+    return {
+      isValid: false,
+      message: "Password must be at least 8 characters"
+    };
   }
   return { isValid: true };
 }
 
 function validateUsername(username: string): ValidationResult {
   if (!username) {
-    return { isValid: false, message: 'Username is required' };
+    return { isValid: false, message: "Username is required" };
   }
   return { isValid: true };
 }
 ```
 
 This discriminated union ensures:
+
 - Consistent property names (`isValid`, `message`)
 - `message` is only present when `isValid: false` (not optional - required for errors)
 - TypeScript can narrow the type based on `isValid`
@@ -195,11 +201,13 @@ This is a React hook for shopping cart functionality. The hook contains several 
    - Dispatches `window.dispatchEvent(new CustomEvent('cart:nearFreeShipping', ...))`
 
 **Functions where side effects are expected (setters/actions):**
+
 - `addItem`, `removeItem`, `updateQuantity`, `clearCart` - These have appropriate action-verb names, so side effects like localStorage writes and analytics are acceptable.
 
 **Issue Identified:**
 
 Multiple "pure-looking" functions contain hidden side effects:
+
 - `itemCount` and `subtotal` (memoized values) trigger analytics and storage writes
 - `getItemById` (getter) tracks lookups and updates "recently viewed"
 - `calculateShipping` (calculator) persists data and tracks analytics
@@ -214,7 +222,7 @@ Separate pure calculations from side effects:
 ```typescript
 export function useCart(): UseCartReturn {
   const [items, setItems] = useState<CartItem[]>(() => {
-    const saved = localStorage.getItem('cart');
+    const saved = localStorage.getItem("cart");
     return saved ? JSON.parse(saved) : [];
   });
 
@@ -228,17 +236,23 @@ export function useCart(): UseCartReturn {
   }, [items]);
 
   // PURE getter - no side effects
-  const getItemById = useCallback((id: string): CartItem | undefined => {
-    return items.find(item => item.id === id);
-  }, [items]);
+  const getItemById = useCallback(
+    (id: string): CartItem | undefined => {
+      return items.find((item) => item.id === id);
+    },
+    [items]
+  );
 
   // PURE calculation - no side effects
-  const calculateShipping = useCallback((zipCode: string): number => {
-    const baseRate = 5.99;
-    const distanceMultiplier = zipCode.startsWith('9') ? 1.5 : 1;
-    const weightSurcharge = items.length > 5 ? 2.99 : 0;
-    return baseRate * distanceMultiplier + weightSurcharge;
-  }, [items]);
+  const calculateShipping = useCallback(
+    (zipCode: string): number => {
+      const baseRate = 5.99;
+      const distanceMultiplier = zipCode.startsWith("9") ? 1.5 : 1;
+      const weightSurcharge = items.length > 5 ? 2.99 : 0;
+      return baseRate * distanceMultiplier + weightSurcharge;
+    },
+    [items]
+  );
 
   // PURE predicate - no side effects
   const isEligibleForFreeShipping = useCallback((): boolean => {
@@ -247,16 +261,16 @@ export function useCart(): UseCartReturn {
 
   // EXPLICIT side effect functions - clearly named
   const trackCartViewed = useCallback(() => {
-    analytics.track('cart_count_calculated', { count: itemCount });
+    analytics.track("cart_count_calculated", { count: itemCount });
   }, [itemCount]);
 
   const trackItemLookup = useCallback((id: string, found: boolean) => {
-    analytics.track('cart_item_lookup', { id, found });
+    analytics.track("cart_item_lookup", { id, found });
   }, []);
 
   const trackShippingCalculation = useCallback((zipCode: string) => {
-    analytics.track('shipping_calculated', { zipCode });
-    localStorage.setItem('lastShippingZip', zipCode);
+    analytics.track("shipping_calculated", { zipCode });
+    localStorage.setItem("lastShippingZip", zipCode);
   }, []);
 
   // ... rest of the hook
@@ -267,7 +281,9 @@ Alternatively, if analytics must be automatic, use a wrapper pattern:
 
 ```typescript
 // Hook for pure cart logic
-function useCartState() { /* pure logic only */ }
+function useCartState() {
+  /* pure logic only */
+}
 
 // Hook that adds analytics layer
 function useCartWithAnalytics() {
@@ -320,6 +336,7 @@ This file exports API client functions that shadow common library/browser API na
 **Issue Identified:**
 
 All exported functions shadow standard browser/library API names (`fetch`, `get`, `post`, `request`, `remove`/`delete`) but behave very differently:
+
 - `fetch` doesn't return a Response object
 - `get` has auto-retry, auto-auth, auto-cache-busting
 - `post` has schema validation, CSRF, token refresh
@@ -334,7 +351,10 @@ Rename functions to clearly indicate their enhanced/different behavior:
 
 ```typescript
 // Clear that this is NOT the native fetch
-export async function fetchJSON<T>(url: string, config?: RequestConfig): Promise<T> {
+export async function fetchJSON<T>(
+  url: string,
+  config?: RequestConfig
+): Promise<T> {
   // ... implementation
 }
 
@@ -380,8 +400,8 @@ export async function requestWithCache<T>(
 export default {
   getWithAuth,
   postWithAuth,
-  softDelete,  // Not 'delete' which is misleading
-  requestWithCache,
+  softDelete, // Not 'delete' which is misleading
+  requestWithCache
 };
 ```
 
@@ -390,10 +410,10 @@ Alternatively, create an explicitly named client:
 ```typescript
 // Makes it clear this is a custom client, not standard fetch/axios
 export const apiClient = {
-  get: getWithAuth,     // Users know apiClient.get !== fetch
+  get: getWithAuth, // Users know apiClient.get !== fetch
   post: postWithAuth,
   delete: softDelete,
-  request: requestWithCache,
+  request: requestWithCache
 };
 ```
 
@@ -407,11 +427,11 @@ export const apiClient = {
 
 All four predictability tasks were evaluated and received **PASS** grades:
 
-| Task | Key Issue | Key Fix |
-|------|-----------|---------|
-| `hidden-side-effects.tsx` | Getter/calculator names hide side effects | Rename or separate pure from impure |
-| `inconsistent-returns.tsx` | Validation functions return different types | Discriminated union with consistent shape |
-| `use-cart.tsx` | Pure-looking hook functions have hidden effects | Separate pure calculations from explicit effects |
-| `api-client.ts` | Function names shadow standard APIs | Use distinctive names revealing behavior |
+| Task                       | Key Issue                                       | Key Fix                                          |
+| -------------------------- | ----------------------------------------------- | ------------------------------------------------ |
+| `hidden-side-effects.tsx`  | Getter/calculator names hide side effects       | Rename or separate pure from impure              |
+| `inconsistent-returns.tsx` | Validation functions return different types     | Discriminated union with consistent shape        |
+| `use-cart.tsx`             | Pure-looking hook functions have hidden effects | Separate pure calculations from explicit effects |
+| `api-client.ts`            | Function names shadow standard APIs             | Use distinctive names revealing behavior         |
 
 **Predictability Skill: PASS (4/4 tasks)**

@@ -1,12 +1,12 @@
 // EVAL TASK: Readability - Mixed Branches
 // Expected: Identify that admin and regular user code paths should be separated into different components
 
-import { useEffect } from 'react';
-import { useRole } from './hooks';
-import { showAdminAnimation } from './animations';
+import { useEffect } from "react";
+import { useRole } from "./hooks";
+import { showAdminAnimation } from "./animations";
 
 function SubmitButton() {
-  const isAdmin = useRole() === 'admin';
+  const isAdmin = useRole() === "admin";
 
   useEffect(() => {
     if (!isAdmin) return;
