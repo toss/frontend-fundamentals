@@ -87,6 +87,25 @@ function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
 
   return (
     <Modal open={open} onClose={onClose}>
+      <ItemEditBody
+        keyword={keyword}
+        onKeywordChange={setKeyword}
+        onClose={onClose}
+      >
+        <ItemEditList
+          keyword={keyword}
+          items={items}
+          recommendedItems={recommendedItems}
+          onConfirm={onConfirm}
+        />
+      </ItemEditBody>
+    </Modal>
+  );
+}
+
+function ItemEditBody({ children, keyword, onKeywordChange, onClose }) {
+  return (
+    <>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Input
           value={keyword}
@@ -94,13 +113,8 @@ function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {
         />
         <Button onClick={onClose}>Close</Button>
       </div>
-      <ItemEditList
-        keyword={keyword}
-        items={items}
-        recommendedItems={recommendedItems}
-        onConfirm={onConfirm}
-      />
-    </Modal>
+      {children}
+    </>
   );
 }
 ```
