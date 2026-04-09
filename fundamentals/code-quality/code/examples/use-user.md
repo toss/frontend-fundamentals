@@ -1,12 +1,24 @@
-# 같은 종류의 함수는 반환 타입 통일하기
+# 같은 종류의 함수는 반환 타입 통일하기 <FrameworkSwitch />
 
 <div style="margin-top: 16px">
 <Badge type="info" text="예측 가능성" />
 </div>
 
+<React>
+
 API 호출과 관련된 Hook들처럼 같은 종류의 함수나 Hook이 서로 다른 반환 타입을 가지면 코드의 일관성이 떨어져서, 같이 일하는 동료들이 코드를 읽는 데에 헷갈릴 수 있어요.
 
+</React>
+
+<Angular>
+
+API 호출과 관련된 서비스 메서드들처럼 같은 종류의 함수나 메서드가 서로 다른 반환 타입을 가지면 코드의 일관성이 떨어져서, 같이 일하는 동료들이 코드를 읽는 데에 헷갈릴 수 있어요.
+
+</Angular>
+
 ## 📝 코드 예시 1: useUser
+
+<React>
 
 다음 `useUser` 와 `useServerTime` Hook은 모두 API 호출과 관련된 Hook이에요.
 
@@ -34,15 +46,52 @@ function useServerTime() {
 }
 ```
 
+</React>
+
+<Angular>
+
+```angular-ts
+@Injectable({ providedIn: 'root' })
+export class UserService {
+  private http = inject(HttpClient);
+
+  getUser(): Observable<User> {
+    return this.http.get<User>('/api/user');
+  }
+
+  getServerTime(): Signal<Date | undefined> {
+    return toSignal(
+      this.http.get<{ time: string }>('/api/server-time').pipe(
+        map(res => new Date(res.time))
+      )
+    );
+  }
+}
+```
+
+</Angular>
+
 ### 👃 코드 냄새 맡아보기
 
 #### 예측 가능성
 
+<React>
+
 서버 API를 호출하는 Hook의 반환 타입이 서로 다르다면, 동료들은 이런 Hook을 쓸 때마다 반환 타입이 무엇인지 확인해야 해요. `Query` 객체를 반환한다면 `data`를 꺼내야 하고, 데이터만 반환한다면 그대로 값을 사용할 수 있죠.
+
+</React>
+
+<Angular>
+
+서버 API를 호출하는 메서드의 반환 타입이 서로 다르다면, 동료들은 이런 메서드를 쓸 때마다 반환 타입이 무엇인지 확인해야 해요. `Observable` 객체를 반환한다면 구독(`subscribe`)하거나 `async` 파이프로 풀어야 하고, `Signal`을 반환한다면 함수처럼 호출해서 값을 읽을 수 있죠.
+
+</Angular>
 
 같은 종류의 동작을 하는 코드가 일관적인 규칙에 따르고 있지 않으면 코드를 읽고 쓰는 데 헷갈려요.
 
 ### ✏️ 개선해보기
+
+<React>
 
 다음 코드처럼 서버 API를 호출하는 Hook은 일관적으로 `Query` 객체를 반환하게 하면, 팀원들이 코드에 대한 예측 가능성을 높일 수 있어요.
 
@@ -67,6 +116,31 @@ function useServerTime() {
   return query;
 }
 ```
+
+</React>
+
+<Angular>
+
+다음 코드처럼 서버 API를 호출하는 메서드는 일관적으로 `Observable` 객체를 반환하게 하면, 팀원들이 코드에 대한 예측 가능성을 높일 수 있어요.
+
+```angular-ts
+@Injectable({ providedIn: 'root' })
+export class UserService {
+  private http = inject(HttpClient);
+
+  getUser(): Observable<User> {
+    return this.http.get<User>('/api/user');
+  }
+
+  getServerTime(): Observable<Date> {
+    return this.http.get<{ time: string }>('/api/server-time').pipe(
+      map(res => new Date(res.time))
+    );
+  }
+}
+```
+
+</Angular>
 
 ## 📝 코드 예시 2: checkIsValid
 
