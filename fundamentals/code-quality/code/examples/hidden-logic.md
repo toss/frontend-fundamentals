@@ -1,4 +1,4 @@
-# 숨은 로직 드러내기
+# 숨은 로직 드러내기 <FrameworkSwitch />
 
 <div style="margin-top: 16px">
 <Badge type="info" text="예측 가능성" />
@@ -8,7 +8,19 @@
 
 ## 📝 코드 예시
 
+<React>
+
 다음 코드는 사용자의 계좌 잔액을 조회할 때 사용할 수 있는 `fetchBalance` 함수예요. 함수를 호출할 때마다 암시적으로 `balance_fetched`라는 로깅이 이루어지고 있어요.
+
+</React>
+
+<Angular>
+
+다음 코드는 사용자의 계좌 잔액을 조회할 때 사용할 수 있는 `fetchBalance` 메서드예요. 함수를 호출할 때마다 암시적으로 `balance_fetched`라는 로깅이 이루어지고 있어요.
+
+</Angular>
+
+<React>
 
 ```typescript 4
 async function fetchBalance(): Promise<number> {
@@ -19,6 +31,25 @@ async function fetchBalance(): Promise<number> {
   return balance;
 }
 ```
+
+</React>
+
+<Angular>
+
+```angular-ts
+@Injectable({ providedIn: 'root' })
+export class BalanceService {
+  private http = inject(HttpClient);
+
+  fetchBalance(): Observable<number> {
+    return this.http.get<number>('...').pipe(
+      tap(() => logging.log('balance_fetched'))
+    );
+  }
+}
+```
+
+</Angular>
 
 ## 👃 코드 냄새 맡아보기
 
@@ -32,6 +63,8 @@ async function fetchBalance(): Promise<number> {
 
 함수의 이름과 파라미터, 반환 타입으로 예측할 수 있는 로직만 구현 부분에 남기세요.
 
+<React>
+
 ```typescript
 async function fetchBalance(): Promise<number> {
   const balance = await http.get<number>("...");
@@ -40,7 +73,26 @@ async function fetchBalance(): Promise<number> {
 }
 ```
 
+</React>
+
+<Angular>
+
+```angular-ts
+@Injectable({ providedIn: 'root' })
+export class BalanceService {
+  private http = inject(HttpClient);
+
+  fetchBalance(): Observable<number> {
+    return this.http.get<number>('...');
+  }
+}
+```
+
+</Angular>
+
 로깅을 하는 코드는 별도로 분리하세요.
+
+<React>
 
 ```tsx
 <Button
@@ -54,3 +106,28 @@ async function fetchBalance(): Promise<number> {
   계좌 잔액 갱신하기
 </Button>
 ```
+
+</React>
+
+<Angular>
+
+```angular-ts
+@Component({
+  selector: 'balance-refresh-button',
+  template: `
+    <button (click)="refresh()">계좌 잔액 갱신하기</button>
+  `
+})
+export class BalanceRefreshButton {
+  private balanceService = inject(BalanceService);
+
+  refresh() {
+    this.balanceService.fetchBalance().pipe(
+      tap(() => logging.log('balance_fetched')),
+      switchMap(balance => this.balanceService.syncBalance(balance))
+    ).subscribe();
+  }
+}
+```
+
+</Angular>
