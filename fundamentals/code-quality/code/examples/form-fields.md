@@ -1,4 +1,4 @@
-# 폼의 응집도 생각하기
+# 폼의 응집도 생각하기 <FrameworkSwitch />
 
 <div style="margin-top: 16px">
 <Badge type="info" text="응집도" />
@@ -12,6 +12,8 @@ Form을 관리할 때는 2가지의 방법으로 응집도를 관리해서, 함�
 필드 단위 응집은 개별 입력 요소를 독립적으로 관리하는 방식이에요.
 각 필드가 고유의 검증 로직을 가지므로 변경이 필요한 범위가 줄어들어 특정 필드의 유지보수가 쉬워져요.
 필드 단위의 응집도를 고려하여 설계하면, 각 필드의 검증 로직이 독립적이어서 다른 필드에 영향을 주지 않아요.
+
+<React>
 
 ```tsx
 import { useForm } from "react-hook-form";
@@ -82,11 +84,74 @@ function isEmptyStringOrNil(value: NullableString): boolean {
 }
 ```
 
+</React>
+
+<Angular>
+
+```angular-ts
+@Component({
+  selector: 'app-form',
+  template: `
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div>
+        <input formControlName="name" placeholder="이름" />
+        @if (form.controls.name.touched && form.controls.name.errors?.['message']) {
+          <p>{{ form.controls.name.errors?.['message'] }}</p>
+        }
+      </div>
+
+      <div>
+        <input formControlName="email" placeholder="이메일" />
+        @if (form.controls.email.touched && form.controls.email.errors?.['message']) {
+          <p>{{ form.controls.email.errors?.['message'] }}</p>
+        }
+      </div>
+
+      <button type="submit">제출</button>
+    </form>
+  `,
+  imports: [ReactiveFormsModule]
+})
+export class FormComponent {
+  private fb = inject(FormBuilder);
+
+  form = this.fb.nonNullable.group({
+    name: ['', [nameValidator]],
+    email: ['', [emailValidator]]
+  });
+
+  onSubmit() {
+    if (this.form.valid) {
+      console.log('Form submitted:', this.form.getRawValue());
+    }
+  }
+}
+
+function nameValidator(control: AbstractControl): ValidationErrors | null {
+  const value = control.value as string;
+  if (!value?.trim()) return { message: '이름을 입력해주세요.' };
+  return null;
+}
+
+function emailValidator(control: AbstractControl): ValidationErrors | null {
+  const value = control.value as string;
+  if (!value?.trim()) return { message: '이메일을 입력해주세요.' };
+  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
+    return { message: '유효한 이메일 주소를 입력해주세요.' };
+  }
+  return null;
+}
+```
+
+</Angular>
+
 ## 폼 전체 단위 응집도
 
 폼 전체 응집은 모든 필드의 검증 로직이 폼에 종속되는 방식이에요. 폼 전체에서의 흐름을 고려하여 설계되며, 변경 단위가 폼 단위로 발생할 때 고려해요.
 
 폼 전체 응집도를 높이면, 폼 전체의 검증이 한 곳에서 관리되어 로직이 간결해지고, 상태가 중앙 집중식으로 관리되므로 폼 전체 흐름을 이해하기 쉬워져요. 필드 간의 결합도가 높아지므로 폼의 재사용성은 떨어질 수 있어요.
+
+<React>
 
 ```tsx
 import * as z from "zod";
@@ -136,6 +201,70 @@ export function Form() {
   );
 }
 ```
+
+</React>
+
+<Angular>
+
+```angular-ts
+const formValidator: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
+  const name = group.get('name')?.value as string;
+  const email = group.get('email')?.value as string;
+  const errors: Record<string, string> = {};
+
+  if (!name?.trim()) {
+    errors['name'] = '이름을 입력해주세요.';
+  }
+
+  if (!email?.trim()) {
+    errors['email'] = '이메일을 입력해주세요.';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
+    errors['email'] = '유효한 이메일 주소를 입력해주세요.';
+  }
+
+  return Object.keys(errors).length ? errors : null;
+};
+
+@Component({
+  selector: 'app-form',
+  template: `
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div>
+        <input formControlName="name" placeholder="이름" />
+        @if (form.controls.name.touched && form.errors?.['name']) {
+          <p>{{ form.errors?.['name'] }}</p>
+        }
+      </div>
+
+      <div>
+        <input formControlName="email" placeholder="이메일" />
+        @if (form.controls.email.touched && form.errors?.['email']) {
+          <p>{{ form.errors?.['email'] }}</p>
+        }
+      </div>
+
+      <button type="submit">제출</button>
+    </form>
+  `,
+  imports: [ReactiveFormsModule]
+})
+export class FormComponent {
+  private fb = inject(FormBuilder);
+
+  form = this.fb.nonNullable.group({
+    name: [''],
+    email: ['']
+  }, { validators: formValidator });
+
+  onSubmit() {
+    if (this.form.valid) {
+      console.log('Form submitted:', this.form.getRawValue());
+    }
+  }
+}
+```
+
+</Angular>
 
 ## 필드 단위 vs. 폼 전체 단위 응집도
 

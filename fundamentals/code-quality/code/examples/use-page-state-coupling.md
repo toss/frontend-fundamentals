@@ -1,12 +1,24 @@
-# 책임을 하나씩 관리하기
+# 책임을 하나씩 관리하기 <FrameworkSwitch />
 
 <div style="margin-top: 16px">
 <Badge type="info" text="결합도" />
 </div>
 
+<React>
+
 쿼리 파라미터, 상태, API 호출과 같은 로직의 종류에 따라서 함수나 컴포넌트, Hook을 나누지 마세요. 한 번에 다루는 맥락의 종류가 많아져서 이해하기 힘들고 수정하기 어려운 코드가 돼요.
 
+</React>
+
+<Angular>
+
+쿼리 파라미터, 상태, API 호출과 같은 로직의 종류에 따라서 서비스나 컴포넌트, Hook을 나누지 마세요. 한 번에 다루는 맥락의 종류가 많아져서 이해하기 힘들고 수정하기 어려운 코드가 돼요.
+
+</Angular>
+
 ## 📝 코드 예시
+
+<React>
 
 다음 `usePageState()` Hook은 페이지 전체의 URL 쿼리 파라미터를 한 번에 관리해요.
 
@@ -59,21 +71,97 @@ export function usePageState() {
 }
 ```
 
+</React>
+
+<Angular>
+
+다음 `PageStateService` 서비스는 페이지 전체의 URL 쿼리 파라미터를 한 번에 관리해요.
+
+```angular-ts
+
+@Injectable({ providedIn: 'root' })
+export class PageStateService {
+  route = inject(ActivatedRoute);
+  router = inject(Router);
+
+  queryParams = toSignal(this.route.queryParams);
+
+  values = computed(() => {
+    const params = this.queryParams() ?? {};
+
+    return {
+      cardId: params['cardId'] ? Number(params['cardId']) : undefined,
+      statementId: params['statementId'] ? Number(params['statementId']) : undefined,
+      dateFrom: params['dateFrom'] ? moment(params['dateFrom']) : moment().subtract(3, 'month'),
+      dateTo: params['dateTo'] ? moment(params['dateTo']) : moment(),
+      statusList: params['statusList'] as StatementStatusType[] | undefined,
+    };
+  });
+
+  setCardId(cardId: number) {
+    this.router.navigate([], { queryParams: { cardId }, queryParamsHandling: 'merge' });
+  }
+
+  setStatementId(statementId: number) {
+    this.router.navigate([], { queryParams: { statementId }, queryParamsHandling: 'merge' });
+  }
+
+  setDateFrom(date?: Moment) {
+    this.router.navigate([], { queryParams: { dateFrom: date?.toISOString() }, queryParamsHandling: 'merge' });
+  }
+
+  setDateTo(date?: Moment) {
+    this.router.navigate([], { queryParams: { dateTo: date?.toISOString() }, queryParamsHandling: 'merge' });
+  }
+
+  setStatusList(statusList?: StatementStatusType[]) {
+    this.router.navigate([], { queryParams: { statusList }, queryParamsHandling: 'merge' });
+  }
+}
+
+```
+
+</Angular>
+
 ## 👃 코드 냄새 맡아보기
 
 ### 결합도
+
+<React>
 
 이 Hook은 "이 페이지에 필요한 모든 쿼리 매개변수를 관리하는 것"이라는 광범위한 책임을 가지고 있어요. 이로 인해 페이지 내의 컴포넌트나 다른 훅들이 이 훅에 의존하게 될 수 있으며, 코드 수정을 할 때 영향 범위가 급격히 확장될 수 있어요.
 
 시간이 지나며 이 Hook은 유지 관리가 점점 어려워지고, 수정하기 힘든 코드로 발전할 수 있어요.
 
+</React>
+
+<Angular>
+
+이 서비스는 "이 페이지에 필요한 모든 쿼리 매개변수를 관리하는 것"이라는 광범위한 책임을 가지고 있어요. 이로 인해 페이지 내의 컴포넌트나 다른 서비스들이 이 서비스에 의존하게 될 수 있으며, 코드 수정을 할 때 영향 범위가 급격히 확장될 수 있어요.
+
+시간이 지나며 이 서비스는 유지 관리가 점점 어려워지고, 수정하기 힘든 코드로 발전할 수 있어요.
+
+</Angular>
+
 ::: info
 
+<React>
+
 이 Hook은 [가독성](./use-page-state-readability.md) 관점으로도 볼 수 있어요.
+
+</React>
+
+<Angular>
+
+이 서비스는 [가독성](./use-page-state-readability.md) 관점으로도 볼 수 있어요.
+
+</Angular>
 
 :::
 
 ## ✏️ 개선해보기
+
+<React>
 
 다음 코드와 같이 각각의 쿼리 파라미터별로 별도의 Hook을 작성할 수 있어요.
 
@@ -91,5 +179,43 @@ export function useCardIdQueryParam() {
 }
 ```
 
+</React>
+
+<Angular>
+
+```angular-ts
+
+@Injectable({ providedIn: 'root' })
+export class CardIdQueryParamService {
+  route = inject(ActivatedRoute);
+  router = inject(Router);
+
+  queryParams = toSignal(this.route.queryParams);
+
+  value = computed(() => {
+    const params = this.queryParams() ?? {};
+
+    return params['cardId'] ? Number(params['cardId']) : undefined;
+  });
+
+  set(cardId: number) {
+    this.router.navigate([], { queryParams: { cardId }, queryParamsHandling: 'merge' });
+  }
+}
+```
+
+</Angular>
+
+<React>
+
 Hook이 담당하는 책임을 분리했기 때문에, 수정에 따른 영향이 갈 범위를 좁힐 수 있어요.
 그래서 Hook을 수정했을 때 예상하지 못한 영향이 생기는 것을 막을 수 있어요.
+
+</React>
+
+<Angular>
+
+서비스가 담당하는 책임을 분리했기 때문에, 수정에 따른 영향이 갈 범위를 좁힐 수 있어요.
+그래서 서비스를 수정했을 때 예상하지 못한 영향이 생기는 것을 막을 수 있어요.
+
+</Angular>
