@@ -44,7 +44,7 @@ npm install --save-dev typescript ts-loader
 
 ::: details tsconfig 옵션 뜻 알아보기
 
-- `target`: 어떤 버전의 JavaScript로 변환할지 결정해요. ES5는 거의 모든 브라우저에서 동작해요.
+- `target`: 어떤 버전의 JavaScript로 변환할지 결정해요. ES6는 거의 모든 브라우저에서 동작해요.
 - `module`: 모듈 시스템을 지정해요. 최신 ESM(ES Modules) 형식인 `ESNext`를 사용하면 트리 쉐이킹 등 웹팩의 최적화 기능을 더 잘 활용할 수 있어요.
 - `skipLibCheck`: 라이브러리 파일의 타입 검사를 건너뛰어 빌드 속도를 높여요.
 - `moduleResolution`: 모듈이 로컬 파일 시스템에 없으면, `node_modules` 디렉토리에서 모듈을 찾아요.
