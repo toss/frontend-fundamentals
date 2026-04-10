@@ -35,7 +35,7 @@ npm install --save-dev typescript ts-loader
     "module": "esnext",
     "strict": true,
     "skipLibCheck": true,
-    "moduleResolution": "node"
+    "moduleResolution": "bundler"
   },
   "include": ["./**/*.ts"],
   "exclude": ["node_modules", "dist"]
