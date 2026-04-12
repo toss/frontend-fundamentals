@@ -96,14 +96,10 @@ module.exports = {
 **설치 방법**
 
 ```bash
-npm install -D webpack-dev-server
+npm install -D vite
 ```
 
 **개발 서버 설정**
-
-```bash
-npm install -D vite
-```
 
 ```js
 // vite.config.js
