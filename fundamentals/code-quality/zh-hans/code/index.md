@@ -24,9 +24,10 @@ comments: false
 - **命名**
   - [为复杂条件命名](./examples/condition-name.md)
   - [为魔数命名](./examples/magic-number-readability.md)
-- **使其从上到下顺利阅读**
+- **使其自然阅读**
   - [减少视点转移](./examples/user-policy.md)
   - [简化三元运算符](./examples/ternary-operator.md)
+  - [让比较从左到右阅读](./examples/comparison-order.md)
 
 ## 2. 可预测性
 

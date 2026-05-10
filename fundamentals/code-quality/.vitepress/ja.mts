@@ -95,7 +95,7 @@ function sidebar(): DefaultTheme.Sidebar {
               collapsed: true
             },
             {
-              text: "上から下へ読めるようにする",
+              text: "自然に読めるようにする",
               items: [
                 {
                   text: "A. 視点の移動を減らす",

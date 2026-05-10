@@ -89,7 +89,7 @@ function sidebar(): DefaultTheme.Sidebar {
               collapsed: true
             },
             {
-              text: "위에서 아래로 읽히게 하기",
+              text: "자연스럽게 읽히게 하기",
               items: [
                 {
                   text: "A. 시점 이동 줄이기",
