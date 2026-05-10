@@ -24,9 +24,10 @@ Readable code has fewer contexts for the reader to consider at once and flows na
 - **Naming**
   - [Name complex conditions](./examples/condition-name.md)
   - [Name magic numbers](./examples/magic-number-readability.md)
-- **Reading from Top to Bottom**
+- **Reading Naturally**
   - [Reduce context switching](./examples/user-policy.md)
   - [Simplify ternary operators](./examples/ternary-operator.md)
+  - [Make comparisons read from left to right](./examples/comparison-order.md)
 
 ## 2. Predictability
 

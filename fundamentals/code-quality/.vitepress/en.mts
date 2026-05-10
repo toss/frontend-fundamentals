@@ -78,7 +78,7 @@ function sidebar(): DefaultTheme.Sidebar {
               collapsed: true
             },
             {
-              text: "Reading from Top to Bottom",
+              text: "Reading Naturally",
               items: [
                 {
                   text: "A. Reducing Eye Movement",

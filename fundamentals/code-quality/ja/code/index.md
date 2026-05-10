@@ -21,9 +21,10 @@ comments: false
 - **名前付け**
   - [複雑な条件に名前を付ける](./examples/condition-name.md)
   - [マジックナンバーに名前を付ける](./examples/magic-number-readability.md)
-- **上から下へ読めるようにする**
+- **自然に読めるようにする**
   - [視点の移動を減らす](./examples/user-policy.md)
   - [三項演算子をシンプルにする](./examples/ternary-operator.md)
+  - [左から右に読めるようにする](./examples/comparison-order.md)
 
 ## 2. 予測可能性
 

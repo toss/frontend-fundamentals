@@ -89,7 +89,7 @@ function sidebar(): DefaultTheme.Sidebar {
               collapsed: true
             },
             {
-              text: "使其从上到下顺利阅读",
+              text: "使其自然阅读",
               items: [
                 {
                   text: "A. 减少视点转移",
