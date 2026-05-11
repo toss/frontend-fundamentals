@@ -124,7 +124,7 @@ function ItemEditBody({ children, keyword, onKeywordChange, onClose }) {
 上記の例のように、`children`を使用して必要なコンポーネントを親で作成することで、不必要なProps Drillingを減らすことができます。
 
 しかし、コンポジションパターンだけでは解決できない場合もあり、コンポーネントツリーの構造が深くなると、依然として問題が発生します。
-例えば、`ItemEditModal`コンポーネントは、まだ`items`と`recommendedItemsを`Props Drillingしています。
+例えば、`ItemEditModal`コンポーネントは、まだ`items`と`recommendedItems`をProps Drillingしています。
 
 ### B. ContextAPIの活用
 

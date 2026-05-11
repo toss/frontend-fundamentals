@@ -71,4 +71,4 @@ function AdminSubmitButton() {
 ```
 
 - `<SubmitButton />` 코드 곳곳에 있던 분기가 단 하나로 합쳐지면서, 분기가 줄어들었어요.
-- `<ViewerSubmitButton />`과 `<AdminSubmitButton />` 에서는 하나의 분기만 관리하기 때문에, 코드를 읽는 사람이 한 번에 고려해야 할 맥락이 적어요.
+- `<ViewerSubmitButton />`과 `<AdminSubmitButton />`에서는 하나의 분기만 관리하기 때문에, 코드를 읽는 사람이 한 번에 고려해야 할 맥락이 적어요.

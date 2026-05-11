@@ -9,7 +9,7 @@ Props Drilling（属性钻探）是父组件与子组件之间产生耦合的一
 ## 📝 代码示例
 
 以下代码是用户选择 `item` 时使用的 `<ItemEditModal />` 组件。
-用户输入关键词来搜索项目列表，当找到目标项目并选择时， 会调用 `onConfirm` 函数。
+用户输入关键词来搜索项目列表，当找到目标项目并选择时，会调用 `onConfirm` 函数。
 
 用户输入的关键词通过 `keyword` 传递，可供选择的项目通过 `items` 传递，推荐项目列表通过 `recommendedItems` 属性传递。
 
@@ -68,7 +68,7 @@ function ItemEditBody({
 
 ### 耦合性
 
-该组件与其父组件 `ItemEditModal` 以及子组件 `ItemEditBody` 、 `ItemEditList` 等共享了相同的属性，如`recommendedItems` 、 `onConfirm` 、 `keyword` 等。
+该组件与其父组件 `ItemEditModal` 以及子组件 `ItemEditBody`、`ItemEditList` 等共享了相同的属性，如 `recommendedItems`、`onConfirm`、`keyword` 等。
 正在发生父组件直接将属性传递给子组件的 [Props Drilling](https://kentcdodds.com/blog/prop-drilling) 情况。
 
 Props Drilling 会导致不必要的属性被传递给多个组件。
@@ -79,7 +79,7 @@ Props Drilling 会导致不必要的属性被传递给多个组件。
 
 ## ✏️ 尝试改善
 
-需要消除父组件直接向子组件传递属性的 Props Drilling 现象。可以采用组合（Composition） 模式来实现这一点。
+需要消除父组件直接向子组件传递属性的 Props Drilling 现象。可以采用组合（Composition）模式来实现这一点。
 
 ```tsx
 function ItemEditModal({ open, items, recommendedItems, onConfirm, onClose }) {

@@ -8,7 +8,7 @@ API 호출과 관련된 Hook들처럼 같은 종류의 함수나 Hook이 서로 
 
 ## 📝 코드 예시 1: useUser
 
-다음 `useUser` 와 `useServerTime` Hook은 모두 API 호출과 관련된 Hook이에요.
+다음 `useUser`와 `useServerTime` Hook은 모두 API 호출과 관련된 Hook이에요.
 
 그렇지만 `useUser`는 `@tanstack/react-query`의 `Query` 객체를 반환하고, `useServerTime`은 서버 시간을 가져와서 데이터만 반환해요.
 
@@ -70,7 +70,7 @@ function useServerTime() {
 
 ## 📝 코드 예시 2: checkIsValid
 
-다음 `checkIsNameValid` 와 `checkIsAgeValid`는 모두 이름과 나이가 올바른지 검증하는 함수예요.
+다음 `checkIsNameValid`와 `checkIsAgeValid`는 모두 이름과 나이가 올바른지 검증하는 함수예요.
 
 ```typescript
 /** 사용자 이름은 20자 미만이어야 해요. */

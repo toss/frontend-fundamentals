@@ -8,7 +8,7 @@
 
 ## 📝 コード例
 
-次のコードは、ユーザーの口座残高を照会する際に使用できる`fetchBalance`関数です。この関数を呼び出すたびに、暗黙的に `balance_fetched`というロギングが行われています。
+次のコードは、ユーザーの口座残高を照会する際に使用できる`fetchBalance`関数です。この関数を呼び出すたびに、暗黙的に`balance_fetched`というロギングが行われています。
 
 ```typescript 4
 async function fetchBalance(): Promise<number> {
