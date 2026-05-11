@@ -24,7 +24,7 @@ async function fetchBalance(): Promise<number> {
 
 ### 예측 가능성
 
-`fetchBalance` 함수의 이름과 반환 타입만을 가지고는 `balance_fetched` 라는 로깅이 이루어지는지 알 수 없어요. 그래서 로깅을 원하지 않는 곳에서도 로깅이 이루어질 수 있어요.
+`fetchBalance` 함수의 이름과 반환 타입만을 가지고는 `balance_fetched`라는 로깅이 이루어지는지 알 수 없어요. 그래서 로깅을 원하지 않는 곳에서도 로깅이 이루어질 수 있어요.
 
 또, 로깅 로직에 오류가 발생했을 때 갑자기 계좌 잔액을 가져오는 로직이 망가질 수도 있죠.
 

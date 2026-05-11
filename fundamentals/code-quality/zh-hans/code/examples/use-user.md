@@ -10,7 +10,7 @@
 
 以下 `useUser` 和 `useServerTime` Hook 都与 API 调用相关。
 
-但是 `useUser` 返回的是 `@tanstack/react-query` 的 `Query` 对象，而 `useServerTime` 则是获取服务器时间后仅返回数据本身 。
+但是 `useUser` 返回的是 `@tanstack/react-query` 的 `Query` 对象，而 `useServerTime` 则是获取服务器时间后仅返回数据本身。
 
 ```typescript 9,18
 import { useQuery } from "@tanstack/react-query";
