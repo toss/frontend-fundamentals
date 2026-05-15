@@ -279,6 +279,9 @@ module.exports = {
 
 == Vite
 
+Vite 6+에서는 Oxc Minifier가 기본으로 적용되므로 별도 설정이 필요하지 않아요.
+명시적으로 설정하려면 다음과 같이 작성할 수 있어요.
+
 **설정 예시**
 
 ```js
@@ -287,7 +290,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   build: {
-    minify: "esbuild"
+    minify: "oxc" // Vite 6+ 기본값, 명시적 설정 가능
   }
 });
 ```
