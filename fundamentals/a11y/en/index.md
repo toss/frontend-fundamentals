@@ -1,7 +1,7 @@
 ---
 layout: home
-title: Bundling
-description: Frontend Bundling Guide (Coming Soon)
+title: Accessibility
+description: Frontend Accessibility Guide (Coming Soon)
 comments: false
 ---
 

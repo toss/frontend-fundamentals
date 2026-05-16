@@ -1,7 +1,7 @@
 ---
 layout: home
-title: Bundling
-description: Frontend Bundling Guide (Coming Soon)
+title: Debugging
+description: Frontend Debugging Guide (Coming Soon)
 comments: false
 ---
 
