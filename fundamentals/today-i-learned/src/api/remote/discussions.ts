@@ -1,6 +1,7 @@
 import { graphqlRequest } from "@/api/client";
 import { PAGE_SIZE } from "@/constants/github";
 import { CATEGORY_ID } from "@/constants";
+import { getThisWeekSearchRange } from "@/utils/date";
 import {
   GET_DISCUSSIONS_QUERY,
   CREATE_DISCUSSION_MUTATION,
@@ -60,7 +61,7 @@ export interface CreatePostRequest {
   body: string;
 }
 
-export interface CreatePostResponse extends GitHubDiscussion {}
+export type CreatePostResponse = GitHubDiscussion;
 
 // Discussions API 서비스 인터페이스
 export interface DiscussionsApiParams {
@@ -204,11 +205,10 @@ export async function fetchWeeklyTopDiscussions({
   repo,
   accessToken
 }: Omit<DiscussionsApiParams, "categoryId">): Promise<GitHubDiscussion[]> {
-  const oneWeekAgo = new Date();
-  oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+  const { startDate, endDate } = getThisWeekSearchRange();
 
-  // 1주일 이내의 discussions를 인기도순으로 검색
-  const searchQuery = `repo:${owner}/${repo} is:discussion created:>=${oneWeekAgo.toISOString().split("T")[0]} sort:interactions-desc`;
+  // 이번 주(월요일 시작 기준)의 discussions를 인기도순으로 검색
+  const searchQuery = `repo:${owner}/${repo} is:discussion created:>=${startDate} created:<=${endDate} sort:interactions-desc`;
 
   const data = await graphqlRequest(
     SEARCH_DISCUSSIONS_QUERY,

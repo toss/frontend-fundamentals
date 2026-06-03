@@ -1,5 +1,6 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { ENV_CONFIG } from "@/utils/env";
+import { getThisWeekSearchRange } from "@/utils/date";
 import {
   useInfiniteQuery,
   useSuspenseQuery,
@@ -23,7 +24,8 @@ import {
   removeDiscussionReaction,
   updateDiscussionComment,
   deleteDiscussionComment,
-  type DiscussionsApiParams
+  type DiscussionsApiParams,
+  type GitHubDiscussionDetail
 } from "@/api/remote/discussions";
 import { CATEGORY_ID } from "@/constants";
 
@@ -35,7 +37,8 @@ export const DISCUSSIONS_QUERY_KEYS = {
     [...DISCUSSIONS_QUERY_KEYS.lists(), params] as const,
   infinite: (params: Partial<UseInfiniteDiscussionsParams>) =>
     [...DISCUSSIONS_QUERY_KEYS.all, "infinite", params] as const,
-  weekly: () => [...DISCUSSIONS_QUERY_KEYS.all, "weekly"] as const,
+  weekly: (range: { startDate: string; endDate: string }) =>
+    [...DISCUSSIONS_QUERY_KEYS.all, "weekly", range] as const,
   repository: (owner: string, repo: string) =>
     ["repository", owner, repo] as const,
   contributions: (authorLogin: string) =>
@@ -131,9 +134,10 @@ export function useWeeklyTopDiscussions({
   limit
 }: Omit<UseDiscussionsParams, "categoryId"> & { limit?: number } = {}) {
   const { user } = useAuth();
+  const weekRange = getThisWeekSearchRange();
 
   return useSuspenseQuery({
-    queryKey: DISCUSSIONS_QUERY_KEYS.weekly(),
+    queryKey: DISCUSSIONS_QUERY_KEYS.weekly(weekRange),
     queryFn: async () => {
       const discussions = await fetchWeeklyTopDiscussions({
         owner,
@@ -293,7 +297,7 @@ export function useAddDiscussionComment() {
 
       queryClient.setQueryData(
         DISCUSSIONS_QUERY_KEYS.detail(discussionId),
-        (old: any) => {
+        (old: GitHubDiscussionDetail | undefined) => {
           if (!old || !user) {
             return old;
           }
@@ -449,7 +453,7 @@ export function useUpdateDiscussion() {
 
       queryClient.setQueryData(
         DISCUSSIONS_QUERY_KEYS.detail(updatedDiscussion.id),
-        (oldData: any) => {
+        (oldData: GitHubDiscussionDetail | undefined) => {
           if (!oldData) {
             return oldData;
           }
