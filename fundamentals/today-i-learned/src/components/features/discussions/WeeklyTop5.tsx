@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
+import type { GitHubDiscussion } from "@/api/remote/discussions";
 import { UserAvatar } from "@/components/shared/common/UserAvatar";
 import { useWeeklyTopDiscussions } from "@/api/hooks/useDiscussions";
+import { getWeeklyTopLabel } from "@/utils/date";
 import { css } from "@styled-system/css";
 
 export function WeeklyTop5() {
@@ -8,7 +10,7 @@ export function WeeklyTop5() {
     limit: 5
   });
 
-  const weekText = getWeekLabel();
+  const weekText = getWeeklyTopLabel();
 
   if (!discussions?.length) {
     return (
@@ -42,20 +44,13 @@ export function WeeklyTop5() {
   );
 }
 
-function getWeekLabel(): string {
-  const now = new Date();
-  const dayOfWeek = now.getDay();
-  const daysToSubtract = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
-  const weekStart = new Date(now);
-  weekStart.setDate(now.getDate() - daysToSubtract);
-
-  const month = weekStart.getMonth() + 1;
-  const weekOfMonth = Math.ceil(weekStart.getDate() / 7);
-
-  return `${month}월 ${weekOfMonth}째주 인기글`;
-}
-
-function PopularPostItem({ post, rank }: { post: any; rank: number }) {
+function PopularPostItem({
+  post,
+  rank
+}: {
+  post: GitHubDiscussion;
+  rank: number;
+}) {
   const navigate = useNavigate();
 
   const handleClick = () => {
