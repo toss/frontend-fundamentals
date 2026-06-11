@@ -141,4 +141,15 @@
     height: 2px;
     width: calc(100% - 16px);
   }
+
+  .nav-item[data-tooltip]::after {
+    left: 50%;
+    top: auto;
+    bottom: calc(100% + 8px);
+    transform: translateX(-50%);
+  }
+
+  .nav-item[data-tooltip]:hover::after {
+    left: 50%;
+  }
 }
