@@ -89,6 +89,7 @@ export function UserProfile() {
   const { user, login, logout } = useAuth();
   const { data: userProfile, isLoading } = useUserProfile();
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const isAuthenticated = user !== null;
 
   useClickOutside(dropdownRef, () => setIsDropdownOpen(false));
 
@@ -96,10 +97,12 @@ export function UserProfile() {
     <div className={css(userProfileContainer)} ref={dropdownRef}>
       <button
         type="button"
-        onClick={!user ? login : () => setIsDropdownOpen(!isDropdownOpen)}
+        onClick={
+          !isAuthenticated ? login : () => setIsDropdownOpen(!isDropdownOpen)
+        }
         className={css(userButton)}
       >
-        {isLoading ? (
+        {isAuthenticated && isLoading ? (
           <>
             <div className={css(loadingAvatar)} />
             <div className={css(profileContent)}>
@@ -107,7 +110,7 @@ export function UserProfile() {
               <ChevronDown className={css(chevronIcon)} />
             </div>
           </>
-        ) : userProfile ? (
+        ) : isAuthenticated && userProfile ? (
           <>
             <UserAvatar
               username={userProfile.login}
@@ -137,7 +140,7 @@ export function UserProfile() {
         )}
       </button>
 
-      {(user || userProfile) && (
+      {isAuthenticated && (
         <UserDropdown
           isOpen={isDropdownOpen}
           onClose={() => setIsDropdownOpen(false)}

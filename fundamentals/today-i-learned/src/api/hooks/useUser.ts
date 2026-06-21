@@ -7,7 +7,8 @@ import { fetchUserProfile, fetchPublicUserProfile } from "@/api/remote/user";
 // Query Keys
 export const USER_QUERY_KEYS = {
   all: ["user"] as const,
-  profile: () => [...USER_QUERY_KEYS.all, "profile"] as const,
+  profile: (username?: string) =>
+    [...USER_QUERY_KEYS.all, "profile", username ?? ""] as const,
   publicProfile: (username: string) =>
     [...USER_QUERY_KEYS.all, "public", username] as const
 } as const;
@@ -20,7 +21,7 @@ export function useUserProfile() {
   const { user } = useAuth();
 
   return useQuery({
-    queryKey: USER_QUERY_KEYS.profile(),
+    queryKey: USER_QUERY_KEYS.profile(user?.login),
     queryFn: () => {
       if (!user?.accessToken) {
         throw new Error("User not authenticated");
