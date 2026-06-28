@@ -1349,6 +1349,7 @@ __metadata:
     "@radix-ui/react-alert-dialog": "npm:^1.1.15"
     "@radix-ui/react-slot": "npm:^1.2.3"
     "@tanstack/react-query": "npm:^5.81.2"
+    "@tanstack/react-virtual": "npm:^3.14.4"
     "@testing-library/jest-dom": "npm:^6.7.0"
     "@testing-library/react": "npm:^16.3.0"
     "@testing-library/user-event": "npm:^14.6.1"
@@ -2754,6 +2755,25 @@ __metadata:
   peerDependencies:
     react: ^18 || ^19
   checksum: 10/8c3f81ede098325e3cfa8803bf5647c159fc7dde23f81b347a36e12366164f58a349be3e7d6f68ece6208ddeb09947f3e26091161579ffdcc2e62baae8fa25d0
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-virtual@npm:^3.14.4":
+  version: 3.14.4
+  resolution: "@tanstack/react-virtual@npm:3.14.4"
+  dependencies:
+    "@tanstack/virtual-core": "npm:3.17.2"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10/a904a0468a4497bde090073f2d19438541d41ec8f5e68e7f2ed01504d2033033f4be9642833c4af031dd1df4a222320c1d8fd1bc883c780062c35fd09dce1918
+  languageName: node
+  linkType: hard
+
+"@tanstack/virtual-core@npm:3.17.2":
+  version: 3.17.2
+  resolution: "@tanstack/virtual-core@npm:3.17.2"
+  checksum: 10/68fdf797f193a9fee60193b22bf197b48f684abee8e48dd14999e318f25a669f20aeb01b52e73320a40d20185b2543f8cbed777f3f27e589b473ed0c6958f06e
   languageName: node
   linkType: hard
 

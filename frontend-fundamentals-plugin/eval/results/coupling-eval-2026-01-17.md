@@ -5,12 +5,12 @@
 
 ## Summary
 
-| Task | Grade | Issue Found | Fix Suggested |
-|------|-------|-------------|---------------|
-| props-drilling.tsx | PASS | Props drilled through 5 layers (App -> Page -> Layout/Header/Sidebar -> Avatar/UserMenu) | Composition pattern with children, Context for user data |
-| god-hook.tsx | PASS | Single hook manages 8 unrelated state pieces (user, preferences, notifications, friends, posts, messages) | Split into useUser, usePreferences, useNotifications, useFriends, usePosts, useMessages |
-| dashboard-layout.tsx | PASS | Props drilled through 4-5 layers; same callbacks passed redundantly (onAlertAcknowledge in 3 branches) | Composition pattern, Context for shared state (user, alerts, notifications) |
-| use-dashboard.tsx | PASS | God hook with 18 useState, 12 useEffect, 50+ returned values managing 6 unrelated domains | Split into useUser, usePreferences, useWidgets, useNotifications, useUIState, useAnalytics, useRealtime |
+| Task                 | Grade | Issue Found                                                                                               | Fix Suggested                                                                                           |
+| -------------------- | ----- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| props-drilling.tsx   | PASS  | Props drilled through 5 layers (App -> Page -> Layout/Header/Sidebar -> Avatar/UserMenu)                  | Composition pattern with children, Context for user data                                                |
+| god-hook.tsx         | PASS  | Single hook manages 8 unrelated state pieces (user, preferences, notifications, friends, posts, messages) | Split into useUser, usePreferences, useNotifications, useFriends, usePosts, useMessages                 |
+| dashboard-layout.tsx | PASS  | Props drilled through 4-5 layers; same callbacks passed redundantly (onAlertAcknowledge in 3 branches)    | Composition pattern, Context for shared state (user, alerts, notifications)                             |
+| use-dashboard.tsx    | PASS  | God hook with 18 useState, 12 useEffect, 50+ returned values managing 6 unrelated domains                 | Split into useUser, usePreferences, useWidgets, useNotifications, useUIState, useAnalytics, useRealtime |
 
 **Overall Pass Rate: 4/4 (100%)**
 
@@ -48,14 +48,12 @@ The `user` prop is passed through 4-5 layers, and intermediate components like `
 **Suggested Fix:**
 
 1. **Composition Pattern**: Use the `children` prop to compose components without drilling:
+
 ```tsx
 function App() {
   const user = useCurrentUser();
   return (
-    <Layout
-      header={<UserMenu user={user} />}
-      sidebar={<Avatar user={user} />}
-    >
+    <Layout header={<UserMenu user={user} />} sidebar={<Avatar user={user} />}>
       <UserProfile user={user} />
     </Layout>
   );
@@ -63,6 +61,7 @@ function App() {
 ```
 
 2. **React Context** (for truly global user data):
+
 ```tsx
 const UserContext = createContext<User | null>(null);
 
@@ -125,7 +124,10 @@ function useUser() {
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    fetchUser().then(setUser).catch(setError).finally(() => setLoading(false));
+    fetchUser()
+      .then(setUser)
+      .catch(setError)
+      .finally(() => setLoading(false));
   }, []);
 
   return { user, loading, error };
@@ -141,7 +143,7 @@ function usePreferences(userId: string | undefined) {
 
   const updatePreferences = async (prefs: Partial<Preferences>) => {
     await savePreferences(prefs);
-    setPreferences(prev => ({ ...prev, ...prefs }));
+    setPreferences((prev) => ({ ...prev, ...prefs }));
   };
 
   return { preferences, updatePreferences };
@@ -157,7 +159,7 @@ function useNotifications(userId: string | undefined) {
 
   const markNotificationRead = async (id: string) => {
     await markRead(id);
-    setNotifications(prev => prev.filter(n => n.id !== id));
+    setNotifications((prev) => prev.filter((n) => n.id !== id));
   };
 
   return { notifications, markNotificationRead };
@@ -194,6 +196,7 @@ This is a more complex props drilling example with multiple data streams being d
 4. **Preferences + onPreferenceUpdate**: drilled through DashboardSidebar -> SidebarSettings AND DashboardMain -> OverviewPanel
 
 The `onAlertAcknowledge` callback is particularly problematic - it's defined in `DashboardLayout` but used in:
+
 - SidebarAlerts -> AlertItem
 - DashboardMain -> OverviewPanel -> AlertsSection
 
@@ -225,12 +228,13 @@ function DashboardLayout() {
 
       <DashboardSidebar collapsed={!sidebarOpen}>
         <SidebarNav activeView={activeView} onViewChange={setActiveView} />
-        <AlertsList alerts={dashboardData.alerts} onAcknowledge={handleAlertAcknowledge} />
+        <AlertsList
+          alerts={dashboardData.alerts}
+          onAcknowledge={handleAlertAcknowledge}
+        />
       </DashboardSidebar>
 
-      <DashboardMain>
-        {/* View content */}
-      </DashboardMain>
+      <DashboardMain>{/* View content */}</DashboardMain>
     </div>
   );
 }
@@ -240,7 +244,10 @@ function DashboardLayout() {
 
 ```tsx
 // For user data (used everywhere)
-const UserContext = createContext<{ user: User; preferences: UserPreferences } | null>(null);
+const UserContext = createContext<{
+  user: User;
+  preferences: UserPreferences;
+} | null>(null);
 
 // For alerts (used in multiple unrelated branches)
 const AlertsContext = createContext<{
@@ -253,7 +260,12 @@ function DashboardLayout() {
 
   return (
     <UserContext.Provider value={{ user, preferences: user.preferences }}>
-      <AlertsContext.Provider value={{ alerts: dashboardData.alerts, onAcknowledge: handleAlertAcknowledge }}>
+      <AlertsContext.Provider
+        value={{
+          alerts: dashboardData.alerts,
+          onAcknowledge: handleAlertAcknowledge
+        }}
+      >
         <DashboardHeader />
         <DashboardSidebar />
         <DashboardMain />
@@ -282,12 +294,14 @@ function AlertItem({ alert }: { alert: Alert }) {
 This is an extreme example of a "god hook" that manages essentially the entire application state:
 
 **State Count:**
+
 - 18 `useState` calls
 - 12 `useEffect` hooks
 - 3 `useRef` hooks
 - 50+ values returned
 
 **Domains Managed (should be separate):**
+
 1. **User** (3 states): `user`, `userLoading`, `userError`
 2. **Preferences** (3 states): `preferences`, `preferencesLoading`, `preferencesDirty`
 3. **Widgets** (5 states): `widgets`, `widgetsLoading`, `widgetsError`, `selectedWidgetId`, `editingWidgetId`
@@ -318,7 +332,10 @@ function useUser() {
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    fetchUser().then(setUser).catch(setError).finally(() => setLoading(false));
+    fetchUser()
+      .then(setUser)
+      .catch(setError)
+      .finally(() => setLoading(false));
   }, []);
 
   const logout = useCallback(async () => {
@@ -336,7 +353,13 @@ function usePreferences(userId: string | undefined) {
 
   // Fetch and auto-save logic
 
-  return { preferences, loading, dirty, updatePreference, updateNotificationPreference };
+  return {
+    preferences,
+    loading,
+    dirty,
+    updatePreference,
+    updateNotificationPreference
+  };
 }
 
 // 3. Dashboard widgets
@@ -350,9 +373,17 @@ function useWidgets(userId: string | undefined) {
   // CRUD operations
 
   return {
-    widgets, loading, error,
-    selectedWidget, editingWidget,
-    addWidget, updateWidget, deleteWidget, selectWidget, startEditing, stopEditing
+    widgets,
+    loading,
+    error,
+    selectedWidget,
+    editingWidget,
+    addWidget,
+    updateWidget,
+    deleteWidget,
+    selectWidget,
+    startEditing,
+    stopEditing
   };
 }
 
@@ -364,7 +395,16 @@ function useNotifications(userId: string | undefined, enabled: boolean) {
 
   // Fetch and polling logic
 
-  return { notifications, loading, unreadCount, panelOpen, setPanelOpen, markRead, markAllRead, dismiss };
+  return {
+    notifications,
+    loading,
+    unreadCount,
+    panelOpen,
+    setPanelOpen,
+    markRead,
+    markAllRead,
+    dismiss
+  };
 }
 
 // 5. UI state (simple, no side effects)
@@ -372,19 +412,30 @@ function useDashboardUI() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [modalOpen, setModalOpen] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [activeTab, setActiveTab] = useState('overview');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeTab, setActiveTab] = useState("overview");
 
   return {
-    sidebarOpen, toggleSidebar: () => setSidebarOpen(v => !v),
-    modalOpen, openModal, closeModal,
-    searchOpen, searchQuery, openSearch, closeSearch, setSearchQuery,
-    activeTab, setTab
+    sidebarOpen,
+    toggleSidebar: () => setSidebarOpen((v) => !v),
+    modalOpen,
+    openModal,
+    closeModal,
+    searchOpen,
+    searchQuery,
+    openSearch,
+    closeSearch,
+    setSearchQuery,
+    activeTab,
+    setTab
   };
 }
 
 // 6. Real-time connection
-function useRealtimeSync(userId: string | undefined, onMessage: (data: any) => void) {
+function useRealtimeSync(
+  userId: string | undefined,
+  onMessage: (data: any) => void
+) {
   const [isConnected, setIsConnected] = useState(false);
   const [lastSync, setLastSync] = useState<Date | null>(null);
 
@@ -397,9 +448,15 @@ function useRealtimeSync(userId: string | undefined, onMessage: (data: any) => v
 function useAnalytics(userId: string | undefined) {
   const [queue, setQueue] = useState<AnalyticsEvent[]>([]);
 
-  const trackEvent = useCallback((name: string, properties: Record<string, any>) => {
-    setQueue(prev => [...prev, { name, properties: { ...properties, userId }, timestamp: new Date() }]);
-  }, [userId]);
+  const trackEvent = useCallback(
+    (name: string, properties: Record<string, any>) => {
+      setQueue((prev) => [
+        ...prev,
+        { name, properties: { ...properties, userId }, timestamp: new Date() }
+      ]);
+    },
+    [userId]
+  );
 
   // Batching and flush logic
 
@@ -407,7 +464,10 @@ function useAnalytics(userId: string | undefined) {
 }
 
 // 8. Keyboard shortcuts (separate concern)
-function useKeyboardShortcuts(shortcuts: KeyboardShortcuts | undefined, handlers: ShortcutHandlers) {
+function useKeyboardShortcuts(
+  shortcuts: KeyboardShortcuts | undefined,
+  handlers: ShortcutHandlers
+) {
   useEffect(() => {
     // Event listener logic
   }, [shortcuts, handlers]);
@@ -421,7 +481,10 @@ function DashboardPage() {
   const { user, loading: userLoading, logout } = useUser();
   const { preferences } = usePreferences(user?.id);
   const widgets = useWidgets(user?.id);
-  const notifications = useNotifications(user?.id, preferences?.notifications.inApp ?? false);
+  const notifications = useNotifications(
+    user?.id,
+    preferences?.notifications.inApp ?? false
+  );
   const ui = useDashboardUI();
   const { trackEvent } = useAnalytics(user?.id);
 

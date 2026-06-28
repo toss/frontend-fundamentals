@@ -2,7 +2,7 @@
 // Expected: Identify that props are drilled through 4+ layers; should use context, composition, or state management
 // Domain: SaaS analytics dashboard
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 // Types
 interface User {
@@ -10,21 +10,21 @@ interface User {
   name: string;
   email: string;
   avatar: string;
-  role: 'admin' | 'editor' | 'viewer';
+  role: "admin" | "editor" | "viewer";
   preferences: UserPreferences;
 }
 
 interface UserPreferences {
-  theme: 'light' | 'dark' | 'system';
+  theme: "light" | "dark" | "system";
   sidebarCollapsed: boolean;
-  dashboardLayout: 'grid' | 'list';
+  dashboardLayout: "grid" | "list";
   notifications: boolean;
   language: string;
 }
 
 interface Notification {
   id: string;
-  type: 'info' | 'warning' | 'error' | 'success';
+  type: "info" | "warning" | "error" | "success";
   message: string;
   read: boolean;
   createdAt: Date;
@@ -41,7 +41,7 @@ interface Metric {
   name: string;
   value: number;
   change: number;
-  trend: 'up' | 'down' | 'stable';
+  trend: "up" | "down" | "stable";
 }
 
 interface Activity {
@@ -53,7 +53,7 @@ interface Activity {
 
 interface Alert {
   id: string;
-  severity: 'low' | 'medium' | 'high' | 'critical';
+  severity: "low" | "medium" | "high" | "critical";
   message: string;
   acknowledged: boolean;
 }
@@ -62,10 +62,14 @@ interface Alert {
 function DashboardLayout() {
   const [user, setUser] = useState<User | null>(null);
   const [notifications, setNotifications] = useState<Notification[]>([]);
-  const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
+  const [dashboardData, setDashboardData] = useState<DashboardData | null>(
+    null
+  );
   const [isLoading, setIsLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [activeView, setActiveView] = useState<'overview' | 'analytics' | 'reports'>('overview');
+  const [activeView, setActiveView] = useState<
+    "overview" | "analytics" | "reports"
+  >("overview");
 
   useEffect(() => {
     // Fetch all data
@@ -78,15 +82,15 @@ function DashboardLayout() {
       .finally(() => setIsLoading(false));
   }, []);
 
-  const handleThemeChange = (theme: UserPreferences['theme']) => {
+  const handleThemeChange = (theme: UserPreferences["theme"]) => {
     if (user) {
       setUser({ ...user, preferences: { ...user.preferences, theme } });
     }
   };
 
   const handleNotificationRead = (id: string) => {
-    setNotifications(prev =>
-      prev.map(n => n.id === id ? { ...n, read: true } : n)
+    setNotifications((prev) =>
+      prev.map((n) => (n.id === id ? { ...n, read: true } : n))
     );
   };
 
@@ -94,9 +98,9 @@ function DashboardLayout() {
     if (dashboardData) {
       setDashboardData({
         ...dashboardData,
-        alerts: dashboardData.alerts.map(a =>
+        alerts: dashboardData.alerts.map((a) =>
           a.id === id ? { ...a, acknowledged: true } : a
-        ),
+        )
       });
     }
   };
@@ -105,7 +109,7 @@ function DashboardLayout() {
     if (user) {
       setUser({
         ...user,
-        preferences: { ...user.preferences, [key]: value },
+        preferences: { ...user.preferences, [key]: value }
       });
     }
   };
@@ -159,11 +163,11 @@ function DashboardHeader({
   onNotificationRead,
   onLogout,
   sidebarOpen,
-  onToggleSidebar,
+  onToggleSidebar
 }: {
   user: User;
   notifications: Notification[];
-  onThemeChange: (theme: UserPreferences['theme']) => void;
+  onThemeChange: (theme: UserPreferences["theme"]) => void;
   onNotificationRead: (id: string) => void;
   onLogout: () => void;
   sidebarOpen: boolean;
@@ -172,7 +176,7 @@ function DashboardHeader({
   return (
     <header className="dashboard-header">
       <button onClick={onToggleSidebar}>
-        {sidebarOpen ? 'Collapse' : 'Expand'}
+        {sidebarOpen ? "Collapse" : "Expand"}
       </button>
 
       <div className="header-right">
@@ -196,13 +200,13 @@ function DashboardHeader({
 function HeaderNotifications({
   notifications,
   onNotificationRead,
-  userPreferences,
+  userPreferences
 }: {
   notifications: Notification[];
   onNotificationRead: (id: string) => void;
   userPreferences: UserPreferences;
 }) {
-  const unreadCount = notifications.filter(n => !n.read).length;
+  const unreadCount = notifications.filter((n) => !n.read).length;
 
   return (
     <div className="header-notifications">
@@ -223,7 +227,7 @@ function HeaderNotifications({
 function NotificationDropdown({
   notifications,
   onNotificationRead,
-  showNotifications,
+  showNotifications
 }: {
   notifications: Notification[];
   onNotificationRead: (id: string) => void;
@@ -235,7 +239,7 @@ function NotificationDropdown({
 
   return (
     <div className="notification-dropdown">
-      {notifications.map(notification => (
+      {notifications.map((notification) => (
         <NotificationItem
           key={notification.id}
           notification={notification}
@@ -249,17 +253,19 @@ function NotificationDropdown({
 // Level 5: Finally uses the callback
 function NotificationItem({
   notification,
-  onRead,
+  onRead
 }: {
   notification: Notification;
   onRead: (id: string) => void;
 }) {
   return (
     <div
-      className={`notification-item ${notification.read ? 'read' : 'unread'}`}
+      className={`notification-item ${notification.read ? "read" : "unread"}`}
       onClick={() => onRead(notification.id)}
     >
-      <span className={`type-${notification.type}`}>{notification.message}</span>
+      <span className={`type-${notification.type}`}>
+        {notification.message}
+      </span>
     </div>
   );
 }
@@ -272,18 +278,18 @@ function DashboardSidebar({
   collapsed,
   onPreferenceUpdate,
   alerts,
-  onAlertAcknowledge,
+  onAlertAcknowledge
 }: {
   user: User;
   activeView: string;
-  onViewChange: (view: 'overview' | 'analytics' | 'reports') => void;
+  onViewChange: (view: "overview" | "analytics" | "reports") => void;
   collapsed: boolean;
   onPreferenceUpdate: (key: keyof UserPreferences, value: any) => void;
   alerts: Alert[];
   onAlertAcknowledge: (id: string) => void;
 }) {
   return (
-    <aside className={`dashboard-sidebar ${collapsed ? 'collapsed' : ''}`}>
+    <aside className={`dashboard-sidebar ${collapsed ? "collapsed" : ""}`}>
       <SidebarNav
         activeView={activeView}
         onViewChange={onViewChange}
@@ -309,13 +315,15 @@ function DashboardSidebar({
 function SidebarAlerts({
   alerts,
   onAlertAcknowledge,
-  collapsed,
+  collapsed
 }: {
   alerts: Alert[];
   onAlertAcknowledge: (id: string) => void;
   collapsed: boolean;
 }) {
-  const criticalAlerts = alerts.filter(a => a.severity === 'critical' && !a.acknowledged);
+  const criticalAlerts = alerts.filter(
+    (a) => a.severity === "critical" && !a.acknowledged
+  );
 
   if (collapsed) {
     return criticalAlerts.length > 0 ? <span className="alert-badge" /> : null;
@@ -323,7 +331,7 @@ function SidebarAlerts({
 
   return (
     <div className="sidebar-alerts">
-      {alerts.map(alert => (
+      {alerts.map((alert) => (
         <AlertItem
           key={alert.id}
           alert={alert}
@@ -337,7 +345,7 @@ function SidebarAlerts({
 // Level 4: Finally uses the callback
 function AlertItem({
   alert,
-  onAcknowledge,
+  onAcknowledge
 }: {
   alert: Alert;
   onAcknowledge: (id: string) => void;
@@ -356,7 +364,7 @@ function AlertItem({
 function SidebarSettings({
   preferences,
   onPreferenceUpdate,
-  collapsed,
+  collapsed
 }: {
   preferences: UserPreferences;
   onPreferenceUpdate: (key: keyof UserPreferences, value: any) => void;
@@ -369,12 +377,12 @@ function SidebarSettings({
       <SettingsToggle
         label="Notifications"
         value={preferences.notifications}
-        onChange={(v) => onPreferenceUpdate('notifications', v)}
+        onChange={(v) => onPreferenceUpdate("notifications", v)}
       />
       <SettingsToggle
         label="Dark Mode"
-        value={preferences.theme === 'dark'}
-        onChange={(v) => onPreferenceUpdate('theme', v ? 'dark' : 'light')}
+        value={preferences.theme === "dark"}
+        onChange={(v) => onPreferenceUpdate("theme", v ? "dark" : "light")}
       />
     </div>
   );
@@ -387,7 +395,7 @@ function DashboardMain({
   dashboardData,
   onAlertAcknowledge,
   userPreferences,
-  onPreferenceUpdate,
+  onPreferenceUpdate
 }: {
   user: User;
   activeView: string;
@@ -398,14 +406,16 @@ function DashboardMain({
 }) {
   return (
     <main className="dashboard-main">
-      {activeView === 'overview' && (
+      {activeView === "overview" && (
         <OverviewPanel
           metrics={dashboardData.metrics}
           recentActivity={dashboardData.recentActivity}
           alerts={dashboardData.alerts}
           onAlertAcknowledge={onAlertAcknowledge}
           layout={userPreferences.dashboardLayout}
-          onLayoutChange={(layout) => onPreferenceUpdate('dashboardLayout', layout)}
+          onLayoutChange={(layout) =>
+            onPreferenceUpdate("dashboardLayout", layout)
+          }
           userRole={user.role}
         />
       )}
@@ -422,28 +432,27 @@ function OverviewPanel({
   onAlertAcknowledge,
   layout,
   onLayoutChange,
-  userRole,
+  userRole
 }: {
   metrics: Metric[];
   recentActivity: Activity[];
   alerts: Alert[];
   onAlertAcknowledge: (id: string) => void;
-  layout: 'grid' | 'list';
-  onLayoutChange: (layout: 'grid' | 'list') => void;
-  userRole: User['role'];
+  layout: "grid" | "list";
+  onLayoutChange: (layout: "grid" | "list") => void;
+  userRole: User["role"];
 }) {
   return (
     <div className={`overview-panel layout-${layout}`}>
       <div className="panel-header">
-        <button onClick={() => onLayoutChange(layout === 'grid' ? 'list' : 'grid')}>
+        <button
+          onClick={() => onLayoutChange(layout === "grid" ? "list" : "grid")}
+        >
           Toggle Layout
         </button>
       </div>
 
-      <MetricsGrid
-        metrics={metrics}
-        layout={layout}
-      />
+      <MetricsGrid metrics={metrics} layout={layout} />
 
       <AlertsSection
         alerts={alerts}
@@ -458,17 +467,17 @@ function OverviewPanel({
 function AlertsSection({
   alerts,
   onAlertAcknowledge,
-  userRole,
+  userRole
 }: {
   alerts: Alert[];
   onAlertAcknowledge: (id: string) => void;
-  userRole: User['role'];
+  userRole: User["role"];
 }) {
-  const canAcknowledge = userRole === 'admin' || userRole === 'editor';
+  const canAcknowledge = userRole === "admin" || userRole === "editor";
 
   return (
     <div className="alerts-section">
-      {alerts.map(alert => (
+      {alerts.map((alert) => (
         <div key={alert.id} className={`alert severity-${alert.severity}`}>
           <span>{alert.message}</span>
           {canAcknowledge && !alert.acknowledged && (

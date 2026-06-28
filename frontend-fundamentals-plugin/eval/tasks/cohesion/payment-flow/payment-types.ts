@@ -6,9 +6,14 @@
 // These types are ONLY used by payment-related components
 // but are placed in a generic types folder
 
-export type CardType = 'visa' | 'mastercard' | 'amex' | 'discover' | 'unknown';
+export type CardType = "visa" | "mastercard" | "amex" | "discover" | "unknown";
 
-export type PaymentMethodType = 'credit_card' | 'debit_card' | 'paypal' | 'apple_pay' | 'google_pay';
+export type PaymentMethodType =
+  | "credit_card"
+  | "debit_card"
+  | "paypal"
+  | "apple_pay"
+  | "google_pay";
 
 export interface PaymentMethod {
   type: PaymentMethodType;
@@ -51,7 +56,7 @@ export interface PaymentTransaction {
   id: string;
   amount: number;
   currency: string;
-  status: 'pending' | 'processing' | 'completed' | 'failed' | 'refunded';
+  status: "pending" | "processing" | "completed" | "failed" | "refunded";
   paymentMethod: PaymentMethod;
   createdAt: Date;
   updatedAt: Date;

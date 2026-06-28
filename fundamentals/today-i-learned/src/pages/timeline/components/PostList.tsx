@@ -1,17 +1,21 @@
-import { useCallback } from "react";
 import {
   PostCard,
   PostCardSkeleton
 } from "@/components/features/discussions/PostCard";
 import { useInfiniteDiscussions } from "@/api/hooks/useDiscussions";
-import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { useUserProfile } from "@/api/hooks/useUser";
+import { useVirtualInfiniteScroll } from "@/hooks/useVirtualInfiniteScroll";
 import { css } from "@styled-system/css";
+import { useCallback, useMemo, type RefObject } from "react";
 import { SortOption } from "../types";
 import { useSearchParams } from "react-router-dom";
 import { CATEGORY_ID } from "@/constants";
 
-export function PostList() {
+export function PostList({
+  scrollElementRef
+}: {
+  scrollElementRef: RefObject<HTMLElement>;
+}) {
   const [searchParams] = useSearchParams({ sort: "newest" });
 
   const sortOption = searchParams.get("sort") as SortOption;
@@ -25,28 +29,60 @@ export function PostList() {
     isLoading
   } = useInfiniteDiscussions({ ...getPostListProps(sortOption) });
 
-  const handleLoadMore = useCallback(() => {
-    if (hasNextPage && !isFetchingNextPage) {
-      fetchNextPage();
-    }
-  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+  const discussions = useMemo(
+    () => postsData?.pages.flatMap((page) => page.discussions) ?? [],
+    [postsData?.pages]
+  );
 
-  const { elementRef } = useIntersectionObserver({
-    enabled: hasNextPage && !isFetchingNextPage,
-    onIntersect: handleLoadMore,
-    rootMargin: "300px"
+  const getVirtualItemKey = useCallback(
+    (itemIndex: number) => {
+      const discussionItem = discussions[itemIndex];
+      return discussionItem?.id ?? `loader-${itemIndex}`;
+    },
+    [discussions]
+  );
+
+  const {
+    listContainerRef,
+    rowVirtualizer,
+    virtualItems,
+    scrollMargin,
+    isLoaderIndex
+  } = useVirtualInfiniteScroll({
+    itemCount: discussions.length,
+    scrollElementRef,
+    getItemKey: getVirtualItemKey,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage
   });
 
-  const discussions =
-    postsData?.pages.flatMap((page) => page.discussions) || [];
+  const renderVirtualItemContent = (itemIndex: number) => {
+    if (isLoaderIndex(itemIndex)) {
+      if (!isFetchingNextPage) return null;
+      return <PostCardSkeleton />;
+    }
+
+    const discussionItem = discussions[itemIndex];
+    if (!discussionItem) return null;
+
+    return (
+      <PostCard
+        discussion={discussionItem}
+        currentUserLogin={userProfile?.login}
+      />
+    );
+  };
 
   if (isLoading) {
     return (
       <div className={postListContainer}>
-        {[...new Array(3)].map((_, index) => (
+        {[...new Array(3)].map((_, skeletonIndex) => (
           <div
-            key={index}
-            className={index < 2 ? skeletonItemWithMargin : skeletonItem}
+            key={skeletonIndex}
+            className={
+              skeletonIndex < 2 ? skeletonItemWithMargin : skeletonItem
+            }
           >
             <PostCardSkeleton />
           </div>
@@ -72,26 +108,29 @@ export function PostList() {
   }
 
   return (
-    <div className={postListContainer}>
-      {discussions.map((discussion, index) => (
-        <div
-          key={discussion.id}
-          className={
-            index < discussions.length - 1 ? postItemWithMargin : postItem
-          }
-        >
-          <PostCard
-            discussion={discussion}
-            currentUserLogin={userProfile?.login}
-          />
-        </div>
-      ))}
-
-      {hasNextPage && (
-        <div ref={elementRef} className={loadMoreContainer}>
-          {isFetchingNextPage ? <PostCardSkeleton /> : null}
-        </div>
-      )}
+    <div ref={listContainerRef} className={postListContainer}>
+      <div
+        className={virtualListContainer}
+        style={{
+          height: `${rowVirtualizer.getTotalSize()}px`
+        }}
+      >
+        {virtualItems.map((virtualItem) => {
+          return (
+            <div
+              key={virtualItem.key}
+              data-index={virtualItem.index}
+              ref={rowVirtualizer.measureElement}
+              className={virtualListItem}
+              style={{
+                transform: `translateY(${virtualItem.start - scrollMargin}px)`
+              }}
+            >
+              {renderVirtualItemContent(virtualItem.index)}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -130,13 +169,16 @@ const postListContainer = css({
   width: "100%"
 });
 
-// Post Item Styles
-const postItem = css({
-  // Base post item style
+const virtualListContainer = css({
+  width: "100%",
+  position: "relative"
 });
 
-const postItemWithMargin = css({
-  marginBottom: "1.5rem"
+const virtualListItem = css({
+  position: "absolute",
+  top: 0,
+  left: 0,
+  width: "100%"
 });
 
 // Skeleton Styles
@@ -191,12 +233,4 @@ const emptyStateDescription = css({
   color: "rgb(107, 114, 128)",
   fontSize: "14px",
   maxWidth: "28rem"
-});
-
-// Load More Styles
-const loadMoreContainer = css({
-  width: "100%",
-  paddingY: "1rem",
-  display: "flex",
-  justifyContent: "center"
 });

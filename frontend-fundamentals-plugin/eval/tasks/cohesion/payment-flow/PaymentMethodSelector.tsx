@@ -3,18 +3,18 @@
 // Domain: E-commerce payment processing
 // Simulated path: src/components/common/PaymentMethodSelector.tsx
 
-import { useState } from 'react';
+import { useState } from "react";
 // Imports scattered across the codebase
-import { PaymentMethod, PaymentConfig } from '../../../types/payment';
-import { usePaymentValidation } from '../../../hooks/usePaymentValidation';
-import { formatCardNumber, maskCardNumber } from '../../../utils/pricing';
+import { PaymentMethod, PaymentConfig } from "../../../types/payment";
+import { usePaymentValidation } from "../../../hooks/usePaymentValidation";
+import { formatCardNumber, maskCardNumber } from "../../../utils/pricing";
 import {
   SUPPORTED_CARD_TYPES,
   PAYMENT_ERRORS,
   MIN_PAYMENT_AMOUNT
-} from '../../../constants/payment-config';
-import { validatePaymentMethod } from '../../../services/payment-api';
-import CreditCardForm from '../../forms/CreditCardForm';
+} from "../../../constants/payment-config";
+import { validatePaymentMethod } from "../../../services/payment-api";
+import CreditCardForm from "../../forms/CreditCardForm";
 
 interface PaymentMethodSelectorProps {
   amount: number;
@@ -27,7 +27,9 @@ export function PaymentMethodSelector({
   onMethodSelect,
   config
 }: PaymentMethodSelectorProps) {
-  const [selectedMethod, setSelectedMethod] = useState<PaymentMethod | null>(null);
+  const [selectedMethod, setSelectedMethod] = useState<PaymentMethod | null>(
+    null
+  );
   const [isValidating, setIsValidating] = useState(false);
   const { errors, validateCard, clearErrors } = usePaymentValidation();
 
@@ -57,11 +59,13 @@ export function PaymentMethodSelector({
       <h3>Select Payment Method</h3>
 
       <div className="method-options">
-        {SUPPORTED_CARD_TYPES.map(cardType => (
+        {SUPPORTED_CARD_TYPES.map((cardType) => (
           <button
             key={cardType}
-            className={`method-btn ${selectedMethod?.type === cardType ? 'selected' : ''}`}
-            onClick={() => handleMethodChange({ type: cardType } as PaymentMethod)}
+            className={`method-btn ${selectedMethod?.type === cardType ? "selected" : ""}`}
+            onClick={() =>
+              handleMethodChange({ type: cardType } as PaymentMethod)
+            }
             disabled={isValidating}
           >
             <CardIcon type={cardType} />
@@ -70,7 +74,7 @@ export function PaymentMethodSelector({
         ))}
       </div>
 
-      {selectedMethod?.type === 'credit_card' && (
+      {selectedMethod?.type === "credit_card" && (
         <CreditCardForm
           onSubmit={validateCard}
           formatCardNumber={formatCardNumber}
@@ -90,6 +94,8 @@ export function PaymentMethodSelector({
   );
 }
 
-const CardIcon = ({ type }: { type: string }) => <span className={`icon-${type}`} />;
+const CardIcon = ({ type }: { type: string }) => (
+  <span className={`icon-${type}`} />
+);
 
 export default PaymentMethodSelector;

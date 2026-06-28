@@ -49,24 +49,28 @@ Record results in `eval/results/with-skill-{date}.md`
 ### Readability Tasks
 
 1. **mixed-branches.tsx**
+
    ```
    Review this React component for readability issues:
    [paste code]
    ```
 
 2. **nested-ternary.tsx**
+
    ```
    Review these functions for readability issues:
    [paste code]
    ```
 
 3. **magic-numbers.tsx**
+
    ```
    Review this code for readability issues:
    [paste code]
    ```
 
 4. **checkout-summary.tsx** ⭐ NEW
+
    ```
    Review this e-commerce checkout component for readability issues:
    [paste code]
@@ -81,18 +85,21 @@ Record results in `eval/results/with-skill-{date}.md`
 ### Predictability Tasks
 
 1. **hidden-side-effects.tsx**
+
    ```
    Review these functions for predictability issues:
    [paste code]
    ```
 
 2. **inconsistent-returns.tsx**
+
    ```
    Review these validation functions for predictability issues:
    [paste code]
    ```
 
 3. **use-cart.tsx** ⭐ NEW
+
    ```
    Review this cart hook for predictability issues:
    [paste code]
@@ -107,18 +114,21 @@ Record results in `eval/results/with-skill-{date}.md`
 ### Cohesion Tasks
 
 1. **scattered-files.md**
+
    ```
    Review this directory structure for cohesion issues:
    [paste content]
    ```
 
 2. **magic-number-duplication.tsx**
+
    ```
    Review this code spread across multiple files for cohesion issues:
    [paste code]
    ```
 
 3. **payment-flow/** ⭐ NEW
+
    ```
    Review these payment feature files for cohesion issues.
    The files are currently organized as:
@@ -136,18 +146,21 @@ Record results in `eval/results/with-skill-{date}.md`
 ### Coupling Tasks
 
 1. **props-drilling.tsx**
+
    ```
    Review these React components for coupling issues:
    [paste code]
    ```
 
 2. **god-hook.tsx**
+
    ```
    Review this React hook for coupling issues:
    [paste code]
    ```
 
 3. **dashboard-layout.tsx** ⭐ NEW
+
    ```
    Review this dashboard layout for coupling issues:
    [paste code]
@@ -164,6 +177,7 @@ Record results in `eval/results/with-skill-{date}.md`
 Use `eval/graders/grader.md` for grading criteria.
 
 For each task:
+
 1. Run 3 trials
 2. Grade each: PASS / PARTIAL / FAIL
 3. Record reasoning
@@ -177,17 +191,19 @@ Create file: `eval/results/{baseline|with-skill}-{YYYY-MM-DD}.md`
 # Eval Results: {Baseline|With Skill} - {Date}
 
 ## Summary
-| Principle | Task | Pass Rate | Notes |
-|-----------|------|-----------|-------|
-| readability | mixed-branches | 0/3 | ... |
-| readability | checkout-summary | 0/3 | ... |
-| ... | ... | ... | ... |
+
+| Principle   | Task             | Pass Rate | Notes |
+| ----------- | ---------------- | --------- | ----- |
+| readability | mixed-branches   | 0/3       | ...   |
+| readability | checkout-summary | 0/3       | ...   |
+| ...         | ...              | ...       | ...   |
 
 ## Detailed Results
 
 ### Readability
 
 #### mixed-branches.tsx
+
 [Use grader.md recording format]
 
 ...
@@ -195,24 +211,24 @@ Create file: `eval/results/{baseline|with-skill}-{YYYY-MM-DD}.md`
 
 ## Task Inventory
 
-| Principle | Task | Domain | Difficulty |
-|-----------|------|--------|------------|
-| readability | mixed-branches.tsx | Generic | Basic |
-| readability | nested-ternary.tsx | Generic | Basic |
-| readability | magic-numbers.tsx | Generic | Basic |
-| readability | checkout-summary.tsx | E-commerce | Advanced |
-| readability | notification-badge.tsx | SaaS | Advanced |
-| predictability | hidden-side-effects.tsx | Generic | Basic |
-| predictability | inconsistent-returns.tsx | Generic | Basic |
-| predictability | use-cart.tsx | E-commerce | Advanced |
-| predictability | api-client.ts | Generic | Advanced |
-| cohesion | scattered-files.md | Generic | Basic |
-| cohesion | magic-number-duplication.tsx | Generic | Basic |
-| cohesion | payment-flow/ | Fintech | Advanced |
-| coupling | props-drilling.tsx | Generic | Basic |
-| coupling | god-hook.tsx | Generic | Basic |
-| coupling | dashboard-layout.tsx | SaaS | Advanced |
-| coupling | use-dashboard.tsx | SaaS | Advanced |
+| Principle      | Task                         | Domain     | Difficulty |
+| -------------- | ---------------------------- | ---------- | ---------- |
+| readability    | mixed-branches.tsx           | Generic    | Basic      |
+| readability    | nested-ternary.tsx           | Generic    | Basic      |
+| readability    | magic-numbers.tsx            | Generic    | Basic      |
+| readability    | checkout-summary.tsx         | E-commerce | Advanced   |
+| readability    | notification-badge.tsx       | SaaS       | Advanced   |
+| predictability | hidden-side-effects.tsx      | Generic    | Basic      |
+| predictability | inconsistent-returns.tsx     | Generic    | Basic      |
+| predictability | use-cart.tsx                 | E-commerce | Advanced   |
+| predictability | api-client.ts                | Generic    | Advanced   |
+| cohesion       | scattered-files.md           | Generic    | Basic      |
+| cohesion       | magic-number-duplication.tsx | Generic    | Basic      |
+| cohesion       | payment-flow/                | Fintech    | Advanced   |
+| coupling       | props-drilling.tsx           | Generic    | Basic      |
+| coupling       | god-hook.tsx                 | Generic    | Basic      |
+| coupling       | dashboard-layout.tsx         | SaaS       | Advanced   |
+| coupling       | use-dashboard.tsx            | SaaS       | Advanced   |
 
 ## Iterating on Skills
 

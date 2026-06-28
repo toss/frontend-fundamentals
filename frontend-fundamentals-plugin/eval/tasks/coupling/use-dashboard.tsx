@@ -2,20 +2,20 @@
 // Expected: Identify that this hook manages dashboard data, user preferences, notifications, analytics, AND UI state; should be split into focused hooks
 // Domain: SaaS analytics dashboard
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef } from "react";
 
 // Types
 interface User {
   id: string;
   name: string;
   email: string;
-  role: 'admin' | 'editor' | 'viewer';
+  role: "admin" | "editor" | "viewer";
 }
 
 interface UserPreferences {
-  theme: 'light' | 'dark' | 'system';
+  theme: "light" | "dark" | "system";
   sidebarCollapsed: boolean;
-  dashboardLayout: 'grid' | 'list';
+  dashboardLayout: "grid" | "list";
   refreshInterval: number;
   notifications: NotificationPreferences;
   shortcuts: KeyboardShortcuts;
@@ -25,7 +25,7 @@ interface NotificationPreferences {
   email: boolean;
   push: boolean;
   inApp: boolean;
-  digest: 'daily' | 'weekly' | 'never';
+  digest: "daily" | "weekly" | "never";
 }
 
 interface KeyboardShortcuts {
@@ -37,7 +37,7 @@ interface KeyboardShortcuts {
 
 interface DashboardWidget {
   id: string;
-  type: 'chart' | 'table' | 'metric' | 'list';
+  type: "chart" | "table" | "metric" | "list";
   title: string;
   config: Record<string, any>;
   position: { x: number; y: number; w: number; h: number };
@@ -45,7 +45,7 @@ interface DashboardWidget {
 
 interface Notification {
   id: string;
-  type: 'info' | 'warning' | 'error' | 'success';
+  type: "info" | "warning" | "error" | "success";
   message: string;
   read: boolean;
   createdAt: Date;
@@ -126,8 +126,8 @@ export function useDashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [modalOpen, setModalOpen] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [activeTab, setActiveTab] = useState('overview');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeTab, setActiveTab] = useState("overview");
 
   // =============== REAL-TIME STATE ===============
   const [isConnected, setIsConnected] = useState(false);
@@ -201,7 +201,9 @@ export function useDashboard() {
   // =============== REAL-TIME EFFECTS ===============
   useEffect(() => {
     if (user) {
-      wsRef.current = new WebSocket(`wss://api.example.com/ws?userId=${user.id}`);
+      wsRef.current = new WebSocket(
+        `wss://api.example.com/ws?userId=${user.id}`
+      );
 
       wsRef.current.onopen = () => setIsConnected(true);
       wsRef.current.onclose = () => setIsConnected(false);
@@ -239,7 +241,7 @@ export function useDashboard() {
 
       if (e.key === shortcuts.toggleSidebar && e.ctrlKey) {
         e.preventDefault();
-        setSidebarOpen(prev => !prev);
+        setSidebarOpen((prev) => !prev);
       }
 
       if (e.key === shortcuts.search && e.ctrlKey) {
@@ -252,15 +254,15 @@ export function useDashboard() {
         refreshDashboard();
       }
 
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         setSearchOpen(false);
         setModalOpen(null);
         setEditingWidgetId(null);
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [preferences?.shortcuts]);
 
   // =============== ANALYTICS FLUSH EFFECT ===============
@@ -284,9 +286,12 @@ export function useDashboard() {
   // =============== THEME EFFECT ===============
   useEffect(() => {
     if (preferences?.theme) {
-      document.documentElement.classList.remove('light', 'dark');
-      if (preferences.theme === 'system') {
-        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.classList.remove("light", "dark");
+      if (preferences.theme === "system") {
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+          .matches
+          ? "dark"
+          : "light";
         document.documentElement.classList.add(systemTheme);
       } else {
         document.documentElement.classList.add(preferences.theme);
@@ -297,13 +302,17 @@ export function useDashboard() {
   // =============== HANDLERS ===============
   const handleRealtimeUpdate = useCallback((data: any) => {
     switch (data.type) {
-      case 'widget_update':
-        setWidgets(prev => prev.map(w => w.id === data.widgetId ? { ...w, ...data.changes } : w));
+      case "widget_update":
+        setWidgets((prev) =>
+          prev.map((w) =>
+            w.id === data.widgetId ? { ...w, ...data.changes } : w
+          )
+        );
         break;
-      case 'notification':
-        setNotifications(prev => [data.notification, ...prev]);
+      case "notification":
+        setNotifications((prev) => [data.notification, ...prev]);
         break;
-      case 'sync':
+      case "sync":
         setLastSync(new Date());
         break;
     }
@@ -320,63 +329,77 @@ export function useDashboard() {
   }, []);
 
   // =============== PREFERENCE ACTIONS ===============
-  const updatePreference = useCallback(<K extends keyof UserPreferences>(
-    key: K,
-    value: UserPreferences[K]
-  ) => {
-    setPreferences(prev => prev ? { ...prev, [key]: value } : null);
-    setPreferencesDirty(true);
-    trackEvent('preference_changed', { key, value });
-  }, []);
+  const updatePreference = useCallback(
+    <K extends keyof UserPreferences>(key: K, value: UserPreferences[K]) => {
+      setPreferences((prev) => (prev ? { ...prev, [key]: value } : null));
+      setPreferencesDirty(true);
+      trackEvent("preference_changed", { key, value });
+    },
+    []
+  );
 
-  const updateNotificationPreference = useCallback(<K extends keyof NotificationPreferences>(
-    key: K,
-    value: NotificationPreferences[K]
-  ) => {
-    setPreferences(prev => {
-      if (!prev) return null;
-      return {
-        ...prev,
-        notifications: { ...prev.notifications, [key]: value },
-      };
-    });
-    setPreferencesDirty(true);
-  }, []);
+  const updateNotificationPreference = useCallback(
+    <K extends keyof NotificationPreferences>(
+      key: K,
+      value: NotificationPreferences[K]
+    ) => {
+      setPreferences((prev) => {
+        if (!prev) return null;
+        return {
+          ...prev,
+          notifications: { ...prev.notifications, [key]: value }
+        };
+      });
+      setPreferencesDirty(true);
+    },
+    []
+  );
 
   // =============== WIDGET ACTIONS ===============
-  const addWidget = useCallback(async (widget: Omit<DashboardWidget, 'id'>) => {
-    if (!user) return;
-    const newWidget = await createWidget(user.id, widget);
-    setWidgets(prev => [...prev, newWidget]);
-    trackEvent('widget_added', { type: widget.type });
-  }, [user]);
+  const addWidget = useCallback(
+    async (widget: Omit<DashboardWidget, "id">) => {
+      if (!user) return;
+      const newWidget = await createWidget(user.id, widget);
+      setWidgets((prev) => [...prev, newWidget]);
+      trackEvent("widget_added", { type: widget.type });
+    },
+    [user]
+  );
 
-  const updateWidget = useCallback(async (id: string, changes: Partial<DashboardWidget>) => {
-    setWidgets(prev => prev.map(w => w.id === id ? { ...w, ...changes } : w));
-    setPendingChanges(prev => prev + 1);
+  const updateWidget = useCallback(
+    async (id: string, changes: Partial<DashboardWidget>) => {
+      setWidgets((prev) =>
+        prev.map((w) => (w.id === id ? { ...w, ...changes } : w))
+      );
+      setPendingChanges((prev) => prev + 1);
 
-    // Debounced save
-    await saveWidget(id, changes);
-    setPendingChanges(prev => prev - 1);
-    setLastSync(new Date());
-  }, []);
+      // Debounced save
+      await saveWidget(id, changes);
+      setPendingChanges((prev) => prev - 1);
+      setLastSync(new Date());
+    },
+    []
+  );
 
-  const deleteWidget = useCallback(async (id: string) => {
-    await removeWidget(id);
-    setWidgets(prev => prev.filter(w => w.id !== id));
-    if (selectedWidgetId === id) setSelectedWidgetId(null);
-    if (editingWidgetId === id) setEditingWidgetId(null);
-    trackEvent('widget_deleted', { id });
-  }, [selectedWidgetId, editingWidgetId]);
+  const deleteWidget = useCallback(
+    async (id: string) => {
+      await removeWidget(id);
+      setWidgets((prev) => prev.filter((w) => w.id !== id));
+      if (selectedWidgetId === id) setSelectedWidgetId(null);
+      if (editingWidgetId === id) setEditingWidgetId(null);
+      trackEvent("widget_deleted", { id });
+    },
+    [selectedWidgetId, editingWidgetId]
+  );
 
   const selectWidget = useCallback((id: string | null) => {
     setSelectedWidgetId(id);
-    if (id) trackEvent('widget_selected', { id });
+    if (id) trackEvent("widget_selected", { id });
   }, []);
 
   const startEditingWidget = useCallback((id: string) => {
     setEditingWidgetId(id);
-    trackEvent('widget_edit_started', { id });
+    trackEvent("widget_edit_started", { id });
   }, []);
 
   const stopEditingWidget = useCallback(() => {
@@ -385,34 +408,36 @@ export function useDashboard() {
 
   // =============== NOTIFICATION ACTIONS ===============
   const markNotificationRead = useCallback(async (id: string) => {
-    setNotifications(prev => prev.map(n => n.id === id ? { ...n, read: true } : n));
+    setNotifications((prev) =>
+      prev.map((n) => (n.id === id ? { ...n, read: true } : n))
+    );
     await updateNotification(id, { read: true });
   }, []);
 
   const markAllNotificationsRead = useCallback(async () => {
-    setNotifications(prev => prev.map(n => ({ ...n, read: true })));
+    setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
     if (user) {
       await markAllRead(user.id);
     }
   }, [user]);
 
   const dismissNotification = useCallback(async (id: string) => {
-    setNotifications(prev => prev.filter(n => n.id !== id));
+    setNotifications((prev) => prev.filter((n) => n.id !== id));
     await deleteNotification(id);
   }, []);
 
   // =============== UI ACTIONS ===============
   const toggleSidebar = useCallback(() => {
-    setSidebarOpen(prev => {
+    setSidebarOpen((prev) => {
       const newValue = !prev;
-      updatePreference('sidebarCollapsed', !newValue);
+      updatePreference("sidebarCollapsed", !newValue);
       return newValue;
     });
   }, [updatePreference]);
 
   const openModal = useCallback((modalId: string) => {
     setModalOpen(modalId);
-    trackEvent('modal_opened', { modalId });
+    trackEvent("modal_opened", { modalId });
   }, []);
 
   const closeModal = useCallback(() => {
@@ -421,27 +446,33 @@ export function useDashboard() {
 
   const openSearch = useCallback(() => {
     setSearchOpen(true);
-    trackEvent('search_opened', {});
+    trackEvent("search_opened", {});
   }, []);
 
   const closeSearch = useCallback(() => {
     setSearchOpen(false);
-    setSearchQuery('');
+    setSearchQuery("");
   }, []);
 
   const setTab = useCallback((tab: string) => {
     setActiveTab(tab);
-    trackEvent('tab_changed', { tab });
+    trackEvent("tab_changed", { tab });
   }, []);
 
   // =============== ANALYTICS ACTIONS ===============
-  const trackEvent = useCallback((name: string, properties: Record<string, any>) => {
-    setAnalyticsQueue(prev => [...prev, {
-      name,
-      properties: { ...properties, userId: user?.id },
-      timestamp: new Date(),
-    }]);
-  }, [user?.id]);
+  const trackEvent = useCallback(
+    (name: string, properties: Record<string, any>) => {
+      setAnalyticsQueue((prev) => [
+        ...prev,
+        {
+          name,
+          properties: { ...properties, userId: user?.id },
+          timestamp: new Date()
+        }
+      ]);
+    },
+    [user?.id]
+  );
 
   const flushAnalytics = useCallback(async () => {
     if (analyticsQueue.length === 0) return;
@@ -453,7 +484,7 @@ export function useDashboard() {
       await sendAnalytics(eventsToFlush);
     } catch (error) {
       // Re-queue failed events
-      setAnalyticsQueue(prev => [...eventsToFlush, ...prev]);
+      setAnalyticsQueue((prev) => [...eventsToFlush, ...prev]);
     }
   }, [analyticsQueue]);
 
@@ -466,7 +497,7 @@ export function useDashboard() {
       const newWidgets = await fetchWidgets(user.id);
       setWidgets(newWidgets);
       setLastSync(new Date());
-      trackEvent('dashboard_refreshed', {});
+      trackEvent("dashboard_refreshed", {});
     } catch (error) {
       setWidgetsError(error as Error);
     } finally {
@@ -475,11 +506,11 @@ export function useDashboard() {
   }, [user, trackEvent]);
 
   // =============== COMPUTED VALUES ===============
-  const unreadCount = notifications.filter(n => !n.read).length;
+  const unreadCount = notifications.filter((n) => !n.read).length;
   const isLoading = userLoading || preferencesLoading || widgetsLoading;
   const hasError = userError || widgetsError;
-  const selectedWidget = widgets.find(w => w.id === selectedWidgetId);
-  const editingWidget = widgets.find(w => w.id === editingWidgetId);
+  const selectedWidget = widgets.find((w) => w.id === selectedWidgetId);
+  const editingWidget = widgets.find((w) => w.id === editingWidgetId);
 
   // Return EVERYTHING - this is the problem
   return {
@@ -547,7 +578,7 @@ export function useDashboard() {
 
     // Computed
     isLoading,
-    hasError,
+    hasError
   };
 }
 
@@ -558,19 +589,31 @@ async function fetchUser(): Promise<User> {
 async function fetchPreferences(userId: string): Promise<UserPreferences> {
   return {} as UserPreferences;
 }
-async function savePreferences(userId: string, prefs: UserPreferences): Promise<void> {}
+async function savePreferences(
+  userId: string,
+  prefs: UserPreferences
+): Promise<void> {}
 async function fetchWidgets(userId: string): Promise<DashboardWidget[]> {
   return [];
 }
-async function createWidget(userId: string, widget: Omit<DashboardWidget, 'id'>): Promise<DashboardWidget> {
+async function createWidget(
+  userId: string,
+  widget: Omit<DashboardWidget, "id">
+): Promise<DashboardWidget> {
   return {} as DashboardWidget;
 }
-async function saveWidget(id: string, changes: Partial<DashboardWidget>): Promise<void> {}
+async function saveWidget(
+  id: string,
+  changes: Partial<DashboardWidget>
+): Promise<void> {}
 async function removeWidget(id: string): Promise<void> {}
 async function fetchNotifications(userId: string): Promise<Notification[]> {
   return [];
 }
-async function updateNotification(id: string, changes: Partial<Notification>): Promise<void> {}
+async function updateNotification(
+  id: string,
+  changes: Partial<Notification>
+): Promise<void> {}
 async function deleteNotification(id: string): Promise<void> {}
 async function markAllRead(userId: string): Promise<void> {}
 async function sendAnalytics(events: AnalyticsEvent[]): Promise<void> {}

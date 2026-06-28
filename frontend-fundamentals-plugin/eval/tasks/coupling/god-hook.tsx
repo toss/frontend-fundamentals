@@ -12,7 +12,10 @@ function useUser() {
   const [messages, setMessages] = useState<Message[]>([]);
 
   useEffect(() => {
-    fetchUser().then(setUser).catch(setError).finally(() => setLoading(false));
+    fetchUser()
+      .then(setUser)
+      .catch(setError)
+      .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
@@ -51,6 +54,6 @@ function useUser() {
     messages,
     updatePreferences,
     markNotificationRead,
-    sendMessage,
+    sendMessage
   };
 }

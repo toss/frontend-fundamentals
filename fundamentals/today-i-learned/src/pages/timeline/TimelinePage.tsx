@@ -1,4 +1,5 @@
 import { css } from "@styled-system/css";
+import { useRef } from "react";
 
 import { GoToLogin } from "@/components/features/auth/UnauthenticatedState";
 import { WeeklyTop5 } from "@/components/features/discussions/WeeklyTop5";
@@ -10,10 +11,11 @@ import { SprintChallenge } from "./components/SprintChallenge";
 
 export function TimelinePage() {
   const { isAuthenticated } = useAuth();
+  const mainContentRef = useRef<HTMLElement>(null);
 
   return (
     <div className={gridLayout}>
-      <section className={mainContentColumn}>
+      <section ref={mainContentRef} className={mainContentColumn}>
         {isAuthenticated ? (
           <>
             <div className={sprintChallengeSection}>
@@ -35,7 +37,7 @@ export function TimelinePage() {
         </div>
 
         <div className={postListSection}>
-          <PostList />
+          <PostList scrollElementRef={mainContentRef} />
         </div>
       </section>
 

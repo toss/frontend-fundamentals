@@ -8,15 +8,15 @@ import {
   CreditCardData,
   PaymentTransaction,
   CardValidationResult
-} from '../types/payment';
+} from "../types/payment";
 import {
   PAYMENT_API_ENDPOINTS,
   PAYMENT_TIMEOUT_MS,
   PAYMENT_ERRORS
-} from '../constants/payment-config';
+} from "../constants/payment-config";
 
 // API base URL from environment
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || '/api';
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "/api";
 
 interface ApiResponse<T> {
   success: boolean;
@@ -34,7 +34,7 @@ async function fetchWithTimeout<T>(
   try {
     const response = await fetch(url, {
       ...options,
-      signal: controller.signal,
+      signal: controller.signal
     });
 
     clearTimeout(timeoutId);
@@ -43,7 +43,7 @@ async function fetchWithTimeout<T>(
       const errorData = await response.json().catch(() => ({}));
       return {
         success: false,
-        error: errorData.message || PAYMENT_ERRORS.PROCESSING_ERROR,
+        error: errorData.message || PAYMENT_ERRORS.PROCESSING_ERROR
       };
     }
 
@@ -52,24 +52,27 @@ async function fetchWithTimeout<T>(
   } catch (error) {
     clearTimeout(timeoutId);
 
-    if (error instanceof Error && error.name === 'AbortError') {
+    if (error instanceof Error && error.name === "AbortError") {
       return { success: false, error: PAYMENT_ERRORS.NETWORK_ERROR };
     }
 
     return {
       success: false,
-      error: error instanceof Error ? error.message : PAYMENT_ERRORS.PROCESSING_ERROR,
+      error:
+        error instanceof Error ? error.message : PAYMENT_ERRORS.PROCESSING_ERROR
     };
   }
 }
 
-export async function validatePaymentMethod(method: PaymentMethod): Promise<boolean> {
+export async function validatePaymentMethod(
+  method: PaymentMethod
+): Promise<boolean> {
   const response = await fetchWithTimeout<{ valid: boolean }>(
     `${API_BASE}${PAYMENT_API_ENDPOINTS.VALIDATE}`,
     {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ method }),
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ method })
     }
   );
 
@@ -80,14 +83,14 @@ export async function tokenizeCard(cardData: CreditCardData): Promise<string> {
   const response = await fetchWithTimeout<{ token: string }>(
     `${API_BASE}${PAYMENT_API_ENDPOINTS.TOKENIZE}`,
     {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         cardNumber: cardData.cardNumber,
         expiry: cardData.expiry,
         cvv: cardData.cvv,
-        cardholderName: cardData.cardholderName,
-      }),
+        cardholderName: cardData.cardholderName
+      })
     }
   );
 
@@ -101,14 +104,14 @@ export async function tokenizeCard(cardData: CreditCardData): Promise<string> {
 export async function processPayment(
   token: string,
   amount: number,
-  currency = 'USD'
+  currency = "USD"
 ): Promise<PaymentTransaction> {
   const response = await fetchWithTimeout<PaymentTransaction>(
     `${API_BASE}${PAYMENT_API_ENDPOINTS.PROCESS}`,
     {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token, amount, currency }),
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token, amount, currency })
     }
   );
 
@@ -126,9 +129,9 @@ export async function refundPayment(
   const response = await fetchWithTimeout<PaymentTransaction>(
     `${API_BASE}${PAYMENT_API_ENDPOINTS.REFUND}`,
     {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ transactionId, amount }),
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ transactionId, amount })
     }
   );
 
@@ -140,12 +143,14 @@ export async function refundPayment(
 }
 
 // This function is only used by payment components
-export async function getSavedPaymentMethods(userId: string): Promise<PaymentMethod[]> {
+export async function getSavedPaymentMethods(
+  userId: string
+): Promise<PaymentMethod[]> {
   const response = await fetchWithTimeout<{ methods: PaymentMethod[] }>(
     `${API_BASE}/users/${userId}/payment-methods`,
     {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
+      method: "GET",
+      headers: { "Content-Type": "application/json" }
     }
   );
 
@@ -161,14 +166,14 @@ export async function savePaymentMethod(
   const response = await fetchWithTimeout<PaymentMethod>(
     `${API_BASE}/users/${userId}/payment-methods`,
     {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ method, setAsDefault }),
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ method, setAsDefault })
     }
   );
 
   if (!response.success || !response.data) {
-    throw new Error(response.error || 'Failed to save payment method');
+    throw new Error(response.error || "Failed to save payment method");
   }
 
   return response.data;

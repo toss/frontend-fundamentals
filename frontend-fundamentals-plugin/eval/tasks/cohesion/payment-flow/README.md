@@ -1,12 +1,15 @@
 # EVAL TASK: Cohesion - Payment Feature with Scattered Files
 
 ## Expected Issue
+
 Identify that payment-related code is scattered across multiple unrelated directories instead of being colocated. Related files should be grouped together (types, components, hooks, utils for the payment feature).
 
 ## Domain
+
 E-commerce payment processing
 
 ## File Structure (Problematic)
+
 ```
 src/
   components/
@@ -27,6 +30,7 @@ src/
 ```
 
 ## Better Structure Would Be
+
 ```
 src/
   features/
@@ -41,4 +45,5 @@ src/
 ```
 
 ## Files in This Task
+
 Examine each file and note how they reference each other across distant directories, making it hard to understand the payment feature as a whole.
