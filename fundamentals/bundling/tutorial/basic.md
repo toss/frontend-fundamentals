@@ -161,7 +161,10 @@ webpack-tutorial/
 │   └── bundle.js       # 웹팩이 만든 번들 파일
 ├── src/
 │   ├── index.js
-│   └── message.js
+│   └── utils/
+│       ├── add.js
+│       ├── index.js
+│       └── subtract.js
 ├── package.json
 ├── webpack.config.js
 └── node_modules/
